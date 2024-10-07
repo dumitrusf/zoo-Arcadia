@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="keywords"
+        content="zoo, animals, habitats, Brocéliande, veterinarians, ecology, wildlife park, conservation, zoo services, guided tours, France zoo, sustainable energy, wild animals, animal feeding, zoo management, Arcadia Zoo" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>ARCADIA - Contact</title>
+
+    <link rel="preload" href="src/css/styles.css" />
+
+    <link rel="icon" type="image/svg+xml" href="/src/assets/images/favicon.svg" />
+    <link rel="icon" type="image/png" href="/src/assets/images/favicon.png" />
+
+    <link rel="stylesheet" href="/node_modules/Normalize-css/normalize.css" />
+
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css" />
+
+    <link rel="stylesheet" href="src/css/styles.css" />
+</head>
+
+<body>
+    <main>
+        <!-- Logo site web -->
+        <header>
+
+            <a href="./index.html">
+                Image redirecting "Home"
+            </a>
+            
+            <picture></picture>
+        </header>
+
+        <!-- Form contacto -->
+        <section>
+            <h2>Contact About:</h2>
+            <form action="/contact" method="POST"> <!-- Cambia la acción al endpoint adecuado -->
+                
+                <!-- Campo de primer nombre -->
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name" name="first-name" placeholder="Emilio" required>
+
+                <br>
+                <br>
+                
+                <!-- Campo de apellido -->
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" name="last-name" placeholder="Emiliano" required>
+                
+                <br>
+                <br>
+                
+                <!-- Campo de correo electrónico -->
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Maximiliano@outlook.com" required>
+                
+                <br>
+                <br>
+                
+                <!-- Campo de asunto -->
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" placeholder="snakes" required>
+                
+                <br>
+                <br>
+                
+                <!-- Campo de mensaje -->
+                <label for="message">Message</label>
+                <br>
+                <textarea id="message" name="message" rows="4" placeholder="are there snakes?" required></textarea>
+
+                <br>
+                <br>
+                
+                <!-- Botón de envío -->
+                <button type="submit">Send</button>
+            </form>
+        </section>
+    </main>
+</body>
+
+</html>
