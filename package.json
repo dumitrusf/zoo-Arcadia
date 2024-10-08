@@ -4,7 +4,7 @@
   "description": "ECF à présenter devant le jury",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "sass": "rm -rf build/css & sass --watch src/scss/:build/css/"
   },
   "repository": {
     "type": "git",
