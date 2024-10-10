@@ -2,9 +2,11 @@
   "name": "zoo-arcadia",
   "version": "1.0.0",
   "description": "ECF à présenter devant le jury",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "sass": "rm -rf build/css & sass --watch src/scss/:build/css/"
+    "sass": "rm -rf build/css & sass --watch src/scss/:build/css/",
+    "hola": "gulp hola"
   },
   "repository": {
     "type": "git",
@@ -47,6 +49,8 @@
   },
   "homepage": "https://github.com/dumitrusf/zoo-Arcadia#readme",
   "devDependencies": {
+    "gulp": "^5.0.0",
+    "gulp-sass": "^5.1.0",
     "sass": "^1.79.4"
   }
 }
