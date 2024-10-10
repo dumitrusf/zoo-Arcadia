@@ -5,8 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "sass": "rm -rf build/css & sass --watch src/scss/:build/css/",
-    "hola": "gulp hola"
+    "css": "gulp compileCss"
   },
   "repository": {
     "type": "git",
@@ -49,8 +48,9 @@
   },
   "homepage": "https://github.com/dumitrusf/zoo-Arcadia#readme",
   "devDependencies": {
+    "del": "^8.0.0",
     "gulp": "^5.0.0",
-    "gulp-sass": "^5.1.0",
+    "gulp-dart-sass": "^1.1.0",
     "sass": "^1.79.4"
   }
 }
