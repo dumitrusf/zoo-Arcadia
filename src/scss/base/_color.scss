@@ -1,0 +1,24 @@
+// Colors
+
+$color: (
+  solid-colors: (
+    c-light: #fff,
+    c-dark: #000,
+    c-body-light: #ebebeb,
+    c-body-dark: #141414,
+    c-highlight-1: #2ed6ff,
+    c-highlight-2: #00ffbf,
+    c-filter-form: #301a00,
+    c-bg-contact: #5f0039,
+    c-button-more: #aa6b1f,
+    c-hgl-hover: #ffff00,
+    c-button-footer: #345813,
+  ),
+  gradient-colors: (
+    g-dark: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.71) 34%, black 49%),
+    g-light: linear-gradient(180deg, rgba(235, 235, 235, 0) 0%, #EBEBEB 50%)
+  )
+);
+
+
+// Colors

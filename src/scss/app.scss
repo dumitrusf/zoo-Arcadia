@@ -1,13 +1,3 @@
-$h2-font: "Poppins-Bold";
-$h2-path: "/src/assets/fonts/Poppins-Bold.ttf";
-$ttf-format: "truetype";
+@forward "base";
 
-@font-face {
-    font-family: $h2-font;
-    src: url($h2-path) format($ttf-format);
-};
 
-body {
-    background-color: rgb(172, 139, 74);
-    font-family: $h2-font;
-};
