@@ -48,6 +48,7 @@
   },
   "homepage": "https://github.com/dumitrusf/zoo-Arcadia#readme",
   "devDependencies": {
+    "browser-sync": "^3.0.3",
     "del": "^8.0.0",
     "gulp": "^5.0.0",
     "gulp-dart-sass": "^1.1.0",
