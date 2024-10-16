@@ -1,12 +1,20 @@
 @use "variables" as v;
 
+html {
+  font-size: 62.5%;
+};
 
-// Ahora accedemos a los colores y fuentes usando los namespaces definidos en "variables"
+
+
 body {
-    // Acceso a los colores desde el alias "v.c" (colors)
-    background: map-get(map-get(v.$color, 'solid-colors'), 'c-bg-contact'); // Usa "v.c" para colores
-    
-    // Acceso a las fuentes desde el alias "v.f" (fonts)
-    font-family: map-get(map-get(v.$path-fonts-formats, 'family-font'), 'normal-font'); // Usa "v.f" para fuentes
-  }
-    
+  font-family: map-get(
+    map-get(v.$path-fonts-formats, "family-font"),
+    "normal-font"
+  );
+
+  background: map-get(
+    map-get(v.$color, "solid-colors"),
+    "c-bg-contact"
+  );
+};
+
