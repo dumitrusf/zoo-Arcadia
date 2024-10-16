@@ -335,7 +335,3 @@ template {
   font-family: "Inter-24";
   src: url(/src/assets/fonts/Inter_24pt-Medium.ttf) format(truetype);
 }
-body {
-  background: #5f0039;
-  font-family: "Inter-24";
-}
