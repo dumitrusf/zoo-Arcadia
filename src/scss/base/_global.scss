@@ -1,0 +1,20 @@
+@use "variables" as v;
+
+html {
+  font-size: 62.5%;
+};
+
+
+
+body {
+  font-family: map-get(
+    map-get(v.$path-fonts-formats, "family-font"),
+    "normal-font"
+  );
+
+  background: map-get(
+    map-get(v.$color, "solid-colors"),
+    "c-bg-contact"
+  );
+};
+
