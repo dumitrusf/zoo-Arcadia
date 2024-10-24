@@ -1,43 +1,41 @@
 // shadows
 
 $shadows: (
-  // Sombras generales
-  general:
+  // Sombras de texto
+  texts:
     (
-      h1-shadow: 0px 4.63px 4.63px 0px rgba(0, 0, 0, 0.97),
       // Sombra de texto para los H1
-      btn-sh: 3px 1px 7.8px 0px rgba(0, 0, 0, 1),
-      // Sombra normal de botones
-      btn-sh-active: -3px -1px 7.8px 0px rgba(0, 0, 0, 1) inset
-        // Sombra de botón activado,
+      h1-shadow: 0px 4.63px 4.63px 0px #000000f7,
+      // Shadows of texts on cards
+      sh-desc-section: (0px 0px 5px 131px #000000, 0px 0px 10px 112px #000000, 0px 0px 15px 231px #000000)
     ),
 
+  btn: (
+    btn-sh: 3px 1px 7.8px 0px #000000,
+    // Sombra normal de botones
+    btn-sh-active: -3px -1px 7.8px 0px #000000 inset
+      // Sombra de botón activado,,,,,,
+  ),
+
   // Sombras de menús
-  menu:
+  menu-blur:
     (
-      // Shadow of the mobile menu
-      sh-menu-mobile: 0px -284px 108px -81px rgba(0, 0, 0, 0.1) inset
+      // Blur of the menu
+      blur-menu: blur(10.100000381469727px)
     ),
 
   // Shadow of sections (section Shadows)
   cards:
     (
-      // Shadows of texts on cards
-      sh-desc-section: 0px 0px 5.5px 0px rgba(0, 0, 0, 1),
-      0px 0px 9px 0px rgba(0, 0, 0, 1),
-      0px 0px 15.8px 0px rgba(0, 0, 0, 1),
-
       // Shadow Hero from bottom,
-      sh-hero-bottom: 0px -172px 59.2px -112px rgba(235, 235, 235, 1) inset
+      sh-hero-bottom: 0px -172px 59.2px -112px #ebebeb inset
     ),
 
   // Shadows of images
   images:
     (
-      // Animal PNG image shadow
-      sh-image: -10px 11px 7.8px 0px rgba(0, 0, 0, 0.97),
       // Internal shadow on animal cards
-      sh-image-animal: 0px 0px 15px 10px #ebebeb inset
+      sh-in-animal: 0px 0px 15px 10px #ebebeb inset
     )
 );
 

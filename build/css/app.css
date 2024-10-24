@@ -316,12 +316,12 @@ template {
   src: url(/src/assets/fonts/Poppins-Bold.ttf) format(truetype);
 }
 @font-face {
-  font-family: "Lora-Medium";
-  src: url(/src/assets/fonts/Lora-Medium.ttf) format(truetype);
-}
-@font-face {
   font-family: "Montserrat-Regular";
   src: url(/src/assets/fonts/Montserrat-Regular.ttf) format(truetype);
+}
+@font-face {
+  font-family: "Roboto-Medium";
+  src: url(/src/assets/fonts/Roboto-Medium.ttf) format(truetype);
 }
 @font-face {
   font-family: "Roboto-Regular";
@@ -335,11 +335,16 @@ template {
   font-family: "Inter-24";
   src: url(/src/assets/fonts/Inter_24pt-Medium.ttf) format(truetype);
 }
+h1 {
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  color: #5f0039;
+  font-family: "Fun-City-Level-3-Basic";
+}
+
 html {
   font-size: 62.5%;
 }
 
 body {
-  font-family: "Inter-24";
   background-color: #ebebeb;
 }

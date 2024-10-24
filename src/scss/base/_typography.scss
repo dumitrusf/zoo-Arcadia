@@ -1,6 +1,20 @@
 // typographie
 @use "fonts" as f;
-@use "colors" as c;
-
+@use "color" as c;
+@use "shadows" as sh;
+@use "font-sizes" as s;
 
 // typographie
+
+
+
+h1 {
+    font-size: map-get(map-get(s.$font-sizes, "headings"), main-heading); 
+    color: map-get(map-get(c.$color, "solid-colors"), "c-bg-contact");
+    font-family: map-get(
+      map-get(f.$path-fonts-formats, "family-font"),
+      "h1-font"
+    );
+  //   color: ;
+  //   text-shadow: ;
+  };
