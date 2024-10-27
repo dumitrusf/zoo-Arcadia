@@ -336,9 +336,39 @@ template {
   src: url(/src/assets/fonts/Inter_24pt-Medium.ttf) format(truetype);
 }
 h1 {
-  font-size: clamp(2.2rem, 5vw, 3rem);
+  font-size: clamp(2.2rem - 0.5vw, 4vw + 1rem, 2.5rem + 0.5vw);
   color: #5f0039;
   font-family: "Fun-City-Level-3-Basic";
+}
+
+section h2 {
+  font-size: clamp(2rem - 0.5vw, 4vw + 1rem, 3.2rem + 0.5vw);
+  color: #000;
+  font-family: "Poppins-Bold";
+}
+
+section div h2 {
+  font-size: clamp(2rem - 0.5vw, 4vw + 1rem, 2.55rem + 0.5vw);
+  color: #2ed6ff;
+  font-family: "Poppins-Bold";
+}
+
+section div > a ~ p {
+  font-size: clamp(1.9rem - 0.5vw, 4vw + 1rem, 2.8rem + 0.5vw);
+  color: #345813;
+  font-family: "Roboto-Regular";
+}
+
+div > h1 ~ p {
+  font-size: clamp(1.9rem - 0.5vw, 4vw + 1rem, 2.8rem + 0.5vw);
+  color: #aa6b1f;
+  font-family: "Roboto-Regular";
+}
+
+div > a {
+  font-size: clamp(1.9rem - 0.5vw, 4vw + 1rem, 2.8rem + 0.5vw);
+  color: #aa6b1f;
+  font-family: "Roboto-Regular";
 }
 
 html {

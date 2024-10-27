@@ -6,15 +6,64 @@
 
 // typographie
 
-
-
 h1 {
-    font-size: map-get(map-get(s.$font-sizes, "headings"), main-heading); 
-    color: map-get(map-get(c.$color, "solid-colors"), "c-bg-contact");
-    font-family: map-get(
-      map-get(f.$path-fonts-formats, "family-font"),
-      "h1-font"
-    );
+  font-size: map-get(map-get(s.$font-sizes, "headings"), main-heading);
+  color: map-get(map-get(c.$color, "solid-colors"), "c-bg-contact");
+  font-family: map-get(
+    map-get(f.$path-fonts-formats, "family-font"),
+    "h1-font"
+  );
   //   color: ;
   //   text-shadow: ;
-  };
+};
+
+section h2 {
+  font-size: map-get(map-get(s.$font-sizes, "headings"), title-main-cards);
+  color: map-get(map-get(c.$color, "solid-colors"), "c-dark");
+  font-family: map-get(
+    map-get(f.$path-fonts-formats, "family-font"),
+    "h2-font"
+  );
+  //   color: ;
+  //   text-shadow: ;
+};
+
+section div h2 {
+  font-size: map-get(map-get(s.$font-sizes, "headings"), title-testimony);
+  color: map-get(map-get(c.$color, "solid-colors"), "c-highlight-1");
+  font-family: map-get(
+    map-get(f.$path-fonts-formats, "family-font"),
+    "h2-font"
+  );
+};
+
+
+section div > a ~ p {
+  font-size: map-get(map-get(s.$font-sizes, "other-texts"), p-in-cards);
+  color: map-get(map-get(c.$color, "solid-colors"), "c-button-footer");
+  font-family: map-get(
+    map-get(f.$path-fonts-formats, "family-font"),
+    "paragraph-font"
+  );
+};
+
+
+div > h1 ~ p {
+  font-size: map-get(map-get(s.$font-sizes, "other-texts"), p-in-cards);
+  color: map-get(map-get(c.$color, "solid-colors"), "c-button-more");
+  font-family: map-get(
+    map-get(f.$path-fonts-formats, "family-font"),
+    "paragraph-font"
+  );
+};
+
+
+
+div > a {
+  font-size: map-get(map-get(s.$font-sizes, "other-texts"), p-in-cards);
+  color: map-get(map-get(c.$color, "solid-colors"), "c-button-more");
+  font-family: map-get(
+    map-get(f.$path-fonts-formats, "family-font"),
+    "paragraph-font"
+  );
+};

@@ -1,24 +1,15 @@
 // font sizes in clamp
 $font-sizes: (
   headings: (
-    main-heading: clamp(2.2rem, 5vw, 3rem),
-    // H1
-    title-main-cards: clamp(2rem, 4vw, 2.8rem),
-    // H2 en cards
-    title-testimony: clamp(1.8rem, 3.5vw, 2.5rem),
-    // H2 en testimonios
-  ), 
-
+    main-heading: clamp(2.2rem - 0.5vw, 4vw + 1rem, 2.5rem + 0.5vw),
+    title-main-cards: clamp(2rem - 0.5vw, 4vw + 1rem, 3.2rem + 0.5vw),
+    title-testimony: clamp(2rem - 0.5vw, 4vw + 1rem, 2.55rem + 0.5vw)
+  ),
   other-texts: (
-    main-paraph: clamp(1.6rem, 3vw, 2rem),
-    // P debajo del H1
-    p-in-cards: clamp(1.6rem, 3vw, 2rem),
-    // P en cards
-    name-testimony-user: clamp(1.6rem, 3vw, 2rem),
-    // Nombre del usuario en testimonios
-    label-wt: clamp(1.4rem, 2.5vw, 1.8rem),
-    // Label
-    text-button: clamp(1.4rem, 2.5vw, 1.8rem) // Texto de botones,
+    main-paraph: clamp(2.2rem - 0.5vw, 4vw + 1rem, 2.95rem + 0.5vw),
+    p-in-cards: clamp(1.9rem - 0.5vw, 4vw + 1rem, 2.8rem + 0.5vw),
+    name-testimony-user: clamp(0.8rem, 1.3vw + 0.6rem, 3rem),
+    label-wt: clamp(0.7rem, 1.2vw + 0.5rem, 2.5rem),
+    text-button: clamp(0.7rem, 1.2vw + 0.5rem, 2.5rem)
   )
 );
-// font sizes in clamp
