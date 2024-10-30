@@ -6,16 +6,52 @@
 
 // typographie
 
-h1 {
+h1,
+div > h1 ~ p {
   font-size: map-get(map-get(s.$font-sizes, "headings"), main-heading);
-  color: map-get(map-get(c.$color, "solid-colors"), "c-bg-contact");
+  color: map-get(map-get(c.$color, "solid-colors"), "c-light");
   font-family: map-get(
     map-get(f.$path-fonts-formats, "family-font"),
     "h1-font"
   );
-  //   color: ;
-  //   text-shadow: ;
-};
+  text-shadow: map-get(map-get(sh.$shadows, "texts"), "h1-shadow");
+}
+
+div > h1 ~ p {
+  line-height: map-get(
+    map-get(s.$font-spaces, "line-heights"),
+    lh-p-main-heading
+  ); /* 148.923% */
+  letter-spacing: map-get(
+    map-get(s.$font-spaces, "letter-spacings"),
+    ls-p-main-heading
+  );
+}
+
+.button-type {
+  font-size: map-get(map-get(s.$font-sizes, "other-texts"), text-button);
+  color: map-get(map-get(c.$color, "solid-colors"), "c-light");
+  font-family: map-get(
+    map-get(f.$path-fonts-formats, "family-font"),
+    "button-font"
+  );
+
+  text-decoration: none;
+  background-color: map-get(map-get(c.$color, "solid-colors"), "c-button-more");
+  border-style: none;
+  text-transform: uppercase;
+}
+
+div {
+  & div + .button-type {
+    background-color: map-get(map-get(c.$color, "solid-colors"), c-highlight-2);
+    color: map-get(map-get(c.$color, "solid-colors"), c-dark);
+  }
+}
+
+[placeholder] {
+  font-size: map-get(map-get(s.$font-sizes, "other-texts"), p-testimony);
+}
 
 section h2 {
   font-size: map-get(map-get(s.$font-sizes, "headings"), title-main-cards);
@@ -24,46 +60,111 @@ section h2 {
     map-get(f.$path-fonts-formats, "family-font"),
     "h2-font"
   );
-  //   color: ;
-  //   text-shadow: ;
-};
+  letter-spacing: map-get(
+    map-get(s.$font-spaces, "letter-spacings"),
+    ls-title-main-cards
+  );
+
+  text-transform: uppercase;
+}
 
 section div h2 {
   font-size: map-get(map-get(s.$font-sizes, "headings"), title-testimony);
-  color: map-get(map-get(c.$color, "solid-colors"), "c-highlight-1");
+  color: map-get(map-get(c.$color, "solid-colors"), "c-dark");
   font-family: map-get(
     map-get(f.$path-fonts-formats, "family-font"),
     "h2-font"
   );
-};
 
+  letter-spacing: map-get(
+    map-get(s.$font-spaces, "letter-spacings"),
+    ls-title-testimony
+  );
+}
+
+section > div:nth-last-child(1) h2 {
+  text-transform: capitalize;
+}
+
+section {
+  div:nth-child(1) h2 + div {
+    span:nth-child(1) {
+      background-color: red;
+      font-family: map-get(
+        map-get(f.$path-fonts-formats, "family-font"),
+        h3-font
+      );
+      font-size: map-get(
+        map-get(s.$font-sizes, "other-texts"),
+        name-testimony-user
+      );
+    }
+    span:nth-child(2) {
+      font-size: map-get(
+        map-get(s.$font-sizes, "other-texts"),
+        name-testimony-user
+      );
+      background-color: #00ffff;
+    }
+
+    & > p {
+      background-color: purple;
+      font-size: map-get(map-get(s.$font-sizes, "other-texts"), p-testimony);
+    }
+  }
+}
 
 section div > a ~ p {
   font-size: map-get(map-get(s.$font-sizes, "other-texts"), p-in-cards);
-  color: map-get(map-get(c.$color, "solid-colors"), "c-button-footer");
+  color: map-get(map-get(c.$color, "solid-colors"), c-light);
   font-family: map-get(
     map-get(f.$path-fonts-formats, "family-font"),
     "paragraph-font"
   );
+  text-shadow: map-get(map-get(sh.$shadows, texts), sh-desc-section);
 };
 
+nav {
 
-div > h1 ~ p {
-  font-size: map-get(map-get(s.$font-sizes, "other-texts"), p-in-cards);
-  color: map-get(map-get(c.$color, "solid-colors"), "c-button-more");
-  font-family: map-get(
-    map-get(f.$path-fonts-formats, "family-font"),
-    "paragraph-font"
-  );
+  background-color: black;
+  
+  & > a {
+    font-size: map-get(s.$font-sizes, menu-font);
+    color: map-get(map-get(c.$color, "solid-colors"), "c-light");
+    font-family: map-get(
+      map-get(f.$path-fonts-formats, "family-font"),
+      "menu-font"
+    );
+    text-decoration: none;
+
+    &.active,
+    &:hover {
+      color: map-get(
+        map-get(c.$color, "solid-colors"),
+        "c-hgl-hover"
+      ); // Amarillo
+      font-family: map-get(
+        map-get(f.$path-fonts-formats, "family-font"),
+        h2-font
+      );
+    };
+  };
 };
 
+div {
+  label + div {
+    font-size: map-get(
+      map-get(s.$font-sizes, "other-texts"),
+      name-testimony-user
+    );
+    background-color: springgreen;
+  }
 
-
-div > a {
-  font-size: map-get(map-get(s.$font-sizes, "other-texts"), p-in-cards);
-  color: map-get(map-get(c.$color, "solid-colors"), "c-button-more");
-  font-family: map-get(
-    map-get(f.$path-fonts-formats, "family-font"),
-    "paragraph-font"
-  );
-};
+  label {
+    font-size: map-get(map-get(s.$font-sizes, "other-texts"), label-wt);
+    font-family: map-get(
+      map-get(f.$path-fonts-formats, "family-font"),
+      normal-font
+    );
+  }
+}

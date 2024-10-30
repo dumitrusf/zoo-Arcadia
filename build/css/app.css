@@ -316,8 +316,8 @@ template {
   src: url(/src/assets/fonts/Poppins-Bold.ttf) format(truetype);
 }
 @font-face {
-  font-family: "Montserrat-Regular";
-  src: url(/src/assets/fonts/Montserrat-Regular.ttf) format(truetype);
+  font-family: "Montserrat-Bold";
+  src: url(/src/assets/fonts/Montserrat-Bold.ttf) format(truetype);
 }
 @font-face {
   font-family: "Roboto-Medium";
@@ -335,40 +335,103 @@ template {
   font-family: "Inter-24";
   src: url(/src/assets/fonts/Inter_24pt-Medium.ttf) format(truetype);
 }
-h1 {
-  font-size: clamp(2.2rem - 0.5vw, 4vw + 1rem, 2.5rem + 0.5vw);
-  color: #5f0039;
+@font-face {
+  font-family: "Poppins-Medium";
+  src: url(/src/assets/fonts/Poppins-Medium.ttf) format(truetype);
+}
+h1,
+div > h1 ~ p {
+  font-size: clamp(2.2rem, 4vw + 1rem, 3rem);
+  color: #fff;
   font-family: "Fun-City-Level-3-Basic";
-}
-
-section h2 {
-  font-size: clamp(2rem - 0.5vw, 4vw + 1rem, 3.2rem + 0.5vw);
-  color: #000;
-  font-family: "Poppins-Bold";
-}
-
-section div h2 {
-  font-size: clamp(2rem - 0.5vw, 4vw + 1rem, 2.55rem + 0.5vw);
-  color: #2ed6ff;
-  font-family: "Poppins-Bold";
-}
-
-section div > a ~ p {
-  font-size: clamp(1.9rem - 0.5vw, 4vw + 1rem, 2.8rem + 0.5vw);
-  color: #345813;
-  font-family: "Roboto-Regular";
+  text-shadow: 0px 4.6px 4.6px rgba(0, 0, 0, 0.968627451);
 }
 
 div > h1 ~ p {
-  font-size: clamp(1.9rem - 0.5vw, 4vw + 1rem, 2.8rem + 0.5vw);
-  color: #aa6b1f;
-  font-family: "Roboto-Regular";
+  line-height: 3.273rem; /* 148.923% */
+  letter-spacing: 0.308rem;
 }
 
-div > a {
-  font-size: clamp(1.9rem - 0.5vw, 4vw + 1rem, 2.8rem + 0.5vw);
-  color: #aa6b1f;
+.button-type {
+  font-size: clamp(1.4rem, 1.5vw + 0.5rem, 2rem);
+  color: #fff;
+  font-family: "Raleway-Bold";
+  text-decoration: none;
+  background-color: #aa6b1f;
+  border-style: none;
+  text-transform: uppercase;
+}
+
+div div + .button-type {
+  background-color: #00ffbf;
+  color: #000;
+}
+
+[placeholder] {
+  font-size: clamp(1.4rem, 1.4vw + 1rem, 1.83rem);
+}
+
+section h2 {
+  font-size: clamp(2rem, 2vw + 1rem, 3.3rem);
+  color: #000;
+  font-family: "Poppins-Bold";
+  letter-spacing: 1.1rem;
+  text-transform: uppercase;
+}
+
+section div h2 {
+  font-size: clamp(1.95rem, 4vw + 1rem, 2.55rem);
+  color: #000;
+  font-family: "Poppins-Bold";
+  letter-spacing: 0.2rem;
+}
+
+section > div:nth-last-child(1) h2 {
+  text-transform: capitalize;
+}
+
+section div:nth-child(1) h2 + div span:nth-child(1) {
+  background-color: red;
+  font-family: "Montserrat-Bold";
+  font-size: clamp(1.8rem, 1.8vw + 1rem, 2rem);
+}
+section div:nth-child(1) h2 + div span:nth-child(2) {
+  font-size: clamp(1.8rem, 1.8vw + 1rem, 2rem);
+  background-color: #00ffff;
+}
+section div:nth-child(1) h2 + div > p {
+  background-color: purple;
+  font-size: clamp(1.4rem, 1.4vw + 1rem, 1.83rem);
+}
+
+section div > a ~ p {
+  font-size: clamp(1.9rem, 2vw + 1rem, 2.9rem);
+  color: #fff;
   font-family: "Roboto-Regular";
+  text-shadow: 0rem 0rem 1.5rem #000000, 0rem 0rem 1rem #000000, 0rem 0rem 0.5rem #000000;
+}
+
+nav {
+  background-color: black;
+}
+nav > a {
+  font-size: clamp(1.4rem, 2vw + 1rem, 1.8rem);
+  color: #fff;
+  font-family: "Poppins-Medium";
+  text-decoration: none;
+}
+nav > a.active, nav > a:hover {
+  color: #ffff00;
+  font-family: "Poppins-Bold";
+}
+
+div label + div {
+  font-size: clamp(1.8rem, 1.8vw + 1rem, 2rem);
+  background-color: springgreen;
+}
+div label {
+  font-size: clamp(1.6rem, 2vw + 1rem, 1.8rem);
+  font-family: "Inter-24";
 }
 
 html {
