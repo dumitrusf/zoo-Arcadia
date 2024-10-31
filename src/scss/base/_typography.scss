@@ -5,6 +5,13 @@
 @use "font-sizes" as s;
 
 // typographie
+html,
+body {
+  font-family: map-get(
+    map-get(f.$path-fonts-formats, "family-font"),
+    normal-font
+  );
+};
 
 h1,
 div > h1 ~ p {
@@ -15,7 +22,7 @@ div > h1 ~ p {
     "h1-font"
   );
   text-shadow: map-get(map-get(sh.$shadows, "texts"), "h1-shadow");
-}
+};
 
 div > h1 ~ p {
   line-height: map-get(
@@ -26,7 +33,7 @@ div > h1 ~ p {
     map-get(s.$font-spaces, "letter-spacings"),
     ls-p-main-heading
   );
-}
+};
 
 .button-type {
   font-size: map-get(map-get(s.$font-sizes, "other-texts"), text-button);
@@ -37,21 +44,31 @@ div > h1 ~ p {
   );
 
   text-decoration: none;
-  background-color: map-get(map-get(c.$color, "solid-colors"), "c-button-more");
+  background-color: map-get(map-get(c.$color, "solid-colors"), c-button-more);
   border-style: none;
   text-transform: uppercase;
-}
+};
+
+header {
+  div > div + .button-type {
+    color: map-get(map-get(c.$color, "solid-colors"), c-light);
+    background-color: map-get(
+      map-get(c.$color, "solid-colors"),
+      c-button-footer
+    );
+  }
+};
 
 div {
   & div + .button-type {
     background-color: map-get(map-get(c.$color, "solid-colors"), c-highlight-2);
     color: map-get(map-get(c.$color, "solid-colors"), c-dark);
-  }
-}
+  };
+};
 
 [placeholder] {
   font-size: map-get(map-get(s.$font-sizes, "other-texts"), p-testimony);
-}
+};
 
 section h2 {
   font-size: map-get(map-get(s.$font-sizes, "headings"), title-main-cards);
@@ -66,7 +83,7 @@ section h2 {
   );
 
   text-transform: uppercase;
-}
+};
 
 section div h2 {
   font-size: map-get(map-get(s.$font-sizes, "headings"), title-testimony);
@@ -80,11 +97,11 @@ section div h2 {
     map-get(s.$font-spaces, "letter-spacings"),
     ls-title-testimony
   );
-}
+};
 
 section > div:nth-last-child(1) h2 {
   text-transform: capitalize;
-}
+};
 
 section {
   div:nth-child(1) h2 + div {
@@ -98,21 +115,21 @@ section {
         map-get(s.$font-sizes, "other-texts"),
         name-testimony-user
       );
-    }
+    };
     span:nth-child(2) {
       font-size: map-get(
         map-get(s.$font-sizes, "other-texts"),
         name-testimony-user
       );
       background-color: #00ffff;
-    }
+    };
 
     & > p {
       background-color: purple;
       font-size: map-get(map-get(s.$font-sizes, "other-texts"), p-testimony);
-    }
-  }
-}
+    };
+  };
+};
 
 section div > a ~ p {
   font-size: map-get(map-get(s.$font-sizes, "other-texts"), p-in-cards);
@@ -125,9 +142,8 @@ section div > a ~ p {
 };
 
 nav {
-
   background-color: black;
-  
+
   & > a {
     font-size: map-get(s.$font-sizes, menu-font);
     color: map-get(map-get(c.$color, "solid-colors"), "c-light");
@@ -158,7 +174,7 @@ div {
       name-testimony-user
     );
     background-color: springgreen;
-  }
+  };
 
   label {
     font-size: map-get(map-get(s.$font-sizes, "other-texts"), label-wt);
@@ -167,4 +183,4 @@ div {
       normal-font
     );
   }
-}
+};

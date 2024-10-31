@@ -339,6 +339,11 @@ template {
   font-family: "Poppins-Medium";
   src: url(/src/assets/fonts/Poppins-Medium.ttf) format(truetype);
 }
+html,
+body {
+  font-family: "Inter-24";
+}
+
 h1,
 div > h1 ~ p {
   font-size: clamp(2.2rem, 4vw + 1rem, 3rem);
@@ -360,6 +365,11 @@ div > h1 ~ p {
   background-color: #aa6b1f;
   border-style: none;
   text-transform: uppercase;
+}
+
+header div > div + .button-type {
+  color: #fff;
+  background-color: #345813;
 }
 
 div div + .button-type {
