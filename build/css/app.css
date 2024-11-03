@@ -344,107 +344,160 @@ body {
   font-family: "Inter-24";
 }
 
-h1,
-div > h1 ~ p {
-  font-size: clamp(2.2rem, 4vw + 1rem, 3rem);
-  color: #fff;
-  font-family: "Fun-City-Level-3-Basic";
-  text-shadow: 0px 4.6px 4.6px rgba(0, 0, 0, 0.968627451);
+.nav {
+  background-color: #000;
 }
-
-div > h1 ~ p {
-  line-height: 3.273rem; /* 148.923% */
-  letter-spacing: 0.308rem;
-}
-
-.button-type {
-  font-size: clamp(1.4rem, 1.5vw + 0.5rem, 2rem);
-  color: #fff;
-  font-family: "Raleway-Bold";
-  text-decoration: none;
-  background-color: #aa6b1f;
-  border-style: none;
-  text-transform: uppercase;
-}
-
-header div > div + .button-type {
-  color: #fff;
-  background-color: #345813;
-}
-
-div div + .button-type {
-  background-color: #00ffbf;
-  color: #000;
-}
-
-[placeholder] {
-  font-size: clamp(1.4rem, 1.4vw + 1rem, 1.83rem);
-}
-
-section h2 {
-  font-size: clamp(2rem, 2vw + 1rem, 3.3rem);
-  color: #000;
-  font-family: "Poppins-Bold";
-  letter-spacing: 1.1rem;
-  text-transform: uppercase;
-}
-
-section div h2 {
-  font-size: clamp(1.95rem, 4vw + 1rem, 2.55rem);
-  color: #000;
-  font-family: "Poppins-Bold";
-  letter-spacing: 0.2rem;
-}
-
-section > div:nth-last-child(1) h2 {
-  text-transform: capitalize;
-}
-
-section div:nth-child(1) h2 + div span:nth-child(1) {
-  background-color: red;
-  font-family: "Montserrat-Bold";
-  font-size: clamp(1.8rem, 1.8vw + 1rem, 2rem);
-}
-section div:nth-child(1) h2 + div span:nth-child(2) {
-  font-size: clamp(1.8rem, 1.8vw + 1rem, 2rem);
-  background-color: #00ffff;
-}
-section div:nth-child(1) h2 + div > p {
-  background-color: purple;
-  font-size: clamp(1.4rem, 1.4vw + 1rem, 1.83rem);
-}
-
-section div > a ~ p {
-  font-size: clamp(1.9rem, 2vw + 1rem, 2.9rem);
-  color: #fff;
-  font-family: "Roboto-Regular";
-  text-shadow: 0rem 0rem 1.5rem #000000, 0rem 0rem 1rem #000000, 0rem 0rem 0.5rem #000000;
-}
-
-nav {
-  background-color: black;
-}
-nav > a {
+.nav__link {
   font-size: clamp(1.4rem, 2vw + 1rem, 1.8rem);
   color: #fff;
   font-family: "Poppins-Medium";
   text-decoration: none;
 }
-nav > a.active, nav > a:hover {
+.nav__link--active, .nav__link:hover {
   color: #ffff00;
   font-family: "Poppins-Bold";
 }
 
-div label + div {
-  font-size: clamp(1.8rem, 1.8vw + 1rem, 2rem);
-  background-color: springgreen;
+.hero {
+  font-size: unset;
 }
-div label {
-  font-size: clamp(1.6rem, 2vw + 1rem, 1.8rem);
-  font-family: "Inter-24";
+.hero__title, .hero__subtitle {
+  font-size: clamp(2.2rem, 2.16vw + 1rem, 3.4rem);
+  color: #fff;
+  font-family: "Fun-City-Level-3-Basic";
+  text-shadow: 0px 4.6px 4.6px rgba(0, 0, 0, 0.968627451);
+}
+.hero__subtitle {
+  line-height: 3.273rem; /* 148.923% */
+  letter-spacing: 0.308rem;
 }
 
-html {
+.intro__button {
+  font-size: clamp(1.4rem, 1.222vw + 0.7rem, 2rem);
+  font-family: "Raleway-Bold";
+  text-decoration: none;
+  border-style: none;
+  text-transform: uppercase;
+}
+.intro__button--hours {
+  color: #fff;
+  background-color: #345813;
+}
+.intro__button--send {
+  background-color: #00ffbf;
+  color: #000;
+}
+.intro__button--more {
+  background-color: #aa6b1f;
+  color: #fff;
+}
+
+.intro__link {
+  text-decoration: none;
+}
+.intro__title {
+  font-size: clamp(2rem, 2.01619vw + 1rem, 3.1rem);
+  color: #000;
+  font-family: "Poppins-Bold";
+  letter-spacing: 1.1rem;
+  text-transform: uppercase;
+}
+.intro__description {
+  font-size: clamp(1.9rem, 1.885vw + 1rem, 2.6rem);
+  color: #fff;
+  font-family: "Roboto-Regular";
+  text-shadow: 0rem 0rem 1.5rem #000000, 0rem 0rem 1rem #000000, 0rem 0rem 0.5rem #000000;
+}
+.intro__details {
+  font-family: "Roboto-Regular";
+  text-transform: uppercase;
+}
+.intro__name {
+  color: #b8117d;
+  letter-spacing: 0.2rem;
+  font-size: clamp(2rem, 1.5466vw + 1rem, 2.3rem);
+}
+.intro__name ~ * {
+  color: pink;
+  font-size: clamp(1.6rem, 1.0081vw + 1rem, 1.9rem);
+  margin: unset;
+}
+
+.pagination__link, .pagination__link ~ span {
+  font-size: calc(clamp(1.8rem, 1.6129vw + 1rem, 2.6rem) - 0.4rem);
+  text-decoration: none;
+}
+
+.testimony__title {
+  font-size: clamp(2rem, 2.01619vw + 1rem, 3.1rem);
+  color: #000;
+  font-family: "Poppins-Bold";
+  letter-spacing: 0.2rem;
+}
+.testimony__title--shown {
+  text-transform: uppercase;
+}
+.testimony__title--feedback {
+  text-transform: capitalize;
+}
+.testimony__user {
+  font-family: "Montserrat-Bold";
+  font-size: clamp(1.8rem, 1.6129vw + 1rem, 2.6rem);
+  text-transform: uppercase;
+}
+.testimony__rating {
+  font-size: clamp(1.8rem, 1.6129vw + 1rem, 2.6rem);
+}
+.testimony__text {
+  font-size: clamp(1.4rem, 0.80645vw + 1rem, 1.8rem);
+}
+.testimony__stars {
+  font-size: clamp(1.6rem, 1.34409vw + 1rem, 2.2rem);
+}
+.testimony__label {
+  font-size: clamp(1.6rem, 1.34409vw + 1rem, 2.2rem);
+  font-family: "Inter-24";
+}
+.testimony__input, .testimony__textarea {
+  font-size: calc(clamp(1.6rem, 1.34409vw + 1rem, 2.2rem) - 0.2rem);
+}
+.testimony__input::placeholder, .testimony__textarea::placeholder {
+  color: grey;
+  font-size: calc(clamp(1.6rem, 1.34409vw + 1rem, 2.2rem) - 0.2rem);
+}
+
+.footer__location-details > p {
+  font-size: calc(clamp(1.4rem, 0.80645vw + 1rem, 1.8rem) + 0.2rem);
+}
+.footer__location-details + p {
+  font-size: clamp(1.4rem, 0.80645vw + 1rem, 1.8rem);
+}
+.footer__hours-table {
+  font-size: clamp(1.3rem, 0.675vw + 1rem, 1.7rem);
+}
+.footer__copyright > small {
+  font-size: clamp(0.7rem, 1.07527vw + 0.4rem, 1.6rem);
+}
+
+.filter {
+  font-size: clamp(1.8rem, 1.6129vw + 1rem, 2.4rem);
+}
+.filter__legend ~ label, .filter__legend ~ input {
+  font-size: clamp(1.6rem, 1.34409vw + 1rem, 2.2rem);
+}
+.filter__fieldset select option {
+  font-size: calc(clamp(1.6rem, 1.34409vw + 1rem, 2.2rem) - 0.2rem);
+}
+.filter__legend ~ select {
+  font-size: calc(clamp(1.6rem, 1.34409vw + 1rem, 2.2rem) - 0.2rem);
+}
+
+.contact__form-section {
+  font-size: clamp(1.6rem, 1.34409vw + 1rem, 2.2rem);
+}
+
+html,
+footer {
   font-size: 62.5%;
 }
 

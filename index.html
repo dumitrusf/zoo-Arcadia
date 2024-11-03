@@ -25,26 +25,27 @@
 </head>
 
 <body id="top">
-	<nav>
-		<a href="#" class="active">|home|</a>
-		<a href="./services.html">services</a>
-		<a href="./habitats.html">habitats</a>
-		<a href="./all-animals-habitats.html">animals</a>
-		<a href="./contact.html">contact</a>
+	<nav class="nav">
+		<a class="nav__link nav__home nav__link--active" href="#">|home|</a>
+		<a class="nav__link nav__services" href="./services.html">services</a>
+		<a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
+		<a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
+		<a class="nav__link nav__contact" href="./contact.html">contact</a>
 	</nav>
 
-	<header>
-		<div>
-			<div>
-				<h1>zoo arcadia</h1>
-				<p>Where all animals love to live</p>
+	<header class="hero">
+		<div class="hero__container">
+			<div class="hero__text">
+				<h1 class="hero__title">zoo arcadia</h1>
+				<p class="hero__subtitle">Where all animals love to live</p>
 			</div>
 
 
-			<a href="#opening-hours" class="button-type">opening hours</a>
+			<a class="intro__button intro__button--hours" href="#opening-hours">opening hours</a>
 
 		</div>
-		<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!227794&authkey=!AEappuXp767fq0M&ithint=photo&e=pUyq0e"
+		<img class="hero__image"
+			src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!227794&authkey=!AEappuXp767fq0M&ithint=photo&e=pUyq0e"
 			alt="hero image">
 	</header>
 
@@ -52,57 +53,61 @@
 	<hr>
 	<br>
 
-	<main>
-		<section>
-			<h2>services</h2>
+	<main class="intro">
+		<section class="intro__section intro__section--services">
+			<h2 class="intro__title">services</h2>
 
-			<div>
-				<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!227795&authkey=!AFPvx5eK9lauDFo&ithint=photo&e=bgprLd"
+			<div class="intro__content">
+				<img class="intro__image"
+					src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!227795&authkey=!AFPvx5eK9lauDFo&ithint=photo&e=bgprLd"
 					alt="intro services">
 
-				<div>
+				<div class="intro__details">
 
-					<a href="./services.html" class="button-type">more</a>
+					<a class="intro__button intro__button--more intro__button--services" href="./services.html">more</a>
 
-					<p>see what arcadia can offers you</p>
+					<p class="intro__description">see what arcadia can offers you</p>
 				</div>
 			</div>
 		</section>
 
 		<br>
 
-		<section>
-			<h2>habitats</h2>
+		<section class="intro__section intro__section--habitats">
+			<h2 class="intro__title">habitats</h2>
 
-			<div>
-				<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!227792&authkey=!AMKZjbJ965omT9g&ithint=photo&e=MUp6nM"
+			<div class="intro__content">
+				<img class="intro__image"
+					src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!227792&authkey=!AMKZjbJ965omT9g&ithint=photo&e=MUp6nM"
 					alt="intro habitats">
 
-				<div>
+				<div class="intro__details">
 
-					<a href="./habitats.html" class="button-type">more</a>
+					<a href="./habitats.html" class="intro__button intro__button--more intro__button--habitats">more</a>
 
 
-					<p>amazing habitats to discover</p>
+					<p class="intro__description">amazing habitats to discover</p>
 				</div>
 			</div>
 		</section>
 
 		<br>
 
-		<section>
-			<h2>animals</h2>
+		<section class="intro__section intro__section--animals">
+			<h2 class="intro__title">animals</h2>
 
-			<div>
-				<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!227793&authkey=!ACU397kzAKvakI0&ithint=photo&e=IApwre"
+			<div class="intro__content">
+				<img class="intro__image"
+					src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!227793&authkey=!ACU397kzAKvakI0&ithint=photo&e=IApwre"
 					alt="intro animals">
 
-				<div>
+				<div class="intro__details">
 
-					<a href="./all-animals-habitats.html" class="button-type">more</a>
+					<a href="./all-animals-habitats.html"
+						class="intro__button intro__button--more intro__button--animals">more</a>
 
 
-					<p>explore another way of love</p>
+					<p class="intro__description">explore another way of love</p>
 				</div>
 			</div>
 		</section>
@@ -112,16 +117,16 @@
 	<hr>
 	<br>
 
-	<section>
-		<div>
-			<h2>testimony</h2>
+	<section class="testimony">
+		<div class="testimony__container">
+			<h2 class="testimony__title testimony__title--shown">testimony</h2>
 
-			<div>
-				<div>
-					<span>knight</span>
-					<span>★★★★★</span>
+			<div class="testimony__item">
+				<div class="testimony__header">
+					<span class="testimony__user">knight</span>
+					<span class="testimony__rating">★★★★★</span>
 				</div>
-				<p>
+				<p class="testimony__text">
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
 					deserunt eos temp
 				</p>
@@ -130,34 +135,35 @@
 
 		<br>
 
-		<div>
-			<h2>Write your feedback</h2>
-			<form>
-				<fieldset>
+		<div class="testimony__feedback">
+			<h2 class="testimony__title testimony__title--feedback">Write your feedback</h2>
+			<form class="testimony__form">
+				<fieldset class="testimony__fieldset">
 
-					<div>
-						<div>
-							<label for="rating"></label>
-							<div id="rating" class="stars">
-								<span class="star" data-value="1">★</span>
-								<span class="star" data-value="2">★</span>
-								<span class="star" data-value="3">★</span>
-								<span class="star" data-value="4">★</span>
-								<span class="star" data-value="5">★</span>
+					<div class="testimony__field">
+						<div class="testimony__rating-group">
+							<label class="testimony__label" for="rating"></label>
+							<div id="rating" class="testimony__stars">
+								<span class="testimony__star" data-value="1">★</span>
+								<span class="testimony__star" data-value="2">★</span>
+								<span class="testimony__star" data-value="3">★</span>
+								<span class="testimony__star" data-value="4">★</span>
+								<span class="testimony__star" data-value="5">★</span>
 							</div>
-							<label for="pseudo">Pseudo</label>
+							<label class="testimony__label" for="pseudo">Pseudo</label>
 
 						</div>
-						<input type="text" id="pseudo" name="pseudo" placeholder="Pseudo" />
+						<input class="testimony__input" type="text" id="pseudo" name="pseudo" placeholder="Pseudo" />
 					</div>
 
-					<div>
-
-						<div>
-							<label for="message">Message</label><br />
-							<textarea id="message" name="message" rows="4" placeholder="Your message"></textarea><br />
+					<div class="testimony__field testimony__field-message">
+						<div class="testimony__message-group">
+							<label class="testimony__label" for="message">Message</label>
+							<br />
+							<textarea class="testimony__textarea" id="message" name="message" rows="4" placeholder="Your message"></textarea>
+							<br />
 						</div>
-						<a type="submit" class="button-type">SEND</a>
+						<a type="submit" class="intro__button intro__button--send">SEND</a>
 					</div>
 
 
@@ -170,43 +176,43 @@
 	<hr>
 	<br>
 
-	<footer>
-		<section id="opening-hours">
-			<div>
-				<div>
-					<p>BRETAGNE (35380)</p>
-					<p>FORÊT DE BROCÉLIANDE</p>
+	<footer class="footer">
+		<section class="footer__hours" id="opening-hours">
+			<div class="footer__location">
+				<div class="footer__location-details">
+					<p class="footer__city">BRETAGNE (35380)</p>
+					<p class="footer__forest">FORÊT DE BROCÉLIANDE</p>
 				</div>
-				<p>HEURES D'OUVERTURE</p>
+				<p class="footer__hours-title">HEURES D'OUVERTURE</p>
 
-				<table>
-					<tr>
-						<th>Matin:</th>
-						<td>08:45 - 12:00</td>
+				<table class="footer__hours-table">
+					<tr class="footers__hours-row">
+						<th class="footer__hours-header">Matin:</th>
+						<td class="footer__hours-data">08:45 - 12:00</td>
 					</tr>
-					<tr>
-						<th>Après-midi:</th>
-						<td>14:00 - 18:00</td>
+					<tr class="footers__hours-row">
+						<th class="footer__hours-header">Après-midi:</th>
+						<td class="footer__hours-data">14:00 - 18:00</td>
 					</tr>
-					<tr>
-						<th>Samedi:</th>
-						<td class="highlight">08:45 - 12:00</td>
+					<tr class="footers__hours-row">
+						<th class="footer__hours-header">Samedi:</th>
+						<td class="footer__hours-data">08:45 - 12:00</td>
 					</tr>
-					<tr>
-						<th>Dimanche:</th>
-						<td>Fermé</td>
+					<tr class="footers__hours-row">
+						<th class="footer__hours-header">Dimanche:</th>
+						<td class="footer__hours-data">Fermé</td>
 					</tr>
 				</table>
 			</div>
 
 			<!-- the image click redirect to top for this moment just exemple -->
-			<a href="#top">
-				<img src="./src/assets/images/logo-site-mobile.svg" alt="Logo del sitio - Volver al inicio">
+			<a class="footer__logo-link" href="#top">
+				<img class="footer__logo" src="./src/assets/images/logo-site-mobile.svg" alt="Logo del sitio - Volver al inicio">
 			</a>
 		</section>
 
-		<div>
-			<small>Copyright © 2024 Arcadia ZOO Bretagne | Designed By D.S.F</small>
+		<div class="footer__copyright">
+			<small>&copy; 2024 Arcadia ZOO Bretagne | Designed By D.S.F</small>
 		</div>
 	</footer>
 </body>
