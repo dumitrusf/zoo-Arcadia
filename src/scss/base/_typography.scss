@@ -1,6 +1,339 @@
 // typographie
 @use "fonts" as f;
-@use "colors" as c;
-
+@use "color" as c;
+@use "shadows" as sh;
+@use "font-sizes" as s;
 
 // typographie
+html,
+body {
+  font-family: map-get(
+    map-get(f.$path-fonts-formats, "family-font"),
+    normal-font
+  );
+}
+
+// nav style typography
+.nav {
+  
+  background-color: map-get(map-get(c.$color, solid-colors), c-dark);
+
+  
+
+  &__link {
+    font-size: map-get(s.$font-sizes, menu-font);
+    color: map-get(map-get(c.$color, "solid-colors"), c-light);
+    font-family: map-get(
+      map-get(f.$path-fonts-formats, "family-font"),
+      "menu-font"
+    );
+    text-decoration: none;
+
+    &--active,
+    &:hover {
+      color: map-get(
+        map-get(c.$color, "solid-colors"),
+        "c-hgl-hover"
+      ); // Amarillo
+      font-family: map-get(
+        map-get(f.$path-fonts-formats, "family-font"),
+        h2-font
+      );
+    }
+  }
+}
+// nav style typography
+
+// main h1 style typography
+.hero {
+  font-size: unset;
+
+  &__title,
+  &__subtitle {
+    font-size: map-get(map-get(s.$font-sizes, "headings"), main-heading);
+    color: map-get(map-get(c.$color, "solid-colors"), "c-light");
+    font-family: map-get(
+      map-get(f.$path-fonts-formats, "family-font"),
+      "h1-font"
+    );
+    text-shadow: map-get(map-get(sh.$shadows, "texts"), "h1-shadow");
+  }
+
+  &__subtitle {
+    line-height: map-get(
+      map-get(s.$font-spaces, "line-heights"),
+      lh-p-main-heading
+    ); /* 148.923% */
+    letter-spacing: map-get(
+      map-get(s.$font-spaces, "letter-spacings"),
+      ls-p-main-heading
+    );
+  }
+}
+// main h1 style typography
+
+// all buttons
+.intro__button {
+  font-size: map-get(map-get(s.$font-sizes, "other-texts"), text-button);
+  font-family: map-get(
+    map-get(f.$path-fonts-formats, "family-font"),
+    button-font
+  );
+  text-decoration: none;
+  border-style: none;
+  text-transform: uppercase;
+
+  // button from header redirecting to footer
+  &--hours {
+    color: map-get(map-get(c.$color, "solid-colors"), c-light);
+    background-color: map-get(
+      map-get(c.$color, "solid-colors"),
+      c-button-footer
+    );
+  }
+  // button from header redirecting to footer
+
+  // button form send
+  &--send {
+    background-color: map-get(map-get(c.$color, "solid-colors"), c-highlight-2);
+    color: map-get(map-get(c.$color, "solid-colors"), c-dark);
+  }
+  // button form send
+
+  // button more info
+  &--more {
+    background-color: map-get(map-get(c.$color, "solid-colors"), c-button-more);
+    color: map-get(map-get(c.$color, "solid-colors"), c-light);
+  }
+  // button more info
+}
+// all buttons
+
+// main section with cards
+.intro {
+  // titles cards
+
+  &__link {
+    text-decoration: none;
+  }
+  
+  &__title {
+    
+    font-size: map-get(map-get(s.$font-sizes, "headings"), title-main-cards);
+    color: map-get(map-get(c.$color, "solid-colors"), "c-dark");
+    font-family: map-get(
+      map-get(f.$path-fonts-formats, "family-font"),
+      "h2-font"
+    );
+    letter-spacing: map-get(
+      map-get(s.$font-spaces, "letter-spacings"),
+      ls-title-main-cards
+    );
+    text-transform: uppercase;
+  }
+  // titles cards
+
+  // paraph in cards
+  &__description {
+    
+
+    font-size: map-get(map-get(s.$font-sizes, "other-texts"), p-in-cards);
+    color: map-get(map-get(c.$color, "solid-colors"), c-light);
+    font-family: map-get(
+      map-get(f.$path-fonts-formats, "family-font"),
+      "paragraph-font"
+    );
+    text-shadow: map-get(map-get(sh.$shadows, texts), sh-desc-section);
+  }
+  // paraph in cards
+
+  &__details {
+    font-family: map-get(
+      map-get(f.$path-fonts-formats, "family-font"),
+      paragraph-font
+    );
+    text-transform: uppercase;
+  }
+  
+  &__name {
+    
+    color: #b8117d;
+    letter-spacing: map-get(
+      map-get(s.$font-spaces, letter-spacings),
+      ls-title-testimony
+    );
+    font-size: map-get(map-get(s.$font-sizes, "headings"), name-animal);
+    
+    & ~ * {
+      color: pink;
+      font-size: map-get(map-get(s.$font-sizes, "other-texts"), rest-animal);
+
+      margin: unset;
+    }
+    
+  }
+  
+  
+}
+// main section with cards
+
+
+// pagination
+
+.pagination {
+
+  &__link,
+  &__link ~ span {
+    font-size: calc(map-get(map-get(s.$font-sizes, "other-texts"), name-testimony-user) - 0.4rem);
+
+    text-decoration: none;
+  }
+  
+}
+
+// pagination
+
+
+// section testimony
+.testimony {
+  // title testimony
+  &__title {
+    font-size: map-get(map-get(s.$font-sizes, "headings"), title-main-cards);
+    color: map-get(map-get(c.$color, "solid-colors"), "c-dark");
+    font-family: map-get(
+      map-get(f.$path-fonts-formats, "family-font"),
+      "h2-font"
+    );
+
+    letter-spacing: map-get(
+      map-get(s.$font-spaces, "letter-spacings"),
+      ls-title-testimony
+    );
+
+    &--shown {
+      
+      text-transform: uppercase;
+    }
+
+    &--feedback {
+      text-transform: capitalize;
+      
+    }
+  }
+  // title testimony
+
+  // user pseudo name
+  &__user {
+    
+    font-family: map-get(
+      map-get(f.$path-fonts-formats, "family-font"),
+      h3-font
+    );
+    font-size: map-get(
+      map-get(s.$font-sizes, "other-texts"),
+      name-testimony-user
+    );
+
+    text-transform: uppercase;
+  }
+  // user pseudo name
+
+  // stars in testimony
+  &__rating {
+    font-size: map-get(
+      map-get(s.$font-sizes, "other-texts"),
+      name-testimony-user
+    );
+    
+  }
+  // stars in testimony
+
+  // paragraph testimony
+  &__text {
+    
+    font-size: map-get(map-get(s.$font-sizes, "other-texts"), p-testimony);
+  }
+  // paragraph testimony
+
+  &__stars {
+    font-size: map-get(map-get(s.$font-sizes, "other-texts"), filter-form);
+    
+  }
+
+  &__label {
+    
+    font-size: map-get(map-get(s.$font-sizes, "other-texts"), filter-form);
+    font-family: map-get(
+      map-get(f.$path-fonts-formats, "family-font"),
+      normal-font
+    );
+  }
+
+  &__input,
+  &__textarea {
+    font-size: calc(map-get(map-get(s.$font-sizes, "other-texts"), filter-form) - 0.2rem);
+    
+    
+    &::placeholder {
+      color: grey;
+      font-size: calc(map-get(map-get(s.$font-sizes, "other-texts"), filter-form) - 0.2rem);
+    }
+  }
+}
+
+// section testimony
+
+// body write testimony
+// section write testimony
+
+// footer
+.footer {
+  &__location-details > p {
+    font-size: calc(map-get(map-get(s.$font-sizes, "other-texts"), p-testimony) + 0.2rem) ;
+  }
+
+  &__location-details + p {
+    
+    font-size: map-get(map-get(s.$font-sizes, "other-texts"), p-testimony);
+  }
+
+  &__hours-table {
+    
+    font-size: map-get(map-get(s.$font-sizes, "footer-texts"), f-tertiary);
+  }
+
+  &__copyright > small {
+    font-size: map-get(map-get(s.$font-sizes, "footer-texts"), f-copy);
+  }
+}
+
+.filter {
+  font-size: map-get(map-get(s.$font-sizes, headings), filter-headings);
+
+  &__legend ~ label,
+  &__legend ~ input {
+    font-size: map-get(map-get(s.$font-sizes, other-texts), filter-form);
+  }
+  
+  &__fieldset select option {
+    font-size: calc(map-get(map-get(s.$font-sizes, other-texts), filter-form) - 0.2rem);
+    
+  }
+  
+  &__legend ~ select {
+    font-size: calc(map-get(map-get(s.$font-sizes, other-texts), filter-form) - 0.2rem);
+
+    
+    
+  }
+}
+
+
+.contact {
+
+  &__form-section {
+    font-size: map-get(map-get(s.$font-sizes, other-texts), filter-form);
+    
+  }
+  
+}

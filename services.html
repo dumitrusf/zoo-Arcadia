@@ -22,25 +22,26 @@
 </head>
 
 <body id="top">
-    <nav>
-        <a href="./index.html">home</a>
-        <a href="#">|services|</a>
-        <a href="./habitats.html">habitats</a>
-        <a href="./all-animals-habitats.html">animals</a>
-        <a href="./contact.html">contact</a>
+    <nav class="nav">
+        <a class="nav__link nav__home" href="./index.html">home</a>
+        <a class="nav__link nav__services nav__link--active" href="#" class="active">|services|</a>
+        <a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
+        <a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
+        <a class="nav__link nav__contact" href="./contact.html">contact</a>
     </nav>
 
-    <header>
-        <div>
-            <div>
-                <h1>services</h1>
+    <header class="hero">
+        <div class="hero__container">
+            <div class="hero__text">
+                <h1 class="hero__title">services</h1>
             </div>
 
 
-            <a href="#opening-hours">opening hours</a>
+            <a class="intro__button intro__button--hours" href="#opening-hours">opening hours</a>
 
         </div>
-        <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!227799&authkey=!AIxGh_Q00XXJ6ZY&ithint=photo&e=JfpjHH"
+        <img class="hero__image"
+            src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!227799&authkey=!AIxGh_Q00XXJ6ZY&ithint=photo&e=JfpjHH"
             alt="hero image services">
 
     </header>
@@ -50,43 +51,45 @@
     <hr>
     <br>
 
-    <main>
-        <section>
-            <h2>restaurant</h2>
+    <main class="intro">
+        <section class="intro__section intro__section--restaurant">
+            <h2 class="intro__title">restaurant</h2>
 
-            <div>
-                <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228340&authkey=!AJl6v0k7W0xGiNo&ithint=photo&e=NCA2wk"
+            <div class="intro__content">
+                <img class="intro__image"
+                    src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228340&authkey=!AJl6v0k7W0xGiNo&ithint=photo&e=NCA2wk"
                     alt="image restaurant arcadia">
 
-                <div>
-                    <p>rest a little before venturing out</p>
+                <div class="intro__details">
+                    <p class="intro__description">rest a little before venturing out</p>
                 </div>
             </div>
         </section>
         <br>
-        <section>
-            <h2>zoo guide</h2>
+        <section class="intro__section intro__section--zoo-guide">
+            <h2 class="intro__title">zoo guide</h2>
 
-            <div>
-                <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228339&authkey=!ADV-T2vbNS1Oub0&ithint=photo&e=tawHjD"
+            <div class="intro__content">
+                <img class="intro__image"
+                    src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228339&authkey=!ADV-T2vbNS1Oub0&ithint=photo&e=tawHjD"
                     alt="image zoo guide">
 
-                <div>
-                    <p>feel safe at all times</p>
+                <div class="intro__details">
+                    <p class="intro__description">feel safe at all times</p>
                 </div>
             </div>
         </section>
         <br>
-        <section>
-            <h2>train to arcadia</h2>
+        <section class="intro__section intro__section--train">
+            <h2 class="intro__title">train to arcadia</h2>
 
-            <div>
-                <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228341&authkey=!AGKlTtZSHp1IyJ8&ithint=photo&e=5psmLp"
+            <div class="intro__content">
+                <img class="intro__image"
+                    src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228341&authkey=!AGKlTtZSHp1IyJ8&ithint=photo&e=5psmLp"
                     alt="image family train">
 
-
-                <div>
-                    <p>a family adventure</p>
+                <div class="intro__details">
+                    <p class="intro__description">a family adventure</p>
                 </div>
             </div>
         </section>
@@ -98,52 +101,45 @@
     <hr>
     <br>
 
-    <footer>
-
-        <section id="opening-hours">
-            <div>
-                <div>
-                    <p>BRETAGNE (35380)</p>
-                    <p>FORÊT DE BROCÉLIANDE</p>
+    <footer class="footer">
+        <section class="footer__hours" id="opening-hours">
+            <div class="footer__location">
+                <div class="footer__location-details">
+                    <p class="footer__city">BRETAGNE (35380)</p>
+                    <p class="footer__forest">FORÊT DE BROCÉLIANDE</p>
                 </div>
-                <p>HEURES D'OUVERTURE</p>
+                <p class="footer__hours-title">HEURES D'OUVERTURE</p>
 
-                <table>
-                    <tr>
-                        <th>Matin:</th>
-                        <td>08:45 - 12:00</td>
+                <table class="footer__hours-table">
+                    <tr class="footers__hours-row">
+                        <th class="footer__hours-header">Matin:</th>
+                        <td class="footer__hours-data">08:45 - 12:00</td>
                     </tr>
-                    <tr>
-                        <th>Après-midi:</th>
-                        <td>14:00 - 18:00</td>
+                    <tr class="footers__hours-row">
+                        <th class="footer__hours-header">Après-midi:</th>
+                        <td class="footer__hours-data">14:00 - 18:00</td>
                     </tr>
-                    <tr>
-                        <th>Samedi:</th>
-                        <td class="highlight">08:45 - 12:00</td>
+                    <tr class="footers__hours-row">
+                        <th class="footer__hours-header">Samedi:</th>
+                        <td class="footer__hours-data">08:45 - 12:00</td>
                     </tr>
-                    <tr>
-                        <th>Dimanche:</th>
-                        <td>Fermé</td>
+                    <tr class="footers__hours-row">
+                        <th class="footer__hours-header">Dimanche:</th>
+                        <td class="footer__hours-data">Fermé</td>
                     </tr>
                 </table>
             </div>
 
             <!-- the image click redirect to top for this moment just exemple -->
-
-
-
-            <a href="#top">
-                <img src="./src/assets/images/logo-site-mobile.svg" alt="Logo del sitio">
+            <a class="footer__logo-link" href="#top">
+                <img class="footer__logo" src="./src/assets/images/logo-site-mobile.svg"
+                    alt="Logo del sitio - Volver al inicio">
             </a>
-
         </section>
 
-        <br>
-
-        <div>
-            <p>Copyright © 2024 Arcadia ZOO Bretagne | Designed By D.S.F</p>
+        <div class="footer__copyright">
+            <small>&copy; 2024 Arcadia ZOO Bretagne | Designed By D.S.F</small>
         </div>
-
     </footer>
 </body>
 

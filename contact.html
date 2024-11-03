@@ -22,69 +22,64 @@
 </head>
 
 <body>
-    <main>
+    <main class="contact">
         <!-- Logo site web -->
-        <header>
-
-            
-			
-			
-			<a href="./index.html">
-				<img src="./src/assets/images/logo-site-mobile.svg" alt="Logo del sitio">
-			</a>
-			
-		</section>
-
-		<br>
-
-		<div>
-			<p>Copyright © 2024 Arcadia ZOO Bretagne | Designed By D.S.F</p>
-		</div>
+        <header class="contact__header">
+            <a href="./index.html" class="contact__logo-link">
+                <img src="./src/assets/images/logo-site-mobile.svg" alt="Logo del sitio" class="contact__logo">
+            </a>
         </header>
 
+        <br>
+
         <!-- Form contacto -->
-        <section>
-            <h2>Contact About:</h2>
-            <form action="/contact" method="POST"> <!-- Cambia la acción al endpoint adecuado -->
-                
+        <section class="contact__form-section">
+            <h2 class="contact__title">Contact About:</h2>
+
+            <form action="/contact" method="POST" class="contact__form">
+
                 <!-- Campo de primer nombre -->
-                <label for="first-name">First Name</label>
-                <input type="text" id="first-name" name="first-name" placeholder="Emilio" required>
+                <label for="first-name" class="contact__label">First Name</label>
+                <input type="text" id="first-name" name="first-name" placeholder="Emilio" required
+                    class="contact__input">
 
                 <br>
                 <br>
-                
+
                 <!-- Campo de apellido -->
-                <label for="last-name">Last Name</label>
-                <input type="text" id="last-name" name="last-name" placeholder="Emiliano" required>
-                
-                <br>
-                <br>
-                
-                <!-- Campo de correo electrónico -->
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Maximiliano@outlook.com" required>
-                
-                <br>
-                <br>
-                
-                <!-- Campo de asunto -->
-                <label for="subject">Subject</label>
-                <input type="text" id="subject" name="subject" placeholder="snakes" required>
-                
-                <br>
-                <br>
-                
-                <!-- Campo de mensaje -->
-                <label for="message">Message</label>
-                <br>
-                <textarea id="message" name="message" rows="4" placeholder="are there snakes?" required></textarea>
+                <label for="last-name" class="contact__label">Last Name</label>
+                <input type="text" id="last-name" name="last-name" placeholder="Emiliano" required
+                    class="contact__input">
 
                 <br>
                 <br>
-                
+
+                <!-- Campo de correo electrónico -->
+                <label for="email" class="contact__label">Email</label>
+                <input type="email" id="email" name="email" placeholder="Maximiliano@outlook.com" required
+                    class="contact__input">
+
+                <br>
+                <br>
+
+                <!-- Campo de asunto -->
+                <label for="subject" class="contact__label">Subject</label>
+                <input type="text" id="subject" name="subject" placeholder="snakes" required class="contact__input">
+
+                <br>
+                <br>
+
+                <!-- Campo de mensaje -->
+                <label for="message" class="contact__label">Message</label>
+                <br>
+                <textarea id="message" name="message" rows="4" placeholder="are there snakes?" required
+                    class="contact__textarea"></textarea>
+
+                <br>
+                <br>
+
                 <!-- Botón de envío -->
-                <button type="submit">Send</button>
+                <button type="submit" class="contact__button">Send</button>
             </form>
         </section>
     </main>

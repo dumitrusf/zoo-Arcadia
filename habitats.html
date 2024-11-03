@@ -24,25 +24,25 @@
 </head>
 
 <body>
-    <nav>
-        <a href="./index.html">home</a>
-        <a href="./services.html">services</a>
-        <a href="#">|habitats|</a>
-        <a href="./all-animals-habitats.html">animals</a>
-        <a href="./contact.html">contact</a>
+    <nav class="nav">
+        <a class="nav__link nav__home" href="./index.html">home</a>
+        <a class="nav__link nav__services" href="./services.html">services</a>
+        <a class="nav__link nav__habitats nav__link--active" href="#">|habitats|</a>
+        <a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
+        <a class="nav__link nav__contact" href="./contact.html">contact</a>
     </nav>
 
-    <header>
-        <div>
-            <div>
-                <h1>habitats</h1>
+    <header class="hero">
+        <div class="hero__container">
+            <div class="hero__text">
+                <h1 class="hero__title">habitats</h1>
             </div>
 
 
-            <a href="#opening-hours">opening hours</a>
+            <a class="intro__button intro__button--hours" href="#opening-hours">opening hours</a>
 
         </div>
-        <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!227800&authkey=!ACwRmG6wW9NktiY&ithint=photo&e=voEkUg"
+        <img class="hero__image" src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!227800&authkey=!ACwRmG6wW9NktiY&ithint=photo&e=voEkUg"
             alt="hero image habitats">
 
     </header>
@@ -53,59 +53,59 @@
     <hr>
     <br>
 
-    <main>
+    <main class="intro">
 
-        <section>
-            <h2>savannah</h2>
+        <section class="intro__section intro__section--savannah">
+            <h2 class="intro__title">savannah</h2>
 
-            <div>
-                <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228345&authkey=!AOpKhCsBigrcueo&ithint=photo&e=CHnaWJ"
+            <div class="intro__content">
+                <img class="intro__image" src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228345&authkey=!AOpKhCsBigrcueo&ithint=photo&e=CHnaWJ"
                     alt="intro savannah habitat">
 
-                <div>
+                <div class="intro__details">
 
-                    <a href="./habitat-1.html">more</a>
+                    <a class="intro__button intro__button--more intro__button--savannah" href="./habitat-1.html">more</a>
 
 
-                    <p>Experience the Wild Majesty of the Savannah</p>
+                    <p class="intro__description">Experience the Wild Majesty of the Savannah</p>
                 </div>
             </div>
         </section>
 
         <br>
 
-        <section>
-            <h2>swamp</h2>
+        <section class="intro__section intro__section--swamp">
+            <h2 class="intro__title">swamp</h2>
 
-            <div>
-                <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228344&authkey=!ANHEFwcjrdRuM44&ithint=photo&e=eswPyM"
+            <div class="intro__content">
+                <img class="intro__image" src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228344&authkey=!ANHEFwcjrdRuM44&ithint=photo&e=eswPyM"
                     alt="intro swamp habitat">
 
-                <div>
+                <div class="intro__details">
 
-                    <a href="./habitat-1.html">more</a>
+                    <a class="intro__button intro__button--more intro__button--swamp" href="./habitat-1.html">more</a>
 
 
-                    <p>Uncover the Mysteries of the Swamp</p>
+                    <p class="intro__description">Uncover the Mysteries of the Swamp</p>
                 </div>
             </div>
         </section>
 
         <br>
 
-        <section>
-            <h2>jungle</h2>
+        <section class="intro__section intro__section--jungle">
+            <h2 class="intro__title">jungle</h2>
 
-            <div>
-                <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228343&authkey=!APRcif3h30gXzY4&ithint=photo&e=Dqz9XM"
+            <div class="intro__content">
+                <img class="intro__image" src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228343&authkey=!APRcif3h30gXzY4&ithint=photo&e=Dqz9XM"
                     alt="intro jungle habitat">
 
-                <div>
+                <div class="intro__details">
 
-                    <a href="./habitat-1.html">more</a>
+                    <a class="intro__button intro__button--more intro__button--jungle" href="./habitat-1.html">more</a>
 
 
-                    <p>Embrace the surprises of the Jungle</p>
+                    <p class="intro__description">Embrace the surprises of the Jungle</p>
                 </div>
             </div>
         </section>
@@ -116,45 +116,45 @@
     <hr>
     <br>
 
-    <footer>
-        <section id="opening-hours">
-            <div>
-                <div>
-                    <p>BRETAGNE (35380)</p>
-                    <p>FORÊT DE BROCÉLIANDE</p>
-                </div>
-                <p>HEURES D'OUVERTURE</p>
+    <footer class="footer">
+		<section class="footer__hours" id="opening-hours">
+			<div class="footer__location">
+				<div class="footer__location-details">
+					<p class="footer__city">BRETAGNE (35380)</p>
+					<p class="footer__forest">FORÊT DE BROCÉLIANDE</p>
+				</div>
+				<p class="footer__hours-title">HEURES D'OUVERTURE</p>
 
-                <table>
-                    <tr>
-                        <th>Matin:</th>
-                        <td>08:45 - 12:00</td>
-                    </tr>
-                    <tr>
-                        <th>Après-midi:</th>
-                        <td>14:00 - 18:00</td>
-                    </tr>
-                    <tr>
-                        <th>Samedi:</th>
-                        <td class="highlight">08:45 - 12:00</td>
-                    </tr>
-                    <tr>
-                        <th>Dimanche:</th>
-                        <td>Fermé</td>
-                    </tr>
-                </table>
-            </div>
+				<table class="footer__hours-table">
+					<tr class="footers__hours-row">
+						<th class="footer__hours-header">Matin:</th>
+						<td class="footer__hours-data">08:45 - 12:00</td>
+					</tr>
+					<tr class="footers__hours-row">
+						<th class="footer__hours-header">Après-midi:</th>
+						<td class="footer__hours-data">14:00 - 18:00</td>
+					</tr>
+					<tr class="footers__hours-row">
+						<th class="footer__hours-header">Samedi:</th>
+						<td class="footer__hours-data">08:45 - 12:00</td>
+					</tr>
+					<tr class="footers__hours-row">
+						<th class="footer__hours-header">Dimanche:</th>
+						<td class="footer__hours-data">Fermé</td>
+					</tr>
+				</table>
+			</div>
 
-            <!-- the image click redirect to top for this moment just exemple -->
-            <a href="#top">
-                <img src="./src/assets/images/logo-site-mobile.svg" alt="Logo del sitio - Volver al inicio">
-            </a>
-        </section>
+			<!-- the image click redirect to top for this moment just exemple -->
+			<a class="footer__logo-link" href="#top">
+				<img class="footer__logo" src="./src/assets/images/logo-site-mobile.svg" alt="Logo del sitio - Volver al inicio">
+			</a>
+		</section>
 
-        <div>
-            <small>Copyright © 2024 Arcadia ZOO Bretagne | Designed By D.S.F</small>
-        </div>
-    </footer>
+		<div class="footer__copyright">
+			<small>&copy; 2024 Arcadia ZOO Bretagne | Designed By D.S.F</small>
+		</div>
+	</footer>
 </body>
 
 </html>
