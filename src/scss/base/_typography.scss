@@ -15,10 +15,7 @@ body {
 
 // nav style typography
 .nav {
-  
   background-color: map-get(map-get(c.$color, solid-colors), c-dark);
-
-  
 
   &__link {
     font-size: map-get(s.$font-sizes, menu-font);
@@ -116,9 +113,8 @@ body {
   &__link {
     text-decoration: none;
   }
-  
+
   &__title {
-    
     font-size: map-get(map-get(s.$font-sizes, "headings"), title-main-cards);
     color: map-get(map-get(c.$color, "solid-colors"), "c-dark");
     font-family: map-get(
@@ -135,8 +131,6 @@ body {
 
   // paraph in cards
   &__description {
-    
-
     font-size: map-get(map-get(s.$font-sizes, "other-texts"), p-in-cards);
     color: map-get(map-get(c.$color, "solid-colors"), c-light);
     font-family: map-get(
@@ -154,45 +148,40 @@ body {
     );
     text-transform: uppercase;
   }
-  
+
   &__name {
-    
     color: #b8117d;
     letter-spacing: map-get(
       map-get(s.$font-spaces, letter-spacings),
       ls-title-testimony
     );
     font-size: map-get(map-get(s.$font-sizes, "headings"), name-animal);
-    
+
     & ~ * {
       color: pink;
       font-size: map-get(map-get(s.$font-sizes, "other-texts"), rest-animal);
 
       margin: unset;
     }
-    
   }
-  
-  
 }
 // main section with cards
-
 
 // pagination
 
 .pagination {
-
   &__link,
   &__link ~ span {
-    font-size: calc(map-get(map-get(s.$font-sizes, "other-texts"), name-testimony-user) - 0.4rem);
+    font-size: calc(
+      map-get(map-get(s.$font-sizes, "other-texts"), name-testimony-user) -
+        0.4rem
+    );
 
     text-decoration: none;
   }
-  
 }
 
 // pagination
-
 
 // section testimony
 .testimony {
@@ -211,20 +200,17 @@ body {
     );
 
     &--shown {
-      
       text-transform: uppercase;
     }
 
     &--feedback {
       text-transform: capitalize;
-      
     }
   }
   // title testimony
 
   // user pseudo name
   &__user {
-    
     font-family: map-get(
       map-get(f.$path-fonts-formats, "family-font"),
       h3-font
@@ -244,24 +230,20 @@ body {
       map-get(s.$font-sizes, "other-texts"),
       name-testimony-user
     );
-    
   }
   // stars in testimony
 
   // paragraph testimony
   &__text {
-    
     font-size: map-get(map-get(s.$font-sizes, "other-texts"), p-testimony);
   }
   // paragraph testimony
 
   &__stars {
     font-size: map-get(map-get(s.$font-sizes, "other-texts"), filter-form);
-    
   }
 
   &__label {
-    
     font-size: map-get(map-get(s.$font-sizes, "other-texts"), filter-form);
     font-family: map-get(
       map-get(f.$path-fonts-formats, "family-font"),
@@ -271,12 +253,15 @@ body {
 
   &__input,
   &__textarea {
-    font-size: calc(map-get(map-get(s.$font-sizes, "other-texts"), filter-form) - 0.2rem);
-    
-    
+    font-size: calc(
+      map-get(map-get(s.$font-sizes, "other-texts"), filter-form) - 0.2rem
+    );
+
     &::placeholder {
       color: grey;
-      font-size: calc(map-get(map-get(s.$font-sizes, "other-texts"), filter-form) - 0.2rem);
+      font-size: calc(
+        map-get(map-get(s.$font-sizes, "other-texts"), filter-form) - 0.2rem
+      );
     }
   }
 }
@@ -289,16 +274,16 @@ body {
 // footer
 .footer {
   &__location-details > p {
-    font-size: calc(map-get(map-get(s.$font-sizes, "other-texts"), p-testimony) + 0.2rem) ;
+    font-size: calc(
+      map-get(map-get(s.$font-sizes, "other-texts"), p-testimony) + 0.2rem
+    );
   }
 
   &__location-details + p {
-    
     font-size: map-get(map-get(s.$font-sizes, "other-texts"), p-testimony);
   }
 
   &__hours-table {
-    
     font-size: map-get(map-get(s.$font-sizes, "footer-texts"), f-tertiary);
   }
 
@@ -314,26 +299,64 @@ body {
   &__legend ~ input {
     font-size: map-get(map-get(s.$font-sizes, other-texts), filter-form);
   }
-  
-  &__fieldset select option {
-    font-size: calc(map-get(map-get(s.$font-sizes, other-texts), filter-form) - 0.2rem);
-    
-  }
-  
-  &__legend ~ select {
-    font-size: calc(map-get(map-get(s.$font-sizes, other-texts), filter-form) - 0.2rem);
 
-    
-    
+  &__fieldset select option {
+    font-size: calc(
+      map-get(map-get(s.$font-sizes, other-texts), filter-form) - 0.2rem
+    );
+  }
+
+  &__legend ~ select {
+    font-size: calc(
+      map-get(map-get(s.$font-sizes, other-texts), filter-form) - 0.2rem
+    );
   }
 }
 
-
 .contact {
-
   &__form-section {
     font-size: map-get(map-get(s.$font-sizes, other-texts), filter-form);
+  }
+}
+
+.animal {
+
+  &__info > h2,
+  &__about > h2 {
+    text-transform: uppercase;
+    font-size: map-get(map-get(s.$font-sizes, "headings"), titles-cards-animal);
+    font-family: map-get(
+        map-get(f.$path-fonts-formats, "family-font"),
+        h2-font
+      );
+  }
+
+  &__observation > h2,
+  &__optional > h2 {
+    font-family: map-get(
+      map-get(f.$path-fonts-formats, "family-font"),
+      h3-font
+    );
+    
+    text-transform: capitalize;
+    font-size: calc(map-get(map-get(s.$font-sizes, "headings"), titles-cards-animal) - 0.2rem);
+  }
+
+  &__description {
+    font-size: calc(map-get(map-get(s.$font-sizes, "other-texts"), request-info-data-card) - 0.2rem);
+    font-family: map-get(
+      map-get(f.$path-fonts-formats, "family-font"),
+      paragraph-font
+    );
     
   }
+
   
+  .animal__header,
+  .animal__data {
+    font-size: map-get(
+      map-get(s.$font-sizes, "other-texts"),
+      request-info-data-card
+    );
+  }
 }

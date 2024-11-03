@@ -496,6 +496,25 @@ body {
   font-size: clamp(1.6rem, 1.34409vw + 1rem, 2.2rem);
 }
 
+.animal__info > h2, .animal__about > h2 {
+  text-transform: uppercase;
+  font-size: clamp(2rem, 1.6129vw + 1rem, 2.6rem);
+  font-family: "Poppins-Bold";
+}
+.animal__observation > h2, .animal__optional > h2 {
+  font-family: "Montserrat-Bold";
+  text-transform: capitalize;
+  font-size: calc(clamp(2rem, 1.6129vw + 1rem, 2.6rem) - 0.2rem);
+}
+.animal__description {
+  font-size: calc(clamp(1.6rem, 1.34409vw + 1rem, 2.2rem) - 0.2rem);
+  font-family: "Roboto-Regular";
+}
+.animal .animal__header,
+.animal .animal__data {
+  font-size: clamp(1.6rem, 1.34409vw + 1rem, 2.2rem);
+}
+
 html,
 footer {
   font-size: 62.5%;

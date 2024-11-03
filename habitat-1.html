@@ -22,29 +22,29 @@
 </head>
 
 <body id="top">
-    <nav>
-        <a href="./index.html">home</a>
-        <a href="./services.html">services</a>
-        <a href="./habitats.html">habitats</a>
-        <a href="./all-animals-habitats.html">animals</a>
-        <a href="./contact.html">contact</a>
+    <nav class="nav">
+        <a class="nav__link nav__home" href="./index.html">home</a>
+        <a class="nav__link nav__services" href="./services.html">services</a>
+        <a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
+        <a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
+        <a class="nav__link nav__contact" href="./contact.html">contact</a>
     </nav>
 
 
-    <header>
-		<div>
-			<div>
-				<h1>savannah</h1>
-				<p>animals</p>
-			</div>
+    <header class="hero">
+        <div class="hero__container">
+            <div class="hero__text">
+                <h1 class="hero__title">savannah</h1>
+                <p class="hero__subtitle">animals</p>
+            </div>
 
 
-			<a href="#opening-hours">opening hours</a>
+            <a class="intro__button intro__button--hours" href="#opening-hours">opening hours</a>
 
-		</div>
-		<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!227810&authkey=!AKYYhfT_eh3BETk&ithint=photo&e=FOYMAW"
-			alt="hero image">
-	</header>
+        </div>
+        <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!227810&authkey=!AKYYhfT_eh3BETk&ithint=photo&e=FOYMAW"
+            alt="hero image">
+    </header>
 
 
 
@@ -52,58 +52,58 @@
     <hr>
     <br>
 
-    <div>
-        <!-- filter for animals ype savannah in this case -->
-        <div>
-            <div>
-                <span>Open Filter</span>
-                <button class="open-filter">☰</button>
+
+
+    <div class="filter">
+        <!-- Filter toggle (open/close) -->
+        <div class="filter__toggle">
+            <div class="filter__toggle-content">
+                <span class="filter__toggle-label">Open Filter</span>
+                <button class="filter__toggle-button filter__toggle-button--open">☰</button>
             </div>
-            <picture></picture>
-            <!-- reference all time to best format like svg -->
         </div>
 
+        <br>
 
-        <!-- menu filter -->
-        <div class="filter-container">
-            <div>
-                <span>close filter</span>
-                <button class="open-filter">✖</button>
+        <!-- Filter menu -->
+        <div class="filter__container">
+            <div class="filter__header">
+                <span class="filter__close-label">Close Filter</span>
+                <button class="filter__toggle-button filter__toggle-button--close">✖</button>
             </div>
 
-            <form>
-                <fieldset>
-                    <legend>Filter by:</legend>
+            <form class="filter__form">
+                <fieldset class="filter__fieldset">
+                    <legend class="filter__legend">Filter by:</legend>
 
-                    <!-- Filter of Animal Bread -->
-                    <label for="animal-bread">Animal bread:</label>
+                    <!-- Animal breed filter -->
+                    <label for="animal-breed" class="filter__label">Animal breed:</label>
                     <br>
-                    <select id="animal-bread" name="animal-bread">
-                        <option value="" disabled selected>Select animal bread</option> <!-- Placeholder -->
+                    <select id="animal-breed" name="animal-breed" class="filter__select">
+                        <option value="" selected>Select animal breed</option>
                         <option value="mammal">Mammal</option>
                         <option value="reptile">Reptile</option>
                         <option value="bird">Bird</option>
-                        <option value="bird">amphibian</option>
-                        <option value="bird">arachnid</option>
-                        <option value="bird">insect</option>
-                        <!-- Añade más opciones según sea necesario -->
+                        <option value="amphibian">Amphibian</option>
+                        <option value="arachnid">Arachnid</option>
+                        <option value="insect">Insect</option>
                     </select>
                     <br>
-                    <!-- Filtro de Nutrición -->
-                    <label for="nutrition">Nutrition:</label>
+                    <!-- Nutrition filter -->
+                    <label for="nutrition" class="filter__label">Nutrition:</label>
                     <br>
-                    <select id="nutrition" name="nutrition">
-                        <option value="" disabled selected>Select animal nutrition</option> <!-- Placeholder -->
-                        <option value="carnivorous">carnivorous</option>
+                    <select id="nutrition" name="nutrition" class="filter__select">
+                        <option value="" selected>Select animal nutrition</option>
+                        <option value="carnivorous">Carnivorous</option>
                         <option value="herbivore">Herbivore</option>
                         <option value="omnivore">Omnivore</option>
                     </select>
                     <br>
-                    <!-- Filter state -->
-                    <label for="state">State:</label>
+                    <!-- State filter -->
+                    <label for="state" class="filter__label">State:</label>
                     <br>
-                    <select id="state" name="state">
-                        <option value="" disabled selected>Select animal state</option> <!-- Placeholder -->
+                    <select id="state" name="state" class="filter__select">
+                        <option value="" selected>Select animal state</option>
                         <option value="healthy">Healthy</option>
                         <option value="sick">Sick</option>
                         <option value="injured">Injured</option>
@@ -116,72 +116,72 @@
                         <option value="new-arrival">New Arrival</option>
                         <option value="endangered">Endangered</option>
                         <option value="old-age">Old Age</option>
-                        <option value="Angry">Angry</option>
+                        <option value="angry">Angry</option>
                     </select>
                     <br>
-                    <!-- Filter date -->
-                    <label for="appointment-date">Appointment date:</label>
+                    <!-- Appointment date filter -->
+                    <label for="appointment-date" class="filter__label">Appointment date:</label>
                     <br>
-                    <input type="date" id="appointment-date" name="appointment-date">
+                    <input type="date" id="appointment-date" name="appointment-date" class="filter__input-date">
                     <br>
                     <br>
-                    <!-- Button restart -->
-                    <button type="reset" class="restart-button">Restart</button>
+                    <!-- Restart button -->
+                    <button type="reset" class="filter__button filter__button--reset">Restart</button>
                 </fieldset>
             </form>
 
-            <div>
-                <span>close filter</span>
-                <button class="open-filter">✖</button>
+            <div class="filter__footer">
+                <span class="filter__close-label">Close Filter</span>
+                <button class="filter__toggle-button filter__toggle-button--close">✖</button>
             </div>
         </div>
-
-
     </div>
+
+
 
     <br>
     <hr>
     <br>
 
-    <main>
+    <main class="intro">
 
 
-        <article>
-            <a href="./animal-picked.html" target="_blank" rel="noopener noreferrer">
+        <article class="intro__animal">
+            <a class="intro__link" href="./animal-picked.html" target="_blank" rel="noopener noreferrer">
                 <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228357&authkey=!AJRkoxjzaDTXPQ8&ithint=photo&e=JkmTAP"
                     alt="animal-1">
-                <div>
-                    <h3>bujara</h3>
-                    <p>vulture</p>
-                    <p>savannah</p>
+                <div class="intro__details">
+                    <h3 class="intro__name">bujara</h3>
+                    <p class="intro__species">vulture</p>
+                    <p class="intro__habitat">savannah</p>
                 </div>
             </a>
         </article>
 
         <br>
 
-        <article>
-            <a href="./animal-picked.html" target="_blank" rel="noopener noreferrer">
+        <article class="intro__animal">
+            <a class="intro__link" href="./animal-picked.html" target="_blank" rel="noopener noreferrer">
                 <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228356&authkey=!AIxQQfjPQUB1eks&ithint=photo&e=GWWV21"
                     alt="animal-2">
-                <div>
-                    <h3>bujara</h3>
-                    <p>vulture</p>
-                    <p>savannah</p>
+                <div class="intro__details">
+                    <h3 class="intro__name">bujara</h3>
+                    <p class="intro__species">vulture</p>
+                    <p class="intro__habitat">savannah</p>
                 </div>
             </a>
         </article>
 
         <br>
 
-        <article>
-            <a href="./animal-picked.html" target="_blank" rel="noopener noreferrer">
+        <article class="intro__animal">
+            <a class="intro__link" href="./animal-picked.html" target="_blank" rel="noopener noreferrer">
                 <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228181&authkey=!AF4NZH7YGXIFpuA&ithint=photo&e=C0lU7c"
                     alt="animal-3">
-                <div>
-                    <h3>bujara</h3>
-                    <p>vulture</p>
-                    <p>savannah</p>
+                <div class="intro__details">
+                    <h3 class="intro__name">bujara</h3>
+                    <p class="intro__species">vulture</p>
+                    <p class="intro__habitat">savannah</p>
                 </div>
             </a>
         </article>
@@ -190,58 +190,58 @@
 
     <br>
 
-    <nav>
-        <a href="#">&lt;</a>
-        <a href="#">1,</a>
-        <a href="#">2,</a>
-        <a href="#">3,</a>
-        <a>...</a>
-        <a href="#">&gt;</a>
+    <nav class="pagination">
+        <a href="#" class="pagination__link pagination__link--prev">&lt;</a>
+        <a href="#" class="pagination__link">1</a>
+        <a href="#" class="pagination__link">2</a>
+        <a href="#" class="pagination__link">3</a>
+        <span class="pagination__ellipsis">...</span>
+        <a href="#" class="pagination__link pagination__link--next">&gt;</a>
     </nav>
 
     <br>
     <hr>
     <br>
 
-    <footer>
-        <section id="opening-hours">
-            <div>
-                <div>
-                    <p>BRETAGNE (35380)</p>
-                    <p>FORÊT DE BROCÉLIANDE</p>
-                </div>
-                <p>HEURES D'OUVERTURE</p>
-    
-                <table>
-                    <tr>
-                        <th>Matin:</th>
-                        <td>08:45 - 12:00</td>
-                    </tr>
-                    <tr>
-                        <th>Après-midi:</th>
-                        <td>14:00 - 18:00</td>
-                    </tr>
-                    <tr>
-                        <th>Samedi:</th>
-                        <td class="highlight">08:45 - 12:00</td>
-                    </tr>
-                    <tr>
-                        <th>Dimanche:</th>
-                        <td>Fermé</td>
-                    </tr>
-                </table>
-            </div>
-    
-            <!-- the image click redirect to top for this moment just exemple -->
-            <a href="#top">
-                <img src="./src/assets/images/logo-site-mobile.svg" alt="Logo del sitio - Volver al inicio">
-            </a>
-        </section>
-    
-        <div>
-            <small>Copyright © 2024 Arcadia ZOO Bretagne | Designed By D.S.F</small>
-        </div>
-    </footer>
+    <footer class="footer">
+		<section class="footer__hours" id="opening-hours">
+			<div class="footer__location">
+				<div class="footer__location-details">
+					<p class="footer__city">BRETAGNE (35380)</p>
+					<p class="footer__forest">FORÊT DE BROCÉLIANDE</p>
+				</div>
+				<p class="footer__hours-title">HEURES D'OUVERTURE</p>
+
+				<table class="footer__hours-table">
+					<tr class="footers__hours-row">
+						<th class="footer__hours-header">Matin:</th>
+						<td class="footer__hours-data">08:45 - 12:00</td>
+					</tr>
+					<tr class="footers__hours-row">
+						<th class="footer__hours-header">Après-midi:</th>
+						<td class="footer__hours-data">14:00 - 18:00</td>
+					</tr>
+					<tr class="footers__hours-row">
+						<th class="footer__hours-header">Samedi:</th>
+						<td class="footer__hours-data">08:45 - 12:00</td>
+					</tr>
+					<tr class="footers__hours-row">
+						<th class="footer__hours-header">Dimanche:</th>
+						<td class="footer__hours-data">Fermé</td>
+					</tr>
+				</table>
+			</div>
+
+			<!-- the image click redirect to top for this moment just exemple -->
+			<a class="footer__logo-link" href="#top">
+				<img class="footer__logo" src="./src/assets/images/logo-site-mobile.svg" alt="Logo del sitio - Volver al inicio">
+			</a>
+		</section>
+
+		<div class="footer__copyright">
+			<small>&copy; 2024 Arcadia ZOO Bretagne | Designed By D.S.F</small>
+		</div>
+	</footer>
 </body>
 
 </html>

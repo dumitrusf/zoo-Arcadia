@@ -22,83 +22,58 @@
 </head>
 
 <body id="top">
-    <nav>
-        <a href="./index.html">home</a>
-        <a href="./services.html">services</a>
-        <a href="./habitats.html">habitats</a>
-        <a href="./all-animals-habitats.html">animals</a>
-        <a href="./contact.html">contact</a>
-    </nav>
+    <nav class="nav">
+        <a class="nav__link nav__home" href="./index.html">home</a>
+        <a class="nav__link nav__services" href="./services.html">services</a>
+        <a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
+        <a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
+        <a class="nav__link nav__contact" href="./contact.html">contact</a>
+    </nav>    
 
-
-    <header>
-
-        <div>
-            <div>
-                <h1>juan</h1>
-                <p>crocodile</p>
+    <header class="hero">
+        <div class="hero__container">
+            <div class="hero__text">
+                <h1 class="hero__title">Juan</h1>
+                <p class="hero__subtitle">Lion</p>
             </div>
 
-            <a href="#opening-hours" class="button-link">opening hours</a>
+
+            <a class="intro__button intro__button--hours" href="#opening-hours">opening hours</a>
+
         </div>
-        <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!227811&authkey=!ALWmUIMH9kBfqqw&ithint=photo&e=wK9S5r"
+        <img class="hero__image" src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!227811&authkey=!ALWmUIMH9kBfqqw&ithint=photo&e=wK9S5r"
             alt="juan the main animals">
-
-        <!-- carrousel three more images with the animal or NON(not necessary to improve ..)-->
-
     </header>
 
 
 
 
+
+
+
+
     <br>
     <hr>
     <br>
 
-    <main>
-        <section>
-            <h2>Animal</h2>
-            <table>
+    <main class="animal">
+
+        <!-- Sección de Información del Animal -->
+        <section class="animal__info">
+            <h2 class="animal__title">Animal</h2>
+            <table class="animal__table">
                 <tbody>
-                    <tr>
-                        <th>Name:</th>
-                        <td>Juan</td>
+                    <tr class="animal__row">
+                        <th class="animal__header">Name:</th>
+                        <td class="animal__data">Juan</td>
                     </tr>
-                    <tr>
-                        <th>Animal Bread:</th>
-                        <td>crocodile</td>
+                    <tr class="animal__row">
+                        <th class="animal__header">Animal Breed:</th>
+                        <td class="animal__data">Crocodile</td>
                     </tr>
-                    <tr>
-                        <th>Habitat:</th>
-                        <td>Swamp</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-
-        <br>
-
-        <!-- Additional information about the animal -->
-        <section>
-            <h2>About It</h2>
-            <table>
-                <tbody>
-                    <tr>
-                        <th>Nutrition:</th>
-                        <td>Carnivorous</td>
-                    </tr>
-                    <tr>
-                        <th>Food Offered:</th>
-                        <td>Fish & Meat</td>
-                    </tr>
-                    <tr>
-                        <th>Food Qty:</th>
-                        <td>5KG</td>
-                    </tr>
-                    <tr>
-                        <th>Date Of Check-Up:</th>
-                        <td>August 18, 2024</td>
+                    <tr class="animal__row">
+                        <th class="animal__header">Habitat:</th>
+                        <td class="animal__data">Swamp</td>
                     </tr>
                 </tbody>
             </table>
@@ -106,74 +81,102 @@
 
         <br>
 
-        <!-- veterinary observation -->
-        <section>
-            <h2>Veterinary Observation</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eu odio sed tortor luctus malesuada.
-            </p>
-            <table>
+        <!-- Sección de Información Adicional -->
+        <section class="animal__about">
+            <h2 class="animal__title">About It</h2>
+            <table class="animal__table">
                 <tbody>
-                    <tr>
-                        <th>Mood Animal:</th>
-                        <td>Angry</td>
+                    <tr class="animal__row">
+                        <th class="animal__header">Nutrition:</th>
+                        <td class="animal__data">Carnivorous</td>
+                    </tr>
+                    <tr class="animal__row">
+                        <th class="animal__header">Food Offered:</th>
+                        <td class="animal__data">Fish & Meat</td>
+                    </tr>
+                    <tr class="animal__row">
+                        <th class="animal__header">Food Qty:</th>
+                        <td class="animal__data">5KG</td>
+                    </tr>
+                    <tr class="animal__row">
+                        <th class="animal__header">Date Of Check-Up:</th>
+                        <td class="animal__data">August 18, 2024</td>
                     </tr>
                 </tbody>
             </table>
         </section>
 
+        <br>
+
+        <!-- Sección de Observación Veterinaria -->
+        <section class="animal__observation">
+            <h2 class="animal__title">Veterinary Observation</h2>
+            <p class="animal__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eu odio
+                sed tortor luctus malesuada.</p>
+            <table class="animal__table">
+                <tbody>
+                    <tr class="animal__row">
+                        <th class="animal__header">Mood Animal:</th>
+                        <td class="animal__data">Angry</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
 
         <br>
 
-        <!-- Optional details -->
-        <section>
-            <h2>Optional Animal Details</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eu odio sed tortor luctus malesuada.
-            </p>
+        <!-- Sección de Detalles Opcionales -->
+        <section class="animal__optional">
+            <h2 class="animal__title">Optional Animal Details</h2>
+            <p class="animal__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eu odio
+                sed tortor luctus malesuada.</p>
         </section>
 
     </main>
 
+
     <br>
     <hr>
     <br>
 
-    <footer>
-        <section id="opening-hours">
-            <div>
-                <div>
-                    <p>BRETAGNE (35380)</p>
-                    <p>FORÊT DE BROCÉLIANDE</p>
+    <footer class="footer">
+        <section class="footer__hours" id="opening-hours">
+            <div class="footer__location">
+                <div class="footer__location-details">
+                    <p class="footer__city">BRETAGNE (35380)</p>
+                    <p class="footer__forest">FORÊT DE BROCÉLIANDE</p>
                 </div>
-                <p>HEURES D'OUVERTURE</p>
+                <p class="footer__hours-title">HEURES D'OUVERTURE</p>
 
-                <table>
-                    <tr>
-                        <th>Matin:</th>
-                        <td>08:45 - 12:00</td>
+                <table class="footer__hours-table">
+                    <tr class="footers__hours-row">
+                        <th class="footer__hours-header">Matin:</th>
+                        <td class="footer__hours-data">08:45 - 12:00</td>
                     </tr>
-                    <tr>
-                        <th>Après-midi:</th>
-                        <td>14:00 - 18:00</td>
+                    <tr class="footers__hours-row">
+                        <th class="footer__hours-header">Après-midi:</th>
+                        <td class="footer__hours-data">14:00 - 18:00</td>
                     </tr>
-                    <tr>
-                        <th>Samedi:</th>
-                        <td class="highlight">08:45 - 12:00</td>
+                    <tr class="footers__hours-row">
+                        <th class="footer__hours-header">Samedi:</th>
+                        <td class="footer__hours-data">08:45 - 12:00</td>
                     </tr>
-                    <tr>
-                        <th>Dimanche:</th>
-                        <td>Fermé</td>
+                    <tr class="footers__hours-row">
+                        <th class="footer__hours-header">Dimanche:</th>
+                        <td class="footer__hours-data">Fermé</td>
                     </tr>
                 </table>
             </div>
 
             <!-- the image click redirect to top for this moment just exemple -->
-            <a href="#top">
-                <img src="./src/assets/images/logo-site-mobile.svg" alt="Logo del sitio - Volver al inicio">
+            <a class="footer__logo-link" href="#top">
+                <img class="footer__logo" src="./src/assets/images/logo-site-mobile.svg"
+                    alt="Logo del sitio - Volver al inicio">
             </a>
         </section>
 
-        <div>
-            <small>Copyright © 2024 Arcadia ZOO Bretagne | Designed By D.S.F</small>
+        <div class="footer__copyright">
+            <small>&copy; 2024 Arcadia ZOO Bretagne | Designed By D.S.F</small>
         </div>
     </footer>
 </body>
