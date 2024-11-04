@@ -1,14 +1,111 @@
 @use "variables" as v;
+@use "mixin-responsive" as m;
 
-html,
-footer {
+html {
   font-size: 62.5%;
+  box-sizing: border-box;
+  scroll-padding-top: 0rem;
+  background-color: map-get(map-get(v.$color, "solid-colors"), "c-body-light");
+  overflow-x: hidden;
+}
+
+*,
+*:before,
+*:after {
+  overflow-x: hidden;
+  margin: 0px;
+  padding: 0px;
+  box-sizing: inherit;
 }
 
 body {
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.hero {
+  background-color: rgb(75, 194, 200);
+  width: 100vw;
+
+  &__text {
+    @include m.responsive(tablet) {
+      width: calc(100vw - (74.4rem - 57.8rem));
+      background-color: orange;
+    }
+    @include m.responsive(desk) {
+      width: calc(100vw - (128rem - 87.7rem));
+      background-color: rgb(149, 80, 252);
+    }
+  }
+
+  &__image {
+    width: 100vw;
+  }
+}
+
+.intro {
+  background-color: palevioletred;
+  //   background-color: red;
+
+  &__button {
+    // flex-shrink: ;
+  }
   
 
-  background-color: map-get(map-get(v.$color, "solid-colors"), "c-body-light");
-};
+  &__section,
+  &__article {
+    background-color: greenyellow;
+    @include m.responsive(tablet) {
+      width: calc(100vw - (74.4rem - 58.7rem));
+      background-color: rgb(92, 92, 232);
+    }
+    @include m.responsive(desk) {
+      width: calc(100vw - (128rem - 122.7rem));
+      background-color: rgb(232, 232, 92);
+    }
+  }
+}
+
+.testimony {
+  background-color: plum;
+
+  &__container {
+    background-color: rgb(20, 28, 255);
+
+    @include m.responsive(tablet) {
+      width: calc(100vw - (74.4rem - 60.5rem));
+      background-color: rgb(92, 232, 192);
+    }
+    @include m.responsive(desk) {
+      width: calc(100vw - (128rem - 95rem));
+      background-color: rgb(113, 9, 9);
+    }
+  }
+}
+
+.footer {
+  background-color: khaki;
+}
+
+.footer,
+.testimony,
+.intro,
+.hero,
+.filter {
+  width: 100vw;
+}
+
+.filter {
+  background-color: cornflowerblue;
+
+  @include m.responsive(tablet) {
+    width: calc(100vw - (74.4rem - 59.2rem));
+    background-color: rgb(230, 232, 92);
+  }
+  @include m.responsive(desk) {
+    width: calc(100vw - (128rem - 85.1rem));
+    background-color: rgb(143, 32, 154);
+  }
+}
 
 

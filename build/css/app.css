@@ -515,11 +515,110 @@ body {
   font-size: clamp(1.6rem, 1.34409vw + 1rem, 2.2rem);
 }
 
-html,
-footer {
+html {
   font-size: 62.5%;
+  box-sizing: border-box;
+  scroll-padding-top: 0rem;
+  background-color: #ebebeb;
+  overflow-x: hidden;
+}
+
+*,
+*:before,
+*:after {
+  overflow-x: hidden;
+  margin: 0px;
+  padding: 0px;
+  box-sizing: inherit;
 }
 
 body {
-  background-color: #ebebeb;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.hero {
+  background-color: rgb(75, 194, 200);
+  width: 100vw;
+}
+@media screen and (min-width: 744px) {
+  .hero__text {
+    width: calc(100vw - 16.6rem);
+    background-color: orange;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .hero__text {
+    width: calc(100vw - 40.3rem);
+    background-color: rgb(149, 80, 252);
+  }
+}
+.hero__image {
+  width: 100vw;
+}
+
+.intro {
+  background-color: palevioletred;
+}
+.intro__section, .intro__article {
+  background-color: greenyellow;
+}
+@media screen and (min-width: 744px) {
+  .intro__section, .intro__article {
+    width: calc(100vw - 15.7rem);
+    background-color: rgb(92, 92, 232);
+  }
+}
+@media screen and (min-width: 1280px) {
+  .intro__section, .intro__article {
+    width: calc(100vw - 5.3rem);
+    background-color: rgb(232, 232, 92);
+  }
+}
+
+.testimony {
+  background-color: plum;
+}
+.testimony__container {
+  background-color: rgb(20, 28, 255);
+}
+@media screen and (min-width: 744px) {
+  .testimony__container {
+    width: calc(100vw - 13.9rem);
+    background-color: rgb(92, 232, 192);
+  }
+}
+@media screen and (min-width: 1280px) {
+  .testimony__container {
+    width: calc(100vw - 33rem);
+    background-color: rgb(113, 9, 9);
+  }
+}
+
+.footer {
+  background-color: khaki;
+}
+
+.footer,
+.testimony,
+.intro,
+.hero,
+.filter {
+  width: 100vw;
+}
+
+.filter {
+  background-color: cornflowerblue;
+}
+@media screen and (min-width: 744px) {
+  .filter {
+    width: calc(100vw - 15.2rem);
+    background-color: rgb(230, 232, 92);
+  }
+}
+@media screen and (min-width: 1280px) {
+  .filter {
+    width: calc(100vw - 42.9rem);
+    background-color: rgb(143, 32, 154);
+  }
 }
