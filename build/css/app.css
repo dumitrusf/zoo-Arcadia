@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -344,14 +345,12 @@ body {
   font-family: "Inter-24";
 }
 
-.nav {
-  background-color: #000;
-}
 .nav__link {
   font-size: clamp(1.4rem, 2vw + 1rem, 1.8rem);
   color: #fff;
   font-family: "Poppins-Medium";
   text-decoration: none;
+  text-transform: uppercase;
 }
 .nav__link--active, .nav__link:hover {
   color: #ffff00;
@@ -373,6 +372,7 @@ body {
 }
 
 .intro__button {
+  color: #fff;
   font-size: clamp(1.4rem, 1.222vw + 0.7rem, 2rem);
   font-family: "Raleway-Bold";
   text-decoration: none;
@@ -380,7 +380,6 @@ body {
   text-transform: uppercase;
 }
 .intro__button--hours {
-  color: #fff;
   background-color: #345813;
 }
 .intro__button--send {
@@ -389,11 +388,11 @@ body {
 }
 .intro__button--more {
   background-color: #aa6b1f;
-  color: #fff;
 }
 
 .intro__link {
   text-decoration: none;
+  color: #000;
 }
 .intro__title {
   font-size: clamp(2rem, 2.01619vw + 1rem, 3.1rem);
@@ -407,18 +406,13 @@ body {
   color: #fff;
   font-family: "Roboto-Regular";
   text-shadow: 0rem 0rem 1.5rem #000000, 0rem 0rem 1rem #000000, 0rem 0rem 0.5rem #000000;
-}
-.intro__details {
-  font-family: "Roboto-Regular";
   text-transform: uppercase;
 }
 .intro__name {
-  color: #b8117d;
   letter-spacing: 0.2rem;
   font-size: clamp(2rem, 1.5466vw + 1rem, 2.3rem);
 }
 .intro__name ~ * {
-  color: pink;
   font-size: clamp(1.6rem, 1.0081vw + 1rem, 1.9rem);
   margin: unset;
 }
@@ -429,10 +423,9 @@ body {
 }
 
 .testimony__title {
-  font-size: clamp(2rem, 2.01619vw + 1rem, 3.1rem);
-  color: #000;
-  font-family: "Poppins-Bold";
-  letter-spacing: 0.2rem;
+  font-family: "Montserrat-Bold";
+  font-size: clamp(1.8rem, 1.6129vw + 1rem, 2.6rem);
+  text-transform: uppercase;
 }
 .testimony__title--shown {
   text-transform: uppercase;
@@ -451,12 +444,8 @@ body {
 .testimony__text {
   font-size: clamp(1.4rem, 0.80645vw + 1rem, 1.8rem);
 }
-.testimony__stars {
+.testimony__stars, .testimony__label {
   font-size: clamp(1.6rem, 1.34409vw + 1rem, 2.2rem);
-}
-.testimony__label {
-  font-size: clamp(1.6rem, 1.34409vw + 1rem, 2.2rem);
-  font-family: "Inter-24";
 }
 .testimony__input, .testimony__textarea {
   font-size: calc(clamp(1.6rem, 1.34409vw + 1rem, 2.2rem) - 0.2rem);
@@ -519,7 +508,6 @@ html {
   font-size: 62.5%;
   box-sizing: border-box;
   scroll-padding-top: 0rem;
-  background-color: #ebebeb;
   overflow-x: hidden;
 }
 
@@ -529,7 +517,6 @@ html {
   overflow-x: hidden;
   margin: 0px;
   padding: 0px;
-  box-sizing: inherit;
 }
 
 body {
@@ -537,66 +524,75 @@ body {
   font-style: normal;
 }
 
+nav {
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.3254901961);
+  backdrop-filter: rgba(0, 0, 0, 0.5294117647);
+}
+
 .hero {
-  background-color: rgb(75, 194, 200);
   width: 100vw;
 }
 @media screen and (min-width: 744px) {
   .hero__text {
     width: calc(100vw - 16.6rem);
-    background-color: orange;
   }
 }
 @media screen and (min-width: 1280px) {
   .hero__text {
     width: calc(100vw - 40.3rem);
-    background-color: rgb(149, 80, 252);
   }
 }
-.hero__image {
+
+img {
   width: 100vw;
 }
 
-.intro {
-  background-color: palevioletred;
-}
-.intro__section, .intro__article {
-  background-color: greenyellow;
-}
 @media screen and (min-width: 744px) {
   .intro__section, .intro__article {
     width: calc(100vw - 15.7rem);
-    background-color: rgb(92, 92, 232);
   }
 }
 @media screen and (min-width: 1280px) {
   .intro__section, .intro__article {
     width: calc(100vw - 5.3rem);
-    background-color: rgb(232, 232, 92);
   }
 }
 
-.testimony {
-  background-color: plum;
-}
-.testimony__container {
-  background-color: rgb(20, 28, 255);
-}
 @media screen and (min-width: 744px) {
   .testimony__container {
     width: calc(100vw - 13.9rem);
-    background-color: rgb(92, 232, 192);
   }
 }
 @media screen and (min-width: 1280px) {
   .testimony__container {
     width: calc(100vw - 33rem);
-    background-color: rgb(113, 9, 9);
   }
 }
 
-.footer {
-  background-color: khaki;
+.bar-button {
+  flex-basis: content;
+  padding: 0;
+  margin: 0;
+}
+
+.main__logo {
+  height: auto;
+  width: min(7.8rem, 18.1vw);
+}
+
+.navbar-toggler-icon {
+  font-size: min(3.8rem, 8vw);
+  filter: invert(1) opacity(1) brightness(100);
+  -webkit-filter: invert(1) opacity(1) brightness(100);
+}
+
+/* Quitar la sombra cuando el botón navbar-toggler está enfocado o activado */
+.navbar-toggler:focus,
+.navbar-toggler:active {
+  box-shadow: none;
 }
 
 .footer,
@@ -607,18 +603,13 @@ body {
   width: 100vw;
 }
 
-.filter {
-  background-color: cornflowerblue;
-}
 @media screen and (min-width: 744px) {
   .filter {
     width: calc(100vw - 15.2rem);
-    background-color: rgb(230, 232, 92);
   }
 }
 @media screen and (min-width: 1280px) {
   .filter {
     width: calc(100vw - 42.9rem);
-    background-color: rgb(143, 32, 154);
   }
 }

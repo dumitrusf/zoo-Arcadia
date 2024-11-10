@@ -5,7 +5,6 @@ html {
   font-size: 62.5%;
   box-sizing: border-box;
   scroll-padding-top: 0rem;
-  background-color: map-get(map-get(v.$color, "solid-colors"), "c-body-light");
   overflow-x: hidden;
 }
 
@@ -15,7 +14,6 @@ html {
   overflow-x: hidden;
   margin: 0px;
   padding: 0px;
-  box-sizing: inherit;
 }
 
 body {
@@ -23,68 +21,97 @@ body {
   font-style: normal;
 }
 
+
+nav {
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  background-color: map-get(map-get(v.$color, cover-img), cover-black);
+  backdrop-filter: map-get(map-get(v.$color, blur), black-blur);
+}
+
+
 .hero {
-  background-color: rgb(75, 194, 200);
+  // background-color: rgb(75, 194, 200);
   width: 100vw;
 
   &__text {
     @include m.responsive(tablet) {
       width: calc(100vw - (74.4rem - 57.8rem));
-      background-color: orange;
+      // background-color: orange;
     }
     @include m.responsive(desk) {
       width: calc(100vw - (128rem - 87.7rem));
-      background-color: rgb(149, 80, 252);
+      // background-color: rgb(149, 80, 252);
     }
-  }
-
-  &__image {
-    width: 100vw;
   }
 }
 
+img {
+  width: 100vw;
+}
+
 .intro {
-  background-color: palevioletred;
-  //   background-color: red;
-
-  &__button {
-    // flex-shrink: ;
-  }
-  
-
   &__section,
   &__article {
-    background-color: greenyellow;
+    // background-color: greenyellow;
     @include m.responsive(tablet) {
       width: calc(100vw - (74.4rem - 58.7rem));
-      background-color: rgb(92, 92, 232);
+      // background-color: rgb(92, 92, 232);
     }
     @include m.responsive(desk) {
       width: calc(100vw - (128rem - 122.7rem));
-      background-color: rgb(232, 232, 92);
+      // background-color: rgb(232, 232, 92);
     }
   }
 }
 
 .testimony {
-  background-color: plum;
+  // background-color: plum;
 
   &__container {
-    background-color: rgb(20, 28, 255);
+    // background-color: rgb(20, 28, 255);
 
     @include m.responsive(tablet) {
       width: calc(100vw - (74.4rem - 60.5rem));
-      background-color: rgb(92, 232, 192);
+      // background-color: rgb(92, 232, 192);
     }
     @include m.responsive(desk) {
       width: calc(100vw - (128rem - 95rem));
-      background-color: rgb(113, 9, 9);
+      // background-color: rgb(113, 9, 9);
     }
   }
 }
 
+.bar-button {
+  flex-basis: content;
+  // background-color: red;
+  padding: 0;
+  margin: 0;
+}
+
+.main__logo {
+  height: auto;
+  width: min(7.8rem, 18.1vw);
+}
+
+.navbar-toggler-icon {
+  font-size: min(3.8rem, 8vw);
+  filter: invert(1) opacity(1) brightness(100);
+  //@includem.responsive(tablet):;
+  //font-size: calc(clamp(2.2rem, 3.801vw + 1rem, 9.5rem));
+  //:;
+  -webkit-filter: invert(1) opacity(1) brightness(100);
+}
+
+/* Quitar la sombra cuando el botón navbar-toggler está enfocado o activado */
+.navbar-toggler:focus,
+.navbar-toggler:active {
+  box-shadow: none;
+}
+
 .footer {
-  background-color: khaki;
+  // background-color: khaki;
 }
 
 .footer,
@@ -96,16 +123,14 @@ body {
 }
 
 .filter {
-  background-color: cornflowerblue;
+  // background-color: cornflowerblue;
 
   @include m.responsive(tablet) {
     width: calc(100vw - (74.4rem - 59.2rem));
-    background-color: rgb(230, 232, 92);
+    // background-color: rgb(230, 232, 92);
   }
   @include m.responsive(desk) {
     width: calc(100vw - (128rem - 85.1rem));
-    background-color: rgb(143, 32, 154);
+    // background-color: rgb(143, 32, 154);
   }
 }
-
-

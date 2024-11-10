@@ -16,7 +16,7 @@
 
 	<link rel="stylesheet" href="/node_modules/Normalize-css/normalize.css" />
 
-	<link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css" />
+	<link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
 
 	<link rel="stylesheet" href="/build/css/app.css">
 
@@ -25,13 +25,54 @@
 </head>
 
 <body id="top">
-	<nav class="nav">
-		<a class="nav__link nav__home nav__link--active" href="#">|home|</a>
-		<a class="nav__link nav__services" href="./services.html">services</a>
-		<a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
-		<a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
-		<a class="nav__link nav__contact" href="./contact.html">contact</a>
+
+	
+	<!-- navbar for mobile with his fonts and sizes -->
+	<nav class="nav navbar position-fixed">
+		<div class="nav__menu collapse" id="navbarToggleExternalContent">
+			<ul class="nav__items">
+				<li class="nav__item">
+					<a class="nav__link nav__home nav__link--active" href="#">home</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__services" href="./services.html">services</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__contact" href="./contact.html">contact</a>
+				</li>
+			</ul>
+			<div>
+				<img class="nav__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
+			</div>
+		</div>
+		<div class="bar container-fluid d-flex">
+			<button class="bar-button navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<a class="main-logo-link" href="#">
+				<img class="main__logo" src="./src/assets/images/logo-bar.svg"
+					alt="logo site">
+			</a>
+			
+		</div>
 	</nav>
+
+
+	<!-- <nav class="nav navbar">
+		
+
+
+		
+	</nav> -->
 
 	<header class="hero">
 		<div class="hero__container">
@@ -160,7 +201,8 @@
 						<div class="testimony__message-group">
 							<label class="testimony__label" for="message">Message</label>
 							<br />
-							<textarea class="testimony__textarea" id="message" name="message" rows="4" placeholder="Your message"></textarea>
+							<textarea class="testimony__textarea" id="message" name="message" rows="4"
+								placeholder="Your message"></textarea>
 							<br />
 						</div>
 						<a type="submit" class="intro__button intro__button--send">SEND</a>
@@ -207,7 +249,8 @@
 
 			<!-- the image click redirect to top for this moment just exemple -->
 			<a class="footer__logo-link" href="#top">
-				<img class="footer__logo" src="./src/assets/images/logo-site-mobile.svg" alt="Logo del sitio - Volver al inicio">
+				<img class="footer__logo" src="./src/assets/images/logo-site-mobile.svg"
+					alt="Logo del sitio - Volver al inicio">
 			</a>
 		</section>
 
@@ -215,6 +258,8 @@
 			<small>&copy; 2024 Arcadia ZOO Bretagne | Designed By D.S.F</small>
 		</div>
 	</footer>
+	<script type="module" src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="module" src="/node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
 </body>
 
 </html>
