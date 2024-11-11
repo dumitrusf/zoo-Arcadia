@@ -529,7 +529,7 @@ nav {
   left: 0;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.3254901961);
-  backdrop-filter: rgba(0, 0, 0, 0.5294117647);
+  backdrop-filter: blur(5.0500001907px);
 }
 
 .hero {
@@ -574,6 +574,7 @@ img {
 
 .bar-button {
   flex-basis: content;
+  border: none;
   padding: 0;
   margin: 0;
 }

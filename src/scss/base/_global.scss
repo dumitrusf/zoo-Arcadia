@@ -21,15 +21,19 @@ body {
   font-style: normal;
 }
 
-
 nav {
   bottom: 0;
   left: 0;
   width: 100vw;
   background-color: map-get(map-get(v.$color, cover-img), cover-black);
-  backdrop-filter: map-get(map-get(v.$color, blur), black-blur);
-}
+  backdrop-filter: map-get(map-get(v.$color, blur), blur);
 
+  // @include m.responsive(tablet) {
+  //   bottom: unset;
+  //   top: 0;
+  //   left: 0;
+  // }
+}
 
 .hero {
   // background-color: rgb(75, 194, 200);
@@ -86,6 +90,7 @@ img {
 .bar-button {
   flex-basis: content;
   // background-color: red;
+  border: none;
   padding: 0;
   margin: 0;
 }

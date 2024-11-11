@@ -16,18 +16,47 @@
 
     <link rel="stylesheet" href="/node_modules/Normalize-css/normalize.css" />
 
-    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css" />
 
     <link rel="stylesheet" href="build/css/app.css">
 </head>
 
 <body id="top">
-    <nav class="nav">
-        <a class="nav__link nav__home" href="./index.html">home</a>
-        <a class="nav__link nav__services" href="./services.html">services</a>
-        <a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
-        <a class="nav__link nav__animals nav__link--active" href="#">|animals|</a>
-        <a class="nav__link nav__contact" href="./contact.html">contact</a>
+    <nav class="nav navbar position-fixed">
+        <div class="nav__menu collapse" id="navbarToggler">
+            <ul class="nav__items">
+                <li class="nav__item">
+                    <a class="nav__link nav__home " href="./index.html">home</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__services" href="./services.html">services</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__animals nav__link--active" href="#">animals</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__contact" href="./contact.html">contact</a>
+                </li>
+            </ul>
+            <div>
+                <img class="nav__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
+            </div>
+        </div>
+        <div class="bar container-fluid d-flex">
+            <button class="bar-button navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a class="main-logo-link" href="#">
+                <img class="main__logo" src="./src/assets/images/logo-bar.svg" alt="logo site">
+            </a>
+
+        </div>
     </nav>
 
     <header class="hero">
@@ -210,44 +239,47 @@
     <br>
 
     <footer class="footer">
-		<section class="footer__hours" id="opening-hours">
-			<div class="footer__location">
-				<div class="footer__location-details">
-					<p class="footer__city">BRETAGNE (35380)</p>
-					<p class="footer__forest">FORÊT DE BROCÉLIANDE</p>
-				</div>
-				<p class="footer__hours-title">HEURES D'OUVERTURE</p>
+        <section class="footer__hours" id="opening-hours">
+            <div class="footer__location">
+                <div class="footer__location-details">
+                    <p class="footer__city">BRETAGNE (35380)</p>
+                    <p class="footer__forest">FORÊT DE BROCÉLIANDE</p>
+                </div>
+                <p class="footer__hours-title">HEURES D'OUVERTURE</p>
 
-				<table class="footer__hours-table">
-					<tr class="footers__hours-row">
-						<th class="footer__hours-header">Matin:</th>
-						<td class="footer__hours-data">08:45 - 12:00</td>
-					</tr>
-					<tr class="footers__hours-row">
-						<th class="footer__hours-header">Après-midi:</th>
-						<td class="footer__hours-data">14:00 - 18:00</td>
-					</tr>
-					<tr class="footers__hours-row">
-						<th class="footer__hours-header">Samedi:</th>
-						<td class="footer__hours-data">08:45 - 12:00</td>
-					</tr>
-					<tr class="footers__hours-row">
-						<th class="footer__hours-header">Dimanche:</th>
-						<td class="footer__hours-data">Fermé</td>
-					</tr>
-				</table>
-			</div>
+                <table class="footer__hours-table">
+                    <tr class="footers__hours-row">
+                        <th class="footer__hours-header">Matin:</th>
+                        <td class="footer__hours-data">08:45 - 12:00</td>
+                    </tr>
+                    <tr class="footers__hours-row">
+                        <th class="footer__hours-header">Après-midi:</th>
+                        <td class="footer__hours-data">14:00 - 18:00</td>
+                    </tr>
+                    <tr class="footers__hours-row">
+                        <th class="footer__hours-header">Samedi:</th>
+                        <td class="footer__hours-data">08:45 - 12:00</td>
+                    </tr>
+                    <tr class="footers__hours-row">
+                        <th class="footer__hours-header">Dimanche:</th>
+                        <td class="footer__hours-data">Fermé</td>
+                    </tr>
+                </table>
+            </div>
 
-			<!-- the image click redirect to top for this moment just exemple -->
-			<a class="footer__logo-link" href="#top">
-				<img class="footer__logo" src="./src/assets/images/logo-site-mobile.svg" alt="Logo del sitio - Volver al inicio">
-			</a>
-		</section>
+            <!-- the image click redirect to top for this moment just exemple -->
+            <a class="footer__logo-link" href="#top">
+                <img class="footer__logo" src="./src/assets/images/logo-site-mobile.svg"
+                    alt="Logo del sitio - Volver al inicio">
+            </a>
+        </section>
 
-		<div class="footer__copyright">
-			<small>&copy; 2024 Arcadia ZOO Bretagne | Designed By D.S.F</small>
-		</div>
-	</footer>
+        <div class="footer__copyright">
+            <small>&copy; 2024 Arcadia ZOO Bretagne | Designed By D.S.F</small>
+        </div>
+    </footer>
+    <script type="module" src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="/node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
 </body>
 
 </html>
