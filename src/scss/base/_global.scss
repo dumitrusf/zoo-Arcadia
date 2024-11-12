@@ -5,13 +5,13 @@ html {
   font-size: 62.5%;
   box-sizing: border-box;
   scroll-padding-top: 0rem;
-  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 *,
 *:before,
 *:after {
-  overflow-x: hidden;
+  overflow: hidden;
   margin: 0px;
   padding: 0px;
 }
@@ -19,6 +19,7 @@ html {
 body {
   font-optical-sizing: auto;
   font-style: normal;
+  overflow: hidden;
 }
 
 nav {
@@ -33,6 +34,14 @@ nav {
   //   top: 0;
   //   left: 0;
   // }
+}
+
+.panda {
+  &__logo {
+    width: 115px;
+    filter: map-get(map-get(v.$color, blur), blur-panda);
+    -webkit-filter: map-get(map-get(v.$color, blur), blur-panda);
+}
 }
 
 .hero {
@@ -56,6 +65,9 @@ img {
 }
 
 .intro {
+
+  
+  
   &__section,
   &__article {
     // background-color: greenyellow;
@@ -117,6 +129,9 @@ img {
 
 .footer {
   // background-color: khaki;
+  &__logo {
+    width: map-get(map-get(v.$font-sizes, "footer-texts"), f-logo);
+  };
 }
 
 .footer,

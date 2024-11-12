@@ -26,7 +26,7 @@
 
 <body id="top">
 
-	
+
 	<!-- navbar for mobile with his fonts and sizes -->
 	<nav class="nav navbar position-fixed">
 		<div class="nav__menu collapse" id="navbarToggler">
@@ -47,22 +47,21 @@
 					<a class="nav__link nav__contact" href="./contact.html">contact</a>
 				</li>
 			</ul>
-			<div>
-				<img class="nav__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
+			<div class="panda">
+				<img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
 			</div>
 		</div>
 		<div class="bar container-fluid d-flex">
 			<button class="bar-button navbar-toggler" type="button" data-bs-toggle="collapse"
-				data-bs-target="#navbarToggler" aria-controls="navbarToggler"
-				aria-expanded="false" aria-label="Toggle navigation">
+				data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
+				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 
 			<a class="main-logo-link" href="#">
-				<img class="main__logo" src="./src/assets/images/logo-bar.svg"
-					alt="logo site">
+				<img class="main__logo" src="./src/assets/images/logo-bar.svg" alt="logo site">
 			</a>
-			
+
 		</div>
 	</nav>
 
@@ -82,12 +81,20 @@
 			</div>
 
 
-			<a class="intro__button intro__button--hours" href="#opening-hours">opening hours</a>
+			<a type="button" class="btn intro__button intro__button--hours" href="#opening-hours">opening hours</a>
 
 		</div>
-		<img class="hero__image"
-			src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!227794&authkey=!AEappuXp767fq0M&ithint=photo&e=pUyq0e"
-			alt="hero image">
+
+		<picture>
+			<source
+				srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228542&authkey=!AMl2o5PoyxXuRBU&ithint=photo&e=u9NmzI"
+				media="(min-width: 1280px)" />
+			<source
+				srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228541&authkey=!ALbJeAgEo2Qdg4I&ithint=photo&e=Fo1CxO"
+				media="(min-width: 744px)" />
+			<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228540&authkey=!AMZQRT_KTs11Qf0&ithint=photo&e=xZ2JoE"
+				class="hero__image d-block w-70 img-fluid" alt="hero image" />
+		</picture>
 	</header>
 
 	<br>
@@ -99,13 +106,19 @@
 			<h2 class="intro__title">services</h2>
 
 			<div class="intro__content">
-				<img class="intro__image"
-					src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!227795&authkey=!AFPvx5eK9lauDFo&ithint=photo&e=bgprLd"
-					alt="intro services">
+				
+
+
+					<picture>
+						<source srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228538&authkey=!ACvxi3zO6HeqkYI&ithint=photo&e=JOX5wV" media="(min-width: 744px)" />
+						<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228539&authkey=!AN4rlHglgLF3_Lg&ithint=photo&e=AmPRWr"	class="intro__image d-block w-70 img-fluid" alt="intro services"/>
+					</picture>
+
 
 				<div class="intro__details">
 
-					<a class="intro__button intro__button--more intro__button--services" href="./services.html">more</a>
+					<a class="btn intro__button intro__button--more intro__button--services"
+						href="./services.html">more</a>
 
 					<p class="intro__description">see what arcadia can offers you</p>
 				</div>
@@ -124,7 +137,8 @@
 
 				<div class="intro__details">
 
-					<a href="./habitats.html" class="intro__button intro__button--more intro__button--habitats">more</a>
+					<a href="./habitats.html"
+						class="btn intro__button intro__button--more intro__button--habitats">more</a>
 
 
 					<p class="intro__description">amazing habitats to discover</p>
@@ -145,7 +159,7 @@
 				<div class="intro__details">
 
 					<a href="./all-animals-habitats.html"
-						class="intro__button intro__button--more intro__button--animals">more</a>
+						class="btn intro__button intro__button--more intro__button--animals">more</a>
 
 
 					<p class="intro__description">explore another way of love</p>
@@ -205,7 +219,7 @@
 								placeholder="Your message"></textarea>
 							<br />
 						</div>
-						<a type="submit" class="intro__button intro__button--send">SEND</a>
+						<a type="submit" class="btn intro__button intro__button--send">SEND</a>
 					</div>
 
 

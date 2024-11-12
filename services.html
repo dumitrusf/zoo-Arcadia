@@ -23,7 +23,7 @@
 
 <body id="top">
     <nav class="nav navbar position-fixed">
-		<div class="nav__menu collapse" id="navbarToggleExternalContent">
+		<div class="nav__menu collapse" id="navbarToggler">
 			<ul class="nav__items">
 				<li class="nav__item">
 					<a class="nav__link nav__home" href="./index.html">home</a>
@@ -41,22 +41,21 @@
 					<a class="nav__link nav__contact" href="./contact.html">contact</a>
 				</li>
 			</ul>
-			<div>
-				<img class="nav__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
+			<div class="panda">
+				<img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
 			</div>
 		</div>
 		<div class="bar container-fluid d-flex">
 			<button class="bar-button navbar-toggler" type="button" data-bs-toggle="collapse"
-				data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
-				aria-expanded="false" aria-label="Toggle navigation">
+				data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
+				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 
 			<a class="main-logo-link" href="#">
-				<img class="main__logo" src="./src/assets/images/logo-bar.svg"
-					alt="logo site">
+				<img class="main__logo" src="./src/assets/images/logo-bar.svg" alt="logo site">
 			</a>
-			
+
 		</div>
 	</nav>
 
@@ -67,7 +66,7 @@
             </div>
 
 
-            <a class="intro__button intro__button--hours" href="#opening-hours">opening hours</a>
+            <a class="btn intro__button intro__button--hours" href="#opening-hours">opening hours</a>
 
         </div>
         <img class="hero__image"

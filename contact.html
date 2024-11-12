@@ -16,12 +16,50 @@
 
     <link rel="stylesheet" href="/node_modules/Normalize-css/normalize.css" />
 
-    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css" />
 
     <link rel="stylesheet" href="build/css/app.css">
 </head>
 
 <body>
+
+    <nav class="nav navbar position-fixed">
+		<div class="nav__menu collapse" id="navbarToggler">
+			<ul class="nav__items">
+				<li class="nav__item">
+					<a class="nav__link nav__home" href="./index.html">home</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__services" href="./services.html">services</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__contact nav__link--active" href="#">contact</a>
+				</li>
+			</ul>
+			<div class="panda">
+				<img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
+			</div>
+		</div>
+		<div class="bar container-fluid d-flex">
+			<button class="bar-button navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<a class="main-logo-link" href="#">
+				<img class="main__logo" src="./src/assets/images/logo-bar.svg" alt="logo site">
+			</a>
+
+		</div>
+	</nav>
+    
     <main class="contact">
 
         <section class="contact__container">
@@ -87,6 +125,8 @@
         </section>
 
     </main>
+    <script type="module" src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="module" src="/node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
 </body>
 
 </html>
