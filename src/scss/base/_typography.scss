@@ -4,6 +4,121 @@
 @use "shadows" as sh;
 @use "font-sizes" as s;
 
+@mixin menu() {
+  font-size: map-get(s.$font-sizes, menu-font);
+  color: map-get(map-get(c.$color, "solid-colors"), c-light);
+  font-family: map-get(
+    map-get(f.$path-fonts-formats, "family-font"),
+    "menu-font"
+  );
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+@mixin heading() {
+  font-size: map-get(map-get(s.$font-sizes, "headings"), main-heading);
+  color: map-get(map-get(c.$color, "solid-colors"), "c-light");
+  font-family: map-get(
+    map-get(f.$path-fonts-formats, "family-font"),
+    "h1-font"
+  );
+  text-shadow: map-get(map-get(sh.$shadows, "texts"), "h1-shadow");
+}
+
+@mixin button() {
+  color: map-get(map-get(c.$color, "solid-colors"), c-light);
+  font-size: map-get(map-get(s.$font-sizes, "other-texts"), text-button);
+  font-family: map-get(
+    map-get(f.$path-fonts-formats, "family-font"),
+    button-font
+  );
+  text-decoration: none;
+  border-style: none;
+  text-transform: uppercase;
+}
+
+@mixin title-section() {
+  font-size: map-get(map-get(s.$font-sizes, "headings"), title-main-cards);
+  color: map-get(map-get(c.$color, "solid-colors"), "c-dark");
+  font-family: map-get(
+    map-get(f.$path-fonts-formats, "family-font"),
+    "h2-font"
+  );
+  letter-spacing: map-get(
+    map-get(s.$font-spaces, "letter-spacings"),
+    ls-title-main-cards
+  );
+  text-transform: uppercase;
+}
+
+@mixin desc-section() {
+  font-size: map-get(map-get(s.$font-sizes, "other-texts"), p-in-cards);
+  color: map-get(map-get(c.$color, "solid-colors"), c-light);
+  font-family: map-get(
+    map-get(f.$path-fonts-formats, "family-font"),
+    "paragraph-font"
+  );
+  text-shadow: map-get(map-get(sh.$shadows, texts), sh-desc-section);
+  text-transform: uppercase;
+}
+
+@mixin testimony-title() {
+  font-size: map-get(map-get(s.$font-sizes, "headings"), title-main-cards);
+  color: map-get(map-get(c.$color, "solid-colors"), "c-dark");
+  font-family: map-get(
+    map-get(f.$path-fonts-formats, "family-font"),
+    "h2-font"
+  );
+
+  letter-spacing: map-get(
+    map-get(s.$font-spaces, "letter-spacings"),
+    ls-title-testimony
+  );
+}
+
+@mixin testimony-title() {
+  font-family: map-get(map-get(f.$path-fonts-formats, "family-font"), h3-font);
+  font-size: map-get(
+    map-get(s.$font-sizes, "other-texts"),
+    name-testimony-user
+  );
+
+  text-transform: uppercase;
+}
+
+@mixin ia-animal() {
+  text-transform: uppercase;
+  font-size: map-get(map-get(s.$font-sizes, "headings"), titles-cards-animal);
+  font-family: map-get(map-get(f.$path-fonts-formats, "family-font"), h2-font);
+}
+
+@mixin oo-animal() {
+  font-family: map-get(map-get(f.$path-fonts-formats, "family-font"), h3-font);
+
+  text-transform: capitalize;
+  font-size: calc(
+    map-get(map-get(s.$font-sizes, "headings"), titles-cards-animal) - 0.2rem
+  );
+}
+
+@mixin pagination() {
+  font-size: calc(
+    map-get(map-get(s.$font-sizes, "other-texts"), name-testimony-user));
+
+  text-decoration: none;
+}
+
+@mixin ad-description() {
+  font-size: calc(
+    map-get(map-get(s.$font-sizes, "other-texts"), request-info-data-card) -
+      0.2rem
+  );
+  font-family: map-get(
+    map-get(f.$path-fonts-formats, "family-font"),
+    paragraph-font
+  );
+}
+
 // typographie
 html,
 body {
@@ -15,19 +130,13 @@ body {
 
 // nav style typography
 .nav {
-  
-  background-color: map-get(map-get(c.$color, solid-colors), c-dark);
-
-  
 
   &__link {
-    font-size: map-get(s.$font-sizes, menu-font);
-    color: map-get(map-get(c.$color, "solid-colors"), c-light);
-    font-family: map-get(
-      map-get(f.$path-fonts-formats, "family-font"),
-      "menu-font"
-    );
-    text-decoration: none;
+    // font-size: map-get(s.$font-sizes, menu-font);
+    // color: map-get(map-get(c.$color, "solid-colors"), c-light);
+    // font-family: map-get(map-get(f.$path-fonts-formats, "family-font"), "menu-font");
+
+    @include menu();
 
     &--active,
     &:hover {
@@ -44,19 +153,17 @@ body {
 }
 // nav style typography
 
+.navbar-toggler-icon {
+  font-size: map-get(map-get(s.$font-sizes, "headings"), bars);
+}
+
 // main h1 style typography
 .hero {
   font-size: unset;
 
   &__title,
   &__subtitle {
-    font-size: map-get(map-get(s.$font-sizes, "headings"), main-heading);
-    color: map-get(map-get(c.$color, "solid-colors"), "c-light");
-    font-family: map-get(
-      map-get(f.$path-fonts-formats, "family-font"),
-      "h1-font"
-    );
-    text-shadow: map-get(map-get(sh.$shadows, "texts"), "h1-shadow");
+    @include heading();
   }
 
   &__subtitle {
@@ -74,22 +181,24 @@ body {
 
 // all buttons
 .intro__button {
-  font-size: map-get(map-get(s.$font-sizes, "other-texts"), text-button);
-  font-family: map-get(
-    map-get(f.$path-fonts-formats, "family-font"),
-    button-font
-  );
-  text-decoration: none;
-  border-style: none;
-  text-transform: uppercase;
+  @include button();
 
   // button from header redirecting to footer
   &--hours {
-    color: map-get(map-get(c.$color, "solid-colors"), c-light);
     background-color: map-get(
       map-get(c.$color, "solid-colors"),
       c-button-footer
     );
+
+    &:hover {
+      filter: invert(1);
+      background-color: map-get(
+        map-get(c.$color, "solid-colors"),
+        c-button-footer
+      );
+      -webkit-filter: invert(1);
+      color: map-get(map-get(c.$color, "solid-colors"), c-light);
+    }
   }
   // button from header redirecting to footer
 
@@ -97,13 +206,31 @@ body {
   &--send {
     background-color: map-get(map-get(c.$color, "solid-colors"), c-highlight-2);
     color: map-get(map-get(c.$color, "solid-colors"), c-dark);
+
+    &:hover {
+      color: map-get(map-get(c.$color, "solid-colors"), c-dark);
+      filter: invert(1);
+      background-color: map-get(
+        map-get(c.$color, "solid-colors"),
+        c-highlight-2
+      );
+      -webkit-filter: invert(1);
+    }
   }
   // button form send
 
   // button more info
   &--more {
     background-color: map-get(map-get(c.$color, "solid-colors"), c-button-more);
-    color: map-get(map-get(c.$color, "solid-colors"), c-light);
+    &:hover {
+      color: map-get(map-get(c.$color, "solid-colors"), c-light);
+      background-color: map-get(
+        map-get(c.$color, "solid-colors"),
+        c-button-more
+      );
+      filter: invert(1);
+      -webkit-filter: invert(1);
+    }
   }
   // button more info
 }
@@ -115,126 +242,65 @@ body {
 
   &__link {
     text-decoration: none;
-  }
-  
-  &__title {
-    
-    font-size: map-get(map-get(s.$font-sizes, "headings"), title-main-cards);
     color: map-get(map-get(c.$color, "solid-colors"), "c-dark");
-    font-family: map-get(
-      map-get(f.$path-fonts-formats, "family-font"),
-      "h2-font"
-    );
-    letter-spacing: map-get(
-      map-get(s.$font-spaces, "letter-spacings"),
-      ls-title-main-cards
-    );
-    text-transform: uppercase;
+  }
+
+  &__title {
+    @include title-section();
   }
   // titles cards
 
   // paraph in cards
   &__description {
-    
-
-    font-size: map-get(map-get(s.$font-sizes, "other-texts"), p-in-cards);
-    color: map-get(map-get(c.$color, "solid-colors"), c-light);
-    font-family: map-get(
-      map-get(f.$path-fonts-formats, "family-font"),
-      "paragraph-font"
-    );
-    text-shadow: map-get(map-get(sh.$shadows, texts), sh-desc-section);
+    @include desc-section();
   }
   // paraph in cards
 
-  &__details {
-    font-family: map-get(
-      map-get(f.$path-fonts-formats, "family-font"),
-      paragraph-font
-    );
-    text-transform: uppercase;
-  }
-  
   &__name {
-    
-    color: #b8117d;
     letter-spacing: map-get(
       map-get(s.$font-spaces, letter-spacings),
       ls-title-testimony
     );
     font-size: map-get(map-get(s.$font-sizes, "headings"), name-animal);
-    
-    & ~ * {
-      color: pink;
-      font-size: map-get(map-get(s.$font-sizes, "other-texts"), rest-animal);
 
+    & ~ * {
+      font-size: map-get(map-get(s.$font-sizes, "other-texts"), rest-animal);
       margin: unset;
     }
-    
   }
-  
-  
 }
 // main section with cards
-
 
 // pagination
 
 .pagination {
-
   &__link,
   &__link ~ span {
-    font-size: calc(map-get(map-get(s.$font-sizes, "other-texts"), name-testimony-user) - 0.4rem);
-
-    text-decoration: none;
+    @include pagination();
   }
-  
 }
 
 // pagination
-
 
 // section testimony
 .testimony {
   // title testimony
   &__title {
-    font-size: map-get(map-get(s.$font-sizes, "headings"), title-main-cards);
-    color: map-get(map-get(c.$color, "solid-colors"), "c-dark");
-    font-family: map-get(
-      map-get(f.$path-fonts-formats, "family-font"),
-      "h2-font"
-    );
-
-    letter-spacing: map-get(
-      map-get(s.$font-spaces, "letter-spacings"),
-      ls-title-testimony
-    );
+    @include testimony-title();
 
     &--shown {
-      
       text-transform: uppercase;
     }
 
     &--feedback {
       text-transform: capitalize;
-      
     }
   }
   // title testimony
 
   // user pseudo name
   &__user {
-    
-    font-family: map-get(
-      map-get(f.$path-fonts-formats, "family-font"),
-      h3-font
-    );
-    font-size: map-get(
-      map-get(s.$font-sizes, "other-texts"),
-      name-testimony-user
-    );
-
-    text-transform: uppercase;
+    @include testimony-title();
   }
   // user pseudo name
 
@@ -244,39 +310,39 @@ body {
       map-get(s.$font-sizes, "other-texts"),
       name-testimony-user
     );
-    
   }
   // stars in testimony
 
   // paragraph testimony
   &__text {
-    
     font-size: map-get(map-get(s.$font-sizes, "other-texts"), p-testimony);
   }
   // paragraph testimony
 
-  &__stars {
+  &__stars,
+  &__label {
     font-size: map-get(map-get(s.$font-sizes, "other-texts"), filter-form);
-    
   }
 
-  &__label {
-    
-    font-size: map-get(map-get(s.$font-sizes, "other-texts"), filter-form);
-    font-family: map-get(
-      map-get(f.$path-fonts-formats, "family-font"),
-      normal-font
+  &__input {
+    height: calc(
+      map-get(map-get(s.$font-sizes, "other-texts"), filter-form) + 1.7rem
+    );
+    font-size: calc(
+      map-get(map-get(s.$font-sizes, "other-texts"), filter-form) - 0.2rem
     );
   }
 
-  &__input,
   &__textarea {
-    font-size: calc(map-get(map-get(s.$font-sizes, "other-texts"), filter-form) - 0.2rem);
-    
-    
+    font-size: calc(
+      map-get(map-get(s.$font-sizes, "other-texts"), filter-form) - 0.1rem
+    );
+
     &::placeholder {
       color: grey;
-      font-size: calc(map-get(map-get(s.$font-sizes, "other-texts"), filter-form) - 0.2rem);
+      font-size: calc(
+        map-get(map-get(s.$font-sizes, "other-texts"), filter-form) - 0.2rem
+      );
     }
   }
 }
@@ -289,16 +355,16 @@ body {
 // footer
 .footer {
   &__location-details > p {
-    font-size: calc(map-get(map-get(s.$font-sizes, "other-texts"), p-testimony) + 0.2rem) ;
+    font-size: calc(
+      map-get(map-get(s.$font-sizes, "other-texts"), p-testimony) + 0.2rem
+    );
   }
 
   &__location-details + p {
-    
     font-size: map-get(map-get(s.$font-sizes, "other-texts"), p-testimony);
   }
 
   &__hours-table {
-    
     font-size: map-get(map-get(s.$font-sizes, "footer-texts"), f-tertiary);
   }
 
@@ -309,31 +375,56 @@ body {
 
 .filter {
   font-size: map-get(map-get(s.$font-sizes, headings), filter-headings);
+  
+  &__legend {
+    font-size: map-get(map-get(s.$font-sizes, headings), filter-headings);
+
+  }
 
   &__legend ~ label,
   &__legend ~ input {
     font-size: map-get(map-get(s.$font-sizes, other-texts), filter-form);
   }
-  
-  &__fieldset select option {
-    font-size: calc(map-get(map-get(s.$font-sizes, other-texts), filter-form) - 0.2rem);
-    
-  }
-  
-  &__legend ~ select {
-    font-size: calc(map-get(map-get(s.$font-sizes, other-texts), filter-form) - 0.2rem);
 
-    
-    
+  &__fieldset select option {
+    font-size: calc(
+      map-get(map-get(s.$font-sizes, other-texts), filter-form) - 0.2rem
+    );
+  }
+
+  &__legend ~ select {
+    font-size: calc(
+      map-get(map-get(s.$font-sizes, other-texts), filter-form) - 0.2rem
+    );
   }
 }
 
-
 .contact {
-
   &__form-section {
     font-size: map-get(map-get(s.$font-sizes, other-texts), filter-form);
-    
   }
-  
+}
+
+.animal {
+  &__info > h2,
+  &__about > h2 {
+    @include ia-animal();
+  }
+
+  &__observation > h2,
+  &__optional > h2 {
+    @include oo-animal();
+  }
+
+  &__description {
+    @include ad-description();
+  }
+
+  .animal__header,
+  .animal__data {
+    font-size: map-get(
+      map-get(s.$font-sizes, "other-texts"),
+      request-info-data-card
+    );
+  }
 }

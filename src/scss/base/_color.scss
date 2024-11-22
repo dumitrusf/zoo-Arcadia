@@ -15,13 +15,13 @@ $color: (
     c-button-footer: #345813,
   ),
   cover-img: (
-    cover-black: #00000033,
-    cover-white: #ffffff33
+    cover-black: #00000053,
+    cover-white: #ffffff53
   ),
 
   blur:(
-    black-blur: #00000087,
-    white-blur: #ffffff87,
+    blur: blur(5.050000190734863px),
+    blur-panda: blur(2.4000000953674316px),
   ),
 );
 

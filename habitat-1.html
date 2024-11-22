@@ -16,35 +16,125 @@
 
     <link rel="stylesheet" href="/node_modules/Normalize-css/normalize.css" />
 
-    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css" />
 
     <link rel="stylesheet" href="build/css/app.css">
 </head>
 
 <body id="top">
-    <nav>
-        <a href="./index.html">home</a>
-        <a href="./services.html">services</a>
-        <a href="./habitats.html">habitats</a>
-        <a href="./all-animals-habitats.html">animals</a>
-        <a href="./contact.html">contact</a>
+    <!-- navbar for mobile with his fonts and sizes -->
+    <nav class="d-md-none nav navbar position-fixed">
+        <div class="nav__menu collapse" id="navbarToggler">
+            <ul class="nav__items">
+                <li class="nav__item">
+                    <a class="nav__link nav__home" href="./index.html">home</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__services" href="./services.html">services</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__contact" href="./contact.html">contact</a>
+                </li>
+            </ul>
+            <div class="panda">
+                <img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
+            </div>
+        </div>
+
+        <div class="bar container-fluid d-flex">
+            <button class="bar-button navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a class="main-logo-link" href="#">
+                <img class="main__logo" src="./src/assets/images/logo-bar.svg" alt="logo site">
+            </a>
+
+        </div>
     </nav>
 
 
-    <header>
-		<div>
-			<div>
-				<h1>savannah</h1>
-				<p>animals</p>
-			</div>
+
+    <!-- navbar for mobile with his fonts and sizes -->
+    <nav class="d-none d-md-block nav navbar position-fixed">
+
+        <div class="bar container-fluid d-flex">
+            <button class="bar-button navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a class="main-logo-link" href="#">
+                <img class="main__logo" src="./src/assets/images/logo-bar.svg" alt="logo site">
+            </a>
+
+        </div>
+
+        <div class="nav__menu nav__menu--desk collapse" id="navbarToggler">
+            <ul class="nav__items">
+                <li class="nav__item">
+                    <a class="nav__link nav__home" href="./index.html">home</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__services" href="./services.html">services</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__contact" href="./contact.html">contact</a>
+                </li>
+            </ul>
+            <div class="panda">
+                <img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
+            </div>
+            <div class="logo-desk">
+                <img class="logo-desk" src="./src/assets/images/logo-desk.svg" alt="Logo site">
+            </div>
+        </div>
+    </nav>
 
 
-			<a href="#opening-hours">opening hours</a>
 
-		</div>
-		<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!227810&authkey=!AKYYhfT_eh3BETk&ithint=photo&e=FOYMAW"
-			alt="hero image">
-	</header>
+    <!-- <nav class="nav navbar"> -->
+
+
+    <header class="hero">
+        <div class="hero__container">
+            <div class="hero__text">
+                <h1 class="hero__title">savannah</h1>
+                <p class="hero__subtitle">animals</p>
+            </div>
+
+
+            <a class="btn intro__button intro__button--hours" href="#opening-hours">opening hours</a>
+
+        </div>
+        
+
+        <picture>
+            <source
+                srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228689&authkey=!AGb9hyvEkexZX_0&ithint=photo&e=Twgyf3"
+                media="(min-width: 1280px)" />
+            <source
+                srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228682&authkey=!AO_ZZzP6a6mOPwg&ithint=photo&e=cvlTBH"
+                media="(min-width: 744px)" />
+            <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228659&authkey=!AMjsIy-pRloHNkM&ithint=photo&e=2wFiuy"
+                class="hero__image d-block img-fluid" alt="intro habitat-1" />
+        </picture>
+    </header>
 
 
 
@@ -52,58 +142,61 @@
     <hr>
     <br>
 
-    <div>
-        <!-- filter for animals ype savannah in this case -->
-        <div>
-            <div>
-                <span>Open Filter</span>
-                <button class="open-filter">☰</button>
-            </div>
-            <picture></picture>
-            <!-- reference all time to best format like svg -->
-        </div>
 
 
-        <!-- menu filter -->
-        <div class="filter-container">
-            <div>
-                <span>close filter</span>
-                <button class="open-filter">✖</button>
-            </div>
 
-            <form>
-                <fieldset>
-                    <legend>Filter by:</legend>
+    <div class="filter">
+        <!-- Filter toggle (open/close) -->
 
-                    <!-- Filter of Animal Bread -->
-                    <label for="animal-bread">Animal bread:</label>
+
+        <span class="filter__toggle-label">Open Filter</span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarFiltrer"
+            aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon btn-filter"></span>
+        </button>
+
+
+
+
+
+        <br>
+
+        <!-- Filter menu -->
+        <div class="filter__container collapse" id="navbarFiltrer">
+            
+
+            <form class="filter__form">
+                <fieldset class="filter__fieldset">
+                    <legend class="filter__legend">Filter by:</legend>
+
+                    <!-- Animal breed filter -->
+                    <label for="animal-breed" class="filter__label">Animal breed:</label>
                     <br>
-                    <select id="animal-bread" name="animal-bread">
-                        <option value="" disabled selected>Select animal bread</option> <!-- Placeholder -->
+                    <select id="animal-breed" name="animal-breed" class="filter__select">
+                        <option value="" selected>Select animal breed</option>
                         <option value="mammal">Mammal</option>
                         <option value="reptile">Reptile</option>
                         <option value="bird">Bird</option>
-                        <option value="bird">amphibian</option>
-                        <option value="bird">arachnid</option>
-                        <option value="bird">insect</option>
-                        <!-- Añade más opciones según sea necesario -->
+                        <option value="amphibian">Amphibian</option>
+                        <option value="arachnid">Arachnid</option>
+                        <option value="insect">Insect</option>
                     </select>
                     <br>
-                    <!-- Filtro de Nutrición -->
-                    <label for="nutrition">Nutrition:</label>
+                    <!-- Nutrition filter -->
+                    <label for="nutrition" class="filter__label">Nutrition:</label>
                     <br>
-                    <select id="nutrition" name="nutrition">
-                        <option value="" disabled selected>Select animal nutrition</option> <!-- Placeholder -->
-                        <option value="carnivorous">carnivorous</option>
+                    <select id="nutrition" name="nutrition" class="filter__select">
+                        <option value="" selected>Select animal nutrition</option>
+                        <option value="carnivorous">Carnivorous</option>
                         <option value="herbivore">Herbivore</option>
                         <option value="omnivore">Omnivore</option>
                     </select>
                     <br>
-                    <!-- Filter state -->
-                    <label for="state">State:</label>
+                    <!-- State filter -->
+                    <label for="state" class="filter__label">State:</label>
                     <br>
-                    <select id="state" name="state">
-                        <option value="" disabled selected>Select animal state</option> <!-- Placeholder -->
+                    <select id="state" name="state" class="filter__select">
+                        <option value="" selected>Select animal state</option>
                         <option value="healthy">Healthy</option>
                         <option value="sick">Sick</option>
                         <option value="injured">Injured</option>
@@ -116,72 +209,88 @@
                         <option value="new-arrival">New Arrival</option>
                         <option value="endangered">Endangered</option>
                         <option value="old-age">Old Age</option>
-                        <option value="Angry">Angry</option>
+                        <option value="angry">Angry</option>
                     </select>
                     <br>
-                    <!-- Filter date -->
-                    <label for="appointment-date">Appointment date:</label>
+                    <!-- Appointment date filter -->
+                    <label for="appointment-date" class="filter__label">Appointment date:</label>
                     <br>
-                    <input type="date" id="appointment-date" name="appointment-date">
+                    <input type="date" id="appointment-date" name="appointment-date" class="filter__input-date">
                     <br>
                     <br>
-                    <!-- Button restart -->
-                    <button type="reset" class="restart-button">Restart</button>
+                    <!-- Restart button -->
+                    <button type="reset" class="filter__button filter__button--reset">Restart</button>
                 </fieldset>
             </form>
 
-            <div>
-                <span>close filter</span>
-                <button class="open-filter">✖</button>
+            <div class="filter__footer">
+                <span class="filter__close-label">Close Filter</span>
+                <button class="filter__toggle-button filter__toggle-button--close">✖</button>
             </div>
         </div>
-
-
     </div>
+
+
 
     <br>
     <hr>
     <br>
 
-    <main>
+    <main class="intro">
 
 
-        <article>
-            <a href="./animal-picked.html" target="_blank" rel="noopener noreferrer">
-                <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228357&authkey=!AJRkoxjzaDTXPQ8&ithint=photo&e=JkmTAP"
-                    alt="animal-1">
-                <div>
-                    <h3>bujara</h3>
-                    <p>vulture</p>
-                    <p>savannah</p>
+        <article class="intro__article intro__animal">
+            <a class="intro__link" href="./animal-picked.html" target="_blank" rel="noopener noreferrer">
+
+                <picture>
+                    <source srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228687&authkey=!AADI2MBU26FJT04&ithint=photo&e=kHFnPE" media="(min-width: 1280px)" />
+                    <source srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228683&authkey=!ABwE8fNtME0OPUQ&ithint=photo&e=wAwFTK" media="(min-width: 744px)" />
+                    <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228660&authkey=!ANsNXnRR0er7Ugw&ithint=photo&e=iibNL9"
+                        class="intro__image d-block img-fluid" alt="animal-1" />
+                </picture>
+
+                <div class="intro__details">
+                    <h3 class="intro__name">bujara</h3>
+                    <p class="intro__species">vulture</p>
+                    <p class="intro__habitat">savannah</p>
                 </div>
             </a>
         </article>
 
         <br>
 
-        <article>
-            <a href="./animal-picked.html" target="_blank" rel="noopener noreferrer">
-                <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228356&authkey=!AIxQQfjPQUB1eks&ithint=photo&e=GWWV21"
-                    alt="animal-2">
-                <div>
-                    <h3>bujara</h3>
-                    <p>vulture</p>
-                    <p>savannah</p>
+        <article class="intro__article intro__animal">
+            <a class="intro__link" href="./animal-picked.html" target="_blank" rel="noopener noreferrer">
+
+
+                <picture>
+                    <source srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228655&authkey=!ADtHdPuknbAhUts&ithint=photo&e=lJFlYv" media="(min-width: 1280px)" />
+                    <source srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228645&authkey=!ALc4yOxSqIXXcts&ithint=photo&e=xvefO4" media="(min-width: 744px)" />
+                    <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228637&authkey=!ABpNXHA_qfVEdLc&ithint=photo&e=XHDMXn"
+                        class="intro__image d-block img-fluid" alt="animal-2" />
+                </picture>
+                <div class="intro__details">
+                    <h3 class="intro__name">bujara</h3>
+                    <p class="intro__species">vulture</p>
+                    <p class="intro__habitat">savannah</p>
                 </div>
             </a>
         </article>
 
         <br>
 
-        <article>
-            <a href="./animal-picked.html" target="_blank" rel="noopener noreferrer">
-                <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228181&authkey=!AF4NZH7YGXIFpuA&ithint=photo&e=C0lU7c"
-                    alt="animal-3">
-                <div>
-                    <h3>bujara</h3>
-                    <p>vulture</p>
-                    <p>savannah</p>
+        <article class="intro__article intro__animal">
+            <a class="intro__link" href="./animal-picked.html" target="_blank" rel="noopener noreferrer">
+                <picture>
+                    <source srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228692&authkey=!AE4JQzILKzGbYcU&ithint=photo&e=JsrNyL" media="(min-width: 1280px)" />
+                    <source srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228684&authkey=!AI0h-H8_m_fMzvQ&ithint=photo&e=GakFzc" media="(min-width: 744px)" />
+                    <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228658&authkey=!APQlYnFbMcDRlrA&ithint=photo&e=GGAqjy"
+                        class="intro__image d-block img-fluid" alt="animal-3" />
+                </picture>
+                <div class="intro__details">
+                    <h3 class="intro__name">bujara</h3>
+                    <p class="intro__species">vulture</p>
+                    <p class="intro__habitat">savannah</p>
                 </div>
             </a>
         </article>
@@ -190,58 +299,71 @@
 
     <br>
 
-    <nav>
-        <a href="#">&lt;</a>
-        <a href="#">1,</a>
-        <a href="#">2,</a>
-        <a href="#">3,</a>
-        <a>...</a>
-        <a href="#">&gt;</a>
+    <nav class="nav-pagination">
+
+        <ul class="nav-pagination__ul">
+            <li class="nav-pagination__li">
+                <a href="#" aria-label="Previous">
+                    <i class="bi bi-caret-left-fill"></i>
+                </a>
+            </li>
+            <li class="nav-pagination__li"><a href="#">1,</a></li>
+            <li class="nav-pagination__li"><a href="#">2,</a></li>
+            <li class="nav-pagination__li"><a href="#">3 ...</a></li>
+            <li class="nav-pagination__li">
+                <a href="#" aria-label="Next">
+                    <i class="bi bi-caret-right-fill"></i>
+                </a>
+            </li>
+        </ul>
     </nav>
 
     <br>
     <hr>
     <br>
 
-    <footer>
-        <section id="opening-hours">
-            <div>
-                <div>
-                    <p>BRETAGNE (35380)</p>
-                    <p>FORÊT DE BROCÉLIANDE</p>
+    <footer class="footer">
+        <section class="footer__hours" id="opening-hours">
+            <div class="footer__location">
+                <div class="footer__location-details">
+                    <p class="footer__city">BRETAGNE (35380)</p>
+                    <p class="footer__forest">FORÊT DE BROCÉLIANDE</p>
                 </div>
-                <p>HEURES D'OUVERTURE</p>
-    
-                <table>
-                    <tr>
-                        <th>Matin:</th>
-                        <td>08:45 - 12:00</td>
+                <p class="footer__hours-title">HEURES D'OUVERTURE</p>
+
+                <table class="footer__hours-table">
+                    <tr class="footers__hours-row">
+                        <th class="footer__hours-header">Matin:</th>
+                        <td class="footer__hours-data">08:45 - 12:00</td>
                     </tr>
-                    <tr>
-                        <th>Après-midi:</th>
-                        <td>14:00 - 18:00</td>
+                    <tr class="footers__hours-row">
+                        <th class="footer__hours-header">Après-midi:</th>
+                        <td class="footer__hours-data">14:00 - 18:00</td>
                     </tr>
-                    <tr>
-                        <th>Samedi:</th>
-                        <td class="highlight">08:45 - 12:00</td>
+                    <tr class="footers__hours-row">
+                        <th class="footer__hours-header">Samedi:</th>
+                        <td class="footer__hours-data">08:45 - 12:00</td>
                     </tr>
-                    <tr>
-                        <th>Dimanche:</th>
-                        <td>Fermé</td>
+                    <tr class="footers__hours-row">
+                        <th class="footer__hours-header">Dimanche:</th>
+                        <td class="footer__hours-data">Fermé</td>
                     </tr>
                 </table>
             </div>
-    
+
             <!-- the image click redirect to top for this moment just exemple -->
-            <a href="#top">
-                <img src="./src/assets/images/logo-site-mobile.svg" alt="Logo del sitio - Volver al inicio">
+            <a class="footer__logo-link" href="#top">
+                <img class="footer__logo" src="./src/assets/images/logo-site-mobile.svg"
+                    alt="Logo del sitio - Volver al inicio">
             </a>
         </section>
-    
-        <div>
-            <small>Copyright © 2024 Arcadia ZOO Bretagne | Designed By D.S.F</small>
+
+        <div class="footer__copyright">
+            <small>&copy; 2024 Arcadia ZOO Bretagne | Designed By D.S.F</small>
         </div>
     </footer>
+    <script type="module" src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="/node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
 </body>
 
 </html>

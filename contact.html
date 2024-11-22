@@ -16,73 +16,168 @@
 
     <link rel="stylesheet" href="/node_modules/Normalize-css/normalize.css" />
 
-    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css" />
 
     <link rel="stylesheet" href="build/css/app.css">
 </head>
 
 <body>
+
+    <!-- navbar for mobile with his fonts and sizes -->
+	<nav class="d-md-none nav navbar position-fixed">
+		<div class="nav__menu collapse" id="navbarToggler">
+			<ul class="nav__items">
+				<li class="nav__item">
+					<a class="nav__link nav__home" href="./index.html">home</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__services" href="./services.html">services</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__contact nav__link--active" href="#">contact</a>
+				</li>
+			</ul>
+			<div class="panda">
+				<img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
+			</div>
+		</div>
+
+		<div class="bar container-fluid d-flex">
+			<button class="bar-button navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<a class="main-logo-link" href="#">
+				<img class="main__logo" src="./src/assets/images/logo-bar.svg" alt="logo site">
+			</a>
+
+		</div>
+	</nav>
+
+
+
+	<!-- navbar for mobile with his fonts and sizes -->
+	<nav class="d-none d-md-block nav navbar position-fixed">
+
+		<div class="bar container-fluid d-flex">
+			<button class="bar-button navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<a class="main-logo-link" href="#">
+				<img class="main__logo" src="./src/assets/images/logo-bar.svg" alt="logo site">
+			</a>
+
+		</div>
+
+		<div class="nav__menu nav__menu--desk collapse" id="navbarToggler">
+			<ul class="nav__items">
+				<li class="nav__item">
+					<a class="nav__link nav__home" href="./index.html">home</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__services" href="./services.html">services</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__contact nav__link--active" href="#">contact</a>
+				</li>
+			</ul>
+			<div class="panda">
+				<img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
+			</div>
+			<div class="logo-desk">
+				<img class="logo-desk" src="./src/assets/images/logo-desk.svg" alt="Logo site">
+			</div>
+		</div>
+	</nav>
+
+
+
+	<!-- <nav class="nav navbar"> -->
+    
     <main class="contact">
-        <!-- Logo site web -->
-        <header class="contact__header">
-            <a href="./index.html" class="contact__logo-link">
-                <img src="./src/assets/images/logo-site-mobile.svg" alt="Logo del sitio" class="contact__logo">
-            </a>
-        </header>
 
-        <br>
+		<!-- Logo site web -->
+		<header class="contact__header">
+			<a href="./index.html" class="contact__logo-link">
+				<img src="./src/assets/images/logo-site-mobile.svg" alt="Logo del sitio" class="contact__logo">
+			</a>
+		</header>
+		
+		<br>
+		
+		<div class="contact__container">
+            <!-- Form contacto -->
+            <section class="contact__form-section">
+                <h2 class="contact__title">Contact About:</h2>
 
-        <!-- Form contacto -->
-        <section class="contact__form-section">
-            <h2 class="contact__title">Contact About:</h2>
+                <form action="/contact" method="POST" class="contact__form">
 
-            <form action="/contact" method="POST" class="contact__form">
+                    <!-- Campo de primer nombre -->
+                    <label for="first-name" class="contact__label">First Name</label>
+                    <input type="text" id="first-name" name="first-name" placeholder="Emilio" required
+                        class="contact__input">
 
-                <!-- Campo de primer nombre -->
-                <label for="first-name" class="contact__label">First Name</label>
-                <input type="text" id="first-name" name="first-name" placeholder="Emilio" required
-                    class="contact__input">
+                    <br>
+                    <br>
 
-                <br>
-                <br>
+                    <!-- Campo de apellido -->
+                    <label for="last-name" class="contact__label">Last Name</label>
+                    <input type="text" id="last-name" name="last-name" placeholder="Emiliano" required
+                        class="contact__input">
 
-                <!-- Campo de apellido -->
-                <label for="last-name" class="contact__label">Last Name</label>
-                <input type="text" id="last-name" name="last-name" placeholder="Emiliano" required
-                    class="contact__input">
+                    <br>
+                    <br>
 
-                <br>
-                <br>
+                    <!-- Campo de correo electrónico -->
+                    <label for="email" class="contact__label">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Maximiliano@outlook.com" required
+                        class="contact__input">
 
-                <!-- Campo de correo electrónico -->
-                <label for="email" class="contact__label">Email</label>
-                <input type="email" id="email" name="email" placeholder="Maximiliano@outlook.com" required
-                    class="contact__input">
+                    <br>
+                    <br>
 
-                <br>
-                <br>
+                    <!-- Campo de asunto -->
+                    <label for="subject" class="contact__label">Subject</label>
+                    <input type="text" id="subject" name="subject" placeholder="snakes" required class="contact__input">
 
-                <!-- Campo de asunto -->
-                <label for="subject" class="contact__label">Subject</label>
-                <input type="text" id="subject" name="subject" placeholder="snakes" required class="contact__input">
+                    <br>
+                    <br>
 
-                <br>
-                <br>
+                    <!-- Campo de mensaje -->
+                    <label for="message" class="contact__label">Message</label>
+                    <br>
+                    <textarea id="message" name="message" rows="4" placeholder="are there snakes?" required
+                        class="contact__textarea"></textarea>
 
-                <!-- Campo de mensaje -->
-                <label for="message" class="contact__label">Message</label>
-                <br>
-                <textarea id="message" name="message" rows="4" placeholder="are there snakes?" required
-                    class="contact__textarea"></textarea>
+                    <br>
+                    <br>
 
-                <br>
-                <br>
+                    <!-- Botón de envío -->
+                    <button type="submit" class="contact__button">Send</button>
+                </form>
+            </section>
+        </div>
 
-                <!-- Botón de envío -->
-                <button type="submit" class="contact__button">Send</button>
-            </form>
-        </section>
     </main>
+    <script type="module" src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="module" src="/node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
 </body>
 
 </html>
