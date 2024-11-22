@@ -2,144 +2,235 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="keywords"
-        content="zoo, animals, habitats, Brocéliande, veterinarians, ecology, wildlife park, conservation, zoo services, guided tours, France zoo, sustainable energy, wild animals, animal feeding, zoo management, Arcadia Zoo" />
+	<meta charset="UTF-8" />
+	<meta name="description" content="" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<meta name="keywords"
+		content="zoo, animals, habitats, Brocéliande, veterinarians, ecology, wildlife park, conservation, zoo services, guided tours, France zoo, sustainable energy, wild animals, animal feeding, zoo management, Arcadia Zoo" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>ARCADIA - Juan crocodile</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+	<title>ARCADIA - Juan crocodile</title>
 
-    <link rel="icon" type="image/svg+xml" href="/src/assets/images/favicon.svg" />
-    <link rel="icon" type="image/png" href="/src/assets/images/favicon.png" />
+	<link rel="icon" type="image/svg+xml" href="/src/assets/images/favicon.svg" />
+	<link rel="icon" type="image/png" href="/src/assets/images/favicon.png" />
 
-    <link rel="stylesheet" href="/node_modules/Normalize-css/normalize.css" />
+	<link rel="stylesheet" href="/node_modules/Normalize-css/normalize.css" />
 
-    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css" />
+	<link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css" />
 
-    <link rel="stylesheet" href="build/css/app.css">
+	<link rel="stylesheet" href="build/css/app.css">
 </head>
 
 <body id="top">
-    <nav class="nav">
-        <a class="nav__link nav__home" href="./index.html">home</a>
-        <a class="nav__link nav__services" href="./services.html">services</a>
-        <a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
-        <a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
-        <a class="nav__link nav__contact" href="./contact.html">contact</a>
-    </nav>    
+	<!-- navbar for mobile with his fonts and sizes -->
+	<nav class="d-md-none nav navbar position-fixed">
+		<div class="nav__menu collapse" id="navbarToggler">
+			<ul class="nav__items">
+				<li class="nav__item">
+					<a class="nav__link nav__home" href="./index.html">home</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__services" href="./services.html">services</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__contact" href="./contact.html">contact</a>
+				</li>
+			</ul>
+			<div class="panda">
+				<img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
+			</div>
+		</div>
 
-    <header class="hero">
-        <div class="hero__container">
-            <div class="hero__text">
-                <h1 class="hero__title">Juan</h1>
-                <p class="hero__subtitle">Lion</p>
-            </div>
+		<div class="bar container-fluid d-flex">
+			<button class="bar-button navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
+			<a class="main-logo-link" href="#">
+				<img class="main__logo" src="./src/assets/images/logo-bar.svg" alt="logo site">
+			</a>
 
-            <a class="intro__button intro__button--hours" href="#opening-hours">opening hours</a>
-
-        </div>
-        <img class="hero__image" src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!227811&authkey=!ALWmUIMH9kBfqqw&ithint=photo&e=wK9S5r"
-            alt="juan the main animals">
-    </header>
-
-
-
-
-
-
-
-
-    <br>
-    <hr>
-    <br>
-
-    <main class="animal">
-
-        <!-- Sección de Información del Animal -->
-        <section class="animal__info animal__card">
-            <h2 class="animal__title">Animal</h2>
-            <table class="animal__table">
-                <tbody>
-                    <tr class="animal__row">
-                        <th class="animal__header">Name:</th>
-                        <td class="animal__data">Juan</td>
-                    </tr>
-                    <tr class="animal__row">
-                        <th class="animal__header">Animal Breed:</th>
-                        <td class="animal__data">Crocodile</td>
-                    </tr>
-                    <tr class="animal__row">
-                        <th class="animal__header">Habitat:</th>
-                        <td class="animal__data">Swamp</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <br>
-
-        <!-- Sección de Información Adicional -->
-        <section class="animal__about animal__card">
-            <h2 class="animal__title">About It</h2>
-            <table class="animal__table">
-                <tbody>
-                    <tr class="animal__row">
-                        <th class="animal__header">Nutrition:</th>
-                        <td class="animal__data">Carnivorous</td>
-                    </tr>
-                    <tr class="animal__row">
-                        <th class="animal__header">Food Offered:</th>
-                        <td class="animal__data">Fish & Meat</td>
-                    </tr>
-                    <tr class="animal__row">
-                        <th class="animal__header">Food Qty:</th>
-                        <td class="animal__data">5KG</td>
-                    </tr>
-                    <tr class="animal__row">
-                        <th class="animal__header">Date Of Check-Up:</th>
-                        <td class="animal__data">August 18, 2024</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <br>
-
-        <!-- Sección de Observación Veterinaria -->
-        <section class="animal__observation animal__card">
-            <h2 class="animal__title">Veterinary Observation</h2>
-            <p class="animal__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eu odio
-                sed tortor luctus malesuada.</p>
-            <table class="animal__table">
-                <tbody>
-                    <tr class="animal__row">
-                        <th class="animal__header">Mood Animal:</th>
-                        <td class="animal__data">Angry</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <br>
-
-        <!-- Sección de Detalles Opcionales -->
-        <section class="animal__optional animal__card">
-            <h2 class="animal__title">Optional Animal Details</h2>
-            <p class="animal__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eu odio
-                sed tortor luctus malesuada.</p>
-        </section>
-
-    </main>
+		</div>
+	</nav>
 
 
-    <br>
-    <hr>
-    <br>
 
-    <footer class="footer">
+	<!-- navbar for mobile with his fonts and sizes -->
+	<nav class="d-none d-md-block nav navbar position-fixed">
+
+		<div class="bar container-fluid d-flex">
+			<button class="bar-button navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<a class="main-logo-link" href="#">
+				<img class="main__logo" src="./src/assets/images/logo-bar.svg" alt="logo site">
+			</a>
+
+		</div>
+
+		<div class="nav__menu nav__menu--desk collapse" id="navbarToggler">
+			<ul class="nav__items">
+				<li class="nav__item">
+					<a class="nav__link nav__home" href="./index.html">home</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__services" href="./services.html">services</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__contact" href="./contact.html">contact</a>
+				</li>
+			</ul>
+			<div class="panda">
+				<img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
+			</div>
+			<div class="logo-desk">
+				<img class="logo-desk" src="./src/assets/images/logo-desk.svg" alt="Logo site">
+			</div>
+		</div>
+	</nav>
+
+
+
+	<!-- <nav class="nav navbar"> -->
+
+	<header class="hero">
+		<div class="hero__container">
+			<div class="hero__text">
+				<h1 class="hero__title">Juan</h1>
+				<p class="hero__subtitle">Lion</p>
+			</div>
+
+
+			<a type="button" class="btn intro__button intro__button--hours" href="#opening-hours">opening hours</a>
+
+		</div>
+		
+
+		<picture>
+			<source
+				srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228707&authkey=!AOva3ENGeg4Ep40&ithint=photo&e=WlnQn9"
+				media="(min-width: 1280px)" />
+			<source
+				srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228706&authkey=!ALn94T9OrtbZQpI&ithint=photo&e=yLqmB9"
+				media="(min-width: 744px)" />
+			<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228705&authkey=!AIAenWn29MuniTM&ithint=photo&e=apkdhj"
+				class="hero__image d-block img-fluid" alt="intro animal picked" />
+		</picture>
+
+	</header>
+
+
+
+
+
+
+
+
+	<br>
+	<hr>
+	<br>
+
+	<main class="animal">
+
+		<!-- Sección de Información del Animal -->
+		<section class="animal__info animal__card">
+			<h2 class="animal__title">Animal</h2>
+			<table class="animal__table">
+				<tbody>
+					<tr class="animal__row">
+						<th class="animal__header">Name:</th>
+						<td class="animal__data">Juan</td>
+					</tr>
+					<tr class="animal__row">
+						<th class="animal__header">Animal Breed:</th>
+						<td class="animal__data">Crocodile</td>
+					</tr>
+					<tr class="animal__row">
+						<th class="animal__header">Habitat:</th>
+						<td class="animal__data">Swamp</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+
+		<br>
+
+		<!-- Sección de Información Adicional -->
+		<section class="animal__about animal__card">
+			<h2 class="animal__title">About It</h2>
+			<table class="animal__table">
+				<tbody>
+					<tr class="animal__row">
+						<th class="animal__header">Nutrition:</th>
+						<td class="animal__data">Carnivorous</td>
+					</tr>
+					<tr class="animal__row">
+						<th class="animal__header">Food Offered:</th>
+						<td class="animal__data">Fish & Meat</td>
+					</tr>
+					<tr class="animal__row">
+						<th class="animal__header">Food Qty:</th>
+						<td class="animal__data">5KG</td>
+					</tr>
+					<tr class="animal__row">
+						<th class="animal__header">Date Of Check-Up:</th>
+						<td class="animal__data">August 18, 2024</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+
+		<br>
+
+		<!-- Sección de Observación Veterinaria -->
+		<section class="animal__observation animal__card">
+			<h2 class="animal__title">Veterinary Observation</h2>
+			<p class="animal__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eu odio
+				sed tortor luctus malesuada.</p>
+			<table class="animal__table">
+				<tbody>
+					<tr class="animal__row">
+						<th class="animal__header">Mood Animal:</th>
+						<td class="animal__data">Angry</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+
+		<br>
+
+		<!-- Sección de Detalles Opcionales -->
+		<section class="animal__optional animal__card">
+			<h2 class="animal__title">Optional Animal Details</h2>
+			<p class="animal__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eu odio
+				sed tortor luctus malesuada.</p>
+		</section>
+
+	</main>
+
+
+	<br>
+	<hr>
+	<br>
+
+	<footer class="footer">
 		<section class="footer__hours" id="opening-hours">
 			<div class="footer__location">
 				<div class="footer__location-details">
@@ -170,7 +261,8 @@
 
 			<!-- the image click redirect to top for this moment just exemple -->
 			<a class="footer__logo-link" href="#top">
-				<img class="footer__logo" src="./src/assets/images/logo-site-mobile.svg" alt="Logo del sitio - Volver al inicio">
+				<img class="footer__logo" src="./src/assets/images/logo-site-mobile.svg"
+					alt="Logo del sitio - Volver al inicio">
 			</a>
 		</section>
 
@@ -178,6 +270,8 @@
 			<small>&copy; 2024 Arcadia ZOO Bretagne | Designed By D.S.F</small>
 		</div>
 	</footer>
+	<script type="module" src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="module" src="/node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
 </body>
 
 </html>

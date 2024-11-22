@@ -20,9 +20,12 @@ $font-sizes: (
   footer-texts: (
     f-tertiary: clamp(1.3rem, 0.675vw + 1rem, 1.7rem),
     f-copy: clamp(0.7rem, 1.07527vw + 0.4rem, 1.6rem),
-    f-logo: clamp(17.4rem, 1vw + 1rem, 39.3rem)
+    f-logo: clamp(18.4rem, 54% + 1rem, 39.3rem)
   ),
   menu-font: clamp(1.4rem, 1.875vw + 1rem, 1.8rem),
+  pagination: clamp(11.4rem, 29.974vw, 27.4rem),
+  // pagination-font:
+  
 );
 
 $font-spaces: (

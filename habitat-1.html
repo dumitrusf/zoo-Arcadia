@@ -22,42 +22,93 @@
 </head>
 
 <body id="top">
-    <nav class="nav navbar position-fixed">
-		<div class="nav__menu collapse" id="navbarToggler">
-			<ul class="nav__items">
-				<li class="nav__item">
-					<a class="nav__link nav__home nav__link--active" href="#">home</a>
-				</li>
-				<li class="nav__item">
-					<a class="nav__link nav__services" href="./services.html">services</a>
-				</li>
-				<li class="nav__item">
-					<a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
-				</li>
-				<li class="nav__item">
-					<a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
-				</li>
-				<li class="nav__item">
-					<a class="nav__link nav__contact" href="./contact.html">contact</a>
-				</li>
-			</ul>
-			<div class="panda">
-				<img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
-			</div>
-		</div>
-		<div class="bar container-fluid d-flex">
-			<button class="bar-button navbar-toggler" type="button" data-bs-toggle="collapse"
-				data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+    <!-- navbar for mobile with his fonts and sizes -->
+    <nav class="d-md-none nav navbar position-fixed">
+        <div class="nav__menu collapse" id="navbarToggler">
+            <ul class="nav__items">
+                <li class="nav__item">
+                    <a class="nav__link nav__home" href="./index.html">home</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__services" href="./services.html">services</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__contact" href="./contact.html">contact</a>
+                </li>
+            </ul>
+            <div class="panda">
+                <img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
+            </div>
+        </div>
 
-			<a class="main-logo-link" href="#">
-				<img class="main__logo" src="./src/assets/images/logo-bar.svg" alt="logo site">
-			</a>
+        <div class="bar container-fluid d-flex">
+            <button class="bar-button navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-		</div>
-	</nav>
+            <a class="main-logo-link" href="#">
+                <img class="main__logo" src="./src/assets/images/logo-bar.svg" alt="logo site">
+            </a>
+
+        </div>
+    </nav>
+
+
+
+    <!-- navbar for mobile with his fonts and sizes -->
+    <nav class="d-none d-md-block nav navbar position-fixed">
+
+        <div class="bar container-fluid d-flex">
+            <button class="bar-button navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a class="main-logo-link" href="#">
+                <img class="main__logo" src="./src/assets/images/logo-bar.svg" alt="logo site">
+            </a>
+
+        </div>
+
+        <div class="nav__menu nav__menu--desk collapse" id="navbarToggler">
+            <ul class="nav__items">
+                <li class="nav__item">
+                    <a class="nav__link nav__home" href="./index.html">home</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__services" href="./services.html">services</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__contact" href="./contact.html">contact</a>
+                </li>
+            </ul>
+            <div class="panda">
+                <img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
+            </div>
+            <div class="logo-desk">
+                <img class="logo-desk" src="./src/assets/images/logo-desk.svg" alt="Logo site">
+            </div>
+        </div>
+    </nav>
+
+
+
+    <!-- <nav class="nav navbar"> -->
 
 
     <header class="hero">
@@ -71,8 +122,18 @@
             <a class="btn intro__button intro__button--hours" href="#opening-hours">opening hours</a>
 
         </div>
-        <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!227810&authkey=!AKYYhfT_eh3BETk&ithint=photo&e=FOYMAW"
-            alt="hero image">
+        
+
+        <picture>
+            <source
+                srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228689&authkey=!AGb9hyvEkexZX_0&ithint=photo&e=Twgyf3"
+                media="(min-width: 1280px)" />
+            <source
+                srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228682&authkey=!AO_ZZzP6a6mOPwg&ithint=photo&e=cvlTBH"
+                media="(min-width: 744px)" />
+            <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228659&authkey=!AMjsIy-pRloHNkM&ithint=photo&e=2wFiuy"
+                class="hero__image d-block img-fluid" alt="intro habitat-1" />
+        </picture>
     </header>
 
 
@@ -83,23 +144,26 @@
 
 
 
+
     <div class="filter">
         <!-- Filter toggle (open/close) -->
-        <div class="filter__toggle">
-            <div class="filter__toggle-content">
-                <span class="filter__toggle-label">Open Filter</span>
-                <button class="filter__toggle-button filter__toggle-button--open">☰</button>
-            </div>
-        </div>
+
+
+        <span class="filter__toggle-label">Open Filter</span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarFiltrer"
+            aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon btn-filter"></span>
+        </button>
+
+
+
+
 
         <br>
 
         <!-- Filter menu -->
-        <div class="filter__container">
-            <div class="filter__header">
-                <span class="filter__close-label">Close Filter</span>
-                <button class="filter__toggle-button filter__toggle-button--close">✖</button>
-            </div>
+        <div class="filter__container collapse" id="navbarFiltrer">
+            
 
             <form class="filter__form">
                 <fieldset class="filter__fieldset">
@@ -175,10 +239,16 @@
     <main class="intro">
 
 
-        <article class="intro__animal">
+        <article class="intro__article intro__animal">
             <a class="intro__link" href="./animal-picked.html" target="_blank" rel="noopener noreferrer">
-                <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228357&authkey=!AJRkoxjzaDTXPQ8&ithint=photo&e=JkmTAP"
-                    alt="animal-1">
+
+                <picture>
+                    <source srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228687&authkey=!AADI2MBU26FJT04&ithint=photo&e=kHFnPE" media="(min-width: 1280px)" />
+                    <source srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228683&authkey=!ABwE8fNtME0OPUQ&ithint=photo&e=wAwFTK" media="(min-width: 744px)" />
+                    <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228660&authkey=!ANsNXnRR0er7Ugw&ithint=photo&e=iibNL9"
+                        class="intro__image d-block img-fluid" alt="animal-1" />
+                </picture>
+
                 <div class="intro__details">
                     <h3 class="intro__name">bujara</h3>
                     <p class="intro__species">vulture</p>
@@ -189,10 +259,16 @@
 
         <br>
 
-        <article class="intro__animal">
+        <article class="intro__article intro__animal">
             <a class="intro__link" href="./animal-picked.html" target="_blank" rel="noopener noreferrer">
-                <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228356&authkey=!AIxQQfjPQUB1eks&ithint=photo&e=GWWV21"
-                    alt="animal-2">
+
+
+                <picture>
+                    <source srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228655&authkey=!ADtHdPuknbAhUts&ithint=photo&e=lJFlYv" media="(min-width: 1280px)" />
+                    <source srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228645&authkey=!ALc4yOxSqIXXcts&ithint=photo&e=xvefO4" media="(min-width: 744px)" />
+                    <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228637&authkey=!ABpNXHA_qfVEdLc&ithint=photo&e=XHDMXn"
+                        class="intro__image d-block img-fluid" alt="animal-2" />
+                </picture>
                 <div class="intro__details">
                     <h3 class="intro__name">bujara</h3>
                     <p class="intro__species">vulture</p>
@@ -203,10 +279,14 @@
 
         <br>
 
-        <article class="intro__animal">
+        <article class="intro__article intro__animal">
             <a class="intro__link" href="./animal-picked.html" target="_blank" rel="noopener noreferrer">
-                <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228181&authkey=!AF4NZH7YGXIFpuA&ithint=photo&e=C0lU7c"
-                    alt="animal-3">
+                <picture>
+                    <source srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228692&authkey=!AE4JQzILKzGbYcU&ithint=photo&e=JsrNyL" media="(min-width: 1280px)" />
+                    <source srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228684&authkey=!AI0h-H8_m_fMzvQ&ithint=photo&e=GakFzc" media="(min-width: 744px)" />
+                    <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228658&authkey=!APQlYnFbMcDRlrA&ithint=photo&e=GGAqjy"
+                        class="intro__image d-block img-fluid" alt="animal-3" />
+                </picture>
                 <div class="intro__details">
                     <h3 class="intro__name">bujara</h3>
                     <p class="intro__species">vulture</p>
@@ -219,13 +299,23 @@
 
     <br>
 
-    <nav class="pagination">
-        <a href="#" class="pagination__link pagination__link--prev">&lt;</a>
-        <a href="#" class="pagination__link">1</a>
-        <a href="#" class="pagination__link">2</a>
-        <a href="#" class="pagination__link">3</a>
-        <span class="pagination__ellipsis">...</span>
-        <a href="#" class="pagination__link pagination__link--next">&gt;</a>
+    <nav class="nav-pagination">
+
+        <ul class="nav-pagination__ul">
+            <li class="nav-pagination__li">
+                <a href="#" aria-label="Previous">
+                    <i class="bi bi-caret-left-fill"></i>
+                </a>
+            </li>
+            <li class="nav-pagination__li"><a href="#">1,</a></li>
+            <li class="nav-pagination__li"><a href="#">2,</a></li>
+            <li class="nav-pagination__li"><a href="#">3 ...</a></li>
+            <li class="nav-pagination__li">
+                <a href="#" aria-label="Next">
+                    <i class="bi bi-caret-right-fill"></i>
+                </a>
+            </li>
+        </ul>
     </nav>
 
     <br>
@@ -233,46 +323,47 @@
     <br>
 
     <footer class="footer">
-		<section class="footer__hours" id="opening-hours">
-			<div class="footer__location">
-				<div class="footer__location-details">
-					<p class="footer__city">BRETAGNE (35380)</p>
-					<p class="footer__forest">FORÊT DE BROCÉLIANDE</p>
-				</div>
-				<p class="footer__hours-title">HEURES D'OUVERTURE</p>
+        <section class="footer__hours" id="opening-hours">
+            <div class="footer__location">
+                <div class="footer__location-details">
+                    <p class="footer__city">BRETAGNE (35380)</p>
+                    <p class="footer__forest">FORÊT DE BROCÉLIANDE</p>
+                </div>
+                <p class="footer__hours-title">HEURES D'OUVERTURE</p>
 
-				<table class="footer__hours-table">
-					<tr class="footers__hours-row">
-						<th class="footer__hours-header">Matin:</th>
-						<td class="footer__hours-data">08:45 - 12:00</td>
-					</tr>
-					<tr class="footers__hours-row">
-						<th class="footer__hours-header">Après-midi:</th>
-						<td class="footer__hours-data">14:00 - 18:00</td>
-					</tr>
-					<tr class="footers__hours-row">
-						<th class="footer__hours-header">Samedi:</th>
-						<td class="footer__hours-data">08:45 - 12:00</td>
-					</tr>
-					<tr class="footers__hours-row">
-						<th class="footer__hours-header">Dimanche:</th>
-						<td class="footer__hours-data">Fermé</td>
-					</tr>
-				</table>
-			</div>
+                <table class="footer__hours-table">
+                    <tr class="footers__hours-row">
+                        <th class="footer__hours-header">Matin:</th>
+                        <td class="footer__hours-data">08:45 - 12:00</td>
+                    </tr>
+                    <tr class="footers__hours-row">
+                        <th class="footer__hours-header">Après-midi:</th>
+                        <td class="footer__hours-data">14:00 - 18:00</td>
+                    </tr>
+                    <tr class="footers__hours-row">
+                        <th class="footer__hours-header">Samedi:</th>
+                        <td class="footer__hours-data">08:45 - 12:00</td>
+                    </tr>
+                    <tr class="footers__hours-row">
+                        <th class="footer__hours-header">Dimanche:</th>
+                        <td class="footer__hours-data">Fermé</td>
+                    </tr>
+                </table>
+            </div>
 
-			<!-- the image click redirect to top for this moment just exemple -->
-			<a class="footer__logo-link" href="#top">
-				<img class="footer__logo" src="./src/assets/images/logo-site-mobile.svg" alt="Logo del sitio - Volver al inicio">
-			</a>
-		</section>
+            <!-- the image click redirect to top for this moment just exemple -->
+            <a class="footer__logo-link" href="#top">
+                <img class="footer__logo" src="./src/assets/images/logo-site-mobile.svg"
+                    alt="Logo del sitio - Volver al inicio">
+            </a>
+        </section>
 
-		<div class="footer__copyright">
-			<small>&copy; 2024 Arcadia ZOO Bretagne | Designed By D.S.F</small>
-		</div>
-	</footer>
+        <div class="footer__copyright">
+            <small>&copy; 2024 Arcadia ZOO Bretagne | Designed By D.S.F</small>
+        </div>
+    </footer>
     <script type="module" src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<script type="module" src="/node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+    <script type="module" src="/node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
 </body>
 
 </html>

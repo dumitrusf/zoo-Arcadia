@@ -23,7 +23,8 @@
 
 <body>
 
-    <nav class="nav navbar position-fixed">
+    <!-- navbar for mobile with his fonts and sizes -->
+	<nav class="d-md-none nav navbar position-fixed">
 		<div class="nav__menu collapse" id="navbarToggler">
 			<ul class="nav__items">
 				<li class="nav__item">
@@ -46,6 +47,7 @@
 				<img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
 			</div>
 		</div>
+
 		<div class="bar container-fluid d-flex">
 			<button class="bar-button navbar-toggler" type="button" data-bs-toggle="collapse"
 				data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
@@ -59,19 +61,68 @@
 
 		</div>
 	</nav>
+
+
+
+	<!-- navbar for mobile with his fonts and sizes -->
+	<nav class="d-none d-md-block nav navbar position-fixed">
+
+		<div class="bar container-fluid d-flex">
+			<button class="bar-button navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<a class="main-logo-link" href="#">
+				<img class="main__logo" src="./src/assets/images/logo-bar.svg" alt="logo site">
+			</a>
+
+		</div>
+
+		<div class="nav__menu nav__menu--desk collapse" id="navbarToggler">
+			<ul class="nav__items">
+				<li class="nav__item">
+					<a class="nav__link nav__home" href="./index.html">home</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__services" href="./services.html">services</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__contact nav__link--active" href="#">contact</a>
+				</li>
+			</ul>
+			<div class="panda">
+				<img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
+			</div>
+			<div class="logo-desk">
+				<img class="logo-desk" src="./src/assets/images/logo-desk.svg" alt="Logo site">
+			</div>
+		</div>
+	</nav>
+
+
+
+	<!-- <nav class="nav navbar"> -->
     
     <main class="contact">
 
-        <section class="contact__container">
-            <!-- Logo site web -->
-            <header class="contact__header">
-                <a href="./index.html" class="contact__logo-link">
-                    <img src="./src/assets/images/logo-site-mobile.svg" alt="Logo del sitio" class="contact__logo">
-                </a>
-            </header>
-
-            <br>
-
+		<!-- Logo site web -->
+		<header class="contact__header">
+			<a href="./index.html" class="contact__logo-link">
+				<img src="./src/assets/images/logo-site-mobile.svg" alt="Logo del sitio" class="contact__logo">
+			</a>
+		</header>
+		
+		<br>
+		
+		<div class="contact__container">
             <!-- Form contacto -->
             <section class="contact__form-section">
                 <h2 class="contact__title">Contact About:</h2>
@@ -122,7 +173,7 @@
                     <button type="submit" class="contact__button">Send</button>
                 </form>
             </section>
-        </section>
+        </div>
 
     </main>
     <script type="module" src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

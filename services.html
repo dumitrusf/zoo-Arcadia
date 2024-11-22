@@ -2,16 +2,16 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="keywords"
-        content="zoo, animals, habitats, Brocéliande, veterinarians, ecology, wildlife park, conservation, zoo services, guided tours, France zoo, sustainable energy, wild animals, animal feeding, zoo management, Arcadia Zoo" />
+	<meta charset="UTF-8" />
+	<meta name="description" content="" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<meta name="keywords"
+		content="zoo, animals, habitats, Brocéliande, veterinarians, ecology, wildlife park, conservation, zoo services, guided tours, France zoo, sustainable energy, wild animals, animal feeding, zoo management, Arcadia Zoo" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>ARCADIA - Services</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+	<title>ARCADIA - Services</title>
 
-    <link rel="icon" type="image/svg+xml" href="/src/assets/images/favicon.svg" />
+	<link rel="icon" type="image/svg+xml" href="/src/assets/images/favicon.svg" />
 	<link rel="icon" type="image/png" href="/src/assets/images/favicon.png" />
 
 	<link rel="stylesheet" href="/node_modules/Normalize-css/normalize.css" />
@@ -22,7 +22,8 @@
 </head>
 
 <body id="top">
-    <nav class="nav navbar position-fixed">
+	<!-- navbar for mobile with his fonts and sizes -->
+	<nav class="d-md-none nav navbar position-fixed">
 		<div class="nav__menu collapse" id="navbarToggler">
 			<ul class="nav__items">
 				<li class="nav__item">
@@ -45,6 +46,7 @@
 				<img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
 			</div>
 		</div>
+
 		<div class="bar container-fluid d-flex">
 			<button class="bar-button navbar-toggler" type="button" data-bs-toggle="collapse"
 				data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
@@ -59,78 +61,142 @@
 		</div>
 	</nav>
 
-    <header class="hero">
-        <div class="hero__container">
-            <div class="hero__text">
-                <h1 class="hero__title">services</h1>
-            </div>
 
 
-            <a class="btn intro__button intro__button--hours" href="#opening-hours">opening hours</a>
+	<!-- navbar for mobile with his fonts and sizes -->
+	<nav class="d-none d-md-block nav navbar position-fixed">
 
-        </div>
-        <img class="hero__image"
-            src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!227799&authkey=!AIxGh_Q00XXJ6ZY&ithint=photo&e=JfpjHH"
-            alt="hero image services">
+		<div class="bar container-fluid d-flex">
+			<button class="bar-button navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-    </header>
+			<a class="main-logo-link" href="#">
+				<img class="main__logo" src="./src/assets/images/logo-bar.svg" alt="logo site">
+			</a>
 
+		</div>
 
-    <br>
-    <hr>
-    <br>
-
-    <main class="intro">
-        <section class="intro__section intro__section--restaurant">
-            <h2 class="intro__title">restaurant</h2>
-
-            <div class="intro__content">
-                <img class="intro__image"
-                    src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228340&authkey=!AJl6v0k7W0xGiNo&ithint=photo&e=NCA2wk"
-                    alt="image restaurant arcadia">
-
-                <div class="intro__details">
-                    <p class="intro__description">rest a little before venturing out</p>
-                </div>
-            </div>
-        </section>
-        <br>
-        <section class="intro__section intro__section--zoo-guide">
-            <h2 class="intro__title">zoo guide</h2>
-
-            <div class="intro__content">
-                <img class="intro__image"
-                    src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228339&authkey=!ADV-T2vbNS1Oub0&ithint=photo&e=tawHjD"
-                    alt="image zoo guide">
-
-                <div class="intro__details">
-                    <p class="intro__description">feel safe at all times</p>
-                </div>
-            </div>
-        </section>
-        <br>
-        <section class="intro__section intro__section--train">
-            <h2 class="intro__title">train to arcadia</h2>
-
-            <div class="intro__content">
-                <img class="intro__image"
-                    src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228341&authkey=!AGKlTtZSHp1IyJ8&ithint=photo&e=5psmLp"
-                    alt="image family train">
-
-                <div class="intro__details">
-                    <p class="intro__description">a family adventure</p>
-                </div>
-            </div>
-        </section>
+		<div class="nav__menu nav__menu--desk collapse" id="navbarToggler">
+			<ul class="nav__items">
+				<li class="nav__item">
+					<a class="nav__link nav__home" href="./index.html">home</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__services nav__link--active" href="#">services</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link nav__contact" href="./contact.html">contact</a>
+				</li>
+			</ul>
+			<div class="panda">
+				<img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
+			</div>
+			<div class="logo-desk">
+				<img class="logo-desk" src="./src/assets/images/logo-desk.svg" alt="Logo site">
+			</div>
+		</div>
+	</nav>
 
 
-    </main>
 
-    <br>
-    <hr>
-    <br>
+	<!-- <nav class="nav navbar"> -->
 
-    <footer class="footer">
+	<header class="hero">
+		<div class="hero__container">
+			<div class="hero__text">
+				<h1 class="hero__title">services</h1>
+			</div>
+
+
+			<a class="btn intro__button intro__button--hours" href="#opening-hours">opening hours</a>
+
+		</div>
+
+		<picture>
+			<source
+				srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228719&authkey=!AGTY2s96OBDnxMM&ithint=photo&e=zOXW2R"
+				media="(min-width: 1280px)" />
+			<source
+				srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228718&authkey=!AMrw3FacU5UOofA&ithint=photo&e=rWngpf"
+				media="(min-width: 744px)" />
+			<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228716&authkey=!AOS4UjSu_nmtdPM&ithint=photo&e=vXrVI9"
+				class="hero__image d-block" alt="hero image services" />
+		</picture>
+
+
+	</header>
+
+
+	<br>
+	<hr>
+	<br>
+
+	<main class="intro">
+		<section class="intro__section intro__section--restaurant">
+			<h2 class="intro__title">restaurant</h2>
+
+			<div class="intro__content">
+				<picture>
+					<source srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228605&authkey=!AHfT_uNL82QNaqA&ithint=photo&e=8M1MYv" media="(min-width: 744px)" />
+					<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228601&authkey=!AMwl8tdd54UdeZU&ithint=photo&e=zf3BPN"
+						class="intro__image d-block" alt="image restaurant arcadia" />
+				</picture>
+
+				<div class="intro__details">
+					<p class="intro__description">rest a little before venturing out</p>
+				</div>
+			</div>
+		</section>
+		<br>
+		<section class="intro__section intro__section--zoo-guide">
+			<h2 class="intro__title">zoo guide</h2>
+
+			<div class="intro__content">
+				<picture>
+					<source srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228604&authkey=!AFtcXND_IMYWhaw&ithint=photo&e=U1Fh7A" media="(min-width: 744px)" />
+					<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228600&authkey=!AGDdjc_ImB72btE&ithint=photo&e=pIVANY"
+						class="intro__image d-block" alt="image zoo guide" />
+				</picture>
+
+				<div class="intro__details">
+					<p class="intro__description">feel safe at all times</p>
+				</div>
+			</div>
+		</section>
+		<br>
+		<section class="intro__section intro__section--train">
+			<h2 class="intro__title">train to arcadia</h2>
+
+			<div class="intro__content">
+				<picture>
+					<source srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228606&authkey=!ACuDQjIRsNPwqy8&ithint=photo&e=GRAPQN" media="(min-width: 744px)" />
+					<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228602&authkey=!AJlfBtd35_Ehi4k&ithint=photo&e=rYQDuT"
+						class="intro__image d-block" alt="image family train" />
+				</picture>
+
+				<div class="intro__details">
+					<p class="intro__description">a family adventure</p>
+				</div>
+			</div>
+		</section>
+
+
+	</main>
+
+	<br>
+	<hr>
+	<br>
+
+	<footer class="footer">
 		<section class="footer__hours" id="opening-hours">
 			<div class="footer__location">
 				<div class="footer__location-details">
@@ -161,7 +227,8 @@
 
 			<!-- the image click redirect to top for this moment just exemple -->
 			<a class="footer__logo-link" href="#top">
-				<img class="footer__logo" src="./src/assets/images/logo-site-mobile.svg" alt="Logo del sitio - Volver al inicio">
+				<img class="footer__logo" src="./src/assets/images/logo-site-mobile.svg"
+					alt="Logo del sitio - Volver al inicio">
 			</a>
 		</section>
 
@@ -169,7 +236,7 @@
 			<small>&copy; 2024 Arcadia ZOO Bretagne | Designed By D.S.F</small>
 		</div>
 	</footer>
-    <script type="module" src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="module" src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 	<script type="module" src="/node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
 </body>
 

@@ -103,8 +103,7 @@
 
 @mixin pagination() {
   font-size: calc(
-    map-get(map-get(s.$font-sizes, "other-texts"), name-testimony-user) - 0.4rem
-  );
+    map-get(map-get(s.$font-sizes, "other-texts"), name-testimony-user));
 
   text-decoration: none;
 }
@@ -131,7 +130,6 @@ body {
 
 // nav style typography
 .nav {
-  // background-color: map-get(map-get(c.$color, solid-colors), c-bg-contact);
 
   &__link {
     // font-size: map-get(s.$font-sizes, menu-font);
@@ -326,10 +324,18 @@ body {
     font-size: map-get(map-get(s.$font-sizes, "other-texts"), filter-form);
   }
 
-  &__input,
-  &__textarea {
+  &__input {
+    height: calc(
+      map-get(map-get(s.$font-sizes, "other-texts"), filter-form) + 1.7rem
+    );
     font-size: calc(
       map-get(map-get(s.$font-sizes, "other-texts"), filter-form) - 0.2rem
+    );
+  }
+
+  &__textarea {
+    font-size: calc(
+      map-get(map-get(s.$font-sizes, "other-texts"), filter-form) - 0.1rem
     );
 
     &::placeholder {
@@ -365,11 +371,15 @@ body {
   &__copyright > small {
     font-size: map-get(map-get(s.$font-sizes, "footer-texts"), f-copy);
   }
-  
 }
 
 .filter {
   font-size: map-get(map-get(s.$font-sizes, headings), filter-headings);
+  
+  &__legend {
+    font-size: map-get(map-get(s.$font-sizes, headings), filter-headings);
+
+  }
 
   &__legend ~ label,
   &__legend ~ input {

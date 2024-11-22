@@ -24,42 +24,93 @@
 </head>
 
 <body>
-    <nav class="nav navbar position-fixed">
-		<div class="nav__menu collapse" id="navbarToggler">
-			<ul class="nav__items">
-				<li class="nav__item">
-					<a class="nav__link nav__home" href="./index.html">home</a>
-				</li>
-				<li class="nav__item">
-					<a class="nav__link nav__services" href="./services.html">services</a>
-				</li>
-				<li class="nav__item">
-					<a class="nav__link nav__habitats nav__link--active" href="#">habitats</a>
-				</li>
-				<li class="nav__item">
-					<a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
-				</li>
-				<li class="nav__item">
-					<a class="nav__link nav__contact" href="./contact.html">contact</a>
-				</li>
-			</ul>
-			<div class="panda">
-				<img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
-			</div>
-		</div>
-		<div class="bar container-fluid d-flex">
-			<button class="bar-button navbar-toggler" type="button" data-bs-toggle="collapse"
-				data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+    <!-- navbar for mobile with his fonts and sizes -->
+    <nav class="d-md-none nav navbar position-fixed">
+        <div class="nav__menu collapse" id="navbarToggler">
+            <ul class="nav__items">
+                <li class="nav__item">
+                    <a class="nav__link nav__home" href="./index.html">home</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__services" href="./services.html">services</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__habitats nav__link--active" href="#">habitats</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__contact" href="./contact.html">contact</a>
+                </li>
+            </ul>
+            <div class="panda">
+                <img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
+            </div>
+        </div>
 
-			<a class="main-logo-link" href="#">
-				<img class="main__logo" src="./src/assets/images/logo-bar.svg" alt="logo site">
-			</a>
+        <div class="bar container-fluid d-flex">
+            <button class="bar-button navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-		</div>
-	</nav>
+            <a class="main-logo-link" href="#">
+                <img class="main__logo" src="./src/assets/images/logo-bar.svg" alt="logo site">
+            </a>
+
+        </div>
+    </nav>
+
+
+
+    <!-- navbar for mobile with his fonts and sizes -->
+    <nav class="d-none d-md-block nav navbar position-fixed">
+
+        <div class="bar container-fluid d-flex">
+            <button class="bar-button navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a class="main-logo-link" href="#">
+                <img class="main__logo" src="./src/assets/images/logo-bar.svg" alt="logo site">
+            </a>
+
+        </div>
+
+        <div class="nav__menu nav__menu--desk collapse" id="navbarToggler">
+            <ul class="nav__items">
+                <li class="nav__item">
+                    <a class="nav__link nav__home" href="./index.html">home</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__services" href="./services.html">services</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__habitats nav__link--active" href="#">habitats</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link nav__contact" href="./contact.html">contact</a>
+                </li>
+            </ul>
+            <div class="panda">
+                <img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
+            </div>
+            <div class="logo-desk">
+                <img class="logo-desk" src="./src/assets/images/logo-desk.svg" alt="Logo site">
+            </div>
+        </div>
+    </nav>
+
+
+
+    <!-- <nav class="nav navbar"> -->
 
     <header class="hero">
         <div class="hero__container">
@@ -71,9 +122,14 @@
             <a class="btn intro__button intro__button--hours" href="#opening-hours">opening hours</a>
 
         </div>
-        <img class="hero__image"
-            src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!227800&authkey=!ACwRmG6wW9NktiY&ithint=photo&e=voEkUg"
-            alt="hero image habitats">
+
+
+        <picture>
+            <source srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228635&authkey=!ADboasr5JctfajQ&ithint=photo&e=wbr8Q2" media="(min-width: 1280px)" />
+            <source srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228631&authkey=!AErDydZTyXlyWG0&ithint=photo&e=Dcf6FG" media="(min-width: 744px)" />
+            <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228624&authkey=!AJ3D08WZ3p1-xgc&ithint=photo&e=XgsePH"
+                class="hero__image d-block img-fluid" alt="hero image habitats" />
+        </picture>
 
     </header>
 
@@ -89,9 +145,11 @@
             <h2 class="intro__title">savannah</h2>
 
             <div class="intro__content">
-                <img class="intro__image"
-                    src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228345&authkey=!AOpKhCsBigrcueo&ithint=photo&e=CHnaWJ"
-                    alt="intro savannah habitat">
+                <picture>
+                    <source srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228632&authkey=!AFKd3QYvrdtPk4c&ithint=photo&e=DaIdBf" media="(min-width: 744px)" />
+                    <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228625&authkey=!AJObZVhNbPOc-Z4&ithint=photo&e=cwni5P"
+                        class="intro__image d-block img-fluid" alt="intro savannah habitat" />
+                </picture>
 
                 <div class="intro__details">
 
@@ -110,13 +168,17 @@
             <h2 class="intro__title">swamp</h2>
 
             <div class="intro__content">
-                <img class="intro__image"
-                    src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228344&authkey=!ANHEFwcjrdRuM44&ithint=photo&e=eswPyM"
-                    alt="intro swamp habitat">
+                <picture>
+                    <source srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228630&authkey=!AA2zueImbYznSDM&ithint=photo&e=o7qWFC" media="(min-width: 744px)" />
+                    <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228626&authkey=!ACEYiUHLv6QFC2E&ithint=photo&e=EUmU9g"
+                        class="intro__image d-block img-fluid" alt="intro swamp habitat" />
+                </picture>
+
 
                 <div class="intro__details">
 
-                    <a class="btn intro__button intro__button--more intro__button--swamp" href="./habitat-1.html">more</a>
+                    <a class="btn intro__button intro__button--more intro__button--swamp"
+                        href="./habitat-1.html">more</a>
 
 
                     <p class="intro__description">Uncover the Mysteries of the Swamp</p>
@@ -130,13 +192,16 @@
             <h2 class="intro__title">jungle</h2>
 
             <div class="intro__content">
-                <img class="intro__image"
-                    src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228343&authkey=!APRcif3h30gXzY4&ithint=photo&e=Dqz9XM"
-                    alt="intro jungle habitat">
+                <picture>
+                    <source srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228633&authkey=!AO6fwXrUP_Wqkzk&ithint=photo&e=MRyIXf" media="(min-width: 744px)" />
+                    <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228627&authkey=!AJYXgP_YFhpxxQk&ithint=photo&e=N3kegb"
+                        class="intro__image d-block img-fluid" alt="intro jungle habitat" />
+                </picture>
 
                 <div class="intro__details">
 
-                    <a class="btn intro__button intro__button--more intro__button--jungle" href="./habitat-1.html">more</a>
+                    <a class="btn intro__button intro__button--more intro__button--jungle"
+                        href="./habitat-1.html">more</a>
 
 
                     <p class="intro__description">Embrace the surprises of the Jungle</p>

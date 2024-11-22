@@ -1,0 +1,5 @@
+node_modules/**
+!node_modules/Normalize-css/**
+!node_modules/bootstrap/dist/**
+!node_modules/bootstrap-icons/font/**
+!node_modules/@popperjs/core/dist/umd/**
