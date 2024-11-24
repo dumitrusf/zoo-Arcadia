@@ -1,0 +1,22 @@
+@use "base/variables" as v;
+@use "base/mixin-responsive" as m;
+
+
+.hero {
+    background-color: rgb(75, 194, 200);
+  
+    &__image {
+      // filter: invert(1);
+      // -webkit-filter: invert(1);
+    }
+  
+    &__text {
+      background-color: limegreen;
+      @include m.responsive(tablet) {
+        background-color: orange;
+      }
+      @include m.responsive(desk) {
+        background-color: rgb(149, 80, 252);
+      }
+    }
+  }

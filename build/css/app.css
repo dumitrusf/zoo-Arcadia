@@ -353,7 +353,11 @@ body {
   text-decoration: none;
   text-transform: uppercase;
 }
-.nav__link--active, .nav__link:hover {
+.nav__link--active {
+  font-size: calc(clamp(1.4rem, 1.875vw + 1rem, 1.8rem) + 0.5rem);
+  color: #ffff00;
+}
+.nav__link:hover {
   color: #ffff00;
   font-family: "Poppins-Bold";
 }
@@ -559,52 +563,41 @@ body,
   }
 }
 
-nav {
-  bottom: 0;
-  left: 0;
+.nav {
   width: 100vw;
-  background-color: rgba(0, 0, 0, 0.3254901961);
-  backdrop-filter: blur(5.0500001907px);
+  height: auto;
 }
 @media screen and (min-width: 1280px) {
-  nav {
+  .nav {
     width: 74.4rem;
     height: 4.7rem;
   }
 }
-@media screen and (min-width: 744px) {
-  nav {
-    bottom: unset;
-    top: 0;
-  }
+.nav__items {
+  height: auto;
+  padding: 0;
+  margin: 0;
 }
 @media screen and (min-width: 1280px) {
-  nav {
-    left: calc(50vw - 37.2rem);
-  }
-  nav .bar {
-    display: none !important;
-  }
-  nav .collapse:not(.show) {
-    display: flex;
-  }
-}
-@media screen and (min-width: 1280px) {
-  nav .nav__items {
+  .nav__items {
     margin: revert;
-    display: flex;
-    flex-direction: row;
-    gap: 0px 5px;
-    align-items: center;
     padding: 0;
     height: auto;
-    column-gap: 2.187rem;
   }
 }
-nav .nav__menu--desk {
-  flex-flow: row-reverse;
-  justify-content: space-around;
+.nav__items li {
+  padding: 1.21rem 0;
+}
+.nav__m-flex {
+  padding: min(3rem, 2vw) min(2.3rem, 2vw);
+  margin: auto;
+  width: max(21rem, 77vw);
+  height: 28.8rem;
+}
+.nav__menu {
+  margin: auto;
   padding: 0;
+  width: max(32rem, 100%);
 }
 
 .d-md-block {
@@ -613,12 +606,12 @@ nav .nav__menu--desk {
 }
 @media screen and (min-width: 744px) {
   .d-md-block {
-    display: block !important;
+    display: flex !important;
   }
 }
 
 .d-md-none {
-  display: block !important;
+  display: flex !important;
 }
 @media screen and (min-width: 744px) {
   .d-md-none {
@@ -637,12 +630,10 @@ nav .nav__menu--desk {
 }
 
 .panda__logo {
-  width: 115px;
-  filter: blur(2.4000000954px);
-  -webkit-filter: blur(2.4000000954px);
+  width: min(30vw, max(25.9rem, 15.333%));
 }
 @media screen and (min-width: 1280px) {
-  .panda {
+  .panda__logo {
     display: none;
   }
 }
@@ -884,4 +875,108 @@ select {
 .animal__table {
   margin: auto;
   width: 100%;
+}
+
+.nav {
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3254901961);
+  backdrop-filter: blur(5.0500001907px);
+  z-index: 1;
+  border-radius: 1rem 1rem 0 0;
+  -webkit-border-radius: 1rem 1rem 0 0;
+  -moz-border-radius: 1rem 1rem 0 0;
+  -ms-border-radius: 1rem 1rem 0 0;
+  -o-border-radius: 1rem 1rem 0 0;
+}
+.nav__items {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+}
+@media screen and (min-width: 1280px) {
+  .nav__items {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 2.187rem;
+  }
+}
+.nav__m-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@media screen and (min-width: 1280px) {
+  .nav__m-flex {
+    display: none;
+  }
+}
+.nav__menu--desk {
+  display: none;
+}
+@media screen and (min-width: 744px) {
+  .nav {
+    border-radius: 0 0 1rem 1rem;
+    -webkit-border-radius: 0 0 1rem 1rem;
+    -moz-border-radius: 0 0 1rem 1rem;
+    -ms-border-radius: 0 0 1rem 1rem;
+    -o-border-radius: 0 0 1rem 1rem;
+    bottom: unset;
+    top: 0;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .nav {
+    left: calc(50vw - 37.2rem);
+  }
+  .nav .bar {
+    display: none !important;
+  }
+  .nav .collapse:not(.show) {
+    display: flex;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .nav__menu--desk {
+    display: flex;
+    flex-flow: row-reverse;
+    height: 4.2rem;
+    align-items: center;
+    vertical-align: middle;
+    justify-content: space-around;
+    width: 100%;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .nav {
+    border-radius: 2.5rem 2.5rem;
+    -webkit-border-radius: 2.5rem 2.5rem;
+    -moz-border-radius: 2.5rem 2.5rem;
+    -ms-border-radius: 2.5rem 2.5rem;
+    -o-border-radius: 2.5rem 2.5rem;
+  }
+}
+
+.panda__logo {
+  filter: blur(6.4000000954px) opacity(0.666);
+  -webkit-filter: blur(6.4000000954px) opacity(0.666);
+}
+
+.hero {
+  background-color: rgb(75, 194, 200);
+}
+.hero__text {
+  background-color: limegreen;
+}
+@media screen and (min-width: 744px) {
+  .hero__text {
+    background-color: orange;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .hero__text {
+    background-color: rgb(149, 80, 252);
+  }
 }

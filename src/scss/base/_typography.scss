@@ -138,7 +138,15 @@ body {
 
     @include menu();
 
-    &--active,
+    &--active {
+      font-size: calc(map-get(s.$font-sizes, menu-font) + 0.5rem)  ;
+      color: map-get(
+        map-get(c.$color, "solid-colors"),
+        "c-hgl-hover"
+      );
+    }
+
+    
     &:hover {
       color: map-get(
         map-get(c.$color, "solid-colors"),

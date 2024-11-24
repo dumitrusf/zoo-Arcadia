@@ -28,55 +28,45 @@ body,
   }
 }
 
-nav {
-  bottom: 0;
-  left: 0;
+.nav {
   width: 100vw;
-  background-color: map-get(map-get(v.$color, cover-img), cover-black);
-  backdrop-filter: map-get(map-get(v.$color, blur), blur);
+  height: auto;
 
   @include m.responsive(desk) {
     width: 74.4rem;
     height: 4.7rem;
   }
 
-  @include m.responsive(tablet) {
-    bottom: unset;
-    top: 0;
+  &__items {
+    height: auto;
     // background-color: red;
-  }
 
-  @include m.responsive(desk) {
-    // background-color: red;
-    left: calc(50vw - 37.2rem);
-    .bar {
-      display: none !important;
-    }
+    padding: 0;
+    margin: 0;
 
-    .collapse:not(.show) {
-      display: flex;
-    }
-  }
-
-  .nav__items {
     @include m.responsive(desk) {
       margin: revert;
-      display: flex;
-      flex-direction: row;
-      gap: 0px 5px;
-      align-items: center;
       padding: 0;
       height: auto;
-      column-gap: 2.187rem;
+      
+    }
+
+    li {
+      padding: 1.21rem 0;
     }
   }
 
-  .nav__menu--desk {
-    flex-flow: row-reverse;
-    // height: 4.2rem;
-    justify-content: space-around;
+  &__m-flex {
+    padding: min(3rem, 2vw) min(2.3rem, 2vw);
+    margin: auto;
+    width: max(21rem, 77vw);
+    height: 28.8rem;
+  }
+
+  &__menu {
+    margin: auto;
     padding: 0;
-    // background-color: red;
+    width: max(32rem, 100%);
   }
 }
 
@@ -86,12 +76,12 @@ nav {
   display: none !important;
 
   @include m.responsive(tablet) {
-    display: block !important;
+    display: flex !important;
   }
 }
 
 .d-md-none {
-  display: block !important;
+  display: flex !important;
 
   @include m.responsive(tablet) {
     display: none !important;
@@ -107,13 +97,8 @@ nav {
   }
 }
 
-.panda {
-  &__logo {
-    width: 115px;
-    filter: map-get(map-get(v.$color, blur), blur-panda);
-    -webkit-filter: map-get(map-get(v.$color, blur), blur-panda);
-  }
-
+.panda__logo {
+  width: min(30vw, max(25.9rem, 15.333%));
   @include m.responsive(desk) {
     display: none;
   }
@@ -240,7 +225,7 @@ select {
     // width: 285, 525, 956;
     margin: 0 auto;
     padding: 0.2rem;
-    width: clamp(28.5rem, 79.9740vw, 95.6rem);
+    width: clamp(28.5rem, 79.974vw, 95.6rem);
   }
 
   &__logo {
@@ -302,8 +287,6 @@ select {
   }
 }
 
-
-
 .filter {
   // background-color: cornflowerblue;
 
@@ -361,7 +344,6 @@ select {
   font-size: clamp(2.4rem, 4.83871vw, 4.4rem);
 }
 
-
 .animal {
   // background-color: rebeccapurple;
   // 313, 664, 1219
@@ -369,26 +351,23 @@ select {
   margin: 0 auto;
   @include m.responsive(tablet) {
     max-width: max(66.4rem, calc(100vw - 8rem));
-
   }
   @include m.responsive(desk) {
     max-width: max(121.9rem, calc(100vw - 6.1rem));
-
   }
-  
+
   &__card {
     // background-color: tan;
-    
+
     margin: 0.5rem auto;
     text-align: center;
 
     width: 98.8%;
-    
+
     @include m.responsive(tablet) {
       max-width: max(64rem, 50%);
       // 313, 664
     }
-   
   }
 
   &__table {
@@ -396,5 +375,4 @@ select {
     // background-color: red;
     width: 100%;
   }
-  
 }
