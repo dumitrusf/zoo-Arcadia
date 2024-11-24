@@ -18,11 +18,11 @@ html {
 
 body,
 .contact {
+  background-color: #ebebeb;
   font-optical-sizing: auto;
   font-style: normal;
   overflow: hidden;
   margin-bottom: clamp(2.5rem, 12vw + 1rem, 6.7rem);
-  // background-color: red;
   @include m.responsive(tablet) {
     margin-bottom: 0rem;
   }
@@ -48,7 +48,6 @@ body,
       margin: revert;
       padding: 0;
       height: auto;
-      
     }
 
     li {
@@ -108,11 +107,30 @@ body,
   // background-color: rgb(75, 194, 200);
   width: 100vw;
 
+  &__container {
+    margin: 0;
+    padding: 3rem 2rem;
+
+    @include m.responsive(tablet) {
+      padding: 5rem 3.8rem;
+    }
+    @include m.responsive(desk) {
+      margin: 0 calc((100vw - 128rem) / 2);
+      padding: 3rem 3rem;
+    }
+  }
+
   &__image {
-    width: 100vw;
+    margin: auto;
+    width: min(100vw, max(128rem, 30vw));
   }
 
   &__text {
+    h1,
+    p {
+      padding: 0.5rem;
+    }
+
     @include m.responsive(tablet) {
       max-width: 57.8rem;
       // background-color: orange;
