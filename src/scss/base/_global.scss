@@ -131,21 +131,31 @@ body,
       padding: 0.5rem;
     }
 
-    @include m.responsive(tablet) {
-      max-width: 57.8rem;
-      // background-color: orange;
-    }
-    @include m.responsive(desk) {
-      max-width: 87.7rem;
-      // background-color: rgb(149, 80, 252);
-    }
+    // @include m.responsive(tablet) {
+    //   max-width: 57.8rem;
+    //   // background-color: orange;
+    // }
+    // @include m.responsive(desk) {
+    //   max-width: 87.7rem;
+    //   // background-color: rgb(149, 80, 252);
+    // }
   }
 }
 
 .intro {
   // background-color: red;
   margin: 0 auto;
-  text-align: center;
+
+
+
+  @include m.responsive(tablet) {
+    width: max(58.7rem, calc(100vw - 74.4rem));
+    // background-color: red;
+  }
+  @include m.responsive(desk) {
+    max-width: 122.7rem;
+    // background-color: rgb(0, 255, 140);
+  }
 
   img {
     width: 100%;
@@ -167,7 +177,7 @@ body,
     width: min(27.3rem, 100vw);
 
     @include m.responsive(tablet) {
-      min-width: 59.2rem;
+      min-width: 35.2rem;
     }
   }
 

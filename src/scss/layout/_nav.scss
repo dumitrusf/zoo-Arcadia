@@ -53,13 +53,14 @@
     -moz-border-radius: 0 0 1rem 1rem;
     -ms-border-radius: 0 0 1rem 1rem;
     -o-border-radius: 0 0 1rem 1rem;
-
+    
     bottom: unset;
     top: 0;
+    
   }
   
-  
   @include m.responsive(desk) {
+    top: 0.1rem;
     // background-color: red;
     left: calc(50vw - 37.2rem);
     .bar {

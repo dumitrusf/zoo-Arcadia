@@ -7,7 +7,7 @@ $shadows: (
       // Sombra de texto para los H1
       h1-shadow: 0px 4.6px 4.6px #000000f7,
       // Shadows of texts on cards
-      sh-desc-section: (0rem 0rem 1.5rem #000000, 0rem 0rem 1rem #000000, 0rem 0rem 0.5rem #000000,)
+      sh-desc-section: (0rem 0rem 0.01rem #000000, 0rem 0rem 0.5rem #000000, 0rem 0rem 20rem #000000,)
     ),
 
   btn: (
@@ -28,14 +28,15 @@ $shadows: (
   cards:
     (
       // Shadow Hero from bottom,
-      sh-hero-bottom: 0px -172px 59.2px -112px #ebebeb inset
+      sh-hero-bottom: 0px -172px 59.2px -112px #ebebeb inset,
+      sh-hero-blr: (0px -172px 59.2px -112px #ebebeb inset, 172px 0px 59.2px -112px #ebebeb inset, -172px 0px 59.2px -112px #ebebeb inset) 
     ),
 
   // Shadows of images
-  images:
+  img:
     (
       // Internal shadow on animal cards
-      sh-in-animal: 0px 0px 15px 10px #ebebeb inset
+      sh-in-animal: 0px 0px 5rem 3rem #ebebeb inset
     )
 );
 
