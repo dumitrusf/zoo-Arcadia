@@ -35,6 +35,8 @@
   text-decoration: none;
   border-style: none;
   text-transform: uppercase;
+  width: fit-content;
+  height: fit-content;
 }
 
 @mixin title-section() {

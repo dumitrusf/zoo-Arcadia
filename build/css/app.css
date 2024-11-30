@@ -383,6 +383,8 @@ body {
   text-decoration: none;
   border-style: none;
   text-transform: uppercase;
+  width: fit-content;
+  height: fit-content;
 }
 .intro__button--hours {
   background-color: #345813;
@@ -428,7 +430,7 @@ body {
   font-size: clamp(1.9rem, 1.885vw + 1rem, 2.6rem);
   color: #fff;
   font-family: "Roboto-Regular";
-  text-shadow: 0rem 0rem 1.5rem #000000, 0rem 0rem 1rem #000000, 0rem 0rem 0.5rem #000000;
+  text-shadow: 0rem 0rem 0.01rem #000000, 0rem 0rem 0.5rem #000000, 0rem 0rem 20rem #000000;
   text-transform: uppercase;
 }
 .intro__name {
@@ -665,20 +667,19 @@ body,
 .hero__text p {
   padding: 0.5rem;
 }
-@media screen and (min-width: 744px) {
-  .hero__text {
-    max-width: 57.8rem;
-  }
-}
-@media screen and (min-width: 1280px) {
-  .hero__text {
-    max-width: 87.7rem;
-  }
-}
 
 .intro {
   margin: 0 auto;
-  text-align: center;
+}
+@media screen and (min-width: 744px) {
+  .intro {
+    width: max(58.7rem, 100vw - 74.4rem);
+  }
+}
+@media screen and (min-width: 1280px) {
+  .intro {
+    max-width: 122.7rem;
+  }
 }
 .intro img {
   width: 100%;
@@ -698,7 +699,7 @@ body,
 }
 @media screen and (min-width: 744px) {
   .intro__article {
-    min-width: 59.2rem;
+    min-width: 35.2rem;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -950,6 +951,7 @@ select {
 }
 @media screen and (min-width: 1280px) {
   .nav {
+    top: 0.1rem;
     left: calc(50vw - 37.2rem);
   }
   .nav .bar {
@@ -989,13 +991,98 @@ select {
   position: relative;
 }
 .hero__container {
-  background: linear-gradient(180deg, rgba(235, 235, 235, 0) 53.333%, #ebebeb 100%);
+  box-shadow: 0px -172px 59.2px -112px #ebebeb inset;
   position: absolute;
   inset: 0;
   z-index: 1;
+  background: linear-gradient(180deg, rgba(235, 235, 235, 0) 80%, #ebebeb 100%);
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: auto;
+  gap: 0;
 }
 @media screen and (min-width: 1280px) {
   .hero__container {
-    background: linear-gradient(180deg, rgba(235, 235, 235, 0) 53.333%, #ebebeb 100%), linear-gradient(90deg, rgba(235, 235, 235, 0) 93.333%, #ebebeb 99.99%), linear-gradient(-90deg, rgba(235, 235, 235, 0) 93.333%, #ebebeb 99.99%);
+    box-shadow: 0px -172px 59.2px -112px #ebebeb inset, 172px 0px 59.2px -112px #ebebeb inset, -172px 0px 59.2px -112px #ebebeb inset;
+    background: linear-gradient(180deg, rgba(235, 235, 235, 0) 72%, #ebebeb 100%), linear-gradient(90deg, rgba(235, 235, 235, 0) 93.333%, #ebebeb 99.99%), linear-gradient(-90deg, rgba(235, 235, 235, 0) 93.333%, #ebebeb 99.99%);
   }
+}
+.hero .intro__button--hours {
+  grid-area: 3/3/4/4;
+  height: min-content;
+  width: max-content;
+}
+.hero__text {
+  grid-area: 1/1/4/4;
+}
+@media screen and (min-width: 744px) {
+  .hero__text {
+    grid-area: 1/1/4/3;
+  }
+}
+
+.intro {
+  text-align: center;
+}
+.intro__animal img {
+  position: relative;
+  border-radius: 1rem;
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem;
+}
+.intro__animal img::after {
+  position: absolute;
+  content: "";
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  background-color: red;
+}
+.intro__content {
+  position: relative;
+  border-radius: 2.5rem;
+  -webkit-border-radius: 2.5rem;
+  -moz-border-radius: 2.5rem;
+  -ms-border-radius: 2.5rem;
+  -o-border-radius: 2.5rem;
+}
+.intro__content .intro__details {
+  background: linear-gradient(180deg, rgba(235, 235, 235, 0) 33.333%, rgba(235, 235, 235, 0.5882352941) 66%, #ebebeb 100%);
+  box-shadow: 0px -172px 59.2px -112px #ebebeb inset;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-around;
+}
+.intro__content .intro__details a {
+  margin-top: 35rem;
+}
+@media screen and (min-width: 1280px) {
+  .intro {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap-reverse;
+    gap: 1rem;
+  }
+  .intro__section:nth-child(1) {
+    order: 3;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .intro {
+    min-width: 122rem;
+  }
+}
+
+.intro:has(.intro__article) {
+  flex-wrap: wrap;
 }

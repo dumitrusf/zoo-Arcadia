@@ -1,0 +1,130 @@
+@use "base/variables" as v;
+@use "base/mixin-responsive" as m;
+@use "base/mixin-grid-flex" as mgf;
+
+.intro {
+  text-align: center;
+
+  &__animal img {
+    position: relative;
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
+
+    &::after {
+      position: absolute;
+      content: "";
+      inset: 0;
+      height: 100%;
+      width: 100%;
+      background-color: red;
+    }
+  }
+
+  &__content {
+    position: relative;
+    border-radius: 2.5rem;
+    -webkit-border-radius: 2.5rem;
+    -moz-border-radius: 2.5rem;
+    -ms-border-radius: 2.5rem;
+    -o-border-radius: 2.5rem;
+    //background-color: red;
+    .intro__details {
+      background: linear-gradient(
+        180deg,
+        #ebebeb00 33.333%,
+        #ebebeb96 66%,
+        #ebebeb 100%
+      );
+      box-shadow: map-get(map-get(v.$shadows, cards), sh-hero-bottom);
+      // background-color: cadetblue;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      justify-content: space-around;
+    }
+    .intro__details {
+      // background-color: red;
+      a {
+        margin-top: 35rem;
+      }
+    }
+  }
+
+  @include m.responsive(desk) {
+    // display: flex;
+    // flex-wrap: wrap-reverse;
+
+    // $direction: row,
+    // $justify: flex-start,
+    // $align: stretch,
+    // $wrap: nowrap,
+    // $gap: 0
+
+    @include mgf.flexbox(row, space-between, center, wrap-reverse, 1rem);
+
+    &__section:nth-child(1) {
+      order: 3;
+    }
+  }
+
+  @include m.responsive(desk) {
+    min-width: 122rem;
+  }
+}
+
+.intro:has(.intro__article) {
+  flex-wrap: wrap;
+}
+
+// .hero {
+//   // background-color: rgb(75, 194, 200);
+
+//   position: relative;
+
+//   &__container {
+
+//     box-shadow:map-get(map-get(v.$shadows, cards), sh-hero-bottom);
+//     position: absolute;
+//     inset: 0;
+//     z-index: 1;
+//     @include mgf.universal-grid(grid-map);
+
+//     @include m.responsive(desk) {
+//       box-shadow:map-get(map-get(v.$shadows, cards), sh-hero-blr);
+//       // background: linear-gradient(180deg, #ebebeb00 53.333%, #ebebeb 100%),
+//       // linear-gradient(90deg, #ebebeb00 93.333%, #ebebeb 99.99%),
+//       // linear-gradient(-90deg, #ebebeb00 93.333%, #ebebeb 99.99%);
+//     }
+
+//   }
+
+//   .intro__button--hours {
+//     grid-area: c27;
+//     height: min-content;
+//     width: max-content;
+//   }
+
+//   &__text {
+//     // background-color: red;
+
+//     // @include mgf.universal-grid(grid-map);
+//     grid-area: c1 / c1 / c25 / c3;
+
+//     // background-color: limegreen;
+//     @include m.responsive(tablet) {
+//       grid-area: c1 / c1 / c22 / c2;
+//       // background-color: orange;
+//     }
+//     @include m.responsive(desk) {
+//       // background-color: rgb(149, 80, 252);
+//     }
+//   }
+// }

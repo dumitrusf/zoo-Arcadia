@@ -1,5 +1,6 @@
 @use "base/variables" as v;
 @use "base/mixin-responsive" as m;
+@use "base/mixin-grid-flex" as mgf;
 
 .hero {
   // background-color: rgb(75, 194, 200);
@@ -7,26 +8,34 @@
   position: relative;
 
   &__container {
-    background: linear-gradient(180deg, #ebebeb00 53.333%, #ebebeb 100%);
+    
+    box-shadow:map-get(map-get(v.$shadows, cards), sh-hero-bottom);
     position: absolute;
     inset: 0;
     z-index: 1;
-
+    background: linear-gradient(180deg, #ebebeb00 80%, #ebebeb 100%);
+    @include mgf.grid();
+    
     @include m.responsive(desk) {
-      background: linear-gradient(180deg, #ebebeb00 53.333%, #ebebeb 100%),
-        linear-gradient(90deg, #ebebeb00 93.333%, #ebebeb 99.99%),
-        linear-gradient(-90deg, #ebebeb00 93.333%, #ebebeb 99.99%);
+      box-shadow:map-get(map-get(v.$shadows, cards), sh-hero-blr);
+      background: linear-gradient(180deg, #ebebeb00 72%, #ebebeb 100%),
+      linear-gradient(90deg, #ebebeb00 93.333%, #ebebeb 99.99%),
+      linear-gradient(-90deg, #ebebeb00 93.333%, #ebebeb 99.99%);
     }
+    
+  }
+  
+  .intro__button--hours {
+    grid-area: 3/3/4/4;
+    height: min-content;
+    width: max-content;
     
   }
 
   &__text {
-    // background-color: limegreen;
+    grid-area: 1/1/4/4;
     @include m.responsive(tablet) {
-      // background-color: orange;
-    }
-    @include m.responsive(desk) {
-      // background-color: rgb(149, 80, 252);
+      grid-area: 1/1/4/3;
     }
   }
 }
