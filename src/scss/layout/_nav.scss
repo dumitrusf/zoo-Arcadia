@@ -1,5 +1,6 @@
 @use "base/variables" as v;
 @use "base/mixin-responsive" as m;
+@use "base/mixin-grid-flex" as mgf;
 
 .nav {
   bottom: 0;
@@ -9,34 +10,23 @@
 
   z-index: 999;
 
-
-
   border-radius: 1rem 1rem 0 0;
   -webkit-border-radius: 1rem 1rem 0 0;
   -moz-border-radius: 1rem 1rem 0 0;
   -ms-border-radius: 1rem 1rem 0 0;
   -o-border-radius: 1rem 1rem 0 0;
-  
-  
+
   &__items {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: start;
+    @include mgf.flexbox(column, space-between, start);
+    // background-color: blue;
     @include m.responsive(desk) {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      column-gap: 2.187rem;
+      @include mgf.flexbox(row, space-between, center, nowrap, 2.187rem);
     }
   }
-
+  
   &__m-flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    // background-color: red;
-
+    
+    @include mgf.flexbox(row, space-between, center);
     @include m.responsive(desk) {
       display: none;
     }
@@ -45,7 +35,6 @@
   &__menu--desk {
     display: none;
   }
-  
 
   @include m.responsive(tablet) {
     border-radius: 0 0 1rem 1rem;
@@ -53,12 +42,11 @@
     -moz-border-radius: 0 0 1rem 1rem;
     -ms-border-radius: 0 0 1rem 1rem;
     -o-border-radius: 0 0 1rem 1rem;
-    
+
     bottom: unset;
     top: 0;
-    
   }
-  
+
   @include m.responsive(desk) {
     top: 0.1rem;
     // background-color: red;
@@ -66,27 +54,19 @@
     .bar {
       display: none !important;
     }
-    
+
     .collapse:not(.show) {
       display: flex;
     }
   }
 
-  
-
-
   @include m.responsive(desk) {
     &__menu--desk {
-      display: flex;
-      flex-flow: row-reverse;
+      @include mgf.flexbox(row-reverse, space-around, center, nowrap, middle);
       height: 4.2rem;
-      align-items: center;
-      vertical-align: middle;
-      justify-content: space-around;
       width: 100%;
     }
   }
-  
 
   @include m.responsive(desk) {
     border-radius: 2.5rem 2.5rem;

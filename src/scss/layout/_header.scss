@@ -4,38 +4,53 @@
 
 .hero {
   // background-color: rgb(75, 194, 200);
-
   position: relative;
 
-  &__container {
-    
-    box-shadow:map-get(map-get(v.$shadows, cards), sh-hero-bottom);
+  &::after {
+    content: "";
     position: absolute;
     inset: 0;
-    z-index: 1;
     background: linear-gradient(180deg, #ebebeb00 80%, #ebebeb 100%);
-    @include mgf.grid();
-    
+    // box-shadow: map-get(map-get(v.$shadows, cards), sh-hero-blr);
+    // background-color: red;
+    z-index: 3;
+    margin: auto;
+    width: min(100vw, max(128rem, 0vw));
+    height: 100%;
     @include m.responsive(desk) {
-      box-shadow:map-get(map-get(v.$shadows, cards), sh-hero-blr);
+      box-shadow: map-get(map-get(v.$shadows, cards), sh-hero-blr);
       background: linear-gradient(180deg, #ebebeb00 72%, #ebebeb 100%),
-      linear-gradient(90deg, #ebebeb00 93.333%, #ebebeb 99.99%),
-      linear-gradient(-90deg, #ebebeb00 93.333%, #ebebeb 99.99%);
+        linear-gradient(90deg, #ebebeb00 93.333%, #ebebeb 120.99%),
+        linear-gradient(-90deg, #ebebeb00 93.333%, #ebebeb 120.99%);
+      // background-color: yellow;
     }
     
   }
-  
+  img[alt*="services"] {
+    backdrop-filter: drop-shadow(0px 11px 7.8px rgba(0, 0, 0, 0.97));
+    -webkit-filter: drop-shadow(0px 11px 7.8px rgba(0, 0, 0, 0.97));
+  }
+
+
+  &__container {
+    position: absolute;
+    inset: 0;
+    z-index: 700;
+    @include mgf.grid();
+    // background-color: red !important
+  }
+
   .intro__button--hours {
-    grid-area: 3/3/4/4;
+    @include mgf.grid-position(3, 4, 3, 4);
     height: min-content;
     width: max-content;
-    
+    align-self: end;
   }
 
   &__text {
-    grid-area: 1/1/4/4;
+    @include mgf.grid-position(1, 4, 1, 4);
     @include m.responsive(tablet) {
-      grid-area: 1/1/4/3;
+      @include mgf.grid-position(1, 4, 1, 3);
     }
   }
 }

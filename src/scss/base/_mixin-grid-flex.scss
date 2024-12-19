@@ -1,31 +1,3 @@
-// $grid-universal: (
-//   "grid-header": (
-//     columns: repeat(3, auto),
-//     rows: repeat(9, auto),
-//     areas: (
-//       "c1 c2 c3"
-//       "c4 c5 c6"
-//       "c7 c8 c9"
-//       "c10 c11 c12"
-//       "c13 c14 c15"
-//       "c16 c17 c18"
-//       "c19 c20 c21"
-//       "c22 c23 c24"
-//       "c25 c26 c27",
-//     ),
-//     gap: 1rem,
-//   )
-// );
-
-// @mixin universal-grid($layout-name) {
-//   $layout: map-get($grid-universal, $layout-name);
-//   display: grid;
-//   grid-template-columns: map-get($layout, columns);
-//   grid-template-rows: map-get($layout, rows);
-//   grid-template-areas: map-get($layout, areas);
-//   gap: map-get($layout, gap);
-// }
-
 @mixin grid(
   $columns: 1,
   $rows: auto,
@@ -62,10 +34,10 @@
 
 // Mixin para posicionamiento de elementos en el grid
 @mixin grid-position(
-  $column-start: auto,
-  $column-end: auto,
   $row-start: auto,
-  $row-end: auto
+  $row-end: auto,
+  $column-start: auto,
+  $column-end: auto
 ) {
   grid-column: #{$column-start} / #{$column-end};
   grid-row: #{$row-start} / #{$row-end};
@@ -84,6 +56,20 @@
   grid-template-columns: repeat(auto-fill, minmax($min-size, 1fr));
 }
 
+
+
+@mixin grid-responsive-infinite(
+  $min-column-size: 250px,
+  $row-height: auto,
+  $gap: 1rem
+) {
+  display: grid;
+  gap: $gap;
+  grid-template-columns: repeat(auto-fit, minmax($min-column-size, 1fr));
+  grid-auto-rows: $row-height;
+}
+
+
 // 
 // 
 // 
@@ -95,7 +81,8 @@
   $justify: flex-start,
   $align: stretch,
   $wrap: nowrap,
-  $gap: 0
+  $gap: 0,
+  $vertical: baseline
 ) {
   display: flex;
   flex-direction: $direction;
@@ -103,4 +90,5 @@
   align-items: $align;
   flex-wrap: $wrap;
   gap: $gap;
+  vertical-align: $vertical;
 }
