@@ -6,7 +6,14 @@
   // background-color: rgb(75, 194, 200);
   position: relative;
 
-  &::after {
+  &:has(img[alt*="monkey"])::before {
+    content: "";
+    background: linear-gradient(270deg, rgba(235, 235, 235, 0) 0%, #000 100%);
+    position: absolute;
+    inset: 0;
+  }
+
+  &:has(img[alt*="hero image"]):not(img[alt*="monkey"])::after {
     content: "";
     position: absolute;
     inset: 0;
@@ -19,18 +26,24 @@
     height: 100%;
     @include m.responsive(desk) {
       box-shadow: map-get(map-get(v.$shadows, cards), sh-hero-blr);
-      background: linear-gradient(180deg, #ebebeb00 72%, #ebebeb 100%),
-        linear-gradient(90deg, #ebebeb00 93.333%, #ebebeb 120.99%),
-        linear-gradient(-90deg, #ebebeb00 93.333%, #ebebeb 120.99%);
       // background-color: yellow;
     }
-    
   }
-  img[alt*="services"] {
+
+  
+
+  &:has(img[alt*="monkey"]):not(img[alt*="hero image"])::after {
+    position: absolute;
+    content: "";
+    inset: 0;
+    box-shadow: map-get(map-get(v.$shadows, cards), sh-hero-bottom);
+    // background-color: yellow;
+  }
+
+  img[alt*="monkey"] {
     backdrop-filter: drop-shadow(0px 11px 7.8px rgba(0, 0, 0, 0.97));
     -webkit-filter: drop-shadow(0px 11px 7.8px rgba(0, 0, 0, 0.97));
   }
-
 
   &__container {
     position: absolute;

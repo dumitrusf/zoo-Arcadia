@@ -55,28 +55,40 @@
 
 @mixin desc-section() {
   font-size: map-get(map-get(s.$font-sizes, "other-texts"), p-in-cards);
-  color: map-get(map-get(c.$color, "solid-colors"), c-light);
+  color: map-get(map-get(c.$color, "solid-colors"), c-dark);
   font-family: map-get(
     map-get(f.$path-fonts-formats, "family-font"),
     "paragraph-font"
   );
-  text-shadow: map-get(map-get(sh.$shadows, texts), sh-desc-section);
+  // text-shadow: map-get(map-get(sh.$shadows, texts), sh-desc-section);
   text-transform: uppercase;
 }
 
-@mixin testimony-title() {
-  font-size: map-get(map-get(s.$font-sizes, "headings"), title-main-cards);
-  color: map-get(map-get(c.$color, "solid-colors"), "c-dark");
+// ✨
+
+@mixin title-caption-car() {
+  font-size: calc(map-get(map-get(s.$font-sizes, "headings"), filter-headings) - 0.358rem);
+  color: map-get(map-get(c.$color, "solid-colors"), c-light);
   font-family: map-get(
     map-get(f.$path-fonts-formats, "family-font"),
-    "h2-font"
+    "h4-font"
   );
-
-  letter-spacing: map-get(
-    map-get(s.$font-spaces, "letter-spacings"),
-    ls-title-testimony
-  );
+  text-transform: uppercase;
+  padding: 1rem 3rem;
 }
+
+@mixin desc-caption-car() {
+  font-size: calc(map-get(map-get(s.$font-sizes, "other-texts"), p-testimony) - 0.358rem);
+  color: map-get(map-get(c.$color, "solid-colors"), c-light);
+  font-family: map-get(
+    map-get(f.$path-fonts-formats, "family-font"),
+    paragraph-font
+    );
+    text-transform: initial;
+    padding: 1rem 6rem;
+}
+
+// ✨
 
 @mixin testimony-title() {
   font-family: map-get(map-get(f.$path-fonts-formats, "family-font"), h3-font);
@@ -99,7 +111,6 @@
   text-transform: capitalize;
   font-size: calc(map-get(map-get(s.$font-sizes, other-texts), request-info-data-card) - 0.358rem);
   font-family: map-get(map-get(f.$path-fonts-formats, "family-font"), paragraph-font);
-  // color: map-get(map-get(c.$color, solid-colors), c-mustard-title);
 }
 
 
@@ -132,6 +143,26 @@
   );
 }
 
+@mixin banner-title() {
+  font-size: calc(
+    map-get(map-get(s.$font-sizes, "headings"), filter-headings));
+  font-family: map-get(
+    map-get(f.$path-fonts-formats, "family-font"),
+    h2-font
+  );
+  color: map-get(map-get(c.$color, solid-colors), c-mustard-title);
+}
+
+@mixin banner-description() {
+  font-size: calc(
+    map-get(s.$font-sizes, menu-font) - 0.5rem);
+  font-family: map-get(
+    map-get(f.$path-fonts-formats, "family-font"),
+    h4-font
+  );
+  color: map-get(map-get(c.$color, solid-colors), c-light);
+}
+
 // typographie
 html,
 body {
@@ -140,6 +171,19 @@ body {
     normal-font
   );
 }
+
+
+.carousel-caption {
+  h4 {
+    @include title-caption-car();
+  }
+  
+  p {
+    
+    @include desc-caption-car();
+  }
+}
+
 
 // nav style typography
 .nav {
@@ -251,6 +295,16 @@ body {
   // button more info
 }
 // all buttons
+
+
+.k-about__content-title {
+  @include banner-title();
+}
+
+.k-about__content-description {
+  @include banner-description();
+}
+
 
 // main section with cards
 .intro {

@@ -3,6 +3,9 @@
 @use "base/mixin-grid-flex" as mgf;
 
 .testimony {
+
+  @include mgf.flexbox(column, space-around, center);
+  
   &__header {
     @include mgf.flexbox(row, space-between);
   }
@@ -46,6 +49,9 @@
     @include m.responsive(desk) {
       width: min(98.6rem, 100vw);
     }
+
+    
+    
   }
 
   &__feedback {
@@ -58,6 +64,11 @@
   &__stars {
     margin-left: auto;
   }
+
+  &__button {
+    margin: 0 auto;
+  }
+  
 }
 
 .intro__button--send {
@@ -103,7 +114,7 @@
 
 .carousel-inner ~ div {
   margin: 3rem 0;
-  @include mgf.flexbox(auto, space-between);
+  @include mgf.flexbox(auto, space-around);
 
   
 }

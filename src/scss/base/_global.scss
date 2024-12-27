@@ -22,6 +22,7 @@ body {
   min-height: 100vh;
   grid-template-rows: auto 1fr auto;
   grid-auto-rows: auto;
+  row-gap: 4rem;
 }
 
 body,
@@ -165,22 +166,22 @@ a {
   margin: 0 auto;
   @include m.responsive(tablet) {
     max-width: max(66.4rem, calc(90vw - 0.4rem));
+    margin: 2rem auto;
   }
   @include m.responsive(desk) {
     max-width: max(121.9rem, calc(80vw - 0.4rem));
   }
 
   &__card {
-
     text-align: center;
     padding: 1rem 0;
     width: -webkit-fill-available;
 
     height: -webkit-fill-available;
 
-
-    margin: auto;
+    margin: 1rem auto;
     @include m.responsive(tablet) {
+      // margin: 1rem auto;
       max-width: max(64rem, 50%);
       // 313, 664
     }
@@ -188,11 +189,6 @@ a {
     p {
       margin: 1rem 1.6rem 1rem;
     }
-  }
-
-  &__card:nth-child(1) table {
-    height: 100%;
-    // background-color: red;
   }
 
   &__table {
@@ -203,14 +199,123 @@ a {
     // height: 100%;
 
     tr {
-      width: -webkit-fill-available;
+      width: 90%;
 
       margin: 0.358rem 0;
     }
-    
   }
-  
-  
+}
+
+.k-about {
+  width: 100%;
+  &__image {
+    max-height: 24.8rem;
+    margin: auto;
+  }
+
+  &__container {
+    margin: 0 auto;
+    width: 100%;
+    max-height: 24.8rem;
+    @include m.responsive(tablet) {
+      max-width: 128rem;
+    }
+  }
+
+  &__content {
+    width: 100vw;
+    height: auto;
+    padding: 1.358rem;
+
+    @include m.responsive(tablet) {
+      max-width: 50%;
+    }
+
+    &-title {
+      padding: 1rem 0;
+    }
+
+    &-description {
+      margin: -2rem 2rem 2rem;
+      @include m.responsive(tablet) {
+        margin: -2rem 4rem 2rem;
+      }
+      p {
+        padding: 1rem 0;
+      }
+    }
+  }
+}
+
+.hero-carousel {
+  width: 100vw;
+  // background-color: red;
+  height: fit-content;
+
+  .hero__container {
+    .intro__button--hours {
+      height: min-content;
+      width: max-content;
+    }
+  }
+
+  .carousel {
+    position: relative;
+    // background-color: royalblue;
+    margin: auto;
+    // width: min(100vw, max(128rem, 0vw));
+
+    &-indicators {
+      padding: 3rem 0 0 0;
+      bottom: -2rem;
+    }
+
+    &-caption {
+      height: fit-content;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+
+      @include m.responsive(tablet) {
+        width: min(64rem, 50vw);
+        margin-bottom: 2rem;
+      }
+      @include m.responsive(desk) {
+        margin-bottom: 3rem;
+      }
+
+      &__title {
+        margin-bottom: 1rem;
+      }
+    }
+  }
+
+  .controls-carousel {
+    width: 100%;
+
+    margin: 0 auto;
+
+    @include m.responsive(tablet) {
+      width: min(74.4rem, 100vw);
+    }
+    @include m.responsive(desk) {
+      width: min(128rem, 100vw);
+    }
+
+
+    .carousel-control-prev,
+    .carousel-control-next {
+      .carousel-control-prev-icon,
+      .carousel-control-next-icon {
+        height: 3rem;
+        width: 3rem;
+        @include m.responsive(tablet) {
+          height: 4.5rem;
+          width: 4.5rem;
+        }
+      }
+    }
+    margin-bottom: 3rem;
+  }
 }
 
 .intro {
@@ -223,16 +328,16 @@ a {
     // background-color: red;
   }
   @include m.responsive(desk) {
-    max-width: 122.7rem;
+    max-width: 128rem;
     // background-color: rgb(0, 255, 140);
   }
 
+  
   img {
     width: 100%;
   }
-
+  
   &__section {
-    // background-color: yellow;
 
     width: 100vw;
     margin: 0 auto;
@@ -253,6 +358,7 @@ a {
 
   @include m.responsive(desk) {
     min-width: 122rem;
+
   }
 }
 
@@ -275,6 +381,10 @@ select {
 
 .testimony {
   width: 100vw;
+
+  a {
+    margin: 3rem 0;
+  }
 
   &__item {
     margin: 2rem auto 0;
