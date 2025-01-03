@@ -2223,3 +2223,64 @@ select {
   border: 0.358rem #ffff00 solid;
   background-color: #000;
 }
+
+body.body-404 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 0;
+  vertical-align: baseline;
+  height: 100vh;
+  background-color: #ebebeb;
+  color: #000000;
+}
+
+.error-page {
+  text-align: center;
+  max-width: 60rem;
+  margin: auto;
+}
+.error-page__title {
+  font-size: 8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #dc3545;
+}
+.error-page__message {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.error-page__suggestion {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+.error-page__nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.error-page__link {
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+}
+.error-page__link.btn-primary {
+  background-color: #007bff;
+}
+.error-page__link.btn-secondary {
+  background-color: #6c757d;
+}
+.error-page__image {
+  margin-top: 2rem;
+}
+.error-page__image img {
+  max-width: 100%;
+  height: auto;
+}
