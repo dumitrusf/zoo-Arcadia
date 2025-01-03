@@ -1,7 +1,7 @@
 // _variables.scss
 @forward './color'; // Importa el mapa de colores con alias "c"
 @forward './typography'; // Importa el mapa de colores con alias "c"
-
+@forward './shadows';
 @forward './fonts';  // Importa el mapa de fuentes con alias "f"
 @forward './font-sizes';  // Importa el mapa de fuentes con alias "f"
 

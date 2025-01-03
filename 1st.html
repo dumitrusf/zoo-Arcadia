@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<div class="filter"> <!-- Filter toggle (open/close) -->
+
+
+    <span class="filter__toggle-label">Open Filter</span>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarFiltrer"
+        aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon btn-filter"></span>
+    </button>
+
+
+
+
+
+    <br>
+
+    <!-- Filter menu -->
+    <div class="filter__container collapse" id="navbarFiltrer">
+
+
+        <form class="filter__form">
+            <fieldset class="filter__fieldset">
+                <legend class="filter__legend">Filter by:</legend>
+
+                <!-- Animal breed filter -->
+                <label for="animal-breed" class="filter__label">Animal breed:</label>
+                <br>
+                <select id="animal-breed" name="animal-breed" class="filter__select">
+                    <option value="" selected>Select animal breed</option>
+                    <option value="mammal">Mammal</option>
+                    <option value="reptile">Reptile</option>
+                    <option value="bird">Bird</option>
+                    <option value="amphibian">Amphibian</option>
+                    <option value="arachnid">Arachnid</option>
+                    <option value="insect">Insect</option>
+                </select>
+                <br>
+                <!-- Habitat filter -->
+                <label for="animal-habitat" class="filter__label">Habitat:</label>
+                <br>
+                <select id="animal-habitat" name="animal-habitat" class="filter__select">
+                    <option value="" selected>Select animal habitat</option>
+                    <option value="savannah">Savannah</option>
+                    <option value="swamp">Swamp</option>
+                    <option value="jungle">Jungle</option>
+                </select>
+                <br>
+                <!-- Nutrition filter -->
+                <label for="nutrition" class="filter__label">Nutrition:</label>
+                <br>
+                <select id="nutrition" name="nutrition" class="filter__select">
+                    <option value="" selected>Select animal nutrition</option>
+                    <option value="carnivorous">Carnivorous</option>
+                    <option value="herbivore">Herbivore</option>
+                    <option value="omnivore">Omnivore</option>
+                </select>
+                <br>
+                <!-- State filter -->
+                <label for="state" class="filter__label">State:</label>
+                <br>
+                <select id="state" name="state" class="filter__select">
+                    <option value="" selected>Select animal state</option>
+                    <option value="healthy">Healthy</option>
+                    <option value="sick">Sick</option>
+                    <option value="injured">Injured</option>
+                    <option value="recovering">Recovering</option>
+                    <option value="quarantined">Quarantined</option>
+                    <option value="pregnant">Pregnant</option>
+                    <option value="deceased">Deceased</option>
+                    <option value="stressed">Stressed</option>
+                    <option value="under-observation">Under Observation</option>
+                    <option value="new-arrival">New Arrival</option>
+                    <option value="endangered">Endangered</option>
+                    <option value="old-age">Old Age</option>
+                    <option value="angry">Angry</option>
+                </select>
+                <br>
+                <!-- Appointment date filter -->
+                <label for="appointment-date" class="filter__label">Appointment date:</label>
+                <br>
+                <input type="date" id="appointment-date" name="appointment-date" class="filter__input-date">
+                <br>
+                <br>
+                <!-- Restart button -->
+                <button type="reset" class="filter__button filter__button--reset">Restart</button>
+            </fieldset>
+        </form>
+
+        <div class="filter__footer">
+            <span class="filter__close-label">Close Filter</span>
+            <button class="filter__toggle-button filter__toggle-button--close">✖</button>
+        </div>
+    </div>
+</div>

@@ -25,25 +25,31 @@
 	<!-- navbar for mobile with his fonts and sizes -->
 	<nav class="d-md-none nav navbar position-fixed">
 		<div class="nav__menu collapse" id="navbarToggler">
-			<ul class="nav__items">
-				<li class="nav__item">
-					<a class="nav__link nav__home" href="./index.html">home</a>
-				</li>
-				<li class="nav__item">
-					<a class="nav__link nav__services" href="./services.html">services</a>
-				</li>
-				<li class="nav__item">
-					<a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
-				</li>
-				<li class="nav__item">
-					<a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
-				</li>
-				<li class="nav__item">
-					<a class="nav__link nav__contact" href="./contact.html">contact</a>
-				</li>
-			</ul>
-			<div class="panda">
-				<img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
+			<div class="nav__m-flex">
+
+				<ul class="nav__items">
+					<li class="nav__item">
+						<a class="nav__link nav__home nav__link--active" href="#">home</a>
+					</li>
+					<li class="nav__item">
+						<a class="nav__link nav__services" href="./services.html">services</a>
+					</li>
+					<li class="nav__item">
+						<a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
+					</li>
+					<li class="nav__item">
+						<a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
+					</li>
+					<li class="nav__item">
+						<a class="nav__link nav__contact" href="./contact.html">contact</a>
+					</li>
+				</ul>
+
+				<a href="/index.html">
+
+					<img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
+				</a>
+
 			</div>
 		</div>
 
@@ -54,7 +60,7 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 
-			<a class="main-logo-link" href="#">
+			<a class="main-logo-link" href="/index.html">
 				<img class="main__logo" src="./src/assets/images/logo-bar.svg" alt="logo site">
 			</a>
 
@@ -63,7 +69,7 @@
 
 
 
-	<!-- navbar for mobile with his fonts and sizes -->
+	<!-- navbar for desk with his fonts and sizes -->
 	<nav class="d-none d-md-block nav navbar position-fixed">
 
 		<div class="bar container-fluid d-flex">
@@ -73,36 +79,58 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 
-			<a class="main-logo-link" href="#">
+			<a class="main-logo-link" href="/index.html">
 				<img class="main__logo" src="./src/assets/images/logo-bar.svg" alt="logo site">
 			</a>
 
 		</div>
 
-		<div class="nav__menu nav__menu--desk collapse" id="navbarToggler">
-			<ul class="nav__items">
-				<li class="nav__item">
-					<a class="nav__link nav__home" href="./index.html">home</a>
-				</li>
-				<li class="nav__item">
-					<a class="nav__link nav__services" href="./services.html">services</a>
-				</li>
-				<li class="nav__item">
-					<a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
-				</li>
-				<li class="nav__item">
-					<a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
-				</li>
-				<li class="nav__item">
-					<a class="nav__link nav__contact" href="./contact.html">contact</a>
-				</li>
-			</ul>
-			<div class="panda">
+		<div class="nav__menu nav__menu--tablet collapse" id="navbarToggler">
+			<div class="nav__m-flex">
+				<ul class="nav__items">
+					<li class="nav__item">
+						<a class="nav__link nav__home" href="./index.html">home</a>
+					</li>
+					<li class="nav__item">
+						<a class="nav__link nav__services" href="./services.html">services</a>
+					</li>
+					<li class="nav__item">
+						<a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
+					</li>
+					<li class="nav__item">
+						<a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
+					</li>
+					<li class="nav__item">
+						<a class="nav__link nav__contact" href="./contact.html">contact</a>
+					</li>
+				</ul>
 				<img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
+
+
 			</div>
-			<div class="logo-desk">
-				<img class="logo-desk" src="./src/assets/images/logo-desk.svg" alt="Logo site">
+			<div class="nav__menu nav__menu--desk collapse" id="navbarToggler">
+				<ul class="nav__items">
+					<li class="nav__item">
+						<a class="nav__link nav__home" href="./index.html">home</a>
+					</li>
+					<li class="nav__item">
+						<a class="nav__link nav__services" href="./services.html">services</a>
+					</li>
+					<li class="nav__item">
+						<a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
+					</li>
+					<li class="nav__item">
+						<a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
+					</li>
+					<li class="nav__item">
+						<a class="nav__link nav__contact" href="./contact.html">contact</a>
+					</li>
+				</ul>
+				<div class="logo-desk">
+					<img class="logo-desk" src="./src/assets/images/logo-desk.svg" alt="Logo site">
+				</div>
 			</div>
+
 		</div>
 	</nav>
 
@@ -131,7 +159,7 @@
 				srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228706&authkey=!ALn94T9OrtbZQpI&ithint=photo&e=yLqmB9"
 				media="(min-width: 744px)" />
 			<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228705&authkey=!AIAenWn29MuniTM&ithint=photo&e=apkdhj"
-				class="hero__image d-block img-fluid" alt="intro animal picked" />
+			class="hero__image d-block" alt="hero image" />
 		</picture>
 
 	</header>
@@ -143,9 +171,9 @@
 
 
 
-	<br>
-	<hr>
-	<br>
+	
+	
+	
 
 	<main class="animal">
 
@@ -159,6 +187,10 @@
 						<td class="animal__data">Juan</td>
 					</tr>
 					<tr class="animal__row">
+						<th class="animal__header">gender:</th>
+						<td class="animal__data">male</td>
+					</tr>
+					<tr class="animal__row">
 						<th class="animal__header">Animal Breed:</th>
 						<td class="animal__data">Crocodile</td>
 					</tr>
@@ -170,7 +202,7 @@
 			</table>
 		</section>
 
-		<br>
+		
 
 		<!-- Sección de Información Adicional -->
 		<section class="animal__about animal__card">
@@ -197,7 +229,7 @@
 			</table>
 		</section>
 
-		<br>
+		
 
 		<!-- Sección de Observación Veterinaria -->
 		<section class="animal__observation animal__card">
@@ -214,7 +246,7 @@
 			</table>
 		</section>
 
-		<br>
+		
 
 		<!-- Sección de Detalles Opcionales -->
 		<section class="animal__optional animal__card">
@@ -226,9 +258,9 @@
 	</main>
 
 
-	<br>
-	<hr>
-	<br>
+	
+	
+	
 
 	<footer class="footer">
 		<section class="footer__hours" id="opening-hours">
@@ -237,26 +269,34 @@
 					<p class="footer__city">BRETAGNE (35380)</p>
 					<p class="footer__forest">FORÊT DE BROCÉLIANDE</p>
 				</div>
-				<p class="footer__hours-title">HEURES D'OUVERTURE</p>
 
-				<table class="footer__hours-table">
-					<tr class="footers__hours-row">
-						<th class="footer__hours-header">Matin:</th>
-						<td class="footer__hours-data">08:45 - 12:00</td>
-					</tr>
-					<tr class="footers__hours-row">
-						<th class="footer__hours-header">Après-midi:</th>
-						<td class="footer__hours-data">14:00 - 18:00</td>
-					</tr>
-					<tr class="footers__hours-row">
-						<th class="footer__hours-header">Samedi:</th>
-						<td class="footer__hours-data">08:45 - 12:00</td>
-					</tr>
-					<tr class="footers__hours-row">
-						<th class="footer__hours-header">Dimanche:</th>
-						<td class="footer__hours-data">Fermé</td>
-					</tr>
-				</table>
+				<div>
+					<p class="footer__hours-title">HEURES D'OUVERTURE</p>
+
+					<table class="footer__hours-table">
+						<tbody>
+
+							<tr class="footer__hours-row">
+								<th class="footer__hours-header">Matin:</th>
+								<td class="footer__hours-data">08:45 - 12:00</td>
+							</tr>
+							<tr class="footer__hours-row">
+								<th class="footer__hours-header">Après-midi:</th>
+								<td class="footer__hours-data">14:00 - 18:00</td>
+							</tr>
+							<tr class="footer__hours-row">
+								<th class="footer__hours-header">Samedi:</th>
+								<td class="footer__hours-data">08:45 - 12:00</td>
+							</tr>
+							<tr class="footer__hours-row">
+								<th class="footer__hours-header">Dimanche:</th>
+								<td class="footer__hours-data">Fermé</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
+
 			</div>
 
 			<!-- the image click redirect to top for this moment just exemple -->
