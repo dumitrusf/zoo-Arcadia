@@ -35,7 +35,7 @@
 
         <!-- Logo site web -->
         <header class="login__header">
-            <a href="./index.html" class="login__logo-link">
+            <a href="./index.php" class="login__logo-link">
                 <img src="./src/assets/images/logo-site-mobile.svg" alt="Logo del sitio" class="login__logo">
             </a>
 
@@ -79,7 +79,7 @@
             </section>
         </div>
 
-        <a href="./login.html" target="_blank" rel="noopener">
+        <a href="./login.php" target="_blank" rel="noopener">
             <span>¿Have you forgotten your password?</span>
         </a>
 

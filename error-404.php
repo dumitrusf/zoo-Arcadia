@@ -32,9 +32,9 @@
             </p>
 
             <nav class="error-page__nav">
-                <a class="btn btn-primary error-page__link" href="index.html">Home</a>
-                <a class="btn btn-secondary error-page__link" href="services.html">Services</a>
-                <a class="btn btn-secondary error-page__link" href="contact.html">Contact</a>
+                <a class="btn btn-primary error-page__link" href="index.php">Home</a>
+                <a class="btn btn-secondary error-page__link" href="services.php">Services</a>
+                <a class="btn btn-secondary error-page__link" href="contact.php">Contact</a>
             </nav>
         </section>
 
