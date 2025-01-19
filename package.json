@@ -1,0 +1,61 @@
+{
+  "name": "zoo-arcadia",
+  "version": "1.0.0",
+  "description": "ECF à présenter devant le jury",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "css": "gulp compileCss"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dumitrusf/zoo-Arcadia.git"
+  },
+  "keywords": [
+    "ECF",
+    "Jury",
+    "zoo",
+    "Arcadia",
+    "Arcadia Zoo",
+    "Ecological Zoo",
+    "Brocéliande animals",
+    "Animal habitats",
+    "savanna",
+    "jungle",
+    "swamp",
+    "Zoo animal health",
+    "Zoo services",
+    "zoo tour",
+    "train Arcadia",
+    "animal information",
+    "Veterinary care",
+    "eco-friendly zoo application",
+    "Wildlife conservation",
+    "Animal feeding and care",
+    "Zoo opening hours",
+    "schedule",
+    "Bretagne wildlife park",
+    "Savanna animals",
+    "Jungle animals",
+    "Swamp animals",
+    "Bretagne wildlife park",
+    "zoo visitors review"
+  ],
+  "author": "Dumitru Stefan-Fernando dumitrulovelace@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dumitrusf/zoo-Arcadia/issues"
+  },
+  "homepage": "https://github.com/dumitrusf/zoo-Arcadia#readme",
+  "devDependencies": {
+    "browser-sync": "^3.0.3",
+    "del": "^8.0.0",
+    "gulp": "^5.0.0",
+    "gulp-dart-sass": "^1.1.0",
+    "sass": "^1.79.4"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3"
+  }
+}
