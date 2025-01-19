@@ -30,16 +30,16 @@
 
                 <ul class="nav__items">
                     <li class="nav__item">
-                        <a class="nav__link nav__home" href="./index.html">home</a>
+                        <a class="nav__link nav__home" href="./index.php">home</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link nav__services" href="./services.html">services</a>
+                        <a class="nav__link nav__services" href="./services.php">services</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
+                        <a class="nav__link nav__habitats" href="./habitats.php">habitats</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
+                        <a class="nav__link nav__animals" href="./all-animals-habitats.php">animals</a>
                     </li>
                     <li class="nav__item">
                         <a class="nav__link nav__contact nav__link--active" href="#">contact</a>
@@ -87,16 +87,16 @@
             <div class="nav__m-flex">
                 <ul class="nav__items">
                     <li class="nav__item">
-                        <a class="nav__link nav__home" href="./index.html">home</a>
+                        <a class="nav__link nav__home" href="./index.php">home</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link nav__services" href="./services.html">services</a>
+                        <a class="nav__link nav__services" href="./services.php">services</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
+                        <a class="nav__link nav__habitats" href="./habitats.php">habitats</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
+                        <a class="nav__link nav__animals" href="./all-animals-habitats.php">animals</a>
                     </li>
                     <li class="nav__item">
                         <a class="nav__link nav__contact nav__link--active" href="#">contact</a>
@@ -109,16 +109,16 @@
             <div class="nav__menu nav__menu--desk collapse" id="navbarToggler">
                 <ul class="nav__items">
                     <li class="nav__item">
-                        <a class="nav__link nav__home" href="./index.html">home</a>
+                        <a class="nav__link nav__home" href="./index.php">home</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link nav__services" href="./services.html">services</a>
+                        <a class="nav__link nav__services" href="./services.php">services</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
+                        <a class="nav__link nav__habitats" href="./habitats.php">habitats</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
+                        <a class="nav__link nav__animals" href="./all-animals-habitats.php">animals</a>
                     </li>
                     <li class="nav__item">
                         <a class="nav__link nav__contact nav__link--active" href="#">contact</a>
@@ -140,10 +140,10 @@
 
         <!-- Logo site web -->
         <header class="contact__header">
-            <a href="./index.html" class="contact__logo-link">
+            <a href="./index.php" class="contact__logo-link">
                 <img src="./src/assets/images/logo-site-mobile.svg" alt="Logo del sitio" class="contact__logo">
             </a>
-            <a href="./login.html" target="_blank" rel="noopener">
+            <a href="./login.php" target="_blank" rel="noopener">
                 <span>Log in?</span>
             </a>
         </header>

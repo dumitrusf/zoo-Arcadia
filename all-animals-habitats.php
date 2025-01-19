@@ -1,163 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="keywords"
-        content="zoo, animals, habitats, Brocéliande, veterinarians, ecology, wildlife park, conservation, zoo services, guided tours, France zoo, sustainable energy, wild animals, animal feeding, zoo management, Arcadia Zoo" />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>ARCADIA - savannah</title>
-
-    <link rel="icon" type="image/svg+xml" href="/src/assets/images/favicon.svg" />
-    <link rel="icon" type="image/png" href="/src/assets/images/favicon.png" />
-
-    <link rel="stylesheet" href="/node_modules/Normalize-css/normalize.css" />
-
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css" />
-
-    <link rel="stylesheet" href="build/css/app.css">
-</head>
-
-<body id="top">
-    <!-- navbar for mobile with his fonts and sizes -->
-    <nav class="d-md-none nav navbar position-fixed">
-        <div class="nav__menu collapse" id="navbarToggler">
-            <div class="nav__m-flex">
-
-                <ul class="nav__items">
-                    <li class="nav__item">
-                        <a class="nav__link nav__home" href="./index.html">home</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="nav__link nav__services" href="./services.html">services</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="nav__link nav__contact" href="./contact.html">contact</a>
-                    </li>
-                </ul>
-
-                <img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
-
-            </div>
-        </div>
-
-        <div class="bar container-fluid d-flex">
-            <button class="bar-button navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <a class="main-logo-link" href="/index.html">
-                <img class="main__logo" src="./src/assets/images/logo-bar.svg" alt="logo site">
-            </a>
-
-        </div>
-    </nav>
-
-
-
-    <!-- navbar for desk with his fonts and sizes -->
-    <nav class="d-none d-md-block nav navbar position-fixed">
-
-        <div class="bar container-fluid d-flex">
-            <button class="bar-button navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <a class="main-logo-link" href="/index.html">
-                <img class="main__logo" src="./src/assets/images/logo-bar.svg" alt="logo site">
-            </a>
-
-        </div>
-
-        <div class="nav__menu nav__menu--tablet collapse" id="navbarToggler">
-            <div class="nav__m-flex">
-                <ul class="nav__items">
-                    <li class="nav__item">
-                        <a class="nav__link nav__home" href="./index.html">home</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="nav__link nav__services" href="./services.html">services</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="nav__link nav__contact" href="./contact.html">contact</a>
-                    </li>
-                </ul>
-                <img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
-
-
-            </div>
-            <div class="nav__menu nav__menu--desk collapse" id="navbarToggler">
-                <ul class="nav__items">
-                    <li class="nav__item">
-                        <a class="nav__link nav__home" href="./index.html">home</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="nav__link nav__services" href="./services.html">services</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="nav__link nav__habitats" href="./habitats.html">habitats</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="nav__link nav__animals" href="./all-animals-habitats.html">animals</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="nav__link nav__contact" href="./contact.html">contact</a>
-                    </li>
-                </ul>
-                <div class="logo-desk">
-                    <img class="logo-desk" src="./src/assets/images/logo-desk.svg" alt="Logo site">
-                </div>
-            </div>
-
-        </div>
-    </nav>
+<?php include "includes/templates/nav.php"; ?>
 
 
 
     <!-- <nav class="nav navbar"> -->
 
-
     <header class="hero">
         <div class="hero__container">
             <div class="hero__text">
-                <h1 class="hero__title">savannah animals</h1>
-                <p class="hero__subtitle">wild animals</p>
+                <h1 class="hero__title">zoo arcadia</h1>
+                <p class="hero__subtitle">discover all animals from the zoo</p>
             </div>
 
-
-            <a class="btn intro__button intro__button--hours" href="#opening-hours">opening hours</a>
-
+            <a href="#opening-hours" class="btn intro__button intro__button--hours">opening hours</a>
         </div>
 
 
         <picture>
             <source
-                srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228689&authkey=!AGb9hyvEkexZX_0&ithint=photo&e=Twgyf3"
+                srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228651&authkey=!AF7FDhfIr6Irtcw&ithint=photo&e=z0hucX"
                 media="(min-width: 1280px)" />
             <source
-                srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228682&authkey=!AO_ZZzP6a6mOPwg&ithint=photo&e=cvlTBH"
+                srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228642&authkey=!ADsg4gNZ0nxjNgs&ithint=photo&e=ROnGBA"
                 media="(min-width: 744px)" />
-            <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228659&authkey=!AMjsIy-pRloHNkM&ithint=photo&e=2wFiuy"
-                class="hero__image d-block img-fluid" alt="hero image intro habitat-1" />
+            <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228640&authkey=!AA8J10uGPzxeMWo&ithint=photo&e=gNK7aA"
+                class="hero__image d-block img-fluid" alt="hero images all animals" />
         </picture>
     </header>
 
@@ -167,8 +33,9 @@
 
 
 
-    <main>
 
+
+    <main>
 
         <nav class="filter">
             <div class="container-fluid">
@@ -204,6 +71,15 @@
                                         <option value="insect">Insect</option>
                                     </select>
 
+                                    <!-- Habitat filter -->
+                                    <label for="animal-habitat" class="filter__label">Habitat:</label>
+
+                                    <select id="animal-habitat" name="animal-habitat" class="filter__select">
+                                        <option value="" selected>Select animal habitat</option>
+                                        <option value="savannah">Savannah</option>
+                                        <option value="swamp">Swamp</option>
+                                        <option value="jungle">Jungle</option>
+                                    </select>
                                     <!-- Nutrition filter -->
                                     <label for="nutrition" class="filter__label">Nutrition:</label>
 
@@ -252,22 +128,44 @@
 
 
 
+
         <div class="intro">
 
 
 
             <article class="intro__article intro__animal">
+                <a class="intro__link" href="./animal-picked.php" target="_blank" rel="noopener noreferrer">
 
-                <a class="intro__link" href="./animal-picked.html" target="_blank" rel="noopener noreferrer">
                     <picture>
                         <source
-                            srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228687&authkey=!AADI2MBU26FJT04&ithint=photo&e=kHFnPE"
+                            srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228653&authkey=!AHvuPgzUrsQF0kU&ithint=photo&e=yyl6sG"
                             media="(min-width: 1280px)" />
                         <source
-                            srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228683&authkey=!ABwE8fNtME0OPUQ&ithint=photo&e=wAwFTK"
+                            srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228643&authkey=!AP6YS2eyrPEr_gA&ithint=photo&e=8G9t8t"
                             media="(min-width: 744px)" />
-                        <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228660&authkey=!ANsNXnRR0er7Ugw&ithint=photo&e=iibNL9"
-                            class="intro__image d-block img-fluid" alt="animal-1" />
+                        <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228638&authkey=!APg7D8eJ-_2D0Lc&ithint=photo&e=RbCz5k"
+                            class="intro__image d-block" alt="animal-1" />
+                    </picture>
+
+                    <div class="intro__details">
+                        <h3 class="intro__name">bujara</h3>
+                        <p class="intro__species">vulture</p>
+                        <p class="intro__habitat">savannah</p>
+                    </div>
+                </a>
+            </article>
+            <article class="intro__article intro__animal">
+                <a class="intro__link" href="./animal-picked.php" target="_blank" rel="noopener noreferrer">
+
+                    <picture>
+                        <source
+                            srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228653&authkey=!AHvuPgzUrsQF0kU&ithint=photo&e=yyl6sG"
+                            media="(min-width: 1280px)" />
+                        <source
+                            srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228643&authkey=!AP6YS2eyrPEr_gA&ithint=photo&e=8G9t8t"
+                            media="(min-width: 744px)" />
+                        <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228638&authkey=!APg7D8eJ-_2D0Lc&ithint=photo&e=RbCz5k"
+                            class="intro__image d-block" alt="animal-1" />
                     </picture>
 
                     <div class="intro__details">
@@ -278,8 +176,10 @@
                 </a>
             </article>
 
+
+
             <article class="intro__article intro__animal">
-                <a class="intro__link" href="./animal-picked.html" target="_blank" rel="noopener noreferrer">
+                <a class="intro__link" href="./animal-picked.php" target="_blank" rel="noopener noreferrer">
 
 
                     <picture>
@@ -290,7 +190,7 @@
                             srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228645&authkey=!ALc4yOxSqIXXcts&ithint=photo&e=xvefO4"
                             media="(min-width: 744px)" />
                         <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228637&authkey=!ABpNXHA_qfVEdLc&ithint=photo&e=XHDMXn"
-                            class="intro__image d-block img-fluid" alt="animal-2" />
+                            class="intro__image d-block" alt="animal-2" />
                     </picture>
                     <div class="intro__details">
                         <h3 class="intro__name">bujara</h3>
@@ -300,36 +200,19 @@
                 </a>
             </article>
 
+
+
             <article class="intro__article intro__animal">
-                <a class="intro__link" href="./animal-picked.html" target="_blank" rel="noopener noreferrer">
+                <a class="intro__link" href="./animal-picked.php" target="_blank" rel="noopener noreferrer">
                     <picture>
                         <source
-                            srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228692&authkey=!AE4JQzILKzGbYcU&ithint=photo&e=JsrNyL"
+                            srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228652&authkey=!AL7eQVJXK5aqJ9k&ithint=photo&e=hneCoo"
                             media="(min-width: 1280px)" />
                         <source
-                            srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228684&authkey=!AI0h-H8_m_fMzvQ&ithint=photo&e=GakFzc"
+                            srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228646&authkey=!ANEWjBbCNzdBSBc&ithint=photo&e=GbOF8g"
                             media="(min-width: 744px)" />
-                        <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228658&authkey=!APQlYnFbMcDRlrA&ithint=photo&e=GGAqjy"
-                            class="intro__image d-block img-fluid" alt="animal-3" />
-                    </picture>
-                    <div class="intro__details">
-                        <h3 class="intro__name">bujara</h3>
-                        <p class="intro__species">vulture</p>
-                        <p class="intro__habitat">savannah</p>
-                    </div>
-                </a>
-            </article>
-            <article class="intro__article intro__animal">
-                <a class="intro__link" href="./animal-picked.html" target="_blank" rel="noopener noreferrer">
-                    <picture>
-                        <source
-                            srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228692&authkey=!AE4JQzILKzGbYcU&ithint=photo&e=JsrNyL"
-                            media="(min-width: 1280px)" />
-                        <source
-                            srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228684&authkey=!AI0h-H8_m_fMzvQ&ithint=photo&e=GakFzc"
-                            media="(min-width: 744px)" />
-                        <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228658&authkey=!APQlYnFbMcDRlrA&ithint=photo&e=GGAqjy"
-                            class="intro__image d-block img-fluid" alt="animal-3" />
+                        <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228639&authkey=!ANa8tcYt_CgCXaQ&ithint=photo&e=tD9HEy"
+                            class="intro__image d-block" alt="animal-3" />
                     </picture>
                     <div class="intro__details">
                         <h3 class="intro__name">bujara</h3>
@@ -359,12 +242,17 @@
                 </li>
             </ul>
         </nav>
-
     </main>
 
 
 
-    
+
+
+
+
+
+
+
 
 
 
