@@ -1,14 +1,33 @@
 <?php
-include "includes/templates/nav.php";
-include "includes/templates/header.php"; 
-
+require "includes/functions.php";
+includeTemplate("nav");
 ?>
 
 
 
+<header class="hero">
+    <div class="hero__container">
+        <div class="hero__text">
+            <h1 class="hero__title">zoo arcadia</h1>
+            <p class="hero__subtitle">Where all animals love to live</p>
+        </div>
 
 
+        <a type="button" class="btn intro__button intro__button--hours" href="#opening-hours">opening hours</a>
 
+    </div>
+
+    <picture>
+        <source
+            srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228542&authkey=!AMl2o5PoyxXuRBU&ithint=photo&e=u9NmzI"
+            media="(min-width: 1280px)" />
+        <source
+            srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228541&authkey=!ALbJeAgEo2Qdg4I&ithint=photo&e=Fo1CxO"
+            media="(min-width: 744px)" />
+        <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228540&authkey=!AMZQRT_KTs11Qf0&ithint=photo&e=xZ2JoE"
+            class="hero__image d-block" alt="hero image" />
+    </picture>
+</header>
 
 <main>
 	<section class="k-about">
@@ -152,68 +171,8 @@ include "includes/templates/header.php";
 	</section>
 </main>
 
+<?php
 
+includeTemplate("footer");
 
-
-
-
-
-
-
-
-
-
-
-<footer class="footer">
-	<section class="footer__hours" id="opening-hours">
-		<div class="footer__location">
-			<div class="footer__location-details">
-				<p class="footer__city">BRETAGNE (35380)</p>
-				<p class="footer__forest">FORÊT DE BROCÉLIANDE</p>
-			</div>
-
-			<div>
-				<p class="footer__hours-title">HEURES D'OUVERTURE</p>
-
-				<table class="footer__hours-table">
-					<tbody>
-
-						<tr class="footer__hours-row">
-							<th class="footer__hours-header">Matin:</th>
-							<td class="footer__hours-data">08:45 - 12:00</td>
-						</tr>
-						<tr class="footer__hours-row">
-							<th class="footer__hours-header">Après-midi:</th>
-							<td class="footer__hours-data">14:00 - 18:00</td>
-						</tr>
-						<tr class="footer__hours-row">
-							<th class="footer__hours-header">Samedi:</th>
-							<td class="footer__hours-data">08:45 - 12:00</td>
-						</tr>
-						<tr class="footer__hours-row">
-							<th class="footer__hours-header">Dimanche:</th>
-							<td class="footer__hours-data">Fermé</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-
-		</div>
-
-		<!-- the image click redirect to top for this moment just exemple -->
-		<a class="footer__logo-link" href="#top">
-			<img class="footer__logo" src="./src/assets/images/logo-site-mobile.svg"
-				alt="Logo del sitio - Volver al inicio">
-		</a>
-	</section>
-
-	<div class="footer__copyright">
-		<small>&copy; 2024 Arcadia ZOO Bretagne | Designed By D.S.F</small>
-	</div>
-</footer>
-<script type="module" src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script type="module" src="/node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
-</body>
-
-</html>
+?>

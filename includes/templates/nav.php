@@ -1,7 +1,14 @@
 <?php
+
+
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Obtener el nombre del archivo actual
 $currentPage = basename($_SERVER['PHP_SELF']);
-
+include './includes/pageTitle.php';
 
 ?>
 
@@ -17,7 +24,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         content="zoo, animals, habitats, Brocéliande, veterinarians, ecology, wildlife park, conservation, zoo services, guided tours, France zoo, sustainable energy, wild animals, animal feeding, zoo management, Arcadia Zoo" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>ARCADIA</title>
+    <title><?= $pageTitle; ?></title>
 
     <link rel="icon" type="image/svg+xml" href="/src/assets/images/favicon.svg" />
 
@@ -33,7 +40,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
 </head>
 
-<body id="top">
+<body class="<?= $currentPage == 'contact.php' ? 'body-contact' : '' ?>" id="top">
 
 
     <!-- navbar for mobile with his fonts and sizes -->
