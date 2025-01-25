@@ -2063,6 +2063,11 @@ select {
 
 .body-contact {
   background-color: #5f0039;
+  display: grid;
+  min-height: 100vh;
+  grid-template-rows: 1fr auto;
+  grid-auto-rows: auto;
+  row-gap: 4rem;
 }
 
 .contact {
