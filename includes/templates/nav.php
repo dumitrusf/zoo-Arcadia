@@ -8,7 +8,7 @@ error_reporting(E_ALL);
 
 // Obtener el nombre del archivo actual
 $currentPage = basename($_SERVER['PHP_SELF']);
-include './includes/pageTitle.php';
+include(__DIR__ . '/../pageTitle.php');
 
 ?>
 
@@ -34,7 +34,7 @@ include './includes/pageTitle.php';
 
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
 
-    <link rel="stylesheet" href="/build/css/app.css">
+    <link rel="stylesheet" href="/public/build/css/app.css">
 
 
 
@@ -66,7 +66,7 @@ include './includes/pageTitle.php';
                     </li>
                 </ul>
 
-                <img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
+                <img class="panda__logo" src="/src/assets/images/panda-menu-mobile.svg" alt="Logo site">
 
             </div>
         </div>
@@ -79,7 +79,7 @@ include './includes/pageTitle.php';
             </button>
 
             <a class="main-logo-link" href="/index.php">
-                <img class="main__logo" src="./src/assets/images/logo-bar.svg" alt="logo site">
+                <img class="main__logo" src="/src/assets/images/logo-bar.svg" alt="logo site">
             </a>
 
         </div>
@@ -98,7 +98,7 @@ include './includes/pageTitle.php';
             </button>
 
             <a class="main-logo-link" href="/index.php">
-                <img class="main__logo" src="./src/assets/images/logo-bar.svg" alt="logo site">
+                <img class="main__logo" src="/src/assets/images/logo-bar.svg" alt="logo site">
             </a>
 
         </div>
@@ -122,7 +122,7 @@ include './includes/pageTitle.php';
                         <a class="nav__link <?= $currentPage == 'contact.php' ? 'nav__link--active' : '' ?>" href="./contact.php">contact</a>
                     </li>
                 </ul>
-                <img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
+                <img class="panda__logo" src="/src/assets/images/panda-menu-mobile.svg" alt="Logo site">
 
 
             </div>
@@ -145,7 +145,7 @@ include './includes/pageTitle.php';
                     </li>
                 </ul>
                 <div class="logo-desk">
-                    <img class="logo-desk" src="./src/assets/images/logo-desk.svg" alt="Logo site">
+                    <img class="logo-desk" src="/src/assets/images/logo-desk.svg" alt="Logo site">
                 </div>
             </div>
 

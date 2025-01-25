@@ -43,7 +43,7 @@ $datecopy = date('d-m-Y');
 
 		<!-- the image click redirect to top for this moment just exemple -->
 		<a class="footer__logo-link" href="#top">
-			<img class="footer__logo" src="./src/assets/images/logo-site-mobile.svg"
+			<img class="footer__logo" src="/src/assets/images/logo-site-mobile.svg"
 				alt="Logo del sitio - Volver al inicio">
 		</a>
 	</section>
