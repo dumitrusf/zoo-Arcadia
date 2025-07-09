@@ -14,16 +14,16 @@ import browserSync from 'browser-sync';
 // Initialize Browsersync
 const bs = browserSync.create();
 
-// Task to clean build/css directory
+// Task to clean public/build/css directory
 export function cleanCss() {
-    return deleteAsync('build/css');
+    return deleteAsync('./public/build/css');
 }
 
 // Task to compile Sass using gulp-dart-sass
 export function css(done) {
     return src("src/scss/app.scss")
         .pipe(dartSassSync().on('error', logError))
-        .pipe(dest("build/css"))
+        .pipe(dest("./public/build/css"))
         .pipe(bs.stream());  // Inyecta el CSS sin recargar toda la página
     done();
 }
@@ -38,17 +38,19 @@ function reload(done) {
 export function watchCss() {
     // Initialize Browsersync server with correct proxy settings
     bs.init({
-        proxy: "localhost:3000",  // Proxy hacia tu servidor PHP
+        proxy: "localhost:3000/public/",  // Proxy hacia tu servidor PHP
         port: 3001,  // Asegura que Browsersync use el puerto 3001 sin conflictos
         notify: false,  // Desactiva las notificaciones en el navegador
         open: true,  // Abre automáticamente el navegador en localhost:3001
     });
 
+    
+
     // Observa los cambios en SCSS y compila
     watch('src/scss/**/*.scss', css);
 
     // Observa los cambios en *todos* los archivos y recarga el navegador
-    watch(['*.php', '*.html', '*.js', '*.css'], reload);  // Recarga cuando cualquier archivo cambia
+    watch(['public/**/*.php', 'public/**/*.html', 'public/**/*.js', 'public/build/css/**/*.css'], reload);  // Recarga cuando cualquier archivo cambia
 }
 
 // Task to clean, compile, and watch
