@@ -1,11 +1,11 @@
 {
-    "name": "juandelatorre/bienes-raices-poo_php_inicio",
-    "description": "Creando un proyecto con POO",
+    "name": "Zoo-Arcadia",
+    "description": "Making the main exam for my title",
     "type": "project",
     "authors": [
         {
-            "name": "Juan Pablo De la torre Valdez",
-            "email": "ptorre@creativaweb.mx"
+            "name": "Dumitru Stefan-Fernando",
+            "email": "dumitrulovelace@gmail.com"
         }
     ],
     "require": {

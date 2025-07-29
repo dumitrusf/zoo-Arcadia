@@ -62,14 +62,14 @@ function watchBackend() {
 
 // 👉 Frontend: gulp public
 function setFrontend(done) {
-  currentProxy = 'http://localhost:3001/zoo-Arcadia/public/';
+  currentProxy = 'http://localhost:3001/public/';
   done();
 }
 exports.public = series(setFrontend, buildCss, serve, watchFrontend);
 
 // 👉 Backend: gulp app  
 function setBackend(done) {
-  currentProxy = 'http://localhost:3002/App/employees/views';
+  currentProxy = 'http://localhost:3002/App/';
   done();
 }
 exports.app = series(setBackend, buildCss, serve, watchBackend);

@@ -39,114 +39,6 @@ include(__DIR__ . '/../../../includes/pageTitle.php');
 <body class="<?= $currentPage == 'contact.php' ? 'body-contact' : '' ?>" id="top">
 
 
-    <!-- navbar for mobile with his fonts and sizes -->
-    <!-- <nav class="d-md-none nav navbar position-fixed">
-        <div class="nav__menu collapse" id="navbarToggler">
-            <div class="nav__m-flex">
-
-                <ul class="nav__items">
-                    <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'index.php' ? 'nav__link--active' : '' ?>" href="../../public/index.php">home</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'services.php' ? 'nav__link--active' : '' ?>" href="../../public/services.php">services</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'habitats.php' ? 'nav__link--active' : '' ?>" href="../../public/habitats.php">habitats</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'all-animals-habitats.php' ? 'nav__link--active' : '' ?>" href="../../public/all-animals-habitats.php">animals</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'contact.php' ? 'nav__link--active' : '' ?>" href="../../public/contact.php">contact</a>
-                    </li>
-                </ul>
-
-                <img class="panda__logo" src="/src/assets/images/panda-menu-mobile.svg" alt="Logo site">
-
-            </div>
-        </div>
-
-        <div class="bar container-fluid d-flex">
-            <button class="bar-button navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <a class="main-logo-link" href="/index.php">
-                <img class="main__logo" src="/src/assets/images/logo-bar.svg" alt="logo site">
-            </a>
-
-        </div>
-    </nav> -->
-
-
-
-    <!-- navbar for desk with his fonts and sizes -->
-    <!-- <nav class="d-none d-md-block nav navbar position-fixed">
-
-        <div class="bar container-fluid d-flex">
-            <button class="bar-button navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <a class="main-logo-link" href="/index.php">
-                <img class="main__logo" src="/src/assets/images/logo-bar.svg" alt="logo site">
-            </a>
-
-        </div>
-
-        <div class="nav__menu nav__menu--tablet collapse" id="navbarToggler">
-            <div class="nav__m-flex">
-                <ul class="nav__items">
-                    <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'index.php' ? 'nav__link--active' : '' ?>" href="../../public/index.php">home</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'services.php' ? 'nav__link--active' : '' ?>" href="../../public/services.php">services</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'habitats.php' ? 'nav__link--active' : '' ?>" href="../../public/habitats.php">habitats</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'all-animals-habitats.php' ? 'nav__link--active' : '' ?>" href="../../public/all-animals-habitats.php">animals</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'contact.php' ? 'nav__link--active' : '' ?>" href="../../public/contact.php">contact</a>
-                    </li>
-                </ul>
-                <img class="panda__logo" src="/src/assets/images/panda-menu-mobile.svg" alt="Logo site">
-
-
-            </div>
-            <div class="nav__menu nav__menu--desk collapse" id="navbarToggler">
-                <ul class="nav__items">
-                    <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'index.php' ? 'nav__link--active' : '' ?>" href="../../public/index.php">home</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'services.php' ? 'nav__link--active' : '' ?>" href="../../public/services.php">services</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'habitats.php' ? 'nav__link--active' : '' ?>" href="../../public/habitats.php">habitats</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'all-animals-habitats.php' ? 'nav__link--active' : '' ?>" href="../../public/all-animals-habitats.php">animals</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'contact.php' ? 'nav__link--active' : '' ?>" href="../../public/contact.php">contact</a>
-                    </li>
-                </ul>
-                <div class="logo-desk">
-                    <img class="logo-desk" src="/src/assets/images/logo-desk.svg" alt="Logo site">
-                </div>
-            </div>
-
-        </div>
-    </nav> -->
 
 
     <nav class="navbar navbar-expand navbar-light bg-light">
@@ -160,7 +52,12 @@ include(__DIR__ . '/../../../includes/pageTitle.php');
     <div class="container">
         <div class="row">
             <div class="col-12">
-                Hola develoteca soy tu CRUD  vagsd
+                <?php
+                
+                include_once __DIR__ . "/../employeesRouter.php";
+                
+                ?>
+                
             </div>
         </div>
     </div>

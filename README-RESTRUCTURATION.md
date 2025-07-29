@@ -6,28 +6,47 @@ This project follows the **Repository Pattern** for data access and implements a
 
 ## Folder Structure (Screaming Architecture Example)
 
+Here is a more detailed view of the structure, showing example files within each domain:
+
 ```
 app/
 ├── animals/
-│   ├── models/
 │   ├── controllers/
-│   ├── views/
-│   └── repositories/
+│   │   └── AnimalsController.php
+│   ├── models/
+│   │   └── Animal.php
+│   ├── repositories/
+│   │   └── AnimalRepository.php
+│   └── views/
+│       ├── index.php
+│       └── show.php
 ├── employees/
-│   ├── models/
 │   ├── controllers/
-│   ├── views/
-│   └── repositories/
+│   │   └── EmployeesController.php
+│   ├── models/
+│   │   └── Employee.php
+│   ├── repositories/
+│   │   └── EmployeeRepository.php
+│   └── views/
+│       ├── dashboard.php
+│       └── profile.php
 ├── services/
-│   ├── models/
 │   ├── controllers/
-│   ├── views/
-│   └── repositories/
+│   │   └── ServicesController.php
+│   ├── models/
+│   │   └── Service.php
+│   ├── repositories/
+│   │   └── ServiceRepository.php
+│   └── views/
+│       ├── index.php
+│       └── edit.php
 └── auth/
-    ├── models/
     ├── controllers/
-    ├── views/
-    └── repositories/
+    │   └── AuthController.php
+    ├── services/
+    │   └── AuthService.php
+    └── views/
+        └── login.php
 ```
 
 ## Git Branching Strategy
