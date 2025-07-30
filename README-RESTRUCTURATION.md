@@ -73,6 +73,66 @@ Each sub-branch is derived from a main branch and is named after the specific ta
 
 This approach allows for clear tracking of work, easy code reviews, and safe integration of new features.
 
+## User Roles & Permissions System
+
+This project implements a comprehensive role-based access control (RBAC) system with three main user types, each with specific permissions and responsibilities that reflect real-world zoo operations.
+
+### 👥 **Role Definitions & Permissions**
+
+#### 🔧 **ADMIN (Zoo Manager)**
+- **User Management**: CRD (Create, Read, Delete) employee and veterinarian accounts
+- **Configuration**: RU (Read, Update) zoo services and opening hours
+- **Content Moderation**: RUD (Read, Update, Delete) testimonials and habitat suggestions (approve/reject)
+- **Animal Management**: CRUD (Create, Read, Update, Delete) all animal data, R medical reports, RU habitats
+- **Analytics**: R (Read) animal visit statistics and click data
+
+#### 🏥 **VETERINARIAN**
+- **Animal Care**: R (Read) all animal basic information
+- **Medical Records**: CRU (Create, Read, Update) medical reports and prescriptions
+- **Habitat Improvements**: CRU (Create, Read, Update) habitat improvement suggestions
+
+#### 👷 **EMPLOYEE**
+- **Content Review**: R (Read) medical reports (for dietary restrictions), RU (Read, Update) testimonial validation
+- **Daily Operations**: RU (Read, Update) zoo services, RU animal feeding records
+
+### 🔄 **Workflow Examples**
+
+#### Habitat Improvement Suggestions:
+1. **Veterinarian**: Creates improvement suggestion
+2. **Admin**: Reviews and approves/rejects suggestion
+3. **Employee**: Can view approved suggestions (if necessary)
+
+#### Medical Care Process:
+1. **Veterinarian**: Creates medical reports and prescriptions
+2. **Employee**: Reads reports to understand dietary restrictions for feeding
+3. **Admin**: Can access all medical data for oversight
+
+### 🏗️ **Technical Implementation**
+
+The system implements a **Hybrid RBAC (Role-Based Access Control)** architecture that combines traditional role-based permissions with direct user permissions for maximum flexibility.
+
+#### **Hybrid Permission Structure:**
+```
+Traditional RBAC:
+users ←→ roles ←→ roles_permissions ←→ permissions
+
+Direct Permission Override:
+users ←→ user_permissions ←→ permissions
+```
+
+#### **Real-World Use Cases:**
+- **Temporary Coverage**: Admin can grant veterinarian permissions to an employee when the vet is sick
+- **Special Assignments**: Give specific permissions without changing the user's primary role
+- **Emergency Situations**: Quickly grant critical permissions during zoo emergencies
+- **Expertise-Based Access**: Allow experienced employees additional permissions in their specialty areas
+
+This hybrid architecture allows for:
+- **Role-based permissions**: Standard permissions assigned by job role
+- **User-specific overrides**: Temporary or permanent additional permissions per user
+- **Operational flexibility**: Adapt to real-world staffing situations
+- **Scalability**: Easy addition of new roles or permissions
+- **Enterprise-grade security**: Granular control over who can do what and when
+
 ## Best Practices
 - Always create a new sub-branch for each task or feature.
 - Use descriptive names for sub-branches (e.g., `feature/login-form-validation`).

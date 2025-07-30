@@ -1,7 +1,37 @@
 -- 2025_01_19_Tables.Sql
 -- The creation of the main tables for zoo arcadia
+
+-- Drop all tables if they exist (in reverse order to avoid foreign key conflicts)
+DROP TABLE IF EXISTS feeding_logs;
+DROP TABLE IF EXISTS nutrition;
+DROP TABLE IF EXISTS health_state_report;
+DROP TABLE IF EXISTS animal_full;
+DROP TABLE IF EXISTS service_logs;
+DROP TABLE IF EXISTS services;
+DROP TABLE IF EXISTS animal_clicks;
+DROP TABLE IF EXISTS animal_general;
+DROP TABLE IF EXISTS breed;
+DROP TABLE IF EXISTS specie;
+DROP TABLE IF EXISTS habitat_suggestion;
+DROP TABLE IF EXISTS habitats;
+DROP TABLE IF EXISTS psw_reset_token;
+DROP TABLE IF EXISTS testimonials;
+DROP TABLE IF EXISTS user_permissions;
+DROP TABLE IF EXISTS roles_permissions;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS permissions;
+DROP TABLE IF EXISTS roles;
+DROP TABLE IF EXISTS slides;
+DROP TABLE IF EXISTS headers;
+DROP TABLE IF EXISTS media_relations;
+DROP TABLE IF EXISTS media_responsive;
+DROP TABLE IF EXISTS media;
+DROP TABLE IF EXISTS bricks;
+DROP TABLE IF EXISTS opening;
+DROP TABLE IF EXISTS form_contact;
+
 -- Form_Contact Table: To store the contact form data
-CREATE TABLE IF NOT EXISTS form_contact (
+CREATE TABLE form_contact (
     id_form INT AUTO_INCREMENT PRIMARY KEY,
     -- Primary key that increases automatically.
     ff_name VARCHAR(50) NOT NULL,
@@ -21,7 +51,7 @@ CREATE TABLE IF NOT EXISTS form_contact (
 --
 --
 -- Opening table: stores opening schedules
-CREATE TABLE IF NOT EXISTS opening (
+CREATE TABLE opening (
     id_opening INT AUTO_INCREMENT PRIMARY KEY,
     -- Unique primary key, self-equal.
     time_slot ENUM("morning", "afternoon", "saturday", "sunday") NOT NULL,
@@ -38,7 +68,7 @@ CREATE TABLE IF NOT EXISTS opening (
 --
 --
 -- Bricks table: represents sections or elements managed by the admin
-CREATE TABLE IF NOT EXISTS bricks (
+CREATE TABLE bricks (
     id_brick INT AUTO_INCREMENT PRIMARY KEY,
     -- Unique Brick identifier.
     b_title VARCHAR(100) NOT NULL,
@@ -53,7 +83,7 @@ CREATE TABLE IF NOT EXISTS bricks (
 --
 --
 -- Medium table: stores multimedia files (images, videos, audios)
-CREATE TABLE IF NOT EXISTS media (
+CREATE TABLE media (
     id_media INT AUTO_INCREMENT PRIMARY KEY,
     -- Unique image identifier
     media_path VARCHAR(2048) NOT NULL,
@@ -74,7 +104,7 @@ CREATE TABLE IF NOT EXISTS media (
 --
 --
 -- Responsive Middle Table: Stores Responsible Versions of the Images
-CREATE TABLE IF NOT EXISTS media_responsive (
+CREATE TABLE media_responsive (
     id_responsive INT AUTO_INCREMENT PRIMARY KEY,
     -- Unique identifier of the responsive version.
     media_id INT NOT NULL,
@@ -91,7 +121,7 @@ CREATE TABLE IF NOT EXISTS media_responsive (
 --
 --
 -- Medium_Relation table: relates multimedia files to other boards in a polymorphic way
-CREATE TABLE IF NOT EXISTS media_relations (
+CREATE TABLE media_relations (
     id_relation INT AUTO_INCREMENT PRIMARY KEY,
     -- Unique identifier of the relationship.
     media_id INT NOT NULL,
@@ -110,7 +140,7 @@ CREATE TABLE IF NOT EXISTS media_relations (
 --
 --
 -- Headers table: stores pages headings
-CREATE TABLE IF NOT EXISTS headers (
+CREATE TABLE headers (
     id_header INT AUTO_INCREMENT PRIMARY KEY,
     -- Single identifier of the heading.
     header_title VARCHAR(100) NOT NULL,
@@ -126,7 +156,7 @@ CREATE TABLE IF NOT EXISTS headers (
 --
 --
 -- Slides table: stores the slides associated with a header
-CREATE TABLE IF NOT EXISTS slides (
+CREATE TABLE slides (
     id_slide INT AUTO_INCREMENT PRIMARY KEY,
     -- Unique slide identifier.
     id_header INT NOT NULL,
@@ -143,7 +173,7 @@ CREATE TABLE IF NOT EXISTS slides (
 --
 --
 -- ROLES TABLE: stores system roles
-CREATE TABLE IF NOT EXISTS roles (
+CREATE TABLE roles (
     id_role INT AUTO_INCREMENT PRIMARY KEY,
     -- Unique role identifier.
     role_name VARCHAR(50) NOT NULL UNIQUE,
@@ -154,7 +184,7 @@ CREATE TABLE IF NOT EXISTS roles (
 --
 --
 -- Permissions table: stores system permissions
-CREATE TABLE IF NOT EXISTS permissions (
+CREATE TABLE permissions (
     id_permission INT AUTO_INCREMENT PRIMARY KEY,
     -- Unique permit identifier.
     permission_name VARCHAR(100) NOT NULL UNIQUE,
@@ -164,20 +194,12 @@ CREATE TABLE IF NOT EXISTS permissions (
 
 --
 --
--- ROLES TABLE: stores system roles
-CREATE TABLE IF NOT EXISTS roles (
-    id_role INT AUTO_INCREMENT PRIMARY KEY,
-    -- Unique role identifier.Self -incremental primary key.
-    role_name VARCHAR(50) NOT NULL UNIQUE,
-    -- Unique name of the role, mandatory.
-    role_description TEXT -- Optional description of the role.
-    -- Note: A role may not be assigned to any user, it is independent.
-);
+-- This table was duplicated and has been removed
 
 --
 --
 -- Users table: stores system users
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE users (
     id_user INT AUTO_INCREMENT PRIMARY KEY,
     -- Single identifier of the self-group user.
     u_first_name VARCHAR(50) NOT NULL,
@@ -198,7 +220,7 @@ CREATE TABLE IF NOT EXISTS users (
 --
 --
 -- User_permissions Table: relates users to permits
-CREATE TABLE IF NOT EXISTS user_permissions (
+CREATE TABLE user_permissions (
     user_id INT NOT NULL,
     -- Relationship with the Users table.
     permission_id INT NOT NULL,
@@ -208,8 +230,19 @@ CREATE TABLE IF NOT EXISTS user_permissions (
 
 --
 --
+-- Roles_permissions Table: relates users to permits
+CREATE TABLE roles_permissions (
+    role_id INT NOT NULL,
+    -- Relationship with the Roles table.
+    permission_id INT NOT NULL,
+    -- Relationship with the permissions table.
+    PRIMARY KEY (role_id, permission_id) -- Composite primary key.
+);
+
+--
+--
 -- TESTIMONIALS TABLE: stores system testimonies
-CREATE TABLE IF NOT EXISTS testimonials (
+CREATE TABLE testimonials (
     id_testimonial INT AUTO_INCREMENT PRIMARY KEY,
     -- Unique testimony identifier.
     pseudo VARCHAR(100) NOT NULL,
@@ -235,7 +268,7 @@ CREATE TABLE IF NOT EXISTS testimonials (
 --
 --
 -- PSW_RESET_ToKEN table: stores the password restoration tokens
-CREATE TABLE IF NOT EXISTS psw_reset_token (
+CREATE TABLE psw_reset_token (
     id_reset_token INT AUTO_INCREMENT PRIMARY KEY,
     -- Single token identifier.
     token VARCHAR(255) NOT NULL UNIQUE,
@@ -252,7 +285,7 @@ CREATE TABLE IF NOT EXISTS psw_reset_token (
 --
 --
 -- Habitats table: defines habitats
-CREATE TABLE IF NOT EXISTS habitats (
+CREATE TABLE habitats (
     id_habitat INT AUTO_INCREMENT PRIMARY KEY,
     -- Single habitat identifier.
     habitat_name VARCHAR(100) NOT NULL,
@@ -263,7 +296,7 @@ CREATE TABLE IF NOT EXISTS habitats (
 --
 --
 -- Habitat_Suggestion Table: Habitats improvements suggestions
-CREATE TABLE IF NOT EXISTS habitat_suggestion (
+CREATE TABLE habitat_suggestion (
     id_hab_suggestion INT AUTO_INCREMENT PRIMARY KEY,
     -- Unique suggestion identifier.
     habitat_id INT NOT NULL,
@@ -284,7 +317,7 @@ CREATE TABLE IF NOT EXISTS habitat_suggestion (
 --
 --
 -- Specie table: defines species
-CREATE TABLE IF NOT EXISTS specie (
+CREATE TABLE specie (
     id_specie INT AUTO_INCREMENT PRIMARY KEY,
     -- Unique identifier of the species.
     specie_name VARCHAR(50) NOT NULL UNIQUE -- Unique name of the species (mammals, birds, etc.).
@@ -294,7 +327,7 @@ CREATE TABLE IF NOT EXISTS specie (
 --
 --
 -- Breed Table: Define races
-CREATE TABLE IF NOT EXISTS breed (
+CREATE TABLE breed (
     id_breed INT AUTO_INCREMENT PRIMARY KEY,
     -- Unique identifier of the breed.
     specie_id INT NOT NULL,
@@ -306,7 +339,7 @@ CREATE TABLE IF NOT EXISTS breed (
 --
 --
 -- Animal_general table: defines animals
-CREATE TABLE IF NOT EXISTS animal_general (
+CREATE TABLE animal_general (
     id_animal_g INT AUTO_INCREMENT PRIMARY KEY,
     -- Unique animal identifier.
     animal_name VARCHAR(50) NOT NULL,
@@ -320,7 +353,7 @@ CREATE TABLE IF NOT EXISTS animal_general (
 --
 --
 -- Animal_Click Table: Records clicks on animals
-CREATE TABLE IF NOT EXISTS animal_clicks (
+CREATE TABLE animal_clicks (
     id_click INT AUTO_INCREMENT PRIMARY KEY,
     -- Single click registration identifier.
     animal_g_id INT NOT NULL,
@@ -340,7 +373,7 @@ CREATE TABLE IF NOT EXISTS animal_clicks (
 --
 --
 -- Services table: defines zoo services
-CREATE TABLE IF NOT EXISTS services (
+CREATE TABLE services (
     id_service INT AUTO_INCREMENT PRIMARY KEY,
     -- Single service identifier.
     service_title VARCHAR(50) NOT NULL,
@@ -355,7 +388,7 @@ CREATE TABLE IF NOT EXISTS services (
 --
 --
 -- Service_logs table: records changes in services
-CREATE TABLE IF NOT EXISTS service_logs (
+CREATE TABLE service_logs (
     id_service_log INT AUTO_INCREMENT PRIMARY KEY,
     -- Unique log identifier.
     service_id INT NOT NULL,
@@ -374,7 +407,7 @@ CREATE TABLE IF NOT EXISTS service_logs (
 --
 --
 -- Animal_Full Table: Complete information of an animal
-CREATE TABLE IF NOT EXISTS animal_full (
+CREATE TABLE animal_full (
     id_full_animal INT AUTO_INCREMENT PRIMARY KEY,
     -- Unique identifier of the complete animal.
 
@@ -394,7 +427,7 @@ CREATE TABLE IF NOT EXISTS animal_full (
 --
 --
 -- Health_state_report table: health reports
-CREATE TABLE IF NOT EXISTS health_state_report (
+CREATE TABLE health_state_report (
     id_hs_report INT AUTO_INCREMENT PRIMARY KEY,
     -- Single identifier of the health report.
 
@@ -423,7 +456,7 @@ CREATE TABLE IF NOT EXISTS health_state_report (
 --
 --
 -- Nutrition Table: Basic nutrition information
-CREATE TABLE IF NOT EXISTS nutrition (
+CREATE TABLE nutrition (
     id_nutrition INT AUTO_INCREMENT PRIMARY KEY,
     -- Single Identifier of the Nutrition Registry.
 
@@ -440,7 +473,7 @@ CREATE TABLE IF NOT EXISTS nutrition (
 --
 --
 -- Feeding_logs table: feeding records
-CREATE TABLE IF NOT EXISTS feeding_logs (
+CREATE TABLE feeding_logs (
     id_feeding_log INT AUTO_INCREMENT PRIMARY KEY,
     -- Single Identifier of the Food Registry.
 

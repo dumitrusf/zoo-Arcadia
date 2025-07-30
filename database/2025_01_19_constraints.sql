@@ -89,6 +89,19 @@ ON UPDATE CASCADE;
 --
 
 -- Verify if there is already a foreign key before adding it
+ALTER TABLE users
+DROP FOREIGN KEY IF EXISTS fk_role_in_users;
+
+-- Relationship: users.role_id -> roles.id_role
+ALTER TABLE users
+ADD CONSTRAINT fk_role_in_users
+FOREIGN KEY (role_id) REFERENCES roles(id_role)
+ON DELETE SET NULL
+ON UPDATE CASCADE;
+--
+--
+
+-- Verify if there is already a foreign key before adding it
 ALTER TABLE testimonials 
 DROP FOREIGN KEY IF EXISTS fk_users_in_testimonials;
 
