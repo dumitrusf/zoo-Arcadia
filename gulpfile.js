@@ -1,55 +1,75 @@
-// Import functions (src, dest, watch) from Gulp
-import gulp, { src, dest, watch, series } from "gulp";
+// 1️⃣ Requiere módulos
+const { src, dest, watch, series } = require('gulp');
+const browserSync = require('browser-sync').create();
+const sass = require('gulp-sass')(require('sass')); // Si usas SASS
+const plumber = require('gulp-plumber');
+const { deleteAsync } = require('del');
 
-// Import default export from gulp-dart-sass and extract required properties
-import dartSassPkg from "gulp-dart-sass";
-const { sync: dartSassSync, logError } = dartSassPkg;
+// 2️⃣ Ruta base para el proxy
+let currentProxy = 'http://localhost:3000/'; // Por defecto: frontend
 
-// Import deleteAsync from 'del' for cleaning
-import { deleteAsync } from 'del';
-
-// Import Browsersync for live-reload
-import browserSync from 'browser-sync';
-
-// Initialize Browsersync
-const bs = browserSync.create();
-
-// Task to clean build/css directory
-export function cleanCss() {
-    return deleteAsync('build/css');
-}
-
-// Task to compile Sass using gulp-dart-sass
-export function css(done) {
-    return src("src/scss/app.scss")
-        .pipe(dartSassSync().on('error', logError))
-        .pipe(dest("build/css"))
-        .pipe(bs.stream());  // Inyecta el CSS sin recargar toda la página
-    done();
-}
-
-// Task to reload the browser on changes to any file
+// 3️⃣ Recarga navegador
 function reload(done) {
-    bs.reload();  // Recarga el navegador completamente
-    done();
+  browserSync.reload();
+  done();
 }
 
-// Watch for changes in SCSS files and any other files
-export function watchCss() {
-    // Initialize Browsersync server with correct proxy settings
-    bs.init({
-        proxy: "localhost:3000",  // Proxy hacia tu servidor PHP
-        port: 3001,  // Asegura que Browsersync use el puerto 3001 sin conflictos
-        notify: false,  // Desactiva las notificaciones en el navegador
-        open: true,  // Abre automáticamente el navegador en localhost:3001
-    });
-
-    // Observa los cambios en SCSS y compila
-    watch('src/scss/**/*.scss', css);
-
-    // Observa los cambios en *todos* los archivos y recarga el navegador
-    watch(['*.php', '*.html', '*.js', '*.css'], reload);  // Recarga cuando cualquier archivo cambia
+// 4️⃣ Limpiar CSS
+function cleanCss() {
+  return deleteAsync('./public/build/css');
 }
 
-// Task to clean, compile, and watch
-export const compileCss = series(cleanCss, css, watchCss);
+// 5️⃣ Compilar SASS/CSS (solo app.scss principal)
+function compileSass() {
+  return src('src/scss/app.scss')       // ① toma SOLO app.scss principal
+    .pipe(plumber())                      // ② evita errores que bloqueen
+    .pipe(sass())                         // ③ compila SASS a CSS
+    .pipe(dest('public/build/css'))      // ④ lo deja en public/build/css
+    .pipe(browserSync.stream());         // ⑤ refresca navegador
+}
+
+// 6️⃣ Tarea combinada: limpiar + compilar
+const buildCss = series(cleanCss, compileSass);
+
+// 7️⃣ Servidor con Browsersync (para frontend o backend)
+function serve(done) {
+  browserSync.init({
+    proxy: currentProxy,    // usa el valor dinámico según tarea
+    open: true,
+    notify: true
+  });
+
+  done();
+}
+
+// 8️⃣ Watch para frontend
+function watchFrontend() {
+  watch('src/scss/**/*.scss', buildCss);      // limpiar + compilar
+  watch('public/**/*.php', reload);
+  watch('public/**/*.html', reload);
+  watch('public/**/*.js', reload);
+  watch('public/build/css/**/*.css', reload);
+}
+
+// 9️⃣ Watch para backend (Screaming Architecture)  
+function watchBackend() {
+    watch('src/scss/**/*.scss', buildCss);    // también vigila CSS
+    watch('App/**/*.php', reload);
+    watch('includes/**/*.php', reload);
+}
+
+// 🔟 Tareas públicas para ejecutar
+
+// 👉 Frontend: gulp public
+function setFrontend(done) {
+  currentProxy = 'http://localhost:3001/public/';
+  done();
+}
+exports.public = series(setFrontend, buildCss, serve, watchFrontend);
+
+// 👉 Backend: gulp app  
+function setBackend(done) {
+  currentProxy = 'http://localhost:3002/App/';
+  done();
+}
+exports.app = series(setBackend, buildCss, serve, watchBackend);

@@ -1,6 +1,6 @@
-@use "base/variables" as v;
-@use "base/mixin-responsive" as m;
-@use "base/mixin-grid-flex" as mgf;
+@use "../base/variables" as v;
+@use "../base/mixin-responsive" as m;
+@use "../base/mixin-grid-flex" as mgf;
 
 .hero-carousel {
   .hero__container {

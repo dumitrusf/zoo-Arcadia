@@ -1,7 +1,14 @@
 <?php
+
+
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Obtener el nombre del archivo actual
 $currentPage = basename($_SERVER['PHP_SELF']);
-
+include(__DIR__ . '/../pageTitle.php');
 
 ?>
 
@@ -17,7 +24,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         content="zoo, animals, habitats, Brocéliande, veterinarians, ecology, wildlife park, conservation, zoo services, guided tours, France zoo, sustainable energy, wild animals, animal feeding, zoo management, Arcadia Zoo" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>ARCADIA</title>
+    <title><?= $pageTitle; ?></title>
 
     <link rel="icon" type="image/svg+xml" href="/src/assets/images/favicon.svg" />
 
@@ -27,13 +34,13 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
 
-    <link rel="stylesheet" href="/build/css/app.css">
+    <link rel="stylesheet" href="/public/build/css/app.css">
 
 
 
 </head>
 
-<body id="top">
+<body class="<?= $currentPage == 'contact.php' ? 'body-contact' : '' ?>" id="top">
 
 
     <!-- navbar for mobile with his fonts and sizes -->
@@ -43,23 +50,23 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
                 <ul class="nav__items">
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'index.php' ? 'nav__link--active' : '' ?>" href="/index.php">home</a>
+                        <a class="nav__link <?= $currentPage == 'index.php' ? 'nav__link--active' : '' ?>" href="../../public/index.php">home</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'services.php' ? 'nav__link--active' : '' ?>" href="./services.php">services</a>
+                        <a class="nav__link <?= $currentPage == 'services.php' ? 'nav__link--active' : '' ?>" href="../../public/services.php">services</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'habitats.php' ? 'nav__link--active' : '' ?>" href="./habitats.php">habitats</a>
+                        <a class="nav__link <?= $currentPage == 'habitats.php' ? 'nav__link--active' : '' ?>" href="../../public/habitats.php">habitats</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'all-animals-habitats.php' ? 'nav__link--active' : '' ?>" href="./all-animals-habitats.php">animals</a>
+                        <a class="nav__link <?= $currentPage == 'all-animals-habitats.php' ? 'nav__link--active' : '' ?>" href="../../public/all-animals-habitats.php">animals</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'contact.php' ? 'nav__link--active' : '' ?>" href="./contact.php">contact</a>
+                        <a class="nav__link <?= $currentPage == 'contact.php' ? 'nav__link--active' : '' ?>" href="../../public/contact.php">contact</a>
                     </li>
                 </ul>
 
-                <img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
+                <img class="panda__logo" src="/src/assets/images/panda-menu-mobile.svg" alt="Logo site">
 
             </div>
         </div>
@@ -72,7 +79,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             </button>
 
             <a class="main-logo-link" href="/index.php">
-                <img class="main__logo" src="./src/assets/images/logo-bar.svg" alt="logo site">
+                <img class="main__logo" src="/src/assets/images/logo-bar.svg" alt="logo site">
             </a>
 
         </div>
@@ -91,7 +98,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             </button>
 
             <a class="main-logo-link" href="/index.php">
-                <img class="main__logo" src="./src/assets/images/logo-bar.svg" alt="logo site">
+                <img class="main__logo" src="/src/assets/images/logo-bar.svg" alt="logo site">
             </a>
 
         </div>
@@ -100,45 +107,45 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             <div class="nav__m-flex">
                 <ul class="nav__items">
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'index.php' ? 'nav__link--active' : '' ?>" href="/index.php">home</a>
+                        <a class="nav__link <?= $currentPage == 'index.php' ? 'nav__link--active' : '' ?>" href="../../public/index.php">home</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'services.php' ? 'nav__link--active' : '' ?>" href="./services.php">services</a>
+                        <a class="nav__link <?= $currentPage == 'services.php' ? 'nav__link--active' : '' ?>" href="../../public/services.php">services</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'habitats.php' ? 'nav__link--active' : '' ?>" href="./habitats.php">habitats</a>
+                        <a class="nav__link <?= $currentPage == 'habitats.php' ? 'nav__link--active' : '' ?>" href="../../public/habitats.php">habitats</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'all-animals-habitats.php' ? 'nav__link--active' : '' ?>" href="./all-animals-habitats.php">animals</a>
+                        <a class="nav__link <?= $currentPage == 'all-animals-habitats.php' ? 'nav__link--active' : '' ?>" href="../../public/all-animals-habitats.php">animals</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'contact.php' ? 'nav__link--active' : '' ?>" href="./contact.php">contact</a>
+                        <a class="nav__link <?= $currentPage == 'contact.php' ? 'nav__link--active' : '' ?>" href="../../public/contact.php">contact</a>
                     </li>
                 </ul>
-                <img class="panda__logo" src="./src/assets/images/panda-menu-mobile.svg" alt="Logo site">
+                <img class="panda__logo" src="/src/assets/images/panda-menu-mobile.svg" alt="Logo site">
 
 
             </div>
             <div class="nav__menu nav__menu--desk collapse" id="navbarToggler">
                 <ul class="nav__items">
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'index.php' ? 'nav__link--active' : '' ?>" href="/index.php">home</a>
+                        <a class="nav__link <?= $currentPage == 'index.php' ? 'nav__link--active' : '' ?>" href="../../public/index.php">home</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'services.php' ? 'nav__link--active' : '' ?>" href="./services.php">services</a>
+                        <a class="nav__link <?= $currentPage == 'services.php' ? 'nav__link--active' : '' ?>" href="../../public/services.php">services</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'habitats.php' ? 'nav__link--active' : '' ?>" href="./habitats.php">habitats</a>
+                        <a class="nav__link <?= $currentPage == 'habitats.php' ? 'nav__link--active' : '' ?>" href="../../public/habitats.php">habitats</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'all-animals-habitats.php' ? 'nav__link--active' : '' ?>" href="./all-animals-habitats.php">animals</a>
+                        <a class="nav__link <?= $currentPage == 'all-animals-habitats.php' ? 'nav__link--active' : '' ?>" href="../../public/all-animals-habitats.php">animals</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'contact.php' ? 'nav__link--active' : '' ?>" href="./contact.php">contact</a>
+                        <a class="nav__link <?= $currentPage == 'contact.php' ? 'nav__link--active' : '' ?>" href="../../public/contact.php">contact</a>
                     </li>
                 </ul>
                 <div class="logo-desk">
-                    <img class="logo-desk" src="./src/assets/images/logo-desk.svg" alt="Logo site">
+                    <img class="logo-desk" src="/src/assets/images/logo-desk.svg" alt="Logo site">
                 </div>
             </div>
 

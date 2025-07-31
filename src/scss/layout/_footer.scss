@@ -1,6 +1,6 @@
-@use "base/variables" as v;
-@use "base/mixin-responsive" as m;
-@use "base/mixin-grid-flex" as mgf;
+@use "../base/variables" as v;
+@use "../base/mixin-responsive" as m;
+@use "../base/mixin-grid-flex" as mgf;
 
 .footer {
   background-color: map-get(map-get(v.$color, solid-colors), c-button-footer);

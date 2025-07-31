@@ -1,9 +1,15 @@
-@use "base/variables" as v;
-@use "base/mixin-responsive" as m;
-@use "base/mixin-grid-flex" as mgf;
+@use "../base/variables" as v;
+@use "../base/mixin-responsive" as m;
+@use "../base/mixin-grid-flex" as mgf;
 
 .body-contact {
   background-color: map-get(map-get(v.$color, solid-colors), c-bg-contact);
+
+  display: grid;
+  min-height: 100vh;
+  grid-template-rows: 1fr auto;
+  grid-auto-rows: auto;
+  row-gap: 4rem;
 }
 
 .contact {
@@ -18,17 +24,16 @@
 
   &__header {
     @include mgf.flexbox(column, unset, center);
-    
+
     a:nth-child(2) {
       margin-top: 2rem;
     }
   }
-  
+
   @include m.responsive(desk) {
     &__form-info {
       @include mgf.flexbox(row, space-between);
-      
-      
+
       div {
         @include mgf.flexbox(column);
         width: calc(100% / 2.05);
