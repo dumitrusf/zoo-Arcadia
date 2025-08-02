@@ -1,10 +1,10 @@
 {
-    "name": "Zoo-Arcadia",
-    "description": "Making the main exam for my title",
+    "name": "dumitru/zoo-arcadia",
+    "description": "making the main exam for my title",
     "type": "project",
     "authors": [
         {
-            "name": "Dumitru Stefan-Fernando",
+            "name": "dumitru stefan-fernando",
             "email": "dumitrulovelace@gmail.com"
         }
     ],
@@ -14,9 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "MVC\\" : "./",
-            "Controllers\\" : "./controllers",
-            "Model\\" : "./models"
+            "Arcadia\\" : "./App"
         }
     }
 }
