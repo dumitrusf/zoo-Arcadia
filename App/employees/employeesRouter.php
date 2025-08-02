@@ -1,6 +1,5 @@
 <?php
 
-
 // Obtenemos el dominio actual ('employees') a partir del directorio del router.
 $domain = basename(__DIR__);
 

@@ -16,11 +16,6 @@ class ComposerStaticInit9b9bef743898022c8417f39ddda9abfd
             'Psr\\Http\\Message\\' => 17,
             'PHPMailer\\PHPMailer\\' => 20,
         ),
-        'M' => 
-        array (
-            'Model\\' => 6,
-            'MVC\\' => 4,
-        ),
         'I' => 
         array (
             'Intervention\\Image\\' => 19,
@@ -29,9 +24,9 @@ class ComposerStaticInit9b9bef743898022c8417f39ddda9abfd
         array (
             'GuzzleHttp\\Psr7\\' => 16,
         ),
-        'C' => 
+        'A' => 
         array (
-            'Controllers\\' => 12,
+            'Arcadia\\' => 8,
         ),
     );
 
@@ -45,14 +40,6 @@ class ComposerStaticInit9b9bef743898022c8417f39ddda9abfd
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
-        'Model\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/models',
-        ),
-        'MVC\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/',
-        ),
         'Intervention\\Image\\' => 
         array (
             0 => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image',
@@ -61,9 +48,9 @@ class ComposerStaticInit9b9bef743898022c8417f39ddda9abfd
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
         ),
-        'Controllers\\' => 
+        'Arcadia\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/controllers',
+            0 => __DIR__ . '/../..' . '/App',
         ),
     );
 
