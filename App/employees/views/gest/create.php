@@ -62,13 +62,13 @@
                     <option selected disabled>
                         Select a role:
                     </option>
-                    <option value="admin">
+                    <option value="1">
                         Admin
                     </option>
-                    <option value="empleado">
+                    <option value="2">
                         Employee
                     </option>
-                    <option value="veterinario">
+                    <option value="3">
                         Veterinarian
                     </option>
 
