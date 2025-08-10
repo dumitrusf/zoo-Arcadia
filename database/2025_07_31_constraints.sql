@@ -308,6 +308,20 @@ ON UPDATE CASCADE;
 --
 
 
+-- Verify if there is already a foreign key before adding it
+ALTER TABLE feeding_logs
+DROP FOREIGN KEY IF EXISTS fk_nutrition_in_feeding_logs;
+
+-- Relationship: feeding_logs.nutrition_id -> nutrition.id_nutrition
+ALTER TABLE feeding_logs
+ADD CONSTRAINT fk_nutrition_in_feeding_logs
+FOREIGN KEY (nutrition_id) REFERENCES nutrition(id_nutrition)
+ON DELETE RESTRICT
+ON UPDATE CASCADE;
+--
+--
+
+
 -- Verify if there is already the foreign key before adding it
 ALTER TABLE feeding_logs
 DROP FOREIGN KEY IF EXISTS fk_users_in_feeding_logs;
