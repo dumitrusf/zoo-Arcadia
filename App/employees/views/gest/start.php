@@ -1,3 +1,5 @@
+<a name="employees" id="" class="btn btn-success" href="?controller=gest&action=create" role="button">Add Employee</a>
+
 <!-- Formulario para ver empleados -->
 <table class="table table-bordered table-striped table-hover">
     <thead>
@@ -29,7 +31,7 @@
                     <div class="btn-group" role="group" aria-label="">
 
                         <a href="#" class="btn btn-sm btn-primary">Edit</a>
-                        <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                        <a href="?controller=gest&action=delete&id=<?php echo $employee->id ;?>" class="btn btn-sm btn-danger">Delete</a>
                     </div>
 
                 </td>
