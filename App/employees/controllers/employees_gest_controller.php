@@ -14,20 +14,20 @@ class EmployeesGestController{
     public function start(){
 
         $employees = Employee::check();
-        print_r($employees);
+        // print_r($employees);
         
         include_once __DIR__ . "/../views/gest/start.php";
     }
     public function create(){
         if($_POST){
-            print_r($_POST);
+            // print_r($_POST);
             $first_name = $_POST['firstname'];
             $last_name = $_POST['lastname'];
             $email = $_POST['email'];
             $role_id = $_POST['role'];
             $psw = $_POST['password'];
             $employee_id = Employee::create($first_name, $last_name, $email, $role_id, $psw);
-            print_r("<br>" . $employee_id);
+            // print_r("<br>" . $employee_id);
         }
         include_once __DIR__ . "/../views/gest/create.php";
     }

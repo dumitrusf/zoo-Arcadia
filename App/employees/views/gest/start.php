@@ -13,18 +13,29 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>1</td>
-            <td>Stefan-Fernando</td>
-            <td>Dumitru</td>
-            <td>dumitrulovelace@gmail.com</td>
-            <td>Admin</td>
-            <td>2024-06-01 10:23:45</td>
-            <td>2024-06-02 14:12:30</td>
-            <td>
-                <a href="#" class="btn btn-sm btn-primary">Edit</a>
-                <a href="#" class="btn btn-sm btn-danger">Delete</a>
-            </td>
-        </tr>
+
+        <?php foreach ($employees as $employee) { ?>
+
+            <tr>
+                <td> <?php echo $employee->id; ?> </td>
+                <td> <?php echo $employee->first_name; ?> </td>
+                <td> <?php echo $employee->last_name; ?> </td>
+                <td> <?php echo $employee->email; ?> </td>
+                <td> <?php echo $employee->role_id; ?> </td>
+                <td> <?php echo $employee->created_at; ?> </td>
+                <td> <?php echo $employee->updated_at; ?> </td>
+                <td>
+
+                    <div class="btn-group" role="group" aria-label="">
+
+                        <a href="#" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                    </div>
+
+                </td>
+            </tr>
+
+        <?php }; ?>
+
     </tbody>
 </table>
