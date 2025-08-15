@@ -90,7 +90,7 @@
 
             <div class="card-footer text-end">
                 <input type="submit" class="btn btn-success" value="Register Employee">
-                <a href="?controller=employees_gest&action=start" class="btn btn-danger">Cancel</a>
+                <a href="?controller=gest&action=start" class="btn btn-danger">Cancel</a>
             </div>
         </form>
 
