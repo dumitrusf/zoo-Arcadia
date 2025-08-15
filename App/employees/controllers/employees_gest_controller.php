@@ -10,16 +10,19 @@ DB::createInstance();
 // Este método devuelve una conexión PDO lista para usar, siguiendo el patrón Singleton.
 // Si es la primera vez que se llama, crea la conexión. Si ya existe, reutiliza la misma.
 
-class EmployeesGestController{
-    public function start(){
+class EmployeesGestController
+{
+    public function start()
+    {
 
         $employees = Employee::check();
         // print_r($employees);
-        
+
         include_once __DIR__ . "/../views/gest/start.php";
     }
-    public function create(){
-        if($_POST){
+    public function create()
+    {
+        if ($_POST) {
             // print_r($_POST);
             $first_name = $_POST['firstname'];
             $last_name = $_POST['lastname'];
@@ -31,7 +34,15 @@ class EmployeesGestController{
         }
         include_once __DIR__ . "/../views/gest/create.php";
     }
-    public function edit(){
+    public function edit()
+    {
         include_once __DIR__ . "/../views/gest/edit.php";
+    }
+
+    public function delete()
+    {
+        
+        echo "<br>";
+        print_r($_GET);
     }
 }
