@@ -10,15 +10,19 @@ class Employee
     public $email;
     public $role_id;
     public $psw;
+    public $created_at;
+    public $updated_at;
 
     // constructor de la clase empleado, que apunta con this a los mismos atributos de la clase sin ($)
-    public function __construct($id, $first_name, $last_name, $email, $role_id, $psw){
+    public function __construct($id, $first_name, $last_name, $email, $role_id, $psw, $created_at, $updated_at){
         $this->id = $id;
         $this->first_name = $first_name;
         $this->last_name = $last_name;
         $this->email = $email;
         $this->role_id = $role_id;
         $this->psw = $psw;
+        $this->created_at = $created_at;
+        $this->updated_at = $updated_at;
     }
 
     // método para obtener todos los empleados de la bdd
@@ -37,7 +41,7 @@ class Employee
         foreach($sql->fetchAll() as $employee){
 
             // guardamos en employeeList los empleados de la bdd en este array para poder mostrarlos en el controlador
-            $employeesList[] = new Employee($employee["id_user"], $employee["u_first_name"], $employee["u_last_name"], $employee["email"], $employee["role_id"], $employee["psw"]); 
+            $employeesList[] = new Employee($employee["id_user"], $employee["u_first_name"], $employee["u_last_name"], $employee["email"], $employee["role_id"], $employee["psw"], $employee["created_at"], $employee["updated_at"]); 
         }
 
         // devolvemos el array de empleados
