@@ -1,10 +1,10 @@
-<a name="employees" id="" class="btn btn-success" href="?controller=gest&action=create" role="button">Add Employee</a>
+<a name="employees" id="" class="btn btn-success mb-2 mt-2" href="?controller=gest&action=create" role="button">Add Employee</a>
 
 <!-- Formulario para ver empleados -->
 <table class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
-            <th scope="col">ID</th>
+            <!-- <th scope="col">ID</th> -->
             <th scope="col">Name</th>
             <th scope="col">Last Name</th>
             <th scope="col">Email</th>
@@ -19,7 +19,7 @@
         <?php foreach ($employees as $employee) { ?>
 
             <tr>
-                <td> <?php echo $employee->id; ?> </td>
+                <!-- <td> <?php echo $employee->id; ?> </td> -->
                 <td> <?php echo $employee->first_name; ?> </td>
                 <td> <?php echo $employee->last_name; ?> </td>
                 <td> <?php echo $employee->email; ?> </td>
