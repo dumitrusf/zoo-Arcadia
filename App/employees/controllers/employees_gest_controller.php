@@ -55,19 +55,26 @@ class EmployeesGestController
     {
 
         $id = $_GET["id"];
+
         $employee = Employee::find($id);
+
+
         print_r($employee);
 
-        if ($_POST){
-
-
-            print_r("<br>");
-            print_r("<br>");
-            print_r($_POST);
-            print_r("<br>");
-            print_r("<br>");
-            
+        if ($_POST) {
+            // print_r($_POST);
+            $id = $_POST['id'];
+            $first_name = $_POST['firstname'];
+            $last_name = $_POST['lastname'];
+            $email = $_POST['email'];
+            $role_id = $_POST['role'];
+            $employee_id = Employee::update($id, $first_name, $last_name, $email, $role_id);
+            // print_r("<br>" . $employee_id);
+            // redireccionamos a la pagina de inicio
+            header("Location: ?controller=gest&action=start");
         }
+
+        
         
         include_once __DIR__ . "/../views/gest/edit.php";
 

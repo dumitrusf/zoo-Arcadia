@@ -109,5 +109,21 @@ class Employee
     }
 
 
+    public static function update($id, $first_name, $last_name, $email, $role_id) {
+        // instanciamos la conexion a la bdd
+        $connectionDB = DB::createInstance();
+
+        // creamos la consulta a la bdd
+        $query = "UPDATE users SET u_first_name = ?, u_last_name = ?, email = ?, role_id = ?, updated_at = NOW() WHERE id_user = ?";
+
+        // preparamos la conexion de la consulta a la bdd
+        $sql = $connectionDB->prepare($query);
+
+        // ejecutamos la consulta ya preparada previamente
+        $sql->execute([$first_name, $last_name, $email, $role_id, $id]);
+
+
+    }
+
     
 }
