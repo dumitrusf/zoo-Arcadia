@@ -57,6 +57,18 @@ class EmployeesGestController
         $id = $_GET["id"];
         $employee = Employee::find($id);
         print_r($employee);
+
+        if ($_POST){
+
+
+            print_r("<br>");
+            print_r("<br>");
+            print_r($_POST);
+            print_r("<br>");
+            print_r("<br>");
+            
+        }
+        
         include_once __DIR__ . "/../views/gest/edit.php";
 
 

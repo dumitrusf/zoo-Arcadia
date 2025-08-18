@@ -76,13 +76,13 @@
                     <option selected value="<?php echo $employee->role_id; ?>">
                         Select a role:
                     </option>
-                    <option value="<?php echo $employee->role_id == 1 ? 'selected' : ''; ?>">
+                    <option value="1" <?php echo $employee->role_id == 1 ? 'selected' : ''; ?>>
                         Admin
                     </option>
-                    <option value="<?php echo $employee->role_id == 2 ? 'selected' : ''; ?>">
+                    <option value="2" <?php echo $employee->role_id == 2 ? 'selected' : ''; ?>>
                         Employee
                     </option>
-                    <option value="<?php echo $employee->role_id == 3 ? 'selected' : ''; ?>">
+                    <option value="3" <?php echo $employee->role_id == 3 ? 'selected' : ''; ?>>
                         Veterinarian
                     </option>
 
