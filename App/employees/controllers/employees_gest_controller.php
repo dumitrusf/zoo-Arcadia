@@ -53,6 +53,12 @@ class EmployeesGestController
 
     public function edit()
     {
+
+        $id = $_GET["id"];
+        $employee = Employee::find($id);
+        print_r($employee);
         include_once __DIR__ . "/../views/gest/edit.php";
+
+
     }
 }
