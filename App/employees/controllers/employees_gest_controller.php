@@ -31,18 +31,28 @@ class EmployeesGestController
             $psw = $_POST['password'];
             $employee_id = Employee::create($first_name, $last_name, $email, $role_id, $psw);
             // print_r("<br>" . $employee_id);
+            // redireccionamos a la pagina de inicio
+            header("Location: ?controller=gest&action=start");
         }
         include_once __DIR__ . "/../views/gest/create.php";
-    }
-    public function edit()
-    {
-        include_once __DIR__ . "/../views/gest/edit.php";
     }
 
     public function delete()
     {
-        
         echo "<br>";
         print_r($_GET);
+        $id = $_GET["id"];
+
+        // Accedemos a la clase interna estática del modelo employee parametrando con id el método delete
+        Employee::delete($id);
+
+        // redireccionamos a la pagina de inicio
+        header("Location: ?controller=gest&action=start");
+    }
+
+
+    public function edit()
+    {
+        include_once __DIR__ . "/../views/gest/edit.php";
     }
 }
