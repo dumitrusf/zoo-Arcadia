@@ -84,5 +84,30 @@ class Employee
         
 
     }
+
+
+
+    public static function find($id) {
+        // instanciamos la conexion a la bdd
+        $connectionDB = DB::createInstance();
+
+        // creamos la consulta a la bdd
+        $query = "SELECT * FROM users WHERE id_user = ?";
+
+        // preparamos la conexion de la consulta a la bdd
+        $sql = $connectionDB->prepare($query);
+
+        // ejecutamos la consulta ya preparada previamente
+        $sql->execute([$id]);
+
+        // guardamos el primer resultado de la consulta en una variable
+        $employee = $sql->fetch();
+
+        // devolvemos el resultado de la consulta
+        return new Employee($employee["id_user"], $employee["u_first_name"], $employee["u_last_name"], $employee["email"], $employee["role_id"], $employee["psw"], $employee["created_at"], $employee["updated_at"]);
+
+    }
+
+
     
 }
