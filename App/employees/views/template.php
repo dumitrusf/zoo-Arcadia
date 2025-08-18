@@ -45,7 +45,7 @@ include(__DIR__ . '/../../../includes/pageTitle.php');
         <div class="nav navbar-nav">
             <a class="nav-item nav-link active" href="#">Sistema <span class="visually-hidden">(current)</span></a>
             <a class="nav-item nav-link" href="#">Home</a>
-            <a class="nav-item nav-link" href="#">Empleados</a>
+            <a class="nav-item nav-link" href="?controller=gest&action=start">Empleados</a>
         </div>
     </nav>
     
