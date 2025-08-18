@@ -66,4 +66,23 @@ class Employee
         // devolvemos el id del empleado creado
         return $connectionDB->lastInsertId();
     }
+
+    public static function delete($id) {
+        // instanciamos la conexion a la bdd
+        $connectionDB = DB::createInstance();
+
+
+        // creamos la consulta a la bdd
+        $query = "DELETE FROM users WHERE id_user = ?";
+
+        // preparamos la conexion de la consulta a la bdd
+        $sql = $connectionDB->prepare($query);
+
+        // ejecutamos la consulta ya preparada previamente
+        $sql->execute([$id]);
+
+        
+
+    }
+    
 }
