@@ -31,6 +31,7 @@
                     class="form-control"
                     id="firstname"
                     placeholder="<?php echo $employee->first_name; ?>"
+                    value="<?php echo $employee->first_name; ?>"
                     name="firstname"
                     aria-describedby="firstname-help"
                     required>
@@ -45,6 +46,7 @@
                     class="form-control"
                     id="lastname"
                     placeholder="<?php echo $employee->last_name; ?>"
+                    value="<?php echo $employee->last_name; ?>"
                     name="lastname"
                     aria-describedby="lastname-help"
                     required>
@@ -58,6 +60,7 @@
                     class="form-control"
                     id="email"
                     placeholder="<?php echo $employee->email; ?>"
+                    value="<?php echo $employee->email; ?>"
                     name="email"
                     aria-describedby="email-help"
                     required>
@@ -76,30 +79,17 @@
                     <option selected value="<?php echo $employee->role_id; ?>">
                         Select a role:
                     </option>
-                    <option value="<?php echo $employee->role_id == 1 ? 'selected' : ''; ?>">
+                    <option value="1" <?php echo $employee->role_id == 1 ? 'selected' : ''; ?>>
                         Admin
                     </option>
-                    <option value="<?php echo $employee->role_id == 2 ? 'selected' : ''; ?>">
+                    <option value="2" <?php echo $employee->role_id == 2 ? 'selected' : ''; ?>>
                         Employee
                     </option>
-                    <option value="<?php echo $employee->role_id == 3 ? 'selected' : ''; ?>">
+                    <option value="3" <?php echo $employee->role_id == 3 ? 'selected' : ''; ?>>
                         Veterinarian
                     </option>
 
                 </select>
-            </div>
-
-            <div class="mb-3">
-                <label for="password"
-                    class="form-label">Password:
-                </label>
-                <input type="password"
-                    class="form-control"
-                    id="password"
-                    placeholder="********"
-                    name="password"
-                    aria-describedby="password-help"
-                    required>
             </div>
 
             <div class="card-footer text-end">
