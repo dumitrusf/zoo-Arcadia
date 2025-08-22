@@ -9,57 +9,57 @@
         <form action="" method="post">
 
             <div class="mb-3">
-                <label for="employee-name"
+                <label for="firstname"
                     class="form-label">Name:
                 </label>
 
                 <input type="text"
                     class="form-control"
-                    id="employee-name"
+                    id="firstname"
                     placeholder="Enter the name"
-                    name="employee-name"
-                    aria-describedby="employee-name-help"
+                    name="firstname"
+                    aria-describedby="firstname-help"
                     required>
             </div>
 
             <div class="mb-3">
-                <label for="employee-lastname"
+                <label for="lastname"
                     class="form-label">Last Name:
                 </label>
 
                 <input type="text"
                     class="form-control"
-                    id="employee-lastname"
+                    id="lastname"
                     placeholder="Enter the last name"
-                    name="employee-lastname"
-                    aria-describedby="employee-lastname-help"
+                    name="lastname"
+                    aria-describedby="lastname-help"
                     required>
             </div>
 
             <div class="mb-3">
-                <label for="employee-email"
+                <label for="email"
                     class="form-label">Email:
                 </label>
                 <input type="email"
                     class="form-control"
-                    id="employee-email"
+                    id="email"
                     placeholder="Enter the mail"
-                    name="employee-email"
-                    aria-describedby="employee-email-help"
+                    name="email"
+                    aria-describedby="email-help"
                     required>
             </div>
 
             <div class="mb-3">
-                <label for="employee-role"
+                <label for="role"
                     class="form-label">Role:
                 </label>
                 <select class="form-select"
-                    id="employee-role"
-                    name="employee-role"
-                    aria-describedby="employee-role-help"
+                    id="role"
+                    name="role"
+                    aria-describedby="role-help"
                     required>
 
-                    <option selected disabled>
+                    <option selected value="">
                         Select a role:
                     </option>
                     <option value="1">
@@ -76,21 +76,21 @@
             </div>
 
             <div class="mb-3">
-                <label for="employee-password"
+                <label for="password"
                     class="form-label">Password:
                 </label>
                 <input type="password"
                     class="form-control"
-                    id="employee-password"
+                    id="password"
                     placeholder="Enter the password"
-                    name="employee-password"
-                    aria-describedby="employee-password-help"
+                    name="password"
+                    aria-describedby="password-help"
                     required>
             </div>
 
             <div class="card-footer text-end">
                 <input type="submit" class="btn btn-success" value="Register Employee">
-                <a href="?controller=employees_gest&action=start" class="btn btn-danger">Cancel</a>
+                <a href="?controller=gest&action=start" class="btn btn-danger">Cancel</a>
             </div>
         </form>
 

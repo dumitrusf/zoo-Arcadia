@@ -38,7 +38,7 @@ class DB {
                 // Y le paso las opciones que definí arriba, como lo de las excepciones.
             );
 
-            echo "<br> Connected to the database!!!!";
+            // echo "<br> Connected to the database!!!! <br> ";
             // Esto solo lo muestro para asegurarme que se conectó bien (útil en pruebas).
         }
 
