@@ -88,9 +88,9 @@
                     required>
             </div>
 
-            <div class="card-footer text-end">
-                <input type="submit" class="btn btn-success" value="Register Employee">
+            <div class="card-footer text-end d-flex justify-content-between align-items-center">
                 <a href="?controller=gest&action=start" class="btn btn-danger">Cancel</a>
+                <input type="submit" class="btn btn-success" value="Register Employee">
             </div>
         </form>
 

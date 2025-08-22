@@ -31,7 +31,7 @@
                     class="form-control"
                     id="firstname"
                     placeholder="<?php echo $employee->first_name; ?>"
-                    value="<?php echo $employee->first_name; ?>"
+                    
                     name="firstname"
                     aria-describedby="firstname-help"
                     required>
@@ -46,7 +46,7 @@
                     class="form-control"
                     id="lastname"
                     placeholder="<?php echo $employee->last_name; ?>"
-                    value="<?php echo $employee->last_name; ?>"
+                    
                     name="lastname"
                     aria-describedby="lastname-help"
                     required>
@@ -60,7 +60,7 @@
                     class="form-control"
                     id="email"
                     placeholder="<?php echo $employee->email; ?>"
-                    value="<?php echo $employee->email; ?>"
+                    
                     name="email"
                     aria-describedby="email-help"
                     required>
@@ -92,9 +92,9 @@
                 </select>
             </div>
 
-            <div class="card-footer text-end">
-                <input type="submit" class="btn btn-success" value="Update Employee">
+            <div class="card-footer text-end d-flex justify-content-between align-items-center">
                 <a href="?controller=gest&action=start" class="btn btn-danger">Cancel</a>
+                <input type="submit" class="btn btn-success" value="Update Employee">
             </div>
         </form>
 
