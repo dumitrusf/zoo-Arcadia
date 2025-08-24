@@ -3,3 +3,4 @@ node_modules/**
 !node_modules/bootstrap/dist/**
 !node_modules/bootstrap-icons/font/**
 !node_modules/@popperjs/core/dist/umd/**
+vendor/
