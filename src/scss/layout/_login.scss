@@ -1,6 +1,6 @@
-@use "base/variables" as v;
-@use "base/mixin-responsive" as m;
-@use "base/mixin-grid-flex" as mgf;
+@use "../base/variables" as v;
+@use "../base/mixin-responsive" as m;
+@use "../base/mixin-grid-flex" as mgf;
 
 .body-login {
   background-color: map-get(map-get(v.$color, solid-colors), c-bg-contact);
