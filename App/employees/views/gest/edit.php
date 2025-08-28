@@ -94,7 +94,7 @@
 
             <div class="card-footer text-end d-flex justify-content-between align-items-start">
                 <input type="submit" class="btn btn-warning px-4" value="Update Employee">
-                <a href="?controller=gest&action=start" class=" btn btn-primary px-4">Cancel</a>
+                <a href="?domain=employees&controller=gest&action=start" class=" btn btn-primary px-4">Cancel</a>
             </div>
         </form>
 

@@ -34,8 +34,8 @@
 
                             <div class="btn-group" role="group" aria-label="">
 
-                                <a href="?domain=employees&controller=gest&action=edit&id=<?php echo $employee->id; ?>" class="btn btn-sm btn-primary">Edit</a>
-                                <a href="?domain=employees&controller=gest&action=delete&id=<?php echo $employee->id; ?>" class="btn btn-sm btn-danger">Delete</a>
+                                <a href="?controller=gest&action=edit&id=<?php echo $employee->id; ?>" class="btn btn-sm btn-primary">Edit</a>
+                                <a href="?controller=gest&action=delete&id=<?php echo $employee->id; ?>" class="btn btn-sm btn-danger">Delete</a>
                             </div>
 
                         </td>

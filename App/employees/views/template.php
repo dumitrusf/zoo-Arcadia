@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 
 // Obtener el nombre del archivo actual
 $currentPage = basename($_SERVER['PHP_SELF']);
-include(__DIR__ . '/../../../includes/pageTitle.php');
+include(__DIR__ . "../../../../includes/pageTitle.php");
 ?>
 
 <!DOCTYPE html>
@@ -44,8 +44,9 @@ include(__DIR__ . '/../../../includes/pageTitle.php');
     <nav class="navbar navbar-expand navbar-light bg-light">
         <div class="nav navbar-nav">
             <a class="nav-item nav-link active" href="#">Sistema <span class="visually-hidden">(current)</span></a>
-            <a class="nav-item nav-link" href="?controller=pages&action=start">Home</a>
-            <a class="nav-item nav-link" href="?controller=gest&action=start">Empleados</a>
+            <a class="nav-item nav-link" href="?domain=employees&controller=pages&action=start">Home</a>
+            <a class="nav-item nav-link" href="?domain=employees&controller=gest&action=start">Empleados</a>
+            <a class="nav-item nav-link" href="?domain=roles&controller=gest&action=start">Roles</a>
         </div>
     </nav>
     
@@ -54,7 +55,8 @@ include(__DIR__ . '/../../../includes/pageTitle.php');
             <div class="col-12">
                 <?php
                 
-                include_once __DIR__ . "/../employeesRouter.php";
+                // Mostrar el contenido capturado del controlador de lo contrario mostrar un mensaje de no hay contenido para mostrar
+                echo $viewContent ?? '<p>No hay contenido para mostrar</p>';
                 
                 ?>
                 
