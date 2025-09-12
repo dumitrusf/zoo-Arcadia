@@ -49,6 +49,10 @@
                     required>
             </div>
 
+
+
+
+
             <div class="mb-3">
                 <label for="role"
                     class="form-label">Role:
@@ -62,15 +66,13 @@
                     <option selected value="">
                         Select a role:
                     </option>
-                    <option value="1">
-                        Admin
-                    </option>
-                    <option value="2">
-                        Employee
-                    </option>
-                    <option value="3">
-                        Veterinarian
-                    </option>
+                    <?php foreach ($roles as $role) { ?>
+
+                        <option value="<?php echo $role->id_role; ?>">
+                            <?php echo $role->role_name; ?>
+                        </option>
+
+                    <?php }; ?>
 
                 </select>
             </div>
