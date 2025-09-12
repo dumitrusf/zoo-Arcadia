@@ -4,7 +4,8 @@
 INSERT INTO roles (id_role, role_name, role_description) VALUES
   (1, 'veterinario', 'Personal veterinario del zoo'),
   (2, 'empleado', 'Empleado general del zoo'),
-  (3, 'admin', 'Administrador del sistema');
+  (3, 'admin', 'Administrador del sistema'),
+  (4, 'contable', 'auditor de cada mes');
 
 -- 2. Insertar USUARIOS (ahora sí existen los roles)
 INSERT INTO users (u_first_name, u_last_name, email, psw, role_id) VALUES 
