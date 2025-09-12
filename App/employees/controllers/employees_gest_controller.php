@@ -2,6 +2,8 @@
 
 include_once __DIR__ . "/../models/employee.php";
 
+require_once __DIR__ . "/../../roles/models/role.php";
+
 include_once __DIR__ . "/../../../database/connection.php";
 // Incluyo el archivo que tiene la clase DB para poder conectarme a la base de datos.
 
@@ -18,10 +20,16 @@ class EmployeesGestController
         $employees = Employee::check();
         // print_r($employees);
 
+        
+
         include_once __DIR__ . "/../views/gest/start.php";
     }
     public function create()
     {
+
+        $roles = Role::check();
+
+        
         if ($_POST) {
             // print_r($_POST);
             $first_name = $_POST['firstname'];
@@ -32,8 +40,10 @@ class EmployeesGestController
             $employee_id = Employee::create($first_name, $last_name, $email, $role_id, $psw);
             // print_r("<br>" . $employee_id);
             // redireccionamos a la pagina de inicio
-            header("Location: ?controller=gest&action=start");
+            header("Location: ?domain=employees&controller=gest&action=start");
         }
+
+        
         include_once __DIR__ . "/../views/gest/create.php";
     }
 
@@ -47,7 +57,7 @@ class EmployeesGestController
         Employee::delete($id);
 
         // redireccionamos a la pagina de inicio
-        header("Location: ?controller=gest&action=start");
+        header("Location: ?domain=employees&controller=gest&action=start");
     }
 
 
@@ -58,6 +68,8 @@ class EmployeesGestController
 
         $employee = Employee::find($id);
 
+        // ¡Añadido! Cargar la lista de todos los roles disponibles
+        $roles = Role::check();
 
         print_r($employee);
 
@@ -71,7 +83,7 @@ class EmployeesGestController
             $employee_id = Employee::update($id, $first_name, $last_name, $email, $role_id);
             // print_r("<br>" . $employee_id);
             // redireccionamos a la pagina de inicio
-            header("Location: ?controller=gest&action=start");
+            header("Location: ?domain=employees&controller=gest&action=start");
         }
 
         

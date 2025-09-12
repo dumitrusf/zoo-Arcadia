@@ -9,17 +9,19 @@ class Employee
     public $last_name;
     public $email;
     public $role_id;
+    public $role_name;
     public $psw;
     public $created_at;
     public $updated_at;
 
     // constructor de la clase empleado, que apunta con this a los mismos atributos de la clase sin ($)
-    public function __construct($id, $first_name, $last_name, $email, $role_id, $psw, $created_at, $updated_at){
+    public function __construct($id, $first_name, $last_name, $email, $role_id, $role_name, $psw, $created_at, $updated_at){
         $this->id = $id;
         $this->first_name = $first_name;
         $this->last_name = $last_name;
         $this->email = $email;
         $this->role_id = $role_id;
+        $this->role_name = $role_name;
         $this->psw = $psw;
         $this->created_at = $created_at;
         $this->updated_at = $updated_at;
@@ -34,14 +36,17 @@ class Employee
         $connectionDB = DB::createInstance();
         
         // creamos la consulta a la bdd, que nos devolverá todos los empleados de la bdd
-        $sql = $connectionDB->query("SELECT * FROM users");
+        $sql = $connectionDB->query("SELECT u.*, r.role_name
+                                     FROM users u 
+                                     INNER JOIN roles r
+                                     ON u.role_id = r.id_role");
 
         // recorremos los empleados obtenidos de la bdd, y los guardamos en el array $employeesList hay que almacenarlos en algún lugar no?
         // para cada iteración de consulta, se crea un nuevo objeto Employee y se agrega al array $employeesList
         foreach($sql->fetchAll() as $employee){
 
             // guardamos en employeeList los empleados de la bdd en este array para poder mostrarlos en el controlador
-            $employeesList[] = new Employee($employee["id_user"], $employee["u_first_name"], $employee["u_last_name"], $employee["email"], $employee["role_id"], $employee["psw"], $employee["created_at"], $employee["updated_at"]); 
+            $employeesList[] = new Employee($employee["id_user"], $employee["u_first_name"], $employee["u_last_name"], $employee["email"], $employee["role_id"], $employee["role_name"], $employee["psw"], $employee["created_at"], $employee["updated_at"]); 
         }
 
         // devolvemos el array de empleados
@@ -92,7 +97,11 @@ class Employee
         $connectionDB = DB::createInstance();
 
         // creamos la consulta a la bdd
-        $query = "SELECT * FROM users WHERE id_user = ?";
+        $query = "SELECT u.*, r.role_name
+                  FROM users u 
+                  INNER JOIN roles r
+                  ON u.role_id = r.id_role
+                  WHERE u.id_user = ?";
 
         // preparamos la conexion de la consulta a la bdd
         $sql = $connectionDB->prepare($query);
@@ -104,7 +113,7 @@ class Employee
         $employee = $sql->fetch();
 
         // devolvemos el resultado de la consulta
-        return new Employee($employee["id_user"], $employee["u_first_name"], $employee["u_last_name"], $employee["email"], $employee["role_id"], $employee["psw"], $employee["created_at"], $employee["updated_at"]);
+        return new Employee($employee["id_user"], $employee["u_first_name"], $employee["u_last_name"], $employee["email"], $employee["role_id"], $employee["role_name"], $employee["psw"], $employee["created_at"], $employee["updated_at"]);
 
     }
 
