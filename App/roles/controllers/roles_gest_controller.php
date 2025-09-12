@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 include_once __DIR__ . "/../models/role.php";
 
 include_once __DIR__ . "/../../../database/connection.php";
@@ -14,9 +16,8 @@ class RolesGestController
 {
     public function start()
     {
-
         $roles = Role::check();
-        // print_r($roles);
+        // No hay mensaje de error en start normal
 
         include_once __DIR__ . "/../views/gest/start.php";
     }
@@ -24,27 +25,34 @@ class RolesGestController
     {
         if ($_POST) {
             // print_r($_POST);
-            $role_name = $_POST['firstname'];
-            $description = $_POST['description'];
+            $role_name = $_POST['role_name'];
+            $description = $_POST['role_description'];
             $role_id = Role::create($role_name, $description);
             // print_r("<br>" . $employee_id);
             // redireccionamos a la pagina de inicio
-            header("Location: ?controller=gest&action=start");
+            header("Location: ?domain=roles&controller=gest&action=start");
         }
         include_once __DIR__ . "/../views/gest/create.php";
     }
 
     public function delete()
     {
-        echo "<br>";
-        print_r($_GET);
-        $id = $_GET["id"];
+        $id = $_GET['id'];
 
-        // Accedemos a la clase interna estática del modelo employee parametrando con id el método delete
-        Role::delete($id);
+        // Obtener resultado con información
+        $result = Role::delete($id);
 
-        // redireccionamos a la pagina de inicio
-        header("Location: ?controller=gest&action=start");
+        // Si tiene éxito: redirigir
+        if (!$result['success']) {
+            // Guardar el mensaje en la session
+
+            $_SESSION["error_message"] = $result["message"];
+        } else {
+            $_SESSION["success_message"] = $result["message"];
+        }
+
+        header("Location: ?domain=roles&controller=gest&action=start");
+        exit();
     }
 
 
@@ -60,19 +68,17 @@ class RolesGestController
 
         if ($_POST) {
             // print_r($_POST);
-            $id = $_POST['id'];
-            $role_name = $_POST['rolename'];
-            $description = $_POST['description'];
+            $id = $_POST['role'];
+            $role_name = $_POST['role_name'];
+            $description = $_POST['role_description'];
             $role_id = Role::update($id, $role_name, $description);
             // print_r("<br>" . $employee_id);
             // redireccionamos a la pagina de inicio
-            header("Location: ?controller=gest&action=start");
+            header("Location: ?domain=roles&controller=gest&action=start");
         }
 
-        
-        
+
+
         include_once __DIR__ . "/../views/gest/edit.php";
-
-
     }
 }
