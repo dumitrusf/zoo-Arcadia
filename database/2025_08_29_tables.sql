@@ -178,7 +178,12 @@ CREATE TABLE roles (
     -- Unique role identifier.
     role_name VARCHAR(50) NOT NULL UNIQUE,
     -- Role name (unique and mandatory).
-    role_description TEXT -- Optional description of the role.
+    role_description TEXT,
+    -- Optional description of the role. 
+    -- Description of the mandatory slide.
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    -- Creation dates
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- Update dates.
 );
 
 --
