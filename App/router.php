@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+require_once __DIR__ . '/../includes/functions.php';
 
 // Si en la URL con get domain no obtenemos el domain por que no hay nada dado, se dara por defecto al dominio employees
 $domain = $_GET["domain"] ?? "employees";
