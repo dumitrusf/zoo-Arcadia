@@ -34,43 +34,56 @@
 
 
 
-        <!-- Formulario para ver roles (puestos) -->
-        <table class="table table-bordered table-striped table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Role-Name</th>
-                    <th scope="col">Role-Description</th>
-                    <th scope="col">Created at</th>
-                    <th scope="col">Updated at</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                <?php foreach ($roles as $role) { ?>
-
+        <div class="table-responsive">
+            <!-- Formulario para ver roles (puestos) -->
+            <table class="table table-hover">
+                <thead class="table-dark">
                     <tr>
-                        <td> <?php echo $role->id_role; ?> </td>
-                        <td> <?php echo $role->role_name; ?> </td>
-                        <td> <?php echo $role->role_description; ?> </td>
-                        <td> <?php echo $role->created_at; ?> </td>
-                        <td> <?php echo $role->updated_at; ?> </td>
-                        <td>
-
-                            <div class="btn-group" role="group" aria-label="">
-
-
-                                <a href="?domain=roles&controller=gest&action=edit&id=<?php echo $role->id_role; ?>" class="btn btn-sm btn-primary">Edit</a>
-
-                                <a href="?domain=roles&controller=gest&action=delete&id=<?php echo $role->id_role; ?>" class="btn btn-sm btn-danger">Delete</a>
-                            </div>
-
-                        </td>
+                        <th class="text-nowrap border border-start-3 border-end-0 rounded-start-3 text-center align-middle" scope="col">ID</th>
+                        <th class="text-nowrap border border-start-1 border-end-1 text-center align-middle" scope="col">Role-Name</th>
+                        <th class="text-nowrap border border-start-1 border-end-1 text-center align-middle" scope="col">Role-Description</th>
+                        <th class="text-nowrap border border-start-1 border-end-1 text-center align-middle" scope="col">Created at</th>
+                        <th class="text-nowrap border border-start-1 border-end-1 text-center align-middle" scope="col">Updated at</th>
+                        <th class="text-nowrap border border-end-3 rounded-end-3 text-center align-middle" scope="col">Actions</th>
                     </tr>
+                </thead>
+                <tbody>
 
-                <?php }; ?>
+                    <?php
+                    $rowNumber = 0;
 
-            </tbody>
-        </table>
+                    foreach ($roles as $role) {
+
+                        $rowNumber++;
+                    ?>
+
+                        <tr class="<?php echo get_row_class($rowNumber); ?>">
+                            <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?> ">   <?php echo $role->id_role; ?> </td>
+                            <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?> ">   <?php echo $role->role_name; ?> </td>
+                            <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?> ">   <?php echo $role->role_description; ?> </td>
+                            <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>">   <?php echo $role->created_at; ?> </td>
+                            <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>">   <?php echo $role->updated_at; ?> </td>
+                            <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>"> 
+
+                                <div class="btn-group" role="group" aria-label="">
+
+
+                                    <a href="?domain=roles&controller=gest&action=edit&id=<?php echo $role->id_role; ?>" class="btn btn-sm btn-primary">Edit</a>
+
+                                    <a href="?domain=roles&controller=gest&action=delete&id=<?php echo $role->id_role; ?>" class="btn btn-sm btn-danger">Delete</a>
+                                </div>
+
+                            </td>
+                        </tr>
+
+                    <?php
+                    }
+                    ?>
+
+                </tbody>
+            </table>
+        </div>
+
+
     </div>
 </div>
