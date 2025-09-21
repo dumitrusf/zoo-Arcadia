@@ -31,13 +31,13 @@ echo 1. Inicializando base de datos...
 %MYSQL_CMD% -u %MYSQL_USER% -p%MYSQL_PASS% < database/2025_01_19_init.sql
 
 echo 2. Creando tablas...
-%MYSQL_CMD% -u %MYSQL_USER% -p%MYSQL_PASS% %DB_NAME% < database/2025_07_30_tables.sql
+%MYSQL_CMD% -u %MYSQL_USER% -p%MYSQL_PASS% %DB_NAME% < database/2025_09_15_tables.sql
 
 echo 3. Agregando constraints...
-%MYSQL_CMD% -u %MYSQL_USER% -p%MYSQL_PASS% %DB_NAME% < database/2025_07_31_constraints.sql
+%MYSQL_CMD% -u %MYSQL_USER% -p%MYSQL_PASS% %DB_NAME% < database/2025_09_15_constraints.sql
 
 echo 4. Insertando datos de prueba...
-%MYSQL_CMD% -u %MYSQL_USER% -p%MYSQL_PASS% %DB_NAME% < database/2025_07_31_seed_data.sql
+%MYSQL_CMD% -u %MYSQL_USER% -p%MYSQL_PASS% %DB_NAME% < database/2025_09_15_seed_data.sql
 
 echo Base de datos actualizada correctamente!
 pause

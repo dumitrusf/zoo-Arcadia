@@ -7,6 +7,7 @@ error_reporting(E_ALL);
 // Obtener el nombre del archivo actual
 $currentPage = basename($_SERVER['PHP_SELF']);
 include(__DIR__ . "../../../../includes/pageTitle.php");
+
 ?>
 
 <!DOCTYPE html>
