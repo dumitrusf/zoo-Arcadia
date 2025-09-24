@@ -100,6 +100,20 @@ ON DELETE SET NULL
 ON UPDATE CASCADE;
 --
 --
+--
+
+-- Verify if there is already a foreign key before adding it
+ALTER TABLE users
+DROP FOREIGN KEY IF EXISTS fk_employee_in_users;
+
+-- Relationship: users.role_id -> roles.id_role
+ALTER TABLE users
+ADD CONSTRAINT fk_employee_in_users
+FOREIGN KEY (employee_id) REFERENCES employees(id_employee)
+ON DELETE SET NULL
+ON UPDATE CASCADE;
+--
+--
 
 -- Verify if there is already a foreign key before adding it
 ALTER TABLE testimonials 
