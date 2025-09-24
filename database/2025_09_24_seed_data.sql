@@ -22,17 +22,17 @@ INSERT INTO employees (id_employee, e_first_name, e_last_name, e_email, e_birthd
 
 -- 4. Insert USERS (credentials and links)
 INSERT INTO users (id_user, username, psw, role_id, employee_id) VALUES 
-  (1, 'mariab', 'hash_password_here', 2, NULL),   -- Maria is an Employee
-  (2, 'dumitrus', 'hash_password_here', 1, 2),  -- Dumitru is a Veterinary
-  (3, 'sophiem', 'hash_password_here', 3, 3),   -- Sophie is an Admin (Boss)
-  (4, 'pierred', 'hash_password_here', NULL, 4),   -- Pierre is a Veterinary
-  (5, 'emmab', 'hash_password_here', 2, 5),     -- Emma is an Employee
-  (6, 'lucasm', 'hash_password_here', NULL, 6),    -- Lucas is an Accountant
-  (7, 'mariel', 'hash_password_here', 3, 7),     -- Marie is an Admin (Boss)
-  (8, 'thomasg', 'hash_password_here', 2, 8),    -- Thomas is an Employee
-  (9, 'julienp', 'hash_password_here', NULL, 9),    -- Julien is an Employee (sin rol en tu caché)
-  (10, 'isabeller', 'hash_password_here', 3, 10),-- Isabelle is an Admin (Boss)
-  (11, 'lakakaa', 'hash_password_here', 2, 11);  -- Lakaka es un Employee (sin rol en tu caché, le asigno 2 por defecto)
+  (1, 'mariab', 'mariab123', 2, NULL),   -- Maria is an Employee
+  (2, 'dumitrus', 'dumitrus123', 1, 2),  -- Dumitru is a Veterinary
+  (3, 'sophiem', 'sophiem123', 3, 3),   -- Sophie is an Admin (Boss)
+  (4, 'pierred', 'pierred123', NULL, 4),   -- Pierre is a Veterinary
+  (5, 'emmab', 'emmab123', 2, 5),     -- Emma is an Employee
+  (6, 'lucasm', 'lucasm123', NULL, 6),    -- Lucas is an Accountant
+  (7, 'mariel', 'mariel123', 3, 7),     -- Marie is an Admin (Boss)
+  (8, 'thomasg', 'thomasg123', 2, 8),    -- Thomas is an Employee
+  (9, 'julienp', 'julienp123', NULL, 9),    -- Julien is an Employee (sin rol en tu caché)
+  (10, 'isabeller', 'isabeller123', 3, 10),-- Isabelle is an Admin (Boss)
+  (11, 'lakakaa', 'lakakaa123', 2, 11);  -- Lakaka es un Employee (sin rol en tu caché, le asigno 2 por defecto)
 
 -- NOTE: The passwords here are placeholders. In a real application, 
 -- they should be generated and hashed using password_hash() in PHP.
