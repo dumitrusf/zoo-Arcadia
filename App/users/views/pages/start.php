@@ -6,7 +6,7 @@
         </p>
         <hr class="my-2">
         <p class="col-md-8 fs-4">
-            we are in EMPLOYEES ✨✨✨✨✨
+            we are in USERS ✨✨✨✨✨
         </p>
         <p class="lead">
             <a href="btn btn-primary btn-lg" href="jumbo action link" role="button"></a>jumbo action name
