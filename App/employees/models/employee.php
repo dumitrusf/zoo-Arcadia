@@ -21,23 +21,23 @@ class Employee
     public $updated_at;
 
     // constructor de la clase empleado, que apunta con this a los mismos atributos de la clase sin ($)
-    public function __construct($id_employee, $e_first_name, $e_last_name, $e_birthdate, $e_phone, $e_email, $e_address, $e_city, $e_zip_code, $e_country, $e_gender, $e_marital_status, $e_role_name, $e_created_at, $e_updated_at)
+    public function __construct($id_employee, $first_name, $last_name, $birthdate, $phone, $email, $address, $city, $zip_code, $country, $gender, $marital_status, $r_role_name, $created_at, $updated_at)
     {
         $this->id = $id_employee;
-        $this->first_name = $e_first_name;
-        $this->last_name = $e_last_name;
-        $this->birthdate = $e_birthdate;
-        $this->phone = $e_phone;
-        $this->email = $e_email;
-        $this->address = $e_address;
-        $this->city = $e_city;
-        $this->zip_code = $e_zip_code;
-        $this->country = $e_country;
-        $this->gender = $e_gender;
-        $this->marital_status = $e_marital_status;
-        $this->role_name = $e_role_name;
-        $this->created_at = $e_created_at;
-        $this->updated_at = $e_updated_at;
+        $this->first_name = $first_name;
+        $this->last_name = $last_name;
+        $this->birthdate = $birthdate;
+        $this->phone = $phone;
+        $this->email = $email;
+        $this->address = $address;
+        $this->city = $city;
+        $this->zip_code = $zip_code;
+        $this->country = $country;
+        $this->gender = $gender;
+        $this->marital_status = $marital_status;
+        $this->role_name = $r_role_name;
+        $this->created_at = $created_at;
+        $this->updated_at = $updated_at;
     }
 
     // método para obtener todos los empleados de la bdd
@@ -61,7 +61,7 @@ class Employee
         foreach ($sql->fetchAll() as $employee) {
 
             // guardamos en employeeList los empleados de la bdd en este array para poder mostrarlos en el controlador
-            $employeesList[] = new Employee($employee["id_employee"], $employee["e_first_name"], $employee["e_last_name"], $employee["e_birthdate"], $employee["e_phone"], $employee["e_email"], $employee["e_address"], $employee["e_city"], $employee["e_zip_code"], $employee["e_country"], $employee["e_gender"], $employee["e_marital_status"], $employee["role_name"], $employee["created_at"], $employee["updated_at"]);
+            $employeesList[] = new Employee($employee["id_employee"], $employee["first_name"], $employee["last_name"], $employee["birthdate"], $employee["phone"], $employee["email"], $employee["address"], $employee["city"], $employee["zip_code"], $employee["country"], $employee["gender"], $employee["marital_status"], $employee["role_name"], $employee["created_at"], $employee["updated_at"]);
         }
 
         // devolvemos el array de empleados
@@ -75,7 +75,7 @@ class Employee
         $connectionDB = DB::createInstance();
 
         // creamos la consulta a la bdd
-        $query = "INSERT INTO employees (e_first_name, e_last_name, e_birthdate, e_phone, e_email, e_address, e_city, e_zip_code, e_country, e_gender, e_marital_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO employees (first_name, last_name, birthdate, phone, email, address, city, zip_code, country, gender, marital_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         // preparamos la conexion de la consulta a la bdd
         $sql = $connectionDB->prepare($query);
@@ -128,7 +128,7 @@ class Employee
         $employee = $sql->fetch();
 
         // devolvemos el resultado de la consulta
-        return new Employee($employee["id_employee"], $employee["e_first_name"], $employee["e_last_name"], $employee["e_birthdate"], $employee["e_phone"], $employee["e_email"], $employee["e_address"], $employee["e_city"], $employee["e_zip_code"], $employee["e_country"], $employee["e_gender"], $employee["e_marital_status"], $employee["role_name"], $employee["created_at"], $employee["updated_at"]);
+        return new Employee($employee["id_employee"], $employee["first_name"], $employee["last_name"], $employee["birthdate"], $employee["phone"], $employee["email"], $employee["address"], $employee["city"], $employee["zip_code"], $employee["country"], $employee["gender"], $employee["marital_status"], $employee["role_name"], $employee["created_at"], $employee["updated_at"]);
         
     }
 
@@ -139,7 +139,7 @@ class Employee
         $connectionDB = DB::createInstance();
 
         // creamos la consulta a la bdd
-        $query = "UPDATE employees SET e_first_name = ?, e_last_name = ?, e_birthdate = ?, e_phone = ?, e_email = ?, e_address = ?, e_city = ?, e_zip_code = ?, e_country = ?, e_gender = ?, e_marital_status = ?, updated_at = NOW() WHERE id_employee = ?";
+        $query = "UPDATE employees SET e_first_name = ?, last_name = ?, birthdate = ?, phone = ?, email = ?, address = ?, city = ?, zip_code = ?, country = ?, gender = ?, marital_status = ?, updated_at = NOW() WHERE id_employee = ?";
 
         // preparamos la conexion de la consulta a la bdd
         $sql = $connectionDB->prepare($query);
