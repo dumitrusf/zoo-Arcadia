@@ -178,7 +178,12 @@ CREATE TABLE roles (
     -- Unique role identifier.
     role_name VARCHAR(50) NOT NULL UNIQUE,
     -- Role name (unique and mandatory).
-    role_description TEXT -- Optional description of the role.
+    role_description TEXT,
+    -- Optional description of the role. 
+    -- Description of the mandatory slide.
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    -- Creation dates
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- Update dates.
 );
 
 --
@@ -192,29 +197,59 @@ CREATE TABLE permissions (
     permission_desc TEXT
 );
 
---
---
--- This table was duplicated and has been removed
+-- Employees table: stores employee information
+CREATE TABLE employees (
+    id_employee INT AUTO_INCREMENT PRIMARY KEY,
+    -- Unique identifier for the employee.
+    first_name VARCHAR(50) NOT NULL,
+    -- Employee's first name.
+    last_name VARCHAR(50) NOT NULL,
+    -- Employee's last name.
+    email VARCHAR(100) NOT NULL UNIQUE,
+    -- Employee's unique contact email.
+    birthdate DATE NOT NULL,
+    -- Employee's birthdate.
+    phone VARCHAR(15) NOT NULL,
+    -- Employee's phone number.
+    address VARCHAR(255) NOT NULL,
+    -- Employee's physical address.
+    city VARCHAR(100) NOT NULL,
+    -- Employee's city of residence.
+    country VARCHAR(100) NOT NULL,
+    -- Employee's country of residence.
+    zip_code VARCHAR(10) NOT NULL,
+    -- Employee's zip code.
+    gender ENUM('male', 'female') NOT NULL,
+    -- Employee's gender.
+    marital_status ENUM('single', 'married', 'divorced', 'widowed') NOT NULL,
+    -- Employee's marital status.
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    -- Timestamp of record creation.
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    -- Timestamp of the last record update.
+);
+
 
 --
 --
 -- Users table: stores system users
 CREATE TABLE users (
     id_user INT AUTO_INCREMENT PRIMARY KEY,
-    -- Single identifier of the self-group user.
-    u_first_name VARCHAR(50) NOT NULL,
-    -- Name of the mandatory user.
-    u_last_name VARCHAR(50) NOT NULL,
-    -- Surname of the mandatory user.
-    email VARCHAR(100) NOT NULL UNIQUE,
-    -- Unique and mandatory email that guarantees that there are no duplicates.
+    -- Unique identifier for the user account.
+    username VARCHAR(50) NOT NULL UNIQUE,
+    -- Unique username for login.
     psw VARCHAR(255) NOT NULL,
-    -- Encrypted, mandatory password.
+    -- Hashed password for security.
     role_id INT DEFAULT NULL,
-    -- Optional relationship with the roles table can be null.
+    -- Foreign key to the 'roles' table, defines user's role.
+    employee_id INT NULL UNIQUE,
+    -- Foreign key to the 'employees' table, links account to an employee.
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    -- Flag to enable or disable the user account.
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    -- Date and time of creation.
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- Date and time of the last update.
+    -- Timestamp of account creation.
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    -- Timestamp of the last account update.
 );
 
 --
