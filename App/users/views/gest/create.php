@@ -88,7 +88,7 @@
                     </option>
                     <?php foreach ($employees as $employee) { ?>
 
-                        <option value="<?php echo $employee->id; ?>">
+                        <option value="<?php echo $employee->id_employee; ?>">
                             <?php echo $employee->last_name; ?>
                         </option>
 
