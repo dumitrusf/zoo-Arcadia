@@ -178,32 +178,6 @@
             </div>
 
 
-
-            <div class="mb-3">
-                <label for="role"
-                    class="form-label">Role:
-                </label>
-                <select class="form-select"
-                    id="role"
-                    name="role"
-                    aria-describedby="role-help"
-                    >
-
-                    <option selected value="">
-                        Select a role:
-                    </option>
-                    <?php foreach ($roles as $role) { ?>
-
-                        <option value="<?php echo $role->id_role; ?>">
-                            <?php echo $role->role_name; ?>
-                        </option>
-
-                    <?php }; ?>
-
-                </select>
-            </div>
-
-
             <div class="card-footer d-flex justify-content-between align-items-center">
                 <input type="submit" class="btn btn-warning px-4" value="Register Employee">
                 <a href="?controller=gest&action=start" class=" px-4 btn btn-primary">Cancel</a>
