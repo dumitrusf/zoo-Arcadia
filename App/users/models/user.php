@@ -86,4 +86,7 @@ class User
 
         return $connectionDB->lastInsertId();
     }
+
+    
+    
 }

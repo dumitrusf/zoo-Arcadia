@@ -129,7 +129,31 @@ class Employee
 
         // devolvemos el resultado de la consulta
         return new Employee($employee["id_employee"], $employee["first_name"], $employee["last_name"], $employee["birthdate"], $employee["phone"], $employee["email"], $employee["address"], $employee["city"], $employee["zip_code"], $employee["country"], $employee["gender"], $employee["marital_status"], $employee["role_name"], $employee["created_at"], $employee["updated_at"]);
+    }
+
+    public static function withoutUsersEmployee()
+    {
+
+        $employeesList = [];
         
+        // instanciamos la conexion a la bdd
+        $connectionDB = DB::createInstance();
+
+        // creamos la consulta a la bdd
+        $query = "SELECT e.id_employee, e.last_name
+                  FROM employees e
+                  LEFT JOIN users u ON e.id_employee = u.employee_id
+                  WHERE u.employee_id IS NULL";
+
+        // preparamos la conexion de la consulta a la bdd
+        $sql = $connectionDB->prepare($query);
+
+        // ejecutamos la consulta ya preparada previamente
+        $sql->execute();
+
+        // guardamos el primer resultado de la consulta en una variable
+        return $sql->fetchAll(PDO::FETCH_OBJ);
+
     }
 
 
@@ -148,4 +172,3 @@ class Employee
         $sql->execute([$first_name, $last_name, $birthdate, $phone, $email, $address, $city, $zip_code, $country, $gender, $marital_status, $id_employee]);
     }
 }
-
