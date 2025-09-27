@@ -24,15 +24,15 @@ INSERT INTO employees (id_employee, first_name, last_name, email, birthdate, pho
 INSERT INTO users (id_user, username, psw, is_active, role_id, employee_id) VALUES 
   (1, 'mariab', 'mariab123', true, 2, NULL),   -- Maria is an Employee
   (2, 'dumitrus', 'dumitrus123', true, 1, 2),  -- Dumitru is a Veterinary
-  (3, 'sophiem', 'sophiem123', true, 3, 3),   -- Sophie is an Admin (Boss)
+  (3, 'sophiem', 'sophiem123', false, 3, 3),   -- Sophie is an Admin (Boss)
   (4, 'pierred', 'pierred123', true, 3, NULL),   -- Pierre is a Veterinary
   (5, 'emmab', 'emmab123', true, 2, 5),     -- Emma is an Employee
   (6, 'lucasm', 'lucasm123', true, NULL, 6),    -- Lucas is an Accountant
-  (7, 'mariel', 'mariel123', true, 3, 7),     -- Marie is an Admin (Boss)
-  (8, 'thomasg', 'thomasg123', true, 2, 8),    -- Thomas is an Employee
+  (7, 'mariel', 'mariel123', false, 3, 7),     -- Marie is an Admin (Boss)
+  (8, 'thomasg', 'thomasg123', false, 2, 8),    -- Thomas is an Employee
   (9, 'julienp', 'julienp123', true, NULL, 9),    -- Julien is an Employee (sin rol en tu caché)
   (10, 'isabeller', 'isabeller123', true, 3, 10),-- Isabelle is an Admin (Boss)
-  (11, 'lakakaa', 'lakakaa123', true, 2, 11);  -- Lakaka es un Employee (sin rol en tu caché, le asigno 2 por defecto)
+  (11, 'lakakaa', 'lakakaa123', false, 2, 11);  -- Lakaka es un Employee (sin rol en tu caché, le asigno 2 por defecto)
 
 -- NOTE: The passwords here are placeholders. In a real application, 
 -- they should be generated and hashed using password_hash() in PHP.

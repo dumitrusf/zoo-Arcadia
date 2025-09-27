@@ -40,12 +40,26 @@ class User
         $connectionDB = DB::createInstance();
 
         // creamos la consulta a la bdd, que nos devolverá todos los empleados de la bdd
-        $sql = $connectionDB->query("SELECT u.*, r.role_name, r.id_role, e.last_name, 
-                                            e.id_employee
+        $sql = $connectionDB->query("SELECT e.last_name, e.id_employee,
+                                            u.id_user, u.username, u.psw, u.is_active, u.created_at, u.updated_at, u.role_id,
+                                            r.role_name
+                                     FROM employees e
+                                     LEFT JOIN users u ON u.employee_id = e.id_employee
+                                     LEFT JOIN roles r ON u.role_id = r.id_role
+
+                                     -- Empleados con o sin usuarios
+                                     
+                                     UNION
+                                     
+                                     -- Usuarios sin empleados
+                                     SELECT NULL as last_name, NULL as id_employee, 
+                                            u.id_user, u.username, u.psw, u.is_active, u.created_at, u.updated_at, u.role_id,
+                                            r.role_name
                                      FROM users u
-                                     LEFT JOIN employees e 
-                                     ON u.employee_id = e.id_employee 
-                                     LEFT JOIN roles r ON r.id_role = u.role_id");
+                                     LEFT JOIN roles r ON u.role_id = r.id_role
+                                     WHERE u.employee_id IS NULL
+                                     
+                                     ORDER BY id_employee, id_user");
 
         // recorremos los empleados obtenidos de la bdd, y los guardamos en el array $employeesList hay que almacenarlos en algún lugar no?
         // para cada iteración de consulta, se crea un nuevo objeto Employee y se agrega al array $employeesList
@@ -59,9 +73,17 @@ class User
         return $usersList;
     }
 
-    
 
+    // Método para crear un nuevo usuario en la bdd
+    public static function create($username, $psw, $role_id, $employee_id)
+    {
+        $connectionDB = DB::createInstance();
 
+        
+        $query = "INSERT INTO users (username, psw, role_id, employee_id) VALUES (?, ?, ?, ?)";
+        $sql = $connectionDB->prepare($query);
+        $sql->execute([$username, $psw, $role_id, $employee_id]);
 
-
+        return $connectionDB->lastInsertId();
+    }
 }
