@@ -34,7 +34,7 @@ class UsersGestController
     {
 
         $roles = Role::check();
-        $employees = Employee::check();
+        $employees = Employee::withoutUsersEmployee();
         
         if ($_POST) {
             // print_r($_POST);
