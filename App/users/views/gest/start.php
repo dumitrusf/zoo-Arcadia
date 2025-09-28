@@ -33,15 +33,17 @@
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>"> <?php echo $user->psw; ?> </td>
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>">
                                 <div class="btn-group" role="group" aria-label="">
-                                <?php $user->is_active; ?>
-                                <?php if ($user->is_active == 1): ?>
-                                    <span class="btn btn-sm bg-success text-white">Activated</span>
-                                    <a href="?domain=users&controller=gest&action=deactivate&id=<?php echo $user->id; ?>" class="btn btn-sm btn-warning">Deactivate</a>
-                                <?php else: ?>
-                                    <span class="btn btn-sm bg-danger text-white">Deactivated</span>
-                                    <a href="?domain=users&controller=gest&action=activate&id=<?php echo $user->id; ?>" class="btn btn-sm btn-success text-white">Activate</a>
-                                <?php endif; ?>
+                                    <?php if ($user->is_active == 1): ?>
+                                        <span class="btn btn-sm bg-success text-white">Activated</span>
+                                        <a href="?domain=users&controller=gest&action=toggleActivation&id=<?php echo $user->id; ?>" class="btn btn-sm btn-warning">Deactivate</a>
+                                    <?php else: ?>
+                                        <a href="?domain=users&controller=gest&action=toggleActivation&id=<?php echo $user->id; ?>" class="btn btn-sm btn-primary text-white">Activate</a>
+                                        <span class="btn btn-sm bg-danger text-white">Deactivated</span>
+                                    <?php endif; ?>
+
+
                                 </div>
+                                <?php echo $user->is_active; ?>
                             </td>
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>"> <?php echo $user->role_name; ?> </td>
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>"> <?php echo $user->employee_last_name; ?> </td>

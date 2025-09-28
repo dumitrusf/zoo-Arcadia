@@ -21,7 +21,7 @@ class UsersGestController
     {
 
         $users = User::check();
-            $is_active = $_POST['is_active'];
+        $is_active = $_POST['is_active'];
         // print_r($users);
 
 
@@ -56,4 +56,20 @@ class UsersGestController
 
         include_once __DIR__ . "/../views/gest/create.php";
     }
+
+    public function delete()
+    {
+        $id_user = $_GET['id'];
+        User::delete($id_user);
+        header("Location: ?domain=users&controller=gest&action=start");
+    }
+
+
+    public function toggleActivation(){
+        $id_user = $_GET["id"];
+        User::toggleActive($id_user);
+        header("Location: ?domain=users&controller=gest&action=start");
+
+    }
+    
 }
