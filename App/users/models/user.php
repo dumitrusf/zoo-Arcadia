@@ -86,4 +86,39 @@ class User
 
         return $connectionDB->lastInsertId();
     }
+
+    
+    public static function delete($id_user)
+    {
+        // instanciamos la conexion a la bdd
+        $connectionDB = DB::createInstance();
+
+
+        // creamos la consulta a la bdd
+        $query = "DELETE FROM users WHERE id_user = ?";
+
+        // preparamos la conexion de la consulta a la bdd
+        $sql = $connectionDB->prepare($query);
+
+        // ejecutamos la consulta ya preparada previamente
+        $sql->execute([$id_user]);
+    }
+
+    public static function toggleActive($id_user){
+        
+        $connectionDB = DB::createInstance();
+
+
+        $query = "UPDATE users 
+                  SET is_active = NOT is_active, 
+                  updated_at = NOW() 
+                  WHERE id_user = ?";
+
+        $sql = $connectionDB->prepare($query);
+        $sql->execute([$id_user]);
+
+                 
+    }
+    
+    
 }
