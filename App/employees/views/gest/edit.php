@@ -196,31 +196,6 @@
                 </select>
             </div>
 
-            <div class="mb-3">
-                <label for="role"
-                    class="form-label">role:
-                </label>
-
-                <!-- despues de hacer el dominio users, venir aqui a continuar ya que el dto sera purista y meteremos la actualizacion de rol en el controlador entre header location y los datos de edit ahi pondremos lo de actualizar rol con user::update -->
-                
-                <!-- <select class="form-select"
-                    id="role"
-                    name="role"
-                    aria-describedby="marital_status-help">
-
-                    <option selected value="">Select a role:</option>
-
-                    <?php foreach ($roles as $role) { ?>
-                        <option
-                            value="<?php echo $role->id_role; ?>"
-                            <?php echo ($employee->role_name == $role->role_name) ? 'selected' : ''; ?>>
-                            <?php echo $role->role_name; ?>
-                        </option>
-                    <?php }; ?>
-
-                </select> -->
-            </div>
-
             <div class="card-footer text-end d-flex justify-content-between align-items-start">
                 <input type="submit" class="btn btn-warning px-4" value="Update Employee">
                 <a href="?domain=employees&controller=gest&action=start" class=" btn btn-primary px-4">Cancel</a>
