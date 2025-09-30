@@ -163,7 +163,7 @@ class Employee
         $connectionDB = DB::createInstance();
 
         // creamos la consulta a la bdd
-        $query = "UPDATE employees SET e_first_name = ?, last_name = ?, birthdate = ?, phone = ?, email = ?, address = ?, city = ?, zip_code = ?, country = ?, gender = ?, marital_status = ?, updated_at = NOW() WHERE id_employee = ?";
+        $query = "UPDATE employees SET first_name = ?, last_name = ?, birthdate = ?, phone = ?, email = ?, address = ?, city = ?, zip_code = ?, country = ?, gender = ?, marital_status = ?, updated_at = NOW() WHERE id_employee = ?";
 
         // preparamos la conexion de la consulta a la bdd
         $sql = $connectionDB->prepare($query);
