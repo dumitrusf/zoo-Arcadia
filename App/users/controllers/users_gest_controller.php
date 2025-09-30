@@ -71,5 +71,43 @@ class UsersGestController
         header("Location: ?domain=users&controller=gest&action=start");
 
     }
+
+
+    public function edit()
+    {
+        
+        $id_user = $_GET["id"];
+        $user = User::find($id_user);
+        $employees = Employee::check();
+        $roles = Role::check();
+
+
+        // ¡Añadido! Cargar la lista de todos los roles disponibles
+        $roles = Role::check();
+
+        print_r($user);
+
+        if ($_POST) {
+            // print_r($_POST);
+            $id_user = $_POST['id'];
+            $username = $_POST['username'];
+            $psw = $_POST['psw'];
+            $role_id = $_POST['role'];
+            $employee_id = $_POST['employee'];
+            $user_id = User::update($username, $psw, $role_id, $employee_id, $id_user);
+            // print_r("<br>" . $employee_id);
+            // redireccionamos a la pagina de inicio
+
+            
+            
+            header("Location: ?domain=users&controller=gest&action=start");
+        }
+
+
+
+
+        include_once __DIR__ . "/../views/gest/edit.php";
+    }
+    
     
 }
