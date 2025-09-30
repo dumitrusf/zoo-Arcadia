@@ -74,6 +74,41 @@ class User
     }
 
 
+
+
+
+    public static function find($id_user)
+    {
+        // instanciamos la conexion a la bdd
+        $connectionDB = DB::createInstance();
+
+        // creamos la consulta a la bdd
+        $query = "SELECT u.*, e.id_employee, e.last_name, r.role_name, r.id_role
+                  FROM users u
+                  LEFT JOIN employees e 
+                  ON e.id_employee = u.employee_id
+                  LEFT JOIN roles r ON r.id_role = u.role_id
+                  WHERE u.id_user = ?";
+
+
+
+        // preparamos la conexion de la consulta a la bdd
+        $sql = $connectionDB->prepare($query);
+
+        // ejecutamos la consulta ya preparada previamente
+        $sql->execute([$id_user]);
+
+        // guardamos el primer resultado de la consulta en una variable
+        $user = $sql->fetch();
+
+        // devolvemos el resultado de la consulta
+        return new User($user["id_user"], $user["username"], $user["psw"], $user["role_id"], $user["role_name"], $user["employee_id"], $user["last_name"], $user["is_active"], $user["created_at"], $user["updated_at"]);
+    }
+    
+    
+    
+
+
     // Método para crear un nuevo usuario en la bdd
     public static function create($username, $psw, $role_id, $employee_id)
     {
@@ -120,5 +155,20 @@ class User
                  
     }
     
+
+    public static function update($username, $psw, $role_id, $employee_id, $id_user)
+    {
+        // instanciamos la conexion a la bdd
+        $connectionDB = DB::createInstance();
+
+        // creamos la consulta a la bdd
+        $query = "UPDATE users SET username = ?, psw = ?, role_id = ?, employee_id = ?, updated_at = NOW() WHERE id_user = ?";
+
+        // preparamos la conexion de la consulta a la bdd
+        $sql = $connectionDB->prepare($query);
+
+        // ejecutamos la consulta ya preparada previamente
+        $sql->execute([$username, $psw, $role_id, $employee_id, $id_user]);
+    }
     
 }
