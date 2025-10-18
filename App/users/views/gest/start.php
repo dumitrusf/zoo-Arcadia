@@ -55,8 +55,15 @@
 
 
 
-                                    <a href="?domain=users&controller=gest&action=edit&id=<?php echo $user->id; ?>" class="btn btn-sm btn-primary">Edit</a>
-                                    <a href="?domain=users&controller=gest&action=delete&id=<?php echo $user->id; ?>" class="btn btn-sm btn-danger">Delete</a>
+                                    <?php if (isset($user->id) && $user->id != null): ?>
+                                        <!-- Es un usuario real, enviamos su ID para editarlo -->
+                                        <a href="?domain=users&controller=gest&action=edit&id=<?php echo $user->id; ?>" class="btn btn-sm btn-primary">Edit</a>
+                                        <a href="?domain=users&controller=gest&action=delete&id=<?php echo $user->id; ?>" class="btn btn-sm btn-danger">Delete</a>
+                                    <?php else: ?>
+                                        <!-- Es solo un empleado, enviamos su ID para asignarle una cuenta -->
+                                        <a href="?domain=users&controller=gest&action=edit&assign_to_employee=<?php echo $user->employee_id; ?>" class="btn btn-sm btn-info">Assign</a>
+                                    <?php endif; ?>
+                                    
                                 </div>
 
                             </td>

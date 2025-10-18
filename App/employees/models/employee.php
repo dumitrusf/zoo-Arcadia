@@ -131,7 +131,7 @@ class Employee
         return new Employee($employee["id_employee"], $employee["first_name"], $employee["last_name"], $employee["birthdate"], $employee["phone"], $employee["email"], $employee["address"], $employee["city"], $employee["zip_code"], $employee["country"], $employee["gender"], $employee["marital_status"], $employee["role_name"], $employee["created_at"], $employee["updated_at"]);
     }
 
-    public static function withoutUsersEmployee()
+    public static function withoutUserEmployee()
     {
 
         $employeesList = [];
