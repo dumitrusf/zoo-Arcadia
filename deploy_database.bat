@@ -37,7 +37,7 @@ echo 3. Agregando constraints...
 %MYSQL_CMD% -u %MYSQL_USER% -p%MYSQL_PASS% %DB_NAME% < database/2025_09_15_constraints.sql
 
 echo 4. Insertando datos de prueba...
-%MYSQL_CMD% -u %MYSQL_USER% -p%MYSQL_PASS% %DB_NAME% < database/2025_09_24_seed_data.sql
+%MYSQL_CMD% -u %MYSQL_USER% -p%MYSQL_PASS% %DB_NAME% < database/2025_10_03_seed_data.sql
 
 echo Base de datos actualizada correctamente!
 pause
