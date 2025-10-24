@@ -76,3 +76,46 @@ INSERT INTO users (id_user, username, psw, is_active, role_id, employee_id) VALU
   (29, 'stephanieh', 'stephanieh123', false, 2, NULL), 
   (30, 'benoita', 'benoita123', false, 1, NULL), 
   (31, 'laetitiac', 'laetitiac123', true, NULL, NULL);
+
+
+-- Este archivo llena la tabla `permissions` con el catálogo oficial de permisos.
+-- ¡IMPORTANTE! Los 'permission_name' deben coincidir EXACTAMENTE con las constantes en PermissionList.php
+INSERT INTO permissions (permission_name, permission_desc) VALUES
+-- Permisos de Cuentas
+('users-view', 'Permite ver la lista de usuarios del sistema.'),
+('users-create', 'Permite crear nuevos usuarios.'),
+('users-edit', 'Permite editar usuarios existentes.'),
+('users-delete', 'Permite eliminar usuarios.'),
+('roles-view', 'Permite ver la lista de roles del sistema.'),
+('roles-create', 'Permite crear nuevos roles.'),
+('roles-edit', 'Permite editar roles existentes.'),
+('roles-delete', 'Permite eliminar roles.'),
+-- Permisos de Gestión del Zoo
+('services-create', 'Permite crear nuevos servicios para el zoo.'),
+('services-view', 'Permite ver la lista de servicios.'),
+('services-edit', 'Permite editar los servicios existentes.'),
+('services-delete', 'Permite eliminar servicios.'),
+('schedules-view', 'Permite ver los horarios del zoo.'),
+('schedules-edit', 'Permite actualizar los horarios del zoo.'),
+('habitats-view', 'Permite ver la información de los hábitats.'),
+('habitats-edit', 'Permite editar la información de los hábitats.'),
+-- Permisos de Animales
+('animals-create', 'Permite añadir nuevos animales al zoo.'),
+('animals-view', 'Permite ver la lista y detalles de los animales.'),
+('animals-edit', 'Permite editar la información de los animales.'),
+('animals-delete', 'Permite eliminar animales del registro.'),
+('animal_stats-view', 'Permite ver las estadísticas de visitas de los animales.'),
+('animal_feeding-view', 'Permite ver la información de alimentación de los animales.'),
+('animal_feeding-assign', 'Permite asignar y actualizar la comida de un animal.'),
+-- Permisos de Veterinario
+('vet_reports-create', 'Permite crear nuevos informes veterinarios.'),
+('vet_reports-view', 'Permite ver los informes veterinarios.'),
+('vet_reports-edit', 'Permite editar informes veterinarios existentes.'),
+('habitat_suggestions-create', 'Permite al veterinario crear sugerencias de mejora para los hábitats.'),
+('habitat_suggestions-view', 'Permite ver las sugerencias de mejora de los hábitats.'),
+('habitat_suggestions-manage', 'Permite aceptar o rechazar sugerencias de hábitats.'),
+('habitat_suggestions-delete', 'Permite eliminar sugerencias de hábitats.'),
+-- Permisos de Interacción Pública
+('testimonials-view', 'Permite ver la lista de testimonios pendientes y aprobados.'),
+('testimonials-validate', 'Permite validar o invalidar testimonios de visitantes.'),
+('testimonials-delete', 'Permite eliminar testimonios.');
