@@ -50,7 +50,7 @@ class UsersGestController
             $user_id = User::create($username, $password, $role_id, $employee_id);
             // print_r("<br>" . $employee_id);
             // redireccionamos a la pagina de inicio
-            header("Location: ?domain=users&controller=gest&action=start");
+            header("Location: /users/gest/start");
         }
 
 
@@ -61,7 +61,7 @@ class UsersGestController
     {
         $id_user = $_GET['id'];
         User::delete($id_user);
-        header("Location: ?domain=users&controller=gest&action=start");
+        header("Location: /users/gest/start");
     }
 
 
@@ -69,7 +69,7 @@ class UsersGestController
     {
         $id_user = $_GET["id"];
         User::toggleActive($id_user);
-        header("Location: ?domain=users&controller=gest&action=start");
+        header("Location: /users/gest/start");
     }
 
 
@@ -115,7 +115,7 @@ class UsersGestController
             $employee_id = $_POST['employee'];
             User::update($username, $psw, $role_id, $employee_id, $id_user);
             
-            header("Location: ?domain=users&controller=gest&action=start");
+            header("Location: /users/gest/start");
             exit();
         }
     
@@ -131,7 +131,7 @@ class UsersGestController
             // Usamos el método que tú creaste en el modelo User.php
             User::assignAccount($employee_id, $user_id);
     
-            header("Location:?domain=users&controller=gest&action=start");
+            header("Location: /users/gest/start");
             exit();
         }
     }

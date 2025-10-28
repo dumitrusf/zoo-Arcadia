@@ -37,7 +37,7 @@
             </div>
             <div class="card-footer d-flex justify-content-between align-items-center">
                 <input type="submit" class="btn btn-warning px-4" value="Register New Role">
-                <a href="?domain=roles&controller=gest&action=start" class=" px-4 btn btn-primary">Cancel</a>
+                <a href="/roles/gest/start" class=" px-4 btn btn-primary">Cancel</a>
             </div>
         </form>
 

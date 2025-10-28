@@ -1,32 +1,37 @@
 <?php
+// App/router.php (El Guardia Central)
 
-require_once __DIR__ . '/../includes/functions.php';
+$domain = $_GET["domain"] ?? "home";
 
-// Si en la URL con get domain no obtenemos el domain por que no hay nada dado, se dara por defecto al dominio employees
-$domain = $_GET["domain"] ?? "employees";
+// --- COMENTARIO D: LISTA DE INVITADOS (SEGURIDAD) ---
+// La única responsabilidad de este archivo es la seguridad y la delegación de alto nivel.
+// Mantiene una "lista blanca" de dominios que existen. Si un dominio no está aquí, es rechazado.
+$allowed_domains = ["animals", "employees", "habitats", "permissions", "reports", "roles", "schedules", "testimonials", "users"];
 
-// Si en la URL con get controller no obtenemos el controller por que no hay nada dado, se dara por defecto al controlador pages, entonces seria ya... employees/pages en este punto
-$controller = $_GET["controller"] ?? "pages";
+if (in_array($domain, $allowed_domains)) {
+    
+    // --- COMENTARIO E: DELEGACIÓN A EXPERTOS ---
+    // ¡Esta es la clave de la arquitectura!
+    // El Guardia Central NO SABE NADA sobre cómo funciona el dominio `employees`.
+    // Su único trabajo es decir: "Ah, es para `employees`... pues que se encargue el experto de `employees`".
+    // Le pasa el control total al "Recepcionista" de ese dominio.
+    $domainRouterPath = __DIR__ . "/{$domain}/{$domain}Router.php";
 
-
-// Si en la URL con get action no obtenemos el action por que no hay nada dado, se dara por defecto al action start, entonces seria ya... employees/pages/start
-$action = $_GET["action"] ?? "start";
-
-
-// Para construir la ruta del archivo hacia el controlador buscaríamos en donde estamos actualmente con DIR (pues estamos en App) y por consiguiente la ruta de lo que guardamos en $controller, domain y action:
-include_once __DIR__ . "/" . $domain . "/controllers/" . $domain . "_" . $controller . "_controller.php";
-
-
-// Construimos el nombre de la clase del controlador dinámicamente.
-// Esto creará el nombre de clase: "EmployeesPagesController"
-$controllerClassName = ucfirst($domain) . ucfirst($controller) . "Controller";
-
-// 6️⃣ Capturar la salida del controlador usando output buffering
-ob_start(); // Empezar a capturar la salida
-$controllerInstance = new $controllerClassName();
-$controllerInstance->$action();
-$viewContent = ob_get_clean(); // Capturar y limpiar el buffer
-
-// 7️⃣ Para mostrar el template de cada dominio  
-require_once __DIR__ . "/{$domain}/views/template.php";
+    if (file_exists($domainRouterPath)) {
+        require_once $domainRouterPath;
+    } else {
+        // ERROR 500: El dominio está en la lista, pero no hemos creado su archivo router.
+        // Esto es un error nuestro (de los programadores), no del usuario.
+        http_response_code(500); 
+        // Por ahora, lo mandamos al 404 para no confundir al usuario.
+        // En un futuro, podríamos crear una página `error-500.php`.
+        header('Location: /public/error-404.php');
+        exit();
+    }
+} else {
+    // ERROR 404: El dominio que ha pedido el usuario no existe en nuestra lista.
+    http_response_code(404);
+    header('Location: /public/error-404.php');
+    exit();
+}
 ?>
