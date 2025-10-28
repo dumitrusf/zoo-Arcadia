@@ -1,50 +1,60 @@
 <?php
 // Obtener el nombre del archivo actual
-$currentPage = basename($_SERVER['PHP_SELF']);
+$domain = $currentDomain ?? "home";
 
 // Definir el título dinámico
-switch ($currentPage) {
-    case 'index.php':
+
+
+switch ($domain) {
+    case 'zoo-Arcadia':
         $pageTitle = 'ARCADIA';
         break;
-    case 'services.php':
-        $pageTitle = 'ARCADIA - Services';
+    case 'employees':
+        $pageTitle = 'ARC Employees';
         break;
-    case 'contact.php':
-        $pageTitle = 'ARCADIA - Contact';
+    case 'users':
+        $pageTitle = 'ARC Users';
         break;
-    case 'about.php':
-        $pageTitle = 'ARCADIA - About Us';
+    case 'roles':
+        $pageTitle = 'ARC Roles';
         break;
-    case 'login.php':
-        $pageTitle = 'ARCADIA - Login';
+    case 'permissions':
+        $pageTitle = 'ARC Permissions';
         break;
-    case 'habitats.php':
-        $pageTitle = 'ARCADIA - Habitats';
+    case 'services':
+        $pageTitle = 'ARC Services';
         break;
-    case 'animal-picked.php':
-        $pageTitle = 'ARCADIA - Animal Details';
+    case 'contact':
+        $pageTitle = 'ARC Contact';
         break;
-    case 'all-animals-habitats.php':
-        $pageTitle = 'ARCADIA - All Animals';
+    case 'about':
+        $pageTitle = 'ARC About Us';
         break;
-    case 'dash-admin.php':
-        $pageTitle = 'ARCADIA - Admin Dashboard';
+    case 'login':
+        $pageTitle = 'ARC Login';
         break;
-    case 'dash-vet.php':
-        $pageTitle = 'ARCADIA - Vet Dashboard';
+    case 'habitats':
+        $pageTitle = 'ARC Habitats';
         break;
-    case 'dash-employee.php':
-        $pageTitle = 'ARCADIA - Employee Dashboard';
+    case 'animal-picked':
+        $pageTitle = 'ARC Animal Details';
         break;
-    case 'error-404.php':
-        $pageTitle = 'ARCADIA - Error 404';
+    case 'all-animals-habitats':
+        $pageTitle = 'ARC All Animals';
         break;
-    case 'habitat-1.php':
-        $pageTitle = 'ARCADIA - Habitat 1';
+    case 'dash-vet':
+        $pageTitle = 'ARC Vet';
+        break;
+    case 'employee':
+        $pageTitle = 'ARC Employee';
+        break;
+    case 'error-404':
+        $pageTitle = 'ARC Error 404';
+        break;
+    case 'habitat':
+        $pageTitle = 'ARC Habitat';
         break;
     default:
-        $pageTitle = 'ARCADIA';
+        $pageTitle = 'Arcadia';
         break;
 }
-?>
