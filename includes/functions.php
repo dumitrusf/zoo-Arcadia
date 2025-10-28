@@ -45,7 +45,7 @@ function handleDomainRouting($domainName, $basePath)
         $controllerInstance->$action();
         $viewContent = ob_get_clean();
 
-        require_once $basePath . "/views/template.php";
+        require_once __DIR__ . "/layouts/BO_main_layout.php";
     } else {
         http_response_code(404);
         header('Location: /public/error-404.php');
