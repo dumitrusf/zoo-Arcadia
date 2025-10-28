@@ -66,7 +66,7 @@ class User
         foreach ($sql->fetchAll() as $user) {
 
             // guardamos en employeeList los empleados de la bdd en este array para poder mostrarlos en el controlador
-            $usersList[] = new User($user["id_user"], $user["username"], $user["psw"], $user["role_id"], $user["role_name"], $user["employee_id"], $user["last_name"], $user["is_active"], $user["created_at"], $user["updated_at"]);
+            $usersList[] = new User($user["id_user"], $user["username"], $user["psw"], $user["role_id"], $user["role_name"], $user["id_employee"], $user["last_name"], $user["is_active"], $user["created_at"], $user["updated_at"]);
         }
 
         // devolvemos el array de empleados
@@ -156,6 +156,31 @@ class User
     }
     
 
+    public static function withoutEmployeeUser()
+    {
+
+        $usersList = [];
+        
+        // instanciamos la conexion a la bdd
+        $connectionDB = DB::createInstance();
+
+        // creamos la consulta a la bdd
+        $query = "SELECT u.id_user, u.username
+                  FROM users u
+                  LEFT JOIN employees e ON u.employee_id = e.id_employee
+                  WHERE e.id_employee IS NULL";
+
+        // preparamos la conexion de la consulta a la bdd
+        $sql = $connectionDB->prepare($query);
+
+        // ejecutamos la consulta ya preparada previamente
+        $sql->execute();
+
+        // guardamos el primer resultado de la consulta en una variable
+        return $sql->fetchAll(PDO::FETCH_OBJ);
+
+    }
+
     public static function update($username, $psw, $role_id, $employee_id, $id_user)
     {
         // instanciamos la conexion a la bdd
@@ -169,6 +194,15 @@ class User
 
         // ejecutamos la consulta ya preparada previamente
         $sql->execute([$username, $psw, $role_id, $employee_id, $id_user]);
+    }
+
+    public static function assignAccount($employee_id, $user_id) {
+        $connectionDB = DB::createInstance();
+
+        $query = "UPDATE users SET employee_id = ? WHERE id_user = ?";
+        $sql = $connectionDB->prepare($query);
+        $sql->execute([$employee_id, $user_id]);
+
     }
     
 }

@@ -34,23 +34,23 @@ class UsersGestController
     {
 
         $roles = Role::check();
-        $employees = Employee::withoutUsersEmployee();
-        
+        $employees = Employee::withoutUserEmployee();
+
         if ($_POST) {
             // print_r($_POST);
             $username = $_POST['username'];
             $password = $_POST['psw'];
             $role = $_POST['role'];
             $employee = $_POST['employee'];
-            
+
             // Convertir string vacío a NULL para employee_id
             $role_id = empty($role) ? null : (int)$role;
             $employee_id = empty($employee) ? null : (int)$employee;
-            
+
             $user_id = User::create($username, $password, $role_id, $employee_id);
             // print_r("<br>" . $employee_id);
             // redireccionamos a la pagina de inicio
-            header("Location: ?domain=users&controller=gest&action=start");
+            header("Location: /users/gest/start");
         }
 
 
@@ -61,53 +61,80 @@ class UsersGestController
     {
         $id_user = $_GET['id'];
         User::delete($id_user);
-        header("Location: ?domain=users&controller=gest&action=start");
+        header("Location: /users/gest/start");
     }
 
 
-    public function toggleActivation(){
+    public function toggleActivation()
+    {
         $id_user = $_GET["id"];
         User::toggleActive($id_user);
-        header("Location: ?domain=users&controller=gest&action=start");
-
+        header("Location: /users/gest/start");
     }
 
 
     public function edit()
     {
-        
-        $id_user = $_GET["id"];
-        $user = User::find($id_user);
-        $employees = Employee::check();
         $roles = Role::check();
+    
+        if (isset($_GET['id'])) {
+            // Editamos un usuario que es existente que si existe con empleado existente
+            $id_user = $_GET["id"];
+            $user_to_edit = User::find($id_user);
+            
+    
+            // Corregido para usar tu nombre de función
+            $employees = Employee::withoutUserEmployee();
+    
+            if (isset($user_to_edit->employee_id) && $user_to_edit->employee_id != null) {
+                $assigned_employee = Employee::find($user_to_edit->employee_id);
+                array_unshift($employees, $assigned_employee);
+            }
+
+            $roles = Role::check();
+
+            print_r($user_to_edit);
+
+            
+        } elseif (isset($_GET["assign_to_employee"])){
 
 
-        // ¡Añadido! Cargar la lista de todos los roles disponibles
-        $roles = Role::check();
+            $id_employee = $_GET['assign_to_employee'];
+            $employee_to_assign = Employee::find($id_employee);
 
-        print_r($user);
+            $unassigned_users = User::withoutEmployeeUser();
 
-        if ($_POST) {
-            // print_r($_POST);
+        }
+    
+        // Lógica del POST para la ACTUALIZACIÓN de un usuario
+        if ($_POST && isset($_POST['id'])) {
             $id_user = $_POST['id'];
             $username = $_POST['username'];
             $psw = $_POST['psw'];
             $role_id = $_POST['role'];
             $employee_id = $_POST['employee'];
-            $user_id = User::update($username, $psw, $role_id, $employee_id, $id_user);
-            // print_r("<br>" . $employee_id);
-            // redireccionamos a la pagina de inicio
-
+            User::update($username, $psw, $role_id, $employee_id, $id_user);
             
-            
-            header("Location: ?domain=users&controller=gest&action=start");
+            header("Location: /users/gest/start");
+            exit();
         }
-
-
-
-
+    
         include_once __DIR__ . "/../views/gest/edit.php";
     }
+
+    public function assignAccount()
+    {
+        if ($_POST) {
+            $employee_id = $_POST['employee_id'];
+            $user_id = $_POST['user_id'];
     
+            // Usamos el método que tú creaste en el modelo User.php
+            User::assignAccount($employee_id, $user_id);
+    
+            header("Location: /users/gest/start");
+            exit();
+        }
+    }
     
 }
+  

@@ -1,7 +1,7 @@
 <div class="card container-fluid overflow-auto">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h2 class="card-title">Users</h2>
-        <a name="users" id="" class="btn btn-success mb-2 mt-2" href="?domain=users&controller=gest&action=create" role="button">Create new Account</a>
+        <a name="users" id="" class="btn btn-success mb-2 mt-2" href="/users/gest/create" role="button">Create new Account</a>
     </div>
     <div class="card-body container-fluid overflow-auto">
 
@@ -35,9 +35,9 @@
                                 <div class="btn-group" role="group" aria-label="">
                                     <?php if ($user->is_active == 1): ?>
                                         <span class="btn btn-sm bg-success text-white">Activated</span>
-                                        <a href="?domain=users&controller=gest&action=toggleActivation&id=<?php echo $user->id; ?>" class="btn btn-sm btn-warning">Deactivate</a>
+                                        <a href="/users/gest/toggleActivation?id=<?php echo $user->id; ?>" class="btn btn-sm btn-warning">Deactivate</a>
                                     <?php else: ?>
-                                        <a href="?domain=users&controller=gest&action=toggleActivation&id=<?php echo $user->id; ?>" class="btn btn-sm btn-primary text-white">Activate</a>
+                                        <a href="/users/gest/toggleActivation?id=<?php echo $user->id; ?>" class="btn btn-sm btn-primary text-white">Activate</a>
                                         <span class="btn btn-sm bg-danger text-white">Deactivated</span>
                                     <?php endif; ?>
 
@@ -55,8 +55,15 @@
 
 
 
-                                    <a href="?domain=users&controller=gest&action=edit&id=<?php echo $user->id; ?>" class="btn btn-sm btn-primary">Edit</a>
-                                    <a href="?domain=users&controller=gest&action=delete&id=<?php echo $user->id; ?>" class="btn btn-sm btn-danger">Delete</a>
+                                    <?php if (isset($user->id) && $user->id != null): ?>
+                                        <!-- Es un usuario real, enviamos su ID para editarlo -->
+                                        <a href="/users/gest/edit?id=<?php echo $user->id; ?>" class="btn btn-sm btn-primary">Edit</a>
+                                        <a href="/users/gest/delete?id=<?php echo $user->id; ?>" class="btn btn-sm btn-danger">Delete</a>
+                                    <?php else: ?>
+                                        <!-- Es solo un empleado, enviamos su ID para asignarle una cuenta -->
+                                        <a href="/users/gest/edit?assign_to_employee=<?php echo $user->employee_id; ?>" class="btn btn-sm btn-info">Assign</a>
+                                    <?php endif; ?>
+                                    
                                 </div>
 
                             </td>
