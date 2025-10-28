@@ -50,7 +50,7 @@ class EmployeesGestController
             $employee_id = Employee::create($first_name, $last_name, $birthdate, $phone, $email, $address, $city, $zip_code, $country, $gender, $marital_status);
             // print_r("<br>" . $employee_id);
             // redireccionamos a la pagina de inicio
-            header("Location: ?domain=employees&controller=gest&action=start");
+            header("Location: /employees/gest/start");
         }
 
 
@@ -67,7 +67,7 @@ class EmployeesGestController
         Employee::delete($id_employee);
 
         // redireccionamos a la pagina de inicio
-        header("Location: ?domain=employees&controller=gest&action=start");
+        header("Location: /employees/gest/start");
     }
 
 
@@ -107,7 +107,7 @@ class EmployeesGestController
 
             
             
-            header("Location: ?domain=employees&controller=gest&action=start");
+            header("Location: /employees/gest/start");
         }
 
 
