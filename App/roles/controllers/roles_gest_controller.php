@@ -30,7 +30,7 @@ class RolesGestController
             $role_id = Role::create($role_name, $description);
             // print_r("<br>" . $employee_id);
             // redireccionamos a la pagina de inicio
-            header("Location: ?domain=roles&controller=gest&action=start");
+            header("Location: /roles/gest/start");
         }
         include_once __DIR__ . "/../views/gest/create.php";
     }
@@ -51,7 +51,7 @@ class RolesGestController
             $_SESSION["success_message"] = $result["message"];
         }
 
-        header("Location: ?domain=roles&controller=gest&action=start");
+        header("Location: /roles/gest/start");
         exit();
     }
 
@@ -74,7 +74,7 @@ class RolesGestController
             $role_id = Role::update($id, $role_name, $description);
             // print_r("<br>" . $employee_id);
             // redireccionamos a la pagina de inicio
-            header("Location: ?domain=roles&controller=gest&action=start");
+            header("Location: /roles/gest/start");
         }
 
 

@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h2 class="card-title">Roles</h2>
-        <a name="roles" id="" class="btn btn-success mb-2 mt-2" href="?domain=roles&controller=gest&action=create" role="button">Add New Role</a>
+        <a name="roles" id="" class="btn btn-success mb-2 mt-2" href="/roles/gest/create" role="button">Add New Role</a>
     </div>
     <div class="card-body">
 
@@ -68,9 +68,9 @@
                                 <div class="btn-group" role="group" aria-label="">
 
 
-                                    <a href="?domain=roles&controller=gest&action=edit&id=<?php echo $role->id_role; ?>" class="btn btn-sm btn-primary">Edit</a>
+                                    <a href="/roles/gest/edit?id=<?php echo $role->id_role; ?>" class="btn btn-sm btn-primary">Edit</a>
 
-                                    <a href="?domain=roles&controller=gest&action=delete&id=<?php echo $role->id_role; ?>" class="btn btn-sm btn-danger">Delete</a>
+                                    <a href="/roles/gest/delete?id=<?php echo $role->id_role; ?>" class="btn btn-sm btn-danger">Delete</a>
                                 </div>
 
                             </td>

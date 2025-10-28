@@ -44,10 +44,10 @@ include(__DIR__ . "../../../../includes/pageTitle.php");
     <nav class="navbar navbar-expand navbar-light bg-light">
         <div class="nav navbar-nav">
         <a class="nav-item nav-link active" href="#">Logged in (user) <span class="visually-hidden">(current)</span></a>
-            <a class="nav-item nav-link" href="?domain=employees&controller=pages&action=start">Home</a>
-            <a class="nav-item nav-link" href="?domain=users&controller=gest&action=start">Users</a>
-            <a class="nav-item nav-link" href="?domain=employees&controller=gest&action=start">Employees</a>
-            <a class="nav-item nav-link" href="?domain=roles&controller=gest&action=start">Roles</a>
+            <a class="nav-item nav-link" href="/employees/pages/start">Home</a>
+            <a class="nav-item nav-link" href="/users/gest/start">Users</a>
+            <a class="nav-item nav-link" href="/employees/gest/start">Employees</a>
+            <a class="nav-item nav-link" href="/roles/gest/start">Roles</a>
         </div>
     </nav>
     

@@ -1,7 +1,7 @@
 <div class="card container-fluid overflow-auto">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h2 class="card-title">Employees</h2>
-        <a name="employees" id="" class="btn btn-success mb-2 mt-2" href="?controller=gest&action=create" role="button">Add Employee</a>
+        <a name="employees" id="" class="btn btn-success mb-2 mt-2" href="/employees/gest/create" role="button">Add Employee</a>
     </div>
     <div class="card-body container-fluid overflow-auto">
 
@@ -54,8 +54,8 @@
 
                                 <div class="btn-group" role="group" aria-label="">
 
-                                    <a href="?domain=employees&controller=gest&action=edit&id=<?php echo $employee->id; ?>" class="btn btn-sm btn-primary">Edit</a>
-                                    <a href="?domain=employees&controller=gest&action=delete&id=<?php echo $employee->id; ?>" class="btn btn-sm btn-danger">Delete</a>
+                                    <a href="/employees/gest/edit?id=<?php echo $employee->id; ?>" class="btn btn-sm btn-primary">Edit</a>
+                                    <a href="/employees/gest/delete?id=<?php echo $employee->id; ?>" class="btn btn-sm btn-danger">Delete</a>
                                 </div>
 
                             </td>
