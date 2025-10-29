@@ -6,55 +6,58 @@ $domain = $currentDomain ?? "home";
 
 
 switch ($domain) {
-    case 'zoo-Arcadia':
-        $pageTitle = 'ARCADIA';
+    case "zoo-Arcadia":
+        $pageTitle = "ARCADIA";
         break;
-    case 'employees':
-        $pageTitle = 'ARC Employees';
+    case "home":
+        $pageTitle = "ARC Dashboard";
         break;
-    case 'users':
-        $pageTitle = 'ARC Users';
+    case "employees":
+        $pageTitle = "ARC Employees";
         break;
-    case 'roles':
-        $pageTitle = 'ARC Roles';
+    case "users":
+        $pageTitle = "ARC Users";
         break;
-    case 'permissions':
-        $pageTitle = 'ARC Permissions';
+    case "roles":
+        $pageTitle = "ARC Roles";
         break;
-    case 'services':
-        $pageTitle = 'ARC Services';
+    case "permissions":
+        $pageTitle = "ARC Permissions";
         break;
-    case 'contact':
-        $pageTitle = 'ARC Contact';
+    case "services":
+        $pageTitle = "ARC Services";
         break;
-    case 'about':
-        $pageTitle = 'ARC About Us';
+    case "contact":
+        $pageTitle = "ARC Contact";
         break;
-    case 'login':
-        $pageTitle = 'ARC Login';
+    case "about":
+        $pageTitle = "ARC About Us";
         break;
-    case 'habitats':
-        $pageTitle = 'ARC Habitats';
+    case "login":
+        $pageTitle = "ARC Login";
         break;
-    case 'animal-picked':
-        $pageTitle = 'ARC Animal Details';
+    case "habitats":
+        $pageTitle = "ARC Habitats";
         break;
-    case 'all-animals-habitats':
-        $pageTitle = 'ARC All Animals';
+    case "animal-picked":
+        $pageTitle = "ARC Animal Details";
         break;
-    case 'dash-vet':
-        $pageTitle = 'ARC Vet';
+    case "all-animals-habitats":
+        $pageTitle = "ARC All Animals";
         break;
-    case 'employee':
-        $pageTitle = 'ARC Employee';
+    case "dash-vet":
+        $pageTitle = "ARC Vet";
         break;
-    case 'error-404':
-        $pageTitle = 'ARC Error 404';
+    case "employee":
+        $pageTitle = "ARC Employee";
         break;
-    case 'habitat':
-        $pageTitle = 'ARC Habitat';
+    case "error-404":
+        $pageTitle = "ARC Error 404";
+        break;
+    case "habitat":
+        $pageTitle = "ARC Habitat";
         break;
     default:
-        $pageTitle = 'Arcadia';
+        $pageTitle = "Arcadia";
         break;
 }

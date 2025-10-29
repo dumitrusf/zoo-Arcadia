@@ -6,7 +6,7 @@ $domain = $_GET["domain"] ?? "home";
 // --- COMENTARIO D: LISTA DE INVITADOS (SEGURIDAD) ---
 // La única responsabilidad de este archivo es la seguridad y la delegación de alto nivel.
 // Mantiene una "lista blanca" de dominios que existen. Si un dominio no está aquí, es rechazado.
-$allowed_domains = ["animals", "employees", "habitats", "permissions", "reports", "roles", "schedules", "testimonials", "users"];
+$allowed_domains = [ "home", "animals", "employees", "habitats", "permissions", "reports", "roles", "schedules", "testimonials", "users"];
 
 if (in_array($domain, $allowed_domains)) {
     
@@ -25,13 +25,13 @@ if (in_array($domain, $allowed_domains)) {
         http_response_code(500); 
         // Por ahora, lo mandamos al 404 para no confundir al usuario.
         // En un futuro, podríamos crear una página `error-500.php`.
-        header('Location: /public/error-404.php');
+        header('Location: /public/error');
         exit();
     }
 } else {
     // ERROR 404: El dominio que ha pedido el usuario no existe en nuestra lista.
     http_response_code(404);
-    header('Location: /public/error-404.php');
+    header('Location: /public/error');
     exit();
 }
 ?>

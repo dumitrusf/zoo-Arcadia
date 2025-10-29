@@ -45,7 +45,7 @@ include(__DIR__ . "/../pageTitle.php");
     <nav class="navbar navbar-expand navbar-light bg-light">
         <div class="nav navbar-nav">
             <a class="nav-item nav-link active" href="#">Logged in (user) <span class="visually-hidden">(current)</span></a>
-            <a class="nav-item nav-link" href="/includes/layouts/BO_main_layout.php">Home</a>
+            <a class="nav-item nav-link" href="/home/pages/start">Home</a>
             <a class="nav-item nav-link" href="/users/gest/start">Users</a>
             <a class="nav-item nav-link" href="/employees/gest/start">Employees</a>
             <a class="nav-item nav-link" href="/roles/gest/start">Roles</a>
