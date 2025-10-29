@@ -1,6 +1,6 @@
 <div class="jumbotron">
-    <h1 class="display-4">¡Bienvenido al Dashboard!</h1>
-    <p class="lead">Desde aquí podrás acceder a todas las secciones de gestión del zoo.</p>
+    <h1 class="display-4">Welcome to the Dashboard!</h1>
+    <p class="lead">From here you can access all the management sections of the zoo.</p>
     <hr class="my-4">
-    <p>Próximamente, aquí verás resúmenes y accesos directos basados en tus permisos.</p>
+    <p>(i really don't know what to write 😂😂 my ideas are all gone) Soon, here you will see summaries and direct access based on your permissions.</p>
 </div>
