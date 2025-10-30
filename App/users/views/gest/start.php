@@ -1,7 +1,7 @@
 <div class="card container-fluid overflow-auto">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h2 class="card-title">Users</h2>
-        <a name="users" id="" class="btn btn-success mb-2 mt-2" href="/users/gest/create" role="button">Create new Account</a>
+        <a name="users" id="" class="btn btn-success mb-2 mt-2" href="/users/gest/create" role="button">+ Create new Account</a>
     </div>
     <div class="card-body container-fluid overflow-auto">
 

@@ -1,7 +1,7 @@
 <div class="card container-fluid overflow-auto">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h2 class="card-title">Employees</h2>
-        <a name="employees" id="" class="btn btn-success mb-2 mt-2" href="/employees/gest/create" role="button">Add Employee</a>
+        <a name="employees" id="" class="btn btn-success mb-2 mt-2" href="/employees/gest/create" role="button">+ Add Employee</a>
     </div>
     <div class="card-body container-fluid overflow-auto">
 

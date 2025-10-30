@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h2 class="card-title">Roles</h2>
-        <a name="roles" id="" class="btn btn-success mb-2 mt-2" href="/roles/gest/create" role="button">Add New Role</a>
+        <a name="roles" id="" class="btn btn-success mb-2 mt-2" href="/roles/gest/create" role="button">+ Add New Role</a>
     </div>
     <div class="card-body">
 

@@ -49,6 +49,7 @@ include(__DIR__ . "/../pageTitle.php");
             <a class="nav-item nav-link" href="/users/gest/start">Users</a>
             <a class="nav-item nav-link" href="/employees/gest/start">Employees</a>
             <a class="nav-item nav-link" href="/roles/gest/start">Roles</a>
+            <a class="nav-item nav-link" href="/permissions/gest/start">Permissions</a>
         </div>
     </nav>
     
