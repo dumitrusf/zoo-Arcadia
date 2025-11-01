@@ -1,358 +1,141 @@
-<div class="container mt-4 px-4 py-4" style="background-color: #d6d6d6; border-radius: 10px;">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1 class="h3">System Permissions Catalog</h1>
-    </div>
-    <p class="text-muted mb-4">
-        This is a list of all possible actions within the system.
-        Can't edit here; it serves as a reference dictionary.
-    </p>
+<?php
 
+// #1Let's create an empty "box of boxes".
+// Each inner box will store the permissions of a category.
+$groupedPermissions = [];
+
+// #2 Let's iterate through the list of permissions that the controller has passed to us by $permissions.
+foreach ($permissions as $permission) {
+    // #3 For each permission, we look at its name (eg: 'users-view')
+    // and we use our "magic scissors" (explode) to cut by the hyphen '-'.
+    // This gives us the pieces: ['users', 'view'].
+    // We only keep the first piece, which is the category. (so .. [0] is the category)
+    $category = explode('-', $permission['permission_name'])[0];
+
+    // #4 Now, we use that category as a "label" for our box of BOXES.
+    // We say: "Put this complete permission in the box that has the label 'users'" (users is a box in that big box that call each box category).
+    // If the box 'users' doesn't exist, PHP creates it for us.
+    $groupedPermissions[$category][] = $permission;
+}
+
+
+// #5 We create a map that translates the internal keys to the titles that the user will see.
+$categoryNames = [
+    'users' => '🔑 Account Management',
+    'roles' => '🔑 Account Management',
+    'services' => '🎪 Zoo Management',
+    'schedules' => '🎪 Zoo Management',
+    'habitats' => '🎪 Zoo Management',
+    'animals' => '🐼 Animal Management',
+    'animal_stats' => '🐼 Animal Management',
+    'animal_feeding' => '🐼 Animal Management',
+    'vet_reports' => '⚕️ Veterinary',
+    'habitat_suggestions' => '⚕️ Veterinary',
+    'testimonials' => '💬 Public Interaction'
+];
+
+// #6 we check if 'roles' exists in our grouped data.
+if (isset($groupedPermissions['roles'])) {
+    # "We create a new box $groupedPermissions['users'] that will be the result of merging...     
+    #  the box $groupedPermissions['users'] (or an empty array if it doesn't exist)...
+    #  with the box $groupedPermissions['roles']."
+    $groupedPermissions['users'] = array_merge($groupedPermissions['users'] ?? [], $groupedPermissions['roles']);
+
+    # "We remove the box $groupedPermissions['roles'] from our grouped data."
+    unset($groupedPermissions['roles']);
+}
+?>
+
+<div class="container-fluid overflow-auto py-4 pt-4 px-4">
+    <div class="row py-4 card">
+        <div class="col-12">
+            <div class="rounded h-100 p-4" style="background-color: #c3c1c8;">
+                <h1 class="h3">System Permissions Catalog</h1>
+                <p class="mb-4">
+                    This is a list of all possible actions within the system.
+                    It cannot be edited here; it serves as a reference dictionary.
+                </p>
                 <div class="card shadow-sm">
                     <div class="card-body p-0">
-                        <table class="table table-hover mb-0">
+                        <table class="table mb-0">
                             <thead class="table-light">
                                 <tr>
-                                    <th scope="col" style="width: 40%;" class="ps-4">Permission</th>
+                                    <th scope="col" style="width: 40%;" class="ps-4">Permiso</th>
                                     <th scope="col">Description</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- Categoría 1: Gestión de Cuentas -->
-                                <tr>
-                                    <td colspan="2" class="table-dark fw-bold ps-4">🔑 Account Management
+                                <?php
+                                $rowNumber = 0;
+                                // We need to keep track of the categories we have already rendered to avoid repeating the header.
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">
-                                        <strong>View Users</strong> (<code>users-view</code>)
-                                    </td>
-                                    <td>
-                                        Allows viewing the list of users in the system.
+                                $processedCategories = [];
 
-                                    </td>
-                                </tr>
-                                <tr class="table-light">
-                                    <td class="ps-4">
-                                        <strong>Create Users</strong> (<code>users-create</code>)
-                                    </td>
-                                    <td>
-                                        Allows creating new users.
+                                ?>
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">
-                                        <strong>Edit Users</strong> (<code>users-edit</code>)
-                                    </td>
-                                    <td>
-                                        Allows editing existing users.
 
-                                    </td>
-                                </tr>
-                                <tr class="table-light">
-                                    <td class="ps-4">
-                                        <strong>Delete Users</strong> (<code>users-delete</code>)
-                                    </td>
-                                    <td>
-                                        Allows deleting users.
+                                <?php
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">
-                                        <strong>View Roles</strong> (<code>roles-view</code>)
-                                    </td>
-                                    <td>
-                                        Allows viewing the list of roles in the system.
+                                // 1. Main loop: We iterate through each box in our box of boxes, in which each box of boxes contains a list of permissions!!.
 
-                                    </td>
-                                </tr>
-                                <tr class="table-light">
-                                    <td class="ps-4">
-                                        <strong>Create Roles</strong> (<code>roles-create</code>)
-                                    </td>
-                                    <td>
-                                        Allows creating new roles.
+                                foreach ($groupedPermissions as $categoryKey => $permissionsInCategory): ?>
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">
-                                        <strong>Edit Roles</strong> (<code>roles-edit</code>)
-                                    </td>
-                                    <td>
-                                        Allows editing existing roles.
 
-                                    </td>
-                                </tr>
-                                <tr class="table-light">
-                                    <td class="ps-4">
-                                        <strong>Delete Roles</strong> (<code>roles-delete</code>)
-                                    </td>
-                                    <td>
-                                        Allows deleting roles.
+                                    <?php
 
-                                    </td>
-                                </tr>
+                                    // 2. We use our "translation dictionary" ($categoryNames) to convert the label.
+                                    // We convert the category key ($categoryKey) into its readable name; if it doesn't exist, we use 'Others' as the default (🔑 Account Management).
+                                    $currentCategoryName = $categoryNames[$categoryKey] ?? 'Others';
 
-                                <!-- Categoría 2: Gestión del Zoo -->
-                                <tr>
-                                    <td colspan="2" class="table-dark fw-bold ps-4">🎪 Zoo Management
+                                    // 3. We check if we have already rendered this category.
+                                    // We check if the category name is already in the array of processed categories.
+                                    // If it is not, we render the category header.
+                                    // If it is, we skip rendering the category header.
+                                    if (!in_array($currentCategoryName, $processedCategories)) {
+                                        echo '<tr><td colspan="2" class="table-dark fw-bold ps-4">' . $currentCategoryName . '</td></tr>';
+                                        //4. We add the category name to the array of processed categories cause is empty!.
+                                        $processedCategories[] = $currentCategoryName;
+                                    }
+                                    ?>
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">
-                                        <strong>Create Services</strong> (<code>services-create</code>)
-                                    </td>
-                                    <td>
-                                        Allows creating new services for the zoo.
+                                    <?php
+                                    // 5. We iterate through the list of permissions in the current category.
+                                    ?>
 
-                                    </td>
-                                </tr>
-                                <tr class="table-light">
-                                    <td class="ps-4">
-                                        <strong>View Services</strong> (<code>services-view</code>)
-                                    </td>
-                                    <td>
-                                        Allows viewing the list of services.
+                                    <?php foreach ($permissionsInCategory as $permission): ?>
+                                        <?php
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">
-                                        <strong>Edit Services</strong> (<code>services-edit</code>)
-                                    </td>
-                                    <td>
-                                        Allows editing existing services.
+                                        $rowNumber++;
+                                        // 6. the array of permissions in the current category is $permissionsInCategory, we will iterate inside this array to get each permission, and make it readable for the user.
+                                        $prettyName = ucwords(str_replace(['-', '_'], ' ', $permission['permission_name']));
 
-                                    </td>
-                                </tr>
-                                <tr class="table-light">
-                                    <td class="ps-4">
-                                        <strong>Delete Services</strong> (<code>services-delete</code>)
-                                    </td>
-                                    <td>
-                                        Allows deleting services.
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">
-                                        <strong>View Schedules</strong> (<code>schedules-view</code>)
-                                    </td>
-                                    <td>
-                                        Allows viewing the list of schedules for the zoo.
+                                        
+                                        ?>
+                                        <tr class="<?php echo get_row_class($rowNumber); ?>">
 
-                                    </td>
-                                </tr>
-                                <tr class="table-light">
-                                    <td class="ps-4">
-                                        <strong>Edit Schedules</strong> (<code>schedules-edit</code>)
-                                    </td>
-                                    <td>
-                                        Allows updating the schedules for the zoo.
+                                            <td class="ps-4">
+                                                <strong>
+                                                    <?= htmlspecialchars($prettyName) ?>
+                                                </strong>
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">
-                                        <strong>View Habitats</strong> (<code>habitats-view</code>)
-                                    </td>
-                                    <td>
-                                        Allows viewing the information of the habitats.
+                                                                                                
+                                                (<code>
+                                                    <?= htmlspecialchars($permission['permission_name']) ?>
+                                                </code>)
+                                            </td>
 
-                                    </td>
-                                </tr>
-                                <tr class="table-light">
-                                    <td class="ps-4">
-                                        <strong>Edit Habitats</strong> (<code>habitats-edit</code>)
-                                    </td>
-                                    <td>
-                                        Allows editing the information of the habitats.
+                                            <td>
+                                                <?= htmlspecialchars($permission['permission_desc']) ?>
+                                            </td>
+                                            </tr>
 
-                                    </td>
-                                </tr>
-
-                                <!-- Categoría 3: Gestión de Animales -->
-                                <tr>
-                                    <td colspan="2" class="table-dark fw-bold ps-4">🐼 Animal Management
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">
-                                        <strong>Add Animals</strong> (<code>animals-create</code>)
-                                    </td>
-                                    <td>
-                                        Allows adding new animals to the zoo.
-
-                                    </td>
-                                </tr>
-                                <tr class="table-light">
-                                    <td class="ps-4">
-                                        <strong>View Animals</strong> (<code>animals-view</code>)
-                                    </td>
-                                    <td>
-                                        Allows viewing the list and details of the animals.
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">
-                                        <strong>Edit Animals</strong> (<code>animals-edit</code>)
-                                    </td>
-                                    <td>
-                                        Allows editing the information of the animals.
-
-                                    </td>
-                                </tr>
-                                <tr class="table-light">
-                                    <td class="ps-4">
-                                        <strong>Delete Animals</strong> (<code>animals-delete</code>)
-                                    </td>
-                                    <td>
-                                        Allows deleting animals from the registry.
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">
-                                        <strong>View Animal Statistics</strong> (<code>animal_stats-view</code>)
-                                    </td>
-                                    <td>
-                                        Allows viewing the statistics of visits to the animals (clicks).
-
-                                    </td>
-                                </tr>
-                                <tr class="table-light">
-                                    <td class="ps-4">
-                                        <strong>View Animal Feeding</strong> (<code>animal_feeding-view</code>)
-                                    </td>
-                                    <td>
-                                        Allows viewing the information of feeding of the animals.
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">
-                                        <strong>Assign Food to Animal</strong> (<code>animal_feeding-assign</code>)
-                                    </td>
-                                    <td>
-                                        Allows assigning and updating the food of an animal.
-
-                                    </td>
-                                </tr>
-
-                                <!-- Categoría 4: Veterinaria -->
-                                <tr>
-                                    <td colspan="2" class="table-dark fw-bold ps-4">⚕️ Veterinary
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">
-                                        <strong>Create Veterinary Reports</strong> (<code>vet_reports-create</code>)
-                                    </td>
-                                    <td>
-                                        Allows creating new veterinary reports.
-
-                                    </td>
-                                </tr>
-                                <tr class="table-light">
-                                    <td class="ps-4">
-                                        <strong>View Veterinary Reports</strong> (<code>vet_reports-view</code>)
-                                    </td>
-                                    <td>
-                                        Allows viewing the veterinary reports.
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">
-                                        <strong>Edit Veterinary Reports</strong> (<code>vet_reports-edit</code>)
-                                    </td>
-                                    <td>
-                                        Allows editing existing veterinary reports.
-
-                                    </td>
-                                </tr>
-                                <tr class="table-light">
-                                    <td class="ps-4">
-                                        <strong>Create Habitat Suggestions</strong> (<code>habitat_suggestions-create</code>)
-                                    </td>
-                                    <td>
-                                        Allows the veterinarian to create suggestions for habitat improvement.
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">
-                                        <strong>View Habitat Suggestions</strong> (<code>habitat_suggestions-view</code>)
-                                    </td>
-                                    <td>
-                                        Allows viewing the suggestions for habitat improvement.
-
-                                    </td>
-                                </tr>
-                                <tr class="table-light">
-                                    <td class="ps-4">
-                                        <strong>Manage Habitat Suggestions</strong> (<code>habitat_suggestions-manage</code>)
-                                    </td>
-                                    <td>
-                                        Allows accepting or rejecting suggestions for habitat improvement.
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">
-                                        <strong>Delete Habitat Suggestions</strong> (<code>habitat_suggestions-delete</code>)
-                                    </td>
-                                    <td>
-                                        Allows deleting suggestions for habitat improvement.
-
-                                    </td>
-                                </tr>
-
-                                <!-- Categoría 5: Interacción Pública -->
-                                <tr>
-                                    <td colspan="2" class="table-dark fw-bold ps-4">💬 Public Interaction
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">
-                                        <strong>View Testimonials</strong> (<code>testimonials-view</code>)
-                                    </td>
-                                    <td>
-                                        Allows viewing the list of testimonials pending and approved.
-
-                                    </td>
-                                </tr>
-                                <tr class="table-light">
-                                    <td class="ps-4">
-                                        <strong>Validate Testimonials</strong> (<code>testimonials-validate</code>)
-                                    </td>
-                                    <td>
-                                        Allows validating or invalidating testimonials from visitors.
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">
-                                        <strong>Delete Testimonials</strong> (<code>testimonials-delete</code>)
-                                    </td>
-                                    <td>
-                                        Allows deleting testimonials.
-
-                                    </td>
-                                </tr>
+                                        <?php endforeach; ?>
+                                    <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
