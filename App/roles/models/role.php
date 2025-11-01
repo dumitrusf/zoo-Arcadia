@@ -156,4 +156,44 @@ class Role
         // ejecutamos la consulta ya preparada previamente
         $sql->execute([$role_name, $role_description, $id_role]);
     }
+
+
+    /**
+     * Returns a simple array with the IDs of the permissions assigned to this role.
+     * @return array
+     */
+    public function getPermissionIds()
+    {
+        $connectionDB = DB::createInstance();
+        $query = "SELECT permission_id 
+                  FROM roles_permissions 
+                  WHERE role_id = ?";
+
+        $sql = $connectionDB->prepare($query);
+
+        $sql->execute([$this->id_role]);
+
+        
+        return $sql->fetchAll(PDO::FETCH_COLUMN);
+    }
+
+
+
+    public static function getPermissions($id_role)
+    {
+        $connectionDB = DB::createInstance();
+
+        $query = "SELECT p.id_permission, p.permission_name, p.permission_desc
+                  FROM permissions p 
+                  JOIN roles_permissions rp 
+                  ON p.id_permission = rp.permission_id 
+                  WHERE rp.role_id = ?
+                  ORDER BY p.permission_name ASC";
+
+        $sql = $connectionDB->prepare($query);
+        $sql->execute([$id_role]);
+
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
 }

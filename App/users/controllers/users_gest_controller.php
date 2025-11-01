@@ -69,7 +69,7 @@ class UsersGestController
     {
         $id_user = $_GET["id"];
         User::toggleActive($id_user);
-        header("Location: /users/gest/start");
+        header("Location: /users/gest/start#user-" . $id_user);
     }
 
 
