@@ -6,7 +6,7 @@
 
         <?php if (isset($user_to_edit)) { ?>
 
-            <form action="?domain=users&controller=gest&action=edit" method="post">
+            <form action="/users/gest/edit" method="post">
 
                 <input type="hidden" name="id" value="<?php echo $user_to_edit->id; ?>">
 
@@ -167,7 +167,7 @@
 
         <?php } else if (isset($employee_to_assign)) { ?>
 
-            <form action="?domain=users&controller=gest&action=assignAccount" method="post">
+            <form action="/users/gest/assignAccount" method="post">
 
                 <input type="hidden" name="employee_id" value="<?php echo $employee_to_assign->id; ?>">
 
