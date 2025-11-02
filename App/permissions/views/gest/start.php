@@ -1,6 +1,6 @@
 <?php
 
-// #1Let's create an empty "box of boxes".
+// #1 Let's create an empty "box of boxes".
 // Each inner box will store the permissions of a category.
 $groupedPermissions = [];
 
@@ -46,8 +46,8 @@ if (isset($groupedPermissions['roles'])) {
 }
 ?>
 
-<div class="container-fluid pt-4 px-4">
-    <div class="row g-4">
+<div class="container-fluid overflow-auto py-4 pt-4 px-4">
+    <div class="row py-4 card">
         <div class="col-12">
             <div class="rounded h-100 p-4" style="background-color: #c3c1c8;">
                 <h1 class="h3">System Permissions Catalog</h1>
@@ -119,10 +119,10 @@ if (isset($groupedPermissions['roles'])) {
                                                     <?= htmlspecialchars($prettyName) ?>
                                                 </strong>
 
-                                                                                                
+<!--                                                                                                 
                                                 (<code>
                                                     <?= htmlspecialchars($permission['permission_name']) ?>
-                                                </code>)
+                                                </code>) -->
                                             </td>
 
                                             <td>

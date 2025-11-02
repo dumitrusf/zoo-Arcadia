@@ -119,3 +119,7 @@ INSERT INTO permissions (permission_name, permission_desc) VALUES
 ('testimonials-view', 'Allows viewing the list of testimonials.'),
 ('testimonials-validate', 'Allows validating or invalidating testimonials.'),
 ('testimonials-delete', 'Allows deleting testimonials.');
+
+
+
+INSERT INTO roles_permissions (role_id, permission_id) VALUES (1, 1);
