@@ -56,11 +56,12 @@
 
 
                                     <?php if (isset($user->id) && $user->id != null): ?>
-                                        <!-- Es un usuario real, enviamos su ID para editarlo -->
+                                        <!-- Is a user account, we send his ID to edit him -->
+                                        <a href="/users/gest/view?id=<?php echo $user->id; ?>" class="btn btn-sm btn-info text-white">View Details</a>
                                         <a href="/users/gest/edit?id=<?php echo $user->id; ?>" class="btn btn-sm btn-primary">Edit</a>
                                         <a href="/users/gest/delete?id=<?php echo $user->id; ?>" class="btn btn-sm btn-danger">Delete</a>
                                     <?php else: ?>
-                                        <!-- Es solo un empleado, enviamos su ID para asignarle una cuenta -->
+                                        <!-- Is a employee, we send his ID to assign him an account -->
                                         <a href="/users/gest/edit?assign_to_employee=<?php echo $user->employee_id; ?>" class="btn btn-sm btn-info">Assign</a>
                                     <?php endif; ?>
                                     

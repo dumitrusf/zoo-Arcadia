@@ -255,7 +255,7 @@ CREATE TABLE users (
 --
 --
 -- User_permissions Table: relates users to permits
-CREATE TABLE user_permissions (
+CREATE TABLE users_permissions (
     user_id INT NOT NULL,
     -- Relationship with the Users table.
     permission_id INT NOT NULL,
