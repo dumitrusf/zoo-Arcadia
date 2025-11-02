@@ -123,3 +123,10 @@ INSERT INTO permissions (permission_name, permission_desc) VALUES
 
 
 INSERT INTO roles_permissions (role_id, permission_id) VALUES (1, 1);
+
+
+INSERT INTO `users_permissions` (`user_id`, `permission_id`) VALUES
+(2, 2),
+(2, 5),
+(2, 8),
+(16, 8);
