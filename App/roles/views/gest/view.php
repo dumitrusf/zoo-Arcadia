@@ -7,15 +7,15 @@
                     <h3 class="mb-0">Rol details: <?= htmlspecialchars($role->role_name) ?></h3>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">Descripción</h5>
+                    <h5 class="card-title">Description</h5>
                     <p class="card-text mb-4">
                         <?= htmlspecialchars($role->role_description) ?>
                     </p>
 
                     <hr>
 
-                    <h5 class="card-title mt-4">Permisos Asignados</h5>
-                    <p class="text-muted">Esta es una lista de solo lectura de las acciones que este rol puede realizar.</p>
+                    <h5 class="card-title mt-4">Permissions Assigned</h5>
+                    <p class="text-muted">This is a read-only list of the actions that this role can perform.</p>
 
                     <?php if (!empty($permissions)) : ?>
                         <div class="list-group">

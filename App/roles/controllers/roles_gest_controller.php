@@ -58,43 +58,53 @@ class RolesGestController
 
     public function edit()
     {
+        // we get the ID of the role from the URL. This variable is the only source of truth for the ID.
         $id_role = $_GET["id"];
-        $role = Role::find($id_role);
 
+        // if we receive data by POST, we process the form.
         if ($_POST) {
-            // print_r($_POST);
-            $id = $_POST['role'];
+            // 1. we update the name and description of the role.
             $role_name = $_POST['role_name'];
             $description = $_POST['role_description'];
-            Role::update($id, $role_name, $description);
+            Role::update($id_role, $role_name, $description);
 
+            // 2. we get the list of IDs of the marked permissions.
+            // if none is marked, it will be an empty array.
+            $permissionIds = $_POST['permissions'] ?? [];
+
+            // 3. we search the Role object to be able to call its synchronization method.
+            $role = Role::find($id_role);
+            $role->savePermissions($permissionIds);
+
+            // 4. we redirect to the list.
             header("Location: /roles/gest/start");
             exit();
         }
 
-        // 1. Cargamos el catálogo completo de permisos que existen en el sistema.
+        // if there is no POST, it means we are showing the form.
+        // we prepare the data for the view.
+        $role = Role::find($id_role);
+
         require_once __DIR__ . '/../../permissions/models/permission.php';
         $allPermissions = Permission::check();
 
-        // 2. Obtenemos los IDs de los permisos que ESTE rol ya tiene asignados.
         $rolePermissionIds = $role->getPermissionIds();
 
-        // 3. Cargamos la vista, que ahora tendrá acceso a $role, $allPermissions y $rolePermissionIds.
         include_once __DIR__ . "/../views/gest/edit.php";
     }
 
     public function view()
     {
-        // 1. Coger el ID del rol desde la URL
+        // 1. we get the ID of the role from the URL
         $id_role = $_GET['id'];
 
-        // 2. Buscar el rol en la base de datos para tener sus detalles (nombre, descripción)
+        // 2. we search the role in the database to have its details (name, description)
         $role = Role::find($id_role);
 
-        // 3. Usar el nuevo método del modelo para obtener la lista de permisos
+        // 3. use the new model method to get the list of permissions
         $permissions = Role::getPermissions($id_role);
 
-        // 4. Cargar la vista de detalles que creamos antes
+        // 4. load the details view that we created before
         require_once __DIR__ . '/../views/gest/view.php';
     }
 }

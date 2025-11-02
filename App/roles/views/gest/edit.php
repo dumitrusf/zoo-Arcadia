@@ -42,30 +42,30 @@
 
             <hr class="my-4">
 
-            <h2 class="h4 mb-3">Permisos Asignados a este Rol</h2>
+            <h2 class="h4 mb-3">Permissions Assigned to this Role</h2>
             <div class="card p-3 shadow-sm">
                 <?php
-                // 1. Agrupamos los permisos por su categoría (la palabra antes del guion)
+                // 1. We group the permissions by their category (the word before the hyphen)
                 $groupedPermissions = [];
                 foreach ($allPermissions as $permission) {
                     $category = explode('-', $permission['permission_name'])[0];
                     $groupedPermissions[$category][] = $permission;
                 }
 
-                // 2. Ahora recorremos las categorías una por una
+                // 2. Now we iterate through the categories one by one
                 foreach ($groupedPermissions as $category => $permissionsInCategory) :
                 ?>
                     <fieldset class="mb-3">
-                        <!-- Dibujamos el nombre de la categoría como un título -->
+                        <!-- We draw the name of the category as a title -->
                         <legend class="h6 text-capitalize border-bottom pb-1 mb-2"><?= htmlspecialchars($category) ?></legend>
 
                         <?php
-                        // 3. Y ahora, recorremos los permisos DENTRO de esta categoría
+                        // 3. Now we iterate through the permissions INSIDE this category
                         foreach ($permissionsInCategory as $permission) :
-                            // 4. La magia: comprobamos si el ID de este permiso está en la lista de los que el rol ya tiene.
+                            // 4. The magic: we check if the ID of this permission is in the list of the ones that the role already has.
                             $isChecked = in_array($permission['id_permission'], $rolePermissionIds);
                         ?>
-                            <!-- Dibujamos el checkbox. Si $isChecked es true, se añade la palabra 'checked' -->
+                            <!-- We draw the checkbox. If $isChecked is true, we add the word 'checked' -->
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="permissions[]" value="<?= $permission['id_permission'] ?>" id="perm-<?= $permission['id_permission'] ?>" <?= $isChecked ? 'checked' : '' ?>>
                                 <label class="form-check-label" for="perm-<?= $permission['id_permission'] ?>">
