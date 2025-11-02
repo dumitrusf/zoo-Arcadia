@@ -52,8 +52,10 @@
                 </div>
             <?php endif; ?>
         </div>
-        <div class="card-footer text-end">
-            <a href="/users/gest/start" class="btn btn-primary">Back to the list</a>
+        <div class="card-footer text-end d-flex justify-content-between align-items-start">
+            <a href="/users/gest/start#user-<?= htmlspecialchars($user->id) ?>" class="btn btn-primary">Back to the list</a>
+            <a href="/users/gest/edit?id=<?= htmlspecialchars($user->id) ?>" class="btn btn-primary">Edit</a>
+
         </div>
     </div>
 </div>

@@ -1,14 +1,12 @@
 
 <?php
 
-include_once __DIR__ . "/../models/user.php";
-
+require_once __DIR__ . "/../models/user.php";
 require_once __DIR__ . "/../../employees/models/employee.php";
-
 require_once __DIR__ . "/../../roles/models/role.php";
 
-include_once __DIR__ . "/../../../database/connection.php";
 // Incluyo el archivo que tiene la clase DB para poder conectarme a la base de datos.
+require_once __DIR__ . "/../../../database/connection.php";
 
 DB::createInstance();
 // Llamo al método estático createInstance() de la clase DB.
