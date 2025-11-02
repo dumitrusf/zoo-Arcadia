@@ -64,12 +64,12 @@ ON UPDATE CASCADE;
 --
 
 -- Verify if there is already a foreign key before adding it
-ALTER TABLE user_permissions
-DROP FOREIGN KEY IF EXISTS fk_users_in_user_permissions;
+ALTER TABLE users_permissions
+DROP FOREIGN KEY IF EXISTS fk_users_in_users_permissions;
 
--- Relationship: user_permissions.user_id -> users.id_user
-ALTER TABLE user_permissions
-ADD CONSTRAINT fk_users_in_user_permissions
+-- Relationship: users_permissions.user_id -> users.id_user
+ALTER TABLE users_permissions
+ADD CONSTRAINT fk_users_in_users_permissions
 FOREIGN KEY (user_id) REFERENCES users(id_user)
 ON DELETE CASCADE
 ON UPDATE CASCADE;
@@ -77,11 +77,11 @@ ON UPDATE CASCADE;
 --
 
 -- Verify if there is already a foreign key before adding it
-ALTER TABLE user_permissions
-DROP FOREIGN KEY IF EXISTS fk_permission_in_user_permissions;
+ALTER TABLE users_permissions
+DROP FOREIGN KEY IF EXISTS fk_permission_in_users_permissions;
 
-ALTER TABLE user_permissions
-ADD CONSTRAINT fk_permission_in_user_permissions
+ALTER TABLE users_permissions
+ADD CONSTRAINT fk_permission_in_users_permissions
 FOREIGN KEY (permission_id) REFERENCES permissions(id_permission)
 ON DELETE CASCADE
 ON UPDATE CASCADE;

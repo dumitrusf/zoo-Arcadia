@@ -1,14 +1,12 @@
 
 <?php
 
-include_once __DIR__ . "/../models/user.php";
-
+require_once __DIR__ . "/../models/user.php";
 require_once __DIR__ . "/../../employees/models/employee.php";
-
 require_once __DIR__ . "/../../roles/models/role.php";
 
-include_once __DIR__ . "/../../../database/connection.php";
 // Incluyo el archivo que tiene la clase DB para poder conectarme a la base de datos.
+require_once __DIR__ . "/../../../database/connection.php";
 
 DB::createInstance();
 // Llamo al método estático createInstance() de la clase DB.
@@ -134,6 +132,29 @@ class UsersGestController
             header("Location: /users/gest/start");
             exit();
         }
+    }
+
+    public function view()
+    {
+        // 1. Obtener el ID del usuario de la URL
+        $id_user = $_GET['id'];
+
+        // 2. Encontrar al usuario
+        $user = User::find($id_user);
+
+        // 3. Obtener el rol del usuario (si lo tiene)
+        $role = $user->getRole();
+        $rolePermissions = [];
+        if ($role) {
+            // 4. Si tiene rol, obtener los permisos de ese rol
+            $rolePermissions = Role::getPermissions($role->id_role);
+        }
+
+        // 5. Obtener los permisos VIP (directos) del usuario
+        $permissions = User::getDirectPermissions($id_user);
+
+        // 6. Cargar la vista con toda la información
+        require_once __DIR__ . '/../views/gest/view.php';
     }
     
 }

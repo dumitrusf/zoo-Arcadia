@@ -204,5 +204,27 @@ class User
         $sql->execute([$employee_id, $user_id]);
 
     }
+
+   
+    public function getRole()
+    {
+        if ($this->role_id) {
+            return Role::find($this->role_id);
+        }
+        return null;
+    }
+
+    public static function getDirectPermissions($id_user)
+    {
+        $connectionDB = DB::createInstance();
+        $query = "SELECT p.id_permission, p.permission_name, p.permission_desc
+                  FROM permissions p 
+                  JOIN users_permissions up ON p.id_permission = up.permission_id 
+                  WHERE up.user_id = ?
+                  ORDER BY p.permission_name ASC";
+        $sql = $connectionDB->prepare($query);
+        $sql->execute([$id_user]);
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
     
 }
