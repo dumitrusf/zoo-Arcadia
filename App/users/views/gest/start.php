@@ -28,7 +28,7 @@
 
                         $rowNumber++;
                     ?>
-                        <tr class="<?php echo get_row_class($rowNumber); ?> ">
+                        <tr id="user-<?= htmlspecialchars($user->id) ?>" class="<?php echo get_row_class($rowNumber); ?> " >
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>"> <?php echo $user->username; ?> </td>
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>"> <?php echo $user->psw; ?> </td>
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>">

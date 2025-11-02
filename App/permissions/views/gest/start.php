@@ -1,6 +1,6 @@
 <?php
 
-// #1Let's create an empty "box of boxes".
+// #1 Let's create an empty "box of boxes".
 // Each inner box will store the permissions of a category.
 $groupedPermissions = [];
 
@@ -119,10 +119,10 @@ if (isset($groupedPermissions['roles'])) {
                                                     <?= htmlspecialchars($prettyName) ?>
                                                 </strong>
 
-                                                                                                
+<!--                                                                                                 
                                                 (<code>
                                                     <?= htmlspecialchars($permission['permission_name']) ?>
-                                                </code>)
+                                                </code>) -->
                                             </td>
 
                                             <td>
