@@ -196,4 +196,48 @@ class Role
         return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
     
+
+    public function savePermissions(array $permissionIds)
+    {
+        $connectionDB = DB::createInstance();
+
+        //  we start a transaction. This is like saying: "If everything goes well... well done, if not... nothing happens" (with native pdo beginTransaction method).
+        $connectionDB->beginTransaction();
+
+        try {
+            // --- STEP 1: DELETE OLD PERMISSIONS ---
+            // We prepare a query to delete all rows in the pivot table
+            // that belong to THIS role.
+            $deleteSql = $connectionDB->prepare("DELETE FROM roles_permissions WHERE role_id = ?");
+            $deleteSql->execute([$this->id_role]);
+
+            // --- STEP 2: INSERT NEW PERMISSIONS ---
+            // We only try to insert if we have permissions.
+            if (!empty($permissionIds)) {
+                // We prepare the insertion query. It will be the same for all.
+                $insertSql = $connectionDB->prepare("INSERT INTO roles_permissions (role_id, permission_id) VALUES (?, ?)");
+
+                //  we iterate through the list of IDs that the controller has passed to us.
+                foreach ($permissionIds as $permissionId) {
+                    // For each ID, we execute the insertion query.
+                    $insertSql->execute([$this->id_role, $permissionId]);
+                }
+            }
+
+            // if we have reached here without errors, everything has gone well!
+            // we make the changes permanent (with native pdo commit method).
+            $connectionDB->commit();
+            return true;
+
+        } catch (Exception $e) {
+            // ¡UPS! Something has failed (the database crashed, a query was wrong...).
+            // We roll back ALL the changes we made from the beginTransaction.
+            $connectionDB->rollBack();
+            // Optional: we can save the error in a log to debug (with native error_log method).
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+    
+    
 }
