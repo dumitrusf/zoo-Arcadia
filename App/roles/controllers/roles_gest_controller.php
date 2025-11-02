@@ -58,27 +58,43 @@ class RolesGestController
 
     public function edit()
     {
-
-        $id = $_GET["id"];
-
-        $role = Role::find($id);
-
-
-        print_r($role);
+        $id_role = $_GET["id"];
+        $role = Role::find($id_role);
 
         if ($_POST) {
             // print_r($_POST);
             $id = $_POST['role'];
             $role_name = $_POST['role_name'];
             $description = $_POST['role_description'];
-            $role_id = Role::update($id, $role_name, $description);
-            // print_r("<br>" . $employee_id);
-            // redireccionamos a la pagina de inicio
+            Role::update($id, $role_name, $description);
+
             header("Location: /roles/gest/start");
+            exit();
         }
 
+        // 1. Cargamos el catálogo completo de permisos que existen en el sistema.
+        require_once __DIR__ . '/../../permissions/models/permission.php';
+        $allPermissions = Permission::check();
 
+        // 2. Obtenemos los IDs de los permisos que ESTE rol ya tiene asignados.
+        $rolePermissionIds = $role->getPermissionIds();
 
+        // 3. Cargamos la vista, que ahora tendrá acceso a $role, $allPermissions y $rolePermissionIds.
         include_once __DIR__ . "/../views/gest/edit.php";
+    }
+
+    public function view()
+    {
+        // 1. Coger el ID del rol desde la URL
+        $id_role = $_GET['id'];
+
+        // 2. Buscar el rol en la base de datos para tener sus detalles (nombre, descripción)
+        $role = Role::find($id_role);
+
+        // 3. Usar el nuevo método del modelo para obtener la lista de permisos
+        $permissions = Role::getPermissions($id_role);
+
+        // 4. Cargar la vista de detalles que creamos antes
+        require_once __DIR__ . '/../views/gest/view.php';
     }
 }

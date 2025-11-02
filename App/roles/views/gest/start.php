@@ -67,10 +67,10 @@
 
                                 <div class="btn-group" role="group" aria-label="">
 
-
-                                    <a href="/roles/gest/edit?id=<?php echo $role->id_role; ?>" class="btn btn-sm btn-primary">Edit</a>
-
+                                    <a href="/roles/gest/view?id=<?php echo $role->id_role; ?>" class="btn btn-sm btn-info">View Details</a>
+                                    <a href="/roles/gest/edit?id=<?php echo $role->id_role; ?>" class="btn btn-sm btn-warning">Edit</a>
                                     <a href="/roles/gest/delete?id=<?php echo $role->id_role; ?>" class="btn btn-sm btn-danger">Delete</a>
+
                                 </div>
 
                             </td>
