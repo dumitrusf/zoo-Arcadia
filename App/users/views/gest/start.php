@@ -28,7 +28,17 @@
 
                         $rowNumber++;
                     ?>
-                        <tr id="user-<?= htmlspecialchars($user->id) ?>" class="<?php echo get_row_class($rowNumber); ?> " >
+                        <?php 
+                            // Determinamos el ID para el ancla. Si es un usuario, usamos su ID.
+                            // Si es un empleado sin usuario, usamos el ID del empleado.
+                            $anchor_id = '';
+                            if (isset($user->id) && $user->id != null) {
+                                $anchor_id = 'user-' . htmlspecialchars($user->id);
+                            } else if (isset($user->employee_id) && $user->employee_id != null) {
+                                $anchor_id = 'employee-' . htmlspecialchars($user->employee_id);
+                            }
+                        ?>
+                        <tr id="<?= $anchor_id ?>" class="<?php echo get_row_class($rowNumber); ?> " >
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>"> <?php echo $user->username; ?> </td>
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>"> <?php echo $user->psw; ?> </td>
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>">
@@ -56,11 +66,12 @@
 
 
                                     <?php if (isset($user->id) && $user->id != null): ?>
-                                        <!-- Es un usuario real, enviamos su ID para editarlo -->
+                                        <!-- Is a user account, we send his ID to edit him -->
+                                        <a href="/users/gest/view?id=<?php echo $user->id; ?>" class="btn btn-sm btn-info text-white">View Details</a>
                                         <a href="/users/gest/edit?id=<?php echo $user->id; ?>" class="btn btn-sm btn-primary">Edit</a>
                                         <a href="/users/gest/delete?id=<?php echo $user->id; ?>" class="btn btn-sm btn-danger">Delete</a>
                                     <?php else: ?>
-                                        <!-- Es solo un empleado, enviamos su ID para asignarle una cuenta -->
+                                        <!-- Is a employee, we send his ID to assign him an account -->
                                         <a href="/users/gest/edit?assign_to_employee=<?php echo $user->employee_id; ?>" class="btn btn-sm btn-info">Assign</a>
                                     <?php endif; ?>
                                     

@@ -29,12 +29,12 @@
                         </div>
                     <?php else : ?>
                         <div class="alert alert-warning" role="alert">
-                            Este rol no tiene ningún permiso asignado actualmente.
+                            This role has no permissions assigned currently.
                         </div>
                     <?php endif; ?>
                 </div>
                 <div class="card-footer text-end">
-                    <a href="/roles/gest/start" class="btn btn-primary">Volver a la lista</a>
+                    <a href="/roles/gest/start" class="btn btn-primary">Back to the list</a>
                 </div>
             </div>
         </div>
