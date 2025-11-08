@@ -1,7 +1,7 @@
 <div class="card container-fluid overflow-auto">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h2 class="card-title">Employees</h2>
-        <a name="employees" id="" class="btn btn-success mb-2 mt-2" href="/employees/gest/create" role="button">+ Add Employee</a>
+        <a name="employees" id="" class="btn btn-success mb-2 mt-2" href="/employees/gest/create" role="button">+ Create New Employee</a>
     </div>
     <div class="card-body container-fluid overflow-auto">
 
@@ -29,14 +29,20 @@
                 <tbody>
 
                     <?php
+                    // Initialize the row number to draw the table rows, thanks to the file, that includes the get_row_class() and get_cell_border_class() functions in the functions.php file in /includes folder
                     $rowNumber = 0;
 
+                    // Iterate through the employees and add them to the table, thanks to the $employees array (defined in the controller employees_gest_controller.php)
                     foreach ($employees as $employee) {
 
+                        // Increment the row number
                         $rowNumber++;
                     ?>
+                    <!-- Draw the table row, thanks to the get_row_class() function in the functions.php file in /includes folder -->
                         <tr class="<?php echo get_row_class($rowNumber); ?> ">
+                            <!-- Draw the table cell, thanks to the get_cell_border_class() function in the functions.php file in /includes folder -->
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>"> <?php echo $employee->first_name; ?> </td>
+                            <!-- Draw the table cell, thanks to the get_cell_border_class() function in the functions.php file in /includes folder -->
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>"> <?php echo $employee->last_name; ?> </td>
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>"> <?php echo $employee->birthdate; ?> </td>
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>"> <?php echo $employee->phone; ?> </td>

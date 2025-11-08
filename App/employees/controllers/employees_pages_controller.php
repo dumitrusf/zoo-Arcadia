@@ -4,19 +4,15 @@ include_once __DIR__ . "/../../../database/connection.php";
 // Incluyo el archivo que tiene la clase DB para poder conectarme a la base de datos.
 
 DB::createInstance();
-// Llamo al método estático createInstance() de la clase DB.
-// Este método me devuelve una conexión PDO lista para usar, siguiendo el patrón Singleton.
-// Si es la primera vez que se llama, crea la conexión. Si ya existe, reutiliza la misma.
+// Call the static method createInstance() of the DB class.
+// This method returns a PDO connection ready to use, following the Singleton pattern.
+// If it is the first time it is called, it creates the connection. If it already exists, it reuses the same one.
 
 class EmployeesPagesController{
     public function start(){
-        include_once __DIR__ . "/../views/pages/start.php";
+        // Include the view to display the start page (just a code chore (a test!))
+        include_once __DIR__ . "/../employees/gest/start.php";
     }
-    public function error(){
-        include_once __DIR__ . "/../views/pages/error.php";
-
-    }
-
 }
 
 ?>
