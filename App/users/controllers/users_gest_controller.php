@@ -19,10 +19,6 @@ class UsersGestController
     {
 
         $users = User::check();
-        $is_active = $_POST['is_active'];
-        // print_r("<pre>" . print_r($users, true) . "</pre>");
-
-
 
         include_once __DIR__ . "/../views/gest/start.php";
     }
@@ -173,24 +169,24 @@ class UsersGestController
 
     public function view()
     {
-        // 1. Get the ID of the user from the URL
+        // Get the ID of the user from the URL
         $id_user = $_GET['id'];
 
-        // 2. Find the user
+        // Find the user
         $user = User::find($id_user);
 
-        // 3. Get the user's role (if they have one)
+        // Get the user's role (if they have one)
         $role = $user->getRole();
         $rolePermissions = [];
         if ($role) {
-            // 4. If they have a role, get the permissions for that role
+            // If they have a role, get the permissions for that role
             $rolePermissions = Role::getPermissions($role->id_role);
         }
 
-        // 5. Get the user's VIP (direct) permissions
+        // Get the user's VIP (direct) permissions
         $permissions = User::getUserVipPermissionsDetails($id_user);
 
-        // 6. Load the view with all the information
+        // Load the view with all the information
         require_once __DIR__ . '/../views/gest/view.php';
     }
     

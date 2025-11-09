@@ -31,9 +31,9 @@ final class PermissionList {
     const ANIMALS_VIEW = 'animals-view';
     const ANIMALS_EDIT = 'animals-edit';
     const ANIMALS_DELETE = 'animals-delete';
-    const ANIMAL_STATS_VIEW = 'animal-stats-view';
-    const ANIMAL_FEEDING_VIEW = 'animal-feeding-view';
-    const ANIMAL_FEEDING_ASSIGN = 'animal-feeding-assign';
+    const ANIMAL_STATS_VIEW = 'animal_stats-view';
+    const ANIMAL_FEEDING_VIEW = 'animal_feeding-view';
+    const ANIMAL_FEEDING_ASSIGN = 'animal_feeding-assign';
 
     // --- VETERINARY PERMISSIONS ---
     const VET_REPORTS_CREATE = 'vet_reports-create';
