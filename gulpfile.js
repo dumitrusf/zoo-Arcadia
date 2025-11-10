@@ -69,7 +69,7 @@ exports.public = series(setFrontend, buildCss, serve, watchFrontend);
 
 // 👉 Backend: gulp app  
 function setBackend(done) {
-  currentProxy = 'http://localhost:3002/App/router.php?domain=employees&controller=pages&action=start';
+  currentProxy = 'http://localhost:3002/home/pages/start';
   done();
 }
 exports.app = series(setBackend, buildCss, serve, watchBackend);

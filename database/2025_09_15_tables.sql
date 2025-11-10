@@ -201,27 +201,27 @@ CREATE TABLE permissions (
 CREATE TABLE employees (
     id_employee INT AUTO_INCREMENT PRIMARY KEY,
     -- Unique identifier for the employee.
-    e_first_name VARCHAR(50) NOT NULL,
+    first_name VARCHAR(50) NOT NULL,
     -- Employee's first name.
-    e_last_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
     -- Employee's last name.
-    e_email VARCHAR(100) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
     -- Employee's unique contact email.
-    e_birthdate DATE NOT NULL,
+    birthdate DATE NOT NULL,
     -- Employee's birthdate.
-    e_phone VARCHAR(15) NOT NULL,
+    phone VARCHAR(15) NOT NULL,
     -- Employee's phone number.
-    e_address VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL,
     -- Employee's physical address.
-    e_city VARCHAR(100) NOT NULL,
+    city VARCHAR(100) NOT NULL,
     -- Employee's city of residence.
-    e_country VARCHAR(100) NOT NULL,
+    country VARCHAR(100) NOT NULL,
     -- Employee's country of residence.
-    e_zip_code VARCHAR(10) NOT NULL,
+    zip_code VARCHAR(10) NOT NULL,
     -- Employee's zip code.
-    e_gender ENUM('male', 'female') NOT NULL,
+    gender ENUM('male', 'female') NOT NULL,
     -- Employee's gender.
-    e_marital_status ENUM('single', 'married', 'divorced', 'widowed') NOT NULL,
+    marital_status ENUM('single', 'married', 'divorced', 'widowed') NOT NULL,
     -- Employee's marital status.
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     -- Timestamp of record creation.
@@ -255,7 +255,7 @@ CREATE TABLE users (
 --
 --
 -- User_permissions Table: relates users to permits
-CREATE TABLE user_permissions (
+CREATE TABLE users_permissions (
     user_id INT NOT NULL,
     -- Relationship with the Users table.
     permission_id INT NOT NULL,

@@ -1,9 +1,9 @@
 <?php
-// Aquí definimos la clase para interactuar con la bdd parametrando los argumentos mediante la ejecución de la consulta a la bdd
+// Defines the Employee class to interact with the database.
 class Employee
 {
 
-    // atributos que tendra el empleado al crearlo desde esta plantilla instanciandolo
+    // attributes that the employee will have when creating it from this template instantiating it
     public $id;
     public $first_name;
     public $last_name;
@@ -20,97 +20,99 @@ class Employee
     public $created_at;
     public $updated_at;
 
-    // constructor de la clase empleado, que apunta con this a los mismos atributos de la clase sin ($)
-    public function __construct($id_employee, $e_first_name, $e_last_name, $e_birthdate, $e_phone, $e_email, $e_address, $e_city, $e_zip_code, $e_country, $e_gender, $e_marital_status, $e_role_name, $e_created_at, $e_updated_at)
+    // constructor of the employee class, that points with this to the same attributes of the class without ($)
+    public function __construct($id_employee, $first_name, $last_name, $birthdate, $phone, $email, $address, $city, $zip_code, $country, $gender, $marital_status, $r_role_name, $created_at, $updated_at)
     {
         $this->id = $id_employee;
-        $this->first_name = $e_first_name;
-        $this->last_name = $e_last_name;
-        $this->birthdate = $e_birthdate;
-        $this->phone = $e_phone;
-        $this->email = $e_email;
-        $this->address = $e_address;
-        $this->city = $e_city;
-        $this->zip_code = $e_zip_code;
-        $this->country = $e_country;
-        $this->gender = $e_gender;
-        $this->marital_status = $e_marital_status;
-        $this->role_name = $e_role_name;
-        $this->created_at = $e_created_at;
-        $this->updated_at = $e_updated_at;
+        $this->first_name = $first_name;
+        $this->last_name = $last_name;
+        $this->birthdate = $birthdate;
+        $this->phone = $phone;
+        $this->email = $email;
+        $this->address = $address;
+        $this->city = $city;
+        $this->zip_code = $zip_code;
+        $this->country = $country;
+        $this->gender = $gender;
+        $this->marital_status = $marital_status;
+        $this->role_name = $r_role_name;
+        $this->created_at = $created_at;
+        $this->updated_at = $updated_at;
     }
 
-    // método para obtener todos los empleados de la bdd
+    // method to get all the employees from the database
     public static function check()
     {
-        // creamos un array vacío para almacenar los empleados
+        // create an empty array to store the employees
         $employeesList = [];
 
-        // instanciamos la conexión a la bdd, ya que si no lo hacemos, no podremos acceder a la bdd para recuperar nada
+        // instantiate the connection to the database, since if we don't do it, we won't be able to access the database to recover anything
         $connectionDB = DB::createInstance();
 
-        // creamos la consulta a la bdd, que nos devolverá todos los empleados de la bdd
+        // create the query to the database, that will return all the employees of the database
         $sql = $connectionDB->query("SELECT e.*, r.role_name, r.id_role
                                      FROM employees e
                                      LEFT JOIN users u 
                                      ON u.employee_id = e.id_employee 
                                      LEFT JOIN roles r ON r.id_role = u.role_id");
 
-        // recorremos los empleados obtenidos de la bdd, y los guardamos en el array $employeesList hay que almacenarlos en algún lugar no?
-        // para cada iteración de consulta, se crea un nuevo objeto Employee y se agrega al array $employeesList
+        // iterate through the employees obtained from the database, and store them in the $employeesList array we have to store them in some place right?
+        // for each query iteration, a new Employee object is created and added to the $employeesList array
         foreach ($sql->fetchAll() as $employee) {
 
-            // guardamos en employeeList los empleados de la bdd en este array para poder mostrarlos en el controlador
-            $employeesList[] = new Employee($employee["id_employee"], $employee["e_first_name"], $employee["e_last_name"], $employee["e_birthdate"], $employee["e_phone"], $employee["e_email"], $employee["e_address"], $employee["e_city"], $employee["e_zip_code"], $employee["e_country"], $employee["e_gender"], $employee["e_marital_status"], $employee["role_name"], $employee["created_at"], $employee["updated_at"]);
+            // store the employees of the database in this array to be able to display them in the controller
+            $employeesList[] = new Employee($employee["id_employee"], $employee["first_name"], $employee["last_name"], $employee["birthdate"], $employee["phone"], $employee["email"], $employee["address"], $employee["city"], $employee["zip_code"], $employee["country"], $employee["gender"], $employee["marital_status"], $employee["role_name"], $employee["created_at"], $employee["updated_at"]);
         }
 
-        // devolvemos el array de empleados
+        // return the array of employees
         return $employeesList;
     }
 
-    // método para crear un nuevo empleado en la bdd
+    // method to create a new employee in the database
     public static function create($first_name, $last_name, $birthdate, $phone, $email, $address, $city, $zip_code, $country, $gender, $marital_status)
     {
-        // instanciamos la conexion a la bdd
+        // instantiate the connection to the database
         $connectionDB = DB::createInstance();
 
-        // creamos la consulta a la bdd
-        $query = "INSERT INTO employees (e_first_name, e_last_name, e_birthdate, e_phone, e_email, e_address, e_city, e_zip_code, e_country, e_gender, e_marital_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        // create the query to the database
+        $query = "INSERT INTO employees (first_name, last_name, birthdate, phone, email, address, city, zip_code, country, gender, marital_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        // preparamos la conexion de la consulta a la bdd
+        // prepare the connection to the database
         $sql = $connectionDB->prepare($query);
 
-        // ejecutamos la consulta ya preparada previamente
+        // execute the query already prepared previously
         $sql->execute([$first_name, $last_name, $birthdate, $phone, $email, $address, $city, $zip_code, $country, $gender, $marital_status]);
 
-        // devolvemos el id del empleado creado
+        // return the id of the created employee
         return $connectionDB->lastInsertId();
     }
 
+
+    // method to delete an employee from the database
     public static function delete($id_employee)
     {
-        // instanciamos la conexion a la bdd
+        // instantiate the connection to the database
         $connectionDB = DB::createInstance();
 
 
-        // creamos la consulta a la bdd
+        // create the query to the database
         $query = "DELETE FROM employees WHERE id_employee = ?";
 
-        // preparamos la conexion de la consulta a la bdd
+        // prepare the connection to the database
         $sql = $connectionDB->prepare($query);
 
-        // ejecutamos la consulta ya preparada previamente
+        // execute the query already prepared previously
         $sql->execute([$id_employee]);
     }
 
 
-
+    // method to find an employee from the database
     public static function find($id_employee)
     {
-        // instanciamos la conexion a la bdd
+        // instantiate the connection to the database
         $connectionDB = DB::createInstance();
 
-        // creamos la consulta a la bdd
+        // create the query to the database
         $query = "SELECT e.*, r.role_name, r.id_role
                     FROM employees e
                     LEFT JOIN users u 
@@ -118,34 +120,59 @@ class Employee
                     LEFT JOIN roles r ON r.id_role = u.role_id
                     WHERE e.id_employee = ?";
 
-        // preparamos la conexion de la consulta a la bdd
+        // prepare the connection to the database
         $sql = $connectionDB->prepare($query);
 
-        // ejecutamos la consulta ya preparada previamente
+        // execute the query already prepared previously
         $sql->execute([$id_employee]);
 
-        // guardamos el primer resultado de la consulta en una variable
+        // store the first result of the query in a variable
         $employee = $sql->fetch();
 
-        // devolvemos el resultado de la consulta
-        return new Employee($employee["id_employee"], $employee["e_first_name"], $employee["e_last_name"], $employee["e_birthdate"], $employee["e_phone"], $employee["e_email"], $employee["e_address"], $employee["e_city"], $employee["e_zip_code"], $employee["e_country"], $employee["e_gender"], $employee["e_marital_status"], $employee["role_name"], $employee["created_at"], $employee["updated_at"]);
+        // return the result of the query
+        return new Employee($employee["id_employee"], $employee["first_name"], $employee["last_name"], $employee["birthdate"], $employee["phone"], $employee["email"], $employee["address"], $employee["city"], $employee["zip_code"], $employee["country"], $employee["gender"], $employee["marital_status"], $employee["role_name"], $employee["created_at"], $employee["updated_at"]);
+    }
+
+    // method to get all the employees without users from the database
+    public static function freeEmployees()
+    {
+        // create an empty array to store the employees without users
+        $employeesList = [];
         
+        // instantiate the connection to the database
+        $connectionDB = DB::createInstance();
+
+        // create the query to the database
+        $query = "SELECT e.id_employee, e.last_name
+                  FROM employees e
+                  LEFT JOIN users u ON e.id_employee = u.employee_id
+                  WHERE u.employee_id IS NULL";
+
+        // prepare the connection to the database
+        $sql = $connectionDB->prepare($query);
+
+        // execute the query already prepared previously
+        $sql->execute();
+
+        // store the first result of the query in a variable
+        return $sql->fetchAll(PDO::FETCH_OBJ);
+
     }
 
 
+    // method to update an employee from the database
     public static function update($id_employee, $first_name, $last_name, $birthdate, $phone, $email, $address, $city, $zip_code, $country, $gender, $marital_status)
     {
-        // instanciamos la conexion a la bdd
+        // instantiate the connection to the database
         $connectionDB = DB::createInstance();
 
-        // creamos la consulta a la bdd
-        $query = "UPDATE employees SET e_first_name = ?, e_last_name = ?, e_birthdate = ?, e_phone = ?, e_email = ?, e_address = ?, e_city = ?, e_zip_code = ?, e_country = ?, e_gender = ?, e_marital_status = ?, updated_at = NOW() WHERE id_employee = ?";
+        // create the query to the database
+        $query = "UPDATE employees SET first_name = ?, last_name = ?, birthdate = ?, phone = ?, email = ?, address = ?, city = ?, zip_code = ?, country = ?, gender = ?, marital_status = ?, updated_at = NOW() WHERE id_employee = ?";
 
-        // preparamos la conexion de la consulta a la bdd
+        // prepare the connection to the database
         $sql = $connectionDB->prepare($query);
 
-        // ejecutamos la consulta ya preparada previamente
+        // execute the query already prepared previously
         $sql->execute([$first_name, $last_name, $birthdate, $phone, $email, $address, $city, $zip_code, $country, $gender, $marital_status, $id_employee]);
     }
 }
-
