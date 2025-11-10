@@ -29,8 +29,8 @@
                         $rowNumber++;
                     ?>
                         <?php 
-                            // Determinamos el ID para el ancla. Si es un usuario, usamos su ID.
-                            // Si es un empleado sin usuario, usamos el ID del empleado.
+                            // Determine the ID for the anchor. If it is a user, we use their ID.
+                            // If it is an employee without a user, we use the employee's ID.
                             $anchor_id = '';
                             if (isset($user->id) && $user->id != null) {
                                 $anchor_id = 'user-' . htmlspecialchars($user->id);
