@@ -6,7 +6,7 @@
     <div class="card-body container-fluid overflow-auto">
 
         <div class="table-responsive">
-            <table class="table table-hover">
+            <table class="table table-hover table-striped dataTable">
                 <thead class="table-dark">
                     <tr>
                         <th class="text-nowrap border border-start-3 border-end-0 rounded-start-3 text-center align-middle" scope="col">Username</th>
