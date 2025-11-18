@@ -20,6 +20,8 @@
   "devDependencies": {
     "browser-sync": "^3.0.4",
     "cssnano": "^4.1.11",
+    "datatables.net": "^2.3.4",
+    "datatables.net-bs5": "^2.3.4",
     "del": "^8.0.0",
     "gulp": "^5.0.1",
     "gulp-autoprefixer": "^7.0.1",
@@ -36,6 +38,7 @@
     "gulp-sourcemaps": "^2.6.5",
     "gulp-terser-js": "^5.2.2",
     "gulp-webp": "^4.0.1",
+    "jquery": "^3.7.1",
     "sass": "^1.89.2",
     "terser": "^5.43.1"
   },

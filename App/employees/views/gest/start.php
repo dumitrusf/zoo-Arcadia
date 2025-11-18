@@ -6,7 +6,8 @@
     <div class="card-body container-fluid overflow-auto">
 
         <div class="table-responsive">
-            <table class="table table-hover">
+
+            <table class="table table-hover table-striped dataTable">
                 <thead class="table-dark">
                     <tr>
                         <th class="text-nowrap border border-start-3 border-end-0 rounded-start-3 text-center align-middle" scope="col">Name</th>
@@ -38,7 +39,7 @@
                         // Increment the row number
                         $rowNumber++;
                     ?>
-                    <!-- Draw the table row, thanks to the get_row_class() function in the functions.php file in /includes folder -->
+                        <!-- Draw the table row, thanks to the get_row_class() function in the functions.php file in /includes folder -->
                         <tr class="<?php echo get_row_class($rowNumber); ?> ">
                             <!-- Draw the table cell, thanks to the get_cell_border_class() function in the functions.php file in /includes folder -->
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>"> <?php echo $employee->first_name; ?> </td>
@@ -73,6 +74,8 @@
 
                 </tbody>
             </table>
+
+
 
 
 
