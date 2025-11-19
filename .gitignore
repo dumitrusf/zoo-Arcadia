@@ -1,5 +1,10 @@
-node_modules/**
-!node_modules/Normalize-css/**
-!node_modules/bootstrap/dist/**
-!node_modules/bootstrap-icons/font/**
-!node_modules/@popperjs/core/dist/umd/**
+/node_modules
+*.md
+
+
+# in other pc do npm install, and composer install
+
+# after that run the project with php -S localhost:3002 for back-en
+# php -S localhost:3001 for front-end
+# in another divided terminal run the project with npx gulp app (if php -S localhost:3002)
+# IF php -S localhost:3001 then npx gulp public

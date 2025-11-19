@@ -1,12 +1,4 @@
-<!-- Formulario de editar empleado -->
-
-
-<br>
-<br>
-<br>
-<br>
-
-<!-- Formulario de crear empleado -->
+<!-- Form to edit an employee -->
 
 <div class="card  shadow-sm mb-4">
     <div class="card-header bg-primary text-white">
@@ -17,7 +9,9 @@
         <form action="" method="post">
 
 
+            <!-- Very Important! Hidden input to store the employee ID, to be able to update the employee in the database -->
             <div>
+                <!-- Hidden input to store the employee ID -->
                 <input type="hidden" class="form-control" aria-describedby="id-help" id="id" name="id" value="<?php echo $employee->id; ?>">
             </div>
 
@@ -27,6 +21,8 @@
                     class="form-label">Name:
                 </label>
 
+                <!-- value: to display the current employee name, in case we forget who we wanted to edit -->
+                <!-- placeholder: to display the current employee name, in case we delete the text from the input, we can see the current employee name as a placeholder -->
                 <input type="text"
                     class="form-control"
                     id="firstname"
@@ -162,10 +158,18 @@
 
                     <option selected value="">Select a gender:</option>
 
+                    <!-- Iterate through the genders options and add them to the select, thanks to the $genders array (defined in the controller employees_gest_controller.php) -->
                     <?php foreach ($genders as $gender_option) { ?>
+                        <!-- Add the gender option to the select -->
                         <option value="<?php echo $gender_option; ?>"
 
+                            <?php
+
+                            # If the current employee gender is the same as the gender option, add the selected attribute to the option
+                            ?>
                             <?php echo ($employee->gender == $gender_option) ? 'selected' : ''; ?>>
+
+                            <!-- Display the gender option -->
                             <?php echo $gender_option; ?>
                         </option>
                     <?php }; ?>
@@ -185,10 +189,18 @@
 
                     <option selected value="">Select a marital status:</option>
 
+                    <!-- Iterate through the marital status options and add them to the select, thanks to the $marital_status array (defined in the controller employees_gest_controller.php) -->
                     <?php foreach ($marital_status as $marital_status_option) { ?>
+                        <!-- Add the marital status option to the select -->
                         <option value="<?php echo $marital_status_option; ?>"
 
+                            <?php
+
+                            # If the current employee marital status is the same as the marital status option, add the selected attribute to the option
+                            ?>
                             <?php echo ($employee->marital_status == $marital_status_option) ? 'selected' : ''; ?>>
+
+                            <!-- Display the marital status option -->
                             <?php echo $marital_status_option; ?>
                         </option>
                     <?php }; ?>
@@ -198,7 +210,7 @@
 
             <div class="card-footer text-end d-flex justify-content-between align-items-start">
                 <input type="submit" class="btn btn-warning px-4" value="Update Employee">
-                <a href="?domain=employees&controller=gest&action=start" class=" btn btn-primary px-4">Cancel</a>
+                <a href="/employees/gest/start" class=" btn btn-primary px-4">Cancel</a>
             </div>
         </form>
 

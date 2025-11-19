@@ -5,8 +5,8 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // Obtener el nombre del archivo actual
-$currentPage = basename($_SERVER['PHP_SELF']);
-include(__DIR__ . "../../../../includes/pageTitle.php");
+$currentDomain = $_GET['domain'] ?? 'home';
+include(__DIR__ . "/../pageTitle.php");
 
 ?>
 
@@ -27,17 +27,14 @@ include(__DIR__ . "../../../../includes/pageTitle.php");
 
     <link rel="icon" type="image/png" href="/src/assets/images/favicon.png" />
 
-    <link rel="stylesheet" href="/node_modules/Normalize-css/normalize.css" />
-
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
-
+    <!-- Hojas de Estilo Compiladas y Copiadas por Gulp -->
+    <link rel="stylesheet" href="/public/build/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/build/css/dataTables.bootstrap5.min.css">
     <!-- <link rel="stylesheet" href="/public/build/css/app.css"> -->
-
-
 
 </head>
 
-<body class="<?= $currentPage == 'contact.php' ? 'body-contact' : '' ?>" id="top">
+<body class="<?= $currentDomain == 'contact' ? 'body-contact' : '' ?>" id="top">
 
 
 
@@ -45,28 +42,41 @@ include(__DIR__ . "../../../../includes/pageTitle.php");
     <nav class="navbar navbar-expand navbar-light bg-light">
         <div class="nav navbar-nav">
             <a class="nav-item nav-link active" href="#">Logged in (user) <span class="visually-hidden">(current)</span></a>
-            <a class="nav-item nav-link" href="?domain=employees&controller=pages&action=start">Home</a>
-            <a class="nav-item nav-link" href="?domain=users&controller=gest&action=start">Users</a>
-            <a class="nav-item nav-link" href="?domain=employees&controller=gest&action=start">Employees</a>
-            <a class="nav-item nav-link" href="?domain=roles&controller=gest&action=start">Roles</a>
+            <a class="nav-item nav-link" href="/home/pages/start">Home</a>
+            <a class="nav-item nav-link" href="/users/gest/start">Users</a>
+            <a class="nav-item nav-link" href="/employees/gest/start">Employees</a>
+            <a class="nav-item nav-link" href="/roles/gest/start">Roles</a>
+            <a class="nav-item nav-link" href="/permissions/gest/start">Permissions</a>
         </div>
     </nav>
-    
+
     <div class="container-xs p-5">
         <div class="row">
             <div class="col-12">
                 <?php
-                
+
                 // Mostrar el contenido capturado del controlador de lo contrario mostrar un mensaje de no hay contenido para mostrar
                 echo $viewContent ?? '<p>No hay contenido para mostrar</p>';
-                
+
                 ?>
-                
+
             </div>
         </div>
     </div>
 
 
-    <script type="module" src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="/node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+    <!-- 
+      Orden de carga de Scripts es importante:
+      1. jQuery (requerido por Bootstrap y DataTables)
+      2. Bootstrap JS (para la funcionalidad de la plantilla)
+      3. DataTables Core
+      4. DataTables Bootstrap 5 Integration
+      5. Nuestro código de activación (app.js)
+    -->
+    <script src="/public/build/js/jquery.min.js"></script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/public/build/js/dataTables.min.js"></script>
+    <script src="/public/build/js/dataTables.bootstrap5.min.js"></script>
+    <script src="/public/build/js/app.js"></script>
+
 </body>

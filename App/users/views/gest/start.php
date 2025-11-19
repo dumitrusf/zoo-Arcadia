@@ -1,12 +1,12 @@
 <div class="card container-fluid overflow-auto">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h2 class="card-title">Users</h2>
-        <a name="users" id="" class="btn btn-success mb-2 mt-2" href="?domain=users&controller=gest&action=create" role="button">Create new Account</a>
+        <a name="users" id="" class="btn btn-success mb-2 mt-2" href="/users/gest/create" role="button">+ Create new Account</a>
     </div>
     <div class="card-body container-fluid overflow-auto">
 
         <div class="table-responsive">
-            <table class="table table-hover">
+            <table class="table table-hover table-striped dataTable">
                 <thead class="table-dark">
                     <tr>
                         <th class="text-nowrap border border-start-3 border-end-0 rounded-start-3 text-center align-middle" scope="col">Username</th>
@@ -28,16 +28,26 @@
 
                         $rowNumber++;
                     ?>
-                        <tr class="<?php echo get_row_class($rowNumber); ?> ">
+                        <?php 
+                            // Determine the ID for the anchor. If it is a user, we use their ID.
+                            // If it is an employee without a user, we use the employee's ID.
+                            $anchor_id = '';
+                            if (isset($user->id) && $user->id != null) {
+                                $anchor_id = 'user-' . htmlspecialchars($user->id);
+                            } else if (isset($user->employee_id) && $user->employee_id != null) {
+                                $anchor_id = 'employee-' . htmlspecialchars($user->employee_id);
+                            }
+                        ?>
+                        <tr id="<?= $anchor_id ?>" class="<?php echo get_row_class($rowNumber); ?> " >
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>"> <?php echo $user->username; ?> </td>
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>"> <?php echo $user->psw; ?> </td>
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>">
                                 <div class="btn-group" role="group" aria-label="">
                                     <?php if ($user->is_active == 1): ?>
                                         <span class="btn btn-sm bg-success text-white">Activated</span>
-                                        <a href="?domain=users&controller=gest&action=toggleActivation&id=<?php echo $user->id; ?>" class="btn btn-sm btn-warning">Deactivate</a>
+                                        <a href="/users/gest/toggleActivation?id=<?php echo $user->id; ?>" class="btn btn-sm btn-warning">Deactivate</a>
                                     <?php else: ?>
-                                        <a href="?domain=users&controller=gest&action=toggleActivation&id=<?php echo $user->id; ?>" class="btn btn-sm btn-primary text-white">Activate</a>
+                                        <a href="/users/gest/toggleActivation?id=<?php echo $user->id; ?>" class="btn btn-sm btn-primary text-white">Activate</a>
                                         <span class="btn btn-sm bg-danger text-white">Deactivated</span>
                                     <?php endif; ?>
 
@@ -55,8 +65,16 @@
 
 
 
-                                    <a href="?domain=users&controller=gest&action=edit&id=<?php echo $user->id; ?>" class="btn btn-sm btn-primary">Edit</a>
-                                    <a href="?domain=users&controller=gest&action=delete&id=<?php echo $user->id; ?>" class="btn btn-sm btn-danger">Delete</a>
+                                    <?php if (isset($user->id) && $user->id != null): ?>
+                                        <!-- Is a user account, we send his ID to edit him -->
+                                        <a href="/users/gest/view?id=<?php echo $user->id; ?>" class="btn btn-sm btn-info text-white">View Details</a>
+                                        <a href="/users/gest/edit?id=<?php echo $user->id; ?>" class="btn btn-sm btn-primary">Edit</a>
+                                        <a href="/users/gest/delete?id=<?php echo $user->id; ?>" class="btn btn-sm btn-danger">Delete</a>
+                                    <?php else: ?>
+                                        <!-- Is a employee, we send his ID to assign him an account -->
+                                        <a href="/users/gest/edit?assign_to_employee=<?php echo $user->employee_id; ?>" class="btn btn-sm btn-info">Assign</a>
+                                    <?php endif; ?>
+                                    
                                 </div>
 
                             </td>
