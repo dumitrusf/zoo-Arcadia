@@ -1,12 +1,9 @@
 <?php
-
-
-
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Obtener el nombre del archivo actual
+// Get the name of the current file
 $currentPage = basename($_SERVER['PHP_SELF']);
 include(__DIR__ . '/../pageTitle.php');
 
@@ -62,7 +59,7 @@ include(__DIR__ . '/../pageTitle.php');
                         <a class="nav__link <?= $currentPage == 'all-animals-habitats.php' ? 'nav__link--active' : '' ?>" href="../../public/all-animals-habitats.php">animals</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'contact.php' ? 'nav__link--active' : '' ?>" href="../../public/contact.php">contact</a>
+                        <a class="nav__link <?= $currentPage == 'contact.php' ? 'nav__link--active' : '' ?>" href="/contact/pages/contact">contact</a>
                     </li>
                 </ul>
 
@@ -119,7 +116,7 @@ include(__DIR__ . '/../pageTitle.php');
                         <a class="nav__link <?= $currentPage == 'all-animals-habitats.php' ? 'nav__link--active' : '' ?>" href="../../public/all-animals-habitats.php">animals</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'contact.php' ? 'nav__link--active' : '' ?>" href="../../public/contact.php">contact</a>
+                        <a class="nav__link <?= $currentPage == 'contact.php' ? 'nav__link--active' : '' ?>" href="/contact/pages/contact">contact</a>
                     </li>
                 </ul>
                 <img class="panda__logo" src="/src/assets/images/panda-menu-mobile.svg" alt="Logo site">
@@ -141,7 +138,7 @@ include(__DIR__ . '/../pageTitle.php');
                         <a class="nav__link <?= $currentPage == 'all-animals-habitats.php' ? 'nav__link--active' : '' ?>" href="../../public/all-animals-habitats.php">animals</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'contact.php' ? 'nav__link--active' : '' ?>" href="../../public/contact.php">contact</a>
+                        <a class="nav__link <?= $currentPage == 'contact.php' ? 'nav__link--active' : '' ?>" href="/contact/pages/contact">contact</a>
                     </li>
                 </ul>
                 <div class="logo-desk">
