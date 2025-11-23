@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Obtener el nombre del archivo actual
+// Get the name of the current file
 $currentDomain = $_GET['domain'] ?? 'home';
 include(__DIR__ . "/../pageTitle.php");
 
@@ -34,29 +34,35 @@ include(__DIR__ . "/../pageTitle.php");
 
 </head>
 
-<body class="<?= $currentDomain == 'contact' ? 'body-contact' : '' ?>" id="top">
+<body class="<?= $currentDomain == 'contact' ? 'body-contact' : ($currentDomain == 'auth' ? 'body-login' : '') ?>" id="top">
 
-
-
-
-    <nav class="navbar navbar-expand navbar-light bg-light">
+    <?php if (!in_array($currentDomain, ['contact', 'auth'])): ?>
+    <nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between" >
         <div class="nav navbar-nav">
-            <a class="nav-item nav-link active" href="#">Logged in (user) <span class="visually-hidden">(current)</span></a>
-            <a class="nav-item nav-link" href="/home/pages/start">Home</a>
+            <?php if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == false): ?>
+                <a class="nav-item nav-link active" href="/auth/pages/login">Login</a>
+            <?php else: ?>
+                <a class="nav-item nav-link active" href="/home/pages/start"><?php echo $_SESSION["user"]["username"]; ?></a>
+            <?php endif; ?>
             <a class="nav-item nav-link" href="/users/gest/start">Users</a>
             <a class="nav-item nav-link" href="/employees/gest/start">Employees</a>
             <a class="nav-item nav-link" href="/roles/gest/start">Roles</a>
             <a class="nav-item nav-link" href="/permissions/gest/start">Permissions</a>
         </div>
+
+        <div class="nav navbar-nav d-flex justify-content-end px-5">
+            <a class="nav-item nav-link" href="/auth/pages/logout">Logout</a>
+        </div>
     </nav>
+    <?php endif; ?>
 
     <div class="container-xs p-5">
         <div class="row">
             <div class="col-12">
                 <?php
 
-                // Mostrar el contenido capturado del controlador de lo contrario mostrar un mensaje de no hay contenido para mostrar
-                echo $viewContent ?? '<p>No hay contenido para mostrar</p>';
+                // Show the captured content from the controller, otherwise show a message that there is no content to show
+                echo $viewContent ?? '<p>There is no content to show</p>';
 
                 ?>
 
@@ -66,7 +72,7 @@ include(__DIR__ . "/../pageTitle.php");
 
 
     <!-- 
-      Orden de carga de Scripts es importante:
+      Order of loading Scripts is important:
       1. jQuery (requerido por Bootstrap y DataTables)
       2. Bootstrap JS (para la funcionalidad de la plantilla)
       3. DataTables Core

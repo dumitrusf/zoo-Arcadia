@@ -1,37 +1,70 @@
 <?php
 // App/router.php (El Guardia Central)
 
+session_start();
+
+
+// App/router.php
+
+// 1. Caché out (it usually works, but sometimes we have to clear the browser cache to start going)
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+
 $domain = $_GET["domain"] ?? "home";
 
-// --- COMENTARIO D: LISTA DE INVITADOS (SEGURIDAD) ---
-// La única responsabilidad de este archivo es la seguridad y la delegación de alto nivel.
-// Mantiene una "lista blanca" de dominios que existen. Si un dominio no está aquí, es rechazado.
-$allowed_domains = [ "home", "animals", "employees", "habitats", "permissions", "reports", "roles", "schedules", "testimonials", "users"];
+// 2. List of sites where we don't need to be logged in
+$public_domains = ["auth", "contact"];
+
+// 3. Security check
+// If there is no user and the domain is not public...
+if (!isset($_SESSION["user"]["username"]) && !in_array($domain, $public_domains)) {
+    // we redirect to login!.
+    header("Location: /auth/pages/login");
+    exit();
+}
+
+// 4. Inverse check (optional but useful)
+// If there is a user and the user tries to go to login...
+if (isset($_SESSION["user"]["username"]) && $domain === "auth" && $_GET["action"] === "login") {
+    // ... why? If you are already inside, we send you to home! (to avoid infinite loops).
+    header("Location: /home/pages/start");
+    exit();
+}
+
+
+
+
+$domain = $_GET["domain"] ?? "home";
+
+//  "lista blanca" de dominios que existen. Si un dominio no está aquí, es rechazado.
+$allowed_domains = [ "auth", "home", "animals", "employees", "habitats", "permissions", "reports", "roles", "schedules", "testimonials", "users", "contact"];
 
 if (in_array($domain, $allowed_domains)) {
-    
-    // --- COMENTARIO E: DELEGACIÓN A EXPERTOS ---
-    // ¡Esta es la clave de la arquitectura!
-    // El Guardia Central NO SABE NADA sobre cómo funciona el dominio `employees`.
-    // Su único trabajo es decir: "Ah, es para `employees`... pues que se encargue el experto de `employees`".
-    // Le pasa el control total al "Recepcionista" de ese dominio.
+    // we redirect to the domain router.
     $domainRouterPath = __DIR__ . "/{$domain}/{$domain}Router.php";
 
     if (file_exists($domainRouterPath)) {
         require_once $domainRouterPath;
     } else {
-        // ERROR 500: El dominio está en la lista, pero no hemos creado su archivo router.
-        // Esto es un error nuestro (de los programadores), no del usuario.
+        // ERROR 500: The domain is in the list, but we haven't created its router file.
+        // This is our error (of the programmers), not the user's.
         http_response_code(500); 
-        // Por ahora, lo mandamos al 404 para no confundir al usuario.
-        // En un futuro, podríamos crear una página `error-500.php`.
-        header('Location: /public/error');
+        // For now, we send you to the 404 page to avoid confusing the user.
+        // In the future, we could create an `error-500.php` page.
+        header('Location: /public/error-404.php');
         exit();
     }
 } else {
-    // ERROR 404: El dominio que ha pedido el usuario no existe en nuestra lista.
+    // ERROR 404: The domain that the user requested does not exist in our list.
     http_response_code(404);
-    header('Location: /public/error');
+    header('Location: /public/error-404.php');
     exit();
 }
+
+
+
+
 ?>
+
+
