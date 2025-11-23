@@ -19,6 +19,19 @@
             <?php endif; ?>
 
             <hr>
+            <h5 class="card-title">Assigned Employee:</h5>
+            <?php if (!empty($user->employee_email)) : ?>
+                <p class="card-text mb-4">
+                    <strong>Employee email:</strong>
+                    <?= htmlspecialchars($user->employee_email) ?>
+                </p>
+            <?php else : ?>
+                <div class="alert alert-secondary" role="alert">
+                    This user <?= htmlspecialchars($user->username) ?> has no employee assigned.
+                </div>
+            <?php endif; ?>
+
+            <hr>
 
             <!-- Section of VIP Permissions -->
             <h5 class="card-title mt-4">⭐ VIP Permissions Assigned to <?= htmlspecialchars($user->username) ?></h5>

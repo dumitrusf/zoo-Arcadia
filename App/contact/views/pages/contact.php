@@ -1,11 +1,3 @@
-<?php
-require_once __DIR__ . '/../includes/functions.php';
-
-includeTemplate("nav");
-
-
-?>
-
 
 
 <!-- <nav class="nav navbar"> -->
@@ -17,7 +9,7 @@ includeTemplate("nav");
         <a href="./index.php" class="contact__logo-link">
             <img src="/src/assets/images/logo-site-mobile.svg" alt="Logo del sitio" class="contact__logo">
         </a>
-        <a href="./login.php" target="_blank" rel="noopener">
+        <a href="/auth/pages/login">
             <span>Log in?</span>
         </a>
     </header>
@@ -25,7 +17,7 @@ includeTemplate("nav");
 
 
     <div class="contact__container">
-        <!-- Form contacto -->
+        <!-- Form contact -->
         <section class="contact__form-section">
             <h2 class="contact__title">Contact About:</h2>
 
@@ -35,7 +27,7 @@ includeTemplate("nav");
 
                     <div>
 
-                        <!-- Campo de primer nombre -->
+                        <!-- Field of first name -->
 
 
                         <label for="first-name" class="contact__label">First Name</label>
@@ -46,7 +38,7 @@ includeTemplate("nav");
 
 
 
-                        <!-- Campo de apellido -->
+                        <!-- Field of last name -->
 
 
                         <label for="last-name" class="contact__label">Last Name</label>
@@ -56,7 +48,7 @@ includeTemplate("nav");
                     </div>
 
                     <div>
-                        <!-- Campo de correo electrónico -->
+                        <!-- Field of email -->
 
                         <label for="email" class="contact__label">Email</label>
                         <input type="email" id="email" name="email" placeholder="Maximiliano@outlook.com" required
@@ -76,7 +68,7 @@ includeTemplate("nav");
 
                     </div>
                 </div>
-                <!-- Campo de mensaje -->
+                <!-- Field of message -->
                 <div>
 
                     <label for="message" class="contact__label">Message</label>
@@ -84,12 +76,11 @@ includeTemplate("nav");
                     <textarea id="message" name="message" rows="4" placeholder="are there snakes?" required
                         class="contact__textarea"></textarea>
                 </div>
-                <!-- Campo de asunto -->
 
 
 
 
-                <!-- Botón de envío -->
+                <!-- Submit -->
                 <button type="submit" class="contact__button">Send</button>
             </form>
         </section>
@@ -97,10 +88,3 @@ includeTemplate("nav");
 
 </main>
 
-
-
-<?php
-includeTemplate("footer");
-
-
-?>
