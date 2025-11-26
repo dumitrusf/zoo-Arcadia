@@ -107,14 +107,14 @@ function watchBackend() {
 
 // 👉 Frontend: gulp public
 function setFrontend(done) {
-  currentProxy = 'http://localhost:3001/public/index.php';
+  currentProxy = 'http://localhost:3001'; // Directamente al puerto del servidor PHP
   done();
 }
 exports.public = series(setFrontend, buildCss, buildJs, serve, watchFrontend);
 
 // 👉 Backend: gulp app  
 function setBackend(done) {
-  currentProxy = 'http://localhost:3002/home/pages/start';
+  currentProxy = 'http://localhost:3002/home/pages/start'; // Ahora todo va por el 3001
   done();
 }
 exports.app = series(setBackend, buildCss, buildJs, serve, watchBackend);

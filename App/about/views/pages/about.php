@@ -1,11 +1,3 @@
-<?php
-require_once __DIR__ . '/../includes/functions.php';
-
-includeTemplate("nav");
-
-
-?>
-
 
 <header class="hero hero-carousel">
 
@@ -247,14 +239,3 @@ includeTemplate("nav");
 		</form>
 	</div>
 </section>
-
-
-
-
-
-
-<?php
-includeTemplate("footer");
-
-
-?>

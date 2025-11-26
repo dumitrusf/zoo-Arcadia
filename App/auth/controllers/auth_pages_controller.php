@@ -11,11 +11,7 @@ DB::createInstance();
 class AuthPagesController{
     public function login(){
         // Include the view to display the start page (just a code chore (a test!))
-        includeTemplate("nav");
         include_once __DIR__ . "/../views/pages/login.php";
-        // includeTemplate("footer");
-
-        // exit();
     }
 
 

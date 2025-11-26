@@ -12,10 +12,6 @@ class ContactPagesController
 {
     public function contact()
     {        
-        includeTemplate("nav");
         include_once __DIR__ . "/../views/pages/contact.php";
-        // includeTemplate("footer");
-        // exit();
-
     }
 }

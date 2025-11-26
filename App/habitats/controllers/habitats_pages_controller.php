@@ -8,18 +8,23 @@ DB::createInstance();
 // This method returns a PDO connection ready to use, following the Singleton pattern.
 // If it is the first time it is called, it creates the connection. If it already exists, it reuses the same one.
 
-
-class HomePagesController {
-    public function start()
-    {
-        require_once __DIR__ . '/../views/gest/start.php';
+class HabitatsPagesController{
+    public function habitats(){
+        include_once __DIR__ . "/../views/pages/habitats.php";
     }
 
+    // public function habitat($habitat_id){
+    //     includeTemplate("nav");
+    //     include_once __DIR__ . "/../views/pages/habitat-{$habitat_id}.php";
+    //     includeTemplate("footer");
 
-    public function index()
-    {
-        include_once __DIR__ . '/../views/pages/index.php';
+    //     exit();
+    // }
 
+    public function habitat1(){
+        include_once __DIR__ . "/../views/pages/habitat1.php";
     }
     
 }
+
+?>

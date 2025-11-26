@@ -14,12 +14,20 @@ header("Pragma: no-cache");
 $domain = $_GET["domain"] ?? "home";
 
 // 2. List of sites where we don't need to be logged in
-$public_domains = ["auth", "contact"];
+// "home", "about", "habitats", "animals", "cms" deben estar aquí para ser accesibles públicamente.
+$public_domains = ["auth", "contact", "home", "about", "habitats", "animals", "cms"];
 
 // 3. Security check
 // If there is no user and the domain is not public...
 if (!isset($_SESSION["user"]["username"]) && !in_array($domain, $public_domains)) {
     // we redirect to login!.
+    header("Location: /auth/pages/login");
+    exit();
+}
+
+// 3.1 Protección específica para el Dashboard (/home/pages/start)
+// Aunque "home" sea público (para index), la acción "start" requiere login.
+if ($domain === "home" && $_GET["action"] === "start" && !isset($_SESSION["user"]["username"])) {
     header("Location: /auth/pages/login");
     exit();
 }
@@ -32,13 +40,10 @@ if (isset($_SESSION["user"]["username"]) && $domain === "auth" && $_GET["action"
     exit();
 }
 
-
-
-
 $domain = $_GET["domain"] ?? "home";
 
 //  "lista blanca" de dominios que existen. Si un dominio no está aquí, es rechazado.
-$allowed_domains = [ "auth", "home", "animals", "employees", "habitats", "permissions", "reports", "roles", "schedules", "testimonials", "users", "contact"];
+$allowed_domains = [ "habitat1", "cms", "about", "auth", "home", "animals", "employees", "habitats", "permissions", "reports", "roles", "schedules", "testimonials", "users", "contact"];
 
 if (in_array($domain, $allowed_domains)) {
     // we redirect to the domain router.

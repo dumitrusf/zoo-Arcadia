@@ -660,7 +660,6 @@ select {
 
   &__logo {
     width: min(18.4rem, 100%);
-    margin: 3rem;
   }
   &__hours {
     color: map-get(map-get(v.$color, solid-colors), c-light);

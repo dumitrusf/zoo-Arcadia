@@ -4,7 +4,7 @@ define("TEMPLATES_URL", __DIR__ . "/templates");
 define("FUNCTIONS_URL", __DIR__ . "functions.php");
 
 
-function includeTemplate(string  $nombre, bool $inicio = false)
+function includeTemplate(string  $nombre)
 {
     include TEMPLATES_URL . "/{$nombre}.php";
 }
@@ -45,7 +45,35 @@ function handleDomainRouting($domainName, $basePath)
         $controllerInstance->$action();
         $viewContent = ob_get_clean();
 
-        require_once __DIR__ . "/layouts/BO_main_layout.php";
+        // DEBUG EXTREMO
+        // echo "<!-- DEBUG FUNCTIONS: Domain recibido: '$domainName' -->";
+
+        // LÓGICA DE SELECCIÓN DE LAYOUT MEJORADA:
+        // Mapa dominio -> acciones públicas (vacío = todas)
+        $public_layout_map = [
+            "home"      => ["index"],
+            "about"     => ["about"],
+            "habitats"  => ["habitats", "habitat1"],
+            "animals"   => ["allanimals", "animalpicked"],
+            "cms"       => ["cms"],
+            "contact"   => ["contact"],
+            "auth"      => ["login"]
+        ];
+
+        $domainKey = strtolower($domainName);
+        $actionKey = strtolower($action);
+
+        $usePublicLayout = false;
+        if (isset($public_layout_map[$domainKey])) {
+            $allowedActions = $public_layout_map[$domainKey];
+            $usePublicLayout = empty($allowedActions) || in_array($actionKey, $allowedActions, true);
+        }
+
+        if ($usePublicLayout) {
+            require __DIR__ . "/layouts/FC_main_layout.php";
+        } else {
+            require __DIR__ . "/layouts/BO_main_layout.php";
+        }
     } else {
         http_response_code(404);
         header('Location: /public/error-404.php');

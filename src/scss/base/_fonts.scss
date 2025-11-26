@@ -37,6 +37,7 @@ $path-fonts-formats: (
   font-family: map-get(map-get($path-fonts-formats, family-font), h1-font);
   src: url(#{map-get(map-get($path-fonts-formats, path-font), h1-path)})
     format(#{map-get(map-get($path-fonts-formats, format-font), ttf-format)});
+  font-display: swap;
 };
 
 
@@ -44,40 +45,47 @@ $path-fonts-formats: (
   font-family: map-get(map-get($path-fonts-formats, family-font), h2-font);
   src: url(#{map-get(map-get($path-fonts-formats, path-font), h2-path)})
     format(#{map-get(map-get($path-fonts-formats, format-font), ttf-format)});
+  font-display: swap;
 };
 
 @font-face {
   font-family: map-get(map-get($path-fonts-formats, family-font), h3-font);
   src: url(#{map-get(map-get($path-fonts-formats, path-font), h3-path)})
     format(#{map-get(map-get($path-fonts-formats, format-font), ttf-format)});
+  font-display: swap;
 };
 
 @font-face {
   font-family: map-get(map-get($path-fonts-formats, family-font), h4-font);
   src: url(#{map-get(map-get($path-fonts-formats, path-font), h4-path)})
     format(#{map-get(map-get($path-fonts-formats, format-font), ttf-format)});
+  font-display: swap;
 };
 
 @font-face {
   font-family: map-get(map-get($path-fonts-formats, family-font), paragraph-font);
   src: url(#{map-get(map-get($path-fonts-formats, path-font), paragraph-path)})
     format(#{map-get(map-get($path-fonts-formats, format-font), ttf-format)});
+  font-display: swap;
 };
 
 @font-face {
   font-family: map-get(map-get($path-fonts-formats, family-font), button-font);
   src: url(#{map-get(map-get($path-fonts-formats, path-font), button-path)})
     format(#{map-get(map-get($path-fonts-formats, format-font), ttf-format)});
+  font-display: swap;
 };
 
 @font-face {
   font-family: map-get(map-get($path-fonts-formats, family-font), normal-font);
   src: url(#{map-get(map-get($path-fonts-formats, path-font), normal-font-path)})
     format(#{map-get(map-get($path-fonts-formats, format-font), ttf-format)});
+  font-display: swap;
 };
 
 @font-face {
   font-family: map-get(map-get($path-fonts-formats, family-font), menu-font);
   src: url(#{map-get(map-get($path-fonts-formats, path-font), menu-font-path)})
     format(#{map-get(map-get($path-fonts-formats, format-font), ttf-format)});
+  font-display: swap;
 };

@@ -1,12 +1,27 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// Datos básicos del enrutador público
+$currentDomain = $_GET['domain'] ?? 'home';
+$currentAction = $_GET['action'] ?? 'index';
 
-// Get the name of the current file
-$currentPage = basename($_SERVER['PHP_SELF']);
+if (!function_exists('public_nav_is_active')) {
+    function public_nav_is_active(string $expectedDomain, array $actions = []): string
+    {
+        $domain = $_GET['domain'] ?? 'home';
+        $action = $_GET['action'] ?? 'index';
+
+        if ($domain !== $expectedDomain) {
+            return '';
+        }
+
+        if (!empty($actions) && !in_array($action, $actions, true)) {
+            return '';
+        }
+
+        return 'nav__link--active';
+    }
+}
+
 include(__DIR__ . '/../pageTitle.php');
-
 ?>
 
 
@@ -29,15 +44,19 @@ include(__DIR__ . '/../pageTitle.php');
 
     <link rel="stylesheet" href="/node_modules/Normalize-css/normalize.css" />
 
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href=" /public/build/css/bootstrap.min.css" />
 
-    <link rel="stylesheet" href="/public/build/css/app.css">
+    <link rel="preload" href="/public/build/css/app.css" as="style"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="/public/build/css/app.css">
+    </noscript>
 
 
 
 </head>
 
-<body class="<?= $currentPage == 'contact.php' ? 'body-contact' : '' ?>" id="top">
+<body class="<?= $currentDomain == 'contact' ? 'body-contact' : ($currentDomain == 'auth' ? 'body-login' : '') ?>" id="top">
 
 
     <!-- navbar for mobile with his fonts and sizes -->
@@ -47,19 +66,19 @@ include(__DIR__ . '/../pageTitle.php');
 
                 <ul class="nav__items">
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'index.php' ? 'nav__link--active' : '' ?>" href="../../public/index.php">home</a>
+                        <a class="nav__link <?= public_nav_is_active('home', ['index']) ?>" href="/home/pages/index">home</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'services.php' ? 'nav__link--active' : '' ?>" href="../../public/services.php">services</a>
+                        <a class="nav__link <?= public_nav_is_active('cms', ['cms']) ?>" href="/cms/pages/cms">services</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'habitats.php' ? 'nav__link--active' : '' ?>" href="../../public/habitats.php">habitats</a>
+                        <a class="nav__link <?= public_nav_is_active('habitats', ['habitats']) ?>" href="/habitats/pages/habitats">habitats</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'all-animals-habitats.php' ? 'nav__link--active' : '' ?>" href="../../public/all-animals-habitats.php">animals</a>
+                        <a class="nav__link <?= public_nav_is_active('animals') ?>" href="/animals/pages/allanimals">animals</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'contact.php' ? 'nav__link--active' : '' ?>" href="/contact/pages/contact">contact</a>
+                        <a class="nav__link <?= public_nav_is_active('contact', ['contact']) ?>" href="/contact/pages/contact">contact</a>
                     </li>
                 </ul>
 
@@ -75,7 +94,7 @@ include(__DIR__ . '/../pageTitle.php');
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <a class="main-logo-link" href="/index.php">
+            <a class="main-logo-link" href="/home/pages/index">
                 <img class="main__logo" src="/src/assets/images/logo-bar.svg" alt="logo site">
             </a>
 
@@ -94,7 +113,7 @@ include(__DIR__ . '/../pageTitle.php');
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <a class="main-logo-link" href="/index.php">
+            <a class="main-logo-link" href="/home/pages/index">
                 <img class="main__logo" src="/src/assets/images/logo-bar.svg" alt="logo site">
             </a>
 
@@ -104,19 +123,19 @@ include(__DIR__ . '/../pageTitle.php');
             <div class="nav__m-flex">
                 <ul class="nav__items">
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'index.php' ? 'nav__link--active' : '' ?>" href="../../public/index.php">home</a>
+                        <a class="nav__link <?= public_nav_is_active('home', ['index']) ?>" href="/home/pages/index">home</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'services.php' ? 'nav__link--active' : '' ?>" href="../../public/services.php">services</a>
+                        <a class="nav__link <?= public_nav_is_active('cms', ['cms']) ?>" href="/cms/pages/cms">services</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'habitats.php' ? 'nav__link--active' : '' ?>" href="../../public/habitats.php">habitats</a>
+                        <a class="nav__link <?= public_nav_is_active('habitats', ['habitats']) ?>" href="/habitats/pages/habitats">habitats</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'all-animals-habitats.php' ? 'nav__link--active' : '' ?>" href="../../public/all-animals-habitats.php">animals</a>
+                        <a class="nav__link <?= public_nav_is_active('animals') ?>" href="/animals/pages/allanimals">animals</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'contact.php' ? 'nav__link--active' : '' ?>" href="/contact/pages/contact">contact</a>
+                        <a class="nav__link <?= public_nav_is_active('contact', ['contact']) ?>" href="/contact/pages/contact">contact</a>
                     </li>
                 </ul>
                 <img class="panda__logo" src="/src/assets/images/panda-menu-mobile.svg" alt="Logo site">
@@ -126,19 +145,19 @@ include(__DIR__ . '/../pageTitle.php');
             <div class="nav__menu nav__menu--desk collapse" id="navbarToggler">
                 <ul class="nav__items">
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'index.php' ? 'nav__link--active' : '' ?>" href="../../public/index.php">home</a>
+                        <a class="nav__link <?= public_nav_is_active('home', ['index']) ?>" href="/home/pages/index">home</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'services.php' ? 'nav__link--active' : '' ?>" href="../../public/services.php">services</a>
+                        <a class="nav__link <?= public_nav_is_active('cms', ['cms']) ?>" href="/cms/pages/cms">services</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'habitats.php' ? 'nav__link--active' : '' ?>" href="../../public/habitats.php">habitats</a>
+                        <a class="nav__link <?= public_nav_is_active('habitats', ['habitats']) ?>" href="/habitats/pages/habitats">habitats</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'all-animals-habitats.php' ? 'nav__link--active' : '' ?>" href="../../public/all-animals-habitats.php">animals</a>
+                        <a class="nav__link <?= public_nav_is_active('animals') ?>" href="/animals/pages/allanimals">animals</a>
                     </li>
                     <li class="nav__item">
-                        <a class="nav__link <?= $currentPage == 'contact.php' ? 'nav__link--active' : '' ?>" href="/contact/pages/contact">contact</a>
+                        <a class="nav__link <?= public_nav_is_active('contact', ['contact']) ?>" href="/contact/pages/contact">contact</a>
                     </li>
                 </ul>
                 <div class="logo-desk">

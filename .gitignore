@@ -1,5 +1,5 @@
 /node_modules
-*.md
+/docs/*
 
 
 # in other pc do npm install, and composer install
