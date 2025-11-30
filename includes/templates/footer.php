@@ -54,7 +54,7 @@ $datecopy = date('d-m-Y');
 	</div>
 </footer>
 
-<script src="/build/js/bootstrap.bundle.min.js" defer></script>
+<script src="/public/build/js/bootstrap.bundle.min.js" defer></script>
 
 </body>
 </html> 

@@ -80,10 +80,10 @@ include(__DIR__ . "/../pageTitle.php");
       4. DataTables Bootstrap 5 Integration
       5. Nuestro código de activación (app.js)
     -->
-    <script src="/build/js/jquery.min.js" defer></script>
-    <script src="/build/js/bootstrap.bundle.min.js" defer></script>
-    <script src="/build/js/dataTables.min.js" defer></script>
-    <script src="/build/js/dataTables.bootstrap5.min.js" defer></script>
-    <script src="/build/js/app.js" defer></script>
+    <script src="/public/build/js/jquery.min.js" defer></script>
+    <script src="/public/build/js/bootstrap.bundle.min.js" defer></script>
+    <script src="/public/build/js/dataTables.min.js" defer></script>
+    <script src="/public/build/js/dataTables.bootstrap5.min.js" defer></script>
+    <script src="/public/build/js/app.js" defer></script>
 
 </body>

@@ -16,6 +16,7 @@ const paths = {
     js: 'src/js/**/*.js',
     vendorJs: [
         'node_modules/jquery/dist/jquery.min.js',
+        'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js',
         'node_modules/datatables.net/js/dataTables.min.js',
         'node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js'
     ],
@@ -26,7 +27,7 @@ const paths = {
 };
 
 // 4️⃣ Ruta base para el proxy
-let currentProxy = 'http://localhost:3000/'; // Por defecto: frontend
+let currentProxy = 'http://localhost:3001'; // ÚNICO PUERTO PHP
 
 // 5️⃣ Recarga navegador
 function reload(done) {
@@ -78,43 +79,25 @@ const buildJs = series(cleanJs, processJs, copyVendorJs);
 // 9️⃣ Servidor con Browsersync
 function serve(done) {
   browserSync.init({
-    proxy: currentProxy,    // usa el valor dinámico según tarea
+    proxy: currentProxy,
     open: true,
     notify: true
   });
-
   done();
 }
 
-// 🔟 Watchers
-function watchFrontend() {
+// 🔟 Watcher ÚNICO Y TODOPODEROSO
+function watchAll() {
+  // Estilos y JS
   watch(paths.scss, buildCss);
-  watch(paths.js, series(buildJs, reload)); // build y luego reload
+  watch(paths.js, series(buildJs, reload));
+  
+  // PHP (Frontend y Backend unificados)
   watch('public/**/*.php', reload);
-  watch('public/**/*.html', reload);
-  watch('public/**/*.js', reload);
-  watch('public/build/css/**/*.css', reload);
+  watch('App/**/*.php', reload);
+  watch('includes/**/*.php', reload);
 }
 
-function watchBackend() {
-    watch(paths.scss, buildCss);
-    watch(paths.js, series(buildJs, reload)); // build y luego reload
-    watch('App/**/*.php', reload);
-    watch('includes/**/*.php', reload);
-}
-
-// 1️⃣1️⃣ Tareas públicas para ejecutar
-
-// 👉 Frontend: gulp public
-function setFrontend(done) {
-  currentProxy = 'http://localhost:3001'; // Directamente al puerto del servidor PHP
-  done();
-}
-exports.public = series(setFrontend, buildCss, buildJs, serve, watchFrontend);
-
-// 👉 Backend: gulp app  
-function setBackend(done) {
-  currentProxy = 'http://localhost:3002/home/pages/start'; // Ahora todo va por el 3001
-  done();
-}
-exports.app = series(setBackend, buildCss, buildJs, serve, watchBackend);
+// 1️⃣1️⃣ TAREA POR DEFECTO
+// Al llamar 'exports.default', Gulp sabe que esta es la tarea que debe ejecutar si solo escribes 'gulp'
+exports.default = series(buildCss, buildJs, serve, watchAll);

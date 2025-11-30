@@ -1,7 +1,14 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h2 class="card-title">Roles</h2>
-        <a name="roles" id="" class="btn btn-success mb-2 mt-2" href="/roles/gest/create" role="button">+ Add New Role</a>
+        
+        <?php 
+        // 🛡️ Solo Admin puede crear roles
+        $isAdmin = (isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin');
+        if ($isAdmin): 
+        ?>
+            <a name="roles" id="" class="btn btn-success mb-2 mt-2" href="/roles/gest/create" role="button">+ Add New Role</a>
+        <?php endif; ?>
     </div>
     <div class="card-body">
 
@@ -63,13 +70,18 @@
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?> ">   <?php echo $role->role_description; ?> </td>
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>">   <?php echo $role->created_at; ?> </td>
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>">   <?php echo $role->updated_at; ?> </td>
+                            
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>"> 
 
                                 <div class="btn-group" role="group" aria-label="">
 
+                                    <!-- View Details: VISIBLE PARA TODOS -->
                                     <a href="/roles/gest/view?id=<?php echo $role->id_role; ?>" class="btn btn-sm btn-info text-white">View Details</a>
-                                    <a href="/roles/gest/edit?id=<?php echo $role->id_role; ?>" class="btn btn-sm btn-primary">Edit</a>
-                                    <a href="/roles/gest/delete?id=<?php echo $role->id_role; ?>" class="btn btn-sm btn-danger">Delete</a>
+
+                                    <?php if ($isAdmin): ?>
+                                        <a href="/roles/gest/edit?id=<?php echo $role->id_role; ?>" class="btn btn-sm btn-primary">Edit</a>
+                                        <a href="/roles/gest/delete?id=<?php echo $role->id_role; ?>" class="btn btn-sm btn-danger">Delete</a>
+                                    <?php endif; ?>
 
                                 </div>
 

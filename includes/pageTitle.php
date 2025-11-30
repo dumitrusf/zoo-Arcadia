@@ -6,12 +6,31 @@ $domain = $currentDomain ?? "home";
 
 
 switch ($domain) {
-    case "zoo-Arcadia":
-        $pageTitle = "ARCADIA";
-        break;
+    // PÁGINAS PÚBLICAS
     case "home":
-        $pageTitle = "ARC Dashboard";
+        if (isset($_GET['action']) && $_GET['action'] === 'start') {
+            $pageTitle = "ARC Dashboard"; // Para el admin/empleado
+        } else {
+            $pageTitle = "ARC Home";      // Para el público
+        }
         break;
+    case "cms": // Services está dentro del dominio CMS
+        $pageTitle = "ARC Services";
+        break;
+    case "habitats":
+        $pageTitle = "ARC Habitats";
+        break;
+    case "animals":
+        $pageTitle = "ARC Animals";
+        break;
+    case "contact":
+        $pageTitle = "ARC Contact";
+        break;
+    case "auth":
+        $pageTitle = "ARC Login";
+        break;
+
+    // PÁGINAS DE GESTIÓN (DASHBOARD)
     case "employees":
         $pageTitle = "ARC Employees";
         break;
@@ -24,40 +43,19 @@ switch ($domain) {
     case "permissions":
         $pageTitle = "ARC Permissions";
         break;
-    case "services":
-        $pageTitle = "ARC Services";
+    case "reports":
+        $pageTitle = "ARC Reports";
         break;
-    case "contact":
-        $pageTitle = "ARC Contact";
-        break;
-    case "about":
-        $pageTitle = "ARC About Us";
-        break;
-    case "login":
-        $pageTitle = "ARC Login";
-        break;
-    case "habitats":
-        $pageTitle = "ARC Habitats";
-        break;
+
+    // CASOS ESPECÍFICOS O ANTIGUOS (Por si acaso)
     case "animal-picked":
         $pageTitle = "ARC Animal Details";
-        break;
-    case "all-animals-habitats":
-        $pageTitle = "ARC All Animals";
-        break;
-    case "dash-vet":
-        $pageTitle = "ARC Vet";
-        break;
-    case "employee":
-        $pageTitle = "ARC Employee";
         break;
     case "error-404":
         $pageTitle = "ARC Error 404";
         break;
-    case "habitat":
-        $pageTitle = "ARC Habitat";
-        break;
+
     default:
-        $pageTitle = "Arcadia";
+        $pageTitle = "Arcadia Zoo";
         break;
 }

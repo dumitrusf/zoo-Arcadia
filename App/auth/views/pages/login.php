@@ -16,9 +16,11 @@ if ($_POST) {
     $connectionDB = DB::createInstance();
 
     // 1. We search ONLY by user/email. We don't put the password here! (i think that if we put the psw here can be risky!, AT THIS MOMENT I DON'T KNO WHY but i'm sure of it, my instinct says me that can i model it in another way to make it more secure)
-    $query = "SELECT u.*, e.email 
+    // 🛡️ MEJORA SEGURIDAD: Nos traemos el role_name haciendo JOIN con roles
+    $query = "SELECT u.*, e.email, r.role_name
               FROM users u 
               LEFT JOIN employees e ON u.employee_id = e.id_employee 
+              LEFT JOIN roles r ON u.role_id = r.id_role
               WHERE u.username = :login OR e.email = :login";
 
     $sql = $connectionDB->prepare($query);
@@ -37,16 +39,21 @@ if ($_POST) {
         // Here we compare the password
         // thanks to select u.* we can see the password in the database (psw column) and compare psw from database with what user put in the input field (passwordInput)
         if ($user['psw'] === $passwordInput) { // If we don't use hash (INSECURE BUT WORKS)
-            // without hashing the password
-            // ($user['psw'] === $passwordInput)
-            // if (password_verify($passwordInput, $user['psw'])) { // IF WE USE HASH (CORRECT)
-            // echo "User found and password correct!";
-            // var_dump($user);
+            
+            // 🛑 NUEVA LÓGICA: Verificar si la cuenta está activa
+            if ($user['is_active'] == 0) {
+                // CUENTA DESACTIVADA: Prohibido pasar
+                $_SESSION["login_error"] = "Your account is deactivated. Please contact the administrator.";
+                header('Location: /auth/pages/login');
+                exit();
+            } else {
+                // CUENTA ACTIVA: Pasa adelante
+                $_SESSION["user"] = $user;
+                $_SESSION["loggedin"] = true;
+                header('Location: /home/pages/start');
+                exit();
+            }
 
-            $_SESSION["user"] = $user;
-            $_SESSION["loggedin"] = true;
-            header('Location: /home/pages/start');
-            exit();
         } else {
             // echo "Password incorrect.";
             $_SESSION["loggedin"] = false;
