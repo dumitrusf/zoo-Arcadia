@@ -1,11 +1,3 @@
-<?php
-require_once __DIR__ . '/../includes/functions.php';
-
-includeTemplate("nav");
-
-
-?>
-
 
 <header class="hero">
 	<div class="hero__container">
@@ -98,11 +90,3 @@ includeTemplate("nav");
 
 	</div>
 </main>
-
-
-
-<?php
-includeTemplate("footer");
-
-
-?>

@@ -1,5 +1,15 @@
 <?php
-// Defines the User class to interact with the database.
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Users\Models
+ * 📂 Physical File:   App/users/models/user.php
+ * 
+ * 📝 Description:
+ * Model that represents a user of the system (Login).
+ * Manages authentication, roles and relationship with employees.
+ */
+
 class User
 {
 

@@ -1,4 +1,19 @@
 <?php
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Permissions\Controllers
+ * 📂 Physical File:   App/permissions/controllers/permissions_gest_controller.php
+ * 
+ * 📝 Description:
+ * Administrative controller for permission management.
+ * Allows listing the permissions available in the system.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Permissions\Models\Permission (via App/permissions/models/permission.php)
+ * - Arcadia\Database\Connection (via database/connection.php)
+ * - Arcadia\Permissions\Views\Gest\Start (via App/permissions/views/gest/start.php)
+ */
    
    // Include the file that has the Permission class to be able to interact with the database.
     require_once __DIR__ . '/../models/permission.php';

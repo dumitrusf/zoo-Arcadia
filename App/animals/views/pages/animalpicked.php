@@ -1,12 +1,3 @@
-<?php
-require_once __DIR__ . '/../includes/functions.php';
-
-includeTemplate("nav");
-
-
-?>
-
-
 <!-- <nav class="nav navbar"> -->
 
 <header class="hero">
@@ -127,13 +118,3 @@ includeTemplate("nav");
 	</section>
 
 </main>
-
-
-
-
-
-<?php
-includeTemplate("footer");
-
-
-?>

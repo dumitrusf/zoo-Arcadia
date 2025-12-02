@@ -1,4 +1,14 @@
 <?php
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Employees\Models
+ * 📂 Physical File:   App/employees/models/employee.php
+ * 
+ * 📝 Description:
+ * Model that manages the employee data.
+ * Manages the personal and labor information of the staff.
+ */
 // Defines the Employee class to interact with the database.
 class Employee
 {

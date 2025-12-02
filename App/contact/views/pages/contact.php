@@ -1,7 +1,5 @@
 
 
-<!-- <nav class="nav navbar"> -->
-
 <main class="contact">
 
     <!-- Logo site web -->

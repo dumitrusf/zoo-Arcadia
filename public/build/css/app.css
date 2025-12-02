@@ -317,34 +317,42 @@ ol {
 @font-face {
   font-family: "Fun-City-Level-3-Basic";
   src: url(/src/assets/fonts/Fun-City-Level-3-Basic.ttf) format(truetype);
+  font-display: swap;
 }
 @font-face {
   font-family: "Poppins-Bold";
   src: url(/src/assets/fonts/Poppins-Bold.ttf) format(truetype);
+  font-display: swap;
 }
 @font-face {
   font-family: "Montserrat-Bold";
   src: url(/src/assets/fonts/Montserrat-Bold.ttf) format(truetype);
+  font-display: swap;
 }
 @font-face {
   font-family: "Roboto-Medium";
   src: url(/src/assets/fonts/Roboto-Medium.ttf) format(truetype);
+  font-display: swap;
 }
 @font-face {
   font-family: "Roboto-Regular";
   src: url(/src/assets/fonts/Roboto-Regular.ttf) format(truetype);
+  font-display: swap;
 }
 @font-face {
   font-family: "Raleway-Bold";
   src: url(/src/assets/fonts/Raleway-Bold.ttf) format(truetype);
+  font-display: swap;
 }
 @font-face {
   font-family: "Inter-24";
   src: url(/src/assets/fonts/Inter_24pt-Medium.ttf) format(truetype);
+  font-display: swap;
 }
 @font-face {
   font-family: "Poppins-Medium";
   src: url(/src/assets/fonts/Poppins-Medium.ttf) format(truetype);
+  font-display: swap;
 }
 html,
 body {
@@ -1209,7 +1217,16 @@ select {
 }
 .footer__logo {
   width: min(18.4rem, 100%);
-  margin: 3rem;
+  margin: 25% 0;
+}
+.footer__logo-link {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 0;
+  vertical-align: baseline;
 }
 .footer__hours {
   color: #fff;

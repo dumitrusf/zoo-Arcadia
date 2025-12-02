@@ -1,13 +1,4 @@
-<?php
-require_once __DIR__ . '/../includes/functions.php';
-
-includeTemplate("nav");
-
-
-?>
-
-
-    <!-- <nav class="nav navbar"> -->
+<!-- <nav class="nav navbar"> -->
 
     <header class="hero">
         <div class="hero__container">
@@ -248,21 +239,4 @@ includeTemplate("nav");
             </ul>
         </nav>
     </main>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<?php
-includeTemplate("footer");
 
