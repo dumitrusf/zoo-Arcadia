@@ -3,7 +3,7 @@
         <h2 class="card-title">Employees</h2>
         
         <?php 
-        // 🛡️ Solo Admin puede crear empleados
+        // Only Admin can create employees
         $isAdmin = (isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin');
         if ($isAdmin): 
         ?>
@@ -87,9 +87,5 @@
 
                 </tbody>
             </table>
-
-
-
-
         </div>
     </div>

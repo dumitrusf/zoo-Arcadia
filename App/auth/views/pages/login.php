@@ -1,22 +1,11 @@
 <?php
 
 
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
-// print_r($_POST);
-
-
-
 if ($_POST) {
     $connectionDB = DB::createInstance();
 
     // 1. We search ONLY by user/email. We don't put the password here! (i think that if we put the psw here can be risky!, AT THIS MOMENT I DON'T KNO WHY but i'm sure of it, my instinct says me that can i model it in another way to make it more secure)
-    // 🛡️ MEJORA SEGURIDAD: Nos traemos el role_name haciendo JOIN con roles
+    // IMPROVE SECURITY: We need to bring the role_name by doing JOIN with roles
     $query = "SELECT u.*, e.email, r.role_name
               FROM users u 
               LEFT JOIN employees e ON u.employee_id = e.id_employee 
@@ -40,14 +29,14 @@ if ($_POST) {
         // thanks to select u.* we can see the password in the database (psw column) and compare psw from database with what user put in the input field (passwordInput)
         if ($user['psw'] === $passwordInput) { // If we don't use hash (INSECURE BUT WORKS)
             
-            // 🛑 NUEVA LÓGICA: Verificar si la cuenta está activa
+            // NEW LOGIC: Check if the account is active
             if ($user['is_active'] == 0) {
-                // CUENTA DESACTIVADA: Prohibido pasar
+                // if ACCOUNT INACTIVE: Don't pass
                 $_SESSION["login_error"] = "Your account is deactivated. Please contact the administrator.";
                 header('Location: /auth/pages/login');
                 exit();
             } else {
-                // CUENTA ACTIVA: Pasa adelante
+                // if ACCOUNT ACTIVE: Go ahead
                 $_SESSION["user"] = $user;
                 $_SESSION["loggedin"] = true;
                 header('Location: /home/pages/start');
@@ -104,7 +93,7 @@ if ($_POST) {
                 <script>
                     setTimeout(function() {
                         document.getElementById('error-message').style.display = 'none';
-                    }, 2000);
+                    }, 2800);
                 </script>
                 <?php unset($_SESSION["login_error"]); // Delete it after showing it 
                 ?>
@@ -119,6 +108,7 @@ if ($_POST) {
                         <div>
                             <!-- Field of user (Email or Username) -->
                             <label for="login_input" class="login__label">Email or UserName</label>
+                            <!-- if email is set, show it, if not, show empty -->
                             <input
                                 type="text"
                                 id="login_input"

@@ -1,4 +1,19 @@
 <?php
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Animals\Controllers
+ * 📂 Physical File:   App/animals/controllers/animals_pages_controller.php
+ * 
+ * 📝 Description:
+ * Public controller for the visualization of animals.
+ * Shows the catalog of animals and their individual cards.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Database\Connection (via database/connection.php)
+ * - Arcadia\Animals\Views\Pages\AllAnimals (via App/animals/views/pages/allanimals.php)
+ * - Arcadia\Animals\Views\Pages\AnimalPicked (via App/animals/views/pages/animalpicked.php)
+ */
 
 include_once __DIR__ . "/../../../database/connection.php";
 // Include the file that has the DB class to be able to connect to the database.

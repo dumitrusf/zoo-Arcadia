@@ -1217,6 +1217,16 @@ select {
 }
 .footer__logo {
   width: min(18.4rem, 100%);
+  margin: 25% 0;
+}
+.footer__logo-link {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 0;
+  vertical-align: baseline;
 }
 .footer__hours {
   color: #fff;

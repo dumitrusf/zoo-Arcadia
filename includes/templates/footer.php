@@ -1,4 +1,14 @@
 <?php
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Includes\Templates
+ * 📂 Physical File:   includes/templates/footer.php
+ * 
+ * 📝 Description:
+ * Footer component.
+ * Legal information, hours and closing of HTML structure.
+ */
 
 $datecopy = date('d-m-Y');
 

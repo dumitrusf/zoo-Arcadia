@@ -1,28 +1,38 @@
 <?php
-// _router.php → "El Portero" del sitio web
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Public
+ * 📂 Physical File:   public/index.php
+ * 
+ * 📝 Description:
+ * MAIN FRONT CONTROLLER.
+ * "The Porter": Receives all requests and decides who to call.
+ * 
+ * 🔗 Dependencies:
+ * - Vendor\Autoload (via vendor/autoload.php)
+ * - Arcadia\Database\Connection (via database/connection.php)
+ * - Arcadia\Includes\Functions (via includes/functions.php)
+ * - Arcadia\App\Router (via App/router.php)
+ */
 
-// 0. CARGAR LAS HERRAMIENTAS (¡NUEVO!)
-require_once __DIR__ . '/../vendor/autoload.php';      // Carga las librerías
-require_once __DIR__ . '/../database/connection.php';  // Carga la BD y config.php
-require_once __DIR__ . '/../includes/functions.php';   // Carga tus funciones
+// _router.php → "The Porter" of the website
 
-// ==========================================
-// DEBUG: LOG MANUAL EN CONSOLA PHP
-// Escribimos en php://stdout para que salga en la terminal verde
-// $logMsg = sprintf("[%s] %s %s\n", date("D M j H:i:s Y"), $_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
-// file_put_contents("php://stdout", $logMsg);
-// ==========================================
+// 0. I'll load the tools
+require_once __DIR__ . '/../vendor/autoload.php';      // Load the libraries
+require_once __DIR__ . '/../database/connection.php';  // Load the database and config.php
+require_once __DIR__ . '/../includes/functions.php';   // Load the functions
 
-// 1. OBTENER EL CAMINO (PATH) DE LA URL SOLICITADA
+// 1. GET THE PATH (PATH) OF THE REQUESTED URL
 $path = ltrim(parse_url($_SERVER['REQUEST_URI'])['path'], '/');
 
-// 3. MÁGIA PARA SERVIR ARCHIVOS ESTÁTICOS (CSS, JS, IMÁGENES) SI ESTÁN FUERA DE PUBLIC
-// Si la URL empieza por "node_modules", "src" o "public", intentamos servir el archivo directamente.
+// 2. MAGIC TO SERVE STATIC FILES (CSS, JS, IMAGES) IF THEY ARE OUTSIDE OF PUBLIC
+// If the URL starts with "node_modules", "src" or "public", we try to serve the file directly.
 if (strpos($path, 'public/') === 0 || strpos($path, 'src/') === 0 || strpos($path, 'node_modules/') === 0) {
-    $fullPath = __DIR__ . '/../' . $path; // Buscamos en la raíz del proyecto
+    $fullPath = __DIR__ . '/../' . $path; // Search in the project root
     
     if (file_exists($fullPath) && is_file($fullPath)) {
-        // Adivinamos el tipo de archivo (MIME type)
+        // Guess the file type (MIME type)
         $ext = pathinfo($fullPath, PATHINFO_EXTENSION);
         switch ($ext) {
             case 'css':  header('Content-Type: text/css'); break;
@@ -35,24 +45,24 @@ if (strpos($path, 'public/') === 0 || strpos($path, 'src/') === 0 || strpos($pat
             case 'woff2':header('Content-Type: font/woff2'); break;
         }
         readfile($fullPath);
-        exit; // ¡Importante! Terminamos aquí para no cargar el router de la App
+        exit; // ¡Importante! We end here to not load the router of the App
     }
 }
 
 
-// 4. COMPROBAR SI EL PATH CORRESPONDE A UN ARCHIVO REAL DENTRO DE PUBLIC
+// 3. CHECK IF THE PATH CORRESPONDS TO A REAL FILE INSIDE OF PUBLIC
 if (file_exists($path) && is_file($path)) {
-    return false; // 🚪 Salida directa, el archivo se entrega sin pasar por el router.
+    return false; // DIRECT OUTPUT, THE FILE IS DELIVERED WITHOUT PASSING THROUGH THE ROUTER.
 }
 
-// 5. SI NO ES UN ARCHIVO, INTERPRETARLO COMO "URL BONITA"
+// 4. IF IT IS NOT A FILE, INTERPRET IT AS "NICE URL"
 $parts = explode('/', $path);
 
-// 6. ASIGNAR SEGMENTOS
+// 5. ASSIGN SEGMENTS
 $_GET['domain'] = !empty($parts[0]) ? $parts[0] : 'home';
 $_GET['controller'] = !empty($parts[1]) ? $parts[1] : 'pages';
 $_GET['action'] = !empty($parts[2]) ? $parts[2] : 'index';
 
-// 7. CARGAR EL ENRUTADOR PRINCIPAL
+// 6. LOAD THE MAIN ROUTER
 require_once __DIR__ . '/../App/router.php';
 ?>

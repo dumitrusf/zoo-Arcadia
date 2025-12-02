@@ -1,20 +1,30 @@
 <?php
-// Obtener el nombre del archivo actual
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Includes
+ * 📂 Physical File:   includes/pageTitle.php
+ * 
+ * 📝 Description:
+ * Presentation logic for Page Titles.
+ * Determines the <title> dynamic based on the current domain.
+ */
+
+// Get the name of the current file
 $domain = $currentDomain ?? "home";
 
-// Definir el título dinámico
-
+// Define the dynamic title
 
 switch ($domain) {
-    // PÁGINAS PÚBLICAS
+    // PUBLIC PAGES
     case "home":
         if (isset($_GET['action']) && $_GET['action'] === 'start') {
-            $pageTitle = "ARC Dashboard"; // Para el admin/empleado
+            $pageTitle = "ARC Dashboard"; // For the admin/employee
         } else {
-            $pageTitle = "ARC Home";      // Para el público
+            $pageTitle = "ARC Home";      // For the public
         }
         break;
-    case "cms": // Services está dentro del dominio CMS
+    case "cms": // Services are inside the CMS domain
         $pageTitle = "ARC Services";
         break;
     case "habitats":
@@ -30,7 +40,7 @@ switch ($domain) {
         $pageTitle = "ARC Login";
         break;
 
-    // PÁGINAS DE GESTIÓN (DASHBOARD)
+    // MANAGEMENT PAGES (DASHBOARD)
     case "employees":
         $pageTitle = "ARC Employees";
         break;
@@ -47,7 +57,7 @@ switch ($domain) {
         $pageTitle = "ARC Reports";
         break;
 
-    // CASOS ESPECÍFICOS O ANTIGUOS (Por si acaso)
+    // SPECIFIC OR ANTIQUES CASES (Just in case)
     case "animal-picked":
         $pageTitle = "ARC Animal Details";
         break;

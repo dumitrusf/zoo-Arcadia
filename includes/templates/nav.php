@@ -1,5 +1,16 @@
 <?php
-// Datos básicos del enrutador público
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Includes\Templates
+ * 📂 Physical File:   includes/templates/nav.php
+ * 
+ * 📝 Description:
+ * Main navigation component.
+ * Shared responsive menu in public views.
+ */
+
+// Basic data of the public router
 $currentDomain = $_GET['domain'] ?? 'home';
 $currentAction = $_GET['action'] ?? 'index';
 

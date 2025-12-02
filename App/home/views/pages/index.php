@@ -87,9 +87,9 @@
 			<h2 class="intro__title">habitats</h2>
 
 			<div class="intro__content">
-				<!-- <img class="intro__image"
+				<img class="intro__image"
 					src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!227792&authkey=!AMKZjbJ965omT9g&ithint=photo&e=MUp6nM"
-					alt="intro habitats"> -->
+					alt="intro habitats">
 
 				<picture>
 

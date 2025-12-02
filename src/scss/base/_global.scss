@@ -660,6 +660,15 @@ select {
 
   &__logo {
     width: min(18.4rem, 100%);
+
+    // background-color: red;
+
+    margin: 25% 0;
+
+    &-link {
+      @include mgf.flexbox(column, center, center);
+    }
+    
   }
   &__hours {
     color: map-get(map-get(v.$color, solid-colors), c-light);
@@ -678,6 +687,9 @@ select {
         margin: 2.3rem 0;
       }
     }
+
+    
+    
   }
 
   &__location {

@@ -1,4 +1,18 @@
 <?php
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Cms\Controllers
+ * 📂 Physical File:   App/cms/controllers/cms_pages_controller.php
+ * 
+ * 📝 Description:
+ * Controller for static content pages (Services).
+ * Shows information about the services of the zoo.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Database\Connection (via database/connection.php)
+ * - Arcadia\Cms\Views\Pages\Cms (via App/cms/views/pages/cms.php)
+ */
 
 include_once __DIR__ . "/../../../database/connection.php";
 // Include the file that has the DB class to be able to connect to the database.

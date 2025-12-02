@@ -1,5 +1,25 @@
-
 <?php
+/**
+ * 🏛️ ARQUITECTURA ARCADIA (Código Simulativo Namespace)
+ * ----------------------------------------------------
+ * 📍 Ubicación Lógica: Arcadia\Users\Controllers
+ * 📂 Archivo Físico:   App/users/controllers/users_gest_controller.php
+ * 
+ * 📝 Descripción:
+ * Controlador para la gestión administrativa de usuarios.
+ * Implementa lógica de permisos (RBAC) y CRUD.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Users\Models\User (via App/users/models/user.php)
+ * - Arcadia\Employees\Models\Employee (via App/employees/models/employee.php)
+ * - Arcadia\Roles\Models\Role (via App/roles/models/role.php)
+ * - Arcadia\Database\Connection (via database/connection.php)
+ * - Arcadia\Permissions\Models\Permission (via App/permissions/models/permission.php)
+ * - Arcadia\Users\Views\Gest\Start (via App/users/views/gest/start.php)
+ * - Arcadia\Users\Views\Gest\Create (via App/users/views/gest/create.php)
+ * - Arcadia\Users\Views\Gest\Edit (via App/users/views/gest/edit.php)
+ * - Arcadia\Users\Views\Gest\View (via App/users/views/gest/view.php)
+ */
 
 require_once __DIR__ . "/../models/user.php";
 require_once __DIR__ . "/../../employees/models/employee.php";

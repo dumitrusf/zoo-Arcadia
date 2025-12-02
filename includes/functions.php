@@ -1,4 +1,14 @@
 <?php
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Includes
+ * 📂 Physical File:   includes/functions.php
+ * 
+ * 📝 Description:
+ * Collection of global utility functions.
+ * Helpers for routes, views and shared logic.
+ */
 
 define("TEMPLATES_URL", __DIR__ . "/templates");
 define("FUNCTIONS_URL", __DIR__ . "functions.php");
@@ -29,9 +39,8 @@ function handleDomainRouting($domainName, $basePath)
     $controller = $_GET['controller'] ?? 'pages';
     $action = $_GET['action'] ?? 'start';
 
-    // OJO: Tu convención de nombres de archivo es diferente a la de la clase.
-    // Archivo: employees_pages_controller.php
-    // Clase: EmployeesPagesController
+    // Exemple of file name due to...(exemple) : employees_pages_controller.php
+    // Exemple of class name due to...(exemple): EmployeesPagesController
     $controllerFileName = $domainName . "_" . $controller . "_controller.php";
     $controllerClassName = ucfirst($domainName) . ucfirst($controller) . "Controller";
 
@@ -45,11 +54,11 @@ function handleDomainRouting($domainName, $basePath)
         $controllerInstance->$action();
         $viewContent = ob_get_clean();
 
-        // DEBUG EXTREMO
-        // echo "<!-- DEBUG FUNCTIONS: Domain recibido: '$domainName' -->";
+        // DEBUG EXTREME
+        // echo "<!-- DEBUG FUNCTIONS: Received domain: '$domainName' -->";
 
-        // LÓGICA DE SELECCIÓN DE LAYOUT MEJORADA:
-        // Mapa dominio -> acciones públicas (vacío = todas)
+        // IMPROVED LAYOUT SELECTION LOGIC:
+        // Domain map -> public actions (empty = all)
         $public_layout_map = [
             "home"      => ["index"],
             "about"     => ["about"],
