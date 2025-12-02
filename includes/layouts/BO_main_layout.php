@@ -1,4 +1,14 @@
 <?php
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Includes\Layouts
+ * 📂 Physical File:   includes/layouts/BO_main_layout.php
+ * 
+ * 📝 Description:
+ * Main layout for BACKOFFICE (Management).
+ * HTML base structure for the administration panel.
+ */
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -27,7 +37,7 @@ include(__DIR__ . "/../pageTitle.php");
 
     <link rel="icon" type="image/png" href="/src/assets/images/favicon.png" />
 
-    <!-- Hojas de Estilo Compiladas y Copiadas por Gulp -->
+    <!-- Compiled and copied stylesheets by Gulp -->
     <link rel="stylesheet" href="/public/build/css/bootstrap.min.css">
     <link rel="stylesheet" href="/public/build/css/dataTables.bootstrap5.min.css">
     <!-- <link rel="stylesheet" href="/public/build/css/app.css"> -->
@@ -51,6 +61,7 @@ include(__DIR__ . "/../pageTitle.php");
         </div>
 
         <div class="nav navbar-nav d-flex justify-content-end px-5">
+            <a class="nav-item nav-link" href="/home/pages/index">Zoo Arcadia</a>
             <a class="nav-item nav-link" href="/auth/pages/logout">Logout</a>
         </div>
     </nav>
@@ -79,10 +90,10 @@ include(__DIR__ . "/../pageTitle.php");
       4. DataTables Bootstrap 5 Integration
       5. Nuestro código de activación (app.js)
     -->
-    <script src="/public/build/js/jquery.min.js"></script>
-    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/public/build/js/dataTables.min.js"></script>
-    <script src="/public/build/js/dataTables.bootstrap5.min.js"></script>
-    <script src="/public/build/js/app.js"></script>
+    <script src="/public/build/js/jquery.min.js" defer></script>
+    <script src="/public/build/js/bootstrap.bundle.min.js" defer></script>
+    <script src="/public/build/js/dataTables.min.js" defer></script>
+    <script src="/public/build/js/dataTables.bootstrap5.min.js" defer></script>
+    <script src="/public/build/js/app.js" defer></script>
 
 </body>

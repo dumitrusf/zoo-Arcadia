@@ -1,4 +1,18 @@
 <?php
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Auth\Controllers
+ * 📂 Physical File:   App/auth/controllers/auth_pages_controller.php
+ * 
+ * 📝 Description:
+ * Public controller for authentication.
+ * Manages the login and logout of users.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Database\Connection (via database/connection.php)
+ * - Arcadia\Auth\Views\Pages\Login (via App/auth/views/pages/login.php)
+ */
 
 include_once __DIR__ . "/../../../database/connection.php";
 // Include the file that has the DB class to be able to connect to the database.
@@ -11,11 +25,7 @@ DB::createInstance();
 class AuthPagesController{
     public function login(){
         // Include the view to display the start page (just a code chore (a test!))
-        includeTemplate("nav");
         include_once __DIR__ . "/../views/pages/login.php";
-        // includeTemplate("footer");
-
-        // exit();
     }
 
 

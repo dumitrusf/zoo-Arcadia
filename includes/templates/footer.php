@@ -1,4 +1,14 @@
 <?php
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Includes\Templates
+ * 📂 Physical File:   includes/templates/footer.php
+ * 
+ * 📝 Description:
+ * Footer component.
+ * Legal information, hours and closing of HTML structure.
+ */
 
 $datecopy = date('d-m-Y');
 
@@ -54,8 +64,7 @@ $datecopy = date('d-m-Y');
 	</div>
 </footer>
 
-<script type="module" src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script type="module" src="/node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+<script src="/public/build/js/bootstrap.bundle.min.js" defer></script>
 
 </body>
 </html> 

@@ -1,5 +1,22 @@
-
 <?php
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Employees\Controllers
+ * 📂 Physical File:   App/employees/controllers/employees_gest_controller.php
+ * 
+ * 📝 Description:
+ * Controller for the administrative management of employees.
+ * Manages the CRUD of employees in the administration area.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Employees\Models\Employee (via App/employees/models/employee.php)
+ * - Arcadia\Roles\Models\Role (via App/roles/models/role.php)
+ * - Arcadia\Database\Connection (via database/connection.php)
+ * - Arcadia\Employees\Views\Gest\Start (via App/employees/views/gest/start.php)
+ * - Arcadia\Employees\Views\Gest\Create (via App/employees/views/gest/create.php)
+ * - Arcadia\Employees\Views\Gest\Edit (via App/employees/views/gest/edit.php)
+ */
 
 require_once __DIR__ . "/../models/employee.php";
 

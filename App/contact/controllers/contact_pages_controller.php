@@ -1,4 +1,18 @@
 <?php
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Contact\Controllers
+ * 📂 Physical File:   App/contact/controllers/contact_pages_controller.php
+ * 
+ * 📝 Description:
+ * Public controller for the contact page.
+ * Shows the contact form and manages its sending.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Database\Connection (via database/connection.php)
+ * - Arcadia\Contact\Views\Pages\Contact (via App/contact/views/pages/contact.php)
+ */
 
 include_once __DIR__ . "/../../../database/connection.php";
 // Include the file that has the DB class to be able to connect to the database.
@@ -12,10 +26,6 @@ class ContactPagesController
 {
     public function contact()
     {        
-        includeTemplate("nav");
         include_once __DIR__ . "/../views/pages/contact.php";
-        // includeTemplate("footer");
-        // exit();
-
     }
 }

@@ -1,178 +1,68 @@
 <?php
-require_once __DIR__ . '/includes/functions.php';
-includeTemplate("nav");
-?>
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Public
+ * 📂 Physical File:   public/index.php
+ * 
+ * 📝 Description:
+ * MAIN FRONT CONTROLLER.
+ * "The Porter": Receives all requests and decides who to call.
+ * 
+ * 🔗 Dependencies:
+ * - Vendor\Autoload (via vendor/autoload.php)
+ * - Arcadia\Database\Connection (via database/connection.php)
+ * - Arcadia\Includes\Functions (via includes/functions.php)
+ * - Arcadia\App\Router (via App/router.php)
+ */
+
+// _router.php → "The Porter" of the website
+
+// 0. I'll load the tools
+require_once __DIR__ . '/../vendor/autoload.php';      // Load the libraries
+require_once __DIR__ . '/../database/connection.php';  // Load the database and config.php
+require_once __DIR__ . '/../includes/functions.php';   // Load the functions
+
+// 1. GET THE PATH (PATH) OF THE REQUESTED URL
+$path = ltrim(parse_url($_SERVER['REQUEST_URI'])['path'], '/');
+
+// 2. MAGIC TO SERVE STATIC FILES (CSS, JS, IMAGES) IF THEY ARE OUTSIDE OF PUBLIC
+// If the URL starts with "node_modules", "src" or "public", we try to serve the file directly.
+if (strpos($path, 'public/') === 0 || strpos($path, 'src/') === 0 || strpos($path, 'node_modules/') === 0) {
+    $fullPath = __DIR__ . '/../' . $path; // Search in the project root
+    
+    if (file_exists($fullPath) && is_file($fullPath)) {
+        // Guess the file type (MIME type)
+        $ext = pathinfo($fullPath, PATHINFO_EXTENSION);
+        switch ($ext) {
+            case 'css':  header('Content-Type: text/css'); break;
+            case 'js':   header('Content-Type: application/javascript'); break;
+            case 'png':  header('Content-Type: image/png'); break;
+            case 'jpg':  header('Content-Type: image/jpeg'); break;
+            case 'svg':  header('Content-Type: image/svg+xml'); break;
+            case 'ttf':  header('Content-Type: font/ttf'); break;
+            case 'woff': header('Content-Type: font/woff'); break;
+            case 'woff2':header('Content-Type: font/woff2'); break;
+        }
+        readfile($fullPath);
+        exit; // ¡Importante! We end here to not load the router of the App
+    }
+}
 
 
+// 3. CHECK IF THE PATH CORRESPONDS TO A REAL FILE INSIDE OF PUBLIC
+if (file_exists($path) && is_file($path)) {
+    return false; // DIRECT OUTPUT, THE FILE IS DELIVERED WITHOUT PASSING THROUGH THE ROUTER.
+}
 
-<header class="hero">
-    <div class="hero__container">
-        <div class="hero__text">
-            <h1 class="hero__title">zoo arcadia</h1>
-            <p class="hero__subtitle">Where all animals love to live</p>
-        </div>
+// 4. IF IT IS NOT A FILE, INTERPRET IT AS "NICE URL"
+$parts = explode('/', $path);
 
+// 5. ASSIGN SEGMENTS
+$_GET['domain'] = !empty($parts[0]) ? $parts[0] : 'home';
+$_GET['controller'] = !empty($parts[1]) ? $parts[1] : 'pages';
+$_GET['action'] = !empty($parts[2]) ? $parts[2] : 'index';
 
-        <a type="button" class="btn intro__button intro__button--hours" href="#opening-hours">opening hours</a>
-
-    </div>
-
-    <picture>
-        <source
-            srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228542&authkey=!AMl2o5PoyxXuRBU&ithint=photo&e=u9NmzI"
-            media="(min-width: 1280px)" />
-        <source
-            srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228541&authkey=!ALbJeAgEo2Qdg4I&ithint=photo&e=Fo1CxO"
-            media="(min-width: 744px)" />
-        <img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228540&authkey=!AMZQRT_KTs11Qf0&ithint=photo&e=xZ2JoE"
-            class="hero__image d-block" alt="hero image" />
-    </picture>
-</header>
-
-<main>
-	<section class="k-about">
-		<div class="k-about__container">
-
-			<div class="k-about__image">
-
-				<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!229330&authkey=!APCoHyp5AxaPBUw&ithint=photo&e=D9Tjm4"
-					class="k-about__image d-block img-fluid" alt="about image" />
-
-
-
-			</div>
-			<div class="k-about__content">
-				<h2 class="k-about__content-title">More About Us</h2>
-				<div class="k-about__content-description">
-
-					<p>In the heart of Bretagne, Arcadia Zoo is home to unique animals from the savannah, jungle, and
-						wetlands.
-					</p>
-					<p>Since 1960, we have ensured their well-being through daily veterinary care and tailored feeding.
-					</p>
-				</div>
-				<a href="about.php" class="k-about__content-button btn intro__button intro__button--hours">know
-					more</a>
-			</div>
-		</div>
-	</section>
-	<div class="intro intro--index">
-
-
-
-
-		<section class="intro__section intro__section--services">
-			<h2 class="intro__title">services</h2>
-
-			<div class="intro__content">
-
-
-
-				<picture>
-
-					<source
-						srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!229326&authkey=!AMTCK-ljrEkI3kU&ithint=photo&e=rrfb5C"
-						media="(min-width: 744px)" />
-					<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228539&authkey=!AN4rlHglgLF3_Lg&ithint=photo&e=GjHwzM"
-						class="intro__image d-block img-fluid" alt="intro services" />
-				</picture>
-
-
-				<div class="intro__details">
-
-					<a class="btn intro__button intro__button--more intro__button--services"
-						href="./services.php">more</a>
-
-					<p class="intro__description">see what arcadia can offers you</p>
-				</div>
-			</div>
-		</section>
-
-
-
-		<section class="intro__section intro__section--habitats">
-			<h2 class="intro__title">habitats</h2>
-
-			<div class="intro__content">
-				<!-- <img class="intro__image"
-					src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!227792&authkey=!AMKZjbJ965omT9g&ithint=photo&e=MUp6nM"
-					alt="intro habitats"> -->
-
-				<picture>
-
-					<source
-						srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228559&authkey=!AAcykAnJfMU5FcM&ithint=photo&e=lTXyX4"
-						media="(min-width: 744px)" />
-					<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228555&authkey=!AOBeDVAn7wllJcw&ithint=photo&e=UP3W8L"
-						class="intro__image d-block img-fluid" alt="intro habitats" />
-				</picture>
-
-				<div class="intro__details">
-
-					<a href="./habitats.php"
-						class="btn intro__button intro__button--more intro__button--habitats">more</a>
-
-
-					<p class="intro__description">amazing habitats to discover</p>
-				</div>
-			</div>
-		</section>
-
-
-
-		<section class="intro__section intro__section--animals">
-			<h2 class="intro__title">animals</h2>
-
-			<div class="intro__content">
-
-				<picture>
-
-					<source
-						srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228558&authkey=!ADU2Nm_3LG8N9Ic&ithint=photo&e=ha5ani"
-						media="(min-width: 744px)" />
-					<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228556&authkey=!AJS4UQNMDnuFR34&ithint=photo&e=O1BROQ"
-						class="intro__image d-block img-fluid" alt="intro animals" />
-				</picture>
-
-				<div class="intro__details">
-
-					<a href="./all-animals-habitats.php"
-						class="btn intro__button intro__button--more intro__button--animals">more</a>
-
-
-					<p class="intro__description">explore another way of love</p>
-				</div>
-			</div>
-		</section>
-	</div>
-	<section class="testimony">
-		<div class="testimony__approuved testimony__container">
-			<h2 class="testimony__title testimony__title--shown">take a look to our most recent testimony</h2>
-
-			<!--  -->
-
-			<div class="testimony__item">
-				<div class="testimony__header">
-					<span class="testimony__user">knight</span>
-					<span class="testimony__rating">★★★★★</span>
-				</div>
-				<p class="testimony__text">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem reiciendis exercitationem
-					iste, repellendus repudiandae nihil ut eaque sed quam sit at harum non quas nulla
-					explicabo architecto numquam eum deleniti!
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem reiciendis exercitationem
-					iste, repellendus repudiandae nihil ut eaque sed quam sit at harum non quas nulla
-					explicabo architecto numquam eum deleniti!
-				</p>
-			</div>
-		</div>
-		<a href="./about.php#testimonys" class="btn intro__button intro__button--hours">know more</a>
-
-	</section>
-</main>
-
-<?php
-
-includeTemplate("footer");
-
+// 6. LOAD THE MAIN ROUTER
+require_once __DIR__ . '/../App/router.php';
 ?>

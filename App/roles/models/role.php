@@ -1,5 +1,15 @@
 <?php
-// Aquí definimos la clase para interactuar con la bdd parametrando los argumentos mediante la ejecución de la consulta a la bdd
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Roles\Models
+ * 📂 Physical File:   App/roles/models/role.php
+ * 
+ * 📝 Description:
+ * Model that defines the security roles (RBAC).
+ * Manages the assignment of permissions to user groups.
+ */
+
 class Role
 {
 
