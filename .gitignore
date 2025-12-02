@@ -1,6 +1,6 @@
 /node_modules
 /docs/*
-
+/.cursor/
 
 # in other pc do npm install, and composer install
 

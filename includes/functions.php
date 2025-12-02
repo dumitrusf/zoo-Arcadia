@@ -8,6 +8,12 @@
  * 📝 Description:
  * Collection of global utility functions.
  * Helpers for routes, views and shared logic.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Includes\Templates\{Name} (via includes/templates/{name}.php)
+ * - Arcadia\Includes\Layouts\FC_main_layout (via includes/layouts/FC_main_layout.php)
+ * - Arcadia\Includes\Layouts\BO_main_layout (via includes/layouts/BO_main_layout.php)
+ * - Arcadia\{Domain}\Controllers\{Controller} (via App/{domain}/controllers/{controller}.php)
  */
 
 define("TEMPLATES_URL", __DIR__ . "/templates");

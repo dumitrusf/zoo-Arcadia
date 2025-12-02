@@ -1,4 +1,18 @@
 <?php
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\App
+ * 📂 Physical File:   App/router.php
+ * 
+ * 📝 Description:
+ * CENTRAL ROUTER ("El Guardia").
+ * Validates permissions, sessions and dispatches to Domain Routers.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\{Domain}\{Domain}Router (via App/{domain}/{domain}Router.php)
+ */
+
 // App/router.php (El Guardia Central)
 
 session_start();

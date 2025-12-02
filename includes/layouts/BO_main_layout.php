@@ -8,6 +8,9 @@
  * 📝 Description:
  * Main layout for BACKOFFICE (Management).
  * HTML base structure for the administration panel.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Includes\PageTitle (via includes/pageTitle.php)
  */
 
 ini_set('display_errors', 1);
