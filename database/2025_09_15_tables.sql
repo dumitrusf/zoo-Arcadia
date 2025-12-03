@@ -54,7 +54,7 @@ CREATE TABLE form_contact (
 CREATE TABLE opening (
     id_opening INT AUTO_INCREMENT PRIMARY KEY,
     -- Unique primary key, self-equal.
-    time_slot ENUM("morning", "afternoon", "saturday", "sunday") NOT NULL,
+    time_slot ENUM("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday") NOT NULL,
     -- Indicates the specific time or day block cannot be null.
     opening_time TIME NOT NULL,
     -- Compulsory opening time.

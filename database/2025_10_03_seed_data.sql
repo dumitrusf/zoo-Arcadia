@@ -130,3 +130,13 @@ INSERT INTO `users_permissions` (`user_id`, `permission_id`) VALUES
 (2, 5),
 (2, 8),
 (16, 8);
+
+-- 🆕 Insert default Schedules (Opening Hours)
+INSERT INTO opening (time_slot, opening_time, closing_time, status) VALUES
+('Monday', '08:00:00', '12:00:00', 'open'),
+('Tuesday', '13:00:00', '18:00:00', 'open'),
+('Wednesday', '09:00:00', '20:00:00', 'open'),
+('Thursday', '10:00:00', '16:00:00', 'closed'),
+('Friday', '11:00:00', '17:00:00', 'open'),
+('Saturday', '09:00:00', '20:00:00', 'open'),
+('Sunday', '10:00:00', '16:00:00', 'closed');
