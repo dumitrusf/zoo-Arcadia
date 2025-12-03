@@ -14,6 +14,7 @@
  * - Arcadia\Includes\Layouts\FC_main_layout (via includes/layouts/FC_main_layout.php)
  * - Arcadia\Includes\Layouts\BO_main_layout (via includes/layouts/BO_main_layout.php)
  * - Arcadia\{Domain}\Controllers\{Controller} (via App/{domain}/controllers/{controller}.php)
+ * - Arcadia\Schedules\Models\Schedule (via App/schedules/models/schedule.php)
  */
 
 define("TEMPLATES_URL", __DIR__ . "/templates");
@@ -94,4 +95,14 @@ function handleDomainRouting($domainName, $basePath)
         header('Location: /public/error-404.php');
         exit();
     }
+}
+
+
+// function to get opening hours globally
+function getOpeningHours() {
+    // We require the model if it is not loaded (using absolute safe path)
+    require_once __DIR__ . '/../App/schedules/models/schedule.php';
+    
+    $scheduleModel = new Schedule();
+    return $scheduleModel->getAll();
 }

@@ -61,6 +61,9 @@ include(__DIR__ . "/../pageTitle.php");
             <a class="nav-item nav-link" href="/employees/gest/start">Employees</a>
             <a class="nav-item nav-link" href="/roles/gest/start">Roles</a>
             <a class="nav-item nav-link" href="/permissions/gest/start">Permissions</a>
+            <?php if (isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin'): ?>
+                <a class="nav-item nav-link" href="/schedules/gest/start">Schedules</a>
+            <?php endif; ?>
         </div>
 
         <div class="nav navbar-nav d-flex justify-content-end px-5">
