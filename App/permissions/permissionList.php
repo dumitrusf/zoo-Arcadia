@@ -1,9 +1,19 @@
 <?php
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Permissions
+ * 📂 Physical File:   App/permissions/permissionList.php
+ * 
+ * 📝 Description:
+ * Utility class with constant permissions.
+ * Define the unique identifiers for each permission in the system.
+ */
 // App/permissions/PermissionList.php
 
 final class PermissionList {
 
-    // No queremos que nadie cree un objeto de esta clase
+    // We don't want anyone to create an object of this class
     private function __construct() {}
 
     // --- ACCOUNT MANAGEMENT PERMISSIONS ---
@@ -31,9 +41,9 @@ final class PermissionList {
     const ANIMALS_VIEW = 'animals-view';
     const ANIMALS_EDIT = 'animals-edit';
     const ANIMALS_DELETE = 'animals-delete';
-    const ANIMAL_STATS_VIEW = 'animal-stats-view';
-    const ANIMAL_FEEDING_VIEW = 'animal-feeding-view';
-    const ANIMAL_FEEDING_ASSIGN = 'animal-feeding-assign';
+    const ANIMAL_STATS_VIEW = 'animal_stats-view';
+    const ANIMAL_FEEDING_VIEW = 'animal_feeding-view';
+    const ANIMAL_FEEDING_ASSIGN = 'animal_feeding-assign';
 
     // --- VETERINARY PERMISSIONS ---
     const VET_REPORTS_CREATE = 'vet_reports-create';

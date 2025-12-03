@@ -6,7 +6,7 @@
 
         <?php if (isset($user_to_edit)) { ?>
 
-            <form action="?domain=users&controller=gest&action=edit" method="post">
+            <form action="/users/gest/edit" method="post">
 
                 <input type="hidden" name="id" value="<?php echo $user_to_edit->id; ?>">
 
@@ -58,63 +58,42 @@
                         required>
                 </div> -->
 
+                <!-- Role Selection -->
                 <div class="mb-3">
-                    <label for="role"
-                        class="form-label">role:
-                    </label>
-
-                    <!-- despues de hacer el dominio users, venir aqui a continuar ya que el dto sera purista y meteremos la actualizacion de rol en el controlador entre header location y los datos de edit ahi pondremos lo de actualizar rol con user::update -->
-
-                    <select class="form-select"
-                        id="role"
-                        name="role"
-                        aria-describedby="marital_status-help">
-
-                        <option selected value="">Select a role:</option>
-
+                    <label for="role" class="form-label">Rol:</label>
+                    <select class="form-select" id="role" name="role">
+                        <option value="">-- Sin Rol --</option>
                         <?php foreach ($roles as $role) { ?>
-                            <option
-                                value="<?php echo $role->id_role; ?>"
-                                <?php echo ($user_to_edit->role_name == $role->role_name) ? 'selected' : ''; ?>>
-                                <?php echo $role->role_name; ?>
+                            <option value="<?= $role->id_role; ?>" <?= ($user_to_edit->role_id == $role->id_role) ? 'selected' : ''; ?>>
+                                <?= htmlspecialchars($role->role_name); ?>
                             </option>
                         <?php }; ?>
-
                     </select>
                 </div>
 
                 <!-- Employee Selection -->
                 <div class="mb-3">
-                    <label for="employee" class="form-label">Employee:</label>
+                    <label for="employee" class="form-label">Employee Assigned:</label>
+                    
+                    <?php if (!empty($user_to_edit->employee_id)) : ?>
+                        
+                        <p class="form-control-plaintext bg-light border rounded px-2 py-1"><?= htmlspecialchars($user_to_edit->employee_last_name ?? 'Employee assigned'); ?></p>
+                        <input type="hidden" name="employee" value="<?= htmlspecialchars($user_to_edit->employee_id); ?>">
+                        <div class="form-text">The assignment of an employee to an account is permanent.</div>
 
+                    <?php else : ?>
 
+                        <select class="form-select" id="employee" name="employee">
+                            <option value="">-- Assign an employee --</option>
+                            <?php foreach ($employees as $employee) { ?>
+                                <option value="<?= $employee->id_employee; ?>">
+                                    <?= htmlspecialchars($employee->last_name); ?>
+                                </option>
+                            <?php }; ?>
+                        </select>
+                        <div class="form-text">Once you assign an employee to this account, you cannot change them.</div>
 
-
-                    <select <?php echo (isset($user_to_edit->employee_id) && $user_to_edit->employee_id != null) ? 'disabled' : ''; ?> class="form-select"
-                        id="employee"
-                        name="employee">
-                        <option value="">Select an employee:</option>
-
-                        <?php foreach ($employees as $employee) { ?>
-                            <option value="<?php echo $employee->id_employee; ?>"
-                                <?php echo (isset($user_to_edit->employee_id) && $user_to_edit->employee_id == $employee->id) ? 'selected' : ""; ?>>
-                                <?php echo $employee->last_name; ?>
-
-                            </option>
-                        <?php }; ?>
-
-                    </select>
-
-                    <?php
-                    // THE FIX: If the employee is set and the dropdown is disabled,
-                    // we add a hidden input to make sure the employee_id is sent in the POST.
-                    if (isset($user_to_edit->employee_id) && $user_to_edit->employee_id != null) {
-                        echo '<input type="hidden" name="employee" value="' . htmlspecialchars($user_to_edit->employee_id) . '">';
-                    }
-                    ?>
-
-
-
+                    <?php endif; ?>
                 </div>
 
                 <!-- VIP Permissions Section -->
@@ -122,23 +101,14 @@
                 <h5 class="mb-3">⭐ VIP Permissions</h5>
                 <p class="text-muted">Mark the additional permissions you want to assign ONLY to this user. These will be added to the ones he already has by his role.</p>
 
-                <div class="row">
+                <div class="row"></div>
                     <?php
-                    
-                    if (!isset($allPermissions)) {
-                        $allPermissions = [
-                            ['id_permission' => 1, 'permission_name' => 'gestion-usuarios-crear', 'permission_desc' => 'Crear nuevos usuarios'],
-                            ['id_permission' => 2, 'permission_name' => 'gestion-usuarios-editar', 'permission_desc' => 'Editar usuarios existentes'],
-                            ['id_permission' => 5, 'permission_name' => 'informes-veterinarios-ver', 'permission_desc' => 'Ver los informes del veterinario'],
-                            ['id_permission' => 8, 'permission_name' => 'servicios-editar', 'permission_desc' => 'Editar los servicios del zoo'],
-                        ];
-                    }
-                    if (!isset($userDirectPermissionIds)) {
-                        $userDirectPermissionIds = [2, 5]; // (example at the moment) Let's assume that the user already has permissions 2 and 5
-                    }
+                    // The data now comes from the controller, we no longer need the test data.
+                    // The $availableVipPermissions variable contains the permissions that can be assigned.
+                    // The $userDirectPermissionIds variable tells us which ones the user already has.
                     ?>
 
-                    <?php foreach ($allPermissions as $permission) : ?>
+                    <?php foreach ($availableVipPermissions as $permission) : ?>
                         <div class="col-md-6 col-lg-4 mb-2">
                             <div class="form-check">
                                 <input class="form-check-input" 
@@ -167,7 +137,7 @@
 
         <?php } else if (isset($employee_to_assign)) { ?>
 
-            <form action="?domain=users&controller=gest&action=assignAccount" method="post">
+            <form action="/users/gest/assignAccount" method="post">
 
                 <input type="hidden" name="employee_id" value="<?php echo $employee_to_assign->id; ?>">
 

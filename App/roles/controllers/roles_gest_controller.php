@@ -1,4 +1,23 @@
 <?php
+/**
+ * 🏛️ ARQUITECTURA ARCADIA (Código Simulativo Namespace)
+ * ----------------------------------------------------
+ * 📍 Ubicación Lógica: Arcadia\Roles\Controllers
+ * 📂 Archivo Físico:   App/roles/controllers/roles_gest_controller.php
+ * 
+ * 📝 Descripción:
+ * Controlador para la gestión de roles y sus permisos.
+ * Define qué puede hacer cada tipo de usuario.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Roles\Models\Role (via App/roles/models/role.php)
+ * - Arcadia\Database\Connection (via database/connection.php)
+ * - Arcadia\Roles\Views\Gest\Start (via App/roles/views/gest/start.php)
+ * - Arcadia\Roles\Views\Gest\Create (via App/roles/views/gest/create.php)
+ * - Arcadia\Permissions\Models\Permission (via App/permissions/models/permission.php)
+ * - Arcadia\Roles\Views\Gest\Edit (via App/roles/views/gest/edit.php)
+ * - Arcadia\Roles\Views\Gest\View (via App/roles/views/gest/view.php)
+ */
 
 session_start();
 

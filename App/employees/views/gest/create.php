@@ -1,8 +1,8 @@
-<!-- Formulario de crear empleado -->
+<!-- Create employee form -->
 
 <div class="card shadow-sm mb-4">
     <div class="card-header bg-primary text-white">
-        <h3>Register Employee</h3>
+        <h3>+ Create New Employee</h3>
     </div>
     <div class="card-body">
 
@@ -141,10 +141,14 @@
                     <option selected value="">
                         Select a gender:
                     </option>
+
+                    <!-- Iterate through the genders options and add them to the select, thanks to the $genders array (defined in the controller employees_gest_controller.php) -->
                     <?php foreach ($genders as $gender_option) { ?>
 
+                        <!-- Add the gender option to the select -->
                         <option value="<?php echo $gender_option; ?>">
 
+                            <!-- Display the gender option -->
                             <?php echo $gender_option; ?>
                         </option>
                     <?php }; ?>
@@ -166,10 +170,13 @@
                     <option selected value="">
                         Select a marital status:
                     </option>
+                    <!-- Iterate through the marital status options and add them to the select, thanks to the $marital_status array (defined in the controller employees_gest_controller.php) -->
                     <?php foreach ($marital_status as $marital_status_option) { ?>
 
+                        <!-- Add the marital status option to the select -->    
                         <option value="<?php echo $marital_status_option; ?>">
 
+                            <!-- Display the marital status option -->
                             <?php echo $marital_status_option; ?>
                         </option>
                     <?php }; ?>
@@ -179,7 +186,7 @@
 
 
             <div class="card-footer d-flex justify-content-between align-items-center">
-                <input type="submit" class="btn btn-warning px-4" value="Register Employee">
+                <input type="submit" class="btn btn-warning px-4" value="Create New Employee">
                 <a href="/employees/gest/start" class=" px-4 btn btn-primary">Cancel</a>
             </div>
         </form>
