@@ -1,4 +1,4 @@
-<!-- Formulario de crear empleado -->
+<!-- Create employee form -->
 
 <div class="card shadow-sm mb-4">
     <div class="card-header bg-primary text-white">

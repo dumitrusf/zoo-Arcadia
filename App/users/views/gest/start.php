@@ -1,7 +1,14 @@
 <div class="card container-fluid overflow-auto">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h2 class="card-title">Users</h2>
-        <a name="users" id="" class="btn btn-success mb-2 mt-2" href="/users/gest/create" role="button">+ Create new Account</a>
+        
+        <?php 
+        // 🛡️ Solo Admin puede crear usuarios
+        $isAdmin = (isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin');
+        if ($isAdmin): 
+        ?>
+            <a name="users" id="" class="btn btn-success mb-2 mt-2" href="/users/gest/create" role="button">+ Create new Account</a>
+        <?php endif; ?>
     </div>
     <div class="card-body container-fluid overflow-auto">
 
@@ -26,6 +33,12 @@
 
                     foreach ($users as $user) {
 
+                        // 🛡️ LOGICA DE VISIBILIDAD: 
+                        // Si NO soy Admin Y el usuario está desactivado... ¡SALTAR!
+                        if (!$isAdmin && $user->is_active == 0) {
+                            continue; 
+                        }
+
                         $rowNumber++;
                     ?>
                         <?php 
@@ -45,9 +58,31 @@
                                 <div class="btn-group" role="group" aria-label="">
                                     <?php if ($user->is_active == 1): ?>
                                         <span class="btn btn-sm bg-success text-white">Activated</span>
-                                        <a href="/users/gest/toggleActivation?id=<?php echo $user->id; ?>" class="btn btn-sm btn-warning">Deactivate</a>
+                                        
+                                        <?php 
+                                        // 🛡️ PROTECCIÓN 1: Soy yo mismo?
+                                        $isMe = (isset($_SESSION['user']['id_user']) && $_SESSION['user']['id_user'] == $user->id);
+                                        
+                                        if ($isMe): 
+                                        ?>
+                                            <button class="btn btn-sm btn-secondary" disabled title="You cannot deactivate yourself">Deactivate</button>
+                                        <?php elseif ($isAdmin): ?>
+                                            <a href="/users/gest/toggleActivation?id=<?php echo $user->id; ?>" class="btn btn-sm btn-warning">Deactivate</a>
+                                        <?php else: ?>
+                                            <!-- Si NO soy admin, no veo el botón -->
+                                            <button class="btn btn-sm btn-secondary" disabled title="Only Admins can deactivate users">Deactivate</button>
+                                        <?php endif; ?>
+
                                     <?php else: ?>
-                                        <a href="/users/gest/toggleActivation?id=<?php echo $user->id; ?>" class="btn btn-sm btn-primary text-white">Activate</a>
+                                        
+                                        <?php 
+                                        if ($isAdmin):
+                                        ?>
+                                            <a href="/users/gest/toggleActivation?id=<?php echo $user->id; ?>" class="btn btn-sm btn-primary text-white">Activate</a>
+                                        <?php else: ?>
+                                            <button class="btn btn-sm btn-secondary" disabled title="Only Admins can activate users">Activate</button>
+                                        <?php endif; ?>
+
                                         <span class="btn btn-sm bg-danger text-white">Deactivated</span>
                                     <?php endif; ?>
 
@@ -63,16 +98,24 @@
 
                                 <div class="btn-group" role="group" aria-label="">
 
-
-
                                     <?php if (isset($user->id) && $user->id != null): ?>
                                         <!-- Is a user account, we send his ID to edit him -->
+                                        
+                                        <!-- View Details: VISIBLE PARA TODOS -->
                                         <a href="/users/gest/view?id=<?php echo $user->id; ?>" class="btn btn-sm btn-info text-white">View Details</a>
-                                        <a href="/users/gest/edit?id=<?php echo $user->id; ?>" class="btn btn-sm btn-primary">Edit</a>
-                                        <a href="/users/gest/delete?id=<?php echo $user->id; ?>" class="btn btn-sm btn-danger">Delete</a>
+                                        
+                                        <?php if ($isAdmin): ?>
+                                            <a href="/users/gest/edit?id=<?php echo $user->id; ?>" class="btn btn-sm btn-primary">Edit</a>
+                                            <a href="/users/gest/delete?id=<?php echo $user->id; ?>" class="btn btn-sm btn-danger">Delete</a>
+                                        <?php endif; ?>
+
                                     <?php else: ?>
-                                        <!-- Is a employee, we send his ID to assign him an account -->
-                                        <a href="/users/gest/edit?assign_to_employee=<?php echo $user->employee_id; ?>" class="btn btn-sm btn-info">Assign</a>
+                                        <!-- Is a employee -->
+                                        <?php if ($isAdmin): ?>
+                                            <a href="/users/gest/edit?assign_to_employee=<?php echo $user->employee_id; ?>" class="btn btn-sm btn-info">Assign</a>
+                                        <?php else: ?>
+                                            <span class="text-muted fst-italic">Not Assigned</span>
+                                        <?php endif; ?>
                                     <?php endif; ?>
                                     
                                 </div>

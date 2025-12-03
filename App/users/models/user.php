@@ -1,5 +1,15 @@
 <?php
-// Defines the User class to interact with the database.
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Users\Models
+ * 📂 Physical File:   App/users/models/user.php
+ * 
+ * 📝 Description:
+ * Model that represents a user of the system (Login).
+ * Manages authentication, roles and relationship with employees.
+ */
+
 class User
 {
 
@@ -11,12 +21,13 @@ class User
     public $role_name;
     public $employee_id;
     public $employee_last_name;
+    public $employee_email;
     public $is_active;
     public $created_at;
     public $updated_at;
 
     // Constructor for the User class.
-    public function __construct($id_user, $username, $psw, $role_id, $role_name, $employee_id, $last_name, $is_active, $created_at, $updated_at)
+    public function __construct($id_user, $username, $psw, $role_id, $role_name, $employee_id, $last_name, $employee_email, $is_active, $created_at, $updated_at)
     {
         $this->id = $id_user;
         $this->username = $username;
@@ -25,6 +36,7 @@ class User
         $this->role_name = $role_name;
         $this->employee_id = $employee_id;
         $this->employee_last_name = $last_name;
+        $this->employee_email = $employee_email;
         $this->is_active = $is_active;
         $this->created_at = $created_at;
         $this->updated_at = $updated_at;
@@ -40,7 +52,7 @@ class User
         $connectionDB = DB::createInstance();
 
         // Create the query to the DB, which will return all users.
-        $sql = $connectionDB->query("SELECT e.last_name, e.id_employee,
+        $sql = $connectionDB->query("SELECT e.last_name, e.email AS employee_email, e.id_employee, 
                                             u.id_user, u.username, u.psw, u.is_active, u.created_at, u.updated_at, u.role_id,
                                             r.role_name
                                      FROM employees e
@@ -52,7 +64,7 @@ class User
                                      UNION
                                      
                                      -- Users without employees
-                                     SELECT NULL as last_name, NULL as id_employee, 
+                                     SELECT NULL as last_name, NULL as employee_email, NULL as id_employee, 
                                             u.id_user, u.username, u.psw, u.is_active, u.created_at, u.updated_at, u.role_id,
                                             r.role_name
                                      FROM users u
@@ -66,7 +78,7 @@ class User
         foreach ($sql->fetchAll() as $user) {
 
             // We store the users from the DB in this array to be able to display them in the controller.
-            $usersList[] = new User($user["id_user"], $user["username"], $user["psw"], $user["role_id"], $user["role_name"], $user["id_employee"], $user["last_name"], $user["is_active"], $user["created_at"], $user["updated_at"]);
+            $usersList[] = new User($user["id_user"], $user["username"], $user["psw"], $user["role_id"], $user["role_name"], $user["id_employee"], $user["last_name"], $user["employee_email"], $user["is_active"], $user["created_at"], $user["updated_at"]);
         }
 
         // Return the array of users.
@@ -84,7 +96,7 @@ class User
         $connectionDB = DB::createInstance();
 
         // Create the query to the DB.
-        $query = "SELECT u.*, e.id_employee, e.last_name, r.role_name, r.id_role
+        $query = "SELECT u.*, e.id_employee, e.last_name, e.email AS employee_email, r.role_name, r.id_role
                   FROM users u
                   LEFT JOIN employees e 
                   ON e.id_employee = u.employee_id
@@ -103,7 +115,7 @@ class User
         $user = $sql->fetch();
 
         // Return the query result.
-        return new User($user["id_user"], $user["username"], $user["psw"], $user["role_id"], $user["role_name"], $user["employee_id"], $user["last_name"], $user["is_active"], $user["created_at"], $user["updated_at"]);
+        return new User($user["id_user"], $user["username"], $user["psw"], $user["role_id"], $user["role_name"], $user["employee_id"], $user["last_name"], $user["employee_email"], $user["is_active"], $user["created_at"], $user["updated_at"]);
     }
     
     

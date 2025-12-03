@@ -1,5 +1,25 @@
-
 <?php
+/**
+ * 🏛️ ARQUITECTURA ARCADIA (Código Simulativo Namespace)
+ * ----------------------------------------------------
+ * 📍 Ubicación Lógica: Arcadia\Users\Controllers
+ * 📂 Archivo Físico:   App/users/controllers/users_gest_controller.php
+ * 
+ * 📝 Descripción:
+ * Controlador para la gestión administrativa de usuarios.
+ * Implementa lógica de permisos (RBAC) y CRUD.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Users\Models\User (via App/users/models/user.php)
+ * - Arcadia\Employees\Models\Employee (via App/employees/models/employee.php)
+ * - Arcadia\Roles\Models\Role (via App/roles/models/role.php)
+ * - Arcadia\Database\Connection (via database/connection.php)
+ * - Arcadia\Permissions\Models\Permission (via App/permissions/models/permission.php)
+ * - Arcadia\Users\Views\Gest\Start (via App/users/views/gest/start.php)
+ * - Arcadia\Users\Views\Gest\Create (via App/users/views/gest/create.php)
+ * - Arcadia\Users\Views\Gest\Edit (via App/users/views/gest/edit.php)
+ * - Arcadia\Users\Views\Gest\View (via App/users/views/gest/view.php)
+ */
 
 require_once __DIR__ . "/../models/user.php";
 require_once __DIR__ . "/../../employees/models/employee.php";
@@ -70,16 +90,16 @@ class UsersGestController
     public function edit()
     {
         $roles = Role::check();
-    
+
         if (isset($_GET['id'])) {
             // We edit an existing user that if it exists with an existing employee
             $id_user = $_GET["id"];
             $user_to_edit = User::find($id_user);
-            
-    
+
+
             // Corregido para usar tu nombre de función
             $employees = Employee::freeEmployees();
-    
+
             if (isset($user_to_edit->employee_id) && $user_to_edit->employee_id != null) {
                 $assigned_employee = Employee::find($user_to_edit->employee_id);
                 array_unshift($employees, $assigned_employee);
@@ -101,23 +121,21 @@ class UsersGestController
             $rolePermissionIds = array_column($rolePermissions, 'id_permission');
 
             // 4. FILTER the full catalog to remove those already included in the ROLE
-            $availableVipPermissions = array_filter($allPermissions, function($permission) use ($rolePermissionIds) {
+            $availableVipPermissions = array_filter($allPermissions, function ($permission) use ($rolePermissionIds) {
                 return !in_array($permission['id_permission'], $rolePermissionIds);
             });
 
             // 5. Get the IDs of the VIP permissions that the user already has directly assigned
             $userDirectPermissionIds = $user_to_edit->getVipPermissionsIdsUserHasAssigned();
-
-        } elseif (isset($_GET["assign_to_employee"])){
+        } elseif (isset($_GET["assign_to_employee"])) {
 
 
             $id_employee = $_GET['assign_to_employee'];
             $employee_to_assign = Employee::find($id_employee);
 
             $unassigned_users = User::withoutEmployeeUser();
-
         }
-    
+
         // Logic of the POST for the UPDATE of a user
         if ($_POST && isset($_POST['id'])) {
 
@@ -131,7 +149,7 @@ class UsersGestController
             $employee_id = empty($_POST['employee']) ? null : (int)$_POST['employee'];
 
             User::update($username, $psw, $role_id, $employee_id, $id_user);
-            
+
             // --- Sincronize VIP Permissions ---
 
             // 1. Get the IDs of the marked checkboxes. If none is marked, it will be an empty array.
@@ -139,7 +157,7 @@ class UsersGestController
 
             // 2. We need the User object to call its method.
             $user = User::find($id_user);
-            
+
             // 3. Ask the object to synchronize its VIP permissions.
             $user->overwriteVipPermissionsIdsUserHasAssigned($permissionIds);
 
@@ -148,7 +166,7 @@ class UsersGestController
             exit();
         }
 
-        
+
 
         include_once __DIR__ . "/../views/gest/edit.php";
     }
@@ -158,10 +176,10 @@ class UsersGestController
         if ($_POST) {
             $employee_id = $_POST['employee_id'];
             $user_id = $_POST['user_id'];
-    
+
             // We use the method that we created in the User.php model
             User::assignAccount($employee_id, $user_id);
-    
+
             header("Location: /users/gest/start");
             exit();
         }
@@ -186,9 +204,9 @@ class UsersGestController
         // Get the user's VIP (direct) permissions
         $permissions = User::getUserVipPermissionsDetails($id_user);
 
+        // var_dump($user);
+        // die();
         // Load the view with all the information
         require_once __DIR__ . '/../views/gest/view.php';
     }
-    
 }
-  

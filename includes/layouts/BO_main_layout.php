@@ -1,10 +1,23 @@
 <?php
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Includes\Layouts
+ * 📂 Physical File:   includes/layouts/BO_main_layout.php
+ * 
+ * 📝 Description:
+ * Main layout for BACKOFFICE (Management).
+ * HTML base structure for the administration panel.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Includes\PageTitle (via includes/pageTitle.php)
+ */
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Obtener el nombre del archivo actual
+// Get the name of the current file
 $currentDomain = $_GET['domain'] ?? 'home';
 include(__DIR__ . "/../pageTitle.php");
 
@@ -27,36 +40,46 @@ include(__DIR__ . "/../pageTitle.php");
 
     <link rel="icon" type="image/png" href="/src/assets/images/favicon.png" />
 
-    <!-- Hojas de Estilo Compiladas y Copiadas por Gulp -->
+    <!-- Compiled and copied stylesheets by Gulp -->
     <link rel="stylesheet" href="/public/build/css/bootstrap.min.css">
     <link rel="stylesheet" href="/public/build/css/dataTables.bootstrap5.min.css">
     <!-- <link rel="stylesheet" href="/public/build/css/app.css"> -->
 
 </head>
 
-<body class="<?= $currentDomain == 'contact' ? 'body-contact' : '' ?>" id="top">
+<body class="<?= $currentDomain == 'contact' ? 'body-contact' : ($currentDomain == 'auth' ? 'body-login' : '') ?>" id="top">
 
-
-
-
-    <nav class="navbar navbar-expand navbar-light bg-light">
+    <?php if (!in_array($currentDomain, ['contact', 'auth'])): ?>
+    <nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between" >
         <div class="nav navbar-nav">
-            <a class="nav-item nav-link active" href="#">Logged in (user) <span class="visually-hidden">(current)</span></a>
-            <a class="nav-item nav-link" href="/home/pages/start">Home</a>
+            <?php if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == false): ?>
+                <a class="nav-item nav-link active" href="/auth/pages/login">Login</a>
+            <?php else: ?>
+                <a class="nav-item nav-link active" href="/home/pages/start"><?php echo $_SESSION["user"]["username"]; ?></a>
+            <?php endif; ?>
             <a class="nav-item nav-link" href="/users/gest/start">Users</a>
             <a class="nav-item nav-link" href="/employees/gest/start">Employees</a>
             <a class="nav-item nav-link" href="/roles/gest/start">Roles</a>
             <a class="nav-item nav-link" href="/permissions/gest/start">Permissions</a>
+            <?php if (isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin'): ?>
+                <a class="nav-item nav-link" href="/schedules/gest/start">Schedules</a>
+            <?php endif; ?>
+        </div>
+
+        <div class="nav navbar-nav d-flex justify-content-end px-5">
+            <a class="nav-item nav-link" href="/home/pages/index">Zoo Arcadia</a>
+            <a class="nav-item nav-link" href="/auth/pages/logout">Logout</a>
         </div>
     </nav>
+    <?php endif; ?>
 
     <div class="container-xs p-5">
         <div class="row">
             <div class="col-12">
                 <?php
 
-                // Mostrar el contenido capturado del controlador de lo contrario mostrar un mensaje de no hay contenido para mostrar
-                echo $viewContent ?? '<p>No hay contenido para mostrar</p>';
+                // Show the captured content from the controller, otherwise show a message that there is no content to show
+                echo $viewContent ?? '<p>There is no content to show</p>';
 
                 ?>
 
@@ -66,17 +89,17 @@ include(__DIR__ . "/../pageTitle.php");
 
 
     <!-- 
-      Orden de carga de Scripts es importante:
+      Order of loading Scripts is important:
       1. jQuery (requerido por Bootstrap y DataTables)
       2. Bootstrap JS (para la funcionalidad de la plantilla)
       3. DataTables Core
       4. DataTables Bootstrap 5 Integration
       5. Nuestro código de activación (app.js)
     -->
-    <script src="/public/build/js/jquery.min.js"></script>
-    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/public/build/js/dataTables.min.js"></script>
-    <script src="/public/build/js/dataTables.bootstrap5.min.js"></script>
-    <script src="/public/build/js/app.js"></script>
+    <script src="/public/build/js/jquery.min.js" defer></script>
+    <script src="/public/build/js/bootstrap.bundle.min.js" defer></script>
+    <script src="/public/build/js/dataTables.min.js" defer></script>
+    <script src="/public/build/js/dataTables.bootstrap5.min.js" defer></script>
+    <script src="/public/build/js/app.js" defer></script>
 
 </body>

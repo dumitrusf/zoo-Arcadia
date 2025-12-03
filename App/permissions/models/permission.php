@@ -1,4 +1,14 @@
 <?php
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Permissions\Models
+ * 📂 Physical File:   App/permissions/models/permission.php
+ * 
+ * 📝 Description:
+ * Model that manages permissions (RBAC).
+ * Defines the granular capabilities that can be assigned.
+ */
 
 // Defines the Permission class to interact with the database.
 

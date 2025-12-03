@@ -1,12 +1,27 @@
 <?php
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Roles\Controllers
+ * 📂 Physical File:   App/roles/controllers/roles_pages_controller.php
+ * 
+ * 📝 Description:
+ * Controller for general pages of roles.
+ * Manages redirects and error views related to roles.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Database\Connection (via database/connection.php)
+ * - Arcadia\Roles\Views\Pages\Start (via App/roles/views/pages/start.php)
+ * - Arcadia\Roles\Views\Pages\Error (via App/roles/views/pages/error.php)
+ */
 
 include_once __DIR__ . "/../../../database/connection.php";
-// Incluyo el archivo que tiene la clase DB para poder conectarme a la base de datos.
+// Include the file that has the DB class to be able to connect to the database.
 
 DB::createInstance();
-// Llamo al método estático createInstance() de la clase DB.
-// Este método me devuelve una conexión PDO lista para usar, siguiendo el patrón Singleton.
-// Si es la primera vez que se llama, crea la conexión. Si ya existe, reutiliza la misma.
+// Call the static method createInstance() of the DB class.
+// This method returns a PDO connection ready to use, following the Singleton pattern.
+// If it is the first time it is called, it creates the connection. If it already exists, it reuses the same one.
 
 class RolesPagesController{
     public function start(){
