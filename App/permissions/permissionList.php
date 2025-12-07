@@ -1,9 +1,19 @@
 <?php
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Permissions
+ * 📂 Physical File:   App/permissions/permissionList.php
+ * 
+ * 📝 Description:
+ * Utility class with constant permissions.
+ * Define the unique identifiers for each permission in the system.
+ */
 // App/permissions/PermissionList.php
 
 final class PermissionList {
 
-    // No queremos que nadie cree un objeto de esta clase
+    // We don't want anyone to create an object of this class
     private function __construct() {}
 
     // --- ACCOUNT MANAGEMENT PERMISSIONS ---

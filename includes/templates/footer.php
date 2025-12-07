@@ -1,4 +1,14 @@
 <?php
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Includes\Templates
+ * 📂 Physical File:   includes/templates/footer.php
+ * 
+ * 📝 Description:
+ * Footer component.
+ * Legal information, hours and closing of HTML structure.
+ */
 
 $datecopy = date('d-m-Y');
 
@@ -17,23 +27,22 @@ $datecopy = date('d-m-Y');
 
 				<table class="footer__hours-table">
 					<tbody>
-
-						<tr class="footer__hours-row">
-							<th class="footer__hours-header">Matin:</th>
-							<td class="footer__hours-data">08:45 - 12:00</td>
-						</tr>
-						<tr class="footer__hours-row">
-							<th class="footer__hours-header">Après-midi:</th>
-							<td class="footer__hours-data">14:00 - 18:00</td>
-						</tr>
-						<tr class="footer__hours-row">
-							<th class="footer__hours-header">Samedi:</th>
-							<td class="footer__hours-data">08:45 - 12:00</td>
-						</tr>
-						<tr class="footer__hours-row">
-							<th class="footer__hours-header">Dimanche:</th>
-							<td class="footer__hours-data">Fermé</td>
-						</tr>
+						<?php
+						// Obtenemos los horarios dinámicos
+						$footerSchedules = getOpeningHours();
+						foreach ($footerSchedules as $schedule):
+						?>
+							<tr class="footer__hours-row">
+								<th class="footer__hours-header"><?= ucfirst($schedule->time_slot) ?>:</th>
+								<td class="footer__hours-data">
+									<?php if ($schedule->status === 'closed'): ?>
+										Closed
+									<?php else: ?>
+										<?= substr($schedule->opening_time, 0, 5) ?> - <?= substr($schedule->closing_time, 0, 5) ?>
+									<?php endif; ?>
+								</td>
+							</tr>
+						<?php endforeach; ?>
 					</tbody>
 				</table>
 			</div>
@@ -54,8 +63,7 @@ $datecopy = date('d-m-Y');
 	</div>
 </footer>
 
-<script type="module" src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script type="module" src="/node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+<script src="/public/build/js/bootstrap.bundle.min.js" defer></script>
 
 </body>
 </html> 

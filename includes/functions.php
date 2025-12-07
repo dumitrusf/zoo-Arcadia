@@ -1,10 +1,27 @@
 <?php
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Includes
+ * 📂 Physical File:   includes/functions.php
+ * 
+ * 📝 Description:
+ * Collection of global utility functions.
+ * Helpers for routes, views and shared logic.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Includes\Templates\{Name} (via includes/templates/{name}.php)
+ * - Arcadia\Includes\Layouts\FC_main_layout (via includes/layouts/FC_main_layout.php)
+ * - Arcadia\Includes\Layouts\BO_main_layout (via includes/layouts/BO_main_layout.php)
+ * - Arcadia\{Domain}\Controllers\{Controller} (via App/{domain}/controllers/{controller}.php)
+ * - Arcadia\Schedules\Models\Schedule (via App/schedules/models/schedule.php)
+ */
 
 define("TEMPLATES_URL", __DIR__ . "/templates");
 define("FUNCTIONS_URL", __DIR__ . "functions.php");
 
 
-function includeTemplate(string  $nombre, bool $inicio = false)
+function includeTemplate(string  $nombre)
 {
     include TEMPLATES_URL . "/{$nombre}.php";
 }
@@ -29,9 +46,8 @@ function handleDomainRouting($domainName, $basePath)
     $controller = $_GET['controller'] ?? 'pages';
     $action = $_GET['action'] ?? 'start';
 
-    // OJO: Tu convención de nombres de archivo es diferente a la de la clase.
-    // Archivo: employees_pages_controller.php
-    // Clase: EmployeesPagesController
+    // Exemple of file name due to...(exemple) : employees_pages_controller.php
+    // Exemple of class name due to...(exemple): EmployeesPagesController
     $controllerFileName = $domainName . "_" . $controller . "_controller.php";
     $controllerClassName = ucfirst($domainName) . ucfirst($controller) . "Controller";
 
@@ -45,10 +61,56 @@ function handleDomainRouting($domainName, $basePath)
         $controllerInstance->$action();
         $viewContent = ob_get_clean();
 
-        require_once __DIR__ . "/layouts/BO_main_layout.php";
+        // DEBUG EXTREME
+        // echo "<!-- DEBUG FUNCTIONS: Received domain: '$domainName' -->";
+
+        // IMPROVED LAYOUT SELECTION LOGIC:
+        // Domain map -> public actions (empty = all)
+        $public_layout_map = [
+            "home"      => ["index"],
+            "about"     => ["about"],
+            "habitats"  => ["habitats", "habitat1"],
+            "animals"   => ["allanimals", "animalpicked"],
+            "cms"       => ["cms"],
+            "contact"   => ["contact"],
+            "auth"      => ["login"]
+        ];
+
+        $domainKey = strtolower($domainName);
+        $actionKey = strtolower($action);
+
+        $usePublicLayout = false;
+        if (isset($public_layout_map[$domainKey])) {
+            $allowedActions = $public_layout_map[$domainKey];
+            $usePublicLayout = empty($allowedActions) || in_array($actionKey, $allowedActions, true);
+        }
+
+        if ($usePublicLayout) {
+            require __DIR__ . "/layouts/FC_main_layout.php";
+        } else {
+            require __DIR__ . "/layouts/BO_main_layout.php";
+        }
     } else {
         http_response_code(404);
         header('Location: /public/error-404.php');
         exit();
     }
+}
+
+
+// function to get opening hours globally
+function getOpeningHours() {
+    // We require the model if it is not loaded (using absolute safe path)
+    require_once __DIR__ . '/../App/schedules/models/schedule.php';
+    
+    $scheduleModel = new Schedule();
+    return $scheduleModel->getAll();
+}
+
+// Generates Cloudinary URLs with transformations
+function getCloudinaryUrl($baseUrl, $transformations) {
+    if (!$baseUrl) return '';
+    $parts = explode('/upload/', $baseUrl);
+    if (count($parts) < 2) return $baseUrl; // Not a valid Cloudinary URL
+    return $parts[0] . '/upload/' . $transformations . '/' . $parts[1];
 }

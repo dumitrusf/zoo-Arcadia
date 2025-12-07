@@ -1,12 +1,20 @@
 <div class="card container-fluid overflow-auto">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h2 class="card-title">Employees</h2>
-        <a name="employees" id="" class="btn btn-success mb-2 mt-2" href="/employees/gest/create" role="button">+ Create New Employee</a>
+        
+        <?php 
+        // Only Admin can create employees
+        $isAdmin = (isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin');
+        if ($isAdmin): 
+        ?>
+            <a name="employees" id="" class="btn btn-success mb-2 mt-2" href="/employees/gest/create" role="button">+ Create New Employee</a>
+        <?php endif; ?>
     </div>
     <div class="card-body container-fluid overflow-auto">
 
         <div class="table-responsive">
-            <table class="table table-hover">
+
+            <table class="table table-hover table-striped dataTable">
                 <thead class="table-dark">
                     <tr>
                         <th class="text-nowrap border border-start-3 border-end-0 rounded-start-3 text-center align-middle" scope="col">Name</th>
@@ -23,7 +31,10 @@
                         <th class="text-nowrap border border-start-1 border-end-1 text-center align-middle" scope="col">Role</th>
                         <th class="text-nowrap border border-start-1 border-end-1 text-center align-middle" scope="col">Created at</th>
                         <th class="text-nowrap border border-start-1 border-end-1 text-center align-middle" scope="col">Updated at</th>
-                        <th class="text-nowrap border border-end-3 rounded-end-3 text-center align-middle" scope="col">Actions</th>
+                        
+                        <?php if ($isAdmin): ?>
+                            <th class="text-nowrap border border-end-3 rounded-end-3 text-center align-middle" scope="col">Actions</th>
+                        <?php endif; ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,7 +49,7 @@
                         // Increment the row number
                         $rowNumber++;
                     ?>
-                    <!-- Draw the table row, thanks to the get_row_class() function in the functions.php file in /includes folder -->
+                        <!-- Draw the table row, thanks to the get_row_class() function in the functions.php file in /includes folder -->
                         <tr class="<?php echo get_row_class($rowNumber); ?> ">
                             <!-- Draw the table cell, thanks to the get_cell_border_class() function in the functions.php file in /includes folder -->
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>"> <?php echo $employee->first_name; ?> </td>
@@ -56,15 +67,18 @@
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>"> <?php echo $employee->role_name; ?> </td>
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>"> <?php echo $employee->created_at; ?> </td>
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>"> <?php echo $employee->updated_at; ?> </td>
-                            <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>">
+                            
+                            <?php if ($isAdmin): ?>
+                                <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>">
 
-                                <div class="btn-group" role="group" aria-label="">
+                                    <div class="btn-group" role="group" aria-label="">
 
-                                    <a href="/employees/gest/edit?id=<?php echo $employee->id; ?>" class="btn btn-sm btn-primary">Edit</a>
-                                    <a href="/employees/gest/delete?id=<?php echo $employee->id; ?>" class="btn btn-sm btn-danger">Delete</a>
-                                </div>
+                                        <a href="/employees/gest/edit?id=<?php echo $employee->id; ?>" class="btn btn-sm btn-primary">Edit</a>
+                                        <a href="/employees/gest/delete?id=<?php echo $employee->id; ?>" class="btn btn-sm btn-danger">Delete</a>
+                                    </div>
 
-                            </td>
+                                </td>
+                            <?php endif; ?>
                         </tr>
 
                     <?php
@@ -73,8 +87,5 @@
 
                 </tbody>
             </table>
-
-
-
         </div>
     </div>

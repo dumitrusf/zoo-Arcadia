@@ -1,49 +1,63 @@
 <?php
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Database
+ * 📂 Physical File:   database/connection.php
+ * 
+ * 📝 Description:
+ * Singleton class for database connection (PDO).
+ * Manages the unique and persistent connection to MySQL.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Config (via config.php)
+ */
+
 include_once __DIR__ . "/../config.php";
 
 class DB {
-    // Vale, aquí estoy declarando una clase que va a encargarse de conectarse a la base de datos.
+    // Here I am declaring a class that will be responsible for connecting to the database.
     
     private static $instance = null;
-    // Esto de aquí es una propiedad estática. La pongo a null al principio porque todavía no hay conexión.
-    // Solo quiero una conexión para todo el proyecto, así que usaré esta misma variable todo el rato.
+    // This here is a static property. I put it to null at the beginning because there is no connection yet.
+    // I only want one connection for the entire project, so I will use this same variable all the time.
 
     public static function createInstance() {
-    // Esta función la voy a llamar desde fuera sin necesidad de crear un objeto (porque es static).
-    // Y va a devolverme la conexión lista para usar.
+    // This function I will call from outside without the need to create an object (because it is static).
+    // And it will return me the connection ready to use.
 
         if (!isset(self::$instance)) {
-        // Compruebo si ya hay una conexión creada.
-        // Uso `self::` porque estoy dentro de la clase y quiero acceder a SU variable estática.
-        // Si no hay conexión todavía, entro y la creo.
+        // Check if there is already a connection created.
+        // Use `self::` because I am inside the class and want to access its static variable.
+        // If there is no connection yet, I enter and create it.
 
             $optionsPDO[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-            // Esto le dice a PDO que si pasa algo mal, que no me lo diga con un número raro, 
-            // sino que lance una excepción para poder capturar el error como dios manda.
+            // This tells PDO that if something goes wrong, don't tell me with a strange number, 
+            // but throw an exception to be able to capture the error.
 
             self::$instance = new PDO(
-                // Aquí creo la conexión PDO.
-                // self::$instance guarda la conexión que estoy creando para poder reutilizarla más tarde.
+                // Here I create the PDO connection.
+                // self::$instance saves the connection I am creating to be able to reuse it later.
                 
                 "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8",
-                // Aquí construyo el string con el host (servidor), nombre de base de datos y codificación.
+                // Here I build the string with the host (server), database name and encoding.
                 
                 DB_USER,
-                // Usuario para conectarme (esto está definido en otro archivo, como constante).
+                // User to connect to (this is defined in another file, as a constant).
                 
                 DB_PASS,
-                // Contraseña de ese usuario.
+                // Password of that user.
                 
                 $optionsPDO
-                // Y le paso las opciones que definí arriba, como lo de las excepciones.
+                // And I pass the options I defined above, like the exceptions.
             );
 
             // echo "<br> Connected to the database!!!! <br> ";
-            // Esto solo lo muestro para asegurarme que se conectó bien (útil en pruebas).
+            // This is only to make sure I am connected well (useful in tests).
         }
 
         return self::$instance;
-        // Devuelvo la conexión, ya sea la que acabo de crear o una que ya existía de antes.
-        // Así puedo usarla en cualquier parte del código sin repetir la creación.
+        // Return the connection, whether it is the one I just created or one that already existed before.
+        // So I can use it in any part of the code without repeating the creation.
     }
 }

@@ -5,71 +5,99 @@ const sass = require('gulp-sass')(require('sass')); // Si usas SASS
 const plumber = require('gulp-plumber');
 const { deleteAsync } = require('del');
 
-// 2️⃣ Ruta base para el proxy
-let currentProxy = 'http://localhost:3000/'; // Por defecto: frontend
+// 2️⃣ Módulos adicionales para JS
+const sourcemaps = require('gulp-sourcemaps');
+const concat = require('gulp-concat');
+const terser = require('gulp-terser-js');
 
-// 3️⃣ Recarga navegador
+// 3️⃣ Rutas de archivos
+const paths = {
+    scss: 'src/scss/**/*.scss',
+    js: 'src/js/**/*.js',
+    vendorJs: [
+        'node_modules/jquery/dist/jquery.min.js',
+        'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js',
+        'node_modules/datatables.net/js/dataTables.min.js',
+        'node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js'
+    ],
+    vendorCss: [
+        'node_modules/bootstrap/dist/css/bootstrap.min.css',
+        'node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css'
+    ]
+};
+
+// 4️⃣ Ruta base para el proxy
+let currentProxy = 'http://localhost:3001'; // ÚNICO PUERTO PHP
+
+// 5️⃣ Recarga navegador
 function reload(done) {
   browserSync.reload();
   done();
 }
 
-// 4️⃣ Limpiar CSS
+// 6️⃣ Limpiar directorios
 function cleanCss() {
   return deleteAsync('./public/build/css');
 }
 
-// 5️⃣ Compilar SASS/CSS (solo app.scss principal)
-function compileSass() {
-  return src('src/scss/app.scss')       // ① toma SOLO app.scss principal
-    .pipe(plumber())                      // ② evita errores que bloqueen
-    .pipe(sass())                         // ③ compila SASS a CSS
-    .pipe(dest('public/build/css'))      // ④ lo deja en public/build/css
-    .pipe(browserSync.stream());         // ⑤ refresca navegador
+function cleanJs() {
+  return deleteAsync('./public/build/js');
 }
 
-// 6️⃣ Tarea combinada: limpiar + compilar
-const buildCss = series(cleanCss, compileSass);
+// 7️⃣ Procesar y compilar archivos
+function compileSass() {
+  return src('src/scss/app.scss')
+    .pipe(plumber())
+    .pipe(sass())
+    .pipe(dest('public/build/css'))
+    .pipe(browserSync.stream());
+}
 
-// 7️⃣ Servidor con Browsersync (para frontend o backend)
+function processJs() {
+    return src(paths.js)
+        .pipe(sourcemaps.init())
+        .pipe(concat('app.js')) // Unifica todos los .js de src/js en uno solo
+        .pipe(terser()) // Comprime/minifica el JS
+        .pipe(sourcemaps.write('.'))
+        .pipe(dest('public/build/js'));
+}
+
+function copyVendorJs() {
+    return src(paths.vendorJs)
+        .pipe(dest('public/build/js'));
+}
+
+function copyVendorCss() {
+    return src(paths.vendorCss)
+        .pipe(dest('public/build/css'));
+}
+
+// 8️⃣ Tareas combinadas
+const buildCss = series(cleanCss, compileSass, copyVendorCss);
+const buildJs = series(cleanJs, processJs, copyVendorJs);
+
+// 9️⃣ Servidor con Browsersync
 function serve(done) {
   browserSync.init({
-    proxy: currentProxy,    // usa el valor dinámico según tarea
+    proxy: currentProxy,
     open: true,
     notify: true
   });
-
   done();
 }
 
-// 8️⃣ Watch para frontend
-function watchFrontend() {
-  watch('src/scss/**/*.scss', buildCss);      // limpiar + compilar
+// 🔟 Watcher ÚNICO Y TODOPODEROSO
+function watchAll() {
+  // Estilos y JS
+  watch(paths.scss, buildCss);
+  watch(paths.js, series(buildJs, reload));
+  
+  // PHP (Frontend y Backend unificados)
   watch('public/**/*.php', reload);
-  watch('public/**/*.html', reload);
-  watch('public/**/*.js', reload);
-  watch('public/build/css/**/*.css', reload);
+  watch('App/**/*.php', reload);
+  watch('includes/**/*.php', reload);
 }
 
-// 9️⃣ Watch para backend (Screaming Architecture)  
-function watchBackend() {
-    watch('src/scss/**/*.scss', buildCss);    // también vigila CSS
-    watch('App/**/*.php', reload);
-    watch('includes/**/*.php', reload);
-}
-
-// 🔟 Tareas públicas para ejecutar
-
-// 👉 Frontend: gulp public
-function setFrontend(done) {
-  currentProxy = 'http://localhost:3001/public/index.php';
-  done();
-}
-exports.public = series(setFrontend, buildCss, serve, watchFrontend);
-
-// 👉 Backend: gulp app  
-function setBackend(done) {
-  currentProxy = 'http://localhost:3002/home/pages/start';
-  done();
-}
-exports.app = series(setBackend, buildCss, serve, watchBackend);
+// 1️⃣1️⃣ TAREA POR DEFECTO
+// Al llamar 'exports.default', Gulp sabe que esta es la tarea que debe ejecutar si solo escribes 'gulp'
+exports.default = series(buildCss, buildJs, serve, watchAll);
