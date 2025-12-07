@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
  * ----------------------------------------------------
@@ -50,27 +51,39 @@ include(__DIR__ . "/../pageTitle.php");
 <body class="<?= $currentDomain == 'contact' ? 'body-contact' : ($currentDomain == 'auth' ? 'body-login' : '') ?>" id="top">
 
     <?php if (!in_array($currentDomain, ['contact', 'auth'])): ?>
-    <nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between" >
-        <div class="nav navbar-nav">
-            <?php if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == false): ?>
-                <a class="nav-item nav-link active" href="/auth/pages/login">Login</a>
-            <?php else: ?>
-                <a class="nav-item nav-link active" href="/home/pages/start"><?php echo $_SESSION["user"]["username"]; ?></a>
-            <?php endif; ?>
-            <a class="nav-item nav-link" href="/users/gest/start">Users</a>
-            <a class="nav-item nav-link" href="/employees/gest/start">Employees</a>
-            <a class="nav-item nav-link" href="/roles/gest/start">Roles</a>
-            <a class="nav-item nav-link" href="/permissions/gest/start">Permissions</a>
-            <?php if (isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin'): ?>
-                <a class="nav-item nav-link" href="/schedules/gest/start">Schedules</a>
-            <?php endif; ?>
-        </div>
+        <nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between">
+            <div class="nav navbar-nav">
+                <?php if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == false): ?>
+                    <a class="nav-item nav-link active" href="/auth/pages/login">Login</a>
+                <?php else: ?>
+                    <a class="nav-item nav-link active" href="/home/pages/start"><?php echo $_SESSION["user"]["username"]; ?></a>
+                <?php endif; ?>
+                <a class="nav-item nav-link" href="/users/gest/start">Users</a>
+                <a class="nav-item nav-link" href="/employees/gest/start">Employees</a>
+                <a class="nav-item nav-link" href="/roles/gest/start">Roles</a>
+                <a class="nav-item nav-link" href="/permissions/gest/start">Permissions</a>
+                <?php if (isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin'): ?>
+                    <a class="nav-item nav-link" href="/schedules/gest/start">Schedules</a>
+                <?php endif; ?>
+                <?php if (in_array($_SESSION['user']['role_id'], [2, 3])): ?>
+                    <li class="nav-item">
+                        <a class="nav-link <?= ($domain === 'cms' && ($action === 'start' || $action === 'edit' || $action === 'create')) ? 'active' : '' ?>" href="/cms/gest/start">
+                            <i class="bi bi-card-list"></i> Services
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?= ($domain === 'cms' && $action === 'logs') ? 'active' : '' ?>" href="/cms/gest/logs">
+                            <i class="bi bi-journal-text"></i> Service Logs
+                        </a>
+                    </li>
+                <?php endif; ?>
+            </div>
 
-        <div class="nav navbar-nav d-flex justify-content-end px-5">
-            <a class="nav-item nav-link" href="/home/pages/index">Zoo Arcadia</a>
-            <a class="nav-item nav-link" href="/auth/pages/logout">Logout</a>
-        </div>
-    </nav>
+            <div class="nav navbar-nav d-flex justify-content-end px-5">
+                <a class="nav-item nav-link" href="/home/pages/index">Zoo Arcadia</a>
+                <a class="nav-item nav-link" href="/auth/pages/logout">Logout</a>
+            </div>
+        </nav>
     <?php endif; ?>
 
     <div class="container-xs p-5">
