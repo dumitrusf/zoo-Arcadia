@@ -12,23 +12,24 @@
 
 	<picture>
 		<source
-			srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228542&authkey=!AMl2o5PoyxXuRBU&ithint=photo&e=u9NmzI"
+			srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764872122/aa7e4c59-0439-4c32-9703-5ee460d1dd8f_3_qzx3wt.webp"
 			media="(min-width: 1280px)" />
 		<source
-			srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228541&authkey=!ALbJeAgEo2Qdg4I&ithint=photo&e=Fo1CxO"
+			srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764873282/aa7e4c59-0439-4c32-9703-5ee460d1dd8f_2_g5y4ed.webp"
 			media="(min-width: 744px)" />
-		<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228540&authkey=!AMZQRT_KTs11Qf0&ithint=photo&e=xZ2JoE"
-			class="hero__image d-block" alt="hero image" />
+		<img src="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764873190/aa7e4c59-0439-4c32-9703-5ee460d1dd8f_1_iyw7yo.webp"
+			class="hero__image d-block" alt="hero image" fetchpriority="high" />
 	</picture>
 </header>
 
 <main>
+
 	<section class="k-about">
 		<div class="k-about__container">
 
 			<div class="k-about__image">
 
-				<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!229330&authkey=!APCoHyp5AxaPBUw&ithint=photo&e=D9Tjm4"
+				<img src="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764873838/5e6e4c9a-7e33-4dc0-ad86-783068dd38a8_1_gadwme.png"
 					class="k-about__image d-block img-fluid" alt="about image" />
 
 
@@ -44,99 +45,37 @@
 					<p>Since 1960, we have ensured their well-being through daily veterinary care and tailored feeding.
 					</p>
 				</div>
-				<a href="about.php" class="k-about__content-button btn intro__button intro__button--hours">know
+				<a href="/about/pages/about" class="k-about__content-button btn intro__button intro__button--hours">know
 					more</a>
 			</div>
 		</div>
 	</section>
-	<div class="intro intro--index">
+	<div class="intro intro--services">
+		<?php if (!empty($featuredServices)): ?>
+			<?php foreach ($featuredServices as $service): ?>
+				<section class="intro__section">
+					<h2 class="intro__title"><?= htmlspecialchars($service->service_title) ?></h2>
 
-
-
-
-		<section class="intro__section intro__section--services">
-			<h2 class="intro__title">services</h2>
-
-			<div class="intro__content">
-
-
-
-				<picture>
-
-					<source
-						srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!229326&authkey=!AMTCK-ljrEkI3kU&ithint=photo&e=rrfb5C"
-						media="(min-width: 744px)" />
-					<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228539&authkey=!AN4rlHglgLF3_Lg&ithint=photo&e=GjHwzM"
-						class="intro__image d-block img-fluid" alt="intro services" />
-				</picture>
-
-
-				<div class="intro__details">
-
-					<a class="btn intro__button intro__button--more intro__button--services"
-						href="./services.php">more</a>
-
-					<p class="intro__description">see what arcadia can offers you</p>
-				</div>
-			</div>
-		</section>
-
-
-
-		<section class="intro__section intro__section--habitats">
-			<h2 class="intro__title">habitats</h2>
-
-			<div class="intro__content">
-				<img class="intro__image"
-					src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!227792&authkey=!AMKZjbJ965omT9g&ithint=photo&e=MUp6nM"
-					alt="intro habitats">
-
-				<picture>
-
-					<source
-						srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228559&authkey=!AAcykAnJfMU5FcM&ithint=photo&e=lTXyX4"
-						media="(min-width: 744px)" />
-					<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228555&authkey=!AOBeDVAn7wllJcw&ithint=photo&e=UP3W8L"
-						class="intro__image d-block img-fluid" alt="intro habitats" />
-				</picture>
-
-				<div class="intro__details">
-
-					<a href="./habitats.php"
-						class="btn intro__button intro__button--more intro__button--habitats">more</a>
-
-
-					<p class="intro__description">amazing habitats to discover</p>
-				</div>
-			</div>
-		</section>
-
-
-
-		<section class="intro__section intro__section--animals">
-			<h2 class="intro__title">animals</h2>
-
-			<div class="intro__content">
-
-				<picture>
-
-					<source
-						srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228558&authkey=!ADU2Nm_3LG8N9Ic&ithint=photo&e=ha5ani"
-						media="(min-width: 744px)" />
-					<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228556&authkey=!AJS4UQNMDnuFR34&ithint=photo&e=O1BROQ"
-						class="intro__image d-block img-fluid" alt="intro animals" />
-				</picture>
-
-				<div class="intro__details">
-
-					<a href="./all-animals-habitats.php"
-						class="btn intro__button intro__button--more intro__button--animals">more</a>
-
-
-					<p class="intro__description">explore another way of love</p>
-				</div>
-			</div>
-		</section>
+					<div class="intro__content">
+						<?php if (!empty($service->media_path)): ?>
+							<picture>
+								<source
+									srcset="<?= getCloudinaryUrl($service->media_path, 'w_744,c_scale,q_auto,f_auto') ?>"
+									media="(min-width: 744px)" />
+								<img src="<?= getCloudinaryUrl($service->media_path, 'w_400,c_scale,q_auto,f_auto') ?>"
+									class="intro__image d-block" alt="Image for <?= htmlspecialchars($service->service_title) ?>" loading="lazy" />
+							</picture>
+						<?php endif; ?>
+						<div class="intro__details">
+							<p class="intro__description"><?= htmlspecialchars($service->service_description) ?></p>
+							<?php if (!empty($service->link)): ?>
+								<a class="btn intro__button intro__button--more intro__button--<?= strtolower(htmlspecialchars($service->service_title)) ?>" href="<?= htmlspecialchars($service->link) ?>">more</a>
+							<?php endif; ?>
+						</div>
+					</div>
+				</section>
+			<?php endforeach; ?>
+		<?php endif; ?>
 	</div>
 	<section class="testimony">
 		<div class="testimony__approuved testimony__container">
