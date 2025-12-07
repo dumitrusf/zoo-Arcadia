@@ -106,3 +106,11 @@ function getOpeningHours() {
     $scheduleModel = new Schedule();
     return $scheduleModel->getAll();
 }
+
+// Generates Cloudinary URLs with transformations
+function getCloudinaryUrl($baseUrl, $transformations) {
+    if (!$baseUrl) return '';
+    $parts = explode('/upload/', $baseUrl);
+    if (count($parts) < 2) return $baseUrl; // Not a valid Cloudinary URL
+    return $parts[0] . '/upload/' . $transformations . '/' . $parts[1];
+}
