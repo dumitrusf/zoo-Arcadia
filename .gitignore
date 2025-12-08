@@ -2,7 +2,7 @@
 /docs/*
 /.cursor
 /.env
-/vendor/
+/vendor
 # in other pc do npm install, and composer install
 
 # after that run the project with php -S localhost:3001 -t . public/index.php
