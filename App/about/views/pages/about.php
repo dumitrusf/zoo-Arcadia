@@ -1,4 +1,3 @@
-
 <header class="hero hero-carousel">
 
 	<div class="hero__container">
@@ -26,12 +25,12 @@
 			<div class="carousel-item active">
 				<picture>
 					<source
-						srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!229344&authkey=!APtyMBLzxHp1TN0&ithint=photo&e=VMeJ4Q"
+						srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889463/desk-protect-and-educate-animals_gre6ou.webp"
 						media="(min-width: 1280px)" />
 					<source
-						srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!229352&authkey=!AC2IRxu38lU3pC8&ithint=photo&e=EiTHlG"
+						srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889306/tab-protect-and-educate-animals_lrofgy.webp"
 						media="(min-width: 744px)" />
-					<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!229348&authkey=!AP2i-h770bjL9eU&ithint=photo&e=MEzpEg"
+					<img src="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889109/protect-and-educate-animals_qi4awr.webp"
 						class="hero__image d-block img-fluid" alt="carousel image" />
 				</picture>
 				<div class="carousel-caption d-none d-md-block">
@@ -45,12 +44,12 @@
 			<div class="carousel-item">
 				<picture>
 					<source
-						srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!229346&authkey=!AH0gW4Mz6vGm3i4&ithint=photo&e=xy7GIk"
+						srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889462/desk-caring-_-unique-esxperiences_zgtlke.webp"
 						media="(min-width: 1280px)" />
 					<source
-						srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!229354&authkey=!AGxbyDAMk439gyw&ithint=photo&e=6mT09Y"
+						srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889307/tab-caring-_-unique-esxperiences_kr2bhp.webp"
 						media="(min-width: 744px)" />
-					<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!229349&authkey=!AB8KxHbBGvAPItw&ithint=photo&e=BRBH1M"
+					<img src="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889109/caring-_-unique-esxperiences_tljdjn.webp"
 						class="hero__image d-block img-fluid" alt="carousel image" />
 				</picture>
 				<div class="carousel-caption d-none d-md-block">
@@ -63,12 +62,12 @@
 			<div class="carousel-item">
 				<picture>
 					<source
-						srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!229345&authkey=!ADxzQ6oFrdgeaDw&ithint=photo&e=a13tfO"
+						srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889463/desk-learning-education-all-time_cj7jls.webp"
 						media="(min-width: 1280px)" />
 					<source
-						srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!229353&authkey=!AMOePYO59vLWTa0&ithint=photo&e=e3gFHP"
+						srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889307/tab-learning-education-all-time_hf6vjg.webp"
 						media="(min-width: 744px)" />
-					<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!229350&authkey=!APuZSGappVTkaaM&ithint=photo&e=3Xnw15"
+					<img src="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889111/learning-education-all-time_cnzcgn.webp"
 						class="hero__image d-block img-fluid" alt="carousel image" />
 				</picture>
 				<div class="carousel-caption d-none d-md-block">

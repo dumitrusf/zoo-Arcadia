@@ -22,13 +22,13 @@
 </head>
 
 <body class="body-404">
-    <!-- Main content for 404 -->
+    <!-- Main content for 500 -->
     <main class="error-page">
         <section class="error-page__content">
-            <h1 class="error-page__title">404</h1>
-            <p class="error-page__message">We are sorry, the page you are looking for does not exist.</p>
+            <h1 class="error-page__title">500</h1>
+            <p class="error-page__message">We are sorry, an Internal Server Error has occurred.</p>
             <p class="error-page__suggestion">
-                But don't worry, here are some useful links to continue sailing:
+            the server has encountered an unexpected condition or configuration problem that prevents it from fulfilling the request made by the browser or client.
             </p>
 
             <nav class="error-page__nav">
@@ -36,10 +36,11 @@
                 <a class="btn btn-secondary error-page__link" href="/cms/pages/cms">Services</a>
                 <a class="btn btn-secondary error-page__link" href="/contact/pages/contact">Contact</a>
             </nav>
+            
         </section>
 
         <picture class="error-page__image">
-            <img src="/src/assets/images/error.svg" alt="404 error illustration">
+            <img src="/src/assets/images/error.svg" alt="500 error illustration">
         </picture>
     </main>
 

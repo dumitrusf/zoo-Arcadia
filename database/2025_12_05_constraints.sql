@@ -13,17 +13,6 @@ ON UPDATE CASCADE;
 --
 --
 
--- Verify if there is already the foreign key before adding it
-ALTER TABLE media_responsive
-DROP FOREIGN KEY IF EXISTS fk_media_in_media_responsive;
-
-ALTER TABLE media_responsive
-ADD CONSTRAINT fk_media_in_media_responsive
-FOREIGN KEY (media_id) REFERENCES media(id_media)
-ON DELETE CASCADE
-ON UPDATE CASCADE;
---
---
 
 -- Verify if there is already a foreign key before adding it
 ALTER TABLE slides
@@ -232,7 +221,7 @@ DROP FOREIGN KEY IF EXISTS fk_service_in_service_logs;
 ALTER TABLE service_logs
 ADD CONSTRAINT fk_service_in_service_logs
 FOREIGN KEY (service_id) REFERENCES services(id_service)
-ON DELETE CASCADE
+ON DELETE CASCADE 
 ON UPDATE CASCADE;
 --
 --
@@ -246,7 +235,7 @@ DROP FOREIGN KEY IF EXISTS fk_user_in_service_logs;
 ALTER TABLE service_logs
 ADD CONSTRAINT fk_user_in_service_logs
 FOREIGN KEY (changed_by) REFERENCES users(id_user)
-ON DELETE CASCADE
+ON DELETE CASCADE 
 ON UPDATE CASCADE;
 --
 --
