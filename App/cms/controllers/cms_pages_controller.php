@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
  * ----------------------------------------------------
@@ -6,26 +7,44 @@
  * 📂 Physical File:   App/cms/controllers/cms_pages_controller.php
  * 
  * 📝 Description:
- * Controller for static content pages (Services).
- * Shows information about the services of the zoo.
- * 
- * 🔗 Dependencies:
- * - Arcadia\Database\Connection (via database/connection.php)
- * - Arcadia\Cms\Views\Pages\Cms (via App/cms/views/pages/cms.php)
+ * Controller for the public CMS pages (Services).
  */
 
-include_once __DIR__ . "/../../../database/connection.php";
-// Include the file that has the DB class to be able to connect to the database.
+// DEBUG: Show errors explicitly
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-DB::createInstance();
-// Call the static method createInstance() of the DB class.
-// This method returns a PDO connection ready to use, following the Singleton pattern.
-// If it is the first time it is called, it creates the connection. If it already exists, it reuses the same one.
+require_once __DIR__ . '/../models/service.php';
+require_once __DIR__ . '/../../hero/models/Hero.php';
+require_once __DIR__ . '/../../hero/models/Slide.php';
 
-class CmsPagesController{
-    public function cms(){
-        include_once __DIR__ . "/../views/pages/cms.php";
+class CmsPagesController {
+    
+    /**
+     * Displays the public services page.
+     * It fetches all services from the database and passes them to the view.
+     */
+    public function cms() {
+        // 1. Get Regular Services
+        $serviceModel = new Service();
+        $services = $serviceModel->getRegularServices();
+
+        // 2. Get Hero for Services Page
+        $heroModel = new Hero();
+        $hero = $heroModel->getByPage('services');
+        $slides = [];
+
+        if ($hero && $hero->has_sliders) {
+            $slideModel = new Slide();
+            $slides = $slideModel->getByHeroId($hero->id_hero);
+        }
+        
+        // 3. Load the view and pass variables
+        if (file_exists(__DIR__ . '/../views/pages/cms.php')) {
+            include_once __DIR__ . '/../views/pages/cms.php';
+        } else {
+            echo "Error: The view 'cms.php' was not found.";
+        }
     }
 }
-
-?>

@@ -6,27 +6,29 @@
  * 📂 Physical File:   App/about/controllers/about_pages_controller.php
  * 
  * 📝 Description:
- * Controller for the "About Us" page.
- * Manages the informative institutional view of the zoo.
- * 
- * 🔗 Dependencies:
- * - Arcadia\Database\Connection (via database/connection.php)
- * - Arcadia\About\Views\Pages\About (via App/about/views/pages/about.php)
+ * Controller for the public About page.
  */
 
-include_once __DIR__ . "/../../../database/connection.php";
-// Include the file that has the DB class to be able to connect to the database.
+require_once __DIR__ . '/../../hero/models/Hero.php';
+require_once __DIR__ . '/../../hero/models/Slide.php';
 
-DB::createInstance();
-// Call the static method createInstance() of the DB class.
-// This method returns a PDO connection ready to use, following the Singleton pattern.
-// If it is the first time it is called, it creates the connection. If it already exists, it reuses the same one.
+class AboutPagesController {
+    
+    public function about() {
+        // 1. Get Hero for About Page
+        $heroModel = new Hero();
+        $hero = $heroModel->getByPage('about');
+        $slides = [];
 
-class AboutPagesController{
-    public function about(){
-        include_once __DIR__ . "/../../about/views/pages/about.php";
+        if ($hero && $hero->has_sliders) {
+            $slideModel = new Slide();
+            $slides = $slideModel->getByHeroId($hero->id_hero);
+        }
+
+        if (file_exists(__DIR__ . '/../views/pages/about.php')) {
+            include_once __DIR__ . '/../views/pages/about.php';
+        } else {
+            echo "Error: View about.php not found.";
+        }
     }
-  
 }
-
-?>

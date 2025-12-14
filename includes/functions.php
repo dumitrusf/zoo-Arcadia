@@ -8,6 +8,13 @@
  * 📝 Description:
  * Collection of global utility functions.
  * Helpers for routes, views and shared logic.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Includes\Templates\{Name} (via includes/templates/{name}.php)
+ * - Arcadia\Includes\Layouts\FC_main_layout (via includes/layouts/FC_main_layout.php)
+ * - Arcadia\Includes\Layouts\BO_main_layout (via includes/layouts/BO_main_layout.php)
+ * - Arcadia\{Domain}\Controllers\{Controller} (via App/{domain}/controllers/{controller}.php)
+ * - Arcadia\Schedules\Models\Schedule (via App/schedules/models/schedule.php)
  */
 
 define("TEMPLATES_URL", __DIR__ . "/templates");
@@ -88,4 +95,32 @@ function handleDomainRouting($domainName, $basePath)
         header('Location: /public/error-404.php');
         exit();
     }
+}
+
+
+// function to get opening hours globally
+function getOpeningHours() {
+    // We require the model if it is not loaded (using absolute safe path)
+    require_once __DIR__ . '/../App/schedules/models/schedule.php';
+    
+    $scheduleModel = new Schedule();
+    return $scheduleModel->getAll();
+}
+
+// Generates Cloudinary URLs with transformations
+function getCloudinaryUrl($baseUrl, $transformations) {
+    if (!$baseUrl) return '';
+    
+    // Find the position of '/upload/'
+    $uploadPos = strpos($baseUrl, '/upload/');
+    if ($uploadPos === false) return $baseUrl; // Not a valid Cloudinary URL
+
+    // The part before /upload/
+    $base = substr($baseUrl, 0, $uploadPos);
+    
+    // The part after /upload/ (version and image name)
+    $imagePath = substr($baseUrl, $uploadPos + strlen('/upload/'));
+
+    // Reconstruct the URL correctly
+    return $base . '/upload/' . $transformations . '/' . $imagePath;
 }

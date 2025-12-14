@@ -8,6 +8,9 @@
  * 📝 Description:
  * Main navigation component.
  * Shared responsive menu in public views.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Includes\PageTitle (via includes/pageTitle.php)
  */
 
 // Basic data of the public router

@@ -1,0 +1,59 @@
+<?php
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\Schedules\Models
+ * 📂 Physical File:   App/schedules/models/schedule.php
+ * 
+ * 📝 Description:
+ * Model for interacting with the 'opening' table (Schedules).
+ */
+
+class Schedule {
+    private $db;
+    
+
+    public function __construct() {
+        $this->db = DB::createInstance();
+    }
+
+    // Obtener todos los horarios
+    public function getAll() {
+        $stmt = $this->db->prepare("SELECT * FROM opening ORDER BY id_opening ASC");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    // Obtener un horario por ID
+    public function getById($id) {
+        $stmt = $this->db->prepare("SELECT * FROM opening WHERE id_opening = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
+
+    // Actualizar un horario existente
+    public function update($id, $data) {
+        $sql = "UPDATE opening SET 
+                time_slot = :time_slot,
+                opening_time = :opening_time,
+                closing_time = :closing_time,
+                status = :status
+                WHERE id_opening = :id";
+        
+        $stmt = $this->db->prepare($sql);
+        
+        try {
+            return $stmt->execute([
+                ':time_slot' => $data['time_slot'],
+                ':opening_time' => $data['opening_time'],
+                ':closing_time' => $data['closing_time'],
+                ':status' => $data['status'],
+                ':id' => $id
+            ]);
+        } catch (PDOException $e) {
+            // Log error or handle it as needed
+            error_log("Error updating schedule: " . $e->getMessage());
+            return false;
+        }
+    }
+}

@@ -1,10 +1,9 @@
 /node_modules
 /docs/*
-
-
+/.cursor
+/.env
+/vendor
 # in other pc do npm install, and composer install
 
-# after that run the project with php -S localhost:3002 for back-en
-# php -S localhost:3001 for front-end
-# in another divided terminal run the project with npx gulp app (if php -S localhost:3002)
-# IF php -S localhost:3001 then npx gulp public
+# after that run the project with php -S localhost:3001 -t . public/index.php
+# in another divided terminal run the project with npx gulp

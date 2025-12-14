@@ -1,12 +1,24 @@
 <?php
-// App/router.php (El Guardia Central)
+/**
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
+ * ----------------------------------------------------
+ * 📍 Logical Path: Arcadia\App
+ * 📂 Physical File:   App/router.php
+ * 
+ * 📝 Description:
+ * CENTRAL ROUTER ("The Guard").
+ * Validates permissions, sessions and dispatches to Domain Routers.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\{Domain}\{Domain}Router (via App/{domain}/{domain}Router.php)
+ */
+
+// App/router.php (The central guard)
 
 session_start();
 
 
-// App/router.php
-
-// 1. Caché out (it usually works, but sometimes we have to clear the browser cache to start going)
+// 1. Caché out (it usually works, but sometimes we have to clear the browser cache to start going)(trying also ctrl + shift + r)
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
@@ -14,7 +26,7 @@ header("Pragma: no-cache");
 $domain = $_GET["domain"] ?? "home";
 
 // 2. List of sites where we don't need to be logged in
-// "home", "about", "habitats", "animals", "cms" deben estar aquí para ser accesibles públicamente.
+// "home", "about", "habitats", "animals", "cms" should be here to be accessible publicly.
 $public_domains = ["auth", "contact", "home", "about", "habitats", "animals", "cms"];
 
 // 3. Security check
@@ -25,25 +37,36 @@ if (!isset($_SESSION["user"]["username"]) && !in_array($domain, $public_domains)
     exit();
 }
 
-// 3.1 Protección específica para el Dashboard (/home/pages/start)
-// Aunque "home" sea público (para index), la acción "start" requiere login.
+// 3.1 Protection specific for the Dashboard (/home/pages/start)
+// Even though "home" is public (for index), the action "start" requires login.
 if ($domain === "home" && $_GET["action"] === "start" && !isset($_SESSION["user"]["username"])) {
+    //we'll redirect to login page.
     header("Location: /auth/pages/login");
     exit();
 }
 
-// 4. Inverse check (optional but useful)
+// 3.2 Global Management Protection (/gest/)
+// If someone tries to access a management controller (gest) without being logged in -> Login.
+// This covers /cms/gest, /hero/gest, etc., even if the domain is public.
+$controller = $_GET['controller'] ?? '';
+if ($controller === 'gest' && !isset($_SESSION["user"]["username"])) {
+    header("Location: /auth/pages/login");
+    exit();
+}
+
+// 4. Inverse check (optional but useful to perform a security check and to avoid infinite loops)
 // If there is a user and the user tries to go to login...
 if (isset($_SESSION["user"]["username"]) && $domain === "auth" && $_GET["action"] === "login") {
-    // ... why? If you are already inside, we send you to home! (to avoid infinite loops).
+    // ... why? If you are already inside the database and logged in, we send you to home!
+    // (to avoid infinite loops).
     header("Location: /home/pages/start");
     exit();
 }
 
 $domain = $_GET["domain"] ?? "home";
 
-//  "lista blanca" de dominios que existen. Si un dominio no está aquí, es rechazado.
-$allowed_domains = [ "habitat1", "cms", "about", "auth", "home", "animals", "employees", "habitats", "permissions", "reports", "roles", "schedules", "testimonials", "users", "contact"];
+//  "white list" of domains that exist. If a domain is not here, it is rejected.
+$allowed_domains = ["hero", "medias", "habitat1", "cms", "about", "auth", "home", "animals", "employees", "habitats", "permissions", "reports", "roles", "schedules", "testimonials", "users", "contact"];
 
 if (in_array($domain, $allowed_domains)) {
     // we redirect to the domain router.
@@ -55,9 +78,8 @@ if (in_array($domain, $allowed_domains)) {
         // ERROR 500: The domain is in the list, but we haven't created its router file.
         // This is our error (of the programmers), not the user's.
         http_response_code(500); 
-        // For now, we send you to the 404 page to avoid confusing the user.
         // In the future, we could create an `error-500.php` page.
-        header('Location: /public/error-404.php');
+        header('Location: /public/error-500.php');
         exit();
     }
 } else {

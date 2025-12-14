@@ -8,6 +8,9 @@
  * 📝 Description:
  * Singleton class for database connection (PDO).
  * Manages the unique and persistent connection to MySQL.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Config (via config.php)
  */
 
 include_once __DIR__ . "/../config.php";

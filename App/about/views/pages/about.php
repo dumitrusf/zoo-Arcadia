@@ -1,100 +1,8 @@
+<?php
+// App/about/views/pages/about.php
+?>
 
-<header class="hero hero-carousel">
-
-	<div class="hero__container">
-		<div class="hero__text">
-			<h1 class="hero__title">zoo arcadia</h1>
-			<p class="hero__subtitle">Where all animals love to live</p>
-		</div>
-
-
-		<a type="button" class="btn intro__button intro__button--hours" href="#opening-hours">opening hours</a>
-
-	</div>
-	<div id="carouselExampleFade" class="carousel carousel-fade slide" data-bs-ride="true">
-
-		<div class="carousel-indicators">
-			<button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="0" class="active"
-				aria-current="true" aria-label="Slide 1"></button>
-			<button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="1"
-				aria-label="Slide 2"></button>
-			<button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="2"
-				aria-label="Slide 3"></button>
-		</div>
-
-		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<picture>
-					<source
-						srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!229344&authkey=!APtyMBLzxHp1TN0&ithint=photo&e=VMeJ4Q"
-						media="(min-width: 1280px)" />
-					<source
-						srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!229352&authkey=!AC2IRxu38lU3pC8&ithint=photo&e=EiTHlG"
-						media="(min-width: 744px)" />
-					<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!229348&authkey=!AP2i-h770bjL9eU&ithint=photo&e=MEzpEg"
-						class="hero__image d-block img-fluid" alt="carousel image" />
-				</picture>
-				<div class="carousel-caption d-none d-md-block">
-					<h4 class="carousel-caption__title">Our team works day by day to protect and educate</h4>
-					<p>Recognize the dedicated team that works every day to guarantee animals care and promote
-						environmental education.</p>
-				</div>
-
-			</div>
-
-			<div class="carousel-item">
-				<picture>
-					<source
-						srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!229346&authkey=!AH0gW4Mz6vGm3i4&ithint=photo&e=xy7GIk"
-						media="(min-width: 1280px)" />
-					<source
-						srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!229354&authkey=!AGxbyDAMk439gyw&ithint=photo&e=6mT09Y"
-						media="(min-width: 744px)" />
-					<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!229349&authkey=!AB8KxHbBGvAPItw&ithint=photo&e=BRBH1M"
-						class="hero__image d-block img-fluid" alt="carousel image" />
-				</picture>
-				<div class="carousel-caption d-none d-md-block">
-					<h4 class="carousel-caption__title">Taking care of animals and offering unique experiences</h4>
-					<p>Explore a safe and friendly atmosphere where visitors and animals live together, reflecting
-						the zoo's commitment to animal welfare and the joy of its visitors.</p>
-				</div>
-			</div>
-
-			<div class="carousel-item">
-				<picture>
-					<source
-						srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!229345&authkey=!ADxzQ6oFrdgeaDw&ithint=photo&e=a13tfO"
-						media="(min-width: 1280px)" />
-					<source
-						srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!229353&authkey=!AMOePYO59vLWTa0&ithint=photo&e=e3gFHP"
-						media="(min-width: 744px)" />
-					<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!229350&authkey=!APuZSGappVTkaaM&ithint=photo&e=3Xnw15"
-						class="hero__image d-block img-fluid" alt="carousel image" />
-				</picture>
-				<div class="carousel-caption d-none d-md-block">
-					<h4 class="carousel-caption__title">A natural space to learn and connect with animals</h4>
-					<p>Discover a space where animals live in harmony, surrounded by green and serene landscapes,
-						designed to learn and connect with nature.</p>
-				</div>
-			</div>
-
-		</div>
-		<div class="controls-carousel">
-			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
-				data-bs-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Previous</span>
-			</button>
-			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
-				data-bs-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Next</span>
-			</button>
-		</div>
-	</div>
-</header>
-
-
+<?php include_once __DIR__ . '/../../../../includes/templates/hero.php'; ?>
 
 
 <main class="intro">
@@ -124,8 +32,6 @@
 
 
 </main>
-
-
 
 
 

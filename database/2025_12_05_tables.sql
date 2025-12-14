@@ -54,7 +54,7 @@ CREATE TABLE form_contact (
 CREATE TABLE opening (
     id_opening INT AUTO_INCREMENT PRIMARY KEY,
     -- Unique primary key, self-equal.
-    time_slot ENUM("morning", "afternoon", "saturday", "sunday") NOT NULL,
+    time_slot ENUM("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday") NOT NULL,
     -- Indicates the specific time or day block cannot be null.
     opening_time TIME NOT NULL,
     -- Compulsory opening time.
@@ -89,9 +89,9 @@ CREATE TABLE media (
     media_path VARCHAR(2048) NOT NULL,
     -- Mobile (main) URL
     media_path_medium VARCHAR(2048),
-    -- URL for tablet (optional)
+    -- Medium (tablet) URL
     media_path_large VARCHAR(2048),
-    -- URL for desktop (optional)
+    -- Large (desktop) URL
     media_type ENUM('image', 'video', 'audio') NOT NULL,
     -- Multimedia file type
     description VARCHAR(255),
@@ -99,23 +99,6 @@ CREATE TABLE media (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     -- Creation date
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- Last update date
-);
-
---
---
--- Responsive Middle Table: Stores Responsible Versions of the Images
-CREATE TABLE media_responsive (
-    id_responsive INT AUTO_INCREMENT PRIMARY KEY,
-    -- Unique identifier of the responsive version.
-    media_id INT NOT NULL,
-    -- Relationship with the average table.Indicates which main image this version belongs.
-    media_size ENUM('small', 'medium', 'large') NOT NULL,
-    -- Version size.It can be small (Small), medium (medium) or large (Large).
-    media_path VARCHAR(2048) NOT NULL,
-    -- URL of the specific version of the image.
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    -- Date of creation of the registration.
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- Date of the last registration update.
 );
 
 --
@@ -140,13 +123,15 @@ CREATE TABLE media_relations (
 --
 --
 -- Headers table: stores pages headings
-CREATE TABLE headers (
-    id_header INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE heroes (
+    id_hero INT AUTO_INCREMENT PRIMARY KEY,
     -- Single identifier of the heading.
-    header_title VARCHAR(100) NOT NULL,
+    hero_title VARCHAR(100) NOT NULL,
     -- Mandatory heading title.
-    header_subtitle VARCHAR(100),
+    hero_subtitle VARCHAR(100),
     -- Subtitle of the optional header.
+    page_name ENUM('home', 'about', 'services', 'habitats', 'animals') NOT NULL UNIQUE,
+    -- Page where this hero belongs.
     has_sliders BOOLEAN DEFAULT FALSE,
     -- The heading has an associated carousel.
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -159,8 +144,8 @@ CREATE TABLE headers (
 CREATE TABLE slides (
     id_slide INT AUTO_INCREMENT PRIMARY KEY,
     -- Unique slide identifier.
-    id_header INT NOT NULL,
-    -- Relationship with the Headers table.
+    hero_id INT NOT NULL,
+    -- Relationship with the Heroes table.
     title_caption VARCHAR(255) NOT NULL,
     -- Title of the mandatory slide.
     description_caption TEXT NOT NULL,
@@ -415,6 +400,10 @@ CREATE TABLE services (
     -- Service title.
     service_description VARCHAR(100) NOT NULL,
     -- Brief description of the service.
+    link VARCHAR(255) NULL,
+    -- Optional URL for the "MORE" button.
+    type ENUM('service', 'habitat', 'featured') NOT NULL DEFAULT 'service',
+    -- Flag to show on the homepage.
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     -- Date of creation of the service.
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- Date of the last update.
@@ -430,13 +419,15 @@ CREATE TABLE service_logs (
     -- Relationship with the Services table.
     changed_by INT NOT NULL,
     -- User who made the change (relationship with Users).
-    change_type ENUM('update_title', 'update_description') NOT NULL,
-    -- Exchange rate performed.
-    previous_value TEXT NOT NULL,
-    -- Anterior value of the modified field.
-    new_value TEXT NOT NULL,
+    action ENUM('create', 'update', 'delete') NOT NULL,
+    -- Action performed.
+    field_name VARCHAR(50) NULL,
+    -- Name of the field that was modified.
+    previous_value TEXT NULL,
+    -- Previous value of the modified field.
+    new_value TEXT NULL,
     -- New value of the modified field.
-    change_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Date of change.
+    change_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Date and time of the change.
 );
 
 --

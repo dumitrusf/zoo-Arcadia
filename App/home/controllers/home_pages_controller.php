@@ -6,35 +6,44 @@
  * 📂 Physical File:   App/home/controllers/home_pages_controller.php
  * 
  * 📝 Description:
- * Main controller for the home page and dashboard.
- * Manages the public homepage and the entry point to the control panel.
- * 
- * 🔗 Dependencies:
- * - Arcadia\Database\Connection (via database/connection.php)
- * - Arcadia\Home\Views\Gest\Start (via App/home/views/gest/start.php)
- * - Arcadia\Home\Views\Pages\Index (via App/home/views/pages/index.php)
+ * Controller for the public Home page.
  */
 
-include_once __DIR__ . "/../../../database/connection.php";
-// Include the file that has the DB class to be able to connect to the database.
-
-DB::createInstance();
-// Call the static method createInstance() of the DB class.
-// This method returns a PDO connection ready to use, following the Singleton pattern.
-// If it is the first time it is called, it creates the connection. If it already exists, it reuses the same one.
-
+require_once __DIR__ . '/../../cms/models/service.php';
+require_once __DIR__ . '/../../hero/models/Hero.php';
+require_once __DIR__ . '/../../hero/models/Slide.php';
 
 class HomePagesController {
-    public function start()
-    {
-        require_once __DIR__ . '/../views/gest/start.php';
+
+    public function index() {
+        // 1. Get Featured Services (Cards)
+        $serviceModel = new Service();
+        $featuredServices = $serviceModel->getFeatured();
+
+        // 2. Get Hero for Home Page
+        $heroModel = new Hero();
+        $hero = $heroModel->getByPage('home');
+        $slides = [];
+
+        // 3. Get Slides if Hero exists and has carousel
+        if ($hero && $hero->has_sliders) {
+            $slideModel = new Slide();
+            $slides = $slideModel->getByHeroId($hero->id_hero);
+        }
+
+        // 4. Load view
+        if (file_exists(__DIR__ . '/../views/pages/index.php')) {
+            include_once __DIR__ . '/../views/pages/index.php';
+        } else {
+            echo "Error: View index.php not found.";
+        }
     }
 
-
-    public function index()
-    {
-        include_once __DIR__ . '/../views/pages/index.php';
-
+    public function start() {
+        if (file_exists(__DIR__ . '/../views/gest/start.php')) {
+            include_once __DIR__ . '/../views/gest/start.php';
+        } else {
+            echo "Error: View not found at " . __DIR__ . '/../views/gest/start.php';
+        }
     }
-    
 }

@@ -395,12 +395,11 @@ body {
 }
 .hero__title, .hero__subtitle {
   font-size: clamp(2.2rem, 2.16vw + 1rem, 3.4rem);
-  color: #fff;
+  color: #000;
   font-family: "Fun-City-Level-3-Basic";
-  text-shadow: 0rem 0.046rem 0.046rem rgba(0, 0, 0, 0.968627451);
+  text-shadow: 0rem 0rem 0.4rem #ffffff, 0rem 0rem 0.69rem #ffffff, 0rem 0rem 0.8rem #ffffff, 0rem 0rem 0.99rem #ffffff;
 }
 .hero__subtitle {
-  line-height: 3.273rem; /* 148.923% */
   letter-spacing: 0.308rem;
 }
 
@@ -468,9 +467,11 @@ body {
 }
 .intro__description {
   font-size: clamp(1.9rem, 1.885vw + 1rem, 2.6rem);
-  color: #000;
+  color: #fff;
   font-family: "Roboto-Regular";
+  text-shadow: 0rem 0rem 0.001rem #000000, 0rem 0rem 0.57rem #000000, 0rem 0rem 0.98rem #000000;
   text-transform: uppercase;
+  padding: 0.5rem;
 }
 .intro__name {
   letter-spacing: 0.2rem;
@@ -770,6 +771,17 @@ a {
 .hero__text h1,
 .hero__text p {
   padding: 0.5rem;
+  margin-top: 1.5rem;
+}
+@media screen and (min-width: 744px) {
+  .hero__text {
+    max-width: 57.8rem;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .hero__text {
+    max-width: 87.7rem;
+  }
 }
 
 .animal {
@@ -1350,34 +1362,25 @@ select {
 .hero {
   position: relative;
 }
-.hero:has(img[alt*=monkey])::before {
-  content: "";
-  background: linear-gradient(270deg, rgba(235, 235, 235, 0) 0%, #000 100%);
-  position: absolute;
-  inset: 0;
-}
-.hero:has(img[alt*="hero image"]):not(img[alt*=monkey])::after {
+.hero::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(235, 235, 235, 0) 80%, #ebebeb 100%);
+  box-shadow: 0rem -17.2rem 5.92rem -11.2rem #ebebeb inset, 17.2rem 0rem 5.92rem -11.2rem #ebebeb inset, -17.2rem 0rem 5.92rem -11.2rem #ebebeb inset;
   z-index: 3;
   margin: auto;
   width: min(100vw, max(128rem, 0vw));
   height: 100%;
 }
-@media screen and (min-width: 1280px) {
-  .hero:has(img[alt*="hero image"]):not(img[alt*=monkey])::after {
-    box-shadow: 0rem -17.2rem 5.92rem -11.2rem #ebebeb inset, 17.2rem 0rem 5.92rem -11.2rem #ebebeb inset, -17.2rem 0rem 5.92rem -11.2rem #ebebeb inset;
-  }
+.hero--services {
+  background: linear-gradient(270deg, rgba(235, 235, 235, 0) 0%, #000 100%);
+  background-color: rgb(0, 255, 157);
 }
-.hero:has(img[alt*=monkey]):not(img[alt*="hero image"])::after {
-  position: absolute;
-  content: "";
-  inset: 0;
+.hero--services::after {
   box-shadow: 0rem -17.2rem 5.92rem -11.2rem #ebebeb inset;
+  width: 100vw;
 }
-.hero img[alt*=monkey] {
+.hero--services img {
   backdrop-filter: drop-shadow(0px 11px 7.8px rgba(0, 0, 0, 0.97));
   -webkit-filter: drop-shadow(0px 11px 7.8px rgba(0, 0, 0, 0.97));
 }
@@ -1640,7 +1643,7 @@ select {
   flex-wrap: nowrap;
   gap: 0;
   vertical-align: baseline;
-  background: linear-gradient(180deg, rgba(235, 235, 235, 0) 0.1%, rgba(235, 235, 235, 0.4196078431) 46%, #ebebeb 100%);
+  background: linear-gradient(180deg, rgba(235, 235, 235, 0) 0.1%, rgba(235, 235, 235, 0.3019607843) 46%, rgba(235, 235, 235, 0.6) 100%);
 }
 .intro__content .intro__details:has(.intro__description:first-child) p {
   padding-top: 3rem;
