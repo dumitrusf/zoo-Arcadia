@@ -110,7 +110,17 @@ function getOpeningHours() {
 // Generates Cloudinary URLs with transformations
 function getCloudinaryUrl($baseUrl, $transformations) {
     if (!$baseUrl) return '';
-    $parts = explode('/upload/', $baseUrl);
-    if (count($parts) < 2) return $baseUrl; // Not a valid Cloudinary URL
-    return $parts[0] . '/upload/' . $transformations . '/' . $parts[1];
+    
+    // Find the position of '/upload/'
+    $uploadPos = strpos($baseUrl, '/upload/');
+    if ($uploadPos === false) return $baseUrl; // Not a valid Cloudinary URL
+
+    // The part before /upload/
+    $base = substr($baseUrl, 0, $uploadPos);
+    
+    // The part after /upload/ (version and image name)
+    $imagePath = substr($baseUrl, $uploadPos + strlen('/upload/'));
+
+    // Reconstruct the URL correctly
+    return $base . '/upload/' . $transformations . '/' . $imagePath;
 }

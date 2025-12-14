@@ -6,33 +6,37 @@
  * 📂 Physical File:   App/animals/controllers/animals_pages_controller.php
  * 
  * 📝 Description:
- * Public controller for the visualization of animals.
- * Shows the catalog of animals and their individual cards.
- * 
- * 🔗 Dependencies:
- * - Arcadia\Database\Connection (via database/connection.php)
- * - Arcadia\Animals\Views\Pages\AllAnimals (via App/animals/views/pages/allanimals.php)
- * - Arcadia\Animals\Views\Pages\AnimalPicked (via App/animals/views/pages/animalpicked.php)
+ * Controller for the public Animals pages.
  */
 
-include_once __DIR__ . "/../../../database/connection.php";
-// Include the file that has the DB class to be able to connect to the database.
+require_once __DIR__ . '/../../hero/models/Hero.php';
+require_once __DIR__ . '/../../hero/models/Slide.php';
 
-DB::createInstance();
-// Call the static method createInstance() of the DB class.
-// This method returns a PDO connection ready to use, following the Singleton pattern.
-// If it is the first time it is called, it creates the connection. If it already exists, it reuses the same one.
-
-class AnimalsPagesController{
-    public function allanimals(){
-        include_once __DIR__ . "/../../animals/views/pages/allanimals.php";
-    }
-
-    public function animalpicked(){
-        include_once __DIR__ . "/../../animals/views/pages/animalpicked.php";
-    }
+class AnimalsPagesController {
     
+    public function allanimals() {
+        // 1. Get Hero for Animals Page
+        $heroModel = new Hero();
+        $hero = $heroModel->getByPage('animals');
+        $slides = [];
+
+        if ($hero && $hero->has_sliders) {
+            $slideModel = new Slide();
+            $slides = $slideModel->getByHeroId($hero->id_hero);
+        }
+
+        if (file_exists(__DIR__ . '/../views/pages/allanimals.php')) {
+            include_once __DIR__ . '/../views/pages/allanimals.php';
+        } else {
+            echo "Error: View allanimals.php not found.";
+        }
+    }
+
+    public function animalpicked() {
+        if (file_exists(__DIR__ . '/../views/pages/animalpicked.php')) {
+            include_once __DIR__ . '/../views/pages/animalpicked.php';
+        } else {
+            echo "Error: View animalpicked.php not found.";
+        }
+    }
 }
-
-?>
-

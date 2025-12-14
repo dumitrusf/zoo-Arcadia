@@ -88,6 +88,10 @@ CREATE TABLE media (
     -- Unique image identifier
     media_path VARCHAR(2048) NOT NULL,
     -- Mobile (main) URL
+    media_path_medium VARCHAR(2048),
+    -- Medium (tablet) URL
+    media_path_large VARCHAR(2048),
+    -- Large (desktop) URL
     media_type ENUM('image', 'video', 'audio') NOT NULL,
     -- Multimedia file type
     description VARCHAR(255),
@@ -119,13 +123,15 @@ CREATE TABLE media_relations (
 --
 --
 -- Headers table: stores pages headings
-CREATE TABLE headers (
-    id_header INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE heroes (
+    id_hero INT AUTO_INCREMENT PRIMARY KEY,
     -- Single identifier of the heading.
-    header_title VARCHAR(100) NOT NULL,
+    hero_title VARCHAR(100) NOT NULL,
     -- Mandatory heading title.
-    header_subtitle VARCHAR(100),
+    hero_subtitle VARCHAR(100),
     -- Subtitle of the optional header.
+    page_name ENUM('home', 'about', 'services', 'habitats', 'animals') NOT NULL UNIQUE,
+    -- Page where this hero belongs.
     has_sliders BOOLEAN DEFAULT FALSE,
     -- The heading has an associated carousel.
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -138,8 +144,8 @@ CREATE TABLE headers (
 CREATE TABLE slides (
     id_slide INT AUTO_INCREMENT PRIMARY KEY,
     -- Unique slide identifier.
-    id_header INT NOT NULL,
-    -- Relationship with the Headers table.
+    hero_id INT NOT NULL,
+    -- Relationship with the Heroes table.
     title_caption VARCHAR(255) NOT NULL,
     -- Title of the mandatory slide.
     description_caption TEXT NOT NULL,

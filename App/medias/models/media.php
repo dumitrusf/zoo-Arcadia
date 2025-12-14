@@ -21,22 +21,27 @@ class Media {
 
     /**
      * Insert a new media record into the database.
-     * @param string $url The main URL of the media (from Cloudinary).
+     * Updated to support responsive images (mobile, tablet, desktop).
+     * 
+     * @param string $url The main URL (usually mobile/base).
      * @param string $type 'image', 'video', or 'audio'.
      * @param string|null $description Optional description.
+     * @param string|null $urlMedium URL for tablet version.
+     * @param string|null $urlLarge URL for desktop version.
      * @return int|false The ID of the inserted media record or false on failure.
      */
-    public function create($url, $type = 'image', $description = null) {
+    public function create($url, $type = 'image', $description = null, $urlMedium = null, $urlLarge = null) {
         try {
-            // Note: media_path_medium and media_path_large are optional/unused for now
-            // as we handle resizing via Cloudinary URL parameters.
-            $sql = "INSERT INTO media (media_path, media_type, description) VALUES (:url, :type, :desc)";
+            $sql = "INSERT INTO media (media_path, media_path_medium, media_path_large, media_type, description) 
+                    VALUES (:url, :url_medium, :url_large, :type, :desc)";
             
             $stmt = $this->db->prepare($sql);
             $stmt->execute([
-                ':url'  => $url,
-                ':type' => $type,
-                ':desc' => $description
+                ':url'        => $url,
+                ':url_medium' => $urlMedium,
+                ':url_large'  => $urlLarge,
+                ':type'       => $type,
+                ':desc'       => $description
             ]);
             
             return $this->db->lastInsertId();
@@ -75,23 +80,6 @@ class Media {
     }
 
     /**
-     * Get media by ID.
-     */
-    public function getById($id) {
-        $stmt = $this->db->prepare("SELECT * FROM media WHERE id_media = :id");
-        $stmt->execute([':id' => $id]);
-        return $stmt->fetch(PDO::FETCH_OBJ);
-    }
-
-    /**
-     * Delete media record by ID.
-     */
-    public function delete($id) {
-        $stmt = $this->db->prepare("DELETE FROM media WHERE id_media = :id");
-        return $stmt->execute([':id' => $id]);
-    }
-
-    /**
      * Unlink a media record from an entity by deleting the relationship.
      * @param string $tableName The name of the related table (e.g., 'services').
      * @param int $relatedId The ID of the record in the related table.
@@ -110,5 +98,22 @@ class Media {
             error_log("Media Unlink Error: " . $e->getMessage());
             return false;
         }
+    }
+
+    /**
+     * Get media by ID.
+     */
+    public function getById($id) {
+        $stmt = $this->db->prepare("SELECT * FROM media WHERE id_media = :id");
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
+
+    /**
+     * Delete media record by ID.
+     */
+    public function delete($id) {
+        $stmt = $this->db->prepare("DELETE FROM media WHERE id_media = :id");
+        return $stmt->execute([':id' => $id]);
     }
 }
