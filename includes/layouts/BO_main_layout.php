@@ -65,6 +65,8 @@ include(__DIR__ . "/../pageTitle.php");
                 <?php if (isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin'): ?>
                     <a class="nav-item nav-link" href="/schedules/gest/start">Schedules</a>
                 <?php endif; ?>
+                
+                <!-- CMS Services (Admin & Employee) -->
                 <?php if (in_array($_SESSION['user']['role_id'], [2, 3])): ?>
                     <li class="nav-item">
                         <a class="nav-link <?= ($domain === 'cms' && ($action === 'start' || $action === 'edit' || $action === 'create')) ? 'active' : '' ?>" href="/cms/gest/start">
@@ -77,6 +79,16 @@ include(__DIR__ . "/../pageTitle.php");
                         </a>
                     </li>
                 <?php endif; ?>
+
+                <!-- Page Headers (Admin Only) -->
+                <?php if (isset($_SESSION['user']['role_id']) && $_SESSION['user']['role_id'] == 3): ?>
+                    <li class="nav-item">
+                        <a class="nav-link <?= ($domain === 'hero') ? 'active' : '' ?>" href="/hero/gest/start">
+                            <i class="bi bi-layout-text-window-reverse"></i> Page Headers
+                        </a>
+                    </li>
+                <?php endif; ?>
+
             </div>
 
             <div class="nav navbar-nav d-flex justify-content-end px-5">
@@ -95,7 +107,6 @@ include(__DIR__ . "/../pageTitle.php");
                 echo $viewContent ?? '<p>There is no content to show</p>';
 
                 ?>
-
             </div>
         </div>
     </div>

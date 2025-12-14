@@ -1,55 +1,30 @@
-<header class="hero">
-	<div class="hero__container">
-		<div class="hero__text">
-			<h1 class="hero__title">zoo arcadia</h1>
-			<p class="hero__subtitle">Where all animals love to live</p>
-		</div>
+<?php
+// App/home/views/pages/index.php
+?>
 
+<?php include_once __DIR__ . '/../../../../includes/templates/hero.php'; ?>
 
-		<a type="button" class="btn intro__button intro__button--hours" href="#opening-hours">opening hours</a>
-
-	</div>
-
-	<picture>
-		<source
-			srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764872122/aa7e4c59-0439-4c32-9703-5ee460d1dd8f_3_qzx3wt.webp"
-			media="(min-width: 1280px)" />
-		<source
-			srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764873282/aa7e4c59-0439-4c32-9703-5ee460d1dd8f_2_g5y4ed.webp"
-			media="(min-width: 744px)" />
-		<img src="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764873190/aa7e4c59-0439-4c32-9703-5ee460d1dd8f_1_iyw7yo.webp"
-			class="hero__image d-block" alt="hero image" fetchpriority="high" />
-	</picture>
-</header>
 
 <main>
-
+	<!-- K-ABOUT (Restored exactly as requested) -->
 	<section class="k-about">
 		<div class="k-about__container">
-
 			<div class="k-about__image">
-
+				<!-- Using static image for now, as it was in original -->
 				<img src="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764873838/5e6e4c9a-7e33-4dc0-ad86-783068dd38a8_1_gadwme.png"
-					class="k-about__image d-block img-fluid" alt="about image" />
-
-
-
+					class="k-about__image d-block img-fluid" alt="about image" loading="lazy" />
 			</div>
 			<div class="k-about__content">
 				<h2 class="k-about__content-title">More About Us</h2>
 				<div class="k-about__content-description">
-
-					<p>In the heart of Bretagne, Arcadia Zoo is home to unique animals from the savannah, jungle, and
-						wetlands.
-					</p>
-					<p>Since 1960, we have ensured their well-being through daily veterinary care and tailored feeding.
-					</p>
+					<p>In the heart of Bretagne, Arcadia Zoo is home to unique animals from the savannah, jungle, and wetlands.</p>
+					<p>Since 1960, we have ensured their well-being through daily veterinary care and tailored feeding.</p>
 				</div>
-				<a href="/about/pages/about" class="k-about__content-button btn intro__button intro__button--hours">know
-					more</a>
+				<a href="/about/pages/about" class="k-about__content-button btn intro__button intro__button--hours">know more</a>
 			</div>
 		</div>
 	</section>
+
 	<div class="intro intro--services">
 		<?php if (!empty($featuredServices)): ?>
 			<?php foreach ($featuredServices as $service): ?>
@@ -62,15 +37,16 @@
 								<source
 									srcset="<?= getCloudinaryUrl($service->media_path, 'w_744,c_scale,q_auto,f_auto') ?>"
 									media="(min-width: 744px)" />
-								<img src="<?= getCloudinaryUrl($service->media_path, 'w_400,c_scale,q_auto,f_auto') ?>"
+								<img src="<?= getCloudinaryUrl($service->media_path, 'w_320,c_scale,q_auto,f_auto') ?>"
 									class="intro__image d-block" alt="Image for <?= htmlspecialchars($service->service_title) ?>" loading="lazy" />
 							</picture>
 						<?php endif; ?>
 						<div class="intro__details">
-							<p class="intro__description"><?= htmlspecialchars($service->service_description) ?></p>
 							<?php if (!empty($service->link)): ?>
 								<a class="btn intro__button intro__button--more intro__button--<?= strtolower(htmlspecialchars($service->service_title)) ?>" href="<?= htmlspecialchars($service->link) ?>">more</a>
 							<?php endif; ?>
+							<p class="intro__description"><?= htmlspecialchars($service->service_description) ?></p>
+
 						</div>
 					</div>
 				</section>

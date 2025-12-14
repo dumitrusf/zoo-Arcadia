@@ -15,7 +15,6 @@ $isEdit = ($action === 'edit');
                     <form action="/cms/gest/save" method="POST" enctype="multipart/form-data">
                         
                         <!-- Hidden ID for Update (CRITICAL) -->
-                        <!-- Ensure this is populated when editing -->
                         <?php if ($isEdit && isset($service->id_service)): ?>
                             <input type="hidden" name="id_service" value="<?= $service->id_service ?>">
                         <?php endif; ?>
@@ -48,19 +47,54 @@ $isEdit = ($action === 'edit');
                             <div class="form-text">Leave empty if no button is needed.</div>
                         </div>
 
-                        <!-- Service Image -->
-                        <div class="mb-3">
-                            <label for="image" class="form-label fw-bold">Service Image</label>
-                            
-                            <?php if ($isEdit && !empty($service->media_path)): ?>
-                                <div class="mb-2 text-center p-3 bg-light rounded border">
-                                    <img src="<?= $service->media_path ?>" alt="Current Image" class="img-fluid rounded" style="max-height: 200px;">
-                                    <div class="mt-1 text-muted small">Current Image</div>
+                        <!-- RESPONSIVE IMAGES -->
+                        <div class="card mb-3 border-light bg-light">
+                            <div class="card-body">
+                                <h5 class="card-title text-muted mb-3"><i class="bi bi-images"></i> Responsive Images</h5>
+                                
+                                <!-- Mobile Image (Main) -->
+                                <div class="mb-3">
+                                    <label for="image" class="form-label fw-bold">Main Image (Mobile/Default)</label>
+                                    <input type="file" class="form-control" id="image" name="image" accept="image/*" <?= $isEdit ? '' : 'required' ?>>
+                                    <div class="form-text">Required. Used for mobile and as fallback.</div>
+                                    <?php if ($isEdit && !empty($service->media_path)): ?>
+                                        <div class="mt-2 p-2 bg-white border rounded">
+                                            <img src="<?= $service->media_path ?>" alt="Mobile" height="80" class="rounded">
+                                            <span class="badge bg-success ms-2">Current</span>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
-                            <?php endif; ?>
 
-                            <input type="file" class="form-control" id="image" name="image" accept="image/*" <?= $isEdit ? '' : 'required' ?>>
-                            <div class="form-text">Upload a JPG, PNG or WebP image (Leave empty to keep current).</div>
+                                <!-- Tablet Image -->
+                                <div class="mb-3">
+                                    <label for="image_tablet" class="form-label fw-bold">Tablet Image (Optional)</label>
+                                    <input type="file" class="form-control" id="image_tablet" name="image_tablet" accept="image/*">
+                                    <div class="form-text">Width ~744px.</div>
+                                    <?php if ($isEdit && !empty($service->media_path_medium)): ?>
+                                        <div class="mt-2 p-2 bg-white border rounded">
+                                            <img src="<?= $service->media_path_medium ?>" alt="Tablet" height="80" class="rounded">
+                                            <span class="badge bg-success ms-2">Current</span>
+                                        </div>
+                                    <?php else: ?>
+                                        <div class="mt-1 text-muted small fst-italic">No tablet image</div>
+                                    <?php endif; ?>
+                                </div>
+
+                                <!-- Desktop Image -->
+                                <div class="mb-3">
+                                    <label for="image_desktop" class="form-label fw-bold">Desktop Image (Optional)</label>
+                                    <input type="file" class="form-control" id="image_desktop" name="image_desktop" accept="image/*">
+                                    <div class="form-text">Width ~1280px+.</div>
+                                    <?php if ($isEdit && !empty($service->media_path_large)): ?>
+                                        <div class="mt-2 p-2 bg-white border rounded">
+                                            <img src="<?= $service->media_path_large ?>" alt="Desktop" height="80" class="rounded">
+                                            <span class="badge bg-success ms-2">Current</span>
+                                        </div>
+                                    <?php else: ?>
+                                        <div class="mt-1 text-muted small fst-italic">No desktop image</div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Service Description -->

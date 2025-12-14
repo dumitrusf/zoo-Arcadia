@@ -1,99 +1,8 @@
-<header class="hero hero-carousel">
+<?php
+// App/about/views/pages/about.php
+?>
 
-	<div class="hero__container">
-		<div class="hero__text">
-			<h1 class="hero__title">zoo arcadia</h1>
-			<p class="hero__subtitle">Where all animals love to live</p>
-		</div>
-
-
-		<a type="button" class="btn intro__button intro__button--hours" href="#opening-hours">opening hours</a>
-
-	</div>
-	<div id="carouselExampleFade" class="carousel carousel-fade slide" data-bs-ride="true">
-
-		<div class="carousel-indicators">
-			<button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="0" class="active"
-				aria-current="true" aria-label="Slide 1"></button>
-			<button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="1"
-				aria-label="Slide 2"></button>
-			<button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="2"
-				aria-label="Slide 3"></button>
-		</div>
-
-		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<picture>
-					<source
-						srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889463/desk-protect-and-educate-animals_gre6ou.webp"
-						media="(min-width: 1280px)" />
-					<source
-						srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889306/tab-protect-and-educate-animals_lrofgy.webp"
-						media="(min-width: 744px)" />
-					<img src="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889109/protect-and-educate-animals_qi4awr.webp"
-						class="hero__image d-block img-fluid" alt="carousel image" />
-				</picture>
-				<div class="carousel-caption d-none d-md-block">
-					<h4 class="carousel-caption__title">Our team works day by day to protect and educate</h4>
-					<p>Recognize the dedicated team that works every day to guarantee animals care and promote
-						environmental education.</p>
-				</div>
-
-			</div>
-
-			<div class="carousel-item">
-				<picture>
-					<source
-						srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889462/desk-caring-_-unique-esxperiences_zgtlke.webp"
-						media="(min-width: 1280px)" />
-					<source
-						srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889307/tab-caring-_-unique-esxperiences_kr2bhp.webp"
-						media="(min-width: 744px)" />
-					<img src="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889109/caring-_-unique-esxperiences_tljdjn.webp"
-						class="hero__image d-block img-fluid" alt="carousel image" />
-				</picture>
-				<div class="carousel-caption d-none d-md-block">
-					<h4 class="carousel-caption__title">Taking care of animals and offering unique experiences</h4>
-					<p>Explore a safe and friendly atmosphere where visitors and animals live together, reflecting
-						the zoo's commitment to animal welfare and the joy of its visitors.</p>
-				</div>
-			</div>
-
-			<div class="carousel-item">
-				<picture>
-					<source
-						srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889463/desk-learning-education-all-time_cj7jls.webp"
-						media="(min-width: 1280px)" />
-					<source
-						srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889307/tab-learning-education-all-time_hf6vjg.webp"
-						media="(min-width: 744px)" />
-					<img src="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889111/learning-education-all-time_cnzcgn.webp"
-						class="hero__image d-block img-fluid" alt="carousel image" />
-				</picture>
-				<div class="carousel-caption d-none d-md-block">
-					<h4 class="carousel-caption__title">A natural space to learn and connect with animals</h4>
-					<p>Discover a space where animals live in harmony, surrounded by green and serene landscapes,
-						designed to learn and connect with nature.</p>
-				</div>
-			</div>
-
-		</div>
-		<div class="controls-carousel">
-			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
-				data-bs-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Previous</span>
-			</button>
-			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
-				data-bs-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Next</span>
-			</button>
-		</div>
-	</div>
-</header>
-
-
+<?php include_once __DIR__ . '/../../../../includes/templates/hero.php'; ?>
 
 
 <main class="intro">
@@ -123,8 +32,6 @@
 
 
 </main>
-
-
 
 
 

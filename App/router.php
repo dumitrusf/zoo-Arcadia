@@ -45,6 +45,15 @@ if ($domain === "home" && $_GET["action"] === "start" && !isset($_SESSION["user"
     exit();
 }
 
+// 3.2 Global Management Protection (/gest/)
+// If someone tries to access a management controller (gest) without being logged in -> Login.
+// This covers /cms/gest, /hero/gest, etc., even if the domain is public.
+$controller = $_GET['controller'] ?? '';
+if ($controller === 'gest' && !isset($_SESSION["user"]["username"])) {
+    header("Location: /auth/pages/login");
+    exit();
+}
+
 // 4. Inverse check (optional but useful to perform a security check and to avoid infinite loops)
 // If there is a user and the user tries to go to login...
 if (isset($_SESSION["user"]["username"]) && $domain === "auth" && $_GET["action"] === "login") {
@@ -57,7 +66,7 @@ if (isset($_SESSION["user"]["username"]) && $domain === "auth" && $_GET["action"
 $domain = $_GET["domain"] ?? "home";
 
 //  "white list" of domains that exist. If a domain is not here, it is rejected.
-$allowed_domains = [ "medias", "habitat1", "cms", "about", "auth", "home", "animals", "employees", "habitats", "permissions", "reports", "roles", "schedules", "testimonials", "users", "contact"];
+$allowed_domains = ["hero", "medias", "habitat1", "cms", "about", "auth", "home", "animals", "employees", "habitats", "permissions", "reports", "roles", "schedules", "testimonials", "users", "contact"];
 
 if (in_array($domain, $allowed_domains)) {
     // we redirect to the domain router.

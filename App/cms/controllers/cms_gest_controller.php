@@ -73,39 +73,55 @@ class CmsGestController {
                 if ($id) {
                     // UPDATE
                     $updateResult = $serviceModel->update($id, $title, $desc, $link, $type, $userId);
-                    if ($updateResult === false) {
-                        throw new Exception("Failed to update service in Database. Check logs/ENUMs.");
+                    if ($updateResult !== false) {
+                        $serviceId = $id;
                     }
-                    $serviceId = $id;
                 } else {
                     // CREATE
                     $serviceId = $serviceModel->create($title, $desc, $link, $type, $userId);
                 }
 
-                // 🚨 DEBUG CHEKPOINT
                 if ($serviceId === false) {
-                    throw new Exception("Failed to create/update service in Database. Check logs/ENUMs.");
+                    throw new Exception("Failed to create/update service in Database.");
                 }
 
-                // Handle Image Upload if present
+                // 1. Upload Main Image (Mobile)
+                $urlMobile = null;
                 if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-                    // 1. Upload to Cloud
-                    $url = $cloudinary->upload($_FILES['image']);
+                    $urlMobile = $cloudinary->upload($_FILES['image']);
+                }
+
+                // 2. Upload Tablet Image
+                $urlTablet = null;
+                if (isset($_FILES['image_tablet']) && $_FILES['image_tablet']['error'] === UPLOAD_ERR_OK) {
+                    $urlTablet = $cloudinary->upload($_FILES['image_tablet']);
+                }
+
+                // 3. Upload Desktop Image
+                $urlDesktop = null;
+                if (isset($_FILES['image_desktop']) && $_FILES['image_desktop']['error'] === UPLOAD_ERR_OK) {
+                    $urlDesktop = $cloudinary->upload($_FILES['image_desktop']);
+                }
+
+                // If at least one image uploaded
+                if ($urlMobile || $urlTablet || $urlDesktop) {
+                    // If mobile is not uploaded but others are, we need a base path.
+                    // For now, assume Mobile is mandatory if updating images, or use existing one if partial update.
+                    // But our view forces 'required' on create for mobile.
                     
-                    if ($url) {
-                        // 2. Save Media DB
-                        $mediaId = $mediaModel->create($url, 'image', "Service: $title");
-                        
-                        if ($mediaId) {
-                            // 3. UNLINK OLD & LINK NEW
-                            // Delete any previous relationships for this service before creating the new one
-                            $mediaModel->unlink('services', $serviceId);
-                            // Create the new one
-                            $mediaModel->link($mediaId, 'services', $serviceId);
-                        } else {
-                             // If media save fails, we don't stop everything, but we log it
-                             error_log("Media save failed for URL: $url");
-                        }
+                    // We need to fetch current media to not overwrite with nulls if we want partial updates?
+                    // Simplified: We assume user uploads what they want to change. If they upload Mobile, we create new Media.
+                    
+                    // Fallback: If only Desktop uploaded, use it as base? 
+                    $base = $urlMobile ?? $urlDesktop ?? $urlTablet;
+
+                    $mediaId = $mediaModel->create($base, 'image', "Service: $title", $urlTablet, $urlDesktop);
+                    
+                    if ($mediaId) {
+                        // Unlink old
+                        $mediaModel->unlink('services', $serviceId);
+                        // Link new
+                        $mediaModel->link($mediaId, 'services', $serviceId);
                     }
                 }
 
@@ -113,9 +129,7 @@ class CmsGestController {
                 exit;
 
             } catch (Exception $e) {
-                // Show error ON SCREEN instead of redirecting
                 echo "<div class='alert alert-danger'><strong>Error saving service:</strong> " . $e->getMessage() . "</div>";
-                // echo "<pre>" . $e->getTraceAsString() . "</pre>"; // Uncomment for full trace
             }
         }
     }

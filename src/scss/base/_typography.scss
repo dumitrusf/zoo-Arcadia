@@ -17,7 +17,7 @@
 
 @mixin heading() {
   font-size: map-get(map-get(s.$font-sizes, "headings"), main-heading);
-  color: map-get(map-get(c.$color, "solid-colors"), "c-light");
+  color: map-get(map-get(c.$color, "solid-colors"), "c-dark");
   font-family: map-get(
     map-get(f.$path-fonts-formats, "family-font"),
     "h1-font"
@@ -55,13 +55,14 @@
 
 @mixin desc-section() {
   font-size: map-get(map-get(s.$font-sizes, "other-texts"), p-in-cards);
-  color: map-get(map-get(c.$color, "solid-colors"), c-dark);
+  color: map-get(map-get(c.$color, "solid-colors"), c-light);
   font-family: map-get(
     map-get(f.$path-fonts-formats, "family-font"),
     "paragraph-font"
   );
-  // text-shadow: map-get(map-get(sh.$shadows, texts), sh-desc-section);
+  text-shadow: map-get(map-get(sh.$shadows, texts), sh-desc-section);
   text-transform: uppercase;
+  padding: 0.5rem;
 }
 
 // ✨
@@ -227,10 +228,10 @@ body {
   }
 
   &__subtitle {
-    line-height: map-get(
-      map-get(s.$font-spaces, "line-heights"),
-      lh-p-main-heading
-    ); /* 148.923% */
+    // line-height: map-get(
+    //   map-get(s.$font-spaces, "line-heights"),
+    //   lh-p-main-heading
+    // ); /* 148.923% */
     letter-spacing: map-get(
       map-get(s.$font-spaces, "letter-spacings"),
       ls-p-main-heading
