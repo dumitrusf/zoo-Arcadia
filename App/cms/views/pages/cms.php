@@ -1,21 +1,4 @@
-<header class="hero">
-	<div class="hero__container">
-		<div class="hero__text">
-			<h1 class="hero__title">services</h1>
-		</div>
-		<a class="btn intro__button intro__button--hours" href="#opening-hours">opening hours</a>
-	</div>
-	<picture>
-		<source
-			srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764876450/DALL_E_2024-08-23_20.27.03_-_A_hyper-realistic_image_of_a_monkey_dressed_exactly_like_the_one_provided_wearing_a_tailored_butler_suit_complete_with_a_bow_tie_and_white_gloves._T_8_pmcjcu.webp"
-			media="(min-width: 1280px)" />
-		<source
-			srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764876398/DALL_E_2024-08-23_20.27.03_-_A_hyper-realistic_image_of_a_monkey_dressed_exactly_like_the_one_provided_wearing_a_tailored_butler_suit_complete_with_a_bow_tie_and_white_gloves._T_7_rtctpu.webp"
-			media="(min-width: 744px)" />
-		<img src="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764876163/DALL_E_2024-08-23_20.27.03_-_A_hyper-realistic_image_of_a_monkey_dressed_exactly_like_the_one_provided_wearing_a_tailored_butler_suit_complete_with_a_bow_tie_and_white_gloves._T_1_dbwrhq.webp"
-			class="hero__image d-block" alt="monkey" fetchpriority="high" />
-	</picture>
-</header>
+<?php include_once __DIR__ . '/../../../../includes/templates/hero.php'; ?>
 
 <main>
 	<div class="intro intro--services">

@@ -147,16 +147,17 @@ a {
     h1,
     p {
       padding: 0.5rem;
+      margin-top: 1.5rem;
     }
 
-    // @include m.responsive(tablet) {
-    //   max-width: 57.8rem;
-    //   // background-color: orange;
-    // }
-    // @include m.responsive(desk) {
-    //   max-width: 87.7rem;
-    //   // background-color: rgb(149, 80, 252);
-    // }
+    @include m.responsive(tablet) {
+      max-width: 57.8rem;
+      // background-color: orange;
+    }
+    @include m.responsive(desk) {
+      max-width: 87.7rem;
+      // background-color: rgb(149, 80, 252);
+    }
   }
 }
 

@@ -19,8 +19,8 @@ ALTER TABLE slides
 DROP FOREIGN KEY IF EXISTS fk_header_in_slides;
 
 ALTER TABLE slides
-ADD CONSTRAINT fk_header_in_slides
-FOREIGN KEY (id_header) REFERENCES headers(id_header)
+ADD CONSTRAINT fk_hero_in_slides
+FOREIGN KEY (hero_id) REFERENCES heroes(id_hero)
 ON DELETE CASCADE
 ON UPDATE CASCADE;
 --

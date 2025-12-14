@@ -1,38 +1,11 @@
-	<!-- <nav class="nav navbar"> -->
+<?php
+// App/habitats/views/pages/habitats.php
+?>
 
-	<header class="hero">
-		<div class="hero__container">
-			<div class="hero__text">
-				<h1 class="hero__title">habitats</h1>
-			</div>
+<?php include_once __DIR__ . '/../../../../includes/templates/hero.php'; ?>
 
-
-			<a class="btn intro__button intro__button--hours" href="#opening-hours">opening hours</a>
-
-		</div>
-
-
-		<picture>
-			<source
-				srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764876866/DALL_E_2024-08-24_13.04.18_-_A_hyper-realistic_image_showing_three_distinct_habitats_with_no_visible_vertical_dividing_lines._On_the_left_a_savanna_with_golden_grass_sparse_tree_2_pskxpd.webp"
-				media="(min-width: 1280px)" />
-			<source
-				srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764876995/DALL_E_2024-08-24_13.04.18_-_A_hyper-realistic_image_showing_three_distinct_habitats_with_no_visible_vertical_dividing_lines._On_the_left_a_savanna_with_golden_grass_sparse_tree_2_jas09u.webp"
-				media="(min-width: 744px)" />
-			<img src="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764877493/DALL_E_2024-08-24_13.04.18_-_A_hyper-realistic_image_showing_three_distinct_habitats_with_no_visible_vertical_dividing_lines._On_the_left_a_savanna_with_golden_grass_sparse_tree_1_ubumul.webp"
-				class="hero__image d-block img-fluid" alt="hero image habitats" />
-		</picture>
-
-	</header>
-
-
-
-
-
-
-
-	<main>
-		<div class="intro intro--services">
+<main>
+	<div class="intro intro--services">
 
         <?php if (!empty($habitats)): ?>
             <?php foreach($habitats as $habitat): ?>
@@ -54,10 +27,10 @@
                         <?php endif; ?>
 
                         <div class="intro__details">
+                            <p class="intro__description"><?= htmlspecialchars($habitat->service_description) ?></p>
                             <?php if (!empty($habitat->link)): ?>
 								<a class="btn intro__button intro__button--more" href="<?= htmlspecialchars($habitat->link) ?>">more</a>
 							<?php endif; ?>
-                            <p class="intro__description"><?= htmlspecialchars($habitat->service_description) ?></p>
                         </div>
                     </div>
                 </section>

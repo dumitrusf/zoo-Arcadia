@@ -67,11 +67,9 @@ INSERT INTO users (id_user, username, psw, is_active, role_id, employee_id) VALU
   (22, 'christopher', 'christopher123', true, 2, 22),
   (23, 'heleneg', 'heleneg123', true, 2, 23),
   (24, 'fredericc', 'fredericc123', true, 2, 24),
-  -- 2 Veterinarians and 1 Admin
   (25, 'celinem', 'celinem123', true, 1, 25), 
   (26, 'oliviera', 'oliviera123', true, 1, 26), 
   (27, 'sandrines', 'sandrines123', true, 3, 27), 
-  -- 4 unassigned and/or inactive users
   (28, 'guillaumem', 'guillaumem123', true, 2, NULL),  
   (29, 'stephanieh', 'stephanieh123', false, 2, NULL), 
   (30, 'benoita', 'benoita123', false, 1, NULL), 
@@ -131,12 +129,94 @@ INSERT INTO `users_permissions` (`user_id`, `permission_id`) VALUES
 (2, 8),
 (16, 8);
 
--- 🆕 Insert default Schedules (Opening Hours)
+-- 🆕 Insert default Schedules (Opening Hours) - DAYS OF WEEK
 INSERT INTO opening (time_slot, opening_time, closing_time, status) VALUES
-('Monday', '08:00:00', '12:00:00', 'open'),
-('Tuesday', '13:00:00', '18:00:00', 'open'),
-('Wednesday', '09:00:00', '20:00:00', 'open'),
-('Thursday', '10:00:00', '16:00:00', 'closed'),
-('Friday', '11:00:00', '17:00:00', 'open'),
-('Saturday', '09:00:00', '20:00:00', 'open'),
-('Sunday', '10:00:00', '16:00:00', 'closed');
+('Monday',    '08:00:00', '18:00:00', 'open'),
+('Tuesday',   '08:00:00', '18:00:00', 'open'),
+('Wednesday', '08:00:00', '18:00:00', 'open'),
+('Thursday',  '08:00:00', '18:00:00', 'open'),
+('Friday',    '08:00:00', '18:00:00', 'open'),
+('Saturday',  '09:00:00', '20:00:00', 'open'),
+('Sunday',    '10:00:00', '18:00:00', 'closed');
+
+-- ============================================================
+-- SEED DATA FOR SERVICES, HABITATS & FEATURED (With Real Cloudinary Images)
+-- ============================================================
+
+-- 1. Insert images into MEDIA table
+INSERT INTO media (id_media, media_path, media_path_medium, media_path_large, media_type, description) VALUES 
+-- Media for Heroes
+(201, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764876163/DALL_E_2024-08-23_20.27.03_-_A_hyper-realistic_image_of_a_monkey_dressed_exactly_like_the_one_provided_wearing_a_tailored_butler_suit_complete_with_a_bow_tie_and_white_gloves._T_1_dbwrhq.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764876398/DALL_E_2024-08-23_20.27.03_-_A_hyper-realistic_image_of_a_monkey_dressed_exactly_like_the_one_provided_wearing_a_tailored_butler_suit_complete_with_a_bow_tie_and_white_gloves._T_7_rtctpu.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764876450/DALL_E_2024-08-23_20.27.03_-_A_hyper-realistic_image_of_a_monkey_dressed_exactly_like_the_one_provided_wearing_a_tailored_butler_suit_complete_with_a_bow_tie_and_white_gloves._T_8_pmcjcu.webp', 'image', 'CMS Hero Monkey Desktop'),
+(204, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764877493/DALL_E_2024-08-24_13.04.18_-_A_hyper-realistic_image_showing_three_distinct_habitats_with_no_visible_vertical_dividing_lines._On_the_left_a_savanna_with_golden_grass_sparse_tree_1_ubumul.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764876995/DALL_E_2024-08-24_13.04.18_-_A_hyper-realistic_image_showing_three_distinct_habitats_with_no_visible_vertical_dividing_lines._On_the_left_a_savanna_with_golden_grass_sparse_tree_2_jas09u.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764876866/DALL_E_2024-08-24_13.04.18_-_A_hyper-realistic_image_showing_three_distinct_habitats_with_no_visible_vertical_dividing_lines._On_the_left_a_savanna_with_golden_grass_sparse_tree_2_pskxpd.webp', 'image', 'Habitats Hero Desktop'),
+(200, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764873190/aa7e4c59-0439-4c32-9703-5ee460d1dd8f_1_iyw7yo.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764873282/aa7e4c59-0439-4c32-9703-5ee460d1dd8f_2_g5y4ed.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764872122/aa7e4c59-0439-4c32-9703-5ee460d1dd8f_3_qzx3wt.webp', 'image', 'Home Hero Background'),
+(205, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764878015/DALL_E_2024-08-27_16.54.15_-_A_highly_detailed_and_realistic_image_featuring_a_cheetah_from_the_savannah_a_scarlet_ibis_from_the_swamp_and_a_chimpanzee_from_the_jungle_all_seam_2_ugfhbt.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764877726/DALL_E_2024-08-27_16.54.15_-_A_highly_detailed_and_realistic_image_featuring_a_cheetah_from_the_savannah_a_scarlet_ibis_from_the_swamp_and_a_chimpanzee_from_the_jungle_all_seam_1_o4z04j.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764877378/DALL_E_2024-08-27_16.54.15_-_A_highly_detailed_and_realistic_image_featuring_a_cheetah_from_the_savannah_a_scarlet_ibis_from_the_swamp_and_a_chimpanzee_from_the_jungle_all_seam_1_ibqrb7.webp', 'image', 'Animals Hero Background'),
+-- Media for Featured Cards (Homepage)
+(100, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764872615/6607a878-b883-49b4-b760-012f655319e8_1_vx5rl5.webp', '', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764872541/1734796025420_3_s62gy0.webp', 'image', 'Services Man'),
+(101, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764872680/DALL_E_2024-08-22_14.38.43_-_An_image_divided_into_three_vertical_sections_each_representing_a_different_natural_environment__a_savanna_a_swamp_and_a_jungle._The_savanna_sectio_1_rtadm7.webp', '', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764872824/DALL_E_2024-08-22_14.38.43_-_An_image_divided_into_three_vertical_sections_each_representing_a_different_natural_environment__a_savanna_a_swamp_and_a_jungle._The_savanna_sectio_2_hwsq3u.webp', 'image', 'Habitats Collage'),
+(102, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764872943/DALL_E_2024-08-22_15.42.48_-_A_realistic_image_depicting_a_seamless_natural_environment_where_a_lion_a_crocodile_and_a_gorilla_coexist._The_lion_is_in_a_grassy_savanna-like_area_1_wmjlun.webp', '', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764872902/DALL_E_2024-08-22_15.42.48_-_A_realistic_image_depicting_a_seamless_natural_environment_where_a_lion_a_crocodile_and_a_gorilla_coexist._The_lion_is_in_a_grassy_savanna-like_area_1_y4gata.webp', 'image', 'Animals Collage'),
+-- Media for Regular Services
+(103, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764876157/_45bf66dc-f855-49f3-8c70-01c353e88270_1_caqe6l.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764876404/_45bf66dc-f855-49f3-8c70-01c353e88270_2_hdhye1.webp', '', 'image', 'Restaurant'),
+(104, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764876160/_5c9ef8df-08e3-4d3f-9d73-3f0e8c8c064d_1_r8yo7a.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764876401/_5c9ef8df-08e3-4d3f-9d73-3f0e8c8c064d_1_pw7vnb.webp', '', 'image', 'Zoo Guide'),
+(105, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764876165/DALL_E_2024-08-23_21.48.55_-_A_hyper-realistic_image_of_a_zoo_train_with_a_conductor_guiding_passengers_through_the_zoo._The_conductor_is_a_human_in_a_professional_uniform_and_th_1_q11b2p.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764876165/DALL_E_2024-08-23_21.48.55_-_A_hyper-realistic_image_of_a_zoo_train_with_a_conductor_guiding_passengers_through_the_zoo._The_conductor_is_a_human_in_a_professional_uniform_and_th_1_wp2qdr.webp', '', 'image', 'Train'),
+-- Media for Habitats Cards
+(106, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764877055/DALL_E_2024-08-22_14.42.06_-_A_realistic_and_detailed_image_of_a_jungle_landscape._The_scene_features_dense_lush_green_foliage_with_tall_trees_thick_undergrowth_and_vines_hangi_1_otbziq.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764876999/DALL_E_2024-08-22_14.42.06_-_A_realistic_and_detailed_image_of_a_jungle_landscape._The_scene_features_dense_lush_green_foliage_with_tall_trees_thick_undergrowth_and_vines_hangi_1_ff7mys.webp', '', 'image', 'Jungle'),
+(107, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764877051/DALL_E_2024-08-22_14.40.51_-_A_realistic_and_detailed_image_of_a_savanna_landscape._The_scene_features_wide_open_grasslands_with_tall_dry_grasses_swaying_in_the_breeze._Scattere_2_ptpvtj.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764876988/DALL_E_2024-08-22_14.40.51_-_A_realistic_and_detailed_image_of_a_savanna_landscape._The_scene_features_wide_open_grasslands_with_tall_dry_grasses_swaying_in_the_breeze._Scattere_1_xbm3xa.webp', '', 'image', 'Savannah'),
+(108, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764877059/DALL_E_2024-08-22_14.41.22_-_A_realistic_and_detailed_image_of_a_swamp_landscape._The_scene_features_murky_waters_reflecting_the_surrounding_thick_vegetation_with_tall_moss-cove_1_ngyvkh.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764876991/DALL_E_2024-08-22_14.41.22_-_A_realistic_and_detailed_image_of_a_swamp_landscape._The_scene_features_murky_waters_reflecting_the_surrounding_thick_vegetation_with_tall_moss-cove_1_esuv3x.webp', '', 'image', 'Swamp'),
+(109, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889109/protect-and-educate-animals_qi4awr.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889306/tab-protect-and-educate-animals_lrofgy.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889463/desk-protect-and-educate-animals_gre6ou.webp', 'image', 'About Carousel Slide 1'),
+(110, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889111/learning-education-all-time_cnzcgn.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889307/tab-learning-education-all-time_hf6vjg.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889463/desk-learning-education-all-time_cj7jls.webp', 'image', 'About Carousel Slide 2'),
+(111, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889109/caring-_-unique-esxperiences_tljdjn.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889307/tab-caring-_-unique-esxperiences_kr2bhp.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764889462/desk-caring-_-unique-esxperiences_zgtlke.webp', 'image', 'About Carousel Slide 3');
+
+-- 2. Insert SERVICES
+INSERT INTO services (id_service, service_title, service_description, link, type) VALUES
+-- Homepage Features
+(100, 'SERVICES', 'SEE WHAT ARCADIA CAN OFFERS YOU', '/cms/pages/cms', 'featured'),
+(101, 'HABITATS', 'AMAZING HABITATS TO DISCOVER', '/habitats/pages/habitats', 'featured'),
+(102, 'ANIMALS', 'EXPLORE ANOTHER WAY OF LOVE', '/animals/pages/allanimals', 'featured'),
+-- Regular Services
+(103, 'Restaurant', 'Get a break', NULL, 'service'),
+(104, 'Zoo Guide', 'Feel safe all time', NULL, 'service'),
+(105, 'Train to Arcadia', 'A family adventure', NULL, 'service'),
+-- Habitats
+(106, 'JUNGLE', 'EMBRACE THE SURPRISES OF THE JUNGLE', '/habitats/pages/habitat1', 'habitat'),
+(107, 'SAVANNAH', 'EXPERIENCE THE WILD MAJESTY OF THE SAVANNAH', '/habitats/pages/habitat1', 'habitat'),
+(108, 'SWAMP', 'UNCOVER THE MYSTERIES OF THE SWAMP', '/habitats/pages/habitat1', 'habitat');
+
+-- 3. Insert HEROES (NO CAROUSEL)
+INSERT INTO heroes (id_hero, hero_title, hero_subtitle, page_name, has_sliders) VALUES
+(1, 'ZOO ARCADIA', 'Where all animals love to live', 'home', 0),
+(2, 'SERVICES', 'Our specialized services for you', 'services', 0),
+(3, 'HABITATS', 'Discover our amazing worlds', 'habitats', 0),
+(4, 'ANIMALS', 'Explore another way of love', 'animals', 0),
+(5, 'ABOUT US', 'Our commitment to conservation and education', 'about', 1);
+
+-- 4. Insert Slides for About Page
+INSERT INTO slides (id_slide, hero_id, title_caption, description_caption) VALUES
+(1, 5, 'Our team works day by day to protect and educate', 'Recognize the dedicated team that works every day to guarantee animals care and promote
+						environmental education.'),
+(2, 5, 'A natural space to learn and connect with animals', 'Discover a space where animals live in harmony, surrounded by green and serene landscapes,
+						designed to learn and connect with nature.'),
+(3, 5, 'Taking care of animals and offering unique experiences', "Explore a safe and friendly atmosphere where visitors and animals live together, reflecting
+						the zoo's commitment to animal welfare and the joy of its visitors.");
+
+
+-- 4. Link MEDIA to SERVICES and HEROES
+INSERT INTO media_relations (media_id, related_table, related_id, usage_type) VALUES
+-- Links for Services
+(100, 'services', 100, 'main'),
+(101, 'services', 101, 'main'),
+(102, 'services', 102, 'main'),
+(103, 'services', 103, 'main'),
+(104, 'services', 104, 'main'),
+(105, 'services', 105, 'main'),
+(106, 'services', 106, 'main'),
+(107, 'services', 107, 'main'),
+(108, 'services', 108, 'main'),
+-- Links for Heroes
+(200, 'heroes', 1, 'main'), 
+(201, 'heroes', 2, 'main'),
+(204, 'heroes', 3, 'main'),
+(205, 'heroes', 4, 'main'),
+-- Links for Slides
+(109, 'slides', 1, 'main'),
+(110, 'slides', 2, 'main'),
+(111, 'slides', 3, 'main');

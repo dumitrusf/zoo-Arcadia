@@ -28,7 +28,7 @@ class Service {
      */
     public function getAll() {
         // JOIN with media_relations and media to get the image URL
-        $sql = "SELECT s.*, m.media_path 
+        $sql = "SELECT s.*, m.media_path, m.media_path_medium, m.media_path_large 
                 FROM services s
                 LEFT JOIN media_relations mr ON s.id_service = mr.related_id AND mr.related_table = 'services'
                 LEFT JOIN media m ON mr.media_id = m.id_media
@@ -44,7 +44,7 @@ class Service {
      * @return array List of featured services.
      */
     public function getFeatured() {
-        $sql = "SELECT s.*, m.media_path 
+        $sql = "SELECT s.*, m.media_path, m.media_path_medium, m.media_path_large 
                 FROM services s
                 LEFT JOIN media_relations mr ON s.id_service = mr.related_id AND mr.related_table = 'services'
                 LEFT JOIN media m ON mr.media_id = m.id_media
@@ -61,7 +61,7 @@ class Service {
      * @return array List of habitat services.
      */
     public function getHabitats() {
-        $sql = "SELECT s.*, m.media_path 
+        $sql = "SELECT s.*, m.media_path, m.media_path_medium, m.media_path_large 
                 FROM services s
                 LEFT JOIN media_relations mr ON s.id_service = mr.related_id AND mr.related_table = 'services'
                 LEFT JOIN media m ON mr.media_id = m.id_media
@@ -78,7 +78,7 @@ class Service {
      * @return array List of regular services.
      */
     public function getRegularServices() {
-        $sql = "SELECT s.*, m.media_path 
+        $sql = "SELECT s.*, m.media_path, m.media_path_medium, m.media_path_large 
                 FROM services s
                 LEFT JOIN media_relations mr ON s.id_service = mr.related_id AND mr.related_table = 'services'
                 LEFT JOIN media m ON mr.media_id = m.id_media
@@ -96,7 +96,7 @@ class Service {
      * @return object|false
      */
     public function getById($id) {
-        $sql = "SELECT s.*, m.media_path 
+        $sql = "SELECT s.*, m.media_path, m.media_path_medium, m.media_path_large 
                 FROM services s
                 LEFT JOIN media_relations mr ON s.id_service = mr.related_id AND mr.related_table = 'services'
                 LEFT JOIN media m ON mr.media_id = m.id_media
@@ -118,34 +118,31 @@ class Service {
      */
     public function create($title, $description, $link, $type, $userId) {
         try {
-            // PASO 1: INICIAR LA TRANSACCIÓN
-            // Es como decirle a la base de datos: "¡Quieto! No guardes nada de verdad todavía.
-            // Voy a hacer varias cosas y TIENEN que funcionar todas juntas".
+            // STEP 1: START TRANSACTION
+            // Ensure data integrity by wrapping operations in a transaction.
             $this->db->beginTransaction();
 
-            // PASO 2: HACER LA PRIMERA COSA (Insertar el Servicio)
-            // Guardamos los datos principales en la tabla 'services'.
+            // STEP 2: INSERT SERVICE
+            // Insert the main service record into the database.
             $sql = "INSERT INTO services (service_title, service_description, link, type) VALUES (:title, :desc, :link, :type)";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([':title' => $title, ':desc' => $description, ':link' => $link, ':type' => $type]);
             $serviceId = $this->db->lastInsertId();
 
-            // PASO 3: HACER LA SEGUNDA COSA (Apuntar en el Diario)
-            // Ahora, escribimos una nota en el diario 'service_logs' para saber quién lo creó.
+            // STEP 3: LOG ACTION
+            // Record the creation event in the audit log.
             $this->logChange($serviceId, $userId, 'create', null, 'New Service Created', $title);
 
-            // PASO 4: CONFIRMAR LA TRANSACCIÓN (Commit)
-            // Como todo ha ido bien, le decimos a la BDD: "¡Vale, ahora sí,
-            // guárdalo todo para siempre!". Los cambios ya son permanentes.
+            // STEP 4: COMMIT TRANSACTION
+            // If all operations succeeded, commit changes to the database.
             $this->db->commit();
             return $serviceId;
 
         } catch (Exception $e) {
-            // ¡EMERGENCIA! ALGO HA FALLADO
-            // Si cualquiera de los pasos anteriores da un error, el código salta aquí.
-            // Le decimos a la BDD: "¡Cancela todo! Rompe los papeles, aquí no ha pasado nada".
+            // ROLLBACK ON FAILURE
+            // If any operation fails, revert all changes to maintain data consistency.
             $this->db->rollBack();
-            error_log("Error creando el servicio: " . $e->getMessage());
+            error_log("Error creating service: " . $e->getMessage());
             return false;
         }
     }
