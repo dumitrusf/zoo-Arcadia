@@ -150,6 +150,7 @@ INSERT INTO media (id_media, media_path, media_path_medium, media_path_large, me
 (204, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764877493/DALL_E_2024-08-24_13.04.18_-_A_hyper-realistic_image_showing_three_distinct_habitats_with_no_visible_vertical_dividing_lines._On_the_left_a_savanna_with_golden_grass_sparse_tree_1_ubumul.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764876995/DALL_E_2024-08-24_13.04.18_-_A_hyper-realistic_image_showing_three_distinct_habitats_with_no_visible_vertical_dividing_lines._On_the_left_a_savanna_with_golden_grass_sparse_tree_2_jas09u.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764876866/DALL_E_2024-08-24_13.04.18_-_A_hyper-realistic_image_showing_three_distinct_habitats_with_no_visible_vertical_dividing_lines._On_the_left_a_savanna_with_golden_grass_sparse_tree_2_pskxpd.webp', 'image', 'Habitats Hero Desktop'),
 (200, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764873190/aa7e4c59-0439-4c32-9703-5ee460d1dd8f_1_iyw7yo.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764873282/aa7e4c59-0439-4c32-9703-5ee460d1dd8f_2_g5y4ed.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764872122/aa7e4c59-0439-4c32-9703-5ee460d1dd8f_3_qzx3wt.webp', 'image', 'Home Hero Background'),
 (205, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764878015/DALL_E_2024-08-27_16.54.15_-_A_highly_detailed_and_realistic_image_featuring_a_cheetah_from_the_savannah_a_scarlet_ibis_from_the_swamp_and_a_chimpanzee_from_the_jungle_all_seam_2_ugfhbt.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764877726/DALL_E_2024-08-27_16.54.15_-_A_highly_detailed_and_realistic_image_featuring_a_cheetah_from_the_savannah_a_scarlet_ibis_from_the_swamp_and_a_chimpanzee_from_the_jungle_all_seam_1_o4z04j.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764877378/DALL_E_2024-08-27_16.54.15_-_A_highly_detailed_and_realistic_image_featuring_a_cheetah_from_the_savannah_a_scarlet_ibis_from_the_swamp_and_a_chimpanzee_from_the_jungle_all_seam_1_ibqrb7.webp', 'image', 'Animals Hero Background'),
+(206, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764873838/5e6e4c9a-7e33-4dc0-ad86-783068dd38a8_1_gadwme.png', NULL, NULL, 'image', 'K-About BG'),
 -- Media for Featured Cards (Homepage)
 (100, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764872615/6607a878-b883-49b4-b760-012f655319e8_1_vx5rl5.webp', '', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764872541/1734796025420_3_s62gy0.webp', 'image', 'Services Man'),
 (101, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764872680/DALL_E_2024-08-22_14.38.43_-_An_image_divided_into_three_vertical_sections_each_representing_a_different_natural_environment__a_savanna_a_swamp_and_a_jungle._The_savanna_sectio_1_rtadm7.webp', '', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764872824/DALL_E_2024-08-22_14.38.43_-_An_image_divided_into_three_vertical_sections_each_representing_a_different_natural_environment__a_savanna_a_swamp_and_a_jungle._The_savanna_sectio_2_hwsq3u.webp', 'image', 'Habitats Collage'),
@@ -189,17 +190,23 @@ INSERT INTO heroes (id_hero, hero_title, hero_subtitle, page_name, has_sliders) 
 (4, 'ANIMALS', 'Explore another way of love', 'animals', 0),
 (5, 'ABOUT US', 'Our commitment to conservation and education', 'about', 1);
 
--- 4. Insert Slides for About Page
+-- 4. Insert Bricks
+INSERT INTO bricks (title, description, link, page_name) VALUES
+('More About Us', 'In the heart of Bretagne, Arcadia Zoo is home to unique animals from the savannah, jungle, and wetlands.
+
+Since 1960, we have ensured their well-being through daily veterinary care and tailored feeding.', '/about/pages/about', 'home'),
+('who we are ?', 'Arcadia Zoo, located near the Brocéliande Forest in Brittany, France, has been a sanctuary for animals since 1960. Organized into diverse habitats such as the savannah, jungle, and wetlands, the zoo is committed to the well-being of its residents. Daily veterinary checks ensure the health of all animals before the zoo opens its doors to the public, and their meals are carefully portioned according to veterinarian reports.
+
+With its thriving operation and happy animals, Arcadia Zoo is a source of pride for its director, José, who envisions even greater achievements for the zoo''s future. Through innovation and care, the zoo continues to be a place where visitors can connect with animals and nature.', NULL, 'about');
+
+-- 5. Insert Slides for About Page
 INSERT INTO slides (id_slide, hero_id, title_caption, description_caption) VALUES
-(1, 5, 'Our team works day by day to protect and educate', 'Recognize the dedicated team that works every day to guarantee animals care and promote
-						environmental education.'),
-(2, 5, 'A natural space to learn and connect with animals', 'Discover a space where animals live in harmony, surrounded by green and serene landscapes,
-						designed to learn and connect with nature.'),
-(3, 5, 'Taking care of animals and offering unique experiences', "Explore a safe and friendly atmosphere where visitors and animals live together, reflecting
-						the zoo's commitment to animal welfare and the joy of its visitors.");
+(1, 5, 'Our team works day by day to protect and educate', 'Recognize the dedicated team that works every day to guarantee animals care and promote environmental education.'),
+(2, 5, 'A natural space to learn and connect with animals', 'Discover a space where animals live in harmony, surrounded by green and serene landscapes, designed to learn and connect with nature.'),
+(3, 5, 'Taking care of animals and offering unique experiences', "Explore a safe and friendly atmosphere where visitors and animals live together, reflecting the zoo's commitment to animal welfare and the joy of its visitors.");
 
 
--- 4. Link MEDIA to SERVICES and HEROES
+-- 6. Link MEDIA to SERVICES and HEROES
 INSERT INTO media_relations (media_id, related_table, related_id, usage_type) VALUES
 -- Links for Services
 (100, 'services', 100, 'main'),
@@ -219,4 +226,6 @@ INSERT INTO media_relations (media_id, related_table, related_id, usage_type) VA
 -- Links for Slides
 (109, 'slides', 1, 'main'),
 (110, 'slides', 2, 'main'),
-(111, 'slides', 3, 'main');
+(111, 'slides', 3, 'main'),
+-- Link for Brick (Home More About Us)
+(206, 'bricks', 1, 'main');
