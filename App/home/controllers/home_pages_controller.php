@@ -7,9 +7,17 @@
  * 
  * 📝 Description:
  * Controller for the public Home page.
+ * Handles fetching of dynamic content (Hero, Slides, Featured Services, Content Bricks).
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\CMS\Models\Service (via App/cms/models/service.php)
+ * - Arcadia\CMS\Models\Brick (via App/cms/models/brick.php)
+ * - Arcadia\Hero\Models\Hero (via App/hero/models/Hero.php)
+ * - Arcadia\Hero\Models\Slide (via App/hero/models/Slide.php)
  */
 
 require_once __DIR__ . '/../../cms/models/service.php';
+require_once __DIR__ . '/../../cms/models/brick.php'; // NEW: Brick Model
 require_once __DIR__ . '/../../hero/models/Hero.php';
 require_once __DIR__ . '/../../hero/models/Slide.php';
 
@@ -31,7 +39,11 @@ class HomePagesController {
             $slides = $slideModel->getByHeroId($hero->id_hero);
         }
 
-        // 4. Load view
+        // 4. NEW: Get Home Content Brick (More About Us)
+        $brickModel = new Brick();
+        $homeBrick = $brickModel->getByPage('home');
+
+        // 5. Load view
         if (file_exists(__DIR__ . '/../views/pages/index.php')) {
             include_once __DIR__ . '/../views/pages/index.php';
         } else {

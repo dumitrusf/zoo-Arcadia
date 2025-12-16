@@ -2,41 +2,41 @@
 // App/about/views/pages/about.php
 ?>
 
+<!-- HERO SECTION (Dynamic) -->
 <?php include_once __DIR__ . '/../../../../includes/templates/hero.php'; ?>
-
 
 <main class="intro">
 
 	<section class="intro__section--presentation">
-		<h2 class="intro__title">who we are ?</h2>
+        <!-- Dynamic Brick Title -->
+		<h2 class="intro__title"><?= isset($aboutBrick) ? htmlspecialchars($aboutBrick->title) : 'who we are ?' ?></h2>
 
 		<div class="intro__content">
-
-
 			<div class="intro__presentation">
-				<p>Arcadia Zoo, located near the Brocéliande Forest in Brittany, France, has been a sanctuary for
+                <!-- Dynamic Brick Description -->
+                <?php if (isset($aboutBrick)): ?>
+				    <p><?= nl2br(htmlspecialchars($aboutBrick->description)) ?></p>
+                <?php else: ?>
+                    <!-- Fallback static content -->
+                    <p>Arcadia Zoo, located near the Brocéliande Forest in Brittany, France, has been a sanctuary for
 					animals since 1960. Organized into diverse habitats such as the savannah, jungle, and wetlands,
 					the zoo is committed to the well-being of its residents. Daily veterinary checks ensure the
 					health of all animals before the zoo opens its doors to the public, and their meals are
 					carefully portioned according to veterinarian reports.
-					<br>
-					<br>
+					<br><br>
 					With its thriving operation and happy animals, Arcadia Zoo is a source of pride for its
 					director, José, who envisions even greater achievements for the zoo's future. Through innovation
 					and care, the zoo continues to be a place where visitors can connect with animals and nature.
-				</p>
-
+				    </p>
+                <?php endif; ?>
 			</div>
 		</div>
 	</section>
 
-
 </main>
 
-
-
-
 <section class="testimony" id="testimonys">
+    <!-- ... testimony section remains static for now ... -->
 	<div class="testimony__approuved testimony__container">
 		<h2 class="testimony__title testimony__title--shown">All testimonys</h2>
 
@@ -105,8 +105,6 @@
 			</div>
 		</div>
 	</div>
-
-
 
 	<div class="testimony__feedback testimony__container">
 		<h2 class="testimony__title testimony__title--feedback">Write your feedback</h2>
