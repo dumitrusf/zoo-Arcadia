@@ -71,10 +71,14 @@ CREATE TABLE opening (
 CREATE TABLE bricks (
     id_brick INT AUTO_INCREMENT PRIMARY KEY,
     -- Unique Brick identifier.
-    b_title VARCHAR(100) NOT NULL,
+    title VARCHAR(100) NOT NULL,
     -- Brick title.Mandatory.
-    b_description TEXT NOT NULL,
+    description TEXT NOT NULL,
     -- Brick description.Mandatory
+    link VARCHAR(255),
+    -- Link for the button (optional).
+    page_name ENUM('home', 'about', 'services', 'habitats', 'animals', 'contact') NOT NULL,
+    -- Page where this brick belongs.
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     -- Creation dates
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- Date of update.

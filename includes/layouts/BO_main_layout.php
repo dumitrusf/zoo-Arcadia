@@ -87,6 +87,12 @@ include(__DIR__ . "/../pageTitle.php");
                             <i class="bi bi-layout-text-window-reverse"></i> Page Headers
                         </a>
                     </li>
+                    <!-- Bricks (Content Blocks) -->
+                    <li class="nav-item">
+                        <a class="nav-link <?= ($domain === 'cms' && $controller === 'bricks') ? 'active' : '' ?>" href="/cms/bricks/start">
+                            <i class="bi bi-box-seam"></i> Content Blocks
+                        </a>
+                    </li>
                 <?php endif; ?>
 
             </div>
@@ -114,8 +120,8 @@ include(__DIR__ . "/../pageTitle.php");
 
     <!-- 
       Order of loading Scripts is important:
-      1. jQuery (requerido por Bootstrap y DataTables)
-      2. Bootstrap JS (para la funcionalidad de la plantilla)
+      1. jQuery (required for Bootstrap and DataTables)
+      2. Bootstrap JS (for the functionality of the template)
       3. DataTables Core
       4. DataTables Bootstrap 5 Integration
       5. Nuestro código de activación (app.js)
