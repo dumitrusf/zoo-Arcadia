@@ -24,12 +24,12 @@
                         <fieldset class="filter__fieldset">
                             <legend class="filter__legend">filter by:</legend>
 
-                            <!-- Animal breed filter -->
+                            <!-- Animal specie  filter -->
                             <div class="filter__legend-election">
-                                <label for="animal-breed" class="filter__label">Animal breed:</label>
+                                <label for="animal-specie " class="filter__label">Animal specie :</label>
 
-                                <select id="animal-breed" name="animal-breed" class="filter__select">
-                                    <option value="" selected>Select animal breed</option>
+                                <select id="animal-specie " name="animal-specie " class="filter__select">
+                                    <option value="" selected>Select animal specie </option>
                                     <option value="mammal">Mammal</option>
                                     <option value="reptile">Reptile</option>
                                     <option value="bird">Bird</option>
@@ -97,116 +97,59 @@
 
 
     <div class="intro">
+        <?php if (!empty($animals)): ?>
+            <?php foreach ($animals as $animal): ?>
+                <article class="intro__article intro__animal">
+                    <a class="intro__link" href="/animals/pages/animalpicked?id=<?= $animal->id_full_animal ?>" target="_blank" rel="noopener noreferrer">
+                        <?php if (!empty($animal->media_path)): ?>
+                            <picture>
+                                <source
+                                    srcset="<?= !empty($animal->media_path_large) ? $animal->media_path_large : getCloudinaryUrl($animal->media_path, 'w_1280,c_scale,q_auto,f_auto') ?>"
+                                    media="(min-width: 1280px)" />
+                                <source
+                                    srcset="<?= !empty($animal->media_path_medium) ? $animal->media_path_medium : getCloudinaryUrl($animal->media_path, 'w_744,c_scale,q_auto,f_auto') ?>"
+                                    media="(min-width: 744px)" />
+                                <img src="<?= getCloudinaryUrl($animal->media_path, 'w_400,c_scale,q_auto,f_auto') ?>"
+                                    class="intro__image d-block img-fluid" alt="<?= htmlspecialchars($animal->animal_name) ?>" loading="lazy" />
+                            </picture>
+                        <?php else: ?>
+                            <div class="intro__image bg-light d-flex align-items-center justify-content-center" style="min-height: 200px;">
+                                <i class="bi bi-image" style="font-size: 3rem; color: #ccc;"></i>
+                            </div>
+                        <?php endif; ?>
 
-
-
-        <article class="intro__article intro__animal">
-            <a class="intro__link" href="/animals/pages/animalpicked" target="_blank" rel="noopener noreferrer">
-
-                <picture>
-                    <source
-                        srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764877372/DALL_E_2024-10-18_18.28.54_-_A_hyper-realistic_jungle_scene_featuring_a_harpy_eagle_perched_on_a_branch_with_a_similar_environment_to_the_previous_jungle_images._The_background_i_1_il6ikc.webp"
-                        media="(min-width: 1280px)" />
-                    <source
-                        srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764877722/DALL_E_2024-10-18_18.28.54_-_A_hyper-realistic_jungle_scene_featuring_a_harpy_eagle_perched_on_a_branch_with_a_similar_environment_to_the_previous_jungle_images._The_background_i_1_nczypq.webp"
-                        media="(min-width: 744px)" />
-                    <img src="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764878015/DALL_E_2024-10-18_18.28.54_-_A_hyper-realistic_jungle_scene_featuring_a_harpy_eagle_perched_on_a_branch_with_a_similar_environment_to_the_previous_jungle_images._The_background_i_1_gxgj6y.webp"
-                        class="intro__image d-block" alt="animal-1" />
-                </picture>
-
-                <div class="intro__details">
-                    <h3 class="intro__name">bujara</h3>
-                    <p class="intro__species">vulture</p>
-                    <p class="intro__habitat">savannah</p>
-                </div>
-            </a>
-        </article>
-        <article class="intro__article intro__animal">
-            <a class="intro__link" href="./animal-picked.php" target="_blank" rel="noopener noreferrer">
-
-                <picture>
-                    <source
-                        srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764877366/jirafa_ddeelb.webp"
-                        media="(min-width: 1280px)" />
-                    <source
-                        srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764877731/jirafa_mfpdrh.webp"
-                        media="(min-width: 744px)" />
-                    <img src="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764878015/jirafa_rqtifl.webp"
-                        class="intro__image d-block" alt="animal-1" />
-                </picture>
-
-                <div class="intro__details">
-                    <h3 class="intro__name">bujara</h3>
-                    <p class="intro__species">vulture</p>
-                    <p class="intro__habitat">savannah</p>
-                </div>
-            </a>
-        </article>
-
-
-
-        <article class="intro__article intro__animal">
-            <a class="intro__link" href="./animal-picked.php" target="_blank" rel="noopener noreferrer">
-
-
-                <picture>
-                    <source
-                        srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764877362/DALL_E_2024-10-19_11.56.54_-_A_close-up_realistic_scene_featuring_a_hippopotamus_in_a_swampy_area._The_hippo_is_partially_submerged_in_water_with_its_large_head_and_upper_body_v_1_iu8pvm.webp"
-                        media="(min-width: 1280px)" />
-                    <source
-                        srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764877718/DALL_E_2024-10-19_11.56.54_-_A_close-up_realistic_scene_featuring_a_hippopotamus_in_a_swampy_area._The_hippo_is_partially_submerged_in_water_with_its_large_head_and_upper_body_v_1_sxpzxo.webp"
-                        media="(min-width: 744px)" />
-                    <img src="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764878016/DALL_E_2024-10-19_11.56.54_-_A_close-up_realistic_scene_featuring_a_hippopotamus_in_a_swampy_area._The_hippo_is_partially_submerged_in_water_with_its_large_head_and_upper_body_v_1_zmk9xs.webp"
-                        class="intro__image d-block" alt="animal-2" />
-                </picture>
-                <div class="intro__details">
-                    <h3 class="intro__name">bujara</h3>
-                    <p class="intro__species">vulture</p>
-                    <p class="intro__habitat">savannah</p>
-                </div>
-            </a>
-        </article>
-
-
-
-        <article class="intro__article intro__animal">
-            <a class="intro__link" href="./animal-picked.php" target="_blank" rel="noopener noreferrer">
-                <picture>
-                    <source
-                        srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764877358/DALL_E_2024-08-24_20.30.28_-_A_hyper-realistic_image_of_a_vulture_in_the_savanna._The_vulture_is_in_the_foreground_standing_on_the_ground_with_its_wings_slightly_spread_showcasi_3_sayqga.webp"
-                        media="(min-width: 1280px)" />
-                    <source
-                        srcset="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764877713/DALL_E_2024-08-24_20.30.28_-_A_hyper-realistic_image_of_a_vulture_in_the_savanna._The_vulture_is_in_the_foreground_standing_on_the_ground_with_its_wings_slightly_spread_showcasi_2_azrc3v.webp"
-                        media="(min-width: 744px)" />
-                    <img src="https://res.cloudinary.com/dxkdwzbs6/image/upload/v1764877968/DALL_E_2024-08-24_20.30.28_-_A_hyper-realistic_image_of_a_vulture_in_the_savanna._The_vulture_is_in_the_foreground_standing_on_the_ground_with_its_wings_slightly_spread_showcasi_1_widzmc.png"
-                        class="intro__image d-block" alt="animal-3" />
-                </picture>
-                <div class="intro__details">
-                    <h3 class="intro__name">bujara</h3>
-                    <p class="intro__species">vulture</p>
-                    <p class="intro__habitat">savannah</p>
-                </div>
-            </a>
-        </article>
-
+                        <div class="intro__details">
+                            <h3 class="intro__name"><?= htmlspecialchars($animal->animal_name ?? 'Unknown') ?></h3>
+                            <p class="intro__classes"><?= htmlspecialchars($animal->specie_name ?? 'Unknown species') ?></p>
+                            <p class="intro__habitat"><?= htmlspecialchars($animal->habitat_name ?? 'Unknown habitat') ?></p>
+                        </div>
+                    </a>
+                </article>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <div class="container text-center py-5">
+                <p class="h3 text-muted">No animals found at the moment.</p>
+            </div>
+        <?php endif; ?>
     </div>
 
-    <nav class="nav-pagination">
-
-        <ul class="nav-pagination__ul">
-            <li class="nav-pagination__li">
-                <a href="#" aria-label="Previous">
-                    <i class="bi bi-caret-left-fill"></i>
-                </a>
-            </li>
-            <li class="nav-pagination__li"><a href="#">1,</a></li>
-            <li class="nav-pagination__li nav__link--active"><a href="#">2,</a></li>
-            <li class="nav-pagination__li"><a href="#">3 ...</a></li>
-            <li class="nav-pagination__li">
-                <a href="#" aria-label="Next">
-                    <i class="bi bi-caret-right-fill"></i>
-                </a>
-            </li>
-        </ul>
-    </nav>
+    <?php if (!empty($animals) && count($animals) > 12): ?>
+        <nav class="nav-pagination">
+            <ul class="nav-pagination__ul">
+                <li class="nav-pagination__li">
+                    <a href="#" aria-label="Previous">
+                        <i class="bi bi-caret-left-fill"></i>
+                    </a>
+                </li>
+                <li class="nav-pagination__li"><a href="#">1,</a></li>
+                <li class="nav-pagination__li nav__link--active"><a href="#">2,</a></li>
+                <li class="nav-pagination__li"><a href="#">3 ...</a></li>
+                <li class="nav-pagination__li">
+                    <a href="#" aria-label="Next">
+                        <i class="bi bi-caret-right-fill"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    <?php endif; ?>
 </main>

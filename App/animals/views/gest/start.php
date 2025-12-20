@@ -1,0 +1,502 @@
+<?php
+// App/animals/views/gest/start.php
+?>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Manage Animals</h1>
+        <a href="/animals/gest/create" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Create New Animal
+        </a>
+    </div>
+
+    <?php if (isset($_GET['msg'])): ?>
+        <div class="alert <?= ($_GET['msg'] === 'error') ? 'alert-danger' : 'alert-success' ?> alert-dismissible fade show" role="alert">
+            <?php if ($_GET['msg'] === 'error' && isset($_GET['error'])): ?>
+                <?= htmlspecialchars($_GET['error']) ?>
+            <?php else: ?>
+                Action completed successfully!
+            <?php endif; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php endif; ?>
+
+    <!-- TABS NAVIGATION -->
+    <ul class="nav nav-tabs mb-4" id="animalsTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="animals-tab" data-bs-toggle="tab" data-bs-target="#animals" type="button" role="tab">
+                Animals
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="species-tab" data-bs-toggle="tab" data-bs-target="#species" type="button" role="tab">
+                Species
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="categories-tab" data-bs-toggle="tab" data-bs-target="#categories" type="button" role="tab">
+                Categories
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="nutrition-tab" data-bs-toggle="tab" data-bs-target="#nutrition" type="button" role="tab">
+                Nutrition
+            </button>
+        </li>
+    </ul>
+
+    <!-- TABS CONTENT -->
+    <div class="tab-content" id="animalsTabsContent">
+        
+        <!-- ANIMALS TAB -->
+        <div class="tab-pane fade show active" id="animals" role="tabpanel">
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th style="width: 50px;">ID</th>
+                            <th>Photo</th>
+                            <th>Name</th>
+                            <th>Species</th>
+                            <th>Category</th>
+                            <th>Habitat</th>
+                            <th>Gender</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (!empty($animals)): ?>
+                            <?php foreach ($animals as $animal): ?>
+                                <tr>
+                                    <!-- ID Column -->
+                                    <td class="fw-bold text-muted">#<?= $animal->id_full_animal ?? 'N/A' ?></td>
+
+                                    <!-- Image Column -->
+                                    <td style="width: 80px;">
+                                        <?php if (!empty($animal->media_path)): ?>
+                                            <img src="<?= htmlspecialchars($animal->media_path) ?>" alt="Animal Photo" 
+                                                 class="rounded" style="width: 60px; height: 60px; object-fit: cover;" loading="lazy">
+                                        <?php else: ?>
+                                            <div class="bg-light rounded d-flex align-items-center justify-content-center text-muted" style="width: 60px; height: 60px;">
+                                                <i class="bi bi-image"></i>
+                                            </div>
+                                        <?php endif; ?>
+                                    </td>
+                                    
+                                    <!-- Name -->
+                                    <td class="fw-bold"><?= htmlspecialchars($animal->animal_name ?? 'N/A') ?></td>
+                                    
+                                    <!-- Species -->
+                                    <td><?= htmlspecialchars($animal->specie_name ?? 'N/A') ?></td>
+                                    
+                                    <!-- Category -->
+                                    <td><?= htmlspecialchars($animal->category_name ?? 'N/A') ?></td>
+                                    
+                                    <!-- Habitat -->
+                                    <td><?= htmlspecialchars($animal->habitat_name ?? 'No habitat assigned') ?></td>
+                                    
+                                    <!-- Gender -->
+                                    <td><?= htmlspecialchars($animal->gender ?? 'N/A') ?></td>
+                                    
+                                    <!-- Actions -->
+                                    <td class="text-end">
+                                        <a href="/animals/gest/edit?id=<?= $animal->id_full_animal ?>" class="btn btn-sm btn-warning me-1">
+                                            <i>edit</i>
+                                        </a>
+                                        <a href="/animals/gest/delete?id=<?= $animal->id_full_animal ?>" 
+                                           class="btn btn-sm btn-danger"
+                                           onclick="return confirm('Are you sure you want to delete this animal?');">
+                                            <i>delete</i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="8" class="text-center text-muted py-4">
+                                    No animals found. Click "Create New Animal" to add one.
+                                </td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+        </div>
+
+        <!-- SPECIES TAB -->
+        <div class="tab-pane fade" id="species" role="tabpanel">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Create New Species</h5>
+                </div>
+                <div class="card-body">
+                    <form action="/animals/gest/saveSpecies" method="POST" class="row g-3">
+                        <div class="col-md-5">
+                            <label for="specie_name" class="form-label fw-bold">Species Name</label>
+                            <input type="text" class="form-control" id="specie_name" name="specie_name" 
+                                   placeholder="E.g., Lion, Tiger, Elephant" required>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="category_id" class="form-label fw-bold">Category</label>
+                            <select class="form-select" id="category_id" name="category_id" required>
+                                <option value="" disabled selected>Select a category...</option>
+                                <?php if (!empty($categories)): ?>
+                                    <?php foreach ($categories as $cat): ?>
+                                        <option value="<?= $cat->id_category ?>">
+                                            <?= htmlspecialchars($cat->category_name) ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <option disabled>No categories available. Create one first!</option>
+                                <?php endif; ?>
+                            </select>
+                        </div>
+                        <div class="col-md-2 d-flex align-items-end">
+                            <button type="submit" class="btn btn-success w-100">
+                                <i class="bi bi-plus-circle"></i> Add
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="mb-3">Existing Species</h5>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th style="width: 50px;">ID</th>
+                                    <th>Species Name</th>
+                                    <th>Category</th>
+                                    <th class="text-end">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (!empty($species)): ?>
+                                    <?php foreach ($species as $specie): ?>
+                                        <tr>
+                                            <td class="fw-bold text-muted">#<?= $specie->id_specie ?></td>
+                                            <td class="fw-bold"><?= htmlspecialchars($specie->specie_name) ?></td>
+                                            <td><?= htmlspecialchars($specie->category_name ?? 'N/A') ?></td>
+                                            <td class="text-end">
+                                                <button type="button" class="btn btn-sm btn-warning me-1" 
+                                                        onclick="editSpecies(<?= $specie->id_specie ?>, '<?= htmlspecialchars($specie->specie_name, ENT_QUOTES) ?>', <?= $specie->category_id ?>)">
+                                                    <i>edit</i>
+                                                </button>
+                                                <a href="/animals/gest/deleteSpecies?id=<?= $specie->id_specie ?>" 
+                                                   class="btn btn-sm btn-danger"
+                                                   onclick="return confirm('Are you sure? This will delete all animals of this species!');">
+                                                    <i>delete</i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <tr>
+                                        <td colspan="4" class="text-center text-muted py-4">
+                                            No species found. Create one above.
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CATEGORIES TAB -->
+        <div class="tab-pane fade" id="categories" role="tabpanel">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Create New Category</h5>
+                </div>
+                <div class="card-body">
+                    <form action="/animals/gest/saveCategory" method="POST" class="row g-3">
+                        <div class="col-md-10">
+                            <label for="category_name" class="form-label fw-bold">Category Name</label>
+                            <input type="text" class="form-control" id="category_name" name="category_name" 
+                                   placeholder="E.g., Mammal, Bird, Reptile, Fish" required>
+                        </div>
+                        <div class="col-md-2 d-flex align-items-end">
+                            <button type="submit" class="btn btn-success w-100">
+                                <i class="bi bi-plus-circle"></i> Add
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="mb-3">Existing Categories</h5>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th style="width: 50px;">ID</th>
+                                    <th>Category Name</th>
+                                    <th class="text-end">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (!empty($categories)): ?>
+                                    <?php foreach ($categories as $category): ?>
+                                        <tr>
+                                            <td class="fw-bold text-muted">#<?= $category->id_category ?></td>
+                                            <td class="fw-bold"><?= htmlspecialchars($category->category_name) ?></td>
+                                            <td class="text-end">
+                                                <button type="button" class="btn btn-sm btn-warning me-1" 
+                                                        onclick="editCategory(<?= $category->id_category ?>, '<?= htmlspecialchars($category->category_name, ENT_QUOTES) ?>')">
+                                                    <i>edit</i>
+                                                </button>
+                                                <a href="/animals/gest/deleteCategory?id=<?= $category->id_category ?>" 
+                                                   class="btn btn-sm btn-danger"
+                                                   onclick="return confirm('Are you sure? This will delete all species and animals in this category!');">
+                                                    <i>delete</i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <tr>
+                                        <td colspan="3" class="text-center text-muted py-4">
+                                            No categories found. Create one above.
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NUTRITION TAB -->
+        <div class="tab-pane fade" id="nutrition" role="tabpanel">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Create New Nutrition Plan</h5>
+                </div>
+                <div class="card-body">
+                    <form action="/animals/gest/saveNutrition" method="POST" class="row g-3">
+                        <div class="col-md-4">
+                            <label for="nutrition_type" class="form-label fw-bold">Nutrition Type</label>
+                            <select class="form-select" id="nutrition_type" name="nutrition_type" required>
+                                <option value="" disabled selected>Select type...</option>
+                                <option value="carnivorous">Carnivorous</option>
+                                <option value="herbivorous">Herbivorous</option>
+                                <option value="omnivorous">Omnivorous</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="food_type" class="form-label fw-bold">Food Type</label>
+                            <select class="form-select" id="food_type" name="food_type" required>
+                                <option value="" disabled selected>Select food...</option>
+                                <option value="meat">Meat</option>
+                                <option value="fruit">Fruit</option>
+                                <option value="legumes">Legumes</option>
+                                <option value="insect">Insect</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="food_qtty" class="form-label fw-bold">Quantity (grams)</label>
+                            <input type="number" class="form-control" id="food_qtty" name="food_qtty" 
+                                   min="1" step="1" placeholder="e.g., 5000" required>
+                        </div>
+                        <div class="col-md-1 d-flex align-items-end">
+                            <button type="submit" class="btn btn-info text-white w-100">
+                                <i class="bi bi-plus-circle"></i> Add
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="mb-3">Existing Nutrition Plans</h5>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th style="width: 50px;">ID</th>
+                                    <th>Nutrition Type</th>
+                                    <th>Food Type</th>
+                                    <th>Quantity (g)</th>
+                                    <th class="text-end">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (!empty($nutritions)): ?>
+                                    <?php foreach ($nutritions as $nutrition): ?>
+                                        <tr>
+                                            <td class="fw-bold text-muted">#<?= $nutrition->id_nutrition ?></td>
+                                            <td class="fw-bold"><?= htmlspecialchars(ucfirst($nutrition->nutrition_type)) ?></td>
+                                            <td><?= htmlspecialchars(ucfirst($nutrition->food_type)) ?></td>
+                                            <td><?= number_format($nutrition->food_qtty) ?>g</td>
+                                            <td class="text-end">
+                                                <button type="button" class="btn btn-sm btn-warning me-1" 
+                                                        onclick="editNutrition(<?= $nutrition->id_nutrition ?>, '<?= htmlspecialchars($nutrition->nutrition_type, ENT_QUOTES) ?>', '<?= htmlspecialchars($nutrition->food_type, ENT_QUOTES) ?>', <?= $nutrition->food_qtty ?>)">
+                                                    <i>edit</i>
+                                                </button>
+                                                <a href="/animals/gest/deleteNutrition?id=<?= $nutrition->id_nutrition ?>" 
+                                                   class="btn btn-sm btn-danger"
+                                                   onclick="return confirm('Are you sure? This will remove this nutrition plan from all animals using it!');">
+                                                    <i>delete</i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <tr>
+                                        <td colspan="5" class="text-center text-muted py-4">
+                                            No nutrition plans found. Create one above.
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Modals (Hidden Forms) -->
+<!-- Edit Category Modal -->
+<div class="modal fade" id="editCategoryModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/animals/gest/saveCategory" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Category</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="edit_category_id" name="id_category">
+                    <div class="mb-3">
+                        <label for="edit_category_name" class="form-label">Category Name</label>
+                        <input type="text" class="form-control" id="edit_category_name" name="category_name" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Species Modal -->
+<div class="modal fade" id="editSpeciesModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/animals/gest/saveSpecies" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Species</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="edit_specie_id" name="id_specie">
+                    <div class="mb-3">
+                        <label for="edit_specie_name" class="form-label">Species Name</label>
+                        <input type="text" class="form-control" id="edit_specie_name" name="specie_name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_specie_category_id" class="form-label">Category</label>
+                        <select class="form-select" id="edit_specie_category_id" name="category_id" required>
+                            <option value="" disabled>Select a category...</option>
+                            <?php if (!empty($categories)): ?>
+                                <?php foreach ($categories as $cat): ?>
+                                    <option value="<?= $cat->id_category ?>">
+                                        <?= htmlspecialchars($cat->category_name) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Nutrition Modal -->
+<div class="modal fade" id="editNutritionModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/animals/gest/saveNutrition" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Nutrition Plan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="edit_nutrition_id" name="id_nutrition">
+                    <div class="mb-3">
+                        <label for="edit_nutrition_type" class="form-label">Nutrition Type</label>
+                        <select class="form-select" id="edit_nutrition_type" name="nutrition_type" required>
+                            <option value="carnivorous">Carnivorous</option>
+                            <option value="herbivorous">Herbivorous</option>
+                            <option value="omnivorous">Omnivorous</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_food_type" class="form-label">Food Type</label>
+                        <select class="form-select" id="edit_food_type" name="food_type" required>
+                            <option value="meat">Meat</option>
+                            <option value="fruit">Fruit</option>
+                            <option value="legumes">Legumes</option>
+                            <option value="insect">Insect</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_food_qtty" class="form-label">Quantity (grams)</label>
+                        <input type="number" class="form-control" id="edit_food_qtty" name="food_qtty" 
+                               min="1" step="1" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-info text-white">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function editCategory(id, name) {
+    document.getElementById('edit_category_id').value = id;
+    document.getElementById('edit_category_name').value = name;
+    new bootstrap.Modal(document.getElementById('editCategoryModal')).show();
+}
+
+function editSpecies(id, name, categoryId) {
+    document.getElementById('edit_specie_id').value = id;
+    document.getElementById('edit_specie_name').value = name;
+    document.getElementById('edit_specie_category_id').value = categoryId;
+    new bootstrap.Modal(document.getElementById('editSpeciesModal')).show();
+}
+
+function editNutrition(id, nutritionType, foodType, foodQty) {
+    document.getElementById('edit_nutrition_id').value = id;
+    document.getElementById('edit_nutrition_type').value = nutritionType;
+    document.getElementById('edit_food_type').value = foodType;
+    document.getElementById('edit_food_qtty').value = foodQty;
+    new bootstrap.Modal(document.getElementById('editNutritionModal')).show();
+}
+</script>

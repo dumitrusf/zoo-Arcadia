@@ -229,3 +229,46 @@ INSERT INTO media_relations (media_id, related_table, related_id, usage_type) VA
 (111, 'slides', 3, 'main'),
 -- Link for Brick (Home More About Us)
 (206, 'bricks', 1, 'main');
+
+-- ============================================================
+-- SEED DATA FOR HABITATS (Savannah, Jungle, Swamp)
+-- ============================================================
+
+-- 7. Insert HABITATS
+INSERT INTO habitats (id_habitat, habitat_name, description_habitat) VALUES
+(1, 'Savannah', 'Majesty in its rawest form'),
+(2, 'Jungle', 'EMBRACE THE SURPRISES OF THE JUNGLE'),
+(3, 'swamp', 'UNCOVER THE MYSTERIES OF THE SWAMP');
+
+-- 8. Insert MEDIA for Habitats (Cards/Listings images)
+INSERT INTO media (id_media, media_path, media_path_medium, media_path_large, media_type, description) VALUES
+-- Savannah Habitat Card Images
+(112, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766091147/arcadia_uploads/jyxp73wbq6ddownipvis.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766091174/arcadia_uploads/jryclj1jkkpz2a39xsg5.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766091253/arcadia_uploads/lddrokgktbokvo1tdypn.png', 'image', 'Savannah Habitat Card'),
+-- Jungle Habitat Card Images
+(113, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766092293/arcadia_uploads/bdxxfgxfxgoif1iwonud.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766092373/arcadia_uploads/nflh6z7os8ptp2brc9is.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766092573/arcadia_uploads/k9v8qp3etqdler2qdvqr.png', 'image', 'Jungle Habitat Card'),
+-- Swamp Habitat Card Images
+(114, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766094070/arcadia_uploads/o1w2dksoerzlkfksmkla.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766094146/arcadia_uploads/visplj8egr0pqdxha9z8.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766094190/arcadia_uploads/v15s7juxxahooaqgamco.png', 'image', 'Swamp Habitat Card'),
+-- Savannah Hero Images
+(115, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766090958/arcadia_uploads/rr8fohrnbkiwdekj2noa.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766091027/arcadia_uploads/qminb0u2p9syksaka3ra.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766091063/arcadia_uploads/tongriqblcx5sa6sasv1.webp', 'image', 'Savannah Hero Background'),
+-- Jungle Hero Images
+(116, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766093099/arcadia_uploads/drjznpcgiejwrtpjnjht.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766093163/arcadia_uploads/nzwzdhlpoekku6b7fmym.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766093194/arcadia_uploads/gydql4irp9h1qzxpq5p2.webp', 'image', 'Jungle Hero Background'),
+-- Swamp Hero Images
+(117, 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766093761/arcadia_uploads/zoqvgbwcus9fhvkqia20.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766093788/arcadia_uploads/xi9hjzrtieopg8a2eptu.webp', 'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766093891/arcadia_uploads/fizurykhv12kkzdn722v.webp', 'image', 'Swamp Hero Background');
+
+-- 9. Insert HEROES for Habitats (with habitat_id)
+INSERT INTO heroes (id_hero, hero_title, hero_subtitle, page_name, has_sliders, habitat_id) VALUES
+(6, 'VELVET SOVEREIGNS', 'HEIRS OF A KINGDOM WITHOUT BORDERS', 'habitats', 0, 1),
+(7, 'the silent Sylvans', 'emerald unseen\'s art', 'habitats', 0, 2),
+(8, 'The bayou barons', 'A new pulse of a hidden world', 'habitats', 0, 3);
+
+-- 10. Link MEDIA to HABITATS (for cards/listings)
+INSERT INTO media_relations (media_id, related_table, related_id, usage_type) VALUES
+(112, 'habitats', 1, 'main'),
+(113, 'habitats', 2, 'main'),
+(114, 'habitats', 3, 'main');
+
+-- 11. Link MEDIA to HEROES (for habitat-specific heroes)
+INSERT INTO media_relations (media_id, related_table, related_id, usage_type) VALUES
+(115, 'heroes', 6, 'main'),
+(116, 'heroes', 7, 'main'),
+(117, 'heroes', 8, 'main');

@@ -23,6 +23,17 @@ ADD CONSTRAINT fk_hero_in_slides
 FOREIGN KEY (hero_id) REFERENCES heroes(id_hero)
 ON DELETE CASCADE
 ON UPDATE CASCADE;
+
+-- Verify if there is already a foreign key before adding it
+ALTER TABLE heroes
+DROP FOREIGN KEY IF EXISTS fk_habitat_in_heroes;
+
+-- Relationship: heroes.habitat_id -> habitats.id_habitat
+ALTER TABLE heroes
+ADD CONSTRAINT fk_habitat_in_heroes
+FOREIGN KEY (habitat_id) REFERENCES habitats(id_habitat)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
 --
 --
 
@@ -172,29 +183,29 @@ ON UPDATE CASCADE;
 
 
 -- Verify if there is already the foreign key before adding it
-ALTER TABLE breed
-DROP FOREIGN KEY IF EXISTS fk_specie_in_breed;
+ALTER TABLE specie 
+DROP FOREIGN KEY IF EXISTS fk_category_in_specie ;
 
--- Relationship: breed.specie_id -> specie.id_specie
-ALTER TABLE breed
-ADD CONSTRAINT fk_specie_in_breed
-FOREIGN KEY (specie_id) REFERENCES specie(id_specie)
-ON DELETE CASCADE    -- Si se elimina una especie, también se eliminan las razas asociadas.
-ON UPDATE CASCADE;   -- Si cambia el id_specie, se actualiza automáticamente en breed.
+-- Relationship: specie.category_id -> category.id_category
+ALTER TABLE specie 
+ADD CONSTRAINT fk_category_in_specie 
+FOREIGN KEY (category_id) REFERENCES category(id_category)
+ON DELETE CASCADE    -- Si se elimina una categoría, también se eliminan las especies asociadas.
+ON UPDATE CASCADE;   -- Si cambia el id_category, se actualiza automáticamente en specie.
 --
 --
 
 
 -- Verify if there is already the foreign key before adding it
 ALTER TABLE animal_general
-DROP FOREIGN KEY IF EXISTS fk_breed_in_animal_general;
+DROP FOREIGN KEY IF EXISTS fk_specie_in_animal_general;
 
--- Relationship: animal_general.breed_id -> breed.id_breed
+-- Relationship: animal_general.specie _id -> specie .id_specie 
 ALTER TABLE animal_general
-ADD CONSTRAINT fk_breed_in_animal_general
-FOREIGN KEY (breed_id) REFERENCES breed(id_breed)
+ADD CONSTRAINT fk_specie_in_animal_general
+FOREIGN KEY (specie_id) REFERENCES specie (id_specie )
 ON DELETE RESTRICT   -- No permite eliminar una raza si tiene animales asociados.
-ON UPDATE CASCADE;   -- Si cambia el id_breed, el cambio se propaga automáticamente a animal_general.
+ON UPDATE CASCADE;   -- Si cambia el id_specie , el cambio se propaga automáticamente a animal_general.
 --
 --
 
@@ -265,6 +276,17 @@ ADD CONSTRAINT fk_habitat_in_animal_full
 FOREIGN KEY (habitat_id) REFERENCES habitats(id_habitat)
 ON DELETE SET NULL
 ON UPDATE CASCADE;
+
+-- Verify if there is already a foreign key before adding it
+ALTER TABLE animal_full
+DROP FOREIGN KEY IF EXISTS fk_nutrition_in_animal_full;
+
+-- Relationship: animal_full.nutrition_id -> nutrition.id_nutrition
+ALTER TABLE animal_full
+ADD CONSTRAINT fk_nutrition_in_animal_full
+FOREIGN KEY (nutrition_id) REFERENCES nutrition(id_nutrition)
+ON DELETE SET NULL
+ON UPDATE CASCADE;
 --
 --
 
@@ -311,16 +333,6 @@ ON UPDATE CASCADE;
 --
 
 
--- Verify if there is already a foreign key before adding it
-ALTER TABLE feeding_logs
-DROP FOREIGN KEY IF EXISTS fk_nutrition_in_feeding_logs;
-
--- Relationship: feeding_logs.nutrition_id -> nutrition.id_nutrition
-ALTER TABLE feeding_logs
-ADD CONSTRAINT fk_nutrition_in_feeding_logs
-FOREIGN KEY (nutrition_id) REFERENCES nutrition(id_nutrition)
-ON DELETE RESTRICT
-ON UPDATE CASCADE;
 --
 --
 

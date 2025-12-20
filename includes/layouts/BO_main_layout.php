@@ -70,27 +70,45 @@ include(__DIR__ . "/../pageTitle.php");
                 <?php if (in_array($_SESSION['user']['role_id'], [2, 3])): ?>
                     <li class="nav-item">
                         <a class="nav-link <?= ($domain === 'cms' && ($action === 'start' || $action === 'edit' || $action === 'create')) ? 'active' : '' ?>" href="/cms/gest/start">
-                            <i class="bi bi-card-list"></i> Services
+                            Services
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?= ($domain === 'cms' && $action === 'logs') ? 'active' : '' ?>" href="/cms/gest/logs">
-                            <i class="bi bi-journal-text"></i> Service Logs
+                            Service Logs
                         </a>
                     </li>
+
+                    <!-- All the animals -->
+
+                    <li class="nav-item">
+                        <a class="nav-link <?= ($domain === 'animals' && ($action === 'start' || $action === 'edit' || $action === 'create')) ? 'active' : '' ?>" href="/animals/gest/start">
+                            All Animals gest
+                        </a>
+                    </li>
+
+
+                    <!-- All the habitats -->
+                    <li class="nav-item">
+                        <a class="nav-link <?= ($domain === 'habitats' && ($action === 'start' || $action === 'edit' || $action === 'create')) ? 'active' : '' ?>" href="/habitats/gest/start">
+                            All Habitats gest
+                        </a>
+                    </li>
+                    
+                    
                 <?php endif; ?>
 
                 <!-- Page Headers (Admin Only) -->
                 <?php if (isset($_SESSION['user']['role_id']) && $_SESSION['user']['role_id'] == 3): ?>
                     <li class="nav-item">
                         <a class="nav-link <?= ($domain === 'hero') ? 'active' : '' ?>" href="/hero/gest/start">
-                            <i class="bi bi-layout-text-window-reverse"></i> Page Headers
+                            Page Headers
                         </a>
                     </li>
                     <!-- Bricks (Content Blocks) -->
                     <li class="nav-item">
                         <a class="nav-link <?= ($domain === 'cms' && $controller === 'bricks') ? 'active' : '' ?>" href="/cms/bricks/start">
-                            <i class="bi bi-box-seam"></i> Content Blocks
+                            Content Blocks
                         </a>
                     </li>
                 <?php endif; ?>

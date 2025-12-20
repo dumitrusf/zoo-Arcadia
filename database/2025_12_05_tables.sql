@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS service_logs;
 DROP TABLE IF EXISTS services;
 DROP TABLE IF EXISTS animal_clicks;
 DROP TABLE IF EXISTS animal_general;
-DROP TABLE IF EXISTS breed;
+DROP TABLE IF EXISTS specie ;
 DROP TABLE IF EXISTS specie;
 DROP TABLE IF EXISTS habitat_suggestion;
 DROP TABLE IF EXISTS habitats;
@@ -134,12 +134,15 @@ CREATE TABLE heroes (
     -- Mandatory heading title.
     hero_subtitle VARCHAR(100),
     -- Subtitle of the optional header.
-    page_name ENUM('home', 'about', 'services', 'habitats', 'animals') NOT NULL UNIQUE,
+    page_name ENUM('home', 'about', 'services', 'habitats', 'animals') NOT NULL,
     -- Page where this hero belongs.
+    habitat_id INT NULL,
+    -- Optional: Specific habitat ID for habitat-specific heroes (NULL for general page heroes).
     has_sliders BOOLEAN DEFAULT FALSE,
     -- The heading has an associated carousel.
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- Automatic creation and update dates.
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Automatic creation and update dates.
+    UNIQUE KEY unique_page_hero (page_name, habitat_id) -- Ensures one hero per page OR per habitat
 );
 
 --
@@ -340,24 +343,24 @@ CREATE TABLE habitat_suggestion (
 
 --
 --
--- Specie table: defines species
-CREATE TABLE specie (
-    id_specie INT AUTO_INCREMENT PRIMARY KEY,
-    -- Unique identifier of the species.
-    specie_name VARCHAR(50) NOT NULL UNIQUE -- Unique name of the species (mammals, birds, etc.).
+-- category table: defines categoryes
+CREATE TABLE category (
+    id_category INT AUTO_INCREMENT PRIMARY KEY,
+    -- Unique identifier of the categoryes.
+    category_name VARCHAR(50) NOT NULL UNIQUE -- Unique name of the categoryes (mammals, birds, etc.).
     -- Note: Unique ensures that there are no duplicates.
 );
 
 --
 --
--- Breed Table: Define races
-CREATE TABLE breed (
-    id_breed INT AUTO_INCREMENT PRIMARY KEY,
-    -- Unique identifier of the breed.
-    specie_id INT NOT NULL,
-    -- Relationship with the Specie table.
-    breed_name VARCHAR(50) NOT NULL -- Name of the race.
-    -- Note: Unique is not used because a race can be similar in different species in other contexts.
+-- specie  Table: Define races
+CREATE TABLE specie  (
+    id_specie  INT AUTO_INCREMENT PRIMARY KEY,
+    -- Unique identifier of the specie .
+    category_id INT NOT NULL,
+    -- Relationship with the category table.
+    specie_name VARCHAR(50) NOT NULL -- Name of the race.
+    -- Note: Unique is not used because a race can be similar in different categoryes in other contexts.
 );
 
 --
@@ -370,8 +373,8 @@ CREATE TABLE animal_general (
     -- Name of the animal.
     gender ENUM('male', 'female') NOT NULL,
     -- Gender of the animal.
-    breed_id INT NOT NULL -- Relationship with the BREED table.
-    -- Note: Breed_id is mandatory because each animal must be associated with a race.
+    specie_id INT NOT NULL -- Relationship with the specie  table.
+    -- Note: specie_id is mandatory because each animal must be associated with a race.
 );
 
 --
@@ -447,6 +450,9 @@ CREATE TABLE animal_full (
     habitat_id INT NULL,
     -- Relationship with the habitats.
 
+    nutrition_id INT NULL,
+    -- Relationship with the nutrition table (nutrition plan for this animal).
+
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     -- Date of creation of the registration.
 
@@ -519,11 +525,8 @@ CREATE TABLE feeding_logs (
     food_type ENUM('meat', 'fruit', 'legumes', 'insect') NOT NULL,
     -- Type of food used in this diet.
 
-    food_qtty SMALLINT NOT NULL,
+    food_qtty SMALLINT NOT NULL
     -- Amount of food given.
-
-    nutrition_id INT NOT NULL
-    -- Relationship with the Nutrition Table to specify nutritional details.
 );
 
 
