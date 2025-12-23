@@ -338,7 +338,12 @@ CREATE TABLE habitat_suggestion (
     -- Date proposed.
     status ENUM('accepted', 'rejected', 'pending') DEFAULT 'pending',
     -- Status of suggestion.
-    reviewed_on TIMESTAMP -- Date reviewed.
+    reviewed_on TIMESTAMP, 
+    -- Date reviewed.
+    deleted_by_admin TINYINT(1) DEFAULT 0, 
+    -- Marks if suggestion is deleted from admin view (soft delete).
+    deleted_by_veterinarian TINYINT(1) DEFAULT 0 
+    -- Marks if suggestion is deleted from veterinarian view (soft delete).
 );
 
 --
@@ -359,7 +364,7 @@ CREATE TABLE specie  (
     -- Unique identifier of the specie .
     category_id INT NOT NULL,
     -- Relationship with the category table.
-    specie_name VARCHAR(50) NOT NULL -- Name of the race.
+    specie_name VARCHAR(200) NOT NULL -- Name of the race.
     -- Note: Unique is not used because a race can be similar in different categoryes in other contexts.
 );
 
@@ -499,7 +504,7 @@ CREATE TABLE nutrition (
     nutrition_type ENUM('carnivorous', 'herbivorous', 'omnivorous') NOT NULL,
     -- Animal diet type.
 
-    food_type ENUM('meat', 'fruit', 'legumes', 'insect') NOT NULL,
+    food_type ENUM('meat', 'fruit', 'legumes', 'insect', 'fish', 'aquatic_plants', 'leaves', 'grass', 'vegetables', 'nectar') NOT NULL,
     -- Specific food type.
 
     food_qtty SMALLINT NOT NULL

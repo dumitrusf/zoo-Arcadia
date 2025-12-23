@@ -1366,11 +1366,17 @@ select {
   content: "";
   position: absolute;
   inset: 0;
-  box-shadow: 0rem -17.2rem 5.92rem -11.2rem #ebebeb inset, 17.2rem 0rem 5.92rem -11.2rem #ebebeb inset, -17.2rem 0rem 5.92rem -11.2rem #ebebeb inset;
+  box-shadow: 0rem -17.2rem 5.92rem -11.2rem #ebebeb inset;
   z-index: 3;
   margin: auto;
   width: min(100vw, max(128rem, 0vw));
   height: 100%;
+  box-shadow: 0rem -17.2rem 5.92rem -11.2rem #ebebeb inset;
+}
+@media screen and (min-width: 1280px) {
+  .hero::after {
+    box-shadow: 0rem -17.2rem 5.92rem -11.2rem #ebebeb inset, 17.2rem 0rem 5.92rem -11.2rem #ebebeb inset, -17.2rem 0rem 5.92rem -11.2rem #ebebeb inset;
+  }
 }
 .hero--services {
   background: linear-gradient(270deg, rgba(235, 235, 235, 0) 0%, #000 100%);

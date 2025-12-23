@@ -26,6 +26,7 @@ require_once __DIR__ . "/../models/animalGeneral.php";
 require_once __DIR__ . "/../models/category.php";
 require_once __DIR__ . "/../models/specie.php";
 require_once __DIR__ . "/../models/nutrition.php";
+require_once __DIR__ . "/../models/feedingLog.php";
 require_once __DIR__ . "/../../habitats/models/habitat.php";
 require_once __DIR__ . "/../../medias/models/cloudinary.php";
 require_once __DIR__ . "/../../medias/models/Media.php";
@@ -41,11 +42,13 @@ class AnimalsGestController
         $categoryModel = new category();
         $specieModel = new specie();
         $nutritionModel = new Nutrition();
+        $feedingModel = new FeedingLog();
         
         $animals = $animalModel->getAll();
         $categories = $categoryModel->getAll();
         $species = $specieModel->getAll();
         $nutritions = $nutritionModel->getAll();
+        $feedings = $feedingModel->getAll();
         
         if (file_exists(__DIR__ . '/../views/gest/start.php')) {
             include_once __DIR__ . '/../views/gest/start.php';

@@ -1,0 +1,167 @@
+<?php
+// App/animals/views/feeding/start.php
+?>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Feeding Logs</h1>
+        <?php 
+            // Only Admin (3) and Employee (2) can create feeding logs
+            $userRoleName = $_SESSION['user']['role_name'] ?? null;
+            if (in_array($userRoleName, ['Admin', 'Employee'])): 
+        ?>
+            <a href="/animals/feeding/create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Record New Feeding
+            </a>
+        <?php endif; ?>
+    </div>
+
+    <?php if (isset($_GET['msg'])): ?>
+        <div class="alert <?= ($_GET['msg'] === 'error') ? 'alert-danger' : 'alert-success' ?> alert-dismissible fade show" role="alert">
+            <?php if ($_GET['msg'] === 'error' && isset($_GET['error'])): ?>
+                <?= htmlspecialchars($_GET['error']) ?>
+            <?php elseif ($_GET['msg'] === 'saved'): ?>
+                Feeding log saved successfully!
+            <?php elseif ($_GET['msg'] === 'deleted'): ?>
+                Feeding log deleted successfully!
+            <?php else: ?>
+                Action completed successfully!
+            <?php endif; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php endif; ?>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th style="width: 50px;">ID</th>
+                            <th>Animal</th>
+                            <th>Food Type</th>
+                            <th>Quantity (g)</th>
+                            <th>Plan Base</th>
+                            <th>Difference</th>
+                            <th>Fed By</th>
+                            <th>Date & Time</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (!empty($feedings)): ?>
+                            <?php foreach ($feedings as $feeding): ?>
+                                <tr>
+                                    <!-- ID Column -->
+                                    <td class="fw-bold text-muted">#<?= $feeding->id_feeding_log ?? 'N/A' ?></td>
+
+                                    <!-- Animal Name -->
+                                    <td class="fw-bold">
+                                        <a href="/animals/feeding/view?animal_id=<?= $feeding->animal_f_id ?>" class="text-decoration-none">
+                                            <?= htmlspecialchars($feeding->animal_name ?? 'N/A') ?>
+                                        </a>
+                                    </td>
+
+                                    <!-- Food Type -->
+                                    <td>
+                                        <span class="badge bg-info">
+                                            <?= htmlspecialchars(ucfirst($feeding->food_type ?? 'N/A')) ?>
+                                        </span>
+                                    </td>
+
+                                    <!-- Quantity Given -->
+                                    <td class="fw-bold"><?= number_format($feeding->food_qtty ?? 0) ?>g</td>
+
+                                    <!-- Plan Base (from nutrition) -->
+                                    <td>
+                                        <?php if ($feeding->plan_food_qtty): ?>
+                                            <span class="text-muted">
+                                                <?= number_format($feeding->plan_food_qtty) ?>g
+                                                <small class="d-block text-muted">(<?= htmlspecialchars(ucfirst($feeding->plan_food_type ?? 'N/A')) ?>)</small>
+                                            </span>
+                                        <?php else: ?>
+                                            <span class="text-muted">No plan assigned</span>
+                                        <?php endif; ?>
+                                    </td>
+
+                                    <!-- Difference (Real vs Plan) -->
+                                    <td>
+                                        <?php if ($feeding->plan_food_qtty): ?>
+                                            <?php 
+                                                $diff = $feeding->food_qtty - $feeding->plan_food_qtty;
+                                                $diffPercent = $feeding->plan_food_qtty > 0 ? round(($diff / $feeding->plan_food_qtty) * 100, 1) : 0;
+                                            ?>
+                                            <?php if ($diff > 0): ?>
+                                                <span class="badge bg-warning text-dark">
+                                                    +<?= number_format($diff) ?>g (+<?= abs($diffPercent) ?>%)
+                                                </span>
+                                            <?php elseif ($diff < 0): ?>
+                                                <span class="badge bg-danger">
+                                                    <?= number_format($diff) ?>g (<?= abs($diffPercent) ?>%)
+                                                </span>
+                                            <?php else: ?>
+                                                <span class="badge bg-success">
+                                                    Exact (0%)
+                                                </span>
+                                            <?php endif; ?>
+                                        <?php else: ?>
+                                            <span class="text-muted">-</span>
+                                        <?php endif; ?>
+                                    </td>
+
+                                    <!-- Fed By (User) -->
+                                    <td>
+                                        <?= htmlspecialchars($feeding->fed_by_username ?? 'Unknown') ?>
+                                    </td>
+
+                                    <!-- Date & Time -->
+                                    <td>
+                                        <?php 
+                                            $date = new DateTime($feeding->food_date);
+                                            echo $date->format('Y-m-d H:i');
+                                        ?>
+                                    </td>
+
+                                    <!-- Actions -->
+                                    <td class="text-end">
+                                        <a href="/animals/feeding/view?animal_id=<?= $feeding->animal_f_id ?>" 
+                                           class="btn btn-sm btn-outline-primary" 
+                                           title="View all feedings for this animal">
+                                            <i class="bi bi-eye">view</i>
+                                        </a>
+                                        <?php 
+                                            // Only Admin and Employee can delete feeding logs
+                                            $userRoleName = $_SESSION['user']['role_name'] ?? null;
+                                            if (in_array($userRoleName, ['Admin', 'Employee'])): 
+                                        ?>
+                                            <a href="/animals/feeding/delete?id=<?= $feeding->id_feeding_log ?>" 
+                                               class="btn btn-sm btn-outline-danger" 
+                                               onclick="return confirm('Are you sure you want to delete this feeding log?')"
+                                               title="Delete">
+                                                <i class="bi bi-trash">delete</i>
+                                            </a>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                    <td colspan="9" class="text-center text-muted py-4">
+                                        <i class="bi bi-inbox"></i> No feeding logs found.
+                                        <?php 
+                                            // Only Admin and Employee can create feeding logs
+                                            $userRoleName = $_SESSION['user']['role_name'] ?? null;
+                                            if (in_array($userRoleName, ['Admin', 'Employee'])): 
+                                        ?>
+                                            <a href="/animals/feeding/create">Create the first one!</a>
+                                        <?php endif; ?>
+                                    </td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

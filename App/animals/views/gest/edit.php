@@ -24,8 +24,8 @@ $isEdit = ($action === 'edit');
                             <label for="animal_name" class="form-label fw-bold">Animal Name</label>
                             <input type="text" class="form-control" id="animal_name" name="animal_name" 
                                    value="<?= $isEdit ? htmlspecialchars($animal->animal_name ?? '') : '' ?>" 
-                                   placeholder="E.g., Simba, Nala, etc." required>
-                            <div class="form-text">The individual name of this animal.</div>
+                                   placeholder="E.g., Simba (León), Nala (León)" required>
+                            <div class="form-text">The individual name of this animal + common species name in parentheses.</div>
                         </div>
 
                         <!-- Species -->

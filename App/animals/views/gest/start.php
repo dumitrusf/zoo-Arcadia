@@ -5,9 +5,16 @@
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>Manage Animals</h1>
-        <a href="/animals/gest/create" class="btn btn-primary">
-            <i class="bi bi-plus-circle"></i> Create New Animal
-        </a>
+        <?php 
+            // Only Admin (3) and Employee (2) can create animals
+            // Veterinarian (1) can only view
+            $userRoleName = $_SESSION['user']['role_name'] ?? null;
+            if (in_array($userRoleName, ['Admin', 'Employee'])): 
+        ?>
+            <a href="/animals/gest/create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Create New Animal
+            </a>
+        <?php endif; ?>
     </div>
 
     <?php if (isset($_GET['msg'])): ?>
@@ -41,6 +48,11 @@
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="nutrition-tab" data-bs-toggle="tab" data-bs-target="#nutrition" type="button" role="tab">
                 Nutrition
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="feeding-tab" data-bs-toggle="tab" data-bs-target="#feeding" type="button" role="tab">
+                Feeding Logs
             </button>
         </li>
     </ul>
@@ -103,14 +115,21 @@
                                     
                                     <!-- Actions -->
                                     <td class="text-end">
-                                        <a href="/animals/gest/edit?id=<?= $animal->id_full_animal ?>" class="btn btn-sm btn-warning me-1">
-                                            <i>edit</i>
-                                        </a>
-                                        <a href="/animals/gest/delete?id=<?= $animal->id_full_animal ?>" 
-                                           class="btn btn-sm btn-danger"
-                                           onclick="return confirm('Are you sure you want to delete this animal?');">
-                                            <i>delete</i>
-                                        </a>
+                                        <?php 
+                                            // Only Admin and Employee can edit/delete animals
+                                            // Veterinarian can only view
+                                            $userRoleName = $_SESSION['user']['role_name'] ?? null;
+                                            if (in_array($userRoleName, ['Admin', 'Employee'])): 
+                                        ?>
+                                            <a href="/animals/gest/edit?id=<?= $animal->id_full_animal ?>" class="btn btn-sm btn-warning me-1">
+                                                <i>edit</i>
+                                            </a>
+                                            <a href="/animals/gest/delete?id=<?= $animal->id_full_animal ?>" 
+                                               class="btn btn-sm btn-danger"
+                                               onclick="return confirm('Are you sure you want to delete this animal?');">
+                                                <i>delete</i>
+                                            </a>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -137,9 +156,10 @@
                 <div class="card-body">
                     <form action="/animals/gest/saveSpecies" method="POST" class="row g-3">
                         <div class="col-md-5">
-                            <label for="specie_name" class="form-label fw-bold">Species Name</label>
+                            <label for="specie_name" class="form-label fw-bold">Species Name (Scientific)</label>
                             <input type="text" class="form-control" id="specie_name" name="specie_name" 
-                                   placeholder="E.g., Lion, Tiger, Elephant" required>
+                                   placeholder="E.g., Panthera leo, Giraffa camelopardalis" required>
+                            <div class="form-text">Enter the scientific name of the species.</div>
                         </div>
                         <div class="col-md-5">
                             <label for="category_id" class="form-label fw-bold">Category</label>
@@ -359,6 +379,155 @@
                                     <tr>
                                         <td colspan="5" class="text-center text-muted py-4">
                                             No nutrition plans found. Create one above.
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FEEDING LOGS TAB -->
+        <div class="tab-pane fade" id="feeding" role="tabpanel">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 class="mb-0">Feeding Logs Management</h5>
+                <?php 
+                    // Only Admin and Employee can create feeding logs
+                    $userRoleName = $_SESSION['user']['role_name'] ?? null;
+                    if (in_array($userRoleName, ['Admin', 'Employee'])): 
+                ?>
+                    <a href="/animals/feeding/create" class="btn btn-primary">
+                        <i class="bi bi-plus-circle"></i> Record New Feeding
+                    </a>
+                <?php endif; ?>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th style="width: 50px;">ID</th>
+                                    <th>Animal</th>
+                                    <th>Food Type</th>
+                                    <th>Quantity (g)</th>
+                                    <th>Plan Base</th>
+                                    <th>Difference</th>
+                                    <th>Fed By</th>
+                                    <th>Date & Time</th>
+                                    <th class="text-end">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (!empty($feedings)): ?>
+                                    <?php foreach ($feedings as $feeding): ?>
+                                        <tr>
+                                            <!-- ID Column -->
+                                            <td class="fw-bold text-muted">#<?= $feeding->id_feeding_log ?? 'N/A' ?></td>
+
+                                            <!-- Animal Name -->
+                                            <td class="fw-bold">
+                                                <a href="/animals/feeding/view?animal_id=<?= $feeding->animal_f_id ?>" class="text-decoration-none">
+                                                    <?= htmlspecialchars($feeding->animal_name ?? 'N/A') ?>
+                                                </a>
+                                            </td>
+
+                                            <!-- Food Type -->
+                                            <td>
+                                                <span class="badge bg-info">
+                                                    <?= htmlspecialchars(ucfirst($feeding->food_type ?? 'N/A')) ?>
+                                                </span>
+                                            </td>
+
+                                            <!-- Quantity Given -->
+                                            <td class="fw-bold"><?= number_format($feeding->food_qtty ?? 0) ?>g</td>
+
+                                            <!-- Plan Base (from nutrition) -->
+                                            <td>
+                                                <?php if ($feeding->plan_food_qtty): ?>
+                                                    <span class="text-muted">
+                                                        <?= number_format($feeding->plan_food_qtty) ?>g
+                                                        <small class="d-block text-muted">(<?= htmlspecialchars(ucfirst($feeding->plan_food_type ?? 'N/A')) ?>)</small>
+                                                    </span>
+                                                <?php else: ?>
+                                                    <span class="text-muted">No plan assigned</span>
+                                                <?php endif; ?>
+                                            </td>
+
+                                            <!-- Difference (Real vs Plan) -->
+                                            <td>
+                                                <?php if ($feeding->plan_food_qtty): ?>
+                                                    <?php 
+                                                        $diff = $feeding->food_qtty - $feeding->plan_food_qtty;
+                                                        $diffPercent = $feeding->plan_food_qtty > 0 ? round(($diff / $feeding->plan_food_qtty) * 100, 1) : 0;
+                                                    ?>
+                                                    <?php if ($diff > 0): ?>
+                                                        <span class="badge bg-warning text-dark">
+                                                            +<?= number_format($diff) ?>g (+<?= abs($diffPercent) ?>%)
+                                                        </span>
+                                                    <?php elseif ($diff < 0): ?>
+                                                        <span class="badge bg-danger">
+                                                            <?= number_format($diff) ?>g (<?= abs($diffPercent) ?>%)
+                                                        </span>
+                                                    <?php else: ?>
+                                                        <span class="badge bg-success">
+                                                            Exact (0%)
+                                                        </span>
+                                                    <?php endif; ?>
+                                                <?php else: ?>
+                                                    <span class="text-muted">-</span>
+                                                <?php endif; ?>
+                                            </td>
+
+                                            <!-- Fed By (User) -->
+                                            <td>
+                                                <?= htmlspecialchars($feeding->fed_by_username ?? 'Unknown') ?>
+                                            </td>
+
+                                            <!-- Date & Time -->
+                                            <td>
+                                                <?php 
+                                                    $date = new DateTime($feeding->food_date);
+                                                    echo $date->format('Y-m-d H:i');
+                                                ?>
+                                            </td>
+
+                                            <!-- Actions -->
+                                            <td class="text-end">
+                                                <a href="/animals/feeding/view?animal_id=<?= $feeding->animal_f_id ?>" 
+                                                   class="btn btn-sm btn-outline-primary me-1" 
+                                                   title="View all feedings for this animal">
+                                                    <i class="bi bi-eye">view</i>
+                                                </a>
+                                                <?php 
+                                                    // Only Admin and Employee can delete feeding logs
+                                                    $userRoleName = $_SESSION['user']['role_name'] ?? null;
+                                                    if (in_array($userRoleName, ['Admin', 'Employee'])): 
+                                                ?>
+                                                    <a href="/animals/feeding/delete?id=<?= $feeding->id_feeding_log ?>" 
+                                                       class="btn btn-sm btn-outline-danger" 
+                                                       onclick="return confirm('Are you sure you want to delete this feeding log?')"
+                                                       title="Delete">
+                                                        <i class="bi bi-trash">delete</i>
+                                                    </a>
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <tr>
+                                        <td colspan="9" class="text-center text-muted py-4">
+                                            <i class="bi bi-inbox"></i> No feeding logs found.
+                                            <?php 
+                                                // Only Admin and Employee can create feeding logs
+                                                $userRoleName = $_SESSION['user']['role_name'] ?? null;
+                                                if (in_array($userRoleName, ['Admin', 'Employee'])): 
+                                            ?>
+                                                <a href="/animals/feeding/create">Create the first one!</a>
+                                            <?php endif; ?>
                                         </td>
                                     </tr>
                                 <?php endif; ?>
