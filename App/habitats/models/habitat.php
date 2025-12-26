@@ -27,6 +27,7 @@ class Habitat {
      */
     public function getAll($includeAnimalCount = false) {
         if ($includeAnimalCount) {
+            // count animals in each habitat
             $sql = "SELECT h.*, COUNT(af.id_full_animal) as animal_count,
                            m.media_path, m.media_path_medium, m.media_path_large
                     FROM habitats h
@@ -36,6 +37,7 @@ class Habitat {
                     GROUP BY h.id_habitat
                     ORDER BY h.habitat_name ASC";
         } else {
+            // else return all habitats without animal count
             $sql = "SELECT h.*, m.media_path, m.media_path_medium, m.media_path_large
                     FROM habitats h
                     LEFT JOIN media_relations mr ON h.id_habitat = mr.related_id AND mr.related_table = 'habitats'
@@ -43,6 +45,7 @@ class Habitat {
                     ORDER BY h.habitat_name ASC";
         }
         
+        // prepare and execute query
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -53,7 +56,7 @@ class Habitat {
      * @param int $id
      * @return object|false
      */
-    public function getById($id) {
+    public function getById($id) { // get habitat by id
         $sql = "SELECT h.*, m.media_path, m.media_path_medium, m.media_path_large
                 FROM habitats h
                 LEFT JOIN media_relations mr ON h.id_habitat = mr.related_id AND mr.related_table = 'habitats'
@@ -71,11 +74,13 @@ class Habitat {
      */
     public function getAnimalsByHabitatId($habitatId) {
         $sql = "SELECT af.*, ag.animal_name, ag.gender, s.specie_name, c.category_name,
+                       n.nutrition_type, n.food_type AS nutrition_food_type, n.food_qtty AS nutrition_food_qtty,
                        m.media_path, m.media_path_medium, m.media_path_large
                 FROM animal_full af
                 JOIN animal_general ag ON af.animal_g_id = ag.id_animal_g
                 JOIN specie s ON ag.specie_id = s.id_specie
                 JOIN category c ON s.category_id = c.id_category
+                LEFT JOIN nutrition n ON af.nutrition_id = n.id_nutrition
                 LEFT JOIN media_relations mr ON af.id_full_animal = mr.related_id AND mr.related_table = 'animal_full'
                 LEFT JOIN media m ON mr.media_id = m.id_media
                 WHERE af.habitat_id = :hid

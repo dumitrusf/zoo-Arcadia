@@ -1427,62 +1427,61 @@ VALUES
        (44, 'Muskrat', 'male', 44),
        (45, 'Giant', 'male', 45),
        (46, 'Manatee', 'female', 46),
-       (47, 'Muskrat', 'female', 44),
-      -- Jungle Birds (48-57)
-      (48, 'Green', 'male', 48),
-      (49, 'Horn', 'male', 49),
-      (50, 'Blue', 'male', 50),
-      (51, 'Eagle', 'female', 51),
-      (52, 'Quetzal', 'male', 52),
-      (53, 'Peck', 'male', 53),
-      (54, 'Cockatoo', 'female', 54),
-      (55, 'Grey', 'male', 55),
-      (56, 'Toucan', 'male', 56),
-      (57, 'Humming', 'female', 57),
-      -- Swamp Birds (58-70)
-      (58, 'Anhinga', 'male', 58),
-      (59, 'Egret', 'female', 59),
-      (60, 'Grey', 'male', 60),
-      (61, 'Red', 'male', 61),
-      (62, 'Stilt', 'female', 62),
-      (63, 'Jabiru', 'male', 63),
-      (64, 'Marabou', 'male', 64),
-      (65, 'Cormorant', 'male', 65),
-      (66, 'Great', 'male', 66),
-      (67, 'Lesser', 'female', 67),
-      (68, 'Greater', 'female', 68),
-      (69, 'Rose', 'female', 69),
-      (70, 'Eurasia', 'male', 70),
-      -- Savannah Birds (71-80)
-      (71, 'Water', 'male', 71),
-      (72, 'Abyssinian', 'female', 72),
-      (73, 'Vulture', 'male', 73),
-      (74, 'Weaver', 'male', 74),
-      (75, 'Martial', 'female', 75),
-      (76, 'Bill', 'male', 76),
-      (77, 'Secretary', 'male', 77),
-      (78, 'Ostrich', 'male', 78),
-      (79, 'Crown', 'female', 79),
-      (80, 'Blacksmith', 'male', 80),
-      -- Swamp Reptiles (81-86)
-      (81, 'Spine', 'female', 81),
-      (82, 'Alli', 'male', 82),
-      (83, 'Yacare', 'male', 83),
-      (84, 'Nile', 'male', 84),
-      (85, 'Gharial', 'male', 85),
-      (86, 'Black', 'male', 86),
-      -- Savannah Reptiles (87-91)
-      (87, 'Agama', 'male', 87),
-      (88, 'Giant', 'male', 88),
-      (89, 'Chameleon', 'male', 89),
-      (90, 'Gopherus', 'female', 90),
-      (91, 'Gecko', 'female', 91),
-      -- Jungle Amphibians (92-96)
-      (92, 'Eyes', 'female', 92),
-      (93, 'Blue', 'male', 93),
-      (94, 'Crystal', 'female', 94),
-      (95, 'Golden', 'male', 95),
-      (96, 'Bicolor', 'female', 96);
+      -- Jungle Birds (47-56)
+      (47, 'Green', 'male', 48),
+      (48, 'Horn', 'male', 49),
+      (49, 'Blue', 'male', 50),
+      (50, 'Eagle', 'female', 51),
+      (51, 'Quetzal', 'male', 52),
+      (52, 'Peck', 'male', 53),
+      (53, 'Cockatoo', 'female', 54),
+      (54, 'Grey', 'male', 55),
+      (55, 'Toucan', 'male', 56),
+      (56, 'Humming', 'female', 57),
+      -- Swamp Birds (57-69)
+      (57, 'Anhinga', 'male', 58),
+      (58, 'Egret', 'female', 59),
+      (59, 'Grey', 'male', 60),
+      (60, 'Red', 'male', 61),
+      (61, 'Stilt', 'female', 62),
+      (62, 'Jabiru', 'male', 63),
+      (63, 'Marabou', 'male', 64),
+      (64, 'Cormorant', 'male', 65),
+      (65, 'Great', 'male', 66),
+      (66, 'Lesser', 'female', 67),
+      (67, 'Greater', 'female', 68),
+      (68, 'Rose', 'female', 69),
+      (69, 'Eurasia', 'male', 70),
+      -- Savannah Birds (70-79)
+      (70, 'Water', 'male', 71),
+      (71, 'Abyssinian', 'female', 72),
+      (72, 'Vulture', 'male', 73),
+      (73, 'Weaver', 'male', 74),
+      (74, 'Martial', 'female', 75),
+      (75, 'Bill', 'male', 76),
+      (76, 'Secretary', 'male', 77),
+      (77, 'Ostrich', 'male', 78),
+      (78, 'Crown', 'female', 79),
+      (79, 'Blacksmith', 'male', 80),
+      -- Swamp Reptiles (80-85)
+      (80, 'Spine', 'female', 81),
+      (81, 'Alli', 'male', 82),
+      (82, 'Yacare', 'male', 83),
+      (83, 'Nile', 'male', 84),
+      (84, 'Gharial', 'male', 85),
+      (85, 'Black', 'male', 86),
+      -- Savannah Reptiles (86-90)
+      (86, 'Agama', 'male', 87),
+      (87, 'Giant', 'male', 88),
+      (88, 'Chameleon', 'male', 89),
+      (89, 'Gopherus', 'female', 90),
+      (90, 'Gecko', 'female', 91),
+      -- Jungle Amphibians (91-95)
+      (91, 'Eyes', 'female', 92),
+      (92, 'Blue', 'male', 93),
+      (93, 'Crystal', 'female', 94),
+      (94, 'Golden', 'male', 95),
+      (95, 'Bicolor', 'female', 96);
 
 -- 16. Insert ANIMAL_FULL (Link animals with habitats and nutrition)
 INSERT INTO
@@ -1588,112 +1587,110 @@ VALUES
        -- Gigante (Nutria Gigante) - carnivorous fish
        (46, 46, 3, 14),
        -- Manatí (Manatí) - herbivorous aquatic plants
-       (47, 47, 3, 18),
-       -- Rata2 (Rata Almizclera) - herbivorous aquatic plants
-       -- Jungle Birds (48-56) - habitat_id=2 (Jungle)
-       (48, 48, 2, 23),
-       -- Verde (Guacamayo) - omnivorous fruit
-       (49, 49, 2, 24),
-       -- Cuerno (Cálao Rinoceronte) - omnivorous fruit
-       (50, 50, 2, 24),
-       -- Azul (Cotinga Azul) - omnivorous fruit
-       (51, 51, 2, 8),
-       -- Águila (Águila Arpía) - carnivorous meat bird of prey
-       (52, 52, 2, 24),
-       -- Quetzal (Quetzal) - omnivorous fruit
-       (53, 53, 2, 27),
-       -- Pico (Pájaro Carpintero) - carnivorous insect
-       (54, 54, 2, 23),
-       -- Cacatúa (Cacatúa de Palmera) - omnivorous fruit
-       (55, 55, 2, 23),
-       -- Gris (Loro Gris) - omnivorous fruit
-      (56, 56, 2, 23),
+      -- Jungle Birds (47-56) - habitat_id=2 (Jungle)
+      (47, 47, 2, 23),
+      -- Verde (Guacamayo) - omnivorous fruit
+      (48, 48, 2, 24),
+      -- Cuerno (Cálao Rinoceronte) - omnivorous fruit
+      (49, 49, 2, 24),
+      -- Azul (Cotinga Azul) - omnivorous fruit
+      (50, 50, 2, 8),
+      -- Águila (Águila Arpía) - carnivorous meat bird of prey
+      (51, 51, 2, 24),
+      -- Quetzal (Quetzal) - omnivorous fruit
+      (52, 52, 2, 27),
+      -- Pico (Pájaro Carpintero) - carnivorous insect
+      (53, 53, 2, 23),
+      -- Cacatúa (Cacatúa de Palmera) - omnivorous fruit
+      (54, 54, 2, 23),
+      -- Gris (Loro Gris) - omnivorous fruit
+      (55, 55, 2, 23),
       -- Tucán (Tucán) - omnivorous fruit
-      (57, 57, 2, 30),
+      (56, 56, 2, 30),
       -- Humming (Hummingbird) - carnivorous nectar
-      -- Swamp Birds (58-70) - habitat_id=3 (Swamp)
-      (58, 58, 3, 25),
+      -- Swamp Birds (57-69) - habitat_id=3 (Swamp)
+      (57, 57, 3, 25),
       -- Anhinga (Anhinga Africana) - carnivorous fish
-      (59, 59, 3, 25),
+      (58, 58, 3, 25),
       -- Garza (Garza Blanca) - carnivorous fish
-      (60, 60, 3, 25),
+      (59, 59, 3, 25),
       -- Gris (Garza Gris) - carnivorous fish
-      (61, 61, 3, 25),
+      (60, 60, 3, 25),
       -- Rojo (Ibis Escarlata) - carnivorous fish
-      (62, 62, 3, 25),
+      (61, 61, 3, 25),
       -- Patas (Cigüeñuela) - carnivorous fish
-      (63, 63, 3, 25),
+      (62, 62, 3, 25),
       -- Jabirú (Jabirú) - carnivorous fish
-      (64, 64, 3, 25),
+      (63, 63, 3, 25),
       -- Marabú (Marabú) - carnivorous fish
-      (65, 65, 3, 25),
+      (64, 64, 3, 25),
       -- Cormorán (Cormorán Carrizal) - carnivorous fish
-      (66, 66, 3, 25),
+      (65, 65, 3, 25),
       -- Grande (Cormorán Grande) - carnivorous fish
-      (67, 67, 3, 26),
+      (66, 66, 3, 26),
       -- Menor (Flamenco Menor) - herbivorous aquatic plants
-      (68, 68, 3, 26),
+      (67, 67, 3, 26),
       -- Mayor (Flamenco Mayor) - herbivorous aquatic plants
-      (69, 69, 3, 25),
+      (68, 68, 3, 25),
       -- Rosa (Espátula Rosada) - carnivorous fish
-      (70, 70, 3, 25),
+      (69, 69, 3, 25),
       -- Eurasia (Espátula Eurasiática) - carnivorous fish
-      -- Savannah Birds (71-80) - habitat_id=1 (Savannah)
-      (71, 71, 1, 25),
+      -- Savannah Birds (70-79) - habitat_id=1 (Savannah)
+      (70, 70, 1, 25),
       -- Agua (Alcaraván) - carnivorous fish
-      (72, 72, 1, 28),
+      (71, 71, 1, 28),
       -- Abisinia (Carraca Abisinia) - omnivorous fruit
-      (73, 73, 1, 8),
+      (72, 72, 1, 8),
       -- Buitre (Buitre Leonado) - carnivorous meat bird of prey
-      (74, 74, 1, 27),
+      (73, 73, 1, 27),
       -- Tejedor (Tejedor Enmascarado) - carnivorous insect
-      (75, 75, 1, 8),
+      (74, 74, 1, 8),
       -- Militar (Águila Marcial) - carnivorous meat bird of prey
-      (76, 76, 1, 28),
+      (75, 75, 1, 28),
       -- Pico (Francolín de Pico Rojo) - omnivorous fruit
-      (77, 77, 1, 8),
+      (76, 76, 1, 8),
       -- Secretario (Secretario) - carnivorous meat bird of prey
-      (78, 78, 1, 29),
+      (77, 77, 1, 29),
       -- Avestruz (Avestruz) - herbivorous grass
-      (79, 79, 1, 25),
+      (78, 78, 1, 25),
       -- Corona (Avefría de Corona Blanca) - carnivorous fish
-      (80, 80, 1, 25),
+      (79, 79, 1, 25),
       -- Herrero (Avefría Herrera) - carnivorous fish
-      -- Swamp Reptiles (81-86) - habitat_id=3 (Swamp)
-      (81, 81, 3, 31),
+      -- Swamp Reptiles (80-85) - habitat_id=3 (Swamp)
+      (80, 80, 3, 31),
       -- Espina (Tortuga de Cuello Negro) - herbivorous vegetables
-      (82, 82, 3, 4),
+      (81, 81, 3, 4),
       -- Alli (Alligator Americano) - carnivorous meat
-      (83, 83, 3, 4),
+      (82, 82, 3, 4),
       -- Yacaré (Yacaré) - carnivorous meat
-      (84, 84, 3, 4),
+      (83, 83, 3, 4),
       -- Nilo (Cocodrilo del Nilo) - carnivorous meat
-      (85, 85, 3, 4),
+      (84, 84, 3, 4),
       -- Gavial (Gavial) - carnivorous meat
-      (86, 86, 3, 4),
+      (85, 85, 3, 4),
       -- Negro (Caimán Negro) - carnivorous meat
-      -- Savannah Reptiles (87-91) - habitat_id=1 (Savannah)
-      (87, 87, 1, 32),
+      -- Savannah Reptiles (86-90) - habitat_id=1 (Savannah)
+      (86, 86, 1, 32),
       -- Agama (Lagarto Agama) - omnivorous insect
-      (88, 88, 1, 31),
+      (87, 87, 1, 31),
       -- Gigante (Tortuga Gigante de Aldabra) - herbivorous vegetables
-      (89, 89, 1, 33),
+      (88, 88, 1, 33),
       -- Camaleón (Camaleón Africano) - carnivorous insect
-      (90, 90, 1, 31),
+      (89, 89, 1, 31),
       -- Gopherus (Tortuga de Matorral) - herbivorous vegetables
-      (91, 91, 1, 32),
+      (90, 90, 1, 32),
       -- Gecko (Gecko Doméstico) - omnivorous insect
-      -- Jungle Amphibians (92-96) - habitat_id=2 (Jungle)
-      (92, 92, 2, 34),
+      -- Jungle Amphibians (91-95) - habitat_id=2 (Jungle)
+      (91, 91, 2, 34),
       -- Ojos (Rana de Ojos Rojos) - carnivorous insect
-      (93, 93, 2, 34),
+      (92, 92, 2, 34),
       -- Azul (Rana Dardo Azul) - carnivorous insect
-      (94, 94, 2, 34),
+      (93, 93, 2, 34),
       -- Cristal (Rana de Cristal) - carnivorous insect
-      (95, 95, 2, 34),
+      (94, 94, 2, 34),
       -- Dorada (Rana Dardo Dorada) - carnivorous insect
-      (96, 96, 2, 34);
-       -- Bicolor (Rana Arborícola Bicolor) - carnivorous insect
+      (95, 95, 2, 34);
+      -- Bicolor (Rana Arborícola Bicolor) - carnivorous insect
 -- 17. Insert MEDIA for Animals (Placeholder URLs - REPLACE with your Cloudinary URLs)
 -- Format: mobile, tablet, desktop
 INSERT INTO
@@ -1708,7 +1705,7 @@ INSERT INTO
 VALUES
        -- Jungle Mammals (1-18)
        (
-              300,
+              1,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399495/Ailuropoda_melanoleuca_ihv5xx.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417311/Ailuropoda_melanoleuca-tab_flrgje.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417311/Ailuropoda_melanoleuca-tab_flrgje.png',
@@ -1716,7 +1713,7 @@ VALUES
               'Bamboo the Panda'
        ),
        (
-              301,
+              2,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399651/Alouatta_seniculus_gdvkge.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417309/Alouatta_seniculus-tab_hshwug.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417309/Alouatta_seniculus-tab_hshwug.png',
@@ -1724,7 +1721,7 @@ VALUES
               'Rufus the Howler Monkey'
        ),
        (
-              302,
+              3,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399649/Arctictis_binturong_hceicv.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417312/binturong-tab_o36u6s.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417312/binturong-tab_o36u6s.png',
@@ -1732,7 +1729,7 @@ VALUES
               'Fuzzy the Binturong'
        ),
        (
-              303,
+              4,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399646/Artibeus_jamaicensis_cb3fdp.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417310/Artibeus_jamaicensis-tab_ai0gio.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417310/Artibeus_jamaicensis-tab_ai0gio.png',
@@ -1740,7 +1737,7 @@ VALUES
               'Nyx the Fruit Bat'
        ),
        (
-              304,
+              5,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399650/Ateles_geoffroyi_dqpqzn.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417311/Ateles_geoffroyi-tab_ik2pbl.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417311/Ateles_geoffroyi-tab_ik2pbl.png',
@@ -1748,7 +1745,7 @@ VALUES
               'Spider the Spider Monkey'
        ),
        (
-              305,
+              6,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399649/Bradypus_variegatus_r5b9sa.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417313/Bradypus_variegatus-tab_vhnfcv.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417313/Bradypus_variegatus-tab_vhnfcv.png',
@@ -1756,7 +1753,7 @@ VALUES
               'Sloth the Sloth'
        ),
        (
-              306,
+              7,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399645/elephas_maximus_w8ma4t.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417314/elephas_maximus-tab_lepulp.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417314/elephas_maximus-tab_lepulp.png',
@@ -1764,7 +1761,7 @@ VALUES
               'Surya the Asian Elephant'
        ),
        (
-              307,
+              8,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399647/Helarctos_malayanus_d6h49l.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417315/Helarctos_malayanus-tab_ejagij.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417315/Helarctos_malayanus-tab_ejagij.png',
@@ -1772,7 +1769,7 @@ VALUES
               'Sunny the Sun Bear'
        ),
        (
-              308,
+              9,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399646/Leopardus_pardalis_klj6gx.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417308/Leopardus_pardalis-tab_kty9wq.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417308/Leopardus_pardalis-tab_kty9wq.png',
@@ -1780,7 +1777,7 @@ VALUES
               'Spots the Ocelot'
        ),
        (
-              309,
+              10,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399649/nasua_h4dj6z.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417315/coati-tab_j94j3r.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417315/coati-tab_j94j3r.png',
@@ -1788,7 +1785,7 @@ VALUES
               'Tail the Coati'
        ),
        (
-              310,
+              11,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399652/Panthera_onca_ycxcam.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417314/jaguar_onca-tab_crdtsg.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417314/jaguar_onca-tab_crdtsg.png',
@@ -1796,7 +1793,7 @@ VALUES
               'Jaguar the Jaguar'
        ),
        (
-              311,
+              12,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399653/Panthera_tigris_tigris_dmud7z.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417309/tigre-tab_h9xuyq.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417309/tigre-tab_h9xuyq.png',
@@ -1804,7 +1801,7 @@ VALUES
               'Rajah the Bengal Tiger'
        ),
        (
-              312,
+              13,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399654/pridontes_maximus_gkjuxq.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417310/Arctictis_binturong-tab_e34jwp.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417310/Arctictis_binturong-tab_e34jwp.png',
@@ -1812,7 +1809,7 @@ VALUES
               'Armor the Giant Armadillo'
        ),
        (
-              313,
+              14,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399654/puma_concolor_kqfvrs.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417308/puma_concolor-tab_tftkkp.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417308/puma_concolor-tab_tftkkp.png',
@@ -1820,7 +1817,7 @@ VALUES
               'Swift the Puma'
        ),
        (
-              314,
+              15,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399656/Tamandua_tetradactyla_aod6bm.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417308/tamandua-tab_jyfyl7.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417308/tamandua-tab_jyfyl7.png',
@@ -1828,7 +1825,7 @@ VALUES
               'Tongue the Anteater'
        ),
        (
-              315,
+              16,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399657/tapirus_terrestris_alafhm.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417314/danta_tapirus-tab_d3x0dt.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417314/danta_tapirus-tab_d3x0dt.png',
@@ -1836,7 +1833,7 @@ VALUES
               'Tapir the Tapir'
        ),
        (
-              316,
+              17,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399656/Tremarctos_ornatus_srt19d.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417309/Tremarctos_ornatus-tab_jigebw.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417309/Tremarctos_ornatus-tab_jigebw.png',
@@ -1844,7 +1841,7 @@ VALUES
               'Andes the Andean Bear'
        ),
        (
-              317,
+              18,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399644/Viverra_tangalunga_c2jpfu.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417309/Viverra_tangalunga-tab_uhbuok.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417309/Viverra_tangalunga-tab_uhbuok.png',
@@ -1853,7 +1850,7 @@ VALUES
        ),
        -- Savannah Mammals (19-36)
        (
-              318,
+              19,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400405/Acinonyx_jubatus_raineyi_rqssn5.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418961/Acinonyx_jubatus_raineyi-tab_xbeysu.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418961/Acinonyx_jubatus_raineyi-tab_xbeysu.png',
@@ -1861,7 +1858,7 @@ VALUES
               'Lightning the Cheetah'
        ),
        (
-              319,
+              20,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400399/Aepyceros_melampus_d7zkqj.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418953/Aepyceros_melampus-tab_mwig1n.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418953/Aepyceros_melampus-tab_mwig1n.png',
@@ -1869,7 +1866,7 @@ VALUES
               'Jumper the Impala'
        ),
        (
-              320,
+              21,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400397/Ceratotherium_simum_d5ednw.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766419001/Ceratotherium_simum-tab_vpahfk.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766419001/Ceratotherium_simum-tab_vpahfk.png',
@@ -1877,7 +1874,7 @@ VALUES
               'Horn the White Rhinoceros'
        ),
        (
-              321,
+              22,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400401/Connochaetes_taurinus_xe3hgj.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418995/Connochaetes_taurinus-tab_xaeuee.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418995/Connochaetes_taurinus-tab_xaeuee.png',
@@ -1885,7 +1882,7 @@ VALUES
               'Blue the Wildebeest'
        ),
        (
-              322,
+              23,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400407/Crocuta_crocuta_gxuyjg.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766419004/Crocuta_crocuta-tab_gwqhkd.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766419004/Crocuta_crocuta-tab_gwqhkd.png',
@@ -1893,7 +1890,7 @@ VALUES
               'Laugh the Spotted Hyena'
        ),
        (
-              323,
+              24,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400403/Damaliscus_lunatus_jimela_jpfpyw.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418956/Damaliscus_lunatus_jimela-tab_owryse.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418956/Damaliscus_lunatus_jimela-tab_owryse.png',
@@ -1901,7 +1898,7 @@ VALUES
               'Topi the Topi'
        ),
        (
-              324,
+              25,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400412/Equus_zebra_fio9ji.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418998/Equus_zebra-tab_xhqye6.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418998/Equus_zebra-tab_xhqye6.png',
@@ -1909,7 +1906,7 @@ VALUES
               'Stripes the Zebra'
        ),
        (
-              325,
+              26,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400410/Giraffa_camelopardalis_peralta_dp4as8.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418967/Giraffa_camelopardalis_peralta-tab_ry0r7d.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418967/Giraffa_camelopardalis_peralta-tab_ry0r7d.png',
@@ -1917,15 +1914,15 @@ VALUES
               'Neck the Giraffe'
        ),
        (
-              326,
+              27,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400414/Leptailurus_serval_kmtfg2.png',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400414/Leptailurus_serval_kmtfg2.png',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400414/Leptailurus_serval_kmtfg2.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418964/Leptailurus_serval-tab_lo5zhr.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418964/Leptailurus_serval-tab_lo5zhr.png',
               'image',
               'Serval the Serval'
        ),
        (
-              327,
+              28,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400416/Loxodonta_africana_f6xnhv.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766419007/Loxodonta_africana-tab_dbha0e.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766419007/Loxodonta_africana-tab_dbha0e.png',
@@ -1933,7 +1930,7 @@ VALUES
               'Tembo the African Elephant'
        ),
        (
-              328,
+              29,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400419/Orycteropus_afer_yjdjh0.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418971/Orycteropus_afer-tab_yot3v8.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418971/Orycteropus_afer-tab_yot3v8.png',
@@ -1941,7 +1938,7 @@ VALUES
               'Earth the Aardvark'
        ),
        (
-              329,
+              30,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400422/Oryx_beisa_ygo3qu.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418958/Oryx_beisa-tab_zyhsbt.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418958/Oryx_beisa-tab_zyhsbt.png',
@@ -1949,7 +1946,7 @@ VALUES
               'Oryx the Oryx'
        ),
        (
-              330,
+              31,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400423/Panthera_leo_melanochaita_nlsq1s.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418980/Panthera_leo_melanochaita-tab_zewlld.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418980/Panthera_leo_melanochaita-tab_zewlld.png',
@@ -1957,7 +1954,7 @@ VALUES
               'King the Lion'
        ),
        (
-              331,
+              32,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400425/Panthera_pardus_pardus_bwwjyo.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418977/Panthera_pardus_pardus-tab_iegyge.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418977/Panthera_pardus_pardus-tab_iegyge.png',
@@ -1965,7 +1962,7 @@ VALUES
               'Leopard the Leopard'
        ),
        (
-              332,
+              33,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400428/Papio_kindae_jtcowj.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418992/Papio_kindae-tab_nge7oj.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418992/Papio_kindae-tab_nge7oj.png',
@@ -1973,7 +1970,7 @@ VALUES
               'Baboon the Baboon'
        ),
        (
-              333,
+              34,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400430/Phacochoerus_africanus_omybxs.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418987/Phacochoerus_africanus-tab_recdfu.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418987/Phacochoerus_africanus-tab_recdfu.png',
@@ -1981,7 +1978,7 @@ VALUES
               'Warthog the Warthog'
        ),
        (
-              334,
+              35,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400432/Syncerus_caffer_dsl1sf.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418989/Syncerus_caffer-tab_tzdbyq.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418989/Syncerus_caffer-tab_tzdbyq.png',
@@ -1989,7 +1986,7 @@ VALUES
               'Buffalo the Cape Buffalo'
        ),
        (
-              335,
+              36,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400395/Viverricula_indica_zsap4k.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418983/Viverricula_indica-tab_fkdvue.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418983/Viverricula_indica-tab_fkdvue.png',
@@ -1998,7 +1995,7 @@ VALUES
        ),
        -- Swamp Mammals (37-47)
        (
-              336,
+              37,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401527/bubalus_bubalis_jxqbv0.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421347/bubalus_bubalis-tab_kqslan.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421347/bubalus_bubalis-tab_kqslan.png',
@@ -2006,7 +2003,7 @@ VALUES
               'Water the Water Buffalo'
        ),
        (
-              337,
+              38,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401513/castor_fiber_ybtswr.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421347/castor_fiber-tab_dbjso4.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421347/castor_fiber-tab_dbjso4.png',
@@ -2014,7 +2011,7 @@ VALUES
               'Beaver the Beaver'
        ),
        (
-              338,
+              39,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401518/Cerdocyon_thous_dfzpyc.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421350/Cerdocyon_thous-tab_dpzlml.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421350/Cerdocyon_thous-tab_dpzlml.png',
@@ -2022,7 +2019,7 @@ VALUES
               'Fox the Crab-eating Fox'
        ),
        (
-              339,
+              40,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401522/Hippopotamus_amphibious_jft9st.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421347/Hippopotamus_amphibious-tab_kmso0t.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421347/Hippopotamus_amphibious-tab_kmso0t.png',
@@ -2030,7 +2027,7 @@ VALUES
               'Hippo the Hippopotamus'
        ),
        (
-              340,
+              41,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401532/Hydrochoerus_hydrochaeris_jlamqa.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421349/Hydrochoerus_hydrochaeris-tab_w82zzd.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421349/Hydrochoerus_hydrochaeris-tab_w82zzd.png',
@@ -2038,7 +2035,7 @@ VALUES
               'Capy the Capybara'
        ),
        (
-              341,
+              42,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401536/Lutra_lutra_rk8nqs.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421351/Lutra_lutra-tab_pvcrlq.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421351/Lutra_lutra-tab_pvcrlq.png',
@@ -2046,7 +2043,7 @@ VALUES
               'Otter the Eurasian Otter'
        ),
        (
-              342,
+              43,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401541/Neomys_fodiens_bglbak.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421352/Neomys_fodiens-tab_jy6ict.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421352/Neomys_fodiens-tab_jy6ict.png',
@@ -2054,7 +2051,7 @@ VALUES
               'Shrew the Water Shrew'
        ),
        (
-              343,
+              44,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401546/Ondatra_zibethicus_wsuylo.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421348/Ondatra_zibethicus-tab_yzyazx.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421348/Ondatra_zibethicus-tab_yzyazx.png',
@@ -2062,7 +2059,7 @@ VALUES
               'Muskrat the Muskrat'
        ),
        (
-              344,
+              45,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401550/Pteronura_brasiliensis_fk1low.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421349/Pteronura_brasiliensis-tab_qhxekn.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421349/Pteronura_brasiliensis-tab_qhxekn.png',
@@ -2070,7 +2067,7 @@ VALUES
               'Giant the Giant Otter'
        ),
        (
-              345,
+              46,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401509/Trichechus_manatus_wbfzmh.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421347/Trichechus_manatus-tab_qxndx9.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421347/Trichechus_manatus-tab_qxndx9.png',
@@ -2079,7 +2076,7 @@ VALUES
        ),
        -- Jungle Birds (48-57)
        (
-              346,
+              47,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399805/Ara_chloropterus_nigxsd.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417846/Ara_chloropterus-tab_vaqsjk.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417846/Ara_chloropterus-tab_vaqsjk.png',
@@ -2087,7 +2084,7 @@ VALUES
               'Green the Macaw'
        ),
        (
-              347,
+              48,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399804/Buceros_rhinoceros_uczklh.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417837/Buceros_rhinoceros-tab_oo0fjb.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417837/Buceros_rhinoceros-tab_oo0fjb.png',
@@ -2095,7 +2092,7 @@ VALUES
               'Horn the Rhinoceros Hornbill'
        ),
        (
-              348,
+              49,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399806/cotinga_nattererii_kmu4fz.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417832/cotinga_nattererii-tab_dolfys.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417832/cotinga_nattererii-tab_dolfys.png',
@@ -2103,7 +2100,7 @@ VALUES
               'Blue the Cotinga'
        ),
        (
-              349,
+              50,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399803/harpia_eagle_ndadhi.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417848/harpia_eagle-tab_okvdpu.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417848/harpia_eagle-tab_okvdpu.png',
@@ -2111,7 +2108,7 @@ VALUES
               'Eagle the Harpy Eagle'
        ),
        (
-              350,
+              51,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399807/Pharomachrus_mocinno_ick4xe.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417835/Pharomachrus_mocinno-tab_ref4wd.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417835/Pharomachrus_mocinno-tab_ref4wd.png',
@@ -2119,7 +2116,7 @@ VALUES
               'Quetzal the Quetzal'
        ),
        (
-              351,
+              52,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399809/Picus_viridis_hmg5nf.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417844/Picus_viridis-tab_eht1q3.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417844/Picus_viridis-tab_eht1q3.png',
@@ -2127,7 +2124,7 @@ VALUES
               'Peck the Woodpecker'
        ),
        (
-              352,
+              53,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399812/Probosciger_aterrimus_zhotv4.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417839/Probosciger_aterrimus-tab_sqfj16.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417839/Probosciger_aterrimus-tab_sqfj16.png',
@@ -2135,7 +2132,7 @@ VALUES
               'Cockatoo the Palm Cockatoo'
        ),
        (
-              353,
+              54,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399810/Psittacus_erithacus_x2rbbc.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417841/Psittacus_erithacus-tab_bjmacc.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417841/Psittacus_erithacus-tab_bjmacc.png',
@@ -2143,7 +2140,7 @@ VALUES
               'Grey the Grey Parrot'
        ),
        (
-              354,
+              55,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399811/Ramphastos_sulfuratus_yjngrm.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417850/Ramphastos_sulfuratus-tab_syj7bv.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417850/Ramphastos_sulfuratus-tab_syj7bv.png',
@@ -2151,7 +2148,7 @@ VALUES
               'Toucan the Toucan'
        ),
        (
-              355,
+              56,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399814/Trochilidae_hflrnu.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417831/Trochilidae-tab_aivyeu.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766417831/Trochilidae-tab_aivyeu.png',
@@ -2160,7 +2157,7 @@ VALUES
        ),
        -- Swamp Birds (58-70)
        (
-              356,
+              57,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401266/anhinga_rufa_llgrfy.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421447/anhinga_rufa-tab_prgz1b.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421447/anhinga_rufa-tab_prgz1b.png',
@@ -2168,7 +2165,7 @@ VALUES
               'Anhinga the African Darter'
        ),
        (
-              357,
+              58,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401301/Ardea_alba_dody5h.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421452/Ardea_alba-tab_feiljn.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421452/Ardea_alba-tab_feiljn.png',
@@ -2176,7 +2173,7 @@ VALUES
               'Egret the Great Egret'
        ),
        (
-              358,
+              59,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401270/Ardea_cinerea_xpxsgc.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421454/Ardea_cinerea-tab_xtmorx.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421454/Ardea_cinerea-tab_xtmorx.png',
@@ -2184,7 +2181,7 @@ VALUES
               'Grey the Grey Heron'
        ),
        (
-              359,
+              60,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401297/Eudocimus_ruber_orjyzx.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421448/Eudocimus_ruber-tab_nsykxr.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421448/Eudocimus_ruber-tab_nsykxr.png',
@@ -2192,7 +2189,7 @@ VALUES
               'Red the Scarlet Ibis'
        ),
        (
-              360,
+              61,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401279/Himantopus_himantopus_uupazn.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421460/Himantopus_himantopus-tab_fezjfg.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421460/Himantopus_himantopus-tab_fezjfg.png',
@@ -2200,7 +2197,7 @@ VALUES
               'Stilt the Black-winged Stilt'
        ),
        (
-              361,
+              62,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401275/Jabiru_mycteria_kbbnig.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421450/Jabiru_mycteria-tab_elj2ow.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421450/Jabiru_mycteria-tab_elj2ow.png',
@@ -2208,7 +2205,7 @@ VALUES
               'Jabiru the Jabiru'
        ),
        (
-              362,
+              63,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401284/Leptoptilos_crumenifer_ux5ngo.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421451/Leptoptilos_crumenifer-tab_gjkxw8.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421451/Leptoptilos_crumenifer-tab_gjkxw8.png',
@@ -2216,7 +2213,7 @@ VALUES
               'Marabou the Marabou Stork'
        ),
        (
-              363,
+              64,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401243/Microcarbo_africanus_dfwzyp.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421453/Microcarbo_africanus-tab_mxnbyn.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421453/Microcarbo_africanus-tab_mxnbyn.png',
@@ -2224,7 +2221,7 @@ VALUES
               'Cormorant the Reed Cormorant'
        ),
        (
-              364,
+              65,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401247/Phalacrocorax_carbo_irhkig.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421454/Phalacrocorax_carbo-tab_mhoryk.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421454/Phalacrocorax_carbo-tab_mhoryk.png',
@@ -2232,7 +2229,7 @@ VALUES
               'Great the Great Cormorant'
        ),
        (
-              365,
+              66,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401288/Phoeniconaias_minor_eqhwou.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421456/Phoeniconaias_minor-tab_velz9q.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421456/Phoeniconaias_minor-tab_velz9q.png',
@@ -2240,7 +2237,7 @@ VALUES
               'Lesser the Lesser Flamingo'
        ),
        (
-              366,
+              67,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401256/Phoenicopterus_roseus_o6eqe7.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421459/Phoenicopterus_roseus-tab_hpf8a9.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421459/Phoenicopterus_roseus-tab_hpf8a9.png',
@@ -2248,7 +2245,7 @@ VALUES
               'Greater the Greater Flamingo'
        ),
        (
-              367,
+              68,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401251/platalea_ajaja_vjqzze.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421457/platalea_ajaja-tab_ubzrvb.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421457/platalea_ajaja-tab_ubzrvb.png',
@@ -2256,230 +2253,222 @@ VALUES
               'Rose the Roseate Spoonbill'
        ),
        (
-              368,
+              69,
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401292/Platalea_leucorodia_kqysuv.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421458/Platalea_leucorodia-tab_kcr7wo.png',
               'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421458/Platalea_leucorodia-tab_kcr7wo.png',
               'image',
               'Eurasia the Eurasian Spoonbill'
        ),
-       (
-              369,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/water_bird_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/eurasia_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/eurasia_desktop.webp',
-              'image',
-              'Eurasia the Eurasian Spoonbill'
-       ),
        -- Savannah Birds (72-81)
        (
-              370,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/water_bird_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/water_bird_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/water_bird_desktop.webp',
+              70,
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400624/Burhinus_vermiculatus_ydqufm.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766419349/Burhinus_vermiculatus-tab_mjvmzo.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766419349/Burhinus_vermiculatus-tab_mjvmzo.png',
               'image',
               'Water the Water Thick-knee'
        ),
        (
-              371,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/abyssinian_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/abyssinian_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/abyssinian_desktop.webp',
+              71,
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400644/Coracias_abyssinicus_ilbkye.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766419336/Coracias_abyssinicus-tab_wmehr5.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766419336/Coracias_abyssinicus-tab_wmehr5.png',
               'image',
               'Abyssinian the Abyssinian Roller'
        ),
        (
-              372,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/vulture_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/vulture_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/vulture_desktop.webp',
+              72,
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400630/Gyps_fulvus_heqvzh.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766419359/Gyps_fulvus-tab_srxukn.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766419359/Gyps_fulvus-tab_srxukn.png',
               'image',
               'Vulture the Griffon Vulture'
        ),
        (
-              373,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/weaver_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/weaver_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/weaver_desktop.webp',
+              73,
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400633/Ploceus_velatus_wy6knn.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766419370/Ploceus_velatus-tab_stpkok.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766419370/Ploceus_velatus-tab_stpkok.png',
               'image',
               'Weaver the Southern Masked Weaver'
        ),
        (
-              374,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/martial_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/martial_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/martial_desktop.webp',
+              74,
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400641/Polemaetus_bellicosus_pqbfpo.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766419367/Polemaetus_bellicosus-tab_rbgq6z.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766419367/Polemaetus_bellicosus-tab_rbgq6z.png',
               'image',
               'Martial the Martial Eagle'
        ),
        (
-              375,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/bill_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/bill_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/bill_desktop.webp',
+              75,
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400636/Pternistis_adspersus_jmkzie.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766419356/Pternistis_adspersus-tab_gohusc.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766419356/Pternistis_adspersus-tab_gohusc.png',
               'image',
               'Bill the Red-billed Spurfowl'
        ),
        (
-              376,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/secretary_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/secretary_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/secretary_desktop.webp',
+              76,
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400647/Sagittarius_serpentarius_b0gklk.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766419346/Sagittarius_serpentarius-tab_ootusy.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766419346/Sagittarius_serpentarius-tab_ootusy.png',
               'image',
               'Secretary the Secretarybird'
        ),
        (
-              377,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/ostrich_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/ostrich_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/ostrich_desktop.webp',
+              77,
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400650/Struthio_camelus_wsnrn6.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766419343/Struthio_camelus-tab_hgxxq0.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766419343/Struthio_camelus-tab_hgxxq0.png',
               'image',
               'Ostrich the Ostrich'
        ),
        (
-              378,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/crown_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/crown_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/crown_desktop.webp',
+              78,
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400653/Vanellus_albiceps_eqvtod.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766419354/Vanellus_albiceps-tab_r8lm4c.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766419354/Vanellus_albiceps-tab_r8lm4c.png',
               'image',
               'Crown the White-crowned Lapwing'
        ),
        (
-              379,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/blacksmith_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/blacksmith_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/blacksmith_desktop.webp',
+              79,
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400627/Vanellus_armatus_cmjqfn.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766419339/Vanellus_armatus-tab_wzukt8.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766419339/Vanellus_armatus-tab_wzukt8.png',
               'image',
               'Blacksmith the Blacksmith Lapwing'
        ),
        -- Swamp Reptiles (82-87)
        (
-              380,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/spine_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/spine_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/spine_desktop.webp',
+              80,
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401683/Acanthochelys_spixii_ovkzk6.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421187/Acanthochelys_spixii-tab_saoe9o.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421187/Acanthochelys_spixii-tab_saoe9o.png',
               'image',
               'Spine the Swamp Turtle'
        ),
        (
-              381,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/alli_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/alli_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/alli_desktop.webp',
+              81,
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401669/Alligator_mississippiensis_hpmkev.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421187/Alligator_mississippiensis-tab_i2gify.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421187/Alligator_mississippiensis-tab_i2gify.png',
               'image',
               'Alli the American Alligator'
        ),
        (
-              382,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/yacare_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/yacare_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/yacare_desktop.webp',
+              82,
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401688/caiman_yacare_oukor8.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421188/caiman_yacare-tab_zv9kxm.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421188/caiman_yacare-tab_zv9kxm.png',
               'image',
               'Yacare the Yacare Caiman'
        ),
        (
-              383,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/nile_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/nile_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/nile_desktop.webp',
+              83,
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401674/Crocodylus_niloticus_zpof9r.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421189/Crocodylus_niloticus-tab_qnscq9.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421189/Crocodylus_niloticus-tab_qnscq9.png',
               'image',
               'Nile the Nile Crocodile'
        ),
        (
-              384,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/gharial_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/gharial_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/gharial_desktop.webp',
+              84,
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401664/Gavialis_gangeticus_gkmbrm.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421189/Gavialis_gangeticus-tab_n9oau2.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421189/Gavialis_gangeticus-tab_n9oau2.png',
               'image',
               'Gharial the Gharial'
        ),
        (
-              385,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/black_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/black_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/black_desktop.webp',
+              85,
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766401678/Melanosuchus_niger_xm1tff.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421189/Melanosuchus_niger-tab_q04okk.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766421189/Melanosuchus_niger-tab_q04okk.png',
               'image',
               'Black the Black Caiman'
        ),
        -- Savannah Reptiles (88-92)
        (
-              386,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/agama_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/agama_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/agama_desktop.webp',
+              86,
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400260/agama_agama_m16cnd.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418343/agama_agama-tab_q6hhxt.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418343/agama_agama-tab_q6hhxt.png',
               'image',
               'Agama the Agama Lizard'
        ),
        (
-              387,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/giant_turtle_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/giant_turtle_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/giant_turtle_desktop.webp',
+              87,
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400262/Aldabrachelys_gigantea_bptz2j.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418348/Aldabrachelys_gigantea-tab_poqmju.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418348/Aldabrachelys_gigantea-tab_poqmju.png',
               'image',
               'Giant the Aldabra Giant Tortoise'
        ),
        (
-              388,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/chameleon_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/chameleon_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/chameleon_desktop.webp',
+              88,
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400258/chamaeleo_africanus_ouxeun.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418351/chamaeleo_africanus-tab_uqqauh.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418351/chamaeleo_africanus-tab_uqqauh.png',
               'image',
               'Chameleon the African Chameleon'
        ),
        (
-              389,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/gopherus_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/gopherus_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/gopherus_desktop.webp',
+              89,
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400266/Gopherus_evgoodei_wxrm1i.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418345/Gopherus_evgoodei-tab_bqlopw.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418345/Gopherus_evgoodei-tab_bqlopw.png',
               'image',
               'Gopherus the Thornscrub Tortoise'
        ),
        (
-              390,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/gecko_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/gecko_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/gecko_desktop.webp',
+              90,
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766400264/Hemidactylus_turcicus_qjl2fj.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418340/Hemidactylus_turcicus-tab_htjmrn.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418340/Hemidactylus_turcicus-tab_htjmrn.png',
               'image',
               'Gecko the Mediterranean House Gecko'
        ),
        -- Jungle Amphibians (93-97)
        (
-              391,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/eyes_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/eyes_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/eyes_desktop.webp',
+              91,
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399988/Agalychnis_callidryas_jd6ce6.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418085/Agalychnis_callidryas-tab_rytokq.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418085/Agalychnis_callidryas-tab_rytokq.png',
               'image',
-              'Eyes the Red-eyed Tree Frog'
+              'Eyes the Red-Eyed Tree Frog'
        ),
        (
-              392,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/blue_frog_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/blue_frog_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/blue_frog_desktop.webp',
+              92,
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399981/Dendrobates_tinctorius_azureus_wwdxkg.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418092/Dendrobates_tinctorius_azureus-tab_ec66qx.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418092/Dendrobates_tinctorius_azureus-tab_ec66qx.png',
               'image',
               'Blue the Blue Poison Dart Frog'
        ),
        (
-              393,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/crystal_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/crystal_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/crystal_desktop.webp',
+              93,
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399983/Hyalinobatrachium_fleischmanni_jbdvxw.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418090/Hyalinobatrachium_fleischmanni-tab_ajcobu.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418090/Hyalinobatrachium_fleischmanni-tab_ajcobu.png',
               'image',
               'Crystal the Northern Glass Frog'
        ),
        (
-              394,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/golden_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/golden_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/golden_desktop.webp',
+              94,
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399984/Phyllobates_terribilis_cspwx4.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418095/Phyllobates_terribilis-tab_xkbtlp.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418095/Phyllobates_terribilis-tab_xkbtlp.png',
               'image',
               'Golden the Golden Poison Frog'
        ),
        (
-              395,
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/bicolor_mobile.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/bicolor_tablet.webp',
-              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1/arcadia_uploads/bicolor_desktop.webp',
+              95,
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766399986/Phyllomedusa_bicolor_limjiq.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418087/Phyllomedusa_bicolor-tab_n5zaja.png',
+              'https://res.cloudinary.com/dxkdwzbs6/image/upload/v1766418087/Phyllomedusa_bicolor-tab_n5zaja.png',
               'image',
               'Bicolor the Bicolored Tree Frog'
        );
@@ -2488,102 +2477,101 @@ VALUES
 INSERT INTO
        media_relations (media_id, related_table, related_id, usage_type)
 VALUES
-       (300, 'animal_full', 1, 'main'),
-       (301, 'animal_full', 2, 'main'),
-       (302, 'animal_full', 3, 'main'),
-       (303, 'animal_full', 4, 'main'),
-       (304, 'animal_full', 5, 'main'),
-       (305, 'animal_full', 6, 'main'),
-       (306, 'animal_full', 7, 'main'),
-       (307, 'animal_full', 8, 'main'),
-       (308, 'animal_full', 9, 'main'),
-       (309, 'animal_full', 10, 'main'),
-       (310, 'animal_full', 11, 'main'),
-       (311, 'animal_full', 12, 'main'),
-       (312, 'animal_full', 13, 'main'),
-       (313, 'animal_full', 14, 'main'),
-       (314, 'animal_full', 15, 'main'),
-       (315, 'animal_full', 16, 'main'),
-       (316, 'animal_full', 17, 'main'),
-       (317, 'animal_full', 18, 'main'),
-       (318, 'animal_full', 19, 'main'),
-       (319, 'animal_full', 20, 'main'),
-       (320, 'animal_full', 21, 'main'),
-       (321, 'animal_full', 22, 'main'),
-       (322, 'animal_full', 23, 'main'),
-       (323, 'animal_full', 24, 'main'),
-       (324, 'animal_full', 25, 'main'),
-       (325, 'animal_full', 26, 'main'),
-       (326, 'animal_full', 27, 'main'),
-       (327, 'animal_full', 28, 'main'),
-       (328, 'animal_full', 29, 'main'),
-       (329, 'animal_full', 30, 'main'),
-       (330, 'animal_full', 31, 'main'),
-       (331, 'animal_full', 32, 'main'),
-       (332, 'animal_full', 33, 'main'),
-       (333, 'animal_full', 34, 'main'),
-       (334, 'animal_full', 35, 'main'),
-       (335, 'animal_full', 36, 'main'),
-       (336, 'animal_full', 37, 'main'),
-       (337, 'animal_full', 38, 'main'),
-       (338, 'animal_full', 39, 'main'),
-       (339, 'animal_full', 40, 'main'),
-       (340, 'animal_full', 41, 'main'),
-       (341, 'animal_full', 42, 'main'),
-       (342, 'animal_full', 43, 'main'),
-       (343, 'animal_full', 44, 'main'),
-       (344, 'animal_full', 45, 'main'),
-       (345, 'animal_full', 46, 'main'),
-       (343, 'animal_full', 47, 'main'),
-       (346, 'animal_full', 48, 'main'),
-       (347, 'animal_full', 49, 'main'),
-       (348, 'animal_full', 50, 'main'),
-       (349, 'animal_full', 51, 'main'),
-       (350, 'animal_full', 52, 'main'),
-       (351, 'animal_full', 53, 'main'),
-       (352, 'animal_full', 54, 'main'),
-       (353, 'animal_full', 55, 'main'),
-       (354, 'animal_full', 56, 'main'),
-      (355, 'animal_full', 57, 'main'),
-      (356, 'animal_full', 58, 'main'),
-      (357, 'animal_full', 59, 'main'),
-      (358, 'animal_full', 60, 'main'),
-      (359, 'animal_full', 61, 'main'),
-      (360, 'animal_full', 62, 'main'),
-      (361, 'animal_full', 63, 'main'),
-      (362, 'animal_full', 64, 'main'),
-      (363, 'animal_full', 65, 'main'),
-      (364, 'animal_full', 66, 'main'),
-      (365, 'animal_full', 67, 'main'),
-      (366, 'animal_full', 68, 'main'),
-      (367, 'animal_full', 69, 'main'),
-      (368, 'animal_full', 70, 'main'),
-      (369, 'animal_full', 71, 'main'),
-      (370, 'animal_full', 72, 'main'),
-      (371, 'animal_full', 73, 'main'),
-      (372, 'animal_full', 74, 'main'),
-      (373, 'animal_full', 75, 'main'),
-      (374, 'animal_full', 76, 'main'),
-      (375, 'animal_full', 77, 'main'),
-      (376, 'animal_full', 78, 'main'),
-      (377, 'animal_full', 79, 'main'),
-      (378, 'animal_full', 80, 'main'),
-      (379, 'animal_full', 81, 'main'),
-      (380, 'animal_full', 82, 'main'),
-      (381, 'animal_full', 83, 'main'),
-      (382, 'animal_full', 84, 'main'),
-      (383, 'animal_full', 85, 'main'),
-      (384, 'animal_full', 86, 'main'),
-      (385, 'animal_full', 87, 'main'),
-      (386, 'animal_full', 88, 'main'),
-      (387, 'animal_full', 89, 'main'),
-      (388, 'animal_full', 90, 'main'),
-      (389, 'animal_full', 91, 'main'),
-      (390, 'animal_full', 92, 'main'),
-      (391, 'animal_full', 93, 'main'),
-      (392, 'animal_full', 94, 'main'),
-      (394, 'animal_full', 95, 'main'),
-      (395, 'animal_full', 96, 'main');
+       (1, 'animal_full', 1, 'main'),
+       (2, 'animal_full', 2, 'main'),
+       (3, 'animal_full', 3, 'main'),
+       (4, 'animal_full', 4, 'main'),
+       (5, 'animal_full', 5, 'main'),
+       (6, 'animal_full', 6, 'main'),
+       (7, 'animal_full', 7, 'main'),
+       (8, 'animal_full', 8, 'main'),
+       (9, 'animal_full', 9, 'main'),
+       (10, 'animal_full', 10, 'main'),
+       (11, 'animal_full', 11, 'main'),
+       (12, 'animal_full', 12, 'main'),
+       (13, 'animal_full', 13, 'main'),
+       (14, 'animal_full', 14, 'main'),
+       (15, 'animal_full', 15, 'main'),
+       (16, 'animal_full', 16, 'main'),
+       (17, 'animal_full', 17, 'main'),
+       (18, 'animal_full', 18, 'main'),
+       (19, 'animal_full', 19, 'main'),
+       (20, 'animal_full', 20, 'main'),
+       (21, 'animal_full', 21, 'main'),
+       (22, 'animal_full', 22, 'main'),
+       (23, 'animal_full', 23, 'main'),
+       (24, 'animal_full', 24, 'main'),
+       (25, 'animal_full', 25, 'main'),
+       (26, 'animal_full', 26, 'main'),
+       (27, 'animal_full', 27, 'main'),
+       (28, 'animal_full', 28, 'main'),
+       (29, 'animal_full', 29, 'main'),
+       (30, 'animal_full', 30, 'main'),
+       (31, 'animal_full', 31, 'main'),
+       (32, 'animal_full', 32, 'main'),
+       (33, 'animal_full', 33, 'main'),
+       (34, 'animal_full', 34, 'main'),
+       (35, 'animal_full', 35, 'main'),
+       (36, 'animal_full', 36, 'main'),
+       (37, 'animal_full', 37, 'main'),
+       (38, 'animal_full', 38, 'main'),
+       (39, 'animal_full', 39, 'main'),
+       (40, 'animal_full', 40, 'main'),
+       (41, 'animal_full', 41, 'main'),
+       (42, 'animal_full', 42, 'main'),
+       (43, 'animal_full', 43, 'main'),
+       (44, 'animal_full', 44, 'main'),
+       (45, 'animal_full', 45, 'main'),
+       (46, 'animal_full', 46, 'main'),
+       (47, 'animal_full', 47, 'main'),
+       (48, 'animal_full', 48, 'main'),
+       (49, 'animal_full', 49, 'main'),
+       (50, 'animal_full', 50, 'main'),
+       (51, 'animal_full', 51, 'main'),
+       (52, 'animal_full', 52, 'main'),
+       (53, 'animal_full', 53, 'main'),
+       (54, 'animal_full', 54, 'main'),
+       (55, 'animal_full', 55, 'main'),
+       (56, 'animal_full', 56, 'main'),
+       (57, 'animal_full', 57, 'main'),
+       (58, 'animal_full', 58, 'main'),
+       (59, 'animal_full', 59, 'main'),
+       (60, 'animal_full', 60, 'main'),
+       (61, 'animal_full', 61, 'main'),
+       (62, 'animal_full', 62, 'main'),
+       (63, 'animal_full', 63, 'main'),
+       (64, 'animal_full', 64, 'main'),
+       (65, 'animal_full', 65, 'main'),
+       (66, 'animal_full', 66, 'main'),
+       (67, 'animal_full', 67, 'main'),
+       (68, 'animal_full', 68, 'main'),
+       (69, 'animal_full', 69, 'main'),
+       (70, 'animal_full', 70, 'main'),
+       (71, 'animal_full', 71, 'main'),
+       (72, 'animal_full', 72, 'main'),
+       (73, 'animal_full', 73, 'main'),
+       (74, 'animal_full', 74, 'main'),
+       (75, 'animal_full', 75, 'main'),
+       (76, 'animal_full', 76, 'main'),
+       (77, 'animal_full', 77, 'main'),
+       (78, 'animal_full', 78, 'main'),
+       (79, 'animal_full', 79, 'main'),
+       (80, 'animal_full', 80, 'main'),
+       (81, 'animal_full', 81, 'main'),
+       (82, 'animal_full', 82, 'main'),
+       (83, 'animal_full', 83, 'main'),
+       (84, 'animal_full', 84, 'main'),
+       (85, 'animal_full', 85, 'main'),
+       (86, 'animal_full', 86, 'main'),
+       (87, 'animal_full', 87, 'main'),
+       (88, 'animal_full', 88, 'main'),
+       (89, 'animal_full', 89, 'main'),
+       (90, 'animal_full', 90, 'main'),
+       (91, 'animal_full', 91, 'main'),
+       (92, 'animal_full', 92, 'main'),
+       (93, 'animal_full', 93, 'main'),
+       (94, 'animal_full', 94, 'main'),
+       (95, 'animal_full', 95, 'main');
 
 -- ============================================================
 -- END OF SEED DATA FOR ANIMALS (Categories, Species, Nutrition, Animals)

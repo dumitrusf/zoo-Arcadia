@@ -5,7 +5,7 @@
 <?php include_once __DIR__ . '/../../../../includes/templates/hero.php'; ?>
 
 <main>
-    <!-- Filter Navigation (can be enhanced later) -->
+    <!-- Filter Navigation -->
     <nav class="filter">
         <div class="container-fluid">
             <a href="/habitats/pages/habitats">← Back to Habitats</a>
@@ -16,24 +16,104 @@
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
                 aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
-                    <h2 class="offcanvas-title" id="offcanvasNavbarLabel">close filter:</h2>
+                    <h2 class="offcanvas-title" id="offcanvasNavbarLabel">Close Filter</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
-                    <form class="filter__container d-flex mt-3" role="search">
+                    <form class="filter__container d-flex mt-3" role="search" id="filterForm">
                         <fieldset class="filter__fieldset">
-                            <legend class="filter__legend">filter by:</legend>
-                            <!-- Animal specie filter -->
+                            <legend class="filter__legend">Filter by:</legend>
                             <div class="filter__legend-election">
-                                <label for="animal-specie" class="filter__label">Animal specie:</label>
-                                <select id="animal-specie" name="animal-specie" class="filter__select">
-                                    <option value="" selected>Select animal specie</option>
-                                    <!-- TODO: Populate dynamically from database -->
+                                <!-- Animal specie filter -->
+                                <label for="filter-specie" class="filter__label">Animal specie:</label>
+                                <select id="filter-specie" name="filter-specie" class="filter__select">
+                                    <option value="">specie...</option>
+                                    <?php if (!empty($species)): ?>
+                                        <?php 
+                                        // Extract unique values from parentheses
+                                        $specieTypes = [];
+                                        foreach ($species as $specie) {
+                                            if (preg_match('/\(([^)]+)\)/', $specie->specie_name, $matches)) {
+                                                $type = trim($matches[1]);
+                                                if (!in_array($type, $specieTypes)) {
+                                                    $specieTypes[] = $type;
+                                                }
+                                            }
+                                        }
+                                        sort($specieTypes);
+                                        foreach ($specieTypes as $type): ?>
+                                            <option value="<?= htmlspecialchars($type) ?>">
+                                                <?= htmlspecialchars(ucfirst($type)) ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </select>
+
+                                <!-- Nutrition filter -->
+                                <label for="filter-nutrition" class="filter__label">Nutrition:</label>
+                                <select id="filter-nutrition" name="filter-nutrition" class="filter__select">
+                                    <option value="">carnivore...</option>
+                                    <?php if (!empty($nutritions)): ?>
+                                        <?php 
+                                        $uniqueNutritionTypes = [];
+                                        foreach ($nutritions as $nutrition) {
+                                            if (!in_array($nutrition->nutrition_type, $uniqueNutritionTypes)) {
+                                                $uniqueNutritionTypes[] = $nutrition->nutrition_type;
+                                            }
+                                        }
+                                        foreach ($uniqueNutritionTypes as $nutType): ?>
+                                            <option value="<?= htmlspecialchars($nutType) ?>">
+                                                <?= htmlspecialchars(ucfirst($nutType)) ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </select>
+
+                                <!-- State filter -->
+                                <label for="filter-state" class="filter__label">state:</label>
+                                <select id="filter-state" name="filter-state" class="filter__select">
+                                    <option value="">healthy...</option>
+                                    <option value="healthy">Healthy</option>
+                                    <option value="sick">Sick</option>
+                                    <option value="injured">Injured</option>
+                                    <option value="recovering">Recovering</option>
+                                    <option value="quarantined">Quarantined</option>
+                                    <option value="pregnant">Pregnant</option>
+                                    <option value="deceased">Deceased</option>
+                                    <option value="stressed">Stressed</option>
+                                    <option value="under-observation">Under Observation</option>
+                                    <option value="new-arrival">New Arrival</option>
+                                    <option value="endangered">Endangered</option>
+                                    <option value="old-age">Old Age</option>
+                                    <option value="angry">Angry</option>
+                                </select>
+
+                                <!-- Name filter -->
+                                <label for="filter-name" class="filter__label">name:</label>
+                                <input type="text" id="filter-name" name="filter-name" class="filter__select" placeholder="name">
+
+                                <!-- Items per page filter -->
+                                <label for="filter-per-page" class="filter__label">Show:</label>
+                                <select id="filter-per-page" name="filter-per-page" class="filter__select">
+                                    <option value="5">5</option>
+                                    <option value="7">7</option>
+                                    <option value="10" selected>10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
                                 </select>
                             </div>
-                            <button type="reset" class="filter__button filter__button--reset">Restart</button>
+
+                            <!-- Restart button -->
+                            <button type="reset" class="filter__button filter__button--reset" id="resetFilters">Restart</button>
                         </fieldset>
                     </form>
+                </div>
+                <div class="offcanvas-header">
+                    <h2 class="offcanvas-title">Close Filter</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
             </div>
         </div>
@@ -57,7 +137,10 @@
     <div class="intro intro--habitats">
         <?php if (!empty($animals)): ?>
             <?php foreach ($animals as $animal): ?>
-                <article class="intro__article intro__animal">
+                <article class="intro__article intro__animal" 
+                         data-specie="<?= htmlspecialchars($animal->specie_name ?? '') ?>"
+                         data-nutrition="<?= htmlspecialchars(strtolower($animal->nutrition_type ?? '')) ?>"
+                         data-name="<?= htmlspecialchars(strtolower($animal->animal_name ?? '')) ?>">
                     <a class="intro__link" href="/animals/pages/animalpicked?id=<?= $animal->id_full_animal ?>" target="_blank" rel="noopener noreferrer">
                         <?php if (!empty($animal->media_path)): ?>
                             <picture>
@@ -92,23 +175,22 @@
         <?php endif; ?>
     </div>
 
-    <!-- Pagination (can be implemented later) -->
-    <?php if (!empty($animals) && count($animals) > 12): ?>
-        <nav class="nav-pagination">
-            <ul class="nav-pagination__ul">
-                <li class="nav-pagination__li">
-                    <a href="#" aria-label="Previous">
-                        <i class="bi bi-caret-left-fill"></i>
-                    </a>
-                </li>
-                <li class="nav-pagination__li nav__link--active"><a href="#">1</a></li>
-                <li class="nav-pagination__li">
-                    <a href="#" aria-label="Next">
-                        <i class="bi bi-caret-right-fill"></i>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    <?php endif; ?>
+    <nav class="nav-pagination" id="paginationNav" style="display: none;">
+        <ul class="nav-pagination__ul">
+            <li class="nav-pagination__li">
+                <a href="#" id="paginationPrev" aria-label="Previous">
+                    <i class="bi bi-caret-left-fill"></i>
+                </a>
+            </li>
+            <!-- Numbers will be generated dynamically here -->
+            <li class="nav-pagination__li">
+                <a href="#" id="paginationNext" aria-label="Next">
+                    <i class="bi bi-caret-right-fill"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
 
 </main>
+
+<script src="/public/build/js/habitat-filter.js" defer></script>

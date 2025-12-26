@@ -13,6 +13,8 @@ require_once __DIR__ . '/../models/habitat.php';
 require_once __DIR__ . '/../../hero/models/Hero.php';
 require_once __DIR__ . '/../../hero/models/Slide.php';
 require_once __DIR__ . '/../../animals/models/animalFull.php';
+require_once __DIR__ . '/../../animals/models/specie.php';
+require_once __DIR__ . '/../../animals/models/nutrition.php';
 
 class HabitatsPagesController {
 
@@ -60,7 +62,14 @@ class HabitatsPagesController {
         // 2. Get animals in this habitat
         $animals = $habitatModel->getAnimalsByHabitatId($id);
 
-        // 3. Get Hero for this specific habitat (if exists), otherwise use generic habitats hero
+        // 3. Get filter data (without habitat since we're already in a specific habitat)
+        $specieModel = new specie();
+        $nutritionModel = new Nutrition();
+        
+        $species = $specieModel->getAll();
+        $nutritions = $nutritionModel->getAll();
+
+        // 4. Get Hero for this specific habitat (if exists), otherwise use generic habitats hero
         $heroModel = new Hero();
         $hero = $heroModel->getByHabitatId($id);
         
@@ -75,7 +84,7 @@ class HabitatsPagesController {
             $slides = $slideModel->getByHeroId($hero->id_hero);
         }
 
-        // 4. Load the view
+        // 5. Load the view
         if (file_exists(__DIR__ . '/../views/pages/habitat1.php')) {
             include_once __DIR__ . '/../views/pages/habitat1.php';
         } else {
