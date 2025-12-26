@@ -28,7 +28,7 @@ $datecopy = date('d-m-Y');
 				<table class="footer__hours-table">
 					<tbody>
 						<?php
-						// Obtenemos los horarios dinámicos
+						// here we get the zoo opening hours dynamically
 						$footerSchedules = getOpeningHours();
 						foreach ($footerSchedules as $schedule):
 						?>
@@ -63,7 +63,11 @@ $datecopy = date('d-m-Y');
 	</div>
 </footer>
 
+<script src="/public/build/js/jquery.min.js" defer></script>
 <script src="/public/build/js/bootstrap.bundle.min.js" defer></script>
+<script src="/public/build/js/dataTables.min.js" defer></script>
+<script src="/public/build/js/dataTables.bootstrap5.min.js" defer></script>
+<script src="/public/build/js/app.js" defer></script>
 
 </body>
 </html> 
