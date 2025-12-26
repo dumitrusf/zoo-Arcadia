@@ -14,10 +14,23 @@ if ($_POST) {
 
     $sql = $connectionDB->prepare($query);
 
-    $loginInput = $_POST['email']; // We get what the user wrote (email or username)
-    $passwordInput = $_POST['password'];
+    $loginInput = $_POST['email'] ?? ''; // We get what the user wrote (email or username)
+    $passwordInput = $_POST['password'] ?? '';
 
-    $sql->bindParam(":login", $loginInput);
+    // Security: Sanitize and validate input
+    // PDO prepared statements already protect against SQL injection, but we add extra validation
+    $loginInput = trim($loginInput);
+    $loginInput = substr($loginInput, 0, 255); // Limit length to prevent buffer issues
+    
+    // Basic validation: ensure input is not empty
+    if (empty($loginInput)) {
+        $_SESSION["login_error"] = "Username or email is required.";
+        header('Location: /auth/pages/login');
+        exit();
+    }
+
+    // Use bindValue instead of bindParam for better security (binds the value, not the variable reference)
+    $sql->bindValue(":login", $loginInput, PDO::PARAM_STR);
 
     $sql->execute();
     // We fetch the user from the database
@@ -39,6 +52,7 @@ if ($_POST) {
                 // if ACCOUNT ACTIVE: Go ahead
                 $_SESSION["user"] = $user;
                 $_SESSION["loggedin"] = true;
+                $_SESSION["last_activity"] = time(); // Set session activity timestamp
                 header('Location: /home/pages/start');
                 exit();
             }

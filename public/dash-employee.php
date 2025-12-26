@@ -124,8 +124,8 @@
                                     <option value="jungle">Jungle</option>
                                     <option value="swamp">Swamp</option>
                                 </select>
-                                <select class="form-select w-auto" id="species-filter">
-                                    <option selected disabled>Species</option>
+                                <select class="form-select w-auto" id="classes-filter">
+                                    <option selected disabled>classes</option>
                                     <option value="mammal">Mammal</option>
                                     <option value="bird">Bird</option>
                                     <option value="reptile">Reptile</option>

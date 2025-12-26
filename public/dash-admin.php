@@ -242,8 +242,8 @@
                                         <option value="jungle">Jungle</option>
                                         <option value="swamp">Swamp</option>
                                     </select>
-                                    <select class="form-select w-auto" id="species-filter">
-                                        <option selected disabled>Species</option>
+                                    <select class="form-select w-auto" id="classes-filter">
+                                        <option selected disabled>classes</option>
                                         <option value="mammal">Mammal</option>
                                         <option value="bird">Bird</option>
                                         <option value="reptile">Reptile</option>
@@ -439,8 +439,8 @@
                                     <option value="jungle">Jungle</option>
                                     <option value="swamp">Swamp</option>
                                 </select>
-                                <select class="form-select w-auto" id="rea-species-filter">
-                                    <option selected disabled>Species</option>
+                                <select class="form-select w-auto" id="rea-classes-filter">
+                                    <option selected disabled>classes</option>
                                     <option value="mammal">Mammal</option>
                                     <option value="bird">Bird</option>
                                     <option value="reptile">Reptile</option>
@@ -454,7 +454,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Animal Found</h5>
                                     <p class="card-text">Name: <span id="current-animal-name">-</span></p>
-                                    <p class="card-text">Breed: <span id="current-animal-breed">-</span></p>
+                                    <p class="card-text">specie : <span id="current-animal-specie ">-</span></p>
                                     <p class="card-text">Habitat: <span id="current-animal-habitat">-</span></p>
                                 </div>
                             </div>
@@ -473,8 +473,8 @@
                             <input type="text" class="form-control" id="new-animal-name" placeholder="Enter new name">
                         </div>
                         <div class="mb-3">
-                            <label for="new-animal-breed" class="form-label">New Breed</label>
-                            <input type="text" class="form-control" id="new-animal-breed" placeholder="Enter new breed">
+                            <label for="new-animal-specie " class="form-label">New specie </label>
+                            <input type="text" class="form-control" id="new-animal-specie " placeholder="Enter new specie ">
                         </div>
                         <div class="mb-3">
                             <label for="new-animal-habitat" class="form-label">New Habitat</label>

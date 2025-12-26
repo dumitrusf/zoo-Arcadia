@@ -1,30 +1,44 @@
 <!-- <nav class="nav navbar"> -->
 
+<?php if (isset($animal) && $animal): ?>
 <header class="hero">
 	<div class="hero__container">
 		<div class="hero__text">
-			<h1 class="hero__title">Juan</h1>
-			<p class="hero__subtitle">Lion</p>
+			<h1 class="hero__title"><?= htmlspecialchars(strtoupper($animal->animal_name ?? 'Unknown')) ?></h1>
+			<p class="hero__subtitle"><?= htmlspecialchars($animal->specie_name ?? 'Unknown species') ?></p>
 		</div>
 
-
 		<a type="button" class="btn intro__button intro__button--hours" href="#opening-hours">opening hours</a>
-
 	</div>
 
-
-	<picture>
-		<source
-			srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228707&authkey=!AOva3ENGeg4Ep40&ithint=photo&e=WlnQn9"
-			media="(min-width: 1280px)" />
-		<source
-			srcset="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228706&authkey=!ALn94T9OrtbZQpI&ithint=photo&e=yLqmB9"
-			media="(min-width: 744px)" />
-		<img src="https://onedrive.live.com/embed?cid=2C3D1E2234649594&resId=2C3D1E2234649594!228705&authkey=!AIAenWn29MuniTM&ithint=photo&e=apkdhj"
-			class="hero__image d-block" alt="hero image" />
-	</picture>
-
+	<?php if (!empty($animal->media_path)): ?>
+		<picture>
+			<source
+				srcset="<?= !empty($animal->media_path_large) ? htmlspecialchars($animal->media_path_large) : getCloudinaryUrl($animal->media_path, 'w_1280,c_scale,q_auto,f_auto') ?>"
+				media="(min-width: 1280px)" />
+			<source
+				srcset="<?= !empty($animal->media_path_medium) ? htmlspecialchars($animal->media_path_medium) : getCloudinaryUrl($animal->media_path, 'w_744,c_scale,q_auto,f_auto') ?>"
+				media="(min-width: 744px)" />
+			<img src="<?= getCloudinaryUrl($animal->media_path, 'w_400,c_scale,q_auto,f_auto') ?>"
+				class="hero__image d-block" alt="<?= htmlspecialchars($animal->animal_name ?? 'Animal image') ?>" />
+		</picture>
+	<?php else: ?>
+		<div class="hero__image bg-light d-flex align-items-center justify-content-center" style="min-height: 400px;">
+			<i class="bi bi-image" style="font-size: 4rem; color: #ccc;"></i>
+		</div>
+	<?php endif; ?>
 </header>
+<?php else: ?>
+	<header class="hero">
+		<div class="hero__container">
+			<div class="hero__text">
+				<h1 class="hero__title">Animal not found</h1>
+				<p class="hero__subtitle">The requested animal could not be found.</p>
+			</div>
+			<a type="button" class="btn intro__button intro__button--hours" href="/animals/pages/allanimals">Back to Animals</a>
+		</div>
+	</header>
+<?php endif; ?>
 
 
 
@@ -40,56 +54,80 @@
 <main class="animal">
 
 	<!-- Sección de Información del Animal -->
+	<?php if (isset($animal) && $animal): ?>
 	<section class="animal__info animal__card">
 		<h2 class="animal__title">Animal</h2>
 		<table class="animal__table">
 			<tbody>
 				<tr class="animal__row">
 					<th class="animal__header">Name:</th>
-					<td class="animal__data">Juan</td>
+					<td class="animal__data"><?= htmlspecialchars($animal->animal_name ?? 'Unknown') ?></td>
 				</tr>
 				<tr class="animal__row">
 					<th class="animal__header">gender:</th>
-					<td class="animal__data">male</td>
+					<td class="animal__data"><?= htmlspecialchars($animal->gender ?? 'Unknown') ?></td>
 				</tr>
 				<tr class="animal__row">
-					<th class="animal__header">Animal Breed:</th>
-					<td class="animal__data">Crocodile</td>
+					<th class="animal__header">Animal specie:</th>
+					<td class="animal__data"><?= htmlspecialchars($animal->specie_name ?? 'Unknown species') ?></td>
 				</tr>
 				<tr class="animal__row">
 					<th class="animal__header">Habitat:</th>
-					<td class="animal__data">Swamp</td>
+					<td class="animal__data"><?= htmlspecialchars($animal->habitat_name ?? 'Unknown habitat') ?></td>
 				</tr>
 			</tbody>
 		</table>
 	</section>
+	<?php endif; ?>
 
 
 
 	<!-- Sección de Información Adicional -->
+	<?php if (isset($animal) && $animal): ?>
 	<section class="animal__about animal__card">
 		<h2 class="animal__title">About It</h2>
 		<table class="animal__table">
 			<tbody>
 				<tr class="animal__row">
 					<th class="animal__header">Nutrition:</th>
-					<td class="animal__data">Carnivorous</td>
+					<td class="animal__data">
+						<?= !empty($animal->nutrition_type) ? htmlspecialchars(ucfirst($animal->nutrition_type)) : 'Not assigned' ?>
+					</td>
 				</tr>
 				<tr class="animal__row">
 					<th class="animal__header">Food Offered:</th>
-					<td class="animal__data">Fish & Meat</td>
+					<td class="animal__data">
+						<?php if (!empty($animal->nutrition_food_type)): ?>
+							<?= htmlspecialchars(ucfirst($animal->nutrition_food_type)) ?>
+						<?php else: ?>
+							Not assigned
+						<?php endif; ?>
+					</td>
 				</tr>
 				<tr class="animal__row">
 					<th class="animal__header">Food Qty:</th>
-					<td class="animal__data">5KG</td>
+					<td class="animal__data">
+						<?php if (!empty($animal->nutrition_food_qtty)): ?>
+							<?= number_format($animal->nutrition_food_qtty / 1000, 1) ?>KG
+						<?php else: ?>
+							Not assigned
+						<?php endif; ?>
+					</td>
 				</tr>
 				<tr class="animal__row">
 					<th class="animal__header">Date Of Check-Up:</th>
-					<td class="animal__data">August 18, 2024</td>
+					<td class="animal__data">
+						<?php if (!empty($animal->review_date)): ?>
+							<?= date('F j, Y', strtotime($animal->review_date)) ?>
+						<?php else: ?>
+							No check-up recorded
+						<?php endif; ?>
+					</td>
 				</tr>
 			</tbody>
 		</table>
 	</section>
+	<?php endif; ?>
 
 
 

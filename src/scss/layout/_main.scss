@@ -224,7 +224,7 @@
     -ms-border-radius: 2rem;
     -o-border-radius: 2rem;
     -webkit-border-radius: 2rem;
-    background-color: map-get(map-get(v.$color, solid-colors), c-dark);
+    background-color: map-get(map-get(v.$color, solid-colors), c-filter-form);
     border: map-get(map-get(v.$color, solid-colors), c-border-card-d) 0.3rem
       solid;
 
