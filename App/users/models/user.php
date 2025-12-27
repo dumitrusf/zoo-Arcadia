@@ -281,4 +281,40 @@ class User
             return false;
         }
     }
+
+    /**
+     * Get all permissions for a user (role permissions + VIP permissions)
+     * Returns a simple array of permission names (strings)
+     * @param int $userId The user ID
+     * @return array Array of permission names like ['users-view', 'animals-create', ...]
+     */
+    public static function getAllUserPermissions($userId)
+    {
+        $connectionDB = DB::createInstance();
+        $permissions = [];
+
+        // Get permissions from role
+        $roleQuery = "SELECT p.permission_name
+                      FROM permissions p
+                      JOIN roles_permissions rp ON p.id_permission = rp.permission_id
+                      JOIN users u ON rp.role_id = u.role_id
+                      WHERE u.id_user = ?";
+        $roleSql = $connectionDB->prepare($roleQuery);
+        $roleSql->execute([$userId]);
+        $rolePermissions = $roleSql->fetchAll(PDO::FETCH_COLUMN);
+        
+        // Get VIP permissions (direct user permissions)
+        $vipQuery = "SELECT p.permission_name
+                     FROM permissions p
+                     JOIN users_permissions up ON p.id_permission = up.permission_id
+                     WHERE up.user_id = ?";
+        $vipSql = $connectionDB->prepare($vipQuery);
+        $vipSql->execute([$userId]);
+        $vipPermissions = $vipSql->fetchAll(PDO::FETCH_COLUMN);
+
+        // Combine both arrays and remove duplicates
+        $permissions = array_unique(array_merge($rolePermissions, $vipPermissions));
+
+        return array_values($permissions); // Re-index array
+    }
 }

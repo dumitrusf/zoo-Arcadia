@@ -15,9 +15,11 @@
         </div>
         <div>
             <?php 
-                // Only Admin (3) and Employee (2) can create feeding logs
-                $userRoleName = $_SESSION['user']['role_name'] ?? null;
-                if (in_array($userRoleName, ['Admin', 'Employee'])): 
+                // Include functions to use hasPermission()
+                require_once __DIR__ . '/../../../../includes/functions.php';
+                
+                // Only users with animal_feeding-assign permission can create feeding logs
+                if (hasPermission('animal_feeding-assign')): 
             ?>
                 <a href="/animals/feeding/create?animal_id=<?= $animal->id_full_animal ?>" class="btn btn-primary me-2">
                     <i class="bi bi-plus-circle"></i> Record New Feeding
@@ -196,9 +198,8 @@
                                     <!-- Actions -->
                                     <td class="text-end">
                                         <?php 
-                                            // Only Admin and Employee can delete feeding logs
-                                            $userRoleName = $_SESSION['user']['role_name'] ?? null;
-                                            if (in_array($userRoleName, ['Admin', 'Employee'])): 
+                                            // Delete button: visible if user has animal_feeding-delete OR animal_feeding-assign
+                                            if (hasPermission('animal_feeding-delete') || hasPermission('animal_feeding-assign')): 
                                         ?>
                                             <a href="/animals/feeding/delete?id=<?= $feeding->id_feeding_log ?>&animal_id=<?= $animal->id_full_animal ?>" 
                                                class="btn btn-sm btn-outline-danger" 
@@ -215,9 +216,8 @@
                                 <td colspan="8" class="text-center text-muted py-4">
                                     <i class="bi bi-inbox"></i> No feeding records found for this animal.
                                     <?php 
-                                        // Only Admin and Employee can create feeding logs
-                                        $userRoleName = $_SESSION['user']['role_name'] ?? null;
-                                        if (in_array($userRoleName, ['Admin', 'Employee'])): 
+                                        // Only users with animal_feeding-assign permission can create feeding logs
+                                        if (hasPermission('animal_feeding-assign')): 
                                     ?>
                                         <a href="/animals/feeding/create?animal_id=<?= $animal->id_full_animal ?>">Create the first one!</a>
                                     <?php endif; ?>

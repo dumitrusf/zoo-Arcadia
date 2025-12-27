@@ -18,6 +18,7 @@
 require_once __DIR__ . "/../models/feedingLog.php";
 require_once __DIR__ . "/../models/animalFull.php";
 require_once __DIR__ . "/../models/nutrition.php";
+require_once __DIR__ . "/../../../includes/functions.php";
 
 class AnimalsFeedingController
 {
@@ -41,14 +42,12 @@ class AnimalsFeedingController
 
     /**
      * Show form to create a new feeding log
-     * Only Admin (3) and Employee (2) can create feeding logs
+     * Only users with animal_feeding-assign permission can create feeding logs
      */
     public function create()
     {
-        // Check if user has permission to create (Admin or Employee only)
-        $userRoleName = $_SESSION['user']['role_name'] ?? null;
-        if (!in_array($userRoleName, ['Admin', 'Employee'])) {
-            // Veterinarian can only view, redirect to start
+        // Check if user has permission to create
+        if (!hasPermission('animal_feeding-assign')) {
             header('Location: /animals/feeding/start?msg=error&error=You do not have permission to create feeding logs');
             exit;
         }
@@ -68,14 +67,12 @@ class AnimalsFeedingController
 
     /**
      * Save feeding log (create new record)
-     * Only Admin (3) and Employee (2) can save feeding logs
+     * Only users with animal_feeding-assign permission can save feeding logs
      */
     public function save()
     {
-        // Check if user has permission to create (Admin or Employee only)
-        $userRoleName = $_SESSION['user']['role_name'] ?? null;
-        if (!in_array($userRoleName, ['Admin', 'Employee'])) {
-            // Veterinarian can only view, redirect to start
+        // Check if user has permission to create
+        if (!hasPermission('animal_feeding-assign')) {
             header('Location: /animals/feeding/start?msg=error&error=You do not have permission to create feeding logs');
             exit;
         }
@@ -92,6 +89,13 @@ class AnimalsFeedingController
         
         // Get user ID from session (employee who fed)
         $userId = $_SESSION['user']['id_user'] ?? null;
+        
+        // Validate user ID is present (required for tracking who fed the animal)
+        if ($userId === null) {
+            error_log("Error: user_id is null when creating feeding log. Session user data: " . print_r($_SESSION['user'] ?? [], true));
+            header('Location: /animals/feeding/create?msg=error&error=User session error. Please log in again.');
+            exit;
+        }
 
         // Validation
         if (!$animalFullId || !$foodType || !$foodQty) {
@@ -157,14 +161,12 @@ class AnimalsFeedingController
 
     /**
      * Delete a feeding log entry
-     * Only Admin (3) and Employee (2) can delete feeding logs
+     * Only users with animal_feeding-delete or animal_feeding-assign permission can delete feeding logs
      */
     public function delete()
     {
-        // Check if user has permission to delete (Admin or Employee only)
-        $userRoleName = $_SESSION['user']['role_name'] ?? null;
-        if (!in_array($userRoleName, ['Admin', 'Employee'])) {
-            // Veterinarian can only view, redirect to start
+        // Check if user has permission to delete
+        if (!hasPermission('animal_feeding-delete') && !hasPermission('animal_feeding-assign')) {
             header('Location: /animals/feeding/start?msg=error&error=You do not have permission to delete feeding logs');
             exit;
         }

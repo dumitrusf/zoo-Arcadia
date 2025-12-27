@@ -124,3 +124,23 @@ function getCloudinaryUrl($baseUrl, $transformations) {
     // Reconstruct the URL correctly
     return $base . '/upload/' . $transformations . '/' . $imagePath;
 }
+ 
+/**
+ * Check if the current user has a specific permission
+ * @param string $permissionName The permission name to check (e.g., 'users-view', 'animals-create')
+ * @return bool True if user has the permission, false otherwise
+ */
+if (!function_exists('hasPermission')) {
+    function hasPermission($permissionName) {
+        // If user is not logged in, they have no permissions
+        if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+            return false;
+        }
+        
+        // Get user permissions from session
+        $userPermissions = $_SESSION["user"]["permissions"] ?? [];
+        
+        // Check if the permission exists in the user's permissions array
+        return in_array($permissionName, $userPermissions);
+    }
+}

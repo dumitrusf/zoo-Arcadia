@@ -13,6 +13,7 @@ require_once __DIR__ . '/../models/habitat.php';
 require_once __DIR__ . '/../../medias/models/cloudinary.php';
 require_once __DIR__ . '/../../medias/models/Media.php';
 require_once __DIR__ . '/../../hero/models/Hero.php';
+require_once __DIR__ . '/../../../includes/functions.php';
 
 class HabitatsGestController {
     
@@ -28,6 +29,12 @@ class HabitatsGestController {
     }
 
     public function create() {
+        // Check if user has permission to create habitats
+        if (!hasPermission('habitats-create')) {
+            header('Location: /habitats/gest/start?msg=error&error=You do not have permission to create habitats');
+            exit;
+        }
+
         $action = 'create';
         $habitat = null;
         $habitatHero = null;
@@ -40,6 +47,12 @@ class HabitatsGestController {
     }
 
     public function edit() {
+        // Check if user has permission to edit habitats
+        if (!hasPermission('habitats-edit')) {
+            header('Location: /habitats/gest/start?msg=error&error=You do not have permission to edit habitats');
+            exit;
+        }
+
         $id = $_GET['id'] ?? null;
         if (!$id) { 
             header('Location: /habitats/gest/start'); 
@@ -75,6 +88,21 @@ class HabitatsGestController {
     public function save() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id_habitat'] ?? null;
+            
+            // Check permissions based on whether it's create or update
+            if ($id) {
+                // UPDATE - requires habitats-edit permission
+                if (!hasPermission('habitats-edit')) {
+                    header('Location: /habitats/gest/start?msg=error&error=You do not have permission to edit habitats');
+                    exit;
+                }
+            } else {
+                // CREATE - requires habitats-create permission
+                if (!hasPermission('habitats-create')) {
+                    header('Location: /habitats/gest/start?msg=error&error=You do not have permission to create habitats');
+                    exit;
+                }
+            }
             $name = trim($_POST['habitat_name'] ?? '');
             $description = trim($_POST['description_habitat'] ?? '');
 
@@ -212,6 +240,12 @@ class HabitatsGestController {
     }
 
     public function delete() {
+        // Check if user has permission to delete habitats
+        if (!hasPermission('habitats-delete')) {
+            header('Location: /habitats/gest/start?msg=error&error=You do not have permission to delete habitats');
+            exit;
+        }
+
         $id = $_GET['id'] ?? null;
         if ($id) {
             $habitatModel = new Habitat();

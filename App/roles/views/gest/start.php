@@ -1,11 +1,15 @@
+<?php
+// Include functions to use hasPermission()
+require_once __DIR__ . '/../../../../includes/functions.php';
+?>
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h2 class="card-title">Roles</h2>
         
         <?php 
-        // 🛡️ Solo Admin puede crear roles
+        // 🛡️ Admin or users with roles-create permission can create roles
         $isAdmin = (isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin');
-        if ($isAdmin): 
+        if ($isAdmin || hasPermission('roles-create')): 
         ?>
             <a name="roles" id="" class="btn btn-success mb-2 mt-2" href="/roles/gest/create" role="button">+ Add New Role</a>
         <?php endif; ?>
@@ -78,8 +82,11 @@
                                     <!-- View Details: VISIBLE PARA TODOS -->
                                     <a href="/roles/gest/view?id=<?php echo $role->id_role; ?>" class="btn btn-sm btn-info text-white">View Details</a>
 
-                                    <?php if ($isAdmin): ?>
+                                    <?php if ($isAdmin || hasPermission('roles-edit')): ?>
                                         <a href="/roles/gest/edit?id=<?php echo $role->id_role; ?>" class="btn btn-sm btn-primary">Edit</a>
+                                    <?php endif; ?>
+                                    
+                                    <?php if ($isAdmin || hasPermission('roles-delete')): ?>
                                         <a href="/roles/gest/delete?id=<?php echo $role->id_role; ?>" class="btn btn-sm btn-danger">Delete</a>
                                     <?php endif; ?>
 

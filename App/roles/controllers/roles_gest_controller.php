@@ -22,8 +22,8 @@
 session_start();
 
 require_once __DIR__ . "/../models/role.php";
-
 require_once __DIR__ . "/../../../database/connection.php";
+require_once __DIR__ . "/../../../includes/functions.php";
 // Incluyo el archivo que tiene la clase DB para poder conectarme a la base de datos.
 
 DB::createInstance();
@@ -42,6 +42,13 @@ class RolesGestController
     }
     public function create()
     {
+        // Check if user is Admin or has roles-create permission
+        $isAdmin = isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin';
+        if (!$isAdmin && !hasPermission('roles-create')) {
+            header('Location: /roles/gest/start?msg=error&error=You do not have permission to create roles');
+            exit;
+        }
+
         if ($_POST) {
             // print_r($_POST);
             $role_name = $_POST['role_name'];
@@ -56,6 +63,13 @@ class RolesGestController
 
     public function delete()
     {
+        // Check if user is Admin or has roles-delete permission
+        $isAdmin = isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin';
+        if (!$isAdmin && !hasPermission('roles-delete')) {
+            header('Location: /roles/gest/start?msg=error&error=You do not have permission to delete roles');
+            exit;
+        }
+
         $id = $_GET['id'];
 
         // Obtener resultado con información
@@ -77,6 +91,13 @@ class RolesGestController
 
     public function edit()
     {
+        // Check if user is Admin or has roles-edit permission
+        $isAdmin = isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin';
+        if (!$isAdmin && !hasPermission('roles-edit')) {
+            header('Location: /roles/gest/start?msg=error&error=You do not have permission to edit roles');
+            exit;
+        }
+
         // we get the ID of the role from the URL. This variable is the only source of truth for the ID.
         $id_role = $_GET["id"];
 

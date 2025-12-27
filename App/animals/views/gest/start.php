@@ -6,10 +6,11 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>Manage Animals</h1>
         <?php 
-            // Only Admin (3) and Employee (2) can create animals
-            // Veterinarian (1) can only view
-            $userRoleName = $_SESSION['user']['role_name'] ?? null;
-            if (in_array($userRoleName, ['Admin', 'Employee'])): 
+            // Include functions to use hasPermission()
+            require_once __DIR__ . '/../../../../includes/functions.php';
+            
+            // Only users with animals-create permission can create animals
+            if (hasPermission('animals-create')): 
         ?>
             <a href="/animals/gest/create" class="btn btn-primary">
                 <i class="bi bi-plus-circle"></i> Create New Animal
@@ -116,14 +117,18 @@
                                     <!-- Actions -->
                                     <td class="text-end">
                                         <?php 
-                                            // Only Admin and Employee can edit/delete animals
-                                            // Veterinarian can only view
-                                            $userRoleName = $_SESSION['user']['role_name'] ?? null;
-                                            if (in_array($userRoleName, ['Admin', 'Employee'])): 
+                                            // Only users with animals-edit permission can edit animals
+                                            if (hasPermission('animals-edit')): 
                                         ?>
                                             <a href="/animals/gest/edit?id=<?= $animal->id_full_animal ?>" class="btn btn-sm btn-warning me-1">
                                                 <i>edit</i>
                                             </a>
+                                        <?php endif; ?>
+                                        
+                                        <?php 
+                                            // Only users with animals-delete permission can delete animals
+                                            if (hasPermission('animals-delete')): 
+                                        ?>
                                             <a href="/animals/gest/delete?id=<?= $animal->id_full_animal ?>" 
                                                class="btn btn-sm btn-danger"
                                                onclick="return confirm('Are you sure you want to delete this animal?');">
