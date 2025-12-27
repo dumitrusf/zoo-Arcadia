@@ -130,7 +130,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
                 <!-- All the animals - Visible if user has animals-view OR animals-create OR animals-edit OR animals-delete -->
                 <?php if (hasPermission('animals-view') || hasPermission('animals-create') || hasPermission('animals-edit') || hasPermission('animals-delete')): ?>
                     <li class="nav-item">
-                        <a class="nav-link <?= ($domain === 'animals' && ($action === 'start' || $action === 'edit' || $action === 'create')) ? 'active' : '' ?>" href="/animals/gest/start">
+                        <a class="nav-link <?= ($domain === 'animals' && $controller === 'gest' && ($action === 'start' || $action === 'edit' || $action === 'create')) ? 'active' : '' ?>" href="/animals/gest/start">
                             All Animals gest
                         </a>
                     </li>
@@ -148,7 +148,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
                 <!-- All the habitats - Visible if user has habitats-view OR habitats-create OR habitats-edit OR habitats-delete -->
                 <?php if (hasPermission('habitats-view') || hasPermission('habitats-create') || hasPermission('habitats-edit') || hasPermission('habitats-delete')): ?>
                     <li class="nav-item">
-                        <a class="nav-link <?= ($domain === 'habitats' && ($action === 'start' || $action === 'edit' || $action === 'create')) ? 'active' : '' ?>" href="/habitats/gest/start">
+                        <a class="nav-link <?= ($domain === 'habitats' && $controller === 'gest' && ($action === 'start' || $action === 'edit' || $action === 'create')) ? 'active' : '' ?>" href="/habitats/gest/start">
                             All Habitats gest
                         </a>
                     </li>
