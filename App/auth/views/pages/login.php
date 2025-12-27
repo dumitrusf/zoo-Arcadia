@@ -1,5 +1,8 @@
 <?php
 
+// Include User model to get permissions
+require_once __DIR__ . '/../../../users/models/user.php';
+require_once __DIR__ . '/../../../roles/models/role.php';
 
 if ($_POST) {
     $connectionDB = DB::createInstance();
@@ -53,6 +56,10 @@ if ($_POST) {
                 $_SESSION["user"] = $user;
                 $_SESSION["loggedin"] = true;
                 $_SESSION["last_activity"] = time(); // Set session activity timestamp
+                
+                // Load all user permissions (role + VIP) into session
+                $_SESSION["user"]["permissions"] = User::getAllUserPermissions($user['id_user']);
+                
                 header('Location: /home/pages/start');
                 exit();
             }

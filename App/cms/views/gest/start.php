@@ -1,13 +1,17 @@
 <?php
 // App/cms/views/gest/start.php
+// Include functions to use hasPermission()
+require_once __DIR__ . '/../../../../includes/functions.php';
 ?>
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>Manage Zoo Services</h1>
-        <a href="/cms/gest/create" class="btn btn-primary">
-            <i class="bi bi-plus-circle"></i> Create New Service
-        </a>
+        <?php if (hasPermission('services-create')): ?>
+            <a href="/cms/gest/create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Create New Service
+            </a>
+        <?php endif; ?>
     </div>
 
     <?php if (isset($_GET['msg'])): ?>
@@ -59,14 +63,19 @@
                                     
                                     <!-- Actions -->
                                     <td class="text-end">
-                                        <a href="/cms/gest/edit?id=<?= $service->id_service ?>" class="btn btn-sm btn-warning me-1">
-                                            <i>edit</i>
-                                        </a>
-                                        <a href="/cms/gest/delete?id=<?= $service->id_service ?>" 
-                                           class="btn btn-sm btn-danger"
-                                           onclick="return confirm('Are you sure you want to delete this service?');">
-                                            <i>delete</i>
-                                        </a>
+                                        <?php if (hasPermission('services-edit')): ?>
+                                            <a href="/cms/gest/edit?id=<?= $service->id_service ?>" class="btn btn-sm btn-warning me-1">
+                                                <i>edit</i>
+                                            </a>
+                                        <?php endif; ?>
+                                        
+                                        <?php if (hasPermission('services-delete')): ?>
+                                            <a href="/cms/gest/delete?id=<?= $service->id_service ?>" 
+                                               class="btn btn-sm btn-danger"
+                                               onclick="return confirm('Are you sure you want to delete this service?');">
+                                                <i>delete</i>
+                                            </a>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

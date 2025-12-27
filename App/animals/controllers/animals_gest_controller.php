@@ -30,6 +30,7 @@ require_once __DIR__ . "/../models/feedingLog.php";
 require_once __DIR__ . "/../../habitats/models/habitat.php";
 require_once __DIR__ . "/../../medias/models/cloudinary.php";
 require_once __DIR__ . "/../../medias/models/Media.php";
+require_once __DIR__ . "/../../../includes/functions.php";
 
 class AnimalsGestController
 {
@@ -206,6 +207,12 @@ class AnimalsGestController
      */
     public function create()
     {
+        // Check if user has permission to create animals
+        if (!hasPermission('animals-create')) {
+            header('Location: /animals/gest/start?msg=error&error=You do not have permission to create animals');
+            exit;
+        }
+
         $action = 'create';
         $animal = null;
         
@@ -232,6 +239,12 @@ class AnimalsGestController
      */
     public function edit()
     {
+        // Check if user has permission to edit animals
+        if (!hasPermission('animals-edit')) {
+            header('Location: /animals/gest/start?msg=error&error=You do not have permission to edit animals');
+            exit;
+        }
+
         $id = $_GET['id'] ?? null;
         if (!$id) {
             header('Location: /animals/gest/start');
@@ -273,6 +286,21 @@ class AnimalsGestController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id_full_animal'] ?? null;
+            
+            // Check permissions based on whether it's create or update
+            if ($id) {
+                // UPDATE - requires animals-edit permission
+                if (!hasPermission('animals-edit')) {
+                    header('Location: /animals/gest/start?msg=error&error=You do not have permission to edit animals');
+                    exit;
+                }
+            } else {
+                // CREATE - requires animals-create permission
+                if (!hasPermission('animals-create')) {
+                    header('Location: /animals/gest/start?msg=error&error=You do not have permission to create animals');
+                    exit;
+                }
+            }
             $animalName = $_POST['animal_name'] ?? '';
             $specieId = $_POST['specie_id'] ?? null;
             $gender = $_POST['gender'] ?? '';
@@ -372,6 +400,12 @@ class AnimalsGestController
      */
     public function delete()
     {
+        // Check if user has permission to delete animals
+        if (!hasPermission('animals-delete')) {
+            header('Location: /animals/gest/start?msg=error&error=You do not have permission to delete animals');
+            exit;
+        }
+
         $id = $_GET['id'] ?? null;
         if ($id) {
             $animalFullModel = new AnimalFull();
