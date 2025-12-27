@@ -1,14 +1,15 @@
 <?php
 // App/animals/views/feeding/start.php
+// Include functions to use hasPermission()
+require_once __DIR__ . '/../../../../includes/functions.php';
 ?>
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>Feeding Logs</h1>
         <?php 
-            // Only Admin (3) and Employee (2) can create feeding logs
-            $userRoleName = $_SESSION['user']['role_name'] ?? null;
-            if (in_array($userRoleName, ['Admin', 'Employee'])): 
+            // Only users with animal_feeding-assign permission can create feeding logs
+            if (hasPermission('animal_feeding-assign')): 
         ?>
             <a href="/animals/feeding/create" class="btn btn-primary">
                 <i class="bi bi-plus-circle"></i> Record New Feeding
@@ -124,15 +125,20 @@
 
                                     <!-- Actions -->
                                     <td class="text-end">
-                                        <a href="/animals/feeding/view?animal_id=<?= $feeding->animal_f_id ?>" 
-                                           class="btn btn-sm btn-outline-primary" 
-                                           title="View all feedings for this animal">
-                                            <i class="bi bi-eye">view</i>
-                                        </a>
                                         <?php 
-                                            // Only Admin and Employee can delete feeding logs
-                                            $userRoleName = $_SESSION['user']['role_name'] ?? null;
-                                            if (in_array($userRoleName, ['Admin', 'Employee'])): 
+                                            // View button: visible if user has animal_feeding-view OR animal_feeding-assign
+                                            if (hasPermission('animal_feeding-view') || hasPermission('animal_feeding-assign')): 
+                                        ?>
+                                            <a href="/animals/feeding/view?animal_id=<?= $feeding->animal_f_id ?>" 
+                                               class="btn btn-sm btn-outline-primary" 
+                                               title="View all feedings for this animal">
+                                                <i class="bi bi-eye">view</i>
+                                            </a>
+                                        <?php endif; ?>
+                                        
+                                        <?php 
+                                            // Delete button: visible if user has animal_feeding-delete OR animal_feeding-assign
+                                            if (hasPermission('animal_feeding-delete') || hasPermission('animal_feeding-assign')): 
                                         ?>
                                             <a href="/animals/feeding/delete?id=<?= $feeding->id_feeding_log ?>" 
                                                class="btn btn-sm btn-outline-danger" 
@@ -149,9 +155,8 @@
                                     <td colspan="9" class="text-center text-muted py-4">
                                         <i class="bi bi-inbox"></i> No feeding logs found.
                                         <?php 
-                                            // Only Admin and Employee can create feeding logs
-                                            $userRoleName = $_SESSION['user']['role_name'] ?? null;
-                                            if (in_array($userRoleName, ['Admin', 'Employee'])): 
+                                            // Only users with animal_feeding-assign permission can create feeding logs
+                                            if (hasPermission('animal_feeding-assign')): 
                                         ?>
                                             <a href="/animals/feeding/create">Create the first one!</a>
                                         <?php endif; ?>

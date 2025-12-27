@@ -16,6 +16,7 @@
 
 require_once __DIR__ . '/../../../database/connection.php';
 require_once __DIR__ . '/../models/schedule.php';
+require_once __DIR__ . '/../../../includes/functions.php';
 
 DB::createInstance();
 
@@ -34,6 +35,12 @@ class SchedulesGestController {
     }
 
     public function edit() {
+        // Check if user has permission to edit schedules
+        if (!hasPermission('schedules-edit')) {
+            header('Location: /schedules/gest/start?msg=error&error=You do not have permission to edit schedules');
+            exit;
+        }
+
         $scheduleModel = new Schedule();
         $error = null;
         $success = null;

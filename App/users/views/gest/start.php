@@ -3,9 +3,9 @@
         <h2 class="card-title">Users</h2>
         
         <?php 
-        // 🛡️ Solo Admin puede crear usuarios
+        // 🛡️ Solo usuarios con permiso users-create pueden crear usuarios
         $isAdmin = (isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin');
-        if ($isAdmin): 
+        if ($isAdmin || hasPermission('users-create')): 
         ?>
             <a name="users" id="" class="btn btn-success mb-2 mt-2" href="/users/gest/create" role="button">+ Create new Account</a>
         <?php endif; ?>
@@ -104,8 +104,11 @@
                                         <!-- View Details: VISIBLE PARA TODOS -->
                                         <a href="/users/gest/view?id=<?php echo $user->id; ?>" class="btn btn-sm btn-info text-white">View Details</a>
                                         
-                                        <?php if ($isAdmin): ?>
+                                        <?php if ($isAdmin || hasPermission('users-edit')): ?>
                                             <a href="/users/gest/edit?id=<?php echo $user->id; ?>" class="btn btn-sm btn-primary">Edit</a>
+                                        <?php endif; ?>
+                                        
+                                        <?php if ($isAdmin || hasPermission('users-delete')): ?>
                                             <a href="/users/gest/delete?id=<?php echo $user->id; ?>" class="btn btn-sm btn-danger">Delete</a>
                                         <?php endif; ?>
 

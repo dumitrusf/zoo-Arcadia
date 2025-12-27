@@ -1,13 +1,20 @@
 <?php
 // App/habitats/views/gest/start.php
+// Include functions to use hasPermission()
+require_once __DIR__ . '/../../../../includes/functions.php';
 ?>
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>Manage Habitats</h1>
-        <a href="/habitats/gest/create" class="btn btn-primary">
-            <i class="bi bi-plus-circle"></i> Create New Habitat
-        </a>
+        <?php 
+        // Only users with habitats-create permission can create habitats
+        if (hasPermission('habitats-create')): 
+        ?>
+            <a href="/habitats/gest/create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Create New Habitat
+            </a>
+        <?php endif; ?>
     </div>
 
     <?php if (isset($_GET['msg'])): ?>
@@ -71,14 +78,19 @@
                                         <span class="badge bg-info"><?= $habitat->animal_count ?? 0 ?></span>
                                     </td>
                                     <td class="text-end">
-                                        <a href="/habitats/gest/edit?id=<?= $habitat->id_habitat ?>" class="btn btn-sm btn-warning me-1">
-                                            <i>edit</i>
-                                        </a>
-                                        <a href="/habitats/gest/delete?id=<?= $habitat->id_habitat ?>" 
-                                           class="btn btn-sm btn-danger"
-                                           onclick="return confirm('Are you sure you want to delete this habitat?');">
-                                            <i>delete</i>
-                                        </a>
+                                        <?php if (hasPermission('habitats-edit')): ?>
+                                            <a href="/habitats/gest/edit?id=<?= $habitat->id_habitat ?>" class="btn btn-sm btn-warning me-1">
+                                                <i>edit</i>
+                                            </a>
+                                        <?php endif; ?>
+                                        
+                                        <?php if (hasPermission('habitats-delete')): ?>
+                                            <a href="/habitats/gest/delete?id=<?= $habitat->id_habitat ?>" 
+                                               class="btn btn-sm btn-danger"
+                                               onclick="return confirm('Are you sure you want to delete this habitat?');">
+                                                <i>delete</i>
+                                            </a>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

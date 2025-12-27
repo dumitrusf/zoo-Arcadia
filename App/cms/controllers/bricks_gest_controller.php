@@ -14,6 +14,7 @@
 require_once __DIR__ . '/../models/brick.php';
 require_once __DIR__ . '/../../medias/models/cloudinary.php';
 require_once __DIR__ . '/../../medias/models/Media.php';
+require_once __DIR__ . '/../../../includes/functions.php';
 
 class BricksGestController
 {
@@ -34,6 +35,12 @@ class BricksGestController
     // Show Create Form
     public function create()
     {
+        // Check if user has permission to create bricks (uses services-create)
+        if (!hasPermission('services-create')) {
+            header('Location: /cms/bricks/start?msg=error&error=You do not have permission to create content blocks');
+            exit;
+        }
+
         $action = 'create';
         $brick = null;
         if (file_exists(__DIR__ . '/../views/gest/bricks_edit.php')) {
@@ -44,6 +51,12 @@ class BricksGestController
     // Show Edit Form
     public function edit()
     {
+        // Check if user has permission to edit bricks (uses services-edit)
+        if (!hasPermission('services-edit')) {
+            header('Location: /cms/bricks/start?msg=error&error=You do not have permission to edit content blocks');
+            exit;
+        }
+
         $id = $_GET['id'] ?? null;
         if (!$id) {
             header('Location: /cms/bricks/start');
@@ -69,6 +82,21 @@ class BricksGestController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id_brick'] ?? null;
+            
+            // Check permissions based on whether it's create or update (uses services permissions)
+            if ($id) {
+                // UPDATE - requires services-edit permission
+                if (!hasPermission('services-edit')) {
+                    header('Location: /cms/bricks/start?msg=error&error=You do not have permission to edit content blocks');
+                    exit;
+                }
+            } else {
+                // CREATE - requires services-create permission
+                if (!hasPermission('services-create')) {
+                    header('Location: /cms/bricks/start?msg=error&error=You do not have permission to create content blocks');
+                    exit;
+                }
+            }
             $title = $_POST['title'];
             $desc = $_POST['description'];
             $link = $_POST['link'] ?? '';
@@ -136,6 +164,12 @@ class BricksGestController
     // Delete
     public function delete()
     {
+        // Check if user has permission to delete bricks (uses services-delete)
+        if (!hasPermission('services-delete')) {
+            header('Location: /cms/bricks/start?msg=error&error=You do not have permission to delete content blocks');
+            exit;
+        }
+
         $id = $_GET['id'] ?? null;
         if ($id) {
             $brickModel = new Brick();

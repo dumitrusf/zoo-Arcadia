@@ -21,6 +21,11 @@ VALUES
               4,
               'Accountant',
               'Responsible for the zoo finances.'
+       ),
+       (
+              5,
+              'NO ROLE',
+              'nothing'
        );
 
 -- 3. Insert EMPLOYEES (personal data)
@@ -531,6 +536,14 @@ VALUES
               true,
               NULL,
               NULL
+       ),
+       (
+              32,
+              'axel',
+              '12345',
+              true,
+              5,
+              NULL
        );
 
 -- Este archivo llena la tabla `permissions` con el catálogo oficial de permisos.
@@ -580,8 +593,16 @@ VALUES
               'Allows viewing the list of habitats.'
        ),
        (
+              'habitats-create',
+              'Allows creating new habitats.'
+       ),
+       (
               'habitats-edit',
               'Allows editing existing habitats.'
+       ),
+       (
+              'habitats-delete',
+              'Allows deleting habitats.'
        ),
        -- Permisos de Animales
        ('animals-create', 'Allows creating new animals.'),

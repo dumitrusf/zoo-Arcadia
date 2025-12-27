@@ -46,9 +46,14 @@
             <div class="card p-3 shadow-sm">
                 <?php
                 // 1. We group the permissions by their category (the word before the hyphen)
+                // hero and bricks are grouped under "services" since they belong to CMS/Services
                 $groupedPermissions = [];
                 foreach ($allPermissions as $permission) {
                     $category = explode('-', $permission['permission_name'])[0];
+                    // Group hero and bricks under services
+                    if ($category === 'hero' || $category === 'bricks') {
+                        $category = 'services';
+                    }
                     $groupedPermissions[$category][] = $permission;
                 }
 

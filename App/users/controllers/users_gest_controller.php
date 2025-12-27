@@ -27,6 +27,7 @@ require_once __DIR__ . "/../../roles/models/role.php";
 
 // Include the file that has the DB class to be able to connect to the database.
 require_once __DIR__ . "/../../../database/connection.php";
+require_once __DIR__ . "/../../../includes/functions.php";
 
 DB::createInstance();
 // Call the static createInstance() method of the DB class.
@@ -46,6 +47,12 @@ class UsersGestController
 
     public function create()
     {
+        // Check if user has permission to create users
+        $isAdmin = isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin';
+        if (!$isAdmin && !hasPermission('users-create')) {
+            header('Location: /users/gest/start?msg=error&error=You do not have permission to create users');
+            exit;
+        }
 
         $roles = Role::check();
         $employees = Employee::freeEmployees();
@@ -73,6 +80,13 @@ class UsersGestController
 
     public function delete()
     {
+        // Check if user has permission to delete users
+        $isAdmin = isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin';
+        if (!$isAdmin && !hasPermission('users-delete')) {
+            header('Location: /users/gest/start?msg=error&error=You do not have permission to delete users');
+            exit;
+        }
+
         $id_user = $_GET['id'];
         User::delete($id_user);
         header("Location: /users/gest/start");
@@ -89,6 +103,13 @@ class UsersGestController
 
     public function edit()
     {
+        // Check if user has permission to edit users
+        $isAdmin = isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin';
+        if (!$isAdmin && !hasPermission('users-edit')) {
+            header('Location: /users/gest/start?msg=error&error=You do not have permission to edit users');
+            exit;
+        }
+
         $roles = Role::check();
 
         if (isset($_GET['id'])) {

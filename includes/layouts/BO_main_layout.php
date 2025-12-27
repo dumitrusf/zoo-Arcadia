@@ -20,7 +20,23 @@ error_reporting(E_ALL);
 
 // Get the name of the current file
 $currentDomain = $_GET['domain'] ?? 'home';
+$domain = $_GET['domain'] ?? 'home';
+$controller = $_GET['controller'] ?? 'pages';
+$action = $_GET['action'] ?? 'index';
 include(__DIR__ . "/../pageTitle.php");
+
+// Include functions to use hasPermission()
+require_once __DIR__ . "/../functions.php";
+
+// If user is logged in but permissions are not loaded in session, load them now
+// This handles cases where user was already logged in before we implemented permission loading
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+    $userId = $_SESSION["user"]["id_user"] ?? null;
+    if ($userId && (!isset($_SESSION["user"]["permissions"]) || empty($_SESSION["user"]["permissions"]))) {
+        require_once __DIR__ . "/../../App/users/models/user.php";
+        $_SESSION["user"]["permissions"] = User::getAllUserPermissions($userId);
+    }
+}
 
 ?>
 
@@ -58,79 +74,88 @@ include(__DIR__ . "/../pageTitle.php");
                 <?php else: ?>
                     <a class="nav-item nav-link active" href="/home/pages/start"><?php echo $_SESSION["user"]["username"]; ?></a>
                 <?php endif; ?>
-                <a class="nav-item nav-link" href="/users/gest/start">Users</a>
-                <a class="nav-item nav-link" href="/employees/gest/start">Employees</a>
-                <a class="nav-item nav-link" href="/roles/gest/start">Roles</a>
-                <a class="nav-item nav-link" href="/permissions/gest/start">Permissions</a>
-                <?php if (isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin'): ?>
+                
+                <?php 
+                // Users: Always visible for any logged-in user
+                $isAdmin = isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin';
+                if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true): 
+                ?>
+                    <a class="nav-item nav-link" href="/users/gest/start">Users</a>
+                <?php endif; ?>
+                
+                <?php 
+                // Employees: Always visible for any logged-in user
+                if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true): 
+                ?>
+                    <a class="nav-item nav-link" href="/employees/gest/start">Employees</a>
+                <?php endif; ?>
+                
+                <?php 
+                // Roles: Always visible for Admin, or if user has roles-view OR roles-create OR roles-edit OR roles-delete permission
+                if ($isAdmin || hasPermission('roles-view') || hasPermission('roles-create') || hasPermission('roles-edit') || hasPermission('roles-delete')): 
+                ?>
+                    <a class="nav-item nav-link" href="/roles/gest/start">Roles</a>
+                <?php endif; ?>
+                
+                <?php 
+                // Permissions: Always visible for any logged-in user
+                if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true): 
+                ?>
+                    <a class="nav-item nav-link" href="/permissions/gest/start">Permissions</a>
+                <?php endif; ?>
+                
+                <?php if (hasPermission('schedules-view') || hasPermission('schedules-edit')): ?>
                     <a class="nav-item nav-link" href="/schedules/gest/start">Schedules</a>
                 <?php endif; ?>
                 
-                <!-- CMS Services (Admin & Employee) -->
-                <?php 
-                    $userRoleName = $_SESSION['user']['role_name'] ?? null;
-                    if (in_array($userRoleName, ['Admin', 'Employee'])): 
-                ?>
+                <!-- CMS Services - Visible if user has services-view OR services-edit OR services-create OR services-delete -->
+                <?php if (hasPermission('services-view') || hasPermission('services-edit') || hasPermission('services-create') || hasPermission('services-delete')): ?>
                     <li class="nav-item">
-                        <a class="nav-link <?= ($domain === 'cms' && ($action === 'start' || $action === 'edit' || $action === 'create')) ? 'active' : '' ?>" href="/cms/gest/start">
+                        <a class="nav-link <?= ($domain === 'cms' && $controller === 'gest' && ($action === 'start' || $action === 'edit' || $action === 'create')) ? 'active' : '' ?>" href="/cms/gest/start">
                             Services
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= ($domain === 'cms' && $action === 'logs') ? 'active' : '' ?>" href="/cms/gest/logs">
+                        <a class="nav-link <?= ($domain === 'cms' && $controller === 'gest' && $action === 'logs') ? 'active' : '' ?>" href="/cms/gest/logs">
                             Service Logs
                         </a>
                     </li>
-
-                    <!-- All the animals -->
-
                     <li class="nav-item">
-                        <a class="nav-link <?= ($domain === 'animals' && ($action === 'start' || $action === 'edit' || $action === 'create')) ? 'active' : '' ?>" href="/animals/gest/start">
+                        <a class="nav-link <?= ($domain === 'cms' && $controller === 'bricks') ? 'active' : '' ?>" href="/cms/bricks/start">
+                            Content Blocks
+                        </a>
+                    </li>
+                <?php endif; ?>
+
+                <!-- All the animals - Visible if user has animals-view OR animals-create OR animals-edit OR animals-delete -->
+                <?php if (hasPermission('animals-view') || hasPermission('animals-create') || hasPermission('animals-edit') || hasPermission('animals-delete')): ?>
+                    <li class="nav-item">
+                        <a class="nav-link <?= ($domain === 'animals' && $controller === 'gest' && ($action === 'start' || $action === 'edit' || $action === 'create')) ? 'active' : '' ?>" href="/animals/gest/start">
                             All Animals gest
                         </a>
                     </li>
+                <?php endif; ?>
 
+                <!-- Feeding Logs - Visible if user has animal_feeding-view or animal_feeding-assign -->
+                <?php if (hasPermission('animal_feeding-view') || hasPermission('animal_feeding-assign')): ?>
                     <li class="nav-item">
                         <a class="nav-link <?= ($domain === 'animals' && $controller === 'feeding') ? 'active' : '' ?>" href="/animals/feeding/start">
                             Feeding Logs
                         </a>
                     </li>
+                <?php endif; ?>
 
-
-                    <!-- All the habitats -->
+                <!-- All the habitats - Visible if user has habitats-view OR habitats-create OR habitats-edit OR habitats-delete -->
+                <?php if (hasPermission('habitats-view') || hasPermission('habitats-create') || hasPermission('habitats-edit') || hasPermission('habitats-delete')): ?>
                     <li class="nav-item">
-                        <a class="nav-link <?= ($domain === 'habitats' && ($action === 'start' || $action === 'edit' || $action === 'create')) ? 'active' : '' ?>" href="/habitats/gest/start">
+                        <a class="nav-link <?= ($domain === 'habitats' && $controller === 'gest' && ($action === 'start' || $action === 'edit' || $action === 'create')) ? 'active' : '' ?>" href="/habitats/gest/start">
                             All Habitats gest
                         </a>
                     </li>
-                    
-                    
                 <?php endif; ?>
 
-                <!-- Animals & Feeding Logs (Veterinarian can view) -->
-                <?php 
-                    $userRoleName = $_SESSION['user']['role_name'] ?? null;
-                    if ($userRoleName === 'Veterinary'): 
-                ?>
-                    <li class="nav-item">
-                        <a class="nav-link <?= ($domain === 'animals' && $controller === 'gest') ? 'active' : '' ?>" href="/animals/gest/start">
-                            All Animals gest
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?= ($domain === 'animals' && $controller === 'feeding') ? 'active' : '' ?>" href="/animals/feeding/start">
-                            Feeding Logs
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?= ($domain === 'habitats' && $controller === 'suggestion') ? 'active' : '' ?>" href="/habitats/suggestion/start">
-                            Habitat Suggestions
-                        </a>
-                    </li>
-                <?php endif; ?>
-
-                <!-- Habitat Suggestions (Admin can review) -->
-                <?php if ($userRoleName === 'Admin'): ?>
+                <!-- Habitat Suggestions (View or Manage) -->
+                <?php if (hasPermission('habitat_suggestions-view') || hasPermission('habitat_suggestions-manage')): ?>
                     <li class="nav-item">
                         <a class="nav-link <?= ($domain === 'habitats' && $controller === 'suggestion') ? 'active' : '' ?>" href="/habitats/suggestion/start">
                             Habitat Suggestions
@@ -143,12 +168,6 @@ include(__DIR__ . "/../pageTitle.php");
                     <li class="nav-item">
                         <a class="nav-link <?= ($domain === 'hero') ? 'active' : '' ?>" href="/hero/gest/start">
                             Page Headers
-                        </a>
-                    </li>
-                    <!-- Bricks (Content Blocks) -->
-                    <li class="nav-item">
-                        <a class="nav-link <?= ($domain === 'cms' && $controller === 'bricks') ? 'active' : '' ?>" href="/cms/bricks/start">
-                            Content Blocks
                         </a>
                     </li>
                 <?php endif; ?>

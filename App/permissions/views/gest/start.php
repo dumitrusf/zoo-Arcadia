@@ -2,7 +2,7 @@
 // Define the structure of our categories and the prefixes that belong to them.
 $permissionStructure = [
     '🔑 Account Management' => ['users', 'roles'],
-    '🎪 Zoo Management' => ['services', 'schedules', 'habitats'],
+    '🎪 Zoo Management' => ['services', 'schedules', 'habitats', 'hero', 'bricks'],
     '🐼 Animal Management' => ['animals', 'animal_stats', 'animal_feeding'],
     '⚕️ Veterinary' => ['vet_reports', 'habitat_suggestions'],
     '💬 Public Interaction' => ['testimonials']
