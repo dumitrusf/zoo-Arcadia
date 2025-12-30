@@ -18,6 +18,7 @@ require_once __DIR__ . '/../models/Hero.php';
 require_once __DIR__ . '/../models/Slide.php'; 
 require_once __DIR__ . '/../../medias/models/cloudinary.php';
 require_once __DIR__ . '/../../medias/models/Media.php';
+require_once __DIR__ . '/../../../includes/functions.php';
 
 class HeroGestController {
     
@@ -35,6 +36,13 @@ class HeroGestController {
 
     // Show Create Form
     public function create() {
+        // Hero (Page Headers) can only be managed by Admin
+        $isAdmin = isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin';
+        if (!$isAdmin) {
+            header('Location: /hero/gest/start?msg=error&error=You do not have permission to create page headers');
+            exit;
+        }
+
         $action = 'create';
         $hero = null;
         $slides = []; 
@@ -45,13 +53,20 @@ class HeroGestController {
 
     // Show Edit Form
     public function edit() {
+        // Hero (Page Headers) can only be managed by Admin
+        $isAdmin = isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin';
+        if (!$isAdmin) {
+            header('Location: /hero/gest/start?msg=error&error=You do not have permission to edit page headers');
+            exit;
+        }
+
         $id = $_GET['id'] ?? null;
         if (!$id) { header('Location: /hero/gest/start'); exit; }
 
         $heroModel = new Hero();
         $hero = $heroModel->getById($id);
         
-        // DEBUG EXTREMO: Ver qué devuelve la base de datos
+        // DEBUG EXTREME: What does the database return
         // echo "<pre>"; var_dump($hero); echo "</pre>"; exit; 
 
         $action = 'edit';
@@ -69,6 +84,13 @@ class HeroGestController {
 
     // Save (Create or Update)
     public function save() {
+        // Hero (Page Headers) can only be managed by Admin
+        $isAdmin = isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin';
+        if (!$isAdmin) {
+            header('Location: /hero/gest/start?msg=error&error=You do not have permission to save page headers');
+            exit;
+        }
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id_hero'] ?? null;
             $title = $_POST['hero_title'];
@@ -145,6 +167,13 @@ class HeroGestController {
     
     // Delete
     public function delete() {
+        // Hero (Page Headers) can only be managed by Admin
+        $isAdmin = isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin';
+        if (!$isAdmin) {
+            header('Location: /hero/gest/start?msg=error&error=You do not have permission to delete page headers');
+            exit;
+        }
+
         $id = $_GET['id'] ?? null;
         if ($id) {
             $heroModel = new Hero();

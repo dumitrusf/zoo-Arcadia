@@ -1,3 +1,7 @@
+<?php
+// Include functions to use hasPermission()
+require_once __DIR__ . '/../../../../includes/functions.php';
+?>
 <!-- App/users/views/gest/view.php -->
 <div class="container-fluid pt-4 px-4">
     <div class="card shadow-sm">
@@ -67,8 +71,13 @@
         </div>
         <div class="card-footer text-end d-flex justify-content-between align-items-start">
             <a href="/users/gest/start#user-<?= htmlspecialchars($user->id) ?>" class="btn btn-primary">Back to the list</a>
-            <a href="/users/gest/edit?id=<?= htmlspecialchars($user->id) ?>" class="btn btn-primary">Edit</a>
-
+            <?php 
+            // Only show Edit button if user has users-edit permission or is Admin
+            $isAdmin = isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin';
+            if ($isAdmin || hasPermission('users-edit')): 
+            ?>
+                <a href="/users/gest/edit?id=<?= htmlspecialchars($user->id) ?>" class="btn btn-primary">Edit</a>
+            <?php endif; ?>
         </div>
     </div>
 </div>

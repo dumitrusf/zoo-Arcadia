@@ -1,3 +1,7 @@
+<?php
+// Include functions to use hasPermission()
+require_once __DIR__ . '/../../../../includes/functions.php';
+?>
 <!-- App/roles/views/gest/view.php -->
 <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
@@ -33,8 +37,15 @@
                         </div>
                     <?php endif; ?>
                 </div>
-                <div class="card-footer text-end">
+                <div class="card-footer text-end d-flex justify-content-between align-items-start">
                     <a href="/roles/gest/start" class="btn btn-primary">Back to the list</a>
+                    <?php 
+                    // Only show Edit button if user has roles-edit permission or is Admin
+                    $isAdmin = isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin';
+                    if ($isAdmin || hasPermission('roles-edit')): 
+                    ?>
+                        <a href="/roles/gest/edit?id=<?= htmlspecialchars($role->id_role) ?>" class="btn btn-primary">Edit</a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

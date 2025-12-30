@@ -1,11 +1,16 @@
+<?php
+// Include functions to use hasPermission()
+require_once __DIR__ . '/../../../../includes/functions.php';
+?>
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h2 class="card-title">Roles</h2>
         
         <?php 
-        // 🛡️ Solo Admin puede crear roles
+        // Only Admin or users with roles-create permission can create roles
         $isAdmin = (isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin');
-        if ($isAdmin): 
+        // roles create from permission list
+        if ($isAdmin || hasPermission('roles-create')): 
         ?>
             <a name="roles" id="" class="btn btn-success mb-2 mt-2" href="/roles/gest/create" role="button">+ Add New Role</a>
         <?php endif; ?>
@@ -42,7 +47,7 @@
 
 
         <div class="table-responsive">
-            <!-- Formulario para ver roles (puestos) -->
+            <!-- table to display the roles -->
             <table class="table table-hover">
                 <thead class="table-dark">
                     <tr>
@@ -65,7 +70,7 @@
                     ?>
 
                         <tr class="<?php echo get_row_class($rowNumber); ?>">
-                            <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?> ">   <?php echo $role->id_role; ?> </td>
+                            <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?> ">  #<?php echo $role->id_role; ?> </td>
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?> ">   <?php echo $role->role_name; ?> </td>
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?> ">   <?php echo $role->role_description; ?> </td>
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>">   <?php echo $role->created_at; ?> </td>
@@ -78,8 +83,11 @@
                                     <!-- View Details: VISIBLE PARA TODOS -->
                                     <a href="/roles/gest/view?id=<?php echo $role->id_role; ?>" class="btn btn-sm btn-info text-white">View Details</a>
 
-                                    <?php if ($isAdmin): ?>
+                                    <?php if ($isAdmin || hasPermission('roles-edit')): ?>
                                         <a href="/roles/gest/edit?id=<?php echo $role->id_role; ?>" class="btn btn-sm btn-primary">Edit</a>
+                                    <?php endif; ?>
+                                    
+                                    <?php if ($isAdmin || hasPermission('roles-delete')): ?>
                                         <a href="/roles/gest/delete?id=<?php echo $role->id_role; ?>" class="btn btn-sm btn-danger">Delete</a>
                                     <?php endif; ?>
 

@@ -1,13 +1,17 @@
 <?php
 // App/cms/views/gest/bricks_start.php
+// Include functions to use hasPermission()
+require_once __DIR__ . '/../../../../includes/functions.php';
 ?>
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>Manage Content Blocks (Bricks)</h1>
-        <a href="/cms/bricks/create" class="btn btn-primary">
-            <i class="bi bi-plus-circle"></i> Create New Brick
-        </a>
+        <?php if (hasPermission('services-create')): ?>
+            <a href="/cms/bricks/create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Create New Brick
+            </a>
+        <?php endif; ?>
     </div>
 
     <?php if (isset($_GET['msg'])): ?>
@@ -53,14 +57,19 @@
                                     <td><?= htmlspecialchars(substr($brick->description, 0, 60)) ?>...</td>
                                     
                                     <td class="text-end">
-                                        <a href="/cms/bricks/edit?id=<?= $brick->id_brick ?>" class="btn btn-sm btn-warning me-1">
-                                            <i class="bi bi-pencil">Edit</i> 
-                                        </a>
-                                        <a href="/cms/bricks/delete?id=<?= $brick->id_brick ?>" 
-                                           class="btn btn-sm btn-danger"
-                                           onclick="return confirm('Are you sure you want to delete this brick?');">
-                                            <i class="bi bi-trash">delete</i>
-                                        </a>
+                                        <?php if (hasPermission('services-edit')): ?>
+                                            <a href="/cms/bricks/edit?id=<?= $brick->id_brick ?>" class="btn btn-sm btn-warning me-1">
+                                                <i class="bi bi-pencil">Edit</i> 
+                                            </a>
+                                        <?php endif; ?>
+                                        
+                                        <?php if (hasPermission('services-delete')): ?>
+                                            <a href="/cms/bricks/delete?id=<?= $brick->id_brick ?>" 
+                                               class="btn btn-sm btn-danger"
+                                               onclick="return confirm('Are you sure you want to delete this brick?');">
+                                                <i class="bi bi-trash">delete</i>
+                                            </a>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

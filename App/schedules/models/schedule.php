@@ -17,21 +17,21 @@ class Schedule {
         $this->db = DB::createInstance();
     }
 
-    // Obtener todos los horarios
+    // Get all schedules
     public function getAll() {
         $stmt = $this->db->prepare("SELECT * FROM opening ORDER BY id_opening ASC");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
-    // Obtener un horario por ID
+    // Get a schedule by ID
     public function getById($id) {
         $stmt = $this->db->prepare("SELECT * FROM opening WHERE id_opening = ?");
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
 
-    // Actualizar un horario existente
+    // Update an existing schedule
     public function update($id, $data) {
         $sql = "UPDATE opening SET 
                 time_slot = :time_slot,

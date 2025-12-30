@@ -40,12 +40,14 @@ CREATE TABLE form_contact (
     -- Surname of the sender cannot be null.
     f_email VARCHAR(100) NOT NULL,
     -- Email of the sender cannot be null.
-    -- Validation of the email format to do it in the application.
     f_subject VARCHAR(100),
-    -- Optional message matter.
+    -- Validation of the email format to do it in the application.
     f_message TEXT NOT NULL,
+    -- Optional message matter.
+    f_sent_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
     -- Body of the mandatory message, since it is the main content.
-    f_sent_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Date of sending the message.It is automatically established at the time of insertion.
+    email_sent BOOLEAN DEFAULT FALSE 
+    -- Date of sending the message.It is automatically established at the time of insertion, Flag to track if email was sent to zoo
 );
 
 --
@@ -475,11 +477,11 @@ CREATE TABLE health_state_report (
     full_animal_id INT NOT NULL,
     -- Relationship with the Animal_Full table.
 
-    hsr_state ENUM('healthy', 'sick', 'quarantined') NOT NULL,
+    hsr_state ENUM('healthy', 'sick', 'quarantined', 'injured', 'happy', 'sad', 'depressed', 'terminal', 'infant', 'hungry', 'well', 'good_condition', 'angry', 'aggressive', 'nervous', 'anxious', 'recovering', 'pregnant', 'malnourished', 'dehydrated', 'stressed') NOT NULL,
     -- Animal status.
 
-    review_date DATE NOT NULL,
-    -- Date of review of the report.
+    review_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    -- Date and time of review of the report (for audit purposes).
 
     vet_obs TEXT NOT NULL,
     -- Observations of the veterinarian.
@@ -490,7 +492,7 @@ CREATE TABLE health_state_report (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     -- Last update date.
 
-    opt_details VARCHAR(255)
+    opt_details TEXT
     -- Optional reports of the report.
 );
 

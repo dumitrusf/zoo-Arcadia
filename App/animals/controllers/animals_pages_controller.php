@@ -15,6 +15,8 @@ require_once __DIR__ . '/../models/animalFull.php';
 require_once __DIR__ . '/../models/specie.php';
 require_once __DIR__ . '/../../habitats/models/habitat.php';
 require_once __DIR__ . '/../models/nutrition.php';
+require_once __DIR__ . '/../../vreports/models/healthStateReport.php';
+require_once __DIR__ . '/../models/animalClick.php';
 
 class AnimalsPagesController {
     
@@ -70,7 +72,31 @@ class AnimalsPagesController {
             header('Location: /animals/pages/allanimals');
             exit;
         }
-
+        
+        // Get the latest health state report for this animal
+        $healthReportModel = new HealthStateReport();
+        $latestReport = $healthReportModel->getLatestByAnimalId($id);
+        
+        // Register click for statistics (only once per session per animal to avoid spam)
+        if ($animal && isset($animal->animal_g_id)) {
+            // Initialize session array for tracking clicked animals if it doesn't exist
+            if (!isset($_SESSION['animal_clicks'])) {
+                $_SESSION['animal_clicks'] = [];
+            }
+            
+            // Check if this animal has already been clicked in this session
+            $animal_g_id = $animal->animal_g_id;
+            if (!in_array($animal_g_id, $_SESSION['animal_clicks'])) {
+                // Register the click
+                $clickModel = new AnimalClick();
+                $clickModel->registerClick($animal_g_id);
+                
+                // Mark this animal as clicked in this session
+                $_SESSION['animal_clicks'][] = $animal_g_id;
+            }
+            // If already clicked in this session, do nothing (prevents spam)
+        }
+        
         if (file_exists(__DIR__ . '/../views/pages/animalpicked.php')) {
             include_once __DIR__ . '/../views/pages/animalpicked.php';
         } else {
