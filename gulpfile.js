@@ -54,12 +54,29 @@ function compileSass() {
 }
 
 function processJs() {
-    return src(paths.js)
+    // Compilar app.js (excluyendo los filtros que se compilan por separado)
+    const appJs = src(['src/js/app.js'])
         .pipe(sourcemaps.init())
-        .pipe(concat('app.js')) // Unifica todos los .js de src/js en uno solo
-        .pipe(terser()) // Comprime/minifica el JS
+        .pipe(terser())
         .pipe(sourcemaps.write('.'))
         .pipe(dest('public/build/js'));
+    
+    // Compilar animals-filter.js por separado
+    const animalsFilterJs = src('src/js/animals-filter.js')
+        .pipe(sourcemaps.init())
+        .pipe(terser())
+        .pipe(sourcemaps.write('.'))
+        .pipe(dest('public/build/js'));
+    
+    // Compilar habitat-filter.js por separado
+    const habitatFilterJs = src('src/js/habitat-filter.js')
+        .pipe(sourcemaps.init())
+        .pipe(terser())
+        .pipe(sourcemaps.write('.'))
+        .pipe(dest('public/build/js'));
+    
+    // Retornar todos los streams en paralelo
+    return require('merge-stream')(appJs, animalsFilterJs, habitatFilterJs);
 }
 
 function copyVendorJs() {

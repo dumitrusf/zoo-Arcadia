@@ -16,6 +16,7 @@
 
 require_once __DIR__ . '/../../../database/connection.php';
 require_once __DIR__ . '/../models/schedule.php';
+require_once __DIR__ . '/../../../includes/functions.php';
 
 DB::createInstance();
 
@@ -24,8 +25,8 @@ class SchedulesGestController {
         $scheduleModel = new Schedule();
         $schedules = $scheduleModel->getAll();
 
-        // Carga la vista estática de gestión
-        // Asegúrate de que el archivo 'start.php' esté en 'views/gest/'
+        // Load the static management view
+        // Make sure the 'start.php' file is in 'views/gest/'
         if (file_exists(__DIR__ . '/../views/gest/start.php')) {
             include_once __DIR__ . '/../views/gest/start.php';
         } else {
@@ -34,13 +35,19 @@ class SchedulesGestController {
     }
 
     public function edit() {
+        // Check if user has permission to edit schedules
+        if (!hasPermission('schedules-edit')) {
+            header('Location: /schedules/gest/start?msg=error&error=You do not have permission to edit schedules');
+            exit;
+        }
+
         $scheduleModel = new Schedule();
         $error = null;
         $success = null;
 
-        // VERIFICAR SI ESTAMOS GUARDANDO (POST)
+        // CHECK IF WE ARE SAVING (POST)
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Recoger datos del formulario
+            // Get data from the form
             $id = $_POST['id_opening'] ?? null;
             $data = [
                 'time_slot'    => $_POST['time_slot'] ?? '',
@@ -50,7 +57,7 @@ class SchedulesGestController {
             ];
 
             if ($id && $scheduleModel->update($id, $data)) {
-                // Redirigir al listado con mensaje de éxito (o mostrarlo aquí)
+                // Redirect to the list with success message (or show it here)
                 header('Location: /schedules/gest/start'); 
                 exit;
             } else {
@@ -58,7 +65,7 @@ class SchedulesGestController {
             }
         }
 
-        // MOSTRAR FORMULARIO (GET)
+        // SHOW FORM (GET)
         $id = $_GET['id'] ?? null;
         $schedule = null;
 

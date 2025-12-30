@@ -55,9 +55,6 @@ class AuthPagesController{
         header("Location: /auth/pages/login");
         exit();
     }
-    
-
-
   
 }
 
