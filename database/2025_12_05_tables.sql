@@ -475,11 +475,11 @@ CREATE TABLE health_state_report (
     full_animal_id INT NOT NULL,
     -- Relationship with the Animal_Full table.
 
-    hsr_state ENUM('healthy', 'sick', 'quarantined') NOT NULL,
+    hsr_state ENUM('healthy', 'sick', 'quarantined', 'injured', 'happy', 'sad', 'depressed', 'terminal', 'infant', 'hungry', 'well', 'good_condition', 'angry', 'aggressive', 'nervous', 'anxious', 'recovering', 'pregnant', 'malnourished', 'dehydrated', 'stressed') NOT NULL,
     -- Animal status.
 
-    review_date DATE NOT NULL,
-    -- Date of review of the report.
+    review_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    -- Date and time of review of the report (for audit purposes).
 
     vet_obs TEXT NOT NULL,
     -- Observations of the veterinarian.
@@ -490,7 +490,7 @@ CREATE TABLE health_state_report (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     -- Last update date.
 
-    opt_details VARCHAR(255)
+    opt_details TEXT
     -- Optional reports of the report.
 );
 

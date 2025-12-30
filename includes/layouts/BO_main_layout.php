@@ -163,6 +163,15 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
                     </li>
                 <?php endif; ?>
 
+                <!-- Health State Reports (Veterinary) -->
+                <?php if (hasPermission('vet_reports-view') || hasPermission('vet_reports-create') || hasPermission('vet_reports-edit')): ?>
+                    <li class="nav-item">
+                        <a class="nav-link <?= ($domain === 'vreports' && $controller === 'gest') ? 'active' : '' ?>" href="/vreports/gest/start">
+                            Health Reports
+                        </a>
+                    </li>
+                <?php endif; ?>
+
                 <!-- Page Headers (Admin Only) -->
                 <?php if (isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin'): ?>
                     <li class="nav-item">

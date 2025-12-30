@@ -64,10 +64,84 @@
         <!-- ANIMALS TAB -->
         <div class="tab-pane fade show active" id="animals" role="tabpanel">
 
+    <!-- FILTERS -->
+    <?php
+    // Extract unique values for filters
+    $uniqueSpeciesTypes = [];
+    $uniqueHabitats = [];
+    $uniqueGenders = [];
+    $uniqueFullSpecies = [];
+    
+    if (!empty($animals)) {
+        foreach ($animals as $animal) {
+            // Extract species type from parentheses (e.g., "roller", "lizard")
+            if (!empty($animal->specie_name) && preg_match('/\(([^)]+)\)/', $animal->specie_name, $matches)) {
+                $type = trim($matches[1]);
+                if (!in_array($type, $uniqueSpeciesTypes)) {
+                    $uniqueSpeciesTypes[] = $type;
+                }
+            }
+            
+            // Extract full species name
+            if (!empty($animal->specie_name) && !in_array($animal->specie_name, $uniqueFullSpecies)) {
+                $uniqueFullSpecies[] = $animal->specie_name;
+            }
+            
+            // Extract unique habitats
+            if (!empty($animal->habitat_name) && $animal->habitat_name !== 'No habitat assigned' && !in_array($animal->habitat_name, $uniqueHabitats)) {
+                $uniqueHabitats[] = $animal->habitat_name;
+            }
+            
+            // Extract unique genders
+            if (!empty($animal->gender) && !in_array($animal->gender, $uniqueGenders)) {
+                $uniqueGenders[] = $animal->gender;
+            }
+        }
+        sort($uniqueSpeciesTypes);
+        sort($uniqueHabitats);
+        sort($uniqueGenders);
+        sort($uniqueFullSpecies);
+    }
+    ?>
+    
+    <div class="card shadow-sm mb-3">
+        <div class="card-body">
+            <div class="row g-3 mb-3">
+                <div class="col-md-3">
+                    <label for="filterSpeciesType" class="form-label fw-bold">Filter by Species Type:</label>
+                    <select class="form-select" id="filterSpeciesType">
+                        <option value="">All types...</option>
+                        <?php foreach ($uniqueSpeciesTypes as $type): ?>
+                            <option value="<?= htmlspecialchars($type) ?>"><?= htmlspecialchars(ucfirst($type)) ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="filterGender" class="form-label fw-bold">Filter by Gender:</label>
+                    <select class="form-select" id="filterGender">
+                        <option value="">All genders...</option>
+                        <?php foreach ($uniqueGenders as $gender): ?>
+                            <option value="<?= htmlspecialchars($gender) ?>"><?= htmlspecialchars(ucfirst($gender)) ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="filterHabitat" class="form-label fw-bold">Filter by Habitat:</label>
+                    <select class="form-select" id="filterHabitat">
+                        <option value="">All habitats...</option>
+                        <?php foreach ($uniqueHabitats as $habitat): ?>
+                            <option value="<?= htmlspecialchars($habitat) ?>"><?= htmlspecialchars($habitat) ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="card shadow-sm">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-hover align-middle">
+                <table id="animalsTable" class="table table-hover align-middle dataTable">
                     <thead class="table-light">
                         <tr>
                             <th style="width: 50px;">ID</th>
@@ -85,7 +159,7 @@
                             <?php foreach ($animals as $animal): ?>
                                 <tr>
                                     <!-- ID Column -->
-                                    <td class="fw-bold text-muted">#<?= $animal->id_full_animal ?? 'N/A' ?></td>
+                                    <td class="fw-bold text-muted" data-order="<?= $animal->id_full_animal ?? 0 ?>">#<?= $animal->id_full_animal ?? 'N/A' ?></td>
 
                                     <!-- Image Column -->
                                     <td style="width: 80px;">
@@ -103,16 +177,23 @@
                                     <td class="fw-bold"><?= htmlspecialchars($animal->animal_name ?? 'N/A') ?></td>
                                     
                                     <!-- Species -->
-                                    <td><?= htmlspecialchars($animal->specie_name ?? 'N/A') ?></td>
+                                    <td data-species-type="<?= !empty($animal->specie_name) && preg_match('/\(([^)]+)\)/', $animal->specie_name, $matches) ? htmlspecialchars(trim($matches[1])) : '' ?>" 
+                                        data-full-species="<?= htmlspecialchars($animal->specie_name ?? 'N/A') ?>">
+                                        <?= htmlspecialchars($animal->specie_name ?? 'N/A') ?>
+                                    </td>
                                     
                                     <!-- Category -->
                                     <td><?= htmlspecialchars($animal->category_name ?? 'N/A') ?></td>
                                     
                                     <!-- Habitat -->
-                                    <td><?= htmlspecialchars($animal->habitat_name ?? 'No habitat assigned') ?></td>
+                                    <td data-habitat="<?= htmlspecialchars($animal->habitat_name ?? 'No habitat assigned') ?>">
+                                        <?= htmlspecialchars($animal->habitat_name ?? 'No habitat assigned') ?>
+                                    </td>
                                     
                                     <!-- Gender -->
-                                    <td><?= htmlspecialchars($animal->gender ?? 'N/A') ?></td>
+                                    <td data-gender="<?= htmlspecialchars($animal->gender ?? 'N/A') ?>">
+                                        <?= htmlspecialchars($animal->gender ?? 'N/A') ?>
+                                    </td>
                                     
                                     <!-- Actions -->
                                     <td class="text-end">
@@ -154,6 +235,7 @@
 
         <!-- SPECIES TAB -->
         <div class="tab-pane fade" id="species" role="tabpanel">
+            <?php if (hasPermission('animals-create')): ?>
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-info text-white">
                     <h5 class="mb-0">Create New Species</h5>
@@ -189,6 +271,7 @@
                     </form>
                 </div>
             </div>
+            <?php endif; ?>
 
             <div class="card shadow-sm">
                 <div class="card-body">
@@ -211,15 +294,19 @@
                                             <td class="fw-bold"><?= htmlspecialchars($specie->specie_name) ?></td>
                                             <td><?= htmlspecialchars($specie->category_name ?? 'N/A') ?></td>
                                             <td class="text-end">
+                                                <?php if (hasPermission('animals-edit')): ?>
                                                 <button type="button" class="btn btn-sm btn-warning me-1" 
                                                         onclick="editSpecies(<?= $specie->id_specie ?>, '<?= htmlspecialchars($specie->specie_name, ENT_QUOTES) ?>', <?= $specie->category_id ?>)">
                                                     <i>edit</i>
                                                 </button>
+                                                <?php endif; ?>
+                                                <?php if (hasPermission('animals-delete')): ?>
                                                 <a href="/animals/gest/deleteSpecies?id=<?= $specie->id_specie ?>" 
                                                    class="btn btn-sm btn-danger"
                                                    onclick="return confirm('Are you sure? This will delete all animals of this species!');">
                                                     <i>delete</i>
                                                 </a>
+                                                <?php endif; ?>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -239,6 +326,7 @@
 
         <!-- CATEGORIES TAB -->
         <div class="tab-pane fade" id="categories" role="tabpanel">
+            <?php if (hasPermission('animals-create')): ?>
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-success text-white">
                     <h5 class="mb-0">Create New Category</h5>
@@ -258,6 +346,7 @@
                     </form>
                 </div>
             </div>
+            <?php endif; ?>
 
             <div class="card shadow-sm">
                 <div class="card-body">
@@ -278,15 +367,19 @@
                                             <td class="fw-bold text-muted">#<?= $category->id_category ?></td>
                                             <td class="fw-bold"><?= htmlspecialchars($category->category_name) ?></td>
                                             <td class="text-end">
+                                                <?php if (hasPermission('animals-edit')): ?>
                                                 <button type="button" class="btn btn-sm btn-warning me-1" 
                                                         onclick="editCategory(<?= $category->id_category ?>, '<?= htmlspecialchars($category->category_name, ENT_QUOTES) ?>')">
                                                     <i>edit</i>
                                                 </button>
+                                                <?php endif; ?>
+                                                <?php if (hasPermission('animals-delete')): ?>
                                                 <a href="/animals/gest/deleteCategory?id=<?= $category->id_category ?>" 
                                                    class="btn btn-sm btn-danger"
                                                    onclick="return confirm('Are you sure? This will delete all species and animals in this category!');">
                                                     <i>delete</i>
                                                 </a>
+                                                <?php endif; ?>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -306,6 +399,7 @@
 
         <!-- NUTRITION TAB -->
         <div class="tab-pane fade" id="nutrition" role="tabpanel">
+            <?php if (hasPermission('animals-create')): ?>
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-info text-white">
                     <h5 class="mb-0">Create New Nutrition Plan</h5>
@@ -344,6 +438,7 @@
                     </form>
                 </div>
             </div>
+            <?php endif; ?>
 
             <div class="card shadow-sm">
                 <div class="card-body">
@@ -368,15 +463,19 @@
                                             <td><?= htmlspecialchars(ucfirst($nutrition->food_type)) ?></td>
                                             <td><?= number_format($nutrition->food_qtty) ?>g</td>
                                             <td class="text-end">
+                                                <?php if (hasPermission('animals-edit')): ?>
                                                 <button type="button" class="btn btn-sm btn-warning me-1" 
                                                         onclick="editNutrition(<?= $nutrition->id_nutrition ?>, '<?= htmlspecialchars($nutrition->nutrition_type, ENT_QUOTES) ?>', '<?= htmlspecialchars($nutrition->food_type, ENT_QUOTES) ?>', <?= $nutrition->food_qtty ?>)">
                                                     <i>edit</i>
                                                 </button>
+                                                <?php endif; ?>
+                                                <?php if (hasPermission('animals-delete')): ?>
                                                 <a href="/animals/gest/deleteNutrition?id=<?= $nutrition->id_nutrition ?>" 
                                                    class="btn btn-sm btn-danger"
                                                    onclick="return confirm('Are you sure? This will remove this nutrition plan from all animals using it!');">
                                                     <i>delete</i>
                                                 </a>
+                                                <?php endif; ?>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -398,11 +497,7 @@
         <div class="tab-pane fade" id="feeding" role="tabpanel">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h5 class="mb-0">Feeding Logs Management</h5>
-                <?php 
-                    // Only Admin and Employee can create feeding logs
-                    $userRoleName = $_SESSION['user']['role_name'] ?? null;
-                    if (in_array($userRoleName, ['Admin', 'Employee'])): 
-                ?>
+                <?php if (hasPermission('animal_feeding-assign')): ?>
                     <a href="/animals/feeding/create" class="btn btn-primary">
                         <i class="bi bi-plus-circle"></i> Record New Feeding
                     </a>
@@ -507,11 +602,7 @@
                                                    title="View all feedings for this animal">
                                                     <i class="bi bi-eye">view</i>
                                                 </a>
-                                                <?php 
-                                                    // Only Admin and Employee can delete feeding logs
-                                                    $userRoleName = $_SESSION['user']['role_name'] ?? null;
-                                                    if (in_array($userRoleName, ['Admin', 'Employee'])): 
-                                                ?>
+                                                <?php if (hasPermission('animal_feeding-delete') || hasPermission('animal_feeding-assign')): ?>
                                                     <a href="/animals/feeding/delete?id=<?= $feeding->id_feeding_log ?>" 
                                                        class="btn btn-sm btn-outline-danger" 
                                                        onclick="return confirm('Are you sure you want to delete this feeding log?')"
@@ -526,11 +617,7 @@
                                     <tr>
                                         <td colspan="9" class="text-center text-muted py-4">
                                             <i class="bi bi-inbox"></i> No feeding logs found.
-                                            <?php 
-                                                // Only Admin and Employee can create feeding logs
-                                                $userRoleName = $_SESSION['user']['role_name'] ?? null;
-                                                if (in_array($userRoleName, ['Admin', 'Employee'])): 
-                                            ?>
+                                            <?php if (hasPermission('animal_feeding-assign')): ?>
                                                 <a href="/animals/feeding/create">Create the first one!</a>
                                             <?php endif; ?>
                                         </td>
@@ -673,4 +760,126 @@ function editNutrition(id, nutritionType, foodType, foodQty) {
     document.getElementById('edit_food_qtty').value = foodQty;
     new bootstrap.Modal(document.getElementById('editNutritionModal')).show();
 }
+
+// DataTables Configuration with Custom Filters - LITERAL copy from animals-filter.js
+// Wait for all scripts to load (including DataTables)
+window.addEventListener('load', function() {
+    // Double check jQuery and DataTables are available
+    if (typeof jQuery === 'undefined' || typeof jQuery.fn.DataTable === 'undefined') {
+        console.error('jQuery or DataTables not loaded!');
+        return;
+    }
+    
+    const $ = jQuery;
+    const table = $('#animalsTable');
+    
+    if (table.length) {
+        // Get existing DataTable instance or initialize
+        let dataTable;
+        if ($.fn.DataTable.isDataTable('#animalsTable')) {
+            // Get existing instance
+            dataTable = table.DataTable();
+            // Reorder by ID if not already ordered
+            dataTable.order([0, 'asc']).draw();
+            console.log('Using existing DataTable instance');
+        } else {
+            // Initialize new instance
+            dataTable = table.DataTable({
+                pageLength: 10,
+                lengthMenu: [[5, 10, 25, 50, 100], [5, 10, 25, 50, 100]],
+                responsive: true,
+                order: [[0, "asc"]], // Order by ID column (first column) ascending
+                language: {
+                    search: "Search:",
+                    lengthMenu: "Show _MENU_ entries",
+                    info: "Showing _START_ to _END_ of _TOTAL_ entries",
+                    infoEmpty: "Showing 0 to 0 of 0 entries",
+                    infoFiltered: "(filtered from _MAX_ total entries)",
+                    zeroRecords: "No matching records found",
+                    paginate: {
+                        first: "First",
+                        last: "Last",
+                        next: "Next",
+                        previous: "Previous"
+                    }
+                },
+                columnDefs: [
+                    { orderable: false, targets: [1, 7] }, // Photo and Actions columns not sortable
+                    { type: 'num', targets: [0] } // ID column should be sorted as numbers (uses data-order attribute)
+                ]
+            });
+            console.log('DataTables initialized');
+        }
+
+        // Custom filter function - LITERAL copy from animals-filter.js lines 5-45
+        $.fn.dataTable.ext.search.push(
+            function(settings, data, dataIndex) {
+                // Only apply to animalsTable
+                const tableId = $(settings.nTable).attr('id');
+                if (tableId !== 'animalsTable') {
+                    return true;
+                }
+                
+                // Get filter values - LITERAL from animals-filter.js line 6-10
+                const specie = $('#filterSpeciesType').val().toLowerCase();
+                const habitat = $('#filterHabitat').val().toLowerCase();
+                const gender = $('#filterGender').val().toLowerCase();
+                
+                // Get the row node
+                const api = new $.fn.dataTable.Api(settings);
+                const row = api.row(dataIndex).node();
+                
+                if (!row) {
+                    return true;
+                }
+                
+                const $row = $(row);
+                
+                // Get data from cells - LITERAL from animals-filter.js line 16-19
+                const speciesCell = $row.find('td').eq(3);
+                const habitatCell = $row.find('td').eq(5);
+                const genderCell = $row.find('td').eq(6);
+                
+                const articleSpecie = speciesCell.data('full-species') || '';
+                const articleHabitat = habitatCell.data('habitat') || '';
+                const articleGender = genderCell.data('gender') || '';
+                
+                let show = true;
+
+                // Filter by specie (extract value from parentheses and compare) - LITERAL from animals-filter.js line 24-29
+                if (specie) {
+                    const specieMatch = articleSpecie.match(/\(([^)]+)\)/);
+                    const articleSpecieType = specieMatch ? specieMatch[1].toLowerCase().trim() : '';
+                    if (articleSpecieType !== specie.toLowerCase()) {
+                        show = false;
+                    }
+                }
+
+                // Filter by habitat - LITERAL from animals-filter.js line 33-35
+                if (show && habitat && articleHabitat.toLowerCase().indexOf(habitat) === -1) {
+                    show = false;
+                }
+
+                // Filter by gender - exact match (not partial like habitat)
+                if (show && gender) {
+                    if (articleGender.toLowerCase().trim() !== gender.trim()) {
+                        show = false;
+                    }
+                }
+
+                return show;
+            }
+        );
+        
+        console.log('Filter function added');
+
+        // Add event listeners to filters - LITERAL from animals-filter.js line 202
+        $('#filterSpeciesType, #filterGender, #filterHabitat').off('change').on('change', function() {
+            console.log('Filter changed:', $(this).attr('id'), $(this).val());
+            dataTable.draw();
+        });
+        
+        console.log('Event listeners added');
+    }
+});
 </script>

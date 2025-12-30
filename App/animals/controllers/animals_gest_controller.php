@@ -65,6 +65,22 @@ class AnimalsGestController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id_category'] ?? null;
+            
+            // Check permissions based on whether it's create or update
+            if ($id) {
+                // UPDATE - requires animals-edit permission
+                if (!hasPermission('animals-edit')) {
+                    header('Location: /animals/gest/start?msg=error&error=You do not have permission to edit categories');
+                    exit;
+                }
+            } else {
+                // CREATE - requires animals-create permission
+                if (!hasPermission('animals-create')) {
+                    header('Location: /animals/gest/start?msg=error&error=You do not have permission to create categories');
+                    exit;
+                }
+            }
+            
             $name = trim($_POST['category_name'] ?? '');
             
             if (empty($name)) {
@@ -96,6 +112,11 @@ class AnimalsGestController
      */
     public function deleteCategory()
     {
+        if (!hasPermission('animals-delete')) {
+            header('Location: /animals/gest/start?msg=error&error=You do not have permission to delete categories');
+            exit;
+        }
+        
         $id = $_GET['id'] ?? null;
         if ($id) {
             $categoryModel = new category();
@@ -112,6 +133,22 @@ class AnimalsGestController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id_specie'] ?? null;
+            
+            // Check permissions based on whether it's create or update
+            if ($id) {
+                // UPDATE - requires animals-edit permission
+                if (!hasPermission('animals-edit')) {
+                    header('Location: /animals/gest/start?msg=error&error=You do not have permission to edit species');
+                    exit;
+                }
+            } else {
+                // CREATE - requires animals-create permission
+                if (!hasPermission('animals-create')) {
+                    header('Location: /animals/gest/start?msg=error&error=You do not have permission to create species');
+                    exit;
+                }
+            }
+            
             $categoryId = $_POST['category_id'] ?? null;
             $name = trim($_POST['specie_name'] ?? '');
             
@@ -144,6 +181,11 @@ class AnimalsGestController
      */
     public function deleteSpecies()
     {
+        if (!hasPermission('animals-delete')) {
+            header('Location: /animals/gest/start?msg=error&error=You do not have permission to delete species');
+            exit;
+        }
+        
         $id = $_GET['id'] ?? null;
         if ($id) {
             $specieModel = new specie();
@@ -160,6 +202,22 @@ class AnimalsGestController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id_nutrition'] ?? null;
+            
+            // Check permissions based on whether it's create or update
+            if ($id) {
+                // UPDATE - requires animals-edit permission
+                if (!hasPermission('animals-edit')) {
+                    header('Location: /animals/gest/start?msg=error&error=You do not have permission to edit nutrition plans');
+                    exit;
+                }
+            } else {
+                // CREATE - requires animals-create permission
+                if (!hasPermission('animals-create')) {
+                    header('Location: /animals/gest/start?msg=error&error=You do not have permission to create nutrition plans');
+                    exit;
+                }
+            }
+            
             $nutritionType = $_POST['nutrition_type'] ?? '';
             $foodType = $_POST['food_type'] ?? '';
             $foodQty = $_POST['food_qtty'] ?? null;
@@ -193,6 +251,11 @@ class AnimalsGestController
      */
     public function deleteNutrition()
     {
+        if (!hasPermission('animals-delete')) {
+            header('Location: /animals/gest/start?msg=error&error=You do not have permission to delete nutrition plans');
+            exit;
+        }
+        
         $id = $_GET['id'] ?? null;
         if ($id) {
             $nutritionModel = new Nutrition();

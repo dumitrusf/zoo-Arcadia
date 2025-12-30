@@ -56,8 +56,29 @@ function handleDomainRouting($domainName, $basePath)
     if (file_exists($controllerFile)) {
         require_once $controllerFile;
 
-        ob_start();
+        // Check if the controller class exists
+        if (!class_exists($controllerClassName)) {
+            http_response_code(404);
+            echo "Error: Controller class '$controllerClassName' not found.";
+            exit();
+        }
+
         $controllerInstance = new $controllerClassName();
+        
+        // Check if the action method exists
+        if (!method_exists($controllerInstance, $action)) {
+            // If it's animals/pages domain and action doesn't exist, redirect to allanimals
+            if ($domainName === 'animals' && $controller === 'pages') {
+                header('Location: /animals/pages/allanimals');
+                exit();
+            }
+            // Otherwise show 404 error
+            http_response_code(404);
+            echo "Error 404: Page not found. The action '$action' does not exist in the controller.";
+            exit();
+        }
+
+        ob_start();
         $controllerInstance->$action();
         $viewContent = ob_get_clean();
 
@@ -82,8 +103,8 @@ function handleDomainRouting($domainName, $basePath)
         $usePublicLayout = false;
         if (isset($public_layout_map[$domainKey])) {
             $allowedActions = $public_layout_map[$domainKey];
-            $usePublicLayout = empty($allowedActions) || in_array($actionKey, $allowedActions, true);
-        }
+                $usePublicLayout = empty($allowedActions) || in_array($actionKey, $allowedActions, true);
+            }
 
         if ($usePublicLayout) {
             require __DIR__ . "/layouts/FC_main_layout.php";

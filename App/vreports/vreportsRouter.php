@@ -2,11 +2,11 @@
 /**
  * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
  * ----------------------------------------------------
- * 📍 Logical Path: Arcadia\Reports
- * 📂 Physical File:   App/reports/reportsRouter.php
+ * 📍 Logical Path: Arcadia\VetReports
+ * 📂 Physical File:   App/vet_reports/vet_reportsRouter.php
  * 
  * 📝 Description:
- * Router for the Reports domain.
+ * Router for the Vet Reports domain.
  * Handles incoming requests and delegates to the appropriate controller.
  * 
  * 🔗 Dependencies:
@@ -14,4 +14,5 @@
  */
 
 require_once __DIR__ . '/../../includes/functions.php';
-handleDomainRouting('reports', __DIR__);
+handleDomainRouting('vreports', __DIR__);
+
