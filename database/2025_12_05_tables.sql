@@ -40,12 +40,14 @@ CREATE TABLE form_contact (
     -- Surname of the sender cannot be null.
     f_email VARCHAR(100) NOT NULL,
     -- Email of the sender cannot be null.
-    -- Validation of the email format to do it in the application.
     f_subject VARCHAR(100),
-    -- Optional message matter.
+    -- Validation of the email format to do it in the application.
     f_message TEXT NOT NULL,
+    -- Optional message matter.
+    f_sent_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
     -- Body of the mandatory message, since it is the main content.
-    f_sent_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Date of sending the message.It is automatically established at the time of insertion.
+    email_sent BOOLEAN DEFAULT FALSE 
+    -- Date of sending the message.It is automatically established at the time of insertion, Flag to track if email was sent to zoo
 );
 
 --

@@ -136,6 +136,15 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
                     </li>
                 <?php endif; ?>
 
+                <!-- Animal Statistics - Visible if user has animal_stats-view -->
+                <?php if (hasPermission('animal_stats-view')): ?>
+                    <li class="nav-item">
+                        <a class="nav-link <?= ($domain === 'animals' && $controller === 'stats') ? 'active' : '' ?>" href="/animals/stats/start">
+                            Animal Statistics
+                        </a>
+                    </li>
+                <?php endif; ?>
+
                 <!-- Feeding Logs - Visible if user has animal_feeding-view or animal_feeding-assign -->
                 <?php if (hasPermission('animal_feeding-view') || hasPermission('animal_feeding-assign')): ?>
                     <li class="nav-item">
