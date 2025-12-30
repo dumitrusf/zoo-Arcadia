@@ -726,7 +726,7 @@ VALUES
        (2, 13),
        -- schedules: view
        (2, 20),
-       -- animals: view
+       -- animals: view, animal_stats-view
        (2, 23),
        (2, 24),
        (2, 25),
@@ -740,7 +740,7 @@ VALUES
        (1, 13),
        -- schedules: view
        (1, 20),
-       -- animals: view
+       -- animals: view, animal_stats-view
        (1, 23),
        (1, 24),
        -- animal_stats: view, animal_feeding: view
@@ -4547,5 +4547,29 @@ VALUES
                Hydration: Normal; stores water in the bladder efficiently.
                Ocular: Clear silver iris; normal pupillary light reflex.
                Stable in Jungle/canopy habitat.'
-       )
+       );
+
+-- ============================================================
+-- SEED DATA FOR ANIMAL_CLICKS (Statistics)
+-- ============================================================
+-- Simulated click statistics for animals
+-- ============================================================
+
+-- INSERT INTO animal_clicks (animal_g_id, year, month, click_count)
+-- VALUES
+--        -- December 2025 (Current month)
+--        (31, 2025, 12, 3),  -- King: 3 clicks
+--        (1, 2025, 12, 2),   -- Bamboo: 2 clicks
+       
+--        -- January 2025 (Historical data - 10 animals with various clicks)
+--        (1, 2025, 1, 7),    -- Bamboo: 7 clicks
+--        (2, 2025, 1, 3),    -- Rufus: 3 clicks
+--        (3, 2025, 1, 4),    -- Fuzzy: 4 clicks
+--        (4, 2025, 1, 7),    -- Nyx: 7 clicks
+--        (5, 2025, 1, 3),    -- Spider: 3 clicks
+--        (6, 2025, 1, 4),    -- Sloth: 4 clicks
+--        (7, 2025, 1, 7),    -- Surya: 7 clicks
+--        (8, 2025, 1, 3),    -- Sunny: 3 clicks
+--        (9, 2025, 1, 4),    -- Spots: 4 clicks
+--        (10, 2025, 1, 7);   -- Tail: 7 clicks
 

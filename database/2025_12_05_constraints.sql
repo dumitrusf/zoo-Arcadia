@@ -347,3 +347,58 @@ ADD CONSTRAINT fk_users_in_feeding_logs
 FOREIGN KEY (user_id) REFERENCES users(id_user)
 ON DELETE SET NULL
 ON UPDATE CASCADE;
+--
+--
+
+-- ============================================================
+-- INDEXES AND OPTIMIZATIONS
+-- ============================================================
+
+-- Verify if index already exists before adding it
+ALTER TABLE animal_clicks
+DROP INDEX IF EXISTS idx_animal_month_year;
+
+-- Unique composite index to prevent duplicate entries per animal/month/year
+ALTER TABLE animal_clicks
+ADD UNIQUE INDEX idx_animal_month_year (animal_g_id, year, month);
+--
+--
+
+-- Verify if index already exists before adding it
+ALTER TABLE animal_clicks
+DROP INDEX IF EXISTS idx_year_month;
+
+-- Index for faster queries by date range (for cleanup jobs)
+ALTER TABLE animal_clicks
+ADD INDEX idx_year_month (year, month);
+--
+--
+
+
+-- Verify if index already exists before adding it
+ALTER TABLE form_contact
+DROP INDEX IF EXISTS idx_sent_date;
+
+-- Index for faster queries by date (for cleanup jobs)
+ALTER TABLE form_contact
+ADD INDEX idx_sent_date (f_sent_date);
+--
+--
+
+-- Verify if index already exists before adding it
+ALTER TABLE form_contact
+DROP INDEX IF EXISTS idx_email;
+
+-- Index for faster email queries
+ALTER TABLE form_contact
+ADD INDEX idx_email (f_email);
+--
+--
+
+-- Verify if index already exists before adding it
+ALTER TABLE psw_reset_token
+DROP INDEX IF EXISTS idx_expires_at;
+
+-- Index for faster cleanup of expired tokens
+ALTER TABLE psw_reset_token
+ADD INDEX idx_expires_at (expires_at);
