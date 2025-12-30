@@ -21,6 +21,11 @@ VALUES
               4,
               'Accountant',
               'Responsible for the zoo finances.'
+       ),
+       (
+              5,
+              'NO ROLE',
+              'nothing'
        );
 
 -- 3. Insert EMPLOYEES (personal data)
@@ -531,6 +536,14 @@ VALUES
               true,
               NULL,
               NULL
+       ),
+       (
+              32,
+              'axel',
+              '12345',
+              true,
+              5,
+              NULL
        );
 
 -- Este archivo llena la tabla `permissions` con el catálogo oficial de permisos.
@@ -580,8 +593,16 @@ VALUES
               'Allows viewing the list of habitats.'
        ),
        (
+              'habitats-create',
+              'Allows creating new habitats.'
+       ),
+       (
               'habitats-edit',
               'Allows editing existing habitats.'
+       ),
+       (
+              'habitats-delete',
+              'Allows deleting habitats.'
        ),
        -- Permisos de Animales
        ('animals-create', 'Allows creating new animals.'),
@@ -652,8 +673,86 @@ VALUES
 INSERT INTO
        roles_permissions (role_id, permission_id)
 VALUES
-       (1, 1);
+       -- Admin (role_id = 3) tiene todos los permisos (1-27, 30-32, 33-35)
+       (3, 1),
+       (3, 2),
+       (3, 3),
+       (3, 4),
+       -- users: view, create, edit, delete
+       (3, 5),
+       (3, 6),
+       (3, 7),
+       (3, 8),
+       -- roles: view, create, edit, delete
+       (3, 9),
+       (3, 10),
+       (3, 11),
+       (3, 12),
+       -- services: create, view, edit, delete
+       (3, 13),
+       (3, 14),
+       -- schedules: view, edit
+       (3, 15),
+       (3, 16),
+       (3, 17),
+       (3, 18),
+       -- habitats: view, create, edit, delete
+       (3, 19),
+       (3, 20),
+       (3, 21),
+       (3, 22),
+       -- animals: create, view, edit, delete
+       (3, 23),
+       (3, 24),
+       (3, 25),
+       -- animal_stats: view, animal_feeding: view, assign
+       (3, 27),
+       -- vet_reports: view
+       (3, 30),
+       (3, 31),
+       (3, 32),
+       -- habitat_suggestions: view, manage, delete
+       (3, 33),
+       (3, 34),
+       (3, 35),
+       -- testimonials: view, validate, delete
+       -- Employee (role_id = 2) tiene todos los permisos (1-27, 30-32, 33-35)
+       (2, 1),
+       (2, 9),
+       (2, 10),
+       (2, 11),
+       (2, 12),
+       -- services: create, view, edit, delete
+       (2, 13),
+       -- schedules: view
+       (2, 20),
+       -- animals: view
+       (2, 23),
+       (2, 24),
+       (2, 25),
+       -- animal_stats: view, animal_feeding: view, assign
+       (2, 27),
+       -- vet_reports: view
+       (2, 33),
+       (2, 34),
+       -- testimonials: view, validate
+       -- Veterinarian (role_id = 1) tiene todos los permisos (1-35)
+       (1, 13),
+       -- schedules: view
+       (1, 20),
+       -- animals: view
+       (1, 23),
+       (1, 24),
+       -- animal_stats: view, animal_feeding: view
+       (1, 26),
+       (1, 27),
+       (1, 28),
+       -- vet_reports: create, view, edit 
+       (1, 29),
+       (1, 30),
+       (1, 32);
 
+-- habitat_suggestions: create, view, delete
 INSERT INTO
        `users_permissions` (`user_id`, `permission_id`)
 VALUES
@@ -1242,53 +1341,57 @@ VALUES
        (52, 2, 'Pharomachrus mocinno (quetzal)'),
        (53, 2, 'Picus viridis (woodpecker)'),
        (54, 2, 'Probosciger aterrimus (parrot)'),
-      (55, 2, 'Psittacus erithacus (parrot)'),
-      (56, 2, 'Ramphastos sulfuratus (toucan)'),
-      (57, 2, 'trochilidae (hummingbird)'),
-      -- start swamp birds
-      (58, 2, 'anhinga rufa (water bird)'),
-      (59, 2, 'Ardea alba (water bird)'),
-      (60, 2, 'Ardea cinerea (water bird)'),
-      (61, 2, 'Eudocimus ruber (water bird)'),
-      (62, 2, 'Himantopus himantopus (water bird)'),
-      (63, 2, 'Jabiru mycteria (water bird)'),
-      (64, 2, 'Leptoptilos crumenifer (water bird)'),
-      (65, 2, 'Microcarbo africanus (water bird)'),
-      (66, 2, 'Phalacrocorax carbo (water bird)'),
-      (67, 2, 'Phoeniconaias minor (water bird)'),
-      (68, 2, 'Phoenicopterus roseus (water bird)'),
-      (69, 2, 'Platalea ajaja (water bird)'),
-      (70, 2, 'Platalea leucorodia (water bird)'),
-      -- start savannah birds
-      (71, 2, 'Burhinus vermiculatus (water bird)'),
-      (72, 2, 'Coracias abyssinicus (roller)'),
-      (73, 2, 'Gyps fulvus (bird of prey)'),
-      (74, 2, 'ploceus velatus (weaver)'),
-      (75, 2, 'Polemaetus bellicosus (bird of prey)'),
-      (76, 2, 'Pternistis adspersus (fowl)'),
-      (77, 2, 'Sagittarius serpentarius (secretarybird)'),
-      (78, 2, 'Struthio camelus (ostrich)'),
-      (79, 2, 'Vanellus albiceps (water bird)'),
-      (80, 2, 'Vanellus armatus (water bird)'),
-      -- start swamp reptiles
-      (81, 3, 'Acanthochelys spixii (turtle)'),
-      (82, 3, 'Alligator mississippiensis (crocodile)'),
-      (83, 3, 'caiman yacare (crocodile)'),
-      (84, 3, 'Crocodylus niloticus (crocodile)'),
-      (85, 3, 'Gavialis gangeticus (crocodile)'),
-      (86, 3, 'Melanosuchus niger (crocodile)'),
-      -- start savannah reptiles
-      (87, 3, 'agama agama (lizard)'),
-      (88, 3, 'Aldabrachelys gigantea (turtle)'),
-      (89, 3, 'chamaeleo africanus (lizard)'),
-      (90, 3, 'Gopherus evgoodei (turtle)'),
-      (91, 3, 'Mediterranean house gecko (lizard)'),
-      -- start jungle amphibians
-      (92, 4, 'Agalychnis callidryas (frog)'),
-      (93, 4, 'Dendrobates tinctorius azureus (frog)'),
-      (94, 4, 'Hyalinobatrachium fleischmanni (frog)'),
-      (95, 4, 'Phyllobates terribilis (frog)'),
-      (96, 4, 'Phyllomedusa bicolor (frog)');
+       (55, 2, 'Psittacus erithacus (parrot)'),
+       (56, 2, 'Ramphastos sulfuratus (toucan)'),
+       (57, 2, 'trochilidae (hummingbird)'),
+       -- start swamp birds
+       (58, 2, 'anhinga rufa (water bird)'),
+       (59, 2, 'Ardea alba (water bird)'),
+       (60, 2, 'Ardea cinerea (water bird)'),
+       (61, 2, 'Eudocimus ruber (water bird)'),
+       (62, 2, 'Himantopus himantopus (water bird)'),
+       (63, 2, 'Jabiru mycteria (water bird)'),
+       (64, 2, 'Leptoptilos crumenifer (water bird)'),
+       (65, 2, 'Microcarbo africanus (water bird)'),
+       (66, 2, 'Phalacrocorax carbo (water bird)'),
+       (67, 2, 'Phoeniconaias minor (water bird)'),
+       (68, 2, 'Phoenicopterus roseus (water bird)'),
+       (69, 2, 'Platalea ajaja (water bird)'),
+       (70, 2, 'Platalea leucorodia (water bird)'),
+       -- start savannah birds
+       (71, 2, 'Burhinus vermiculatus (water bird)'),
+       (72, 2, 'Coracias abyssinicus (roller)'),
+       (73, 2, 'Gyps fulvus (bird of prey)'),
+       (74, 2, 'ploceus velatus (weaver)'),
+       (75, 2, 'Polemaetus bellicosus (bird of prey)'),
+       (76, 2, 'Pternistis adspersus (fowl)'),
+       (
+              77,
+              2,
+              'Sagittarius serpentarius (secretarybird)'
+       ),
+       (78, 2, 'Struthio camelus (ostrich)'),
+       (79, 2, 'Vanellus albiceps (water bird)'),
+       (80, 2, 'Vanellus armatus (water bird)'),
+       -- start swamp reptiles
+       (81, 3, 'Acanthochelys spixii (turtle)'),
+       (82, 3, 'Alligator mississippiensis (crocodile)'),
+       (83, 3, 'caiman yacare (crocodile)'),
+       (84, 3, 'Crocodylus niloticus (crocodile)'),
+       (85, 3, 'Gavialis gangeticus (crocodile)'),
+       (86, 3, 'Melanosuchus niger (crocodile)'),
+       -- start savannah reptiles
+       (87, 3, 'agama agama (lizard)'),
+       (88, 3, 'Aldabrachelys gigantea (turtle)'),
+       (89, 3, 'chamaeleo africanus (lizard)'),
+       (90, 3, 'Gopherus evgoodei (turtle)'),
+       (91, 3, 'Mediterranean house gecko (lizard)'),
+       -- start jungle amphibians
+       (92, 4, 'Agalychnis callidryas (frog)'),
+       (93, 4, 'Dendrobates tinctorius azureus (frog)'),
+       (94, 4, 'Hyalinobatrachium fleischmanni (frog)'),
+       (95, 4, 'Phyllobates terribilis (frog)'),
+       (96, 4, 'Phyllomedusa bicolor (frog)');
 
 -- 14. Insert NUTRITION PLANS
 INSERT INTO
@@ -1427,61 +1530,61 @@ VALUES
        (44, 'Muskrat', 'male', 44),
        (45, 'Giant', 'male', 45),
        (46, 'Manatee', 'female', 46),
-      -- Jungle Birds (47-56)
-      (47, 'Green', 'male', 48),
-      (48, 'Horn', 'male', 49),
-      (49, 'Blue', 'male', 50),
-      (50, 'Eagle', 'female', 51),
-      (51, 'Quetzal', 'male', 52),
-      (52, 'Peck', 'male', 53),
-      (53, 'Cockatoo', 'female', 54),
-      (54, 'Grey', 'male', 55),
-      (55, 'Toucan', 'male', 56),
-      (56, 'Humming', 'female', 57),
-      -- Swamp Birds (57-69)
-      (57, 'Anhinga', 'male', 58),
-      (58, 'Egret', 'female', 59),
-      (59, 'Grey', 'male', 60),
-      (60, 'Red', 'male', 61),
-      (61, 'Stilt', 'female', 62),
-      (62, 'Jabiru', 'male', 63),
-      (63, 'Marabou', 'male', 64),
-      (64, 'Cormorant', 'male', 65),
-      (65, 'Great', 'male', 66),
-      (66, 'Lesser', 'female', 67),
-      (67, 'Greater', 'female', 68),
-      (68, 'Rose', 'female', 69),
-      (69, 'Eurasia', 'male', 70),
-      -- Savannah Birds (70-79)
-      (70, 'Water', 'male', 71),
-      (71, 'Abyssinian', 'female', 72),
-      (72, 'Vulture', 'male', 73),
-      (73, 'Weaver', 'male', 74),
-      (74, 'Martial', 'female', 75),
-      (75, 'Bill', 'male', 76),
-      (76, 'Secretary', 'male', 77),
-      (77, 'Ostrich', 'male', 78),
-      (78, 'Crown', 'female', 79),
-      (79, 'Blacksmith', 'male', 80),
-      -- Swamp Reptiles (80-85)
-      (80, 'Spine', 'female', 81),
-      (81, 'Alli', 'male', 82),
-      (82, 'Yacare', 'male', 83),
-      (83, 'Nile', 'male', 84),
-      (84, 'Gharial', 'male', 85),
-      (85, 'Black', 'male', 86),
-      -- Savannah Reptiles (86-90)
-      (86, 'Agama', 'male', 87),
-      (87, 'Giant', 'male', 88),
-      (88, 'Chameleon', 'male', 89),
-      (89, 'Gopherus', 'female', 90),
-      (90, 'Gecko', 'female', 91),
-      -- Jungle Amphibians (91-95)
-      (91, 'Eyes', 'female', 92),
-      (92, 'Blue', 'male', 93),
-      (93, 'Crystal', 'female', 94),
-      (94, 'Golden', 'male', 95),
-      (95, 'Bicolor', 'female', 96);
+       -- Jungle Birds (47-56)
+       (47, 'Green', 'male', 48),
+       (48, 'Horn', 'male', 49),
+       (49, 'Blue', 'male', 50),
+       (50, 'Eagle', 'female', 51),
+       (51, 'Quetzal', 'male', 52),
+       (52, 'Peck', 'male', 53),
+       (53, 'Cockatoo', 'female', 54),
+       (54, 'Grey', 'male', 55),
+       (55, 'Toucan', 'male', 56),
+       (56, 'Humming', 'female', 57),
+       -- Swamp Birds (57-69)
+       (57, 'Anhinga', 'male', 58),
+       (58, 'Egret', 'female', 59),
+       (59, 'Grey', 'male', 60),
+       (60, 'Red', 'male', 61),
+       (61, 'Stilt', 'female', 62),
+       (62, 'Jabiru', 'male', 63),
+       (63, 'Marabou', 'male', 64),
+       (64, 'Cormorant', 'male', 65),
+       (65, 'Great', 'male', 66),
+       (66, 'Lesser', 'female', 67),
+       (67, 'Greater', 'female', 68),
+       (68, 'Rose', 'female', 69),
+       (69, 'Eurasia', 'male', 70),
+       -- Savannah Birds (70-79)
+       (70, 'Water', 'male', 71),
+       (71, 'Abyssinian', 'female', 72),
+       (72, 'Vulture', 'male', 73),
+       (73, 'Weaver', 'male', 74),
+       (74, 'Martial', 'female', 75),
+       (75, 'Bill', 'male', 76),
+       (76, 'Secretary', 'male', 77),
+       (77, 'Ostrich', 'male', 78),
+       (78, 'Crown', 'female', 79),
+       (79, 'Blacksmith', 'male', 80),
+       -- Swamp Reptiles (80-85)
+       (80, 'Spine', 'female', 81),
+       (81, 'Alli', 'male', 82),
+       (82, 'Yacare', 'male', 83),
+       (83, 'Nile', 'male', 84),
+       (84, 'Gharial', 'male', 85),
+       (85, 'Black', 'male', 86),
+       -- Savannah Reptiles (86-90)
+       (86, 'Agama', 'male', 87),
+       (87, 'Giant', 'male', 88),
+       (88, 'Chameleon', 'male', 89),
+       (89, 'Gopherus', 'female', 90),
+       (90, 'Gecko', 'female', 91),
+       -- Jungle Amphibians (91-95)
+       (91, 'Eyes', 'female', 92),
+       (92, 'Blue', 'male', 93),
+       (93, 'Crystal', 'female', 94),
+       (94, 'Golden', 'male', 95),
+       (95, 'Bicolor', 'female', 96);
 
 -- 16. Insert ANIMAL_FULL (Link animals with habitats and nutrition)
 INSERT INTO
@@ -1587,110 +1690,111 @@ VALUES
        -- Gigante (Nutria Gigante) - carnivorous fish
        (46, 46, 3, 14),
        -- Manatí (Manatí) - herbivorous aquatic plants
-      -- Jungle Birds (47-56) - habitat_id=2 (Jungle)
-      (47, 47, 2, 23),
-      -- Verde (Guacamayo) - omnivorous fruit
-      (48, 48, 2, 24),
-      -- Cuerno (Cálao Rinoceronte) - omnivorous fruit
-      (49, 49, 2, 24),
-      -- Azul (Cotinga Azul) - omnivorous fruit
-      (50, 50, 2, 8),
-      -- Águila (Águila Arpía) - carnivorous meat bird of prey
-      (51, 51, 2, 24),
-      -- Quetzal (Quetzal) - omnivorous fruit
-      (52, 52, 2, 27),
-      -- Pico (Pájaro Carpintero) - carnivorous insect
-      (53, 53, 2, 23),
-      -- Cacatúa (Cacatúa de Palmera) - omnivorous fruit
-      (54, 54, 2, 23),
-      -- Gris (Loro Gris) - omnivorous fruit
-      (55, 55, 2, 23),
-      -- Tucán (Tucán) - omnivorous fruit
-      (56, 56, 2, 30),
-      -- Humming (Hummingbird) - carnivorous nectar
-      -- Swamp Birds (57-69) - habitat_id=3 (Swamp)
-      (57, 57, 3, 25),
-      -- Anhinga (Anhinga Africana) - carnivorous fish
-      (58, 58, 3, 25),
-      -- Garza (Garza Blanca) - carnivorous fish
-      (59, 59, 3, 25),
-      -- Gris (Garza Gris) - carnivorous fish
-      (60, 60, 3, 25),
-      -- Rojo (Ibis Escarlata) - carnivorous fish
-      (61, 61, 3, 25),
-      -- Patas (Cigüeñuela) - carnivorous fish
-      (62, 62, 3, 25),
-      -- Jabirú (Jabirú) - carnivorous fish
-      (63, 63, 3, 25),
-      -- Marabú (Marabú) - carnivorous fish
-      (64, 64, 3, 25),
-      -- Cormorán (Cormorán Carrizal) - carnivorous fish
-      (65, 65, 3, 25),
-      -- Grande (Cormorán Grande) - carnivorous fish
-      (66, 66, 3, 26),
-      -- Menor (Flamenco Menor) - herbivorous aquatic plants
-      (67, 67, 3, 26),
-      -- Mayor (Flamenco Mayor) - herbivorous aquatic plants
-      (68, 68, 3, 25),
-      -- Rosa (Espátula Rosada) - carnivorous fish
-      (69, 69, 3, 25),
-      -- Eurasia (Espátula Eurasiática) - carnivorous fish
-      -- Savannah Birds (70-79) - habitat_id=1 (Savannah)
-      (70, 70, 1, 25),
-      -- Agua (Alcaraván) - carnivorous fish
-      (71, 71, 1, 28),
-      -- Abisinia (Carraca Abisinia) - omnivorous fruit
-      (72, 72, 1, 8),
-      -- Buitre (Buitre Leonado) - carnivorous meat bird of prey
-      (73, 73, 1, 27),
-      -- Tejedor (Tejedor Enmascarado) - carnivorous insect
-      (74, 74, 1, 8),
-      -- Militar (Águila Marcial) - carnivorous meat bird of prey
-      (75, 75, 1, 28),
-      -- Pico (Francolín de Pico Rojo) - omnivorous fruit
-      (76, 76, 1, 8),
-      -- Secretario (Secretario) - carnivorous meat bird of prey
-      (77, 77, 1, 29),
-      -- Avestruz (Avestruz) - herbivorous grass
-      (78, 78, 1, 25),
-      -- Corona (Avefría de Corona Blanca) - carnivorous fish
-      (79, 79, 1, 25),
-      -- Herrero (Avefría Herrera) - carnivorous fish
-      -- Swamp Reptiles (80-85) - habitat_id=3 (Swamp)
-      (80, 80, 3, 31),
-      -- Espina (Tortuga de Cuello Negro) - herbivorous vegetables
-      (81, 81, 3, 4),
-      -- Alli (Alligator Americano) - carnivorous meat
-      (82, 82, 3, 4),
-      -- Yacaré (Yacaré) - carnivorous meat
-      (83, 83, 3, 4),
-      -- Nilo (Cocodrilo del Nilo) - carnivorous meat
-      (84, 84, 3, 4),
-      -- Gavial (Gavial) - carnivorous meat
-      (85, 85, 3, 4),
-      -- Negro (Caimán Negro) - carnivorous meat
-      -- Savannah Reptiles (86-90) - habitat_id=1 (Savannah)
-      (86, 86, 1, 32),
-      -- Agama (Lagarto Agama) - omnivorous insect
-      (87, 87, 1, 31),
-      -- Gigante (Tortuga Gigante de Aldabra) - herbivorous vegetables
-      (88, 88, 1, 33),
-      -- Camaleón (Camaleón Africano) - carnivorous insect
-      (89, 89, 1, 31),
-      -- Gopherus (Tortuga de Matorral) - herbivorous vegetables
-      (90, 90, 1, 32),
-      -- Gecko (Gecko Doméstico) - omnivorous insect
-      -- Jungle Amphibians (91-95) - habitat_id=2 (Jungle)
-      (91, 91, 2, 34),
-      -- Ojos (Rana de Ojos Rojos) - carnivorous insect
-      (92, 92, 2, 34),
-      -- Azul (Rana Dardo Azul) - carnivorous insect
-      (93, 93, 2, 34),
-      -- Cristal (Rana de Cristal) - carnivorous insect
-      (94, 94, 2, 34),
-      -- Dorada (Rana Dardo Dorada) - carnivorous insect
-      (95, 95, 2, 34);
-      -- Bicolor (Rana Arborícola Bicolor) - carnivorous insect
+       -- Jungle Birds (47-56) - habitat_id=2 (Jungle)
+       (47, 47, 2, 23),
+       -- Verde (Guacamayo) - omnivorous fruit
+       (48, 48, 2, 24),
+       -- Cuerno (Cálao Rinoceronte) - omnivorous fruit
+       (49, 49, 2, 24),
+       -- Azul (Cotinga Azul) - omnivorous fruit
+       (50, 50, 2, 8),
+       -- Águila (Águila Arpía) - carnivorous meat bird of prey
+       (51, 51, 2, 24),
+       -- Quetzal (Quetzal) - omnivorous fruit
+       (52, 52, 2, 27),
+       -- Pico (Pájaro Carpintero) - carnivorous insect
+       (53, 53, 2, 23),
+       -- Cacatúa (Cacatúa de Palmera) - omnivorous fruit
+       (54, 54, 2, 23),
+       -- Gris (Loro Gris) - omnivorous fruit
+       (55, 55, 2, 23),
+       -- Tucán (Tucán) - omnivorous fruit
+       (56, 56, 2, 30),
+       -- Humming (Hummingbird) - carnivorous nectar
+       -- Swamp Birds (57-69) - habitat_id=3 (Swamp)
+       (57, 57, 3, 25),
+       -- Anhinga (Anhinga Africana) - carnivorous fish
+       (58, 58, 3, 25),
+       -- Garza (Garza Blanca) - carnivorous fish
+       (59, 59, 3, 25),
+       -- Gris (Garza Gris) - carnivorous fish
+       (60, 60, 3, 25),
+       -- Rojo (Ibis Escarlata) - carnivorous fish
+       (61, 61, 3, 25),
+       -- Patas (Cigüeñuela) - carnivorous fish
+       (62, 62, 3, 25),
+       -- Jabirú (Jabirú) - carnivorous fish
+       (63, 63, 3, 25),
+       -- Marabú (Marabú) - carnivorous fish
+       (64, 64, 3, 25),
+       -- Cormorán (Cormorán Carrizal) - carnivorous fish
+       (65, 65, 3, 25),
+       -- Grande (Cormorán Grande) - carnivorous fish
+       (66, 66, 3, 26),
+       -- Menor (Flamenco Menor) - herbivorous aquatic plants
+       (67, 67, 3, 26),
+       -- Mayor (Flamenco Mayor) - herbivorous aquatic plants
+       (68, 68, 3, 25),
+       -- Rosa (Espátula Rosada) - carnivorous fish
+       (69, 69, 3, 25),
+       -- Eurasia (Espátula Eurasiática) - carnivorous fish
+       -- Savannah Birds (70-79) - habitat_id=1 (Savannah)
+       (70, 70, 1, 25),
+       -- Agua (Alcaraván) - carnivorous fish
+       (71, 71, 1, 28),
+       -- Abisinia (Carraca Abisinia) - omnivorous fruit
+       (72, 72, 1, 8),
+       -- Buitre (Buitre Leonado) - carnivorous meat bird of prey
+       (73, 73, 1, 27),
+       -- Tejedor (Tejedor Enmascarado) - carnivorous insect
+       (74, 74, 1, 8),
+       -- Militar (Águila Marcial) - carnivorous meat bird of prey
+       (75, 75, 1, 28),
+       -- Pico (Francolín de Pico Rojo) - omnivorous fruit
+       (76, 76, 1, 8),
+       -- Secretario (Secretario) - carnivorous meat bird of prey
+       (77, 77, 1, 29),
+       -- Avestruz (Avestruz) - herbivorous grass
+       (78, 78, 1, 25),
+       -- Corona (Avefría de Corona Blanca) - carnivorous fish
+       (79, 79, 1, 25),
+       -- Herrero (Avefría Herrera) - carnivorous fish
+       -- Swamp Reptiles (80-85) - habitat_id=3 (Swamp)
+       (80, 80, 3, 31),
+       -- Espina (Tortuga de Cuello Negro) - herbivorous vegetables
+       (81, 81, 3, 4),
+       -- Alli (Alligator Americano) - carnivorous meat
+       (82, 82, 3, 4),
+       -- Yacaré (Yacaré) - carnivorous meat
+       (83, 83, 3, 4),
+       -- Nilo (Cocodrilo del Nilo) - carnivorous meat
+       (84, 84, 3, 4),
+       -- Gavial (Gavial) - carnivorous meat
+       (85, 85, 3, 4),
+       -- Negro (Caimán Negro) - carnivorous meat
+       -- Savannah Reptiles (86-90) - habitat_id=1 (Savannah)
+       (86, 86, 1, 32),
+       -- Agama (Lagarto Agama) - omnivorous insect
+       (87, 87, 1, 31),
+       -- Gigante (Tortuga Gigante de Aldabra) - herbivorous vegetables
+       (88, 88, 1, 33),
+       -- Camaleón (Camaleón Africano) - carnivorous insect
+       (89, 89, 1, 31),
+       -- Gopherus (Tortuga de Matorral) - herbivorous vegetables
+       (90, 90, 1, 32),
+       -- Gecko (Gecko Doméstico) - omnivorous insect
+       -- Jungle Amphibians (91-95) - habitat_id=2 (Jungle)
+       (91, 91, 2, 34),
+       -- Ojos (Rana de Ojos Rojos) - carnivorous insect
+       (92, 92, 2, 34),
+       -- Azul (Rana Dardo Azul) - carnivorous insect
+       (93, 93, 2, 34),
+       -- Cristal (Rana de Cristal) - carnivorous insect
+       (94, 94, 2, 34),
+       -- Dorada (Rana Dardo Dorada) - carnivorous insect
+       (95, 95, 2, 34);
+
+-- Bicolor (Rana Arborícola Bicolor) - carnivorous insect
 -- 17. Insert MEDIA for Animals (Placeholder URLs - REPLACE with your Cloudinary URLs)
 -- Format: mobile, tablet, desktop
 INSERT INTO
@@ -2577,3 +2681,1871 @@ VALUES
 -- END OF SEED DATA FOR ANIMALS (Categories, Species, Nutrition, Animals)
 -- ✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨
 -- ============================================================
+INSERT INTO
+       health_state_report (
+              full_animal_id,
+              hsr_state,
+              vet_obs,
+              checked_by,
+              opt_details
+       )
+VALUES
+       (
+              1,
+              'healthy',
+              'Subject: Bamboo
+                  - Appearance: Coat clean/dense.
+                  - Posture: Upright while feeding.
+                  - Movement: Normal climbing/gait.
+                  - Digestion: Fibrous green bolus.
+                  - Behavior: Active foraging.',
+              2,
+              'Male Panda. 
+               Status: healthy.
+               BCS: 3/5 (Ideal weight).
+               High dexterity in pseudo-thumb.
+               Responsive to environment.
+               No signs of stress or stereotypic pacing.
+               Stable condition.'
+       ),
+       (
+              2,
+              'healthy',
+              'Subject: Rufus
+                  - Appearance: Rich reddish-brown fur, no patches.
+                  - Posture: Active brachiating and tail use.
+                  - Vocalization: Strong, normal morning howling.
+                  - Movement: Fluid climbing, grip strength normal.
+                  - Eyes: Clear, responsive to keepers.',
+              2,
+              'Male Howler Monkey. 
+               Status: healthy.
+               BCS: 3/5 (Ideal).
+               Strong prehensile tail control.
+               Feeding well on leafy greens and fruits.
+               Socially integrated with the group.
+               No signs of lethargy.'
+       ),
+       (
+              3,
+              'happy',
+              'Subject: Fuzzy
+                  - Appearance: Coarse black fur in excellent condition.
+                  - Posture: Relaxed, draped over high branch using prehensile tail.
+                  - Movement: Agile climbing, showing good coordination.
+                  - Scent: Strong characteristic scent (normal marking).
+                  - Behavior: Highly inquisitive and seeking enrichment.',
+              2,
+              'Male Binturong. 
+               Status: happy.
+               BCS: 3/5.
+               Enjoying fruit-based enrichment.
+               Prehensile tail strength is optimal.
+               No signs of respiratory distress.
+               Very active during dusk observation.
+               Stable in jungle habitat.'
+       ),
+       (
+              4,
+              'good_condition',
+              'Subject: Nyx
+                  - Appearance: Patagium (wing membrane) intact and elastic.
+                  - Posture: Hanging securely by hind claws in shaded area.
+                  - Movement: Quick, erratic flight patterns observed during feeding.
+                  - Eyes: Small, dark, and clear.
+                  - Respiration: Stable during rest.',
+              2,
+              'Female Fruit Bat. 
+               Status: good_condition.
+               BCS: 3/5.
+               High consumption of soft fruits (mango/papaya).
+               Wing membranes show no signs of tearing or dryness.
+               Socializing well with the colony.
+               Weight is stable for an adult female.
+               Stable in jungle nocturnal exhibit.'
+       ),
+       (
+              5,
+              'well',
+              'Subject: Spider
+                  - Appearance: Limbs are long and lean, fur is glossy.
+                  - Posture: Frequent use of suspensory locomotion.
+                  - Movement: Extremely agile; rapid brachiation observed.
+                  - Tail: Prehensile tail shows excellent tactile sensitivity.
+                  - Social: Engaging in grooming behaviors with group members.',
+              2,
+              'Male Spider Monkey. 
+               Status: well.
+               BCS: 2.5/5 (Typical lean build for this species).
+               No signs of joint stiffness during high-speed swings.
+               Appetite for diverse fruits and nuts is high.
+               Vocalizations are clear and frequent.
+               Overall excellent physical coordination.
+               Stable in jungle canopy exhibit.'
+       ),
+       (
+              6,
+              'healthy',
+              'Subject: Sloth
+                  - Appearance: Algae growth on fur (normal symbiotic relationship).
+                  - Posture: Securely suspended; neck rotation reaches 270 degrees.
+                  - Movement: Typically slow, showing coordinated limb placement.
+                  - Digestion: Stomach appears distended (normal slow digestion).
+                  - Claws: All three claws on each limb are sharp and intact.',
+              2,
+              'Male Three-toed Sloth. 
+               Status: healthy.
+               BCS: 3/5.
+               Monitoring slow metabolic rate (standard for species).
+               Respiratory rate is low but steady.
+               No signs of ectoparasites beyond normal moths.
+               Fecal descent occurs weekly (normal cycle).
+               Stable in jungle high-canopy habitat.'
+       ),
+       (
+              7,
+              'well',
+              'Subject: Surya
+                  - Appearance: Skin is thick and well-hydrated; no lesions.
+                  - Posture: Even weight distribution across all four limbs.
+                  - Movement: Steady gait; no signs of joint discomfort.
+                  - Trunk: High muscle tone and full range of motion.
+                  - Ears: Active flapping for thermoregulation.',
+              2,
+              'Male Asian Elephant. 
+               Status: well.
+               BCS: 3.5/5.
+               Foot pads checked: no cracks or foreign objects.
+               Consuming full ration of hay and supplemental browse.
+               Temporal glands show no abnormal discharge.
+               Social interaction with herd is positive.
+               Stable in jungle/grassland transition habitat.'
+       ),
+       (
+              8,
+              'healthy',
+              'Subject: Sunny
+                  - Appearance: Short, sleek black fur; chest patch is vivid.
+                  - Posture: Active; often standing on hind legs to scout.
+                  - Movement: Agile climbing; claws provide excellent grip.
+                  - Tongue: Fully functional, used for foraging enrichment.
+                  - Teeth: Canines and molars in good condition.',
+              2,
+              'Male Sun Bear. 
+               Status: healthy.
+               BCS: 3/5.
+               Very active during foraging activities.
+               Long claws are naturally worn but strong.
+               No signs of dental decay from fruit/honey diet.
+               Characteristic "U" shaped chest patch is clear.
+               Stable in jungle arboreal habitat.'
+       ),
+       (
+              9,
+              'healthy',
+              'Subject: Spots
+                  - Appearance: Rosette pattern is distinct; fur is sleek.
+                  - Posture: Low-profile stalking posture, very alert.
+                  - Movement: Silent and fluid gait; paws in perfect condition.
+                  - Eyes: Pupils reacting normally to light changes.
+                  - Claws: Fully retracting; no signs of overgrowth.',
+              2,
+              'Female Ocelot. 
+               Status: healthy.
+               BCS: 3/5.
+               High responsiveness to auditory enrichment.
+               Weight is stable and muscle tone is lean.
+               Dental exam shows clean canines, no gingivitis.
+               Active nocturnal hunter behavior observed.
+               Stable in jungle undergrowth habitat.'
+       ),
+       (
+              10,
+              'well',
+              'Subject: Tail
+                  - Appearance: Banded tail is long and held upright.
+                  - Snout: Highly mobile and moist; no nasal discharge.
+                  - Movement: Constant foraging behavior; energetic pace.
+                  - Claws: Strong and blunt, adapted for digging.
+                  - Social: High interaction levels with the female band.',
+              2,
+              'Female Coati. 
+               Status: well.
+               BCS: 3/5.
+               Olfactory response is excellent.
+               Consuming varied diet (insects, fruit, and eggs).
+               Tail used effectively for balance during climbing.
+               No signs of dental issues in elongated jaw.
+               Stable in jungle floor and canopy habitat.'
+       ),
+       (
+              11,
+              'healthy',
+              'Subject: Jaguar
+                  - Appearance: Powerful build, rosettes with internal spots.
+                  - Posture: Firm and dominant; high muscular definition.
+                  - Movement: Heavy but silent gait; excellent swimmer.
+                  - Jaw: Massive masseter muscles; gums are healthy pink.
+                  - Eyes: Golden-yellow, focused, and clear.',
+              2,
+              'Male Jaguar. 
+               Status: healthy.
+               BCS: 3.5/5 (Strong muscular condition).
+               Jaw strength is optimal; dental ridge is clean.
+               Water-entry behavior observed; no skin issues from moisture.
+               Paws are large and pads are thick, no cracks.
+               Territorial marking behavior is consistent.
+               Stable in deep jungle habitat.'
+       ),
+       (
+              12,
+              'healthy',
+              'Subject: Rajah
+                  - Appearance: Deep orange coat with sharp black stripes.
+                  - Posture: Massive frame; shoulders show high muscle tone.
+                  - Movement: Powerful, confident stride; no joint clicking.
+                  - Teeth: Canines are intact; no tartar buildup on carnassials.
+                  - Respiration: Deep and regular, even after physical exertion.',
+              2,
+              'Male Bengal Tiger. 
+               Status: healthy.
+               BCS: 3/5 (Perfect muscular balance).
+               Weight is optimal for an adult male.
+               No signs of lameness or paw pad irritation.
+               Responsive to training and vocal cues.
+               Drinking and feeding patterns are consistent.
+               Stable in jungle/marshland habitat.'
+       ),
+       (
+              13,
+              'healthy',
+              'Subject: Armor
+                  - Appearance: Carapace is hard and intact; no cracked scales.
+                  - Posture: Low to the ground; legs tucked slightly under shell.
+                  - Movement: Strong digging action; gait is steady and heavy.
+                  - Claws: Large central claw is sharp and structurally sound.
+                  - Skin: Soft skin between pelvic and scapular shields is pink/clean.',
+              2,
+              'Male Giant Armadillo. 
+               Status: healthy.
+               BCS: 3/5.
+               Flexibility of the 11 to 13 moveable bands is optimal.
+               No signs of infection in the abdominal soft tissue.
+               Powerful digging behavior observed in nocturnal hours.
+               Thermoregulation is normal; seeking cool soil as needed.
+               Stable in deep jungle floor habitat.'
+       ),
+       (
+              14,
+              'well',
+              'Subject: Swift
+                  - Appearance: Uniform tan coat; clear of debris or parasites.
+                  - Posture: Extremely lean and muscular; ready for propulsion.
+                  - Movement: Exceptional jumping ability; joints are silent.
+                  - Paws: Large hind feet provide great stability and power.
+                  - Eyes: Large pupils; tracking movement with high precision.',
+              2,
+              'Female Puma. 
+               Status: well.
+               BCS: 3/5.
+               High vertical leap capability observed (normal for species).
+               Dental check: Carnassials are sharp and align perfectly.
+               Auditory response: Ears rotate 180 degrees to catch sounds.
+               Metabolic rate is steady; eating well.
+               Stable in jungle/scrubland transition habitat.'
+       ),
+       (
+              15,
+              'healthy',
+              'Subject: Tongue
+                  - Appearance: Distinctive "black vest" pattern over tan fur.
+                  - Snout: Long and tubular; nostrils clear of obstructions.
+                  - Tongue: Highly extensible and moist (essential for feeding).
+                  - Movement: Slow on ground but very agile in climbing.
+                  - Tail: Strong prehensile grip; skin on underside is healthy.',
+              2,
+              'Male Southern Tamandua. 
+               Status: healthy.
+               BCS: 3/5.
+               Large claws on front limbs are sharp for breaking termite nests.
+               No signs of oral lesions or tongue dryness.
+               Effective use of tail as a fifth limb during arboreal activity.
+               Responds well to olfactory enrichment (honey/insects).
+               Stable in jungle canopy habitat.'
+       ),
+       (
+              16,
+              'healthy',
+              'Subject: Tapir
+                  - Appearance: Bristly dark brown coat; mane is erect.
+                  - Proboscis: Flexible and reactive; no signs of congestion.
+                  - Eyes: Clear, no cloudiness (often prone to corneal issues).
+                  - Feet: Three toes on hind feet and four on front are intact.
+                  - Skin: Thick hide is healthy; no signs of fungal infection.',
+              2,
+              'Female South American Tapir. 
+               Status: healthy.
+               BCS: 3.5/5.
+               Proboscis functionality is excellent for grasping vegetation.
+               Weight distribution is normal; no lameness in damp terrain.
+               Auditory sense is sharp; ears are highly mobile.
+               Regular defecation in water (normal species behavior).
+               Stable in jungle riverside habitat.'
+       ),
+       (
+              17,
+              'well',
+              'Subject: Andes
+                  - Appearance: Thick black fur; distinct cream spectacles.
+                  - Posture: Robust; often seen resting in elevated platforms.
+                  - Movement: Excellent vertical climbing; strong pectoral muscles.
+                  - Mouth: Strong molars for crushing bromeliads and palms.
+                  - Behavior: Solitary and calm during observation.',
+              2,
+              'Male Spectacled Bear. 
+               Status: well.
+               BCS: 3/5.
+               Facial markings are clear and skin underneath is healthy.
+               Arboreal activity is high; claws are in great condition.
+               Dietary intake of fibrous plants is normal.
+               No signs of dental wear on large chewing surfaces.
+               Stable in cloud forest/jungle transition habitat.'
+       ),
+       (
+              18,
+              'healthy',
+              'Subject: Civet
+                  - Appearance: Distinctive black spinal stripe and spotted flanks.
+                  - Neck: Bold black and white throat bands are clean.
+                  - Movement: Low-slung, agile gait; very responsive to sound.
+                  - Tail: Fully banded; no signs of alopecia or injury.
+                  - Glands: Scent marking behavior is normal and active.',
+              2,
+              'Female Malayan Civet. 
+               Status: healthy.
+               BCS: 3/5.
+               Nocturnal activity levels are optimal.
+               Scent glands are clear of blockages or inflammation.
+               Claws are semi-retractable and show normal wear.
+               Dental health: Sharp carnassials for omnivorous diet.
+               Stable in jungle floor/dense brush habitat.'
+       ),
+       (
+              19,
+              'healthy',
+              'Subject: Lightning
+                  - Appearance: Lean, aerodynamic build; tear marks are symmetrical.
+                  - Spine: Exceptional flexibility; no signs of vertebral stiffness.
+                  - Movement: Explosive acceleration; non-retractable claws are sharp.
+                  - Respiration: Large nasal passages allow for rapid oxygen intake.
+                  - Feet: Hard, ridge-like paw pads for high-speed traction.',
+              2,
+              'Male East African Cheetah. 
+               Status: healthy.
+               BCS: 2.5/5 (Ideal lean athletic condition).
+               Cardiovascular check: Resting heart rate is stable.
+               Non-retractable claws provide excellent grip during sprints.
+               Tail used effectively as a rudder during high-speed turns.
+               Dental exam: Small canines but healthy jaw alignment.
+               Stable in savannah open-plain habitat.'
+       ),
+       (
+              20,
+              'well',
+              'Subject: Jumper
+                  - Appearance: Sleek reddish-brown coat; distinct white underbelly.
+                  - Horns: Symmetrical, ridged, and firmly attached to the skull.
+                  - Movement: High-velocity leaping (metatarsal glands are active).
+                  - Eyes: Large, lateral placement; clear 360-degree awareness.
+                  - Hooves: Sharp and even; no signs of overgrowth or rot.',
+              2,
+              'Male Impala. 
+               Status: well.
+               BCS: 3/5.
+               Propulsion muscles in hindquarters show high power.
+               Scent glands on hind legs are functioning for herd cohesion.
+               Vigilant behavior; normal response to savannah stimuli.
+               Dental check: Herbivorous grinding surfaces are intact.
+               Stable in savannah grassland habitat.'
+       ),
+       (
+              21,
+              'healthy',
+              'Subject: Horn
+                  - Appearance: Massive slate-gray body; skin folds are clean.
+                  - Horn: Primary and secondary horns are sturdy and well-shaped.
+                  - Mouth: Wide, square lip (characteristic of species) is flexible.
+                  - Movement: Surprisingly agile for weight; steady, heavy gait.
+                  - Feet: Three-toed structure shows even wear on all hooves.',
+              2,
+              'Male White Rhinoceros. 
+               Status: healthy.
+               BCS: 3.5/5.
+               Keratin structure of the horn shows no deep fissures.
+               Skin condition: Mud-wallowing behavior is maintaining hydration.
+               No signs of pressure sores on hocks or digits.
+               Grazing efficiency is high due to healthy square-lip muscle.
+               Stable in savannah open-grassland habitat.'
+       ),
+       (
+              22,
+              'well',
+              'Subject: Blue
+                  - Appearance: Slate gray coat with dark vertical stripes.
+                  - Horns: Cow-like, curving outward and then inward; secure base.
+                  - Movement: Constant roaming; high endurance in trot and gallop.
+                  - Mane/Tail: Thick, black terminal hair; no signs of parasites.
+                  - Hooves: Cloven hooves are hard and adapted for dry soil.',
+              2,
+              'Male Blue Wildebeest. 
+               Status: well.
+               BCS: 3/5.
+               Cardiovascular endurance is excellent.
+               Social dominance behavior observed within the herd.
+               Grazing frequency is normal for a bulk feeder.
+               No signs of respiratory distress after high-speed bursts.
+               Stable in savannah plains habitat.'
+       ),
+       (
+              23,
+              'healthy',
+              'Subject: Laugh
+                  - Appearance: Spotted sandy coat; neck is exceptionally thick.
+                  - Jaw: Massive zygomatic arches; teeth can crush dense bone.
+                  - Posture: Sloping back profile (front legs longer than hind).
+                  - Ears: Rounded and alert; high sensitivity to vocalizations.
+                  - Movement: Efficient, loping gait with high stamina.',
+              2,
+              'Female Spotted Hyena. 
+               Status: healthy.
+               BCS: 3.5/5.
+               Dental check: Enamel is intact despite bone-crushing diet.
+               Alpha female behavior observed; high social confidence.
+               Digestive system: Normal production of "white scat" (calcium-rich).
+               Muscle tone in forequarters is extremely developed.
+               Stable in savannah scrubland habitat.'
+       ),
+       (
+              24,
+              'well',
+              'Subject: Topi
+                  - Appearance: Deep reddish-brown coat with purple sheen.
+                  - Mask: Dark facial and leg patches are well-defined.
+                  - Horns: Lyrate-shaped, heavily ringed; stable and symmetrical.
+                  - Movement: Fluid, high-speed galloping; no signs of hoof rot.
+                  - Posture: Often stands on elevated ground; vigilant stance.',
+              2,
+              'Male Topi. 
+               Status: well.
+               BCS: 3/5.
+               High muscular definition in the shoulders and hocks.
+               Alertness levels are optimal for a sentinel species.
+               Ruminating normally; no signs of abdominal bloating.
+               Hooves are hard and self-wearing on dry savannah soil.
+               Stable in savannah open-plain habitat.'
+       ),
+       (
+              25,
+              'healthy',
+              'Subject: Stripes
+                  - Appearance: Grid-iron pattern on rump; clean white belly.
+                  - Throat: Dewlap (skin fold) is prominent and healthy.
+                  - Hooves: Hard, fast-growing; no signs of laminitis or cracks.
+                  - Movement: Strong, rhythmic gallop; knees and hocks are supple.
+                  - Teeth: Incisors align perfectly for efficient grazing.',
+              2,
+              'Female Mountain Zebra. 
+               Status: healthy.
+               BCS: 3/5.
+               Hoof maintenance: Naturally worn, no corrective trimming needed.
+               Gastrointestinal: Active gut sounds; normal fermentation.
+               Hydration levels are optimal; skin pinch test is elastic.
+               Social status: Integrated well with the harem.
+               Stable in rocky savannah/sloped habitat.'
+       ),
+       (
+              26,
+              'healthy',
+              'Subject: Neck
+                  - Appearance: Large, pale orange-brown blotches; coat is sleek.
+                  - Neck: Seven cervical vertebrae show normal alignment and range.
+                  - Cardiovascular: Strong, rhythmic pulse; large heart capacity.
+                  - Tongue: Prehensile, dark purple, and free of lesions.
+                  - Movement: Graceful pacing gait; no signs of fetlock drop.',
+              2,
+              'Female West African Giraffe. 
+               Status: healthy.
+               BCS: 3/5.
+               High-pressure vascular system is functioning normally.
+               Ossicones are intact with healthy hair tufts.
+               Successful foraging at height; tongue elasticity is optimal.
+               Hoof health: Symmetrical wear on both digits.
+               Stable in savannah woodland habitat.'
+       ),
+       (
+              27,
+              'healthy',
+              'Subject: Serval
+                  - Appearance: Golden-yellow coat with bold black spots and stripes.
+                  - Ears: Oversized, upright, and highly mobile; "white bar" markings.
+                  - Legs: Extremely long (longest relative to body size in felids).
+                  - Movement: Expert pouncing; vertical jump is powerful and fluid.
+                  - Tail: Relatively short for a feline, used for balance in leaps.',
+              2,
+              'Male Serval. 
+               Status: healthy.
+               BCS: 2.5/5 (Lean and lithe).
+               Auditory canal check: Clear, responding to high-frequency sounds.
+               Metatarsal and metacarpal bones show no signs of stress fractures.
+               Dental: Sharp, needle-like teeth for small prey consumption.
+               Active hunting behavior (leaping/pouncing) observed daily.
+               Stable in savannah wetlands/tall grass habitat.'
+       ),
+       (
+              28,
+              'healthy',
+              'Subject: Tembo
+                  - Appearance: Massive grey frame; skin is thick and wrinkled.
+                  - Trunk: Highly dexterous; full range of motion in the "fingers".
+                  - Tusks: Symmetrical ivory growth; no deep cracks or pulp exposure.
+                  - Feet: Large, cushioned pads; nails are trimmed and healthy.
+                  - Ears: Massive "map of Africa" shape; vascular cooling active.',
+              2,
+              'Male African Bush Elephant. 
+               Status: healthy.
+               BCS: 3.5/5.
+               Pedicure performed: No abscesses or necrotic tissue in solar pads.
+               Temporal glands: Occasional drainage (normal musth preparation).
+               Hydration: Active mud bathing for thermoregulation and skin care.
+               Social: Demonstrates high cognitive engagement with enrichment.
+               Stable in savannah plains/woodland habitat.'
+       ),
+       (
+              29,
+              'healthy',
+              'Subject: Earth
+                  - Appearance: Sparse, bristly hair over pale, thick skin.
+                  - Snout: Long and flexible; nostrils have dense hair filters.
+                  - Claws: Shovel-like, extremely strong for breaking concrete-like mounds.
+                  - Ears: Rabbit-like and highly mobile; clear of any debris.
+                  - Movement: Low-slung power; highly efficient digging mechanics.',
+              2,
+              'Male Aardvark. 
+               Status: healthy.
+               BCS: 3/5.
+               Nostril hair-seals are functioning to prevent dust inhalation.
+               Skin check: No abrasions from burrowing activities.
+               Tongue is moist and extensible (long and worm-like).
+               Nocturnal activity levels are high; digging tunnels as expected.
+               Dentition: Columnar teeth (no enamel) are in good condition.
+               Stable in savannah burrow/grassland habitat.'
+       ),
+       (
+              30,
+              'healthy',
+              'Subject: Oryx
+                  - Appearance: Fawn-colored coat with bold black facial masks.
+                  - Horns: Long, rapier-like, and nearly straight; ringed at the base.
+                  - Movement: Steady, economical gait; adapted for long distances.
+                  - Eyes: Dark and clear; no signs of irritation from dust or sun.
+                  - Hooves: Large and splayed, providing stability on sand and rock.',
+              2,
+              'Female Beisa Oryx. 
+               Status: healthy.
+               BCS: 3/5.
+               Physiological adaptation: Efficient water conservation observed.
+               Horns are structurally sound; no fissures in the keratin sheath.
+               Nasal cooling system (carotid rete) appears functioning normally.
+               Social behavior: Calm temperament; maintains position in hierarchy.
+               Stable in savannah semi-arid/grassland habitat.'
+       ),
+       (
+              31,
+              'healthy',
+              'Subject: King
+                  - Appearance: Large, muscular frame; dense tawny coat.
+                  - Mane: Thick and dark; extends under the belly (species trait).
+                  - Mouth: Massive canines; gums are pink and healthy.
+                  - Paws: Large, heavy-padded; claws are sharp and retractable.
+                  - Eyes: Amber-colored; excellent binocular focus and clarity.',
+              2,
+              'Male Southern African Lion. 
+               Status: healthy.
+               BCS: 3.5/5.
+               Superior muscle mass in the cervical and pectoral regions.
+               Mane coverage indicates optimal hormonal levels.
+               Vocalizations (roaring) are powerful; respiratory tract is clear.
+               No signs of joint stiffness during patrolling behavior.
+               Stable in savannah open-woodland habitat.'
+       ),
+       (
+              32,
+              'well',
+              'Subject: Leopard
+                  - Appearance: Rosette-patterned coat; long, muscular tail.
+                  - Muscles: High definition in the scapular (shoulder) region.
+                  - Claws: Fully retractable, extremely sharp for arboreal grip.
+                  - Eyes: Large pupils for low-light hunting; clear and alert.
+                  - Tail: Thick and used as a precision counterbalance.',
+              2,
+              'Male African Leopard. 
+               Status: well.
+               BCS: 3/5.
+               Exceptional climbing agility; ligaments in paws are healthy.
+               Vibrissae (whiskers) are intact, aiding nocturnal navigation.
+               Territorial marking behavior is consistent.
+               Dental exam: Canines and carnassials show no fractures.
+               Stable in savannah riverine/kopje habitat.'
+       ),
+       (
+              33,
+              'well',
+              'Subject: Baboon
+                  - Appearance: Slender build; yellowish-brown silky fur.
+                  - Face: Shorter muzzle compared to other Papio species.
+                  - Hands/Feet: Highly dexterous; opposable thumbs are functional.
+                  - Posterior: Ischial callosities (sitting pads) are healthy.
+                  - Movement: Quadrupedal walking is fluid; high arboreal agility.',
+              2,
+              'Male Kinda Baboon. 
+               Status: well.
+               BCS: 3/5.
+               Dental: Large canines are intact; no gingival inflammation.
+               Social behavior: Highly interactive; grooming others frequently.
+               Manual dexterity: Excellent at manipulating small seeds/objects.
+               Skin check: No signs of dermatitis under the fur.
+               Stable in savannah woodland/gallery forest habitat.'
+       ),
+       (
+              34,
+              'healthy',
+              'Subject: Warthog
+                  - Appearance: Sparse grey bristles; prominent facial warts.
+                  - Tusks: Upper tusks curve 180 degrees; lower tusks are sharp.
+                  - Knees: Calloused pads on front carpus (kneeling pads) are intact.
+                  - Tail: Tasselled at the tip; held erect during movement.
+                  - Eyes: Set high on the head; clear and vigilant.',
+              2,
+              'Male Common Warthog. 
+               Status: healthy.
+               BCS: 3/5.
+               Carpal callosities are thick, protecting joints while foraging.
+               Tusk alignment is correct; self-sharpening mechanism is functional.
+               Respiratory: Snout is moist and responsive; sense of smell is keen.
+               Skin: Healthy, shows evidence of regular mud-coating for sun protection.
+               Stable in savannah open-grassland habitat.'
+       ),
+       (
+              35,
+              'healthy',
+              'Subject: Buffalo
+                  - Appearance: Robust black frame; sparse, coarse hair.
+                  - Horns: Heavy "boss" (shield) meets in the center; tips are intact.
+                  - Neck: Extremely thick and muscular; no signs of skin parasites.
+                  - Hooves: Large, cloven, and hard; designed for heavy trampling.
+                  - Ears: Large and fringed with hair; high mobility for insect swatting.',
+              2,
+              'Male Cape Buffalo. 
+               Status: healthy.
+               BCS: 4/5.
+               The cranial boss is fully ossified and shows no fractures.
+               Immune system appears strong; eyes and muzzle are clear.
+               Social status: High-ranking bull behavior; alert and protective.
+               Excellent digestive efficiency observed in ruminating cycles.
+               Thick hide is in good condition; regular wallowing behavior.
+               Stable in savannah plains/dense thicket habitat.'
+       ),
+       (
+              36,
+              'well',
+              'Subject: India
+                  - Appearance: Slender, cat-like body; greyish with black spots/rings.
+                  - Tail: Distinctively ringed with 8-9 black bands.
+                  - Scent Glands: Perineal glands are active and healthy.
+                  - Ears: Small, rounded, and set low on the head.
+                  - Claws: Semi-retractable; sharp for climbing and pinning prey.',
+              2,
+              'Female Small Indian Civet. 
+               Status: well.
+               BCS: 2.5/5 (Lithe, athletic build).
+               Scent-marking behavior is frequent (territorial health).
+               Dental: Sharp carnassial teeth show no tartar or wear.
+               Pelage: Coarse hair is glossy; no signs of alopecia.
+               High nocturnal activity; efficient foraging for insects and fruit.
+               Stable in savannah scrub/tall grass habitat.'
+       ),
+       (
+              37,
+              'well',
+              'Subject: Water
+                  - Appearance: Massive slate-black hide; sparse hair coverage.
+                  - Horns: Wide-reaching, crescent-shaped, and ribbed.
+                  - Feet: Extra-wide splayed hooves with flexible fetlocks.
+                  - Skin: Thick dermis with low sweat gland density.
+                  - Movement: Powerful swimmer; slow, deliberate gait on land.',
+              2,
+              'Male Water Buffalo. 
+               Status: well.
+               BCS: 3.5/5.
+               Hoof health: Broad splay prevents sinking in soft substrate.
+               Thermoregulation: Regular wallowing maintains core temperature.
+               Nasal passages are clear; high tolerance for high-moisture air.
+               Dental: Strong molars for grinding coarse aquatic vegetation.
+               Stable in swamp/marshland habitat.'
+       ),
+       (
+              38,
+              'well',
+              'Subject: Beaver
+                  - Appearance: Dense, waterproof brown fur; robust, compact body.
+                  - Teeth: Large, orange-tinted incisors (high iron content).
+                  - Tail: Broad, flat, and scaly; used as a rudder and fat storage.
+                  - Feet: Webbed hind feet for swimming; dexterous front paws.
+                  - Eyes/Ears: Small with nictitating membranes and valvular closures.',
+              2,
+              'Male Eurasian Beaver. 
+               Status: well.
+               BCS: 3.5/5.
+               Dental: Incisors are correctly aligned for self-sharpening.
+               Pelage: Natural oils (castoreum) provide excellent waterproofing.
+               Tail condition: No lesions; distal temperature regulation is normal.
+               High activity in lodge maintenance and dam building.
+               Respiratory: Clear lung sounds after prolonged immersion.
+               Stable in swamp/riverine habitat.'
+       ),
+       (
+              39,
+              'healthy',
+              'Subject: Fox
+                  - Appearance: Short, robust limbs; grey-brown coat with black tipping.
+                  - Muzzle: Relatively short and pointed; dark rhinarium.
+                  - Tail: Thick and bushy, often with a black tip and dorsal stripe.
+                  - Feet: Strong claws adapted for digging in soft, muddy terrain.
+                  - Ears: Medium-sized; keen auditory response to nocturnal movements.',
+              2,
+              'Male Crab-eating Fox. 
+               Status: healthy.
+               BCS: 3/5.
+               Gastrointestinal: High tolerance for varied diet (fruit/crustaceans).
+               Pads: Interdigital skin is healthy, no signs of fungal infection.
+               Dental: Generalist dentition is intact; moderate wear on molars.
+               Behavior: Cautious but active during crepuscular hours.
+               Stable in swamp/seasonally flooded savannah habitat.'
+       ),
+       (
+              40,
+              'healthy',
+              'Subject: Hippo
+                  - Appearance: Barrel-shaped torso; smooth, hairless grey-pink skin.
+                  - Mouth: Massive gape (up to 150 degrees); tusks are long and sharp.
+                  - Head: Eyes, ears, and nostrils are positioned on top of the skull.
+                  - Feet: Four-toed, semi-webbed structure for weight distribution.
+                  - Skin: Secretes "blood sweat" (reddish hipposudoric acid) for protection.',
+              2,
+              'Male Common Hippopotamus. 
+               Status: healthy.
+               BCS: 4/5.
+               Skin hydration is optimal; "blood sweat" secretion is active.
+               Dental: Lower canines are clear of abscesses; correct alignment.
+               Respiratory: Normal breath-holding cycles observed (up to 5 min).
+               Gastrointestinal: Heavy grazing activity; no signs of bloat.
+               Stable in swamp/riverine habitat.'
+       ),
+       (
+              41,
+              'well',
+              'Subject: Capy
+                  - Appearance: Heavy, blunt muzzle; coarse reddish-brown fur.
+                  - Feet: Partially webbed; 4 toes on front feet, 3 on hind feet.
+                  - Teeth: Two pairs of large, ever-growing incisors; clear of plaque.
+                  - Eyes/Ears: High-set on the head, typical of semi-aquatic mammals.
+                  - Movement: Efficient swimmer; agile on land for its size.',
+              2,
+              'Female Capybara. 
+               Status: well.
+               BCS: 3/5.
+               Dental: Molar occlusion is normal; incisors show natural wear.
+               Skin: Healthy hydration; no signs of dry-skin dermatitis.
+               Interdigital webbing is intact and free of fungal lesions.
+               Digestive: Active cecotrophy (normal for nutritional efficiency).
+               Social: Calm temperament; integrates well with the group.
+               Stable in swamp/riverbank habitat.'
+       ),
+       (
+              42,
+              'well',
+              'Subject: Otter
+                  - Appearance: Long, streamlined body; dense chocolate-brown fur.
+                  - Tail: Thick at the base, tapering towards the end (muscular rudder).
+                  - Vibrissae: Long, stiff whiskers; highly sensitive to vibrations.
+                  - Feet: Fully webbed; claws are short and strong.
+                  - Movement: Extremely fluid swimming; serpentine motion on land.',
+              2,
+              'Female Eurasian Otter. 
+               Status: well.
+               BCS: 3/5.
+               Pelage integrity: Guard hairs and underfur are perfectly waterproof.
+               Metabolism: High calorie intake required; active hunting observed.
+               Auditory: Ear valves closure is functional during dives.
+               Vibrissae response: Normal reaction to tactile stimuli in water.
+               Social: Solitary but territorial markings are consistent.
+               Stable in swamp/estuary habitat.'
+       ),
+       (
+              43,
+              'well',
+              'Subject: Shrew
+                  - Appearance: Slate-black dorsal fur with a silver-white belly.
+                  - Feet: Fringes of stiff hairs on feet and tail (act as oars).
+                  - Mouth: Red-tipped teeth; submandibular glands produce toxin.
+                  - Sensory: Tiny eyes; relies on long snout and whiskers.
+                  - Movement: Hyperactive; can run on the surface of the water.',
+              2,
+              'Female Eurasian Water Shrew. 
+               Status: well.
+               BCS: 2.5/5.
+               Metabolism: Extremely high; requiring frequent insect/crustacean prey.
+               Toxicology: Venomous saliva is active (used to paralyze prey).
+               Pelage: Air-trapping fur provides buoyancy and insulation.
+               Respiratory: Rapid respiratory rate is normal for this species.
+               Stable in swamp/edge of freshwater habitat.'
+       ),
+       (
+              44,
+              'well',
+              'Subject: Muskrat
+                  - Appearance: Stocky body; waterproof reddish-brown fur.
+                  - Tail: Long, scaly, and laterally flattened (unique rudder).
+                  - Mouth: Folds of skin (valvular) behind incisors for underwater chewing.
+                  - Feet: Hind feet are large with swimming fringes (semi-webbed).
+                  - Scent: Pronounced musk glands near the base of the tail.',
+              2,
+              'Male Muskrat. 
+               Status: well.
+               BCS: 3/5.
+               Dental: Incisors show healthy growth; can gnaw while submerged.
+               Thermoregulation: Regional heterothermy in tail/limbs is functional.
+               Respiratory: High tolerance for CO2 during 15-minute dives.
+               Scent glands are producing musk normally for territory marking.
+               Stable in swamp/marshland habitat.'
+       ),
+       (
+              45,
+              'healthy',
+              'Subject: Giant
+                  - Appearance: Exceptionally long body; chocolate-brown velvet fur.
+                  - Neck: Distinctive cream-colored throat patches (unique ID).
+                  - Tail: Broad, muscular, and dorso-ventrally flattened at the end.
+                  - Feet: Large, fully webbed paws with prominent claws.
+                  - Sensory: Large, sensitive whiskers; acute underwater vision.',
+              2,
+              'Male Giant Otter. 
+               Status: healthy.
+               BCS: 3.5/5.
+               High muscular density in the pelvic and caudal regions.
+               Throat markings are clear and skin is free of irritations.
+               Gastrointestinal: High metabolic rate; efficient fish digestion.
+               Vocalizations: Highly communicative; social barking is frequent.
+               Excellent swimming propulsion and agile maneuvering.
+               Stable in swamp/slow-moving river habitat.'
+       ),
+       (
+              46,
+              'healthy',
+              'Subject: Manatee
+                  - Appearance: Gray, wrinkled skin; sparse bristles on the snout.
+                  - Tail: Large, paddle-shaped horizontal fluke.
+                  - Flippers: Flexible pectoral fins; presence of three vestigial nails.
+                  - Mouth: Prehensile split lips for grasping aquatic plants.
+                  - Eyes: Small with a circular sphincter-like closure.',
+              2,
+              'Female West Indian Manatee. 
+               Status: healthy.
+               BCS: 3.5/5.
+               Respiratory: Sustained breath-holding; nostrils seal perfectly.
+               Dental: Continuous horizontal molar replacement is active.
+               Skin: Healthy thickness; minor commensal algae growth (normal).
+               Buoyancy control: Dense, heavy bones (pachyostosis) are functional.
+               Digestive: Active fermentation; abdomen is soft and non-distended.
+               Stable in swamp/estuarine coastal habitat.'
+       ),
+       (
+              47,
+              'healthy',
+              'Subject: Green
+                  - Appearance: Deep red plumage; teal-green wing coverts.
+                  - Bill: Large, hooked beak; black upper mandible, pale lower.
+                  - Face: Bare white skin with fine lines of small red feathers.
+                  - Feet: Zygodactyl (two toes forward, two backward).
+                  - Tail: Long, pointed, primarily red with blue tips.',
+              2,
+              'Male Red-and-green Macaw. 
+               Status: healthy.
+               BCS: 3/5 (Breast muscles are firm and well-developed).
+               Feather condition: Intact rachis and barbs; preening is active.
+               Respiratory: Clear air sacs; no nasal discharge from cere.
+               Grip strength: Powerful hallux and forward digits.
+               Oral: Tongue is muscular and healthy; beak is correctly aligned.
+               Stable in tropical jungle/canopy habitat.'
+       ),
+       (
+              48,
+              'well',
+              'Subject: Horn
+                  - Appearance: Large black body; white tail with a black band.
+                  - Casque: Large, upward-curved orange/red horn-like structure.
+                  - Bill: Massive, reinforced with keratin; clean margins.
+                  - Eyes: Prominent eyelashes (modified feathers); clear iris.
+                  - Feet: Strong, dark grey; adapted for perching on thick branches.',
+              2,
+              'Male Rhinoceros Hornbill. 
+               Status: well.
+               BCS: 3/5.
+               Casque integrity: Solid keratinous structure; no fissures or peeling.
+               Feathering: Wing feathers are robust; molting cycle is normal.
+               Respiratory: Clear resonance in vocalizations; no audible stridor.
+               Behavior: High alertness; active exploration of canopy levels.
+               Oral: Interior of the beak is healthy; tongue is responsive.
+               Stable in tropical jungle/high-canopy habitat.'
+       ),
+       (
+              49,
+              'well',
+              'Subject: Blue
+                  - Appearance: Brilliant turquoise-blue plumage; purple throat/belly.
+                  - Bill: Short, broad, and black; adapted for swallowing berries.
+                  - Wings: Slightly rounded; feathers show structural coloration.
+                  - Feet: Small, dark grey; three toes forward, one backward.
+                  - Tail: Short and square; feathers are intact and glossy.',
+              2,
+              'Male Spangled Cotinga. 
+               Status: well.
+               BCS: 2.5/5.
+               Feather condition: Excellent; no signs of stress bars.
+               Uropygial gland is active; preening behavior is frequent.
+               Respiratory: Clear breaths; high-altitude vocalizations are normal.
+               Digestive: Crop is functioning well; fruit-based diet processing.
+               Movement: High agility within the canopy.
+               Stable in tropical jungle/canopy habitat.'
+       ),
+       (
+              50,
+              'well',
+              'Subject: Eagle
+                  - Appearance: Massive grey-white body; double-crested black crown.
+                  - Talons: Extremely large (up to 13cm); black, sharp, and curved.
+                  - Bill: Strongly hooked; dark grey keratin; high bite force.
+                  - Wings: Broad and relatively short for maneuverability in trees.
+                  - Eyes: Large, forward-facing; intense grey or orange iris.',
+              2,
+              'Female Harpy Eagle. 
+               Status: well.
+               BCS: 3.5/5 (Robust pectoral muscle mass).
+               Pododermatitis check: Foot pads are thick and healthy; no lesions.
+               Grip strength: Exceptional; hallux tendon is fully functional.
+               Feathering: Crest feathers respond to stimuli; no frayed primary feathers.
+               Vision: Rapid pupillary light reflex; acute distance focus.
+               Respiratory: Strong, clear vocalizations; high aerobic capacity.
+               Stable in tropical jungle/emergent tree habitat.'
+       ),
+       (
+              51,
+              'well',
+              'Subject: Quetzal
+                  - Appearance: Iridescent green plumage; vibrant red breast/belly.
+                  - Tail: Extremely long green upper tail coverts (streamers).
+                  - Bill: Short, yellow, and partially hidden by bristly feathers.
+                  - Feet: Heterodactyl (toes 1 & 2 backward, 3 & 4 forward).
+                  - Skin: Remarkably thin and easily damaged; requires careful handling.',
+              2,
+              'Male Resplendent Quetzal. 
+               Status: well.
+               BCS: 2.5/5.
+               Plumage: Iridescence is high; long tail coverts are intact and clean.
+               Integument: Skin is healthy; no signs of feather cysts or parasites.
+               Digestive: Efficient regurgitation of large seeds from wild fruits.
+               Respiratory: Normal breath sounds; stable in high-humidity environment.
+               Behavior: Vigilant; normal perching and nesting activity.
+               Stable in cloud forest/jungle habitat.'
+       ),
+       (
+              52,
+              'well',
+              'Subject: Peck
+                  - Appearance: Bright green upperparts; red crown and black lores.
+                  - Bill: Strong, dagger-like; reinforced keratin for wood boring.
+                  - Tongue: Long, barbed, and coated with sticky saliva.
+                  - Tail: Stiff, pointed rectrices (tail feathers) for support.
+                  - Feet: Zygodactyl; sharp claws for vertical bark clinging.',
+              2,
+              'Male Eurasian Green Woodpecker. 
+               Status: well.
+               BCS: 3/5.
+               Cranial: No signs of concussion or trauma; hyoid apparatus is functional.
+               Oral: Tongue extends fully; salivary glands are active and sticky.
+               Feathering: Tail feathers show expected wear from trunk support.
+               Gait: Strong vertical hopping; grip strength is symmetrical.
+               Respiratory: Clear; no distress after high-frequency drumming.
+               Stable in jungle/woodland edge habitat.'
+       ),
+       (
+              53,
+              'well',
+              'Subject: Cockatoo
+                  - Appearance: Large, smoky-grey to black plumage; prominent crest.
+                  - Bill: Massive, hooked, and black; mandibles do not meet completely.
+                  - Face: Bare red cheek patches; skin is vibrant and smooth.
+                  - Tongue: Specialized red and black tip for extracting nut meats.
+                  - Feet: Zygodactyl; thick, scaly skin with powerful black claws.',
+              2,
+              'Female Palm Cockatoo. 
+               Status: well.
+               BCS: 3/5.
+               Cheek patches: Normal coloration; rapid flush response to stimuli.
+               Dental/Beak: Upper and lower mandibles show healthy keratin layers.
+               Plumage: Fine powder-down is present; feathers are well-preened.
+               Vocalization: Loud, complex calls; no signs of respiratory clicking.
+               Grip: High manual dexterity; uses feet to hold tools/drumsticks.
+               Stable in tropical jungle/rainforest habitat.'
+       ),
+       (
+              54,
+              'healthy',
+              'Subject: Grey
+                  - Appearance: Mottled grey plumage; bright red short tail.
+                  - Bill: Solid black, hooked, and very powerful.
+                  - Face: Bare white skin around the eyes; pale yellow iris.
+                  - Feet: Zygodactyl; dark grey with fine, sensitive scales.
+                  - Wings: Large and broad; feathers show a fine silver sheen.',
+              2,
+              'Male African Grey Parrot. 
+               Status: healthy.
+               BCS: 3/5.
+               Neurological: Highly alert; normal vocal mimicry and problem-solving.
+               Plumage: Symmetrical feather wear; no signs of feather-plucking (PBFD-free).
+               Respiratory: Clear nares (cere); no sneezing or discharge.
+               Uropygial gland: Functional, providing essential preening oils.
+               Mineral status: Proper calcium/phosphorus balance (critical for Greys).
+               Stable in tropical jungle/lowland forest habitat.'
+       ),
+       (
+              55,
+              'healthy',
+              'Subject: Toucan
+                  - Appearance: Black plumage; bright yellow throat and chest.
+                  - Bill: Large, multi-colored (green, red, orange, blue); serrated edges.
+                  - Feet: Zygodactyl; blue-grey skin; strong grip for hopping.
+                  - Eyes: Green skin patch around the eye; dark pupil.
+                  - Tail: Long, black with white and red undertail coverts.',
+              2,
+              'Male Keel-billed Toucan. 
+               Status: healthy.
+               BCS: 3/5.
+               Bill Integrity: Keratin sheath (rhamphotheca) is smooth; no delamination.
+               Thermoregulation: Excellent vascular control in bill observed.
+               Digestive: Rapid transit time; efficient seed regurgitation.
+               Plumage: Waxy sheen on feathers; uropygial gland is functional.
+               Oral: Serrated tomia (edges of the bill) are sharp and clean.
+               Stable in tropical jungle/canopy habitat.'
+       ),
+       (
+              56,
+              'healthy',
+              'Subject: Humming
+                  - Appearance: Iridescent green and bronze plumage; metallic sheen.
+                  - Bill: Long, needle-like, and slightly decurved.
+                  - Wings: Narrow and pointed; capable of high-frequency rotation.
+                  - Feet: Very small (anisodactyl); used only for perching.
+                  - Tongue: Long, bifurcated, and extensible (tubular structure).',
+              2,
+              'Female Hummingbird. 
+               Status: healthy.
+               BCS: 2.5/5 (Pectoral muscles must be convex for flight power).
+               Metabolic rate: Normal; bird is active and maintaining glucose levels.
+               Torpor capability: Functional (used for energy conservation at night).
+               Flight: Symmetrical hovering; high-speed wing beat is stable.
+               Plumage: Feather barbs are tightly interlocked for aerodynamics.
+               Oral: Tongue capillary action is functional for nectar uptake.
+               Stable in tropical jungle/flowering understory habitat.'
+       ),
+       (
+              57,
+              'healthy',
+              'Subject: Anhinga
+                  - Appearance: Slender black body; silvery-white wing patches.
+                  - Neck: Long, S-shaped, and extremely flexible.
+                  - Bill: Sharp, straight, and serrated (spear-like).
+                  - Tail: Long and fan-shaped; used for steering underwater.
+                  - Feet: Totipalmate (all four toes webbed); dark grey.',
+              2,
+              'Male African Darter. 
+               Status: healthy.
+               BCS: 3/5.
+               Neck Anatomy: 8th and 9th vertebrae specialized for "spearing" motion.
+               Plumage: Healthy wettability (normal for diving); no feather lice.
+               Thermoregulation: Sun-basking behavior is regular and efficient.
+               Oral: Sharp tomia; no lesions from prey handling.
+               Ocular: Nictitating membrane is clear and functional for diving.
+               Stable in swamp/freshwater lake habitat.'
+       ),
+       (
+              58,
+              'healthy',
+              'Subject: Egret
+                  - Appearance: Pure white plumage; long, slender silhouette.
+                  - Bill: Long, dagger-like, and bright yellow.
+                  - Neck: Long "S" curve; can extend rapidly for hunting.
+                  - Feet: Anisodactyl; long black legs and toes; no webbing.
+                  - Eyes: Yellow iris; sharp binocular vision for depth perception.',
+              2,
+              'Female Great Egret. 
+               Status: healthy.
+               BCS: 2.5/5 (Lean, typical for the species).
+               Feathering: Nuptial plumes (aigrettes) are in good condition.
+               Legs/Feet: Integument is smooth; no pododermatitis or scaling.
+               Respiratory: Air sacs are clear; calm respiratory rate.
+               Oral: Beak is perfectly straight; tomia are sharp for gripping fish.
+               Behavior: High stability while wading; successful foraging observed.
+               Stable in swamp/wetland habitat.'
+       ),
+       (
+              59,
+              'healthy',
+              'Subject: Grey
+                  - Appearance: Ash-grey upperparts; white head with black "eyebrows".
+                  - Bill: Powerful, spear-shaped; dull yellow to orange.
+                  - Neck: Long, white with vertical black streaks on the front.
+                  - Feet: Long, dark grey/greenish; anisodactyl arrangement.
+                  - Wings: Very broad; slow, rhythmic wing beats in flight.',
+              2,
+              'Male Grey Heron. 
+               Status: healthy.
+               BCS: 3/5.
+               Plumage: Symmetrical wing feathers; no signs of ectoparasites.
+               Grooming: Pectinate claw (middle toe) is sharp and clean.
+               Neck mobility: Full range of motion for "strike" hunting.
+               Ocular: Clear corneas; excellent focus on submerged prey.
+               Respiratory: Deep, rhythmic breathing; no tracheal rales.
+               Stable in swamp/shallow water habitat.'
+       ),
+       (
+              60,
+              'healthy',
+              'Subject: Red
+                  - Appearance: Brilliant scarlet plumage; black wing tips.
+                  - Bill: Long, thin, and curved downwards; dark grey to black.
+                  - Legs: Long and slender; pinkish-red coloration.
+                  - Feet: Partially webbed; adapted for walking on soft mud.
+                  - Eyes: Small, dark; positioned for lateral peripheral vision.',
+              2,
+              'Male Scarlet Ibis. 
+               Status: healthy.
+               BCS: 3/5.
+               Plumage: Vivid scarlet (indicates high-quality carotenoid intake).
+               Beak: Distal sensory pits are functional for tactile foraging.
+               Integument: Leg scaling is smooth; no signs of pododermatitis.
+               Digestive: Efficient processing of aquatic invertebrates.
+               Respiratory: Clear upper respiratory tract; no rales.
+               Stable in swamp/mangrove habitat.'
+       ),
+       (
+              61,
+              'well',
+              'Subject: Stilt
+                  - Appearance: Contrast of black wings/back and pure white underparts.
+                  - Legs: Extraordinarily long, thin, and bright pink.
+                  - Bill: Long, needle-thin, and straight; black color.
+                  - Eyes: Large, red iris; positioned for precise pecking.
+                  - Feet: Three toes forward, no hallux (hind toe); partially webbed.',
+              2,
+              'Female Black-winged Stilt. 
+               Status: well.
+               BCS: 2.5/5 (Natural slender morphotype).
+               Locomotion: Perfect joint extension in long tibiotarsus/tarsometatarsus.
+               Plumage: Clean mantle; female-typical brownish-black hue on back.
+               Beak: Fine tip integrity is maintained; precise strike reflex.
+               Respiratory: Clear; no signs of distress after flight.
+               Integument: Leg skin is hydrated; no lesions or "bumblefoot".
+               Stable in swamp/salt pan habitat.'
+       ),
+       (
+              62,
+              'healthy',
+              'Subject: Jabiru
+                  - Appearance: Massive white body; featherless black head and neck.
+                  - Neck: Distinctive bright red distensible band at the base.
+                  - Bill: Enormous, heavy, slightly upturned, and black.
+                  - Feet: Large, thick, dark grey legs; anisodactyl.
+                  - Wings: Broad and powerful; one of the largest spans in the swamp.',
+              2,
+              'Male Jabiru Stork. 
+               Status: healthy.
+               BCS: 3.5/5.
+               Gular sac: Red skin is vibrant and highly elastic; no lesions.
+               Beak: Robust keratin; high bite force; no signs of necrosis or cracks.
+               Locomotion: Steady gait; strong weight-bearing on tarsometatarsus.
+               Respiratory: Clear air sacs; powerful, silent respiration.
+               Thermoregulation: Gular fluttering behavior is normal.
+               Stable in swamp/seasonally flooded savanna habitat.'
+       ),
+       (
+              63,
+              'well',
+              'Subject: Marabou
+                  - Appearance: Slate-grey wings; white underparts; bald, spotted head.
+                  - Neck: Long, reddish-pink distensible gular sac.
+                  - Bill: Massive, wedge-shaped, and dull yellowish-grey.
+                  - Feet: Large, dark; often appear white due to urohidrosis (cooling).
+                  - Shoulders: Broad with soft white down feathers at the base of the neck.',
+              2,
+              'Male Marabou Stork. 
+               Status: well.
+               BCS: 3/5.
+               Gular sac: Elastic and vascularized; used effectively for cooling.
+               Skin: Bald head shows healthy pigmentation; no sun-induced lesions.
+               Thermoregulation: Urohidrosis behavior is active (cooling via excreta).
+               Beak: Robust; no malocclusions; powerful enough for scavenging.
+               Respiratory: Clear; no evidence of fungal air sacculitis.
+               Stable in swamp/open wetland margins habitat.'
+       ),
+       (
+              64,
+              'healthy',
+              'Subject: Cormorant
+                  - Appearance: Mainly black plumage; long tail; small crest in breeding.
+                  - Bill: Yellowish, hooked at the tip for gripping slippery fish.
+                  - Eyes: Distinctive red or dark iris; adapted for underwater vision.
+                  - Feet: Totipalmate (all four toes webbed); positioned posteriorly.
+                  - Tail: Long and stiff; used as a rudder and for balance on land.',
+              2,
+              'Male Long-tailed Cormorant. 
+               Status: healthy.
+               BCS: 3/5.
+               Plumage: Normal wettability; wing-drying behavior is frequent.
+               Uropygial gland: Low secretion (typical for diving efficiency).
+               Ocular: Nictitating membrane (third eyelid) is clear and reactive.
+               Locomotion: Powerful swimming; waddling gait on land is normal.
+               Respiratory: Clear; high tolerance for apnea during dives.
+               Stable in swamp/freshwater river habitat.'
+       ),
+       (
+              65,
+              'healthy',
+              'Subject: Great
+                  - Appearance: Large, soot-black plumage; yellow throat patch.
+                  - Bill: Strong, hooked; dark grey with a prominent nail at the tip.
+                  - Wings: Broad and powerful for low-altitude flight over water.
+                  - Feet: Large, totipalmate; dark grey with thick, scaly skin.
+                  - Eyes: Emerald green iris; adapted for low-light underwater hunting.',
+              2,
+              'Male Great Cormorant. 
+               Status: healthy.
+               BCS: 3.5/5.
+               Gular skin: Pliable and healthy; shows typical yellow/white breeding color.
+               Plumage: Structured to allow water penetration for reduced buoyancy.
+               Ocular: High visual acuity; emerald iris reflex is normal.
+               Skeletal: Robust coracoid and furcula for powerful diving strokes.
+               Metabolism: Efficient thermogenesis observed after cold water dives.
+               Stable in swamp/estuary/coastal habitat.'
+       ),
+       (
+              66,
+              'healthy',
+              'Subject: Lesser
+                  - Appearance: Deep pink to red plumage; dark crimson flight feathers.
+                  - Bill: Deeply angular; dark maroon with black tip; specialized lamellae.
+                  - Legs: Long, thin, and pink; feet are webbed (palmate).
+                  - Neck: Long and flexible; 19 cervical vertebrae.
+                  - Eyes: Small, yellow to orange iris; lateral placement.',
+              2,
+              'Female Lesser Flamingo. 
+               Status: healthy.
+               BCS: 2.5/5.
+               Plumage: Vibrant pink (reflects optimal spirulina-based diet).
+               Beak: Fine filter lamellae are clean and unobstructed.
+               Locomotion: Steady on mudflats; normal "marching" social behavior.
+               Salt Glands: Supraorbital glands are active (excreting excess salt).
+               Integument: Foot pads are soft but resilient to alkaline waters.
+               Stable in swamp/alkaline lake habitat.'
+       ),
+       (
+              67,
+              'healthy',
+              'Subject: Greater
+                  - Appearance: Pale pinkish-white body; coral-red wing coverts.
+                  - Bill: Large, pink with a prominent black tip; "broken-back" shape.
+                  - Legs: Extremely long, pink; knees (intertarsal joints) are dark pink.
+                  - Neck: Long, slender, and highly mobile; often held in an S-shape.
+                  - Feet: Webbed (palmate); adapted for treading on soft sediment.',
+              2,
+              'Female Greater Flamingo. 
+               Status: healthy.
+               BCS: 3/5.
+               Plumage: Symmetrical primary feathers; axillary feathers show bright coral.
+               Feeding Mechanism: Tongue-pumping action is strong and rhythmic.
+               Joint Health: No swelling in the intertarsal joints; full range of motion.
+               Ocular: Clear yellow iris; no signs of avian conjunctivitis.
+               Respiratory: Clear; high-altitude flight capacity is maintained.
+               Stable in swamp/lagoon/estuary habitat.'
+       ),
+       (
+              68,
+              'healthy',
+              'Subject: Rose
+                  - Appearance: Bright pink body; white neck and upper back; bald greenish head.
+                  - Bill: Long, flat, and spatulate (spoon-shaped); grey to yellowish.
+                  - Legs: Long, slender, and deep pink; semi-palmate feet.
+                  - Eyes: Intense red iris; lateral placement.
+                  - Wings: Large, pink with darker carmine patches on the shoulders.',
+              2,
+              'Female Roseate Spoonbill. 
+               Status: healthy.
+               BCS: 3/5.
+               Bill Integrity: Sensory pits on the spatulate tip are highly responsive.
+               Plumage: Vibrant pink sheen; no signs of stress-induced molting.
+               Integument: Head skin is smooth; no signs of solar dermatitis.
+               Foraging Behavior: Lateral "sweeping" motion is vigorous and coordinated.
+               Respiratory: Clear; no signs of aspergillosis in air sacs.
+               Stable in swamp/mangrove/marsh habitat.'
+       ),
+       (
+              69,
+              'healthy',
+              'Subject: Eurasia
+                  - Appearance: Pure white plumage; long yellowish-black crest during breeding.
+                  - Bill: Long, flat, and spoon-shaped; black with a yellow tip.
+                  - Legs: Long, black; adapted for wading in soft mud.
+                  - Eyes: Dark red to brown iris; excellent peripheral vision.
+                  - Throat: Bare yellowish skin patch at the base of the bill.',
+              2,
+              'Male Eurasian Spoonbill. 
+               Status: healthy.
+               BCS: 3/5.
+               Bill: Rhamphotheca is smooth; yellow tip is prominent and healthy.
+               Plumage: Symmetrical flight feathers; no signs of feather mites.
+               Vocal/Behavior: Bill-clattering behavior is normal for social interaction.
+               Neck: Cervical flexibility allows for wide-angle foraging sweeps.
+               Integument: Leg skin is intact; no signs of parasitic pododermatitis.
+               Stable in swamp/estuary/reed bed habitat.'
+       ),
+       (
+              70,
+              'healthy',
+              'Subject: Water
+                  - Appearance: Cryptic brown and grey plumage; fine dark streaks.
+                  - Eyes: Large, prominent yellow iris; adapted for night vision.
+                  - Bill: Short, stout, and black with a yellow base.
+                  - Legs: Thick, greenish-yellow "knees" (intertarsal joints).
+                  - Wings: Narrow; shows a white bar during flight.',
+              2,
+              'Male Water Thick-knee. 
+               Status: healthy.
+               BCS: 3/5.
+               Ocular: High pupillary light reflex; clear corneas.
+               Plumage: Excellent cryptic pattern for pebble/sand mimicry.
+               Locomotion: Strong runner; "bobbing" behavior is normal.
+               Auditory: Highly sensitive to low-frequency vibrations.
+               Integrity: No lesions on the tarsal pads from rocky substrate.
+               Stable in Savannah/riverine fringe habitat.'
+       ),
+       (
+              71,
+              'healthy',
+              'Subject: Abyssinian
+                  - Appearance: Brilliant turquoise body; tan/fawn back; dark blue wings.
+                  - Tail: Two long, slender black streamers (outer rectrices).
+                  - Bill: Strong, black, slightly hooked at the tip.
+                  - Feet: Syndactyl (inner and middle toes partially joined).
+                  - Eyes: Large, dark; keen eyesight for spotting terrestrial prey.',
+              2,
+              'Female Abyssinian Roller. 
+               Status: healthy.
+               BCS: 2.5/5.
+               Plumage: Iridescent blue structural coloration is vivid.
+               Tail Filaments: Intact and symmetrical; no signs of breakage.
+               Beak: Sharp tomia for crushing insect exoskeletons.
+               Flight: High maneuverability; pectoral muscles well-developed.
+               Neurological: Rapid head-tilt reflex (typical for sit-and-wait predators).
+               Stable in Savannah/dry woodland habitat.'
+       ),
+       (
+              72,
+              'healthy',
+              'Subject: Vulture
+                  - Appearance: Sandy-brown body; dark flight feathers; pale ruff.
+                  - Head/Neck: Bald with white down; adapted for hygiene.
+                  - Bill: Massive, hooked, and pale yellow/grey; high shearing force.
+                  - Feet: Large but relatively weak grip (compared to eagles); black.
+                  - Wings: Immense envergure (span); "fingered" primary feathers.',
+              2,
+              'Male Griffon Vulture. 
+               Status: healthy.
+               BCS: 3/5.
+               Digestive: High gastric acidity (pH ~1) confirmed; no toxin buildup.
+               Neck: Skin is clear; no signs of necrotic debris or parasites.
+               Flight: Excellent use of thermals; primary feathers show normal wear.
+               Respiratory: Massive lung capacity and clear air sacs for high-altitude soaring.
+               Beak: Keratin sheath is hard; normal occlusion for tearing tissue.
+               Stable in Savannah/mountain cliff habitat.'
+       ),
+       (
+              73,
+              'healthy',
+              'Subject: Weaver
+                  - Appearance: Bright yellow body; black face mask and throat.
+                  - Bill: Strong, conical, and black; adapted for seed-cracking and weaving.
+                  - Eyes: Distinctive red iris; highly alert.
+                  - Feet: Pinkish-brown; strong hallux for gripping thin branches.
+                  - Wings: Short and rounded; efficient for quick, undulating flight.',
+              2,
+              'Male Southern Masked Weaver. 
+               Status: healthy.
+               BCS: 2.5/5.
+               Plumage: Vibrant breeding colors; no signs of depigmentation.
+               Beak: High dexterity; no fractures in the rhamphotheca.
+               Motor Skills: Excellent fine motor coordination for nest construction.
+               Respiratory: Clear; no evidence of tracheal mites (Sternostoma tracheacolum).
+               Ocular: Red iris is clear; rapid pupillary response.
+               Stable in Savannah/thornveld habitat.'
+       ),
+       (
+              74,
+              'healthy',
+              'Subject: Martial
+                  - Appearance: Dark brown upperparts; white underparts with dark spots.
+                  - Head: Slight crest on the nape; powerful, broad head.
+                  - Bill: Massive, hooked, black; base (cere) is bluish-grey.
+                  - Feet: Huge, pale yellow; equipped with exceptionally long, black talons.
+                  - Wings: Long and broad; dark underwing coverts.',
+              2,
+              'Female Martial Eagle. 
+               Status: healthy.
+               BCS: 3.5/5.
+               Musculoskeletal: Pectoral muscles are firm; wings show powerful extension.
+               Talons: Hallux talon is sharp and structurally sound; no fissures.
+               Ocular: Deep-set yellow eyes; 1.0 visual acuity (estimated).
+               Crop: Normal motility; no signs of impaction or sour crop.
+               Respiratory: Massive air sac capacity; clear, silent breathing.
+               Stable in Savannah/open woodland habitat.'
+       ),
+       (
+              75,
+              'healthy',
+              'Subject: Bill
+                  - Appearance: Cryptic grey-brown plumage with fine barring.
+                  - Head: Bright yellow bare skin around the eyes.
+                  - Bill: Strong, slightly curved, and bright red.
+                  - Feet: Reddish-pink legs; males possess sharp tarsal spurs.
+                  - Body: Rounded, terrestrial build; short wings and tail.',
+              2,
+              'Male Red-billed Spurfowl. 
+               Status: healthy.
+               BCS: 3/5.
+               Integument: Orbital skin is vibrant and free of pox lesions.
+               Tarsal Spurs: Calcified and sharp; used effectively for defense.
+               Digestive: Gizzard is functional; efficient processing of seeds and bulbs.
+               Locomotion: Strong pelvic limb musculature; no lameness.
+               Respiratory: Clear; typical loud vocalizations indicate good lung capacity.
+               Stable in Savannah/riverine thicket habitat.'
+       ),
+       (
+              76,
+              'healthy',
+              'Subject: Secretary
+                  - Appearance: Grey body; black thighs and flight feathers; crest of black plumes.
+                  - Head: Bare orange/red facial skin; eagle-like hooked bill.
+                  - Legs: Extraordinarily long, scaled; pinkish-grey; short toes for terrestrial grip.
+                  - Tail: Long with two central streamers.
+                  - Wings: Large and broad; used for soaring and stabilization during hunts.',
+              2,
+              'Male Secretarybird. 
+               Status: healthy.
+               BCS: 3/5.
+               Predatory Mechanics: Kick force is rapid and powerful; tarsal scales are intact.
+               Plumage: Nuchal crest plumes are full and symmetrical.
+               Ocular: Large eyes with long eyelashes (modified feathers); clear corneas.
+               Integument: Facial skin is vibrant; no signs of avian pox or lesions.
+               Respiratory: Clear; efficient gas exchange for long-distance walking.
+               Stable in Savannah/open grassland habitat.'
+       ),
+       (
+              77,
+              'healthy',
+              'Subject: Ostrich
+                  - Appearance: Massive black body plumage; white wing and tail plumes.
+                  - Neck/Legs: Bare skin, pinkish-red (breeding male); extremely long.
+                  - Feet: Didactyl (only 2 toes); large inner toe with a hoof-like claw.
+                  - Eyes: Largest eyes of any land vertebrate; thick black lashes.
+                  - Bill: Flat and broad; adapted for opportunistic grazing.',
+              2,
+              'Male Common Ostrich. 
+               Status: healthy.
+               BCS: 3.5/5.
+               Locomotion: Powerful stride; no signs of slipped tendon or splay leg.
+               Podotheca: Thick plantar pads; main claw shows healthy wear.
+               Thermoregulation: Wing-fanning behavior is effective; air sacs clear.
+               Ocular: Corneas clear; no signs of grit-induced irritation.
+               Digestive: Proventriculus and gizzard functioning; stones present for grinding.
+               Stable in Savannah/semi-arid plains habitat.'
+       ),
+       (
+              78,
+              'healthy',
+              'Subject: Crown
+                  - Appearance: Grey-brown upperparts; white underparts and crown.
+                  - Head: Long, drooping bright yellow facial wattles.
+                  - Wings: Large white patches visible in flight; black wing tips.
+                  - Bill: Yellow base with a black tip; straight and pointed.
+                  - Feet: Long, greenish-yellow; three toes forward.',
+              2,
+              'Female White-headed Lapwing. 
+               Status: healthy.
+               BCS: 2.5/5.
+               Wattles: Turgid and vibrant yellow; no signs of parasitic cysts.
+               Wing Spurs: Carpal spurs are sharp and well-developed for defense.
+               Nervous System: Highly alert; normal "bobbing" and alarm displays.
+               Plumage: Clean and waterproofed; uropygial gland is active.
+               Respiratory: Clear; no evidence of syngamiasis (gapeworm).
+               Stable in Savannah/riverine sandbar habitat.'
+       ),
+       (
+              79,
+              'healthy',
+              'Subject: Blacksmith
+                  - Appearance: Bold pattern of black, grey, and white; white crown.
+                  - Wings: Equipped with sharp black carpal spurs on the wrists.
+                  - Bill: Short, straight, and black; ideal for surface picking.
+                  - Eyes: Deep red iris; provides excellent contrast in bright light.
+                  - Legs: Long, thin, and black; adapted for wading in shallow mud.',
+              2,
+              'Male Blacksmith Lapwing. 
+               Status: healthy.
+               BCS: 2.5/5.
+               Wing Spurs: Sharp and prominent; no signs of periosteal reaction.
+               Ocular: Vibrant red iris; no signs of uveitis or corneal opacity.
+               Plumage: High contrast maintained; no feathers show signs of depigmentation.
+               Behavior: Highly vocal; "tink-tink-tink" alarm call is loud and clear.
+               Locomotion: Agile on mudflats; symmetrical gait.
+               Stable in Savannah/wetland margin habitat.'
+       ),
+       (
+              80,
+              'healthy',
+              'Subject: Spine
+                  - Appearance: Dark grey to blackish shell; depressed central groove.
+                  - Neck: Long, covered with prominent pointed tubercles (spines).
+                  - Shell: Oval-shaped carapax; relatively flat for hydrodynamic efficiency.
+                  - Limbs: Strong, webbed feet with sharp claws for digging in mud.
+                  - Head: Wide and flat with a slightly hooked upper jaw.',
+              2,
+              'Female Black Spine-necked Swamp Turtle. 
+               Status: healthy.
+               BCS: 3/5.
+               Carapace Integrity: Scutes are firm; no signs of shell rot or pitting.
+               Neck Tubercles: Pointed and intact; no fungal growth in interstitial skin.
+               Hydration: Ocular membranes are moist; skin elasticity is normal.
+               Cloacal Health: Clean; no signs of prolapse or parasitic discharge.
+               Activity: Cryptic but responsive to tactile stimuli.
+               Stable in swamp/shallow pond habitat.'
+       ),
+       (
+              81,
+              'healthy',
+              'Subject: Alli
+                  - Appearance: Large, robust body; dark grey to black coloration.
+                  - Snout: Broad, U-shaped; upper jaw overlaps lower teeth.
+                  - Osteoderms: Bony plates embedded in the skin of the back for protection.
+                  - Tail: Massive and laterally compressed for aquatic propulsion.
+                  - Eyes: Vertically slit pupils; reflective tapetum lucidum for night vision.',
+              2,
+              'Male American Alligator. 
+               Status: healthy.
+               BCS: 4/5.
+               Dentition: Full set of teeth (approx. 74-80); no signs of gingival infection.
+               Dermal Scutes: Osteoderms are hard and well-vascularized.
+               Thermoregulation: Gaping behavior observed (normal heat exchange).
+               Ocular: Nictitating membrane is functional and clear.
+               Cloacal: Strong muscle tone; clear of obstructions.
+               Stable in swamp/freshwater marsh habitat.'
+       ),
+       (
+              82,
+              'healthy',
+              'Subject: Yacare
+                  - Appearance: Dark olive to black; cross-banding on sides and tail.
+                  - Snout: Medium-width; visible lower teeth when jaws are closed.
+                  - Eyes: Prominent bony ridge between the orbits (spectacle-like).
+                  - Belly: Highly ossified ventral scales (bony plates).
+                  - Tail: Serrated dorsal crest; extremely muscular.',
+              2,
+              'Male Yacare Caiman. 
+               Status: healthy.
+               BCS: 3.5/5.
+               Dentition: Characteristic "overbite" absent; teeth are clean and sharp.
+               Ventral Scales: Extensive osteoderm development (typical for the genus).
+               Nasal: Valves are responsive and airtight during submersion.
+               Integument: Typical dark pigmentation; no signs of "red leg" (septisemia).
+               Reflexes: Strong tail-thrash response and rapid jaw snap.
+               Stable in swamp/riverine habitat.'
+       ),
+       (
+              83,
+              'healthy',
+              'Subject: Nile
+                  - Appearance: Bronze to greyish-green; dark cross-bands on the tail.
+                  - Snout: Long and tapered; 4th lower tooth visible when jaws closed.
+                  - Body: Massive, armored with heavy osteoderms on the dorsal side.
+                  - Feet: Strongly webbed hind feet; five toes on front, four on back.
+                  - Senses: Sensory pits (ISOs) located on almost every scale of the body.',
+              2,
+              'Male Nile Crocodile. 
+               Status: healthy.
+               BCS: 4/5.
+               Oral: Tongue is fixed to the floor of the mouth; no signs of stomatitis.
+               Dentition: Massive pressure capacity; teeth show regular replacement cycles.
+               Integument: ISOs (Integumentary Sense Organs) are sensitive and healthy.
+               Cardiovascular: Strong heart rate; Foramen of Panizza function is presumed normal.
+               Locomotion: Powerful "high walk" and aquatic propulsion.
+               Stable in swamp/river/lake habitat.'
+       ),
+       (
+              84,
+              'healthy',
+              'Subject: Gharial
+                  - Appearance: Olive-green to light brown; long, slender body.
+                  - Snout: Extremely elongated and narrow; needle-like teeth.
+                  - Head: Distinctive "ghara" (bulbous growth) on the narial boss.
+                  - Feet: Extensively webbed; weak terrestrial locomotion (slides on belly).
+                  - Tail: Well-developed vertically flattened tail for rapid swimming.',
+              2,
+              'Male Indian Gharial. 
+               Status: healthy.
+               BCS: 3/5.
+               Narials: Ghara structure is intact; resonates correctly for vocalization.
+               Dentition: Numerous interlocking teeth (approx. 110); no malocclusions.
+               Ocular: Eyes sit high on the skull; clear vision above water line.
+               Musculoskeletal: Specialized for aquatic life; leg muscles are lean.
+               Integument: Scales are smooth; minimal algae attachment.
+               Stable in river/deep swamp habitat.'
+       ),
+       (
+              85,
+              'healthy',
+              'Subject: Black
+                  - Appearance: Very dark, near-black skin; grey-brown banding on lower jaw.
+                  - Eyes: Large, prominent with a silver/grey iris.
+                  - Snout: Broad and heavy; structurally stronger than other caimans.
+                  - Size: Robust and massive body; can exceed 5 meters in length.
+                  - Osteoderms: Heavily armored dorsal surface with dark, ridged scales.',
+              2,
+              'Male Black Caiman. 
+               Status: healthy.
+               BCS: 4/5.
+               Integument: Dark pigmentation is uniform; no signs of depigmentation or fungi.
+               Cranial: Massive jaw adductor muscles; temporal fenestrae are clear.
+               Metabolism: Efficient post-prandial thermoregulation observed.
+               Ocular: Tapetum lucidum providing strong nocturnal eye-shine.
+               Nervous System: High response to chemical cues in water.
+               Stable in Amazonian swamp/flooded forest habitat.'
+       ),
+       (
+              86,
+              'healthy',
+              'Subject: Agama
+                  - Appearance: Bright orange head; indigo/blue body; bicolored tail.
+                  - Body: Sub-cylindrical; covered in small, keeled scales.
+                  - Head: Large, triangular; distinct tympanum (ear opening).
+                  - Feet: Long toes with sharp claws for climbing rocks and trees.
+                  - Tail: Long, non-autotomous (typically does not drop easily).',
+              2,
+              'Male Common Agama. 
+               Status: healthy.
+               BCS: 2.5/5.
+               Coloration: High-intensity breeding colors; indicates dominance and health.
+               Digital: All claws intact; excellent grip and climbing mobility.
+               Oral: Mucosa is pink; acrodont dentition is stable and clean.
+               Tympanum: Clear and free of mite clusters or debris.
+               Hydration: Lateral skin folds are minimal; eyes are bright and protuberant.
+               Stable in Savannah/kopje/suburban habitat.'
+       ),
+       (
+              87,
+              'healthy',
+              'Subject: Giant
+                  - Appearance: Massive domed carapace; thick, pillar-like legs.
+                  - Neck: Long, allowing reach to higher vegetation.
+                  - Head: Relatively small; scaly; no external ears.
+                  - Feet: Cylindrical (elephantine) with blunt nails for heavy support.
+                  - Shell: High-domed, brownish-grey; growth rings visible on scutes.',
+              2,
+              'Male Aldabra Giant Tortoise. 
+               Status: healthy.
+               BCS: 3.5/5.
+               Carapace: No signs of "pyramiding" or metabolic bone disease.
+               Locomotion: Slow but steady; gait is symmetrical and strong.
+               Beak: Keratinized rhamphotheca is sharp for shearing fibrous plants.
+               Hydration: Normal; access to mud wallows has kept skin supple.
+               Fecal: High fiber content; normal digestion of lignified grasses.
+               Stable in Savannah/grassland habitat.'
+       ),
+       (
+              88,
+              'healthy',
+              'Subject: Chameleon
+                  - Appearance: Usually green with pale lateral stripes; tall cranial casque.
+                  - Eyes: Conical turrets; 360-degree independent rotation.
+                  - Feet: Zygodactylous (toes fused into two opposing pads).
+                  - Tail: Strongly prehensile; coiled when at rest.
+                  - Tongue: Extremely long, projectile; equipped with a suction tip.',
+              2,
+              'Male African Chameleon. 
+               Status: healthy.
+               BCS: 2.5/5.
+               Ocular: Rapid independent tracking; no signs of sunken orbits (dehydration).
+               Casque: Well-defined cranial crest; no signs of metabolic softening.
+               Grip: Strong zygodactylous grasp; no tremors or limb weakness.
+               Integument: Efficient color change; skin sheds in clean patches.
+               Oral: Hyoid apparatus functional; tongue projection is swift and accurate.
+               Stable in Savannah/shrubland habitat.'
+       ),
+       (
+              89,
+              'healthy',
+              'Subject: Gopherus
+                  - Appearance: Rugose, dark brown carapace; yellowish plastron.
+                  - Forelimbs: Broad, spade-like, and heavily scaled for burrowing.
+                  - Head: Square-shaped profile; thick scales on the forehead.
+                  - Size: Medium-sized tortoise; high-domed shell.
+                  - Throat: Gular scutes (front of the bottom shell) are prominent.',
+              2,
+              'Female Goode’s Thornscrub Tortoise. 
+               Status: healthy.
+               BCS: 3/5.
+               Forelimbs: Fossorial adaptations are intact; nails are thick and blunt.
+               Plastron: Firm; no signs of shell pitting or erosive lesions.
+               Nasal: Nares are dry and clear; no discharge (rinitis check).
+               Hydration: Mental glands are active; eyes are clear and alert.
+               Behavior: Efficient burrowing reflex; responsive to environmental changes.
+               Stable in Savannah/thornscrub habitat.'
+       ),
+       (
+              90,
+              'healthy',
+              'Subject: Gecko
+                  - Appearance: Pale, translucent skin with dark spots/tubercles.
+                  - Eyes: Large, vertical pupils; fixed transparent spectacle (no eyelids).
+                  - Feet: Expanded toe pads with specialized subdigital lamellae.
+                  - Tail: Cylindrical, fragile (can autotomize); often shows regeneration rings.
+                  - Body: Flattened dorsoventrally; skin feels soft and granular.',
+              2,
+              'Female Mediterranean House Gecko. 
+               Status: healthy.
+               BCS: 2.5/5.
+               Digital Pads: Setae are clean and functional; full adhesive capability.
+               Ocular: Spectacle is clear; no retained shed (dysecdysis) over the eyes.
+               Tail: Original tail intact; fat reserves in the caudal base are adequate.
+               Integument: Tubercles are prominent; no signs of mite infestation.
+               Activity: Strong righting reflex; active nocturnal hunting behavior.
+               Stable in Savannah/rocky/urban habitat.'
+       ),
+       (
+              91,
+              'healthy',
+              'Subject: Eyes
+                  - Appearance: Neon green dorsum; bright orange feet; blue/yellow flanks.
+                  - Eyes: Large, bulging, brilliant red with vertical slit pupils.
+                  - Feet: Suction-cup toe pads for climbing; lack of extensive webbing.
+                  - Skin: Smooth, permeable, and moist; secretes protective peptides.
+                  - Eyelids: Reticulated lower eyelid (nictitating membrane) with gold pattern.',
+              2,
+              'Female Red-eyed Tree Frog. 
+               Status: healthy.
+               BCS: 3/5.
+               Integument: Skin is moist and vibrant; no signs of chytrid fungus or lesions.
+               Ocular: Red iridophores are vivid; nictitating membrane functions perfectly.
+               Digital Pads: Adhesive discs are turgid; provides strong vertical grip.
+               Coelomic: Normal palpation; no evidence of impaction or internal masses.
+               Respiration: Gular pumping is steady; cutaneous respiration appears optimal.
+               Stable in Jungle/high-humidity arboreal habitat.'
+       ),
+       (
+              92,
+              'healthy',
+              'Subject: Blue
+                  - Appearance: Brilliant azure blue with irregular black spotting.
+                  - Body: Stout and robust; limbs are darker blue.
+                  - Feet: Suction-like toe pads; lack of webbing (terrestrial).
+                  - Skin: Extremely smooth and moist; contains poison glands.
+                  - Head: Small with large, dark, lateral eyes.',
+              2,
+              'Male Blue Poison Dart Frog. 
+               Status: healthy.
+               BCS: 3/5.
+               Integument: Mucous layer is intact; no signs of Batrachochytrium dendrobatidis.
+               Coloration: High saturation; indicates optimal nutritional status.
+               Digital Pads: Broad and functional; normal "sticky" response on leaves.
+               Gular: Rhythmic gular fluttering (normal respiratory rate).
+               Musculoskeletal: Forelimbs are strong; no signs of "spindly leg" syndrome.
+               Stable in Jungle/leaf litter habitat.'
+       ),
+       (
+              93,
+              'healthy',
+              'Subject: Crystal
+                  - Appearance: Lime green dorsum with faint yellow spots; transparent belly.
+                  - Internal: Visceral organs (heart, liver, intestines) visible through skin.
+                  - Eyes: Large, golden-white iris with horizontal pupils; forward-facing.
+                  - Body: Small, delicate, and flattened; adapted for leaf-dwelling.
+                  - Feet: Tips expanded into discs; yellow-green coloration.',
+              2,
+              'Female Fleischmann’s Glass Frog. 
+               Status: healthy.
+               BCS: 2.5/5.
+               Transparency: Ventral skin is clear; no signs of internal hemorrhage or edema.
+               Cardiac: Heart rate is regular and visible; normal contraction cycle.
+               Digestive: Liver is dark red (normal); intestinal motility is active.
+               Ocular: Eyes are turgid; no signs of corneal clouding.
+               Reproductive: Gravid state check: Oocytes visible through the abdominal wall.
+               Stable in Jungle/riverine vegetation habitat.'
+       ),
+       (
+              94,
+              'healthy',
+              'Subject: Golden
+                  - Appearance: Solid bright yellow; robust and large for a dendrobatid.
+                  - Skin: Extremely smooth; contains high concentrations of batrachotoxin.
+                  - Mouth: Possesses teeth (maxillary), unlike most other poison frogs.
+                  - Feet: Large toe pads; non-webbed; designed for terrestrial foraging.
+                  - Eyes: Large and completely black; providing sharp contrast to the body.',
+              2,
+              'Male Golden Poison Frog. 
+               Status: healthy.
+               BCS: 3.5/5.
+               Integument: Lustrous yellow sheen; no signs of skin peeling or discoloration.
+               Oral: Maxillary teeth are present and stable; oral mucosa is healthy.
+               Toxicity Check: Glandular activity is normal (dietary sourced in wild).
+               Motor Skills: High activity levels; strong jumping and climbing response.
+               Respiratory: Steady gular respiration; no audible distress.
+               Stable in Jungle/humid leaf litter habitat.'
+       ),
+       (
+              95,
+              'healthy',
+              'Subject: Bicolor
+                  - Appearance: Bright leaf-green dorsum; creamy white or yellowish belly.
+                  - Eyes: Large, silver-grey iris with vertical pupils.
+                  - Limbs: Long and slender; possesses opposable first toes on all feet.
+                  - Glands: Large parotoid glands extending behind the eyes.
+                  - Skin: Waxy texture; secretes dermorphins and deltorphins.',
+              2,
+              'Female Giant Monkey Frog. 
+               Status: healthy.
+               BCS: 4/5.
+               Integument: Waxy coating is uniform; no signs of skin desiccation.
+               Parotoid Glands: Symmetrical and productive; no signs of impaction.
+               Grip: Strong opposable grasp; coordination is excellent during arboreal movement.
+               Hydration: Normal; stores water in the bladder efficiently.
+               Ocular: Clear silver iris; normal pupillary light reflex.
+               Stable in Jungle/canopy habitat.'
+       )
+

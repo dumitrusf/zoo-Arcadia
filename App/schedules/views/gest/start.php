@@ -1,5 +1,7 @@
 <?php
 // App/schedules/views/gest/start.php
+// Include functions to use hasPermission()
+require_once __DIR__ . '/../../../../includes/functions.php';
 ?>
 
 <div class="container mt-4">
@@ -43,9 +45,11 @@
                                     </td>
                                     <td><?= $schedule->updated_at ?></td>
                                     <td>
-                                        <a href="/schedules/gest/edit?id=<?= $schedule->id_opening ?>" class="btn btn-sm btn-warning">
-                                            <i class="bi bi-pencil"></i> Edit
-                                        </a>
+                                        <?php if (hasPermission('schedules-edit')): ?>
+                                            <a href="/schedules/gest/edit?id=<?= $schedule->id_opening ?>" class="btn btn-sm btn-warning">
+                                                <i class="bi bi-pencil"></i> Edit
+                                            </a>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

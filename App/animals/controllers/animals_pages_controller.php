@@ -15,6 +15,7 @@ require_once __DIR__ . '/../models/animalFull.php';
 require_once __DIR__ . '/../models/specie.php';
 require_once __DIR__ . '/../../habitats/models/habitat.php';
 require_once __DIR__ . '/../models/nutrition.php';
+require_once __DIR__ . '/../../vreports/models/healthStateReport.php';
 
 class AnimalsPagesController {
     
@@ -70,7 +71,11 @@ class AnimalsPagesController {
             header('Location: /animals/pages/allanimals');
             exit;
         }
-
+        
+        // Get the latest health state report for this animal
+        $healthReportModel = new HealthStateReport();
+        $latestReport = $healthReportModel->getLatestByAnimalId($id);
+        
         if (file_exists(__DIR__ . '/../views/pages/animalpicked.php')) {
             include_once __DIR__ . '/../views/pages/animalpicked.php';
         } else {

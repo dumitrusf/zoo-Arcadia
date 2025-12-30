@@ -1,7 +1,11 @@
 <!-- <nav class="nav navbar"> -->
 
+<!-- HERO SECTION for animal picked page -->
 <?php if (isset($animal) && $animal): ?>
 <header class="hero">
+
+
+	<!-- HERO TEXT for animal picked page animal name and its specie name -->
 	<div class="hero__container">
 		<div class="hero__text">
 			<h1 class="hero__title"><?= htmlspecialchars(strtoupper($animal->animal_name ?? 'Unknown')) ?></h1>
@@ -11,7 +15,9 @@
 		<a type="button" class="btn intro__button intro__button--hours" href="#opening-hours">opening hours</a>
 	</div>
 
+	
 	<?php if (!empty($animal->media_path)): ?>
+		<!-- ANIMAL IMAGE for animal picked page -->
 		<picture>
 			<source
 				srcset="<?= !empty($animal->media_path_large) ? htmlspecialchars($animal->media_path_large) : getCloudinaryUrl($animal->media_path, 'w_1280,c_scale,q_auto,f_auto') ?>"
@@ -23,21 +29,12 @@
 				class="hero__image d-block" alt="<?= htmlspecialchars($animal->animal_name ?? 'Animal image') ?>" />
 		</picture>
 	<?php else: ?>
+		<!-- ANIMAL IMAGE NOT FOUND for animal picked page -->
 		<div class="hero__image bg-light d-flex align-items-center justify-content-center" style="min-height: 400px;">
 			<i class="bi bi-image" style="font-size: 4rem; color: #ccc;"></i>
 		</div>
 	<?php endif; ?>
 </header>
-<?php else: ?>
-	<header class="hero">
-		<div class="hero__container">
-			<div class="hero__text">
-				<h1 class="hero__title">Animal not found</h1>
-				<p class="hero__subtitle">The requested animal could not be found.</p>
-			</div>
-			<a type="button" class="btn intro__button intro__button--hours" href="/animals/pages/allanimals">Back to Animals</a>
-		</div>
-	</header>
 <?php endif; ?>
 
 
@@ -51,10 +48,10 @@
 
 
 
+<?php if (isset($animal) && $animal): ?>
 <main class="animal">
 
 	<!-- Sección de Información del Animal -->
-	<?php if (isset($animal) && $animal): ?>
 	<section class="animal__info animal__card">
 		<h2 class="animal__title">Animal</h2>
 		<table class="animal__table">
@@ -117,10 +114,10 @@
 				<tr class="animal__row">
 					<th class="animal__header">Date Of Check-Up:</th>
 					<td class="animal__data">
-						<?php if (!empty($animal->review_date)): ?>
-							<?= date('F j, Y', strtotime($animal->review_date)) ?>
+						<?php if (isset($latestReport) && $latestReport && !empty($latestReport->review_date)): ?>
+							<?= date('F j, Y', strtotime($latestReport->review_date)) ?>
 						<?php else: ?>
-							No check-up recorded
+							No Check-Up Recorded
 						<?php endif; ?>
 					</td>
 				</tr>
@@ -132,15 +129,25 @@
 
 
 	<!-- Sección de Observación Veterinaria -->
+	<?php if (isset($animal) && $animal): ?>
 	<section class="animal__observation animal__card">
 		<h2 class="animal__title">Veterinary Observation</h2>
-		<p class="animal__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eu odio
-			sed tortor luctus malesuada.</p>
+		<?php if (isset($latestReport) && $latestReport && !empty($latestReport->vet_obs)): ?>
+			<p class="animal__description"><?= htmlspecialchars($latestReport->vet_obs) ?></p>
+		<?php else: ?>
+			<p class="animal__description">No veterinary observations recorded yet.</p>
+		<?php endif; ?>
 		<table class="animal__table">
 			<tbody>
 				<tr class="animal__row">
 					<th class="animal__header">Mood Animal:</th>
-					<td class="animal__data">Angry</td>
+					<td class="animal__data">
+						<?php if (isset($latestReport) && $latestReport && !empty($latestReport->hsr_state)): ?>
+							<?= htmlspecialchars(ucfirst(str_replace('_', ' ', $latestReport->hsr_state))) ?>
+						<?php else: ?>
+							Not recorded
+						<?php endif; ?>
+					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -151,8 +158,12 @@
 	<!-- Sección de Detalles Opcionales -->
 	<section class="animal__optional animal__card">
 		<h2 class="animal__title">Optional Animal Details</h2>
-		<p class="animal__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eu odio
-			sed tortor luctus malesuada.</p>
+		<?php if (isset($latestReport) && $latestReport && !empty($latestReport->opt_details)): ?>
+			<p class="animal__description"><?= htmlspecialchars($latestReport->opt_details) ?></p>
+		<?php else: ?>
+			<p class="animal__description">No additional details available.</p>
+		<?php endif; ?>
 	</section>
 
 </main>
+<?php endif; ?>

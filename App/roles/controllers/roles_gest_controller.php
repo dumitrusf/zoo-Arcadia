@@ -22,14 +22,14 @@
 session_start();
 
 require_once __DIR__ . "/../models/role.php";
-
 require_once __DIR__ . "/../../../database/connection.php";
-// Incluyo el archivo que tiene la clase DB para poder conectarme a la base de datos.
+require_once __DIR__ . "/../../../includes/functions.php";
+// Include the file that has the DB class to be able to connect to the database.
 
 DB::createInstance();
-// Llamo al método estático createInstance() de la clase DB.
-// Este método devuelve una conexión PDO lista para usar, siguiendo el patrón Singleton.
-// Si es la primera vez que se llama, crea la conexión. Si ya existe, reutiliza la misma.
+// Call the static method createInstance() of the DB class.
+// This method returns a PDO connection ready to use, following the Singleton pattern.
+// If it is the first time it is called, it creates the connection. If it already exists, it reuses the same one.
 
 class RolesGestController
 {
@@ -42,6 +42,13 @@ class RolesGestController
     }
     public function create()
     {
+        // Check if user is Admin or has roles-create permission
+        $isAdmin = isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin';
+        if (!$isAdmin && !hasPermission('roles-create')) {
+            header('Location: /roles/gest/start?msg=error&error=You do not have permission to create roles');
+            exit;
+        }
+
         if ($_POST) {
             // print_r($_POST);
             $role_name = $_POST['role_name'];
@@ -56,14 +63,21 @@ class RolesGestController
 
     public function delete()
     {
+        // Check if user is Admin or has roles-delete permission
+        $isAdmin = isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin';
+        if (!$isAdmin && !hasPermission('roles-delete')) {
+            header('Location: /roles/gest/start?msg=error&error=You do not have permission to delete roles');
+            exit;
+        }
+
         $id = $_GET['id'];
 
-        // Obtener resultado con información
+        // Get result with information
         $result = Role::delete($id);
 
-        // Si tiene éxito: redirigir
+        // If it is successful: redirect
         if (!$result['success']) {
-            // Guardar el mensaje en la session
+            // Save the message in the session
 
             $_SESSION["error_message"] = $result["message"];
         } else {
@@ -77,6 +91,13 @@ class RolesGestController
 
     public function edit()
     {
+        // Check if user is Admin or has roles-edit permission
+        $isAdmin = isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin';
+        if (!$isAdmin && !hasPermission('roles-edit')) {
+            header('Location: /roles/gest/start?msg=error&error=You do not have permission to edit roles');
+            exit;
+        }
+
         // we get the ID of the role from the URL. This variable is the only source of truth for the ID.
         $id_role = $_GET["id"];
 

@@ -2,7 +2,7 @@
 // Define the structure of our categories and the prefixes that belong to them.
 $permissionStructure = [
     '🔑 Account Management' => ['users', 'roles'],
-    '🎪 Zoo Management' => ['services', 'schedules', 'habitats'],
+    '🎪 Zoo Management' => ['services', 'schedules', 'habitats', 'hero', 'bricks'],
     '🐼 Animal Management' => ['animals', 'animal_stats', 'animal_feeding'],
     '⚕️ Veterinary' => ['vet_reports', 'habitat_suggestions'],
     '💬 Public Interaction' => ['testimonials']
@@ -46,7 +46,8 @@ foreach ($permissions as $permission) {
                         <table class="table mb-0">
                             <thead class="table-light">
                                 <tr>
-                                    <th scope="col" style="width: 40%;" class="ps-4">Permiso</th>
+                                    <th scope="col" style="width: 50px;">ID</th>
+                                    <th scope="col" style="width: 40%;" class="ps-4">Permission</th>
                                     <th scope="col">Description</th>
                                 </tr>
                             </thead>
@@ -55,7 +56,8 @@ foreach ($permissions as $permission) {
                                 <?php foreach ($groupedPermissions as $categoryName => $permissionsInCategory): ?>
                                     <?php if (empty($permissionsInCategory)) continue; ?>
                                     <tr>
-                                        <td colspan="2" class="table-dark fw-bold ps-4">
+
+                                        <td colspan="3" class="table-dark fw-bold ps-4">
                                             <?= htmlspecialchars($categoryName) ?>
                                         </td>
                                     </tr>
@@ -65,6 +67,9 @@ foreach ($permissions as $permission) {
                                         $prettyName = ucwords(str_replace(['-', '_'], ' ', $permission['permission_name']));
                                         ?>
                                         <tr class="<?php echo get_row_class($rowNumber); ?>">
+
+
+                                            <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>">#<?php echo $permission['id_permission']; ?></td>
                                             <td class="ps-4">
                                                 <strong>
                                                     <?= htmlspecialchars($prettyName) ?>

@@ -13,6 +13,7 @@
 require_once __DIR__ . '/../models/service.php';
 require_once __DIR__ . '/../../medias/models/cloudinary.php';
 require_once __DIR__ . '/../../medias/models/Media.php';
+require_once __DIR__ . '/../../../includes/functions.php';
 
 class CmsGestController {
     
@@ -29,6 +30,12 @@ class CmsGestController {
     }
 
     public function create() {
+        // Check if user has permission to create services
+        if (!hasPermission('services-create')) {
+            header('Location: /cms/gest/start?msg=error&error=You do not have permission to create services');
+            exit;
+        }
+
         $action = 'create';
         $service = null;
         if (file_exists(__DIR__ . '/../views/gest/edit.php')) {
@@ -37,6 +44,12 @@ class CmsGestController {
     }
 
     public function edit() {
+        // Check if user has permission to edit services
+        if (!hasPermission('services-edit')) {
+            header('Location: /cms/gest/start?msg=error&error=You do not have permission to edit services');
+            exit;
+        }
+
         $id = $_GET['id'] ?? null;
         if (!$id) { header('Location: /cms/gest/start'); exit; }
 
@@ -55,6 +68,21 @@ class CmsGestController {
     public function save() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id_service'] ?? null;
+            
+            // Check permissions based on whether it's create or update
+            if ($id) {
+                // UPDATE - requires services-edit permission
+                if (!hasPermission('services-edit')) {
+                    header('Location: /cms/gest/start?msg=error&error=You do not have permission to edit services');
+                    exit;
+                }
+            } else {
+                // CREATE - requires services-create permission
+                if (!hasPermission('services-create')) {
+                    header('Location: /cms/gest/start?msg=error&error=You do not have permission to create services');
+                    exit;
+                }
+            }
             $title = $_POST['service_title'];
             $desc = $_POST['service_description'];
             $link = $_POST['link'] ?? '';
@@ -136,6 +164,12 @@ class CmsGestController {
     
     // Delete
     public function delete() {
+        // Check if user has permission to delete services
+        if (!hasPermission('services-delete')) {
+            header('Location: /cms/gest/start?msg=error&error=You do not have permission to delete services');
+            exit;
+        }
+
         $id = $_GET['id'] ?? null;
         if ($id) {
             $serviceModel = new Service();
