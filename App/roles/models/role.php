@@ -13,14 +13,14 @@
 class Role
 {
 
-    // atributos que tendra el empleado al crearlo desde esta plantilla instanciandolo
+    // attributes that the role will have when creating it from this template instantiating it
     public $id_role;
     public $role_name;
     public $role_description;
     public $created_at;
     public $updated_at;
 
-    // constructor de la clase empleado, que apunta con this a los mismos atributos de la clase sin ($)
+    // constructor of the role class, that points with this to the same attributes of the class without ($)
     public function __construct($id_role, $role_name, $role_description, $created_at, $updated_at)
     {
         $this->id_role = $id_role;
@@ -30,48 +30,48 @@ class Role
         $this->updated_at = $updated_at;
     }
 
-    // método para obtener todos los roles de la bdd
+    // method to get all the roles from the database
     public static function check()
     {
 
 
-        // creamos un array vacío para almacenar los roles
+        // create an empty array to store the roles
         $rolesList = [];
 
-        // instanciamos la conexión a la bdd, ya que si no lo hacemos, no podremos acceder a la bdd para recuperar nada
+        // instantiate the connection to the database, since if we don't do it, we won't be able to access the database to recover anything
         $connectionDB = DB::createInstance();
 
-        // creamos la consulta a la bdd, que nos devolverá todos los roles de la bdd
+        // create the query to the database, that will return all the roles from the database
         $sql = $connectionDB->query("SELECT * FROM roles");
 
-        // recorremos los roles obtenidos de la bdd, y los guardamos en el array $employeesList hay que almacenarlos en algún lugar no?
-        // para cada iteración de consulta, se crea un nuevo objeto Role y se agrega al array $rolesList
+        // iterate through the roles obtained from the database, and save them in the $rolesList array, we have to store them somewhere right?
+        // for each iteration of the query, a new Role object is created and added to the $rolesList array
         foreach ($sql->fetchAll() as $role) {
 
-            // guardamos en employeeList los roles de la bdd en este array para poder mostrarlos en el controlador
+            // save the roles from the database in this array to be able to show them in the controller
             $rolesList[] = new Role($role["id_role"], $role["role_name"], $role["role_description"], $role["created_at"], $role["updated_at"]);
         }
 
-        // devolvemos el array de roles
+        // return the array of roles
         return $rolesList;
     }
 
-    // método para crear un nuevo empleado en la bdd
+    // method to create a new role in the database
     public static function create($role_name, $role_description)
     {
-        // instanciamos la conexion a la bdd
+        // instantiate the connection to the database
         $connectionDB = DB::createInstance();
 
-        // creamos la consulta a la bdd
+        // create the query to the database
         $query = "INSERT INTO roles (role_name, role_description) VALUES (?, ?)";
 
-        // preparamos la conexion de la consulta a la bdd
+        // prepare the connection to the database for the query
         $sql = $connectionDB->prepare($query);
 
-        // ejecutamos la consulta ya preparada previamente
+        // execute the query already prepared previously
         $sql->execute([$role_name, $role_description]);
 
-        // devolvemos el id del empleado creado
+        // return the id of the role created
         return $connectionDB->lastInsertId();
     }
 
@@ -100,7 +100,7 @@ class Role
     public static function delete($id_role)
     {
 
-        // instanciamos la conexion a la bdd
+        // instantiate the connection to the database
         $connectionDB = DB::createInstance();
 
         $usersCount = self::getRole($id_role);
@@ -112,13 +112,13 @@ class Role
                 'message' => "No se puede borrar: {$usersCount['employeesHasRoles']} colaborador/es tienen el rol de {$usersCount['role_name']}"
             ]; // ← Devuelve array con INFORMACIÓN
         } else {
-            // creamos la consulta a la bdd
+            // create the query to the database
             $query = "DELETE FROM roles WHERE id_role = ?";
 
-            // preparamos la conexion de la consulta a la bdd
+            // prepare the connection to the database for the query
             $sql = $connectionDB->prepare($query);
 
-            // ejecutamos la consulta ya preparada previamente
+            // execute the query already prepared previously
             $sql->execute([$id_role]);
 
             return [
@@ -132,38 +132,38 @@ class Role
 
     public static function find($id_role)
     {
-        // instanciamos la conexion a la bdd
+        // instantiate the connection to the database
         $connectionDB = DB::createInstance();
 
-        // creamos la consulta a la bdd
+        // create the query to the database
         $query = "SELECT * FROM roles WHERE id_role = ?";
 
-        // preparamos la conexion de la consulta a la bdd
+        // prepare the connection to the database for the query
         $sql = $connectionDB->prepare($query);
 
-        // ejecutamos la consulta ya preparada previamente
+        // execute the query already prepared previously
         $sql->execute([$id_role]);
 
-        // guardamos el primer resultado de la consulta en una variable
+        // save the first result of the query in a variable
         $role = $sql->fetch();
 
-        // devolvemos el resultado de la consulta
+        // return the result of the query
         return new Role($role["id_role"], $role["role_name"], $role["role_description"], $role["created_at"], $role["updated_at"]);
     }
 
 
     public static function update($id_role, $role_name, $role_description)
     {
-        // instanciamos la conexion a la bdd
+        // instantiate the connection to the database
         $connectionDB = DB::createInstance();
 
-        // creamos la consulta a la bdd
+        // create the query to the database
         $query = "UPDATE roles SET role_name = ?, role_description = ?, updated_at = NOW() WHERE id_role = ?";
 
-        // preparamos la conexion de la consulta a la bdd
+        // prepare the connection to the database for the query
         $sql = $connectionDB->prepare($query);
 
-        // ejecutamos la consulta ya preparada previamente
+        // execute the query already prepared previously
         $sql->execute([$role_name, $role_description, $id_role]);
     }
 

@@ -79,7 +79,7 @@ class specie
     public function create($categoryId, $name)
     {
         try {
-            // Usamos 'category_id' que es la llave foránea en tu tabla 'specie'
+            // We use 'category_id' that is the foreign key in our 'specie' table
             $sql = "INSERT INTO specie (category_id, specie_name) 
                     VALUES (:cid, :name)";
 
@@ -106,7 +106,7 @@ class specie
     public function update($id, $categoryId, $name)
     {
         try {
-            // Actualizamos el nombre y su categoría usando el ID principal
+            // Update the name and its category using the main ID
             $sql = "UPDATE specie s
                     SET category_id = :cid, 
                         specie_name = :name 

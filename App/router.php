@@ -120,7 +120,7 @@ if (isset($_SESSION["user"]["username"]) && $domain === "auth" && $_GET["action"
 $domain = $_GET["domain"] ?? "home";
 
 //  "white list" of domains that exist. If a domain is not here, it is rejected.
-$allowed_domains = ["hero", "medias", "habitat1", "cms", "about", "auth", "home", "animals", "employees", "habitats", "permissions", "reports", "roles", "schedules", "testimonials", "users", "contact"];
+$allowed_domains = ["hero", "medias", "habitat1", "cms", "about", "auth", "home", "animals", "employees", "habitats", "permissions", "reports", "roles", "schedules", "testimonials", "users", "contact", "vreports"];
 
 if (in_array($domain, $allowed_domains)) {
     // we redirect to the domain router.
@@ -142,9 +142,6 @@ if (in_array($domain, $allowed_domains)) {
     header('Location: /public/error-404.php');
     exit();
 }
-
-
-
 
 ?>
 

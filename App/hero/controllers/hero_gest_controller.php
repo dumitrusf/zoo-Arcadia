@@ -66,7 +66,7 @@ class HeroGestController {
         $heroModel = new Hero();
         $hero = $heroModel->getById($id);
         
-        // DEBUG EXTREMO: Ver qué devuelve la base de datos
+        // DEBUG EXTREME: What does the database return
         // echo "<pre>"; var_dump($hero); echo "</pre>"; exit; 
 
         $action = 'edit';

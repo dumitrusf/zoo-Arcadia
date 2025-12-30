@@ -118,7 +118,7 @@ class UsersGestController
             $user_to_edit = User::find($id_user);
 
 
-            // Corregido para usar tu nombre de función
+            // Corrected to use our function name
             $employees = Employee::freeEmployees();
 
             if (isset($user_to_edit->employee_id) && $user_to_edit->employee_id != null) {

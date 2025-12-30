@@ -7,8 +7,9 @@ require_once __DIR__ . '/../../../../includes/functions.php';
         <h2 class="card-title">Roles</h2>
         
         <?php 
-        // 🛡️ Admin or users with roles-create permission can create roles
+        // Only Admin or users with roles-create permission can create roles
         $isAdmin = (isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin');
+        // roles create from permission list
         if ($isAdmin || hasPermission('roles-create')): 
         ?>
             <a name="roles" id="" class="btn btn-success mb-2 mt-2" href="/roles/gest/create" role="button">+ Add New Role</a>
@@ -46,7 +47,7 @@ require_once __DIR__ . '/../../../../includes/functions.php';
 
 
         <div class="table-responsive">
-            <!-- Formulario para ver roles (puestos) -->
+            <!-- table to display the roles -->
             <table class="table table-hover">
                 <thead class="table-dark">
                     <tr>
@@ -69,7 +70,7 @@ require_once __DIR__ . '/../../../../includes/functions.php';
                     ?>
 
                         <tr class="<?php echo get_row_class($rowNumber); ?>">
-                            <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?> ">   <?php echo $role->id_role; ?> </td>
+                            <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?> ">  #<?php echo $role->id_role; ?> </td>
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?> ">   <?php echo $role->role_name; ?> </td>
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?> ">   <?php echo $role->role_description; ?> </td>
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>">   <?php echo $role->created_at; ?> </td>

@@ -16,6 +16,7 @@
             <table class="table table-hover table-striped dataTable">
                 <thead class="table-dark">
                     <tr>
+                        <th class="text-nowrap border border-start-3 border-end-0 rounded-start-3 text-center align-middle" scope="col">ID</th>
                         <th class="text-nowrap border border-start-3 border-end-0 rounded-start-3 text-center align-middle" scope="col">Username</th>
                         <th class="text-nowrap border border-start-1 border-end-1 text-center align-middle" scope="col">psw</th>
                         <th class="text-nowrap border border-start-1 border-end-1 text-center align-middle" scope="col">Activated ?</th>
@@ -33,8 +34,8 @@
 
                     foreach ($users as $user) {
 
-                        // 🛡️ LOGICA DE VISIBILIDAD: 
-                        // Si NO soy Admin Y el usuario está desactivado... ¡SALTAR!
+                        // LOGIC OF VISIBILITY: 
+                        // If I am not Admin and the user is deactivated... SKIP!
                         if (!$isAdmin && $user->is_active == 0) {
                             continue; 
                         }
@@ -52,6 +53,7 @@
                             }
                         ?>
                         <tr id="<?= $anchor_id ?>" class="<?php echo get_row_class($rowNumber); ?> " >
+                            <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>"> <?php echo $user->id; ?> </td>
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>"> <?php echo $user->username; ?> </td>
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>"> <?php echo $user->psw; ?> </td>
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>">
@@ -60,7 +62,7 @@
                                         <span class="btn btn-sm bg-success text-white">Activated</span>
                                         
                                         <?php 
-                                        // 🛡️ PROTECCIÓN 1: Soy yo mismo?
+                                        // PROTECTION 1: Am I myself?
                                         $isMe = (isset($_SESSION['user']['id_user']) && $_SESSION['user']['id_user'] == $user->id);
                                         
                                         if ($isMe): 
@@ -69,7 +71,7 @@
                                         <?php elseif ($isAdmin): ?>
                                             <a href="/users/gest/toggleActivation?id=<?php echo $user->id; ?>" class="btn btn-sm btn-warning">Deactivate</a>
                                         <?php else: ?>
-                                            <!-- Si NO soy admin, no veo el botón -->
+                                            <!-- If I am not Admin, I do not see the button -->
                                             <button class="btn btn-sm btn-secondary" disabled title="Only Admins can deactivate users">Deactivate</button>
                                         <?php endif; ?>
 
@@ -101,7 +103,7 @@
                                     <?php if (isset($user->id) && $user->id != null): ?>
                                         <!-- Is a user account, we send his ID to edit him -->
                                         
-                                        <!-- View Details: VISIBLE PARA TODOS -->
+                                        <!-- View Details: VISIBLE FOR ALL -->
                                         <a href="/users/gest/view?id=<?php echo $user->id; ?>" class="btn btn-sm btn-info text-white">View Details</a>
                                         
                                         <?php if ($isAdmin || hasPermission('users-edit')): ?>
@@ -113,7 +115,7 @@
                                         <?php endif; ?>
 
                                     <?php else: ?>
-                                        <!-- Is a employee -->
+                                        <!-- Is an employee -->
                                         <?php if ($isAdmin): ?>
                                             <a href="/users/gest/edit?assign_to_employee=<?php echo $user->employee_id; ?>" class="btn btn-sm btn-info">Assign</a>
                                         <?php else: ?>
