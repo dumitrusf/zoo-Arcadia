@@ -23,12 +23,8 @@ require_once __DIR__ . "/../models/employee.php";
 require_once __DIR__ . "/../../roles/models/role.php";
 
 require_once __DIR__ . "/../../../database/connection.php";
-// Include the file that has the DB class to be able to connect to the database.
 
 DB::createInstance();
-// Call the static method createInstance() of the DB class.
-// This method returns a PDO connection ready to use, following the Singleton pattern.
-// If it is the first time it is called, it creates the connection. If it already exists, it reuses the same one.
 
 class EmployeesGestController
 {
@@ -75,6 +71,7 @@ class EmployeesGestController
             
             // Redirect to the start page
             header("Location: /employees/gest/start");
+            exit();
         }
 
         // Include the view to display the create page
@@ -92,6 +89,7 @@ class EmployeesGestController
 
         // Redirect to the start page
         header("Location: /employees/gest/start");
+        exit();
     }
 
 
@@ -106,7 +104,7 @@ class EmployeesGestController
         // Get the ID of the employee from the URL (thanks to the GET method)
         $id_employee = $_GET["id"];
 
-        // Find the employee from the database, thanks to the method find( from the Employee model)
+        // Find the employee from the database, thanks to the method find (from the Employee model)
         $employee = Employee::find($id_employee);
 
 
@@ -134,6 +132,7 @@ class EmployeesGestController
             
             // Redirect to the start page
             header("Location: /employees/gest/start");
+            exit();
         }
 
 

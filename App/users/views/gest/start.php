@@ -10,6 +10,32 @@
             <a name="users" id="" class="btn btn-success mb-2 mt-2" href="/users/gest/create" role="button">+ Create new Account</a>
         <?php endif; ?>
     </div>
+    
+    <!-- Show success, error or warning messages -->
+    <?php if (isset($_GET['msg'])): ?>
+        <?php
+        // Determine the type of alert based on the message
+        $alertClass = 'alert-success'; // Por defecto es éxito
+        if ($_GET['msg'] === 'error') {
+            $alertClass = 'alert-danger';
+        } elseif ($_GET['msg'] === 'warning') {
+            $alertClass = 'alert-warning';
+        }
+        ?>
+        <div class="alert <?= $alertClass ?> alert-dismissible fade show m-3" role="alert">
+            <?php if ($_GET['msg'] === 'error' && isset($_GET['error'])): ?>
+                <strong>Error:</strong> <?= htmlspecialchars($_GET['error']) ?>
+            <?php elseif ($_GET['msg'] === 'warning' && isset($_GET['message'])): ?>
+                <strong>Warning:</strong> <?= htmlspecialchars($_GET['message']) ?>
+            <?php elseif ($_GET['msg'] === 'success' && isset($_GET['message'])): ?>
+                <strong>Success:</strong> <?= htmlspecialchars($_GET['message']) ?>
+            <?php else: ?>
+                Action completed successfully!
+            <?php endif; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php endif; ?>
+    
     <div class="card-body container-fluid overflow-auto">
 
         <div class="table-responsive">

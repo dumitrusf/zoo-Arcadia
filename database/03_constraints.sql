@@ -2,8 +2,8 @@
 -- The creation of the main tables for zoo arcadia
 
 -- Verify if there is already a foreign key before adding it
-ALTER TABLE media_relations
-DROP FOREIGN KEY IF EXISTS fk_media_in_media_relations;
+-- Note: MySQL doesn't support IF EXISTS for DROP FOREIGN KEY, so we skip this in initial setup
+ALTER TABLE media_relations DROP FOREIGN KEY IF EXISTS fk_media_in_media_relations;
 
 ALTER TABLE media_relations
 ADD CONSTRAINT fk_media_in_media_relations
@@ -15,8 +15,7 @@ ON UPDATE CASCADE;
 
 
 -- Verify if there is already a foreign key before adding it
-ALTER TABLE slides
-DROP FOREIGN KEY IF EXISTS fk_header_in_slides;
+ALTER TABLE slides DROP FOREIGN KEY IF EXISTS fk_header_in_slides;
 
 ALTER TABLE slides
 ADD CONSTRAINT fk_hero_in_slides
@@ -25,8 +24,7 @@ ON DELETE CASCADE
 ON UPDATE CASCADE;
 
 -- Verify if there is already a foreign key before adding it
-ALTER TABLE heroes
-DROP FOREIGN KEY IF EXISTS fk_habitat_in_heroes;
+ALTER TABLE heroes DROP FOREIGN KEY IF EXISTS fk_habitat_in_heroes;
 
 -- Relationship: heroes.habitat_id -> habitats.id_habitat
 ALTER TABLE heroes
@@ -38,8 +36,7 @@ ON UPDATE CASCADE;
 --
 
 -- Verify if there is already a foreign key before adding it
-ALTER TABLE roles_permissions
-DROP FOREIGN KEY IF EXISTS fk_roles_in_roles_permissions;
+ALTER TABLE roles_permissions DROP FOREIGN KEY IF EXISTS fk_roles_in_roles_permissions;
 
 -- Relationship: roles_permissions.role_id -> roles.id_role
 ALTER TABLE roles_permissions
@@ -51,8 +48,7 @@ ON UPDATE CASCADE;
 --
 
 -- Verify if there is already a foreign key before adding it
-ALTER TABLE roles_permissions
-DROP FOREIGN KEY IF EXISTS fk_permissions_in_roles_permissions;
+ALTER TABLE roles_permissions DROP FOREIGN KEY IF EXISTS fk_permissions_in_roles_permissions;
 
 -- Relationship: roles_permissions.permission_id -> permissions.id_permission
 ALTER TABLE roles_permissions
@@ -64,8 +60,7 @@ ON UPDATE CASCADE;
 --
 
 -- Verify if there is already a foreign key before adding it
-ALTER TABLE users_permissions
-DROP FOREIGN KEY IF EXISTS fk_users_in_users_permissions;
+ALTER TABLE users_permissions DROP FOREIGN KEY IF EXISTS fk_users_in_users_permissions;
 
 -- Relationship: users_permissions.user_id -> users.id_user
 ALTER TABLE users_permissions
@@ -77,8 +72,7 @@ ON UPDATE CASCADE;
 --
 
 -- Verify if there is already a foreign key before adding it
-ALTER TABLE users_permissions
-DROP FOREIGN KEY IF EXISTS fk_permission_in_users_permissions;
+ALTER TABLE users_permissions DROP FOREIGN KEY IF EXISTS fk_permission_in_users_permissions;
 
 ALTER TABLE users_permissions
 ADD CONSTRAINT fk_permission_in_users_permissions
@@ -89,8 +83,7 @@ ON UPDATE CASCADE;
 --
 
 -- Verify if there is already a foreign key before adding it
-ALTER TABLE users
-DROP FOREIGN KEY IF EXISTS fk_role_in_users;
+ALTER TABLE users DROP FOREIGN KEY IF EXISTS fk_role_in_users;
 
 -- Relationship: users.role_id -> roles.id_role
 ALTER TABLE users
@@ -103,8 +96,7 @@ ON UPDATE CASCADE;
 --
 
 -- Verify if there is already a foreign key before adding it
-ALTER TABLE users
-DROP FOREIGN KEY IF EXISTS fk_employee_in_users;
+ALTER TABLE users DROP FOREIGN KEY IF EXISTS fk_employee_in_users;
 
 -- Relationship: users.role_id -> roles.id_role
 ALTER TABLE users
@@ -128,22 +120,44 @@ ON UPDATE CASCADE;         -- Si cambia el id_user, se actualiza automáticament
 --
 --
 
--- Verify if there is already a foreign key before adding it
-ALTER TABLE psw_reset_token 
-DROP FOREIGN KEY IF EXISTS fk_user_in_psw_reset_token;
+-- ============================================================
+-- CHARACTER SET CONFIGURATION: Ensure utf8mb4 for Unicode support
+-- ============================================================
+-- This ensures that tables can store emojis and full Unicode characters (4 bytes)
+-- utf8mb4 is required for emojis, while utf8 only supports 3-byte characters
 
--- Relationship: psw_reset_token.user_id -> users.id_user
-ALTER TABLE psw_reset_token 
-ADD CONSTRAINT fk_user_in_psw_reset_token 
-FOREIGN KEY (user_id) REFERENCES users(id_user) 
-ON DELETE CASCADE         -- Si se elimina un usuario, se eliminan automáticamente sus tokens.
-ON UPDATE CASCADE;        -- Si cambia el id_user, se actualiza automáticamente en psw_reset_token.
+-- Ensure testimonials table uses utf8mb4 (for emojis in messages)
+ALTER TABLE testimonials 
+    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Specifically ensure message and pseudo columns use utf8mb4
+ALTER TABLE testimonials 
+    MODIFY COLUMN message TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL;
+
+ALTER TABLE testimonials 
+    MODIFY COLUMN pseudo VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL;
+
+-- Ensure form_contact table uses utf8mb4 (for emojis in contact messages)
+ALTER TABLE form_contact 
+    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Specifically ensure message-related columns use utf8mb4
+ALTER TABLE form_contact 
+    MODIFY COLUMN f_message TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL;
+
+ALTER TABLE form_contact 
+    MODIFY COLUMN ff_name VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL;
+
+ALTER TABLE form_contact 
+    MODIFY COLUMN fl_name VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL;
+
+ALTER TABLE form_contact 
+    MODIFY COLUMN f_subject VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 --
 --
 
 -- Verify if there is already the foreign key before adding it
-ALTER TABLE habitat_suggestion
-DROP FOREIGN KEY IF EXISTS fk_vet_in_habitat_suggestion;
+ALTER TABLE habitat_suggestion DROP FOREIGN KEY IF EXISTS fk_vet_in_habitat_suggestion;
 
 -- Relationship: habitat_suggestion.suggested_by -> users.id_user
 ALTER TABLE habitat_suggestion
@@ -155,8 +169,7 @@ ON UPDATE CASCADE;
 --
 
 -- Verify if there is already the foreign key before adding it
-ALTER TABLE habitat_suggestion
-DROP FOREIGN KEY IF EXISTS fk_admin_in_habitat_suggestion;
+ALTER TABLE habitat_suggestion DROP FOREIGN KEY IF EXISTS fk_admin_in_habitat_suggestion;
 
 -- Relationship: habitat_suggestion.reviewed_by -> users.id_user
 ALTER TABLE habitat_suggestion
@@ -169,8 +182,7 @@ ON UPDATE CASCADE;
 
 
 -- Verify if there is already the foreign key before adding it
-ALTER TABLE habitat_suggestion
-DROP FOREIGN KEY IF EXISTS fk_habitat_in_habitat_suggestion;
+ALTER TABLE habitat_suggestion DROP FOREIGN KEY IF EXISTS fk_habitat_in_habitat_suggestion;
 
 -- Relationship: habitat_suggestion.habitat_id -> habitats.id_habitat
 ALTER TABLE habitat_suggestion
@@ -197,8 +209,7 @@ ON UPDATE CASCADE;   -- Si cambia el id_category, se actualiza automáticamente 
 
 
 -- Verify if there is already the foreign key before adding it
-ALTER TABLE animal_general
-DROP FOREIGN KEY IF EXISTS fk_specie_in_animal_general;
+ALTER TABLE animal_general DROP FOREIGN KEY IF EXISTS fk_specie_in_animal_general;
 
 -- Relationship: animal_general.specie _id -> specie .id_specie 
 ALTER TABLE animal_general
@@ -211,8 +222,7 @@ ON UPDATE CASCADE;   -- Si cambia el id_specie , el cambio se propaga automátic
 
 
 -- Verify if there is already the foreign key before adding it
-ALTER TABLE animal_clicks
-DROP FOREIGN KEY IF EXISTS fk_animal_g_in_click;
+ALTER TABLE animal_clicks DROP FOREIGN KEY IF EXISTS fk_animal_g_in_click;
 
 -- Relationship: animal_click.id_animal_g -> animal_general.id_animal_g
 ALTER TABLE animal_clicks
@@ -225,8 +235,7 @@ ON UPDATE CASCADE;   -- Si cambia el id_animal_g, el cambio se propaga automáti
 
 
 -- Verify if there is already the foreign key before adding it
-ALTER TABLE service_logs
-DROP FOREIGN KEY IF EXISTS fk_service_in_service_logs;
+ALTER TABLE service_logs DROP FOREIGN KEY IF EXISTS fk_service_in_service_logs;
 
 -- Relationship: service_logs.id_service -> services.id_service
 ALTER TABLE service_logs
@@ -239,8 +248,7 @@ ON UPDATE CASCADE;
 
 
 -- Verify if there is already the foreign key before adding it
-ALTER TABLE service_logs
-DROP FOREIGN KEY IF EXISTS fk_user_in_service_logs;
+ALTER TABLE service_logs DROP FOREIGN KEY IF EXISTS fk_user_in_service_logs;
 
 -- Relationship: service_logs.changed_by -> users.id_user
 ALTER TABLE service_logs
@@ -253,8 +261,7 @@ ON UPDATE CASCADE;
 
 
 -- Verify if there is already the foreign key before adding it
-ALTER TABLE animal_full
-DROP FOREIGN KEY IF EXISTS fk_animal_g_in_animal_full;
+ALTER TABLE animal_full DROP FOREIGN KEY IF EXISTS fk_animal_g_in_animal_full;
 
 -- Relationship: animal_full.animal_g_id -> animal_general.id_animal_g
 ALTER TABLE animal_full
@@ -267,8 +274,7 @@ ON UPDATE CASCADE;
 
 
 -- Verify if there is already the foreign key before adding it
-ALTER TABLE animal_full
-DROP FOREIGN KEY IF EXISTS fk_habitat_in_animal_full;
+ALTER TABLE animal_full DROP FOREIGN KEY IF EXISTS fk_habitat_in_animal_full;
 
 -- Relationship: animal_full.habitat_id -> habitats.id_habitat
 ALTER TABLE animal_full
@@ -278,8 +284,7 @@ ON DELETE SET NULL
 ON UPDATE CASCADE;
 
 -- Verify if there is already a foreign key before adding it
-ALTER TABLE animal_full
-DROP FOREIGN KEY IF EXISTS fk_nutrition_in_animal_full;
+ALTER TABLE animal_full DROP FOREIGN KEY IF EXISTS fk_nutrition_in_animal_full;
 
 -- Relationship: animal_full.nutrition_id -> nutrition.id_nutrition
 ALTER TABLE animal_full
@@ -292,8 +297,7 @@ ON UPDATE CASCADE;
 
 
 -- Verify if there is already the foreign key before adding it
-ALTER TABLE health_state_report
-DROP FOREIGN KEY IF EXISTS fk_full_animal_in_health_report;
+ALTER TABLE health_state_report DROP FOREIGN KEY IF EXISTS fk_full_animal_in_health_report;
 
 -- Relationship: health_state_report.full_animal_id -> animal_full.id_full_animal
 ALTER TABLE health_state_report
@@ -306,8 +310,7 @@ ON UPDATE CASCADE;
 
 
 -- Verify if there is already the foreign key before adding it
-ALTER TABLE health_state_report
-DROP FOREIGN KEY IF EXISTS fk_users_in_health_report;
+ALTER TABLE health_state_report DROP FOREIGN KEY IF EXISTS fk_users_in_health_report;
 
 -- Relationship: health_state_report.checked_by -> users.id_user
 ALTER TABLE health_state_report
@@ -320,8 +323,7 @@ ON UPDATE CASCADE;
 
 
 -- Verify if there is already the foreign key before adding it
-ALTER TABLE feeding_logs
-DROP FOREIGN KEY IF EXISTS fk_full_animal_in_feeding_logs;
+ALTER TABLE feeding_logs DROP FOREIGN KEY IF EXISTS fk_full_animal_in_feeding_logs;
 
 -- Relationship: feeding_logs.animal_f_id -> animal_full.id_full_animal
 ALTER TABLE feeding_logs
@@ -338,8 +340,7 @@ ON UPDATE CASCADE;
 
 
 -- Verify if there is already the foreign key before adding it
-ALTER TABLE feeding_logs
-DROP FOREIGN KEY IF EXISTS fk_users_in_feeding_logs;
+ALTER TABLE feeding_logs DROP FOREIGN KEY IF EXISTS fk_users_in_feeding_logs;
 
 -- Relationship: feeding_logs.user_id -> users.id_user
 ALTER TABLE feeding_logs
@@ -394,11 +395,3 @@ ALTER TABLE form_contact
 ADD INDEX idx_email (f_email);
 --
 --
-
--- Verify if index already exists before adding it
-ALTER TABLE psw_reset_token
-DROP INDEX IF EXISTS idx_expires_at;
-
--- Index for faster cleanup of expired tokens
-ALTER TABLE psw_reset_token
-ADD INDEX idx_expires_at (expires_at);

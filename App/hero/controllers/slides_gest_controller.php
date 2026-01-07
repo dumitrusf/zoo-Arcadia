@@ -8,6 +8,11 @@
  * 📝 Description:
  * Controller for managing Slides within a Hero.
  * Handles image uploads and slide CRUD.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Hero\Models\Slide (via App/hero/models/Slide.php)
+ * - Arcadia\Medias\Models\Cloudinary (via App/medias/models/cloudinary.php)
+ * - Arcadia\Medias\Models\Media (via App/medias/models/media.php)
  */
 
 require_once __DIR__ . '/../models/Slide.php';
@@ -110,7 +115,7 @@ class SlidesGestController {
                     $mediaId = $mediaModel->create($base, 'image', "Slide: $title", $urlTablet, $urlDesktop);
                     
                     if ($mediaId) {
-                        // UNLINK OLD & LINK NEW
+                        // UNLINK OLD & LINK NEW !important to keep in mind for our experience!
                         $mediaModel->unlink('slides', $slideId);
                         $mediaModel->link($mediaId, 'slides', $slideId);
                     }

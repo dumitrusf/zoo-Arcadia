@@ -1,4 +1,3 @@
-
 <!-- Formulario de crear empleado -->
 
 <div class="card shadow-sm mb-4">

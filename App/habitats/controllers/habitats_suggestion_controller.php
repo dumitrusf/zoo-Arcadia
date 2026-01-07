@@ -9,6 +9,10 @@
  * Controller for managing habitat suggestions.
  * Veterinarians can create, edit (pending only), and delete (accepted/rejected only).
  * Admins can review (accept/reject) and delete any suggestion.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Habitats\Models\HabitatSuggestion (via App/habitats/models/habitatSuggestion.php)
+ * - Arcadia\Habitats\Models\Habitat (via App/habitats/models/habitat.php)
  */
 
 require_once __DIR__ . "/../models/habitatSuggestion.php";

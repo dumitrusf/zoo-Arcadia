@@ -1,10 +1,8 @@
-
-
 <main class="contact">
 
     <!-- Logo site web -->
     <header class="contact__header">
-        <a href="./index.php" class="contact__logo-link">
+        <a href="/home/pages/index" class="contact__logo-link">
             <img src="/src/assets/images/logo-site-mobile.svg" alt="Logo del sitio" class="contact__logo">
         </a>
         <a href="/auth/pages/login">
@@ -19,7 +17,35 @@
         <section class="contact__form-section">
             <h2 class="contact__title">Contact About:</h2>
 
-            <form action="/contact" method="POST" class="contact__form">
+            <!-- Success/Error Messages -->
+            <?php if (isset($_GET['msg'])): ?>
+                <div class="alert alert-<?= $_GET['msg'] === 'success' ? 'success' : 'danger' ?> alert-dismissible fade show" role="alert" style="margin-bottom: 1rem; padding: 1rem; border-radius: 0.358rem;">
+                    <?= htmlspecialchars($_GET['message'] ?? $_GET['error'] ?? '') ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <script>
+                    // Clean URL parameters after 3 seconds or on click
+                    (function() {
+                        const cleanUrl = function() {
+                            if (window.location.search.includes('msg=')) {
+                                const url = new URL(window.location);
+                                url.searchParams.delete('msg');
+                                url.searchParams.delete('message');
+                                url.searchParams.delete('error');
+                                window.history.replaceState({}, '', url.pathname + (url.search ? url.search : ''));
+                            }
+                        };
+                        
+                        // Clean after 3 seconds
+                        setTimeout(cleanUrl, 3000);
+                        
+                        // Clean on click anywhere
+                        document.addEventListener('click', cleanUrl, { once: true });
+                    })();
+                </script>
+            <?php endif; ?>
+
+            <form action="/contact/pages/contact" method="POST" class="contact__form">
 
                 <div class="contact__form-info">
 

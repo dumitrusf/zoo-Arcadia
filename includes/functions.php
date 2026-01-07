@@ -46,6 +46,11 @@ function handleDomainRouting($domainName, $basePath)
     $controller = $_GET['controller'] ?? 'pages';
     $action = $_GET['action'] ?? 'start';
 
+    // Convert action with hyphens to camelCase (e.g., "forgot-password" -> "forgotPassword")
+    // This allows us to use nice URLs while keeping valid PHP method names
+    $action = str_replace('-', '', ucwords($action, '-'));
+    $action = lcfirst($action); // Make first letter lowercase (camelCase)
+
     // Exemple of file name due to...(exemple) : employees_pages_controller.php
     // Exemple of class name due to...(exemple): EmployeesPagesController
     $controllerFileName = $domainName . "_" . $controller . "_controller.php";
@@ -87,14 +92,16 @@ function handleDomainRouting($domainName, $basePath)
 
         // IMPROVED LAYOUT SELECTION LOGIC:
         // Domain map -> public actions (empty = all)
+        // Note: Actions are already converted to camelCase above, but we compare in lowercase
         $public_layout_map = [
             "home"      => ["index"],
             "about"     => ["about"],
             "habitats"  => ["habitats", "habitat1"],
             "animals"   => ["allanimals", "animalpicked"],
             "cms"       => ["cms"],
-            "contact"   => ["contact"],
-            "auth"      => ["login"]
+            "contact"   => ["contact", "submit"], // Public actions for contact form
+            "auth"      => ["login"],
+            "testimonials" => ["create"] // Public action for creating testimonials
         ];
 
         $domainKey = strtolower($domainName);

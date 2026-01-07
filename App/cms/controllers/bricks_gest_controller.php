@@ -9,6 +9,12 @@
  * 📝 Description:
  * Controller for managing Bricks (Content Blocks).
  * Handles CRUD operations and image uploads via Cloudinary.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Cms\Models\Brick (via App/cms/models/brick.php)
+ * - Arcadia\Medias\Models\Cloudinary (via App/medias/models/cloudinary.php)
+ * - Arcadia\Medias\Models\Media (via App/medias/models/media.php)
+ * - Arcadia\Includes\Functions (via includes/functions.php)
  */
 
 require_once __DIR__ . '/../models/brick.php';

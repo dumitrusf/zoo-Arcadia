@@ -8,7 +8,14 @@
  * 📝 Description:
  * Model that represents a user of the system (Login).
  * Manages authentication, roles and relationship with employees.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Database\Connection (via database/connection.php)
+ * - Arcadia\Roles\Models\Role (via App/roles/models/role.php)
  */
+
+require_once __DIR__ . '/../../../database/connection.php';
+require_once __DIR__ . '/../../roles/models/role.php';
 
 class User
 {
@@ -85,11 +92,11 @@ class User
         return $usersList;
     }
 
-
-
-
-
-
+    /**
+     * Find a user by ID
+     * @param int $id_user The ID of the user
+     * @return object|null The user object if found, null otherwise
+     */
     public static function find($id_user)
     {
         // Instantiate the database connection.
@@ -103,8 +110,6 @@ class User
                   LEFT JOIN roles r ON r.id_role = u.role_id
                   WHERE u.id_user = ?";
 
-
-
         // Prepare the DB connection for the query.
         $sql = $connectionDB->prepare($query);
 
@@ -114,12 +119,55 @@ class User
         // Store the first result of the query in a variable.
         $user = $sql->fetch();
 
+        // Check if user was found before creating the object
+        if (!$user) {
+            return null;
+        }
+
         // Return the query result.
         return new User($user["id_user"], $user["username"], $user["psw"], $user["role_id"], $user["role_name"], $user["employee_id"], $user["last_name"], $user["employee_email"], $user["is_active"], $user["created_at"], $user["updated_at"]);
     }
+
+    /**
+     * Check if a username already exists in the database
+     * 
+     * This method is important to avoid creating duplicate users.
+     * Before creating a new user, we must check that the username
+     * (which can be an email) is not already registered in the users table.
+     * 
+     * @param string $username The username to check (can be an email)
+     * @return bool true if the username already exists, false if it is available
+     */
+    public static function usernameExists($username)
+    {
+        // Instantiate the database connection.
+        $connectionDB = DB::createInstance();
+
+        // Create the query to the DB.
+        $query = "SELECT COUNT(*) as count FROM users WHERE username = ? LIMIT 1";
+
+        // Prepare the DB connection for the query.
+        $sql = $connectionDB->prepare($query);
+
+        // Execute the previously prepared query.
+        $sql->execute([$username]);
+
+        // Store the first result of the query in a variable.
+        $result = $sql->fetch(PDO::FETCH_ASSOC);
+
+        // If count is greater than 0, it means that the username already exists
+        // Return true if it exists, false if it does not exist
+        return (int)$result['count'] > 0;
+    }
     
-    
-    // Method to create a new user in the DB.
+    /**
+     * Create a new user in the DB
+     * @param string $username The username of the user
+     * @param string $psw The password of the user
+     * @param int|null $role_id The ID of the role
+     * @param int|null $employee_id The ID of the employee
+     * @return int The ID of the created user
+     */
     public static function create($username, $psw, $role_id, $employee_id)
     {
         $connectionDB = DB::createInstance();
@@ -133,11 +181,15 @@ class User
     }
 
     
+    /**
+     * Delete a user from the DB
+     * @param int $id_user The ID of the user
+     * @return bool true if the user was deleted successfully, false otherwise
+     */
     public static function delete($id_user)
     {
         // Instantiate the database connection.
         $connectionDB = DB::createInstance();
-
 
         // Create the query to the DB.
         $query = "DELETE FROM users WHERE id_user = ?";
@@ -146,13 +198,17 @@ class User
         $sql = $connectionDB->prepare($query);
 
         // Execute the previously prepared query.
-        $sql->execute([$id_user]);
+       return $sql->execute([$id_user]);
     }
 
-    public static function toggleActive($id_user){
+    /**
+     * Toggle the active status of a user
+     * @param int $id_user The ID of the user
+     * @return bool true if the active status was toggled successfully, false otherwise
+     */
+    public static function toggleActive($id_user) {
         
         $connectionDB = DB::createInstance();
-
 
         $query = "UPDATE users 
                   SET is_active = NOT is_active, 
@@ -160,12 +216,15 @@ class User
                   WHERE id_user = ?";
 
         $sql = $connectionDB->prepare($query);
-        $sql->execute([$id_user]);
-
+        return $sql->execute([$id_user]);
                  
     }
-    
 
+
+    /**
+     * Get all users without an employee
+     * @return array Array of users without an employee like [{id_user: 1, username: 'user1'}, ...]
+     */
     public static function withoutEmployeeUser()
     {
 
@@ -191,6 +250,15 @@ class User
 
     }
 
+    /**
+     * Update a user in the DB
+     * @param string $username The username of the user
+     * @param string $psw The password of the user
+     * @param int|null $role_id The ID of the role
+     * @param int|null $employee_id The ID of the employee
+     * @param int $id_user The ID of the user
+     * @return bool true if the user was updated successfully, false otherwise
+     */
     public static function update($username, $psw, $role_id, $employee_id, $id_user)
     {
         // Instantiate the database connection.
@@ -202,20 +270,29 @@ class User
         // Prepare the DB connection for the query.
         $sql = $connectionDB->prepare($query);
 
-        // Execute the previously prepared query.
-        $sql->execute([$username, $psw, $role_id, $employee_id, $id_user]);
+        // Execute the previously prepared query and return the result.
+        return $sql->execute([$username, $psw, $role_id, $employee_id, $id_user]);
     }
 
+    /**
+     * Assign an account to an employee
+     * @param int $employee_id The ID of the employee
+     * @param int $user_id The ID of the user
+     * @return bool true if the account was assigned successfully, false otherwise
+     */
     public static function assignAccount($employee_id, $user_id) {
         $connectionDB = DB::createInstance();
 
         $query = "UPDATE users SET employee_id = ? WHERE id_user = ?";
         $sql = $connectionDB->prepare($query);
-        $sql->execute([$employee_id, $user_id]);
+        return $sql->execute([$employee_id, $user_id]);
 
     }
 
-   
+    /**
+     * Get the role of the user
+     * @return object|null The role object if found, null otherwise
+     */
     public function getRole()
     {
         if ($this->role_id) {
@@ -224,6 +301,11 @@ class User
         return null;
     }
 
+    /**
+     * Get the details of the VIP permissions assigned to the user
+     * @param int $id_user The ID of the user
+     * @return array Array of permission details like [{id_permission: 1, permission_name: 'permission1', permission_desc: 'description1'}, ...]
+     */
     public static function getUserVipPermissionsDetails($id_user)
     {
         $connectionDB = DB::createInstance();
@@ -237,7 +319,10 @@ class User
         return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
     
-  
+    /**
+     * Get the IDs of the VIP permissions assigned to the user
+     * @return array Array of permission IDs like [1, 2, 3]
+     */
     public function getVipPermissionsIdsUserHasAssigned()
     {
         $connectionDB = DB::createInstance();
@@ -249,6 +334,11 @@ class User
         return $sql->fetchAll(PDO::FETCH_COLUMN);
     }
 
+    /**
+     * Overwrite the VIP permissions for a user
+     * @param array $permissionIds The IDs of the permissions to assign to the user
+     * @return bool true if the permissions were overwritten successfully, false otherwise
+     */
     public function overwriteVipPermissionsIdsUserHasAssigned(array $permissionIds)
     {
         $connectionDB = DB::createInstance();
@@ -317,4 +407,26 @@ class User
 
         return array_values($permissions); // Re-index array
     }
+
+    /**
+     * Get the last user created or modified
+     * @return object|false
+     */
+    public static function getLast() {
+        $connectionDB = DB::createInstance();
+        $sql = $connectionDB->query("SELECT e.last_name, e.email AS employee_email, e.id_employee, 
+                                            u.id_user, u.username, u.psw, u.is_active, u.created_at, u.updated_at, u.role_id,
+                                            r.role_name
+                                     FROM users u
+                                     LEFT JOIN employees e ON u.employee_id = e.id_employee
+                                     LEFT JOIN roles r ON u.role_id = r.id_role
+                                     ORDER BY COALESCE(u.updated_at, u.created_at) DESC, u.id_user DESC
+                                     LIMIT 1");
+        $user = $sql->fetch();
+        if ($user) {
+            return new User($user["id_user"], $user["username"], $user["psw"], $user["role_id"], $user["role_name"], $user["id_employee"], $user["last_name"], $user["employee_email"], $user["is_active"], $user["created_at"], $user["updated_at"]);
+        }
+        return false;
+    }
+
 }

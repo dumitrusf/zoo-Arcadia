@@ -7,12 +7,20 @@
  * 
  * 📝 Description:
  * Controller for managing Hero Headers (CRUD).
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Hero\Models\Hero (via App/hero/models/Hero.php)
+ * - Arcadia\Hero\Models\Slide (via App/hero/models/Slide.php)
+ * - Arcadia\Medias\Models\Cloudinary (via App/medias/models/cloudinary.php)
+ * - Arcadia\Medias\Models\Media (via App/medias/models/media.php)
+ * - Arcadia\Includes\Functions (via includes/functions.php)
+ * 
  */
 
 // DEBUG: Show errors explicitly
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
 require_once __DIR__ . '/../models/Hero.php';
 require_once __DIR__ . '/../models/Slide.php'; 
@@ -22,7 +30,7 @@ require_once __DIR__ . '/../../../includes/functions.php';
 
 class HeroGestController {
     
-    // Dashboard: List all heroes
+    // Dashboard: List all heroes (page headers in back office)
     public function start() {
         $heroModel = new Hero();
         $heroes = $heroModel->getAll();

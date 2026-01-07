@@ -54,7 +54,7 @@ require_once __DIR__ . '/../../../../includes/functions.php';
 
                                     <td><span class="badge bg-info text-dark"><?= ucfirst($brick->page_name) ?></span></td>
                                     <td class="fw-bold"><?= htmlspecialchars($brick->title) ?></td>
-                                    <td><?= htmlspecialchars(substr($brick->description, 0, 60)) ?>...</td>
+                                    <td><?= nl2br(htmlspecialchars(substr($brick->description, 0, 60))) ?>...</td>
                                     
                                     <td class="text-end">
                                         <?php if (hasPermission('services-edit')): ?>

@@ -1,4 +1,3 @@
-
 <?php
 /**
  * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
@@ -27,7 +26,7 @@ class AnimalFull {
     public function getAll() {
         $sql = "SELECT af.*, ag.animal_name, ag.gender, s.specie_name, c.category_name, h.habitat_name, 
                        n.nutrition_type, n.food_type AS nutrition_food_type, n.food_qtty AS nutrition_food_qtty,
-                       m.media_path, m.media_path_medium, m.media_path_large 
+                       m.media_path, m.media_path_medium, m.media_path_large
                 FROM animal_full af
                 JOIN animal_general ag ON af.animal_g_id = ag.id_animal_g
                 JOIN specie s ON ag.specie_id = s.id_specie 
@@ -36,6 +35,8 @@ class AnimalFull {
                 LEFT JOIN nutrition n ON af.nutrition_id = n.id_nutrition
                 LEFT JOIN media_relations mr ON af.id_full_animal = mr.related_id AND mr.related_table = 'animal_full'
                 LEFT JOIN media m ON mr.media_id = m.id_media
+                LEFT JOIN health_state_report hsr ON hsr.full_animal_id = af.id_full_animal
+                GROUP BY af.id_full_animal
                 ORDER BY ag.animal_name ASC";
         
         $stmt = $this->db->prepare($sql);
@@ -126,6 +127,29 @@ class AnimalFull {
             error_log("Error deleting animal full profile: " . $e->getMessage());
             return false;
         }
+    }
+
+    /**
+     * Get the last animal created or modified
+     * @return object|false
+     */
+    public function getLast() {
+        $sql = "SELECT af.*, ag.animal_name, ag.gender, s.specie_name, c.category_name, h.habitat_name, 
+                       n.nutrition_type, n.food_type AS nutrition_food_type, n.food_qtty AS nutrition_food_qtty,
+                       m.media_path, m.media_path_medium, m.media_path_large 
+                FROM animal_full af
+                JOIN animal_general ag ON af.animal_g_id = ag.id_animal_g
+                JOIN specie s ON ag.specie_id = s.id_specie 
+                LEFT JOIN category c ON s.category_id = c.id_category
+                LEFT JOIN habitats h ON af.habitat_id = h.id_habitat
+                LEFT JOIN nutrition n ON af.nutrition_id = n.id_nutrition
+                LEFT JOIN media_relations mr ON af.id_full_animal = mr.related_id AND mr.related_table = 'animal_full'
+                LEFT JOIN media m ON mr.media_id = m.id_media
+                ORDER BY af.id_full_animal DESC
+                LIMIT 1";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
 }
 

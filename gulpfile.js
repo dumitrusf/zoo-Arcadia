@@ -21,6 +21,7 @@ const paths = {
         'node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js'
     ],
     vendorCss: [
+        'node_modules/normalize.css/normalize.css',
         'node_modules/bootstrap/dist/css/bootstrap.min.css',
         'node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css'
     ]
@@ -47,6 +48,14 @@ function cleanJs() {
 // 7️⃣ Procesar y compilar archivos
 function compileSass() {
   return src('src/scss/app.scss')
+    .pipe(plumber())
+    .pipe(sass())
+    .pipe(dest('public/build/css'))
+    .pipe(browserSync.stream());
+}
+
+function compileBoSidebar() {
+  return src('src/scss/bo-sidebar-only.scss')
     .pipe(plumber())
     .pipe(sass())
     .pipe(dest('public/build/css'))
@@ -90,8 +99,12 @@ function copyVendorCss() {
 }
 
 // 8️⃣ Tareas combinadas
-const buildCss = series(cleanCss, compileSass, copyVendorCss);
+const buildCss = series(cleanCss, compileSass, compileBoSidebar, copyVendorCss);
 const buildJs = series(cleanJs, processJs, copyVendorJs);
+
+// Exportar tareas para uso en Dockerfile
+exports.buildCss = buildCss;
+exports.buildJs = buildJs;
 
 // 9️⃣ Servidor con Browsersync
 function serve(done) {

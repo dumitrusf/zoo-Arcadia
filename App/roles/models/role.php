@@ -8,7 +8,14 @@
  * 📝 Description:
  * Model that defines the security roles (RBAC).
  * Manages the assignment of permissions to user groups.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Database\Connection (via database/connection.php)
+ * 
  */
+
+require_once __DIR__ . '/../../../database/connection.php';
+
 
 class Role
 {

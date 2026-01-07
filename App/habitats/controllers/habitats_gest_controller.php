@@ -7,6 +7,14 @@
  * 
  * 📝 Description:
  * Controller for managing habitats (CRUD).
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Habitats\Models\Habitat (via App/habitats/models/habitat.php)
+ * - Arcadia\Medias\Models\Cloudinary (via App/medias/models/cloudinary.php)
+ * - Arcadia\Medias\Models\Media (via App/medias/models/media.php)
+ * - Arcadia\Hero\Models\Hero (via App/hero/models/Hero.php)
+ * - Arcadia\Includes\Functions (via includes/functions.php)
+ * 
  */
 
 require_once __DIR__ . '/../models/habitat.php';
@@ -19,7 +27,8 @@ class HabitatsGestController {
     
     public function start() {
         $habitatModel = new Habitat();
-        $habitats = $habitatModel->getAll(true); // Include animal count
+        // Include animal count (in model function getAll we have animal count)
+        $habitats = $habitatModel->getAll(true); 
         
         if (file_exists(__DIR__ . '/../views/gest/start.php')) {
             include_once __DIR__ . '/../views/gest/start.php';

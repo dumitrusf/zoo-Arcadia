@@ -7,6 +7,11 @@
  * 
  * 📝 Description:
  * Model for managing media uploads via Cloudinary.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Dotenv\Dotenv (via vendor/autoload.php)
+ * - Arcadia\Cloudinary\Configuration\Configuration (via vendor/autoload.php)
+ * - Arcadia\Cloudinary\Api\Upload\UploadApi (via vendor/autoload.php)
  */
 
 require_once __DIR__ . '/../../../vendor/autoload.php';

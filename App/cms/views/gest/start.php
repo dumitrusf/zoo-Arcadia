@@ -58,7 +58,7 @@ require_once __DIR__ . '/../../../../includes/functions.php';
                                     
                                     <!-- Description (Truncated) -->
                                     <td>
-                                        <?= htmlspecialchars(substr($service->service_description, 0, 100)) ?>...
+                                        <?= nl2br(htmlspecialchars(substr($service->service_description, 0, 100))) ?>...
                                     </td>
                                     
                                     <!-- Actions -->

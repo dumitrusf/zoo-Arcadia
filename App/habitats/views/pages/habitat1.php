@@ -5,10 +5,9 @@
 <?php include_once __DIR__ . '/../../../../includes/templates/hero.php'; ?>
 
 <main>
-    <!-- Filter Navigation -->
     <nav class="filter">
         <div class="container-fluid">
-            <a href="/habitats/pages/habitats">← Back to Habitats</a>
+            <a href="#">Open Filter</a>
             <button class="navbar-toggler bar-button" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <i class="bi bi-filter-right"></i>
@@ -29,7 +28,7 @@
                                 <select id="filter-specie" name="filter-specie" class="filter__select">
                                     <option value="">specie...</option>
                                     <?php if (!empty($species)): ?>
-                                        <?php 
+                                        <?php
                                         // Extract unique values from parentheses
                                         $specieTypes = [];
                                         foreach ($species as $specie) {
@@ -52,9 +51,9 @@
                                 <!-- Nutrition filter -->
                                 <label for="filter-nutrition" class="filter__label">Nutrition:</label>
                                 <select id="filter-nutrition" name="filter-nutrition" class="filter__select">
-                                    <option value="">carnivore...</option>
+                                    <option value="">nutrition...</option>
                                     <?php if (!empty($nutritions)): ?>
-                                        <?php 
+                                        <?php
                                         $uniqueNutritionTypes = [];
                                         foreach ($nutritions as $nutrition) {
                                             if (!in_array($nutrition->nutrition_type, $uniqueNutritionTypes)) {
@@ -72,20 +71,14 @@
                                 <!-- State filter -->
                                 <label for="filter-state" class="filter__label">state:</label>
                                 <select id="filter-state" name="filter-state" class="filter__select">
-                                    <option value="">healthy...</option>
-                                    <option value="healthy">Healthy</option>
-                                    <option value="sick">Sick</option>
-                                    <option value="injured">Injured</option>
-                                    <option value="recovering">Recovering</option>
-                                    <option value="quarantined">Quarantined</option>
-                                    <option value="pregnant">Pregnant</option>
-                                    <option value="deceased">Deceased</option>
-                                    <option value="stressed">Stressed</option>
-                                    <option value="under-observation">Under Observation</option>
-                                    <option value="new-arrival">New Arrival</option>
-                                    <option value="endangered">Endangered</option>
-                                    <option value="old-age">Old Age</option>
-                                    <option value="angry">Angry</option>
+                                    <option value="">state...</option>
+                                    <?php if (isset($allowedStates) && !empty($allowedStates)): ?>
+                                        <?php foreach ($allowedStates as $stateValue => $stateLabel): ?>
+                                            <option value="<?= htmlspecialchars($stateValue) ?>">
+                                                <?= htmlspecialchars($stateLabel) ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
                                 </select>
 
                                 <!-- Name filter -->
@@ -137,10 +130,11 @@
     <div class="intro intro--habitats">
         <?php if (!empty($animals)): ?>
             <?php foreach ($animals as $animal): ?>
-                <article class="intro__article intro__animal" 
-                         data-specie="<?= htmlspecialchars($animal->specie_name ?? '') ?>"
-                         data-nutrition="<?= htmlspecialchars(strtolower($animal->nutrition_type ?? '')) ?>"
-                         data-name="<?= htmlspecialchars(strtolower($animal->animal_name ?? '')) ?>">
+                <article class="intro__article intro__animal"
+                    data-specie="<?= htmlspecialchars($animal->specie_name ?? '') ?>"
+                    data-nutrition="<?= htmlspecialchars(strtolower($animal->nutrition_type ?? '')) ?>"
+                    data-state="<?= htmlspecialchars(strtolower($animal->latest_health_state ?? '')) ?>"
+                    data-name="<?= htmlspecialchars(strtolower($animal->animal_name ?? '')) ?>">
                     <a class="intro__link" href="/animals/pages/animalpicked?id=<?= $animal->id_full_animal ?>" target="_blank" rel="noopener noreferrer">
                         <?php if (!empty($animal->media_path)): ?>
                             <picture>

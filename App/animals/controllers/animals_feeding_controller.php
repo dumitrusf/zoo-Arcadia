@@ -13,6 +13,7 @@
  * - Arcadia\Animals\Models\FeedingLog (via App/animals/models/feedingLog.php)
  * - Arcadia\Animals\Models\AnimalFull (via App/animals/models/animalFull.php)
  * - Arcadia\Animals\Models\Nutrition (via App/animals/models/nutrition.php)
+ * - Arcadia\Includes\Functions (via includes/functions.php)
  */
 
 require_once __DIR__ . "/../models/feedingLog.php";
@@ -118,7 +119,7 @@ class AnimalsFeedingController
         }
 
         $feedingModel = new FeedingLog();
-        $result = $feedingModel->create($animalFullId, $userId, $foodType, $foodQty, $foodDate);
+        $result = $feedingModel->create($animalFullId, $foodType, $foodQty, $userId, $foodDate);
 
         if ($result) {
             header('Location: /animals/feeding/start?msg=saved');

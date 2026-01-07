@@ -1,0 +1,43 @@
+# Archivos y directorios a ignorar al construir la imagen Docker
+
+# Node modules (se instalan en el contenedor si es necesario)
+node_modules/
+npm-debug.log
+
+# Git
+.git/
+.gitignore
+
+# Docker
+docker-compose.yml
+Dockerfile
+.dockerignore
+
+# Archivos de entorno (se montan como volumen)
+.env
+.env.local
+.env.*.local
+
+# Documentación
+docs/
+*.md
+
+# Archivos temporales
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build local (se generará en el contenedor)
+public/build/
+
+# Backups
+*.bak
+*.backup
+

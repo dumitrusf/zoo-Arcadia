@@ -8,6 +8,10 @@
  * 📝 Description:
  * Model for interacting with the 'heroes' database table.
  * Handles CRUD operations for header/hero sections.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Database\Connection (via database/connection.php)
+ * 
  */
 
 require_once __DIR__ . '/../../../database/connection.php';
@@ -156,5 +160,21 @@ class Hero {
     public function delete($id) {
         $stmt = $this->db->prepare("DELETE FROM heroes WHERE id_hero = :id");
         return $stmt->execute([':id' => $id]);
+    }
+
+    /**
+     * Get the last hero/page header created or modified
+     * @return object|false
+     */
+    public function getLast() {
+        $sql = "SELECT h.*, m.media_path, m.media_path_medium, m.media_path_large 
+                FROM heroes h
+                LEFT JOIN media_relations mr ON h.id_hero = mr.related_id AND mr.related_table = 'heroes'
+                LEFT JOIN media m ON mr.media_id = m.id_media
+                ORDER BY h.id_hero DESC
+                LIMIT 1";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
 }

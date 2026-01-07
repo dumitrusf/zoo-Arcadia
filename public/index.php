@@ -16,53 +16,55 @@
  * - Arcadia\App\Router (via App/router.php)
  */
 
-// _router.php → "The Porter" of the website
+// 0. Load required dependencies
+require_once __DIR__ . '/../vendor/autoload.php';      // Load Composer libraries
+require_once __DIR__ . '/../database/connection.php';  // Load database connection and config
+require_once __DIR__ . '/../includes/functions.php';   // Load helper functions
 
-// 0. I'll load the tools
-require_once __DIR__ . '/../vendor/autoload.php';      // Load the libraries
-require_once __DIR__ . '/../database/connection.php';  // Load the database and config.php
-require_once __DIR__ . '/../includes/functions.php';   // Load the functions
+// 1. Extract the path from the requested URL
+$parsedUrl = parse_url($_SERVER['REQUEST_URI']);
+$path = ltrim($parsedUrl['path'] ?? '', '/');
 
-// 1. GET THE PATH (PATH) OF THE REQUESTED URL
-$path = ltrim(parse_url($_SERVER['REQUEST_URI'])['path'], '/');
-
-// 2. MAGIC TO SERVE STATIC FILES (CSS, JS, IMAGES) IF THEY ARE OUTSIDE OF PUBLIC
-// If the URL starts with "node_modules", "src" or "public", we try to serve the file directly.
+// 2. Serve static files (CSS, JS, images) if they are outside the public directory
+// If the URL starts with "public/", "src/" or "node_modules/", we serve the file directly
 if (strpos($path, 'public/') === 0 || strpos($path, 'src/') === 0 || strpos($path, 'node_modules/') === 0) {
-    $fullPath = __DIR__ . '/../' . $path; // Search in the project root
+    $fullPath = __DIR__ . '/../' . $path;
     
     if (file_exists($fullPath) && is_file($fullPath)) {
-        // Guess the file type (MIME type)
+        // Set appropriate MIME type based on file extension
         $ext = pathinfo($fullPath, PATHINFO_EXTENSION);
         switch ($ext) {
             case 'css':  header('Content-Type: text/css'); break;
             case 'js':   header('Content-Type: application/javascript'); break;
             case 'png':  header('Content-Type: image/png'); break;
             case 'jpg':  header('Content-Type: image/jpeg'); break;
+            case 'jpeg': header('Content-Type: image/jpeg'); break;
             case 'svg':  header('Content-Type: image/svg+xml'); break;
             case 'ttf':  header('Content-Type: font/ttf'); break;
             case 'woff': header('Content-Type: font/woff'); break;
             case 'woff2':header('Content-Type: font/woff2'); break;
         }
         readfile($fullPath);
-        exit; // ¡Importante! We end here to not load the router of the App
+        exit; // Important: stop execution here to prevent loading the router
     }
 }
 
-
-// 3. CHECK IF THE PATH CORRESPONDS TO A REAL FILE INSIDE OF PUBLIC
-if (file_exists($path) && is_file($path)) {
-    return false; // DIRECT OUTPUT, THE FILE IS DELIVERED WITHOUT PASSING THROUGH THE ROUTER.
+// 3. Check if the path corresponds to a real file inside the public directory
+// If it exists, serve it directly without passing through the router
+$publicFilePath = __DIR__ . '/' . $path;
+if (file_exists($publicFilePath) && is_file($publicFilePath)) {
+    readfile($publicFilePath);
+    exit;
 }
 
-// 4. IF IT IS NOT A FILE, INTERPRET IT AS "NICE URL"
+// 4. If it's not a file, interpret it as a "nice URL" and parse the segments
 $parts = explode('/', $path);
 
-// 5. ASSIGN SEGMENTS
+// 5. Assign URL segments to GET parameters for the router
 $_GET['domain'] = !empty($parts[0]) ? $parts[0] : 'home';
 $_GET['controller'] = !empty($parts[1]) ? $parts[1] : 'pages';
 $_GET['action'] = !empty($parts[2]) ? $parts[2] : 'index';
 
-// 6. LOAD THE MAIN ROUTER
+// 6. Load and execute the main router
 require_once __DIR__ . '/../App/router.php';
 ?>

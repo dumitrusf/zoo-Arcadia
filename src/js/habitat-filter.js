@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const $article = $(this);
             const articleSpecie = $article.data('specie') || '';
             const articleNutrition = $article.data('nutrition') || '';
+            const articleState = $article.data('state') || '';
             const articleName = $article.data('name') || '';
 
             let show = true;
@@ -29,6 +30,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // Filter by nutrition
             if (show && nutrition && articleNutrition.indexOf(nutrition) === -1) {
+                show = false;
+            }
+
+            // Filter by state
+            if (show && state && articleState.indexOf(state) === -1) {
                 show = false;
             }
 
@@ -161,6 +167,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const visibleAnimals = [];
         const specie = $('#filter-specie').val().toLowerCase();
         const nutrition = $('#filter-nutrition').val().toLowerCase();
+        const state = $('#filter-state').val().toLowerCase();
         const name = $('#filter-name').val().toLowerCase();
         
         $('.intro__animal').each(function() {
@@ -168,6 +175,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const $article = $(this);
             const articleSpecie = $article.data('specie') || '';
             const articleNutrition = $article.data('nutrition') || '';
+            const articleState = $article.data('state') || '';
             const articleName = $article.data('name') || '';
             
             let show = true;
@@ -178,6 +186,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (articleSpecieType !== specie.toLowerCase()) show = false;
             }
             if (show && nutrition && articleNutrition.indexOf(nutrition) === -1) show = false;
+            if (show && state && articleState.indexOf(state) === -1) show = false;
             if (show && name && articleName.indexOf(name) === -1) show = false;
             
             if (show) {

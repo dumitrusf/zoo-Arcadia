@@ -59,15 +59,15 @@ $datecopy = date('d-m-Y');
 
 	<div class="footer__copyright">
 		
-		<small>&copy; <?= $datecopy; ?> Arcadia ZOO Bretagne | Designed By D.S.F</small>
+		<small>&copy; <?= $datecopy; ?> Arcadia ZOO | Designed By D.S.F</small>
 	</div>
 </footer>
 
-<script src="/public/build/js/jquery.min.js" defer></script>
-<script src="/public/build/js/bootstrap.bundle.min.js" defer></script>
-<script src="/public/build/js/dataTables.min.js" defer></script>
-<script src="/public/build/js/dataTables.bootstrap5.min.js" defer></script>
-<script src="/public/build/js/app.js" defer></script>
+<script src="/build/js/jquery.min.js" defer></script>
+<script src="/build/js/bootstrap.bundle.min.js" defer></script>
+<script src="/build/js/dataTables.min.js" defer></script>
+<script src="/build/js/dataTables.bootstrap5.min.js" defer></script>
+<script src="/build/js/app.js" defer></script>
 
 </body>
 </html> 
