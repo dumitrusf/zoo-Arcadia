@@ -8,9 +8,15 @@
  * 📝 Description:
  * Model that manages permissions (RBAC).
  * Defines the granular capabilities that can be assigned.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Database\Connection (via database/connection.php)
  */
 
 // Defines the Permission class to interact with the database.
+
+require_once __DIR__ . '/../../../database/connection.php';
+
 
 class Permission {
     // This is our QUERY (Query) to read data

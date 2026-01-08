@@ -1,42 +1,32 @@
 <?php
 /**
- * 🏛️ ARQUITECTURA ARCADIA (Código Simulativo Namespace)
+ * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
  * ----------------------------------------------------
- * 📍 Ubicación Lógica: Arcadia\Roles\Controllers
- * 📂 Archivo Físico:   App/roles/controllers/roles_gest_controller.php
+ * 📍 Logical Path: Arcadia\Roles\Controllers
+ * 📂 Physical File:   App/roles/controllers/roles_gest_controller.php
  * 
  * 📝 Descripción:
- * Controlador para la gestión de roles y sus permisos.
- * Define qué puede hacer cada tipo de usuario.
+ * Controller for the management of roles and their permissions.
+ * Defines what each type of user can do.
  * 
  * 🔗 Dependencies:
  * - Arcadia\Roles\Models\Role (via App/roles/models/role.php)
  * - Arcadia\Database\Connection (via database/connection.php)
- * - Arcadia\Roles\Views\Gest\Start (via App/roles/views/gest/start.php)
- * - Arcadia\Roles\Views\Gest\Create (via App/roles/views/gest/create.php)
- * - Arcadia\Permissions\Models\Permission (via App/permissions/models/permission.php)
- * - Arcadia\Roles\Views\Gest\Edit (via App/roles/views/gest/edit.php)
- * - Arcadia\Roles\Views\Gest\View (via App/roles/views/gest/view.php)
+ * - Arcadia\Includes\Functions (via includes/functions.php)
  */
-
-session_start();
 
 require_once __DIR__ . "/../models/role.php";
 require_once __DIR__ . "/../../../database/connection.php";
 require_once __DIR__ . "/../../../includes/functions.php";
-// Include the file that has the DB class to be able to connect to the database.
+require_once __DIR__ . "/../../../includes/helpers/csrf.php";
 
 DB::createInstance();
-// Call the static method createInstance() of the DB class.
-// This method returns a PDO connection ready to use, following the Singleton pattern.
-// If it is the first time it is called, it creates the connection. If it already exists, it reuses the same one.
 
 class RolesGestController
 {
     public function start()
     {
         $roles = Role::check();
-        // No hay mensaje de error en start normal
 
         include_once __DIR__ . "/../views/gest/start.php";
     }
@@ -50,13 +40,20 @@ class RolesGestController
         }
 
         if ($_POST) {
+            // Verify CSRF token
+            if (!csrf_verify('role_create')) {
+                header('Location: /roles/gest/create?msg=error&error=Invalid request. Please try again.');
+                exit;
+            }
+
             // print_r($_POST);
             $role_name = $_POST['role_name'];
             $description = $_POST['role_description'];
             $role_id = Role::create($role_name, $description);
             // print_r("<br>" . $employee_id);
-            // redireccionamos a la pagina de inicio
+            // redirect to the start page
             header("Location: /roles/gest/start");
+            exit();
         }
         include_once __DIR__ . "/../views/gest/create.php";
     }
@@ -67,7 +64,7 @@ class RolesGestController
         $isAdmin = isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin';
         if (!$isAdmin && !hasPermission('roles-delete')) {
             header('Location: /roles/gest/start?msg=error&error=You do not have permission to delete roles');
-            exit;
+            exit();
         }
 
         $id = $_GET['id'];
@@ -103,6 +100,12 @@ class RolesGestController
 
         // if we receive data by POST, we process the form.
         if ($_POST) {
+            // Verify CSRF token
+            if (!csrf_verify('role_edit')) {
+                header('Location: /roles/gest/edit?id=' . $id_role . '&msg=error&error=Invalid request. Please try again.');
+                exit;
+            }
+
             // 1. we update the name and description of the role.
             $role_name = $_POST['role_name'];
             $description = $_POST['role_description'];

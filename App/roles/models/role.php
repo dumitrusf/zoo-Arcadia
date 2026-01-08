@@ -8,7 +8,14 @@
  * 📝 Description:
  * Model that defines the security roles (RBAC).
  * Manages the assignment of permissions to user groups.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Database\Connection (via database/connection.php)
+ * 
  */
+
+require_once __DIR__ . '/../../../database/connection.php';
+
 
 class Role
 {
@@ -30,7 +37,7 @@ class Role
         $this->updated_at = $updated_at;
     }
 
-    // method to get all the roles from the database
+    // Method to get all the roles from the database
     public static function check()
     {
 
@@ -56,7 +63,7 @@ class Role
         return $rolesList;
     }
 
-    // method to create a new role in the database
+    // Method to create a new role in the database
     public static function create($role_name, $role_description)
     {
         // instantiate the connection to the database
@@ -110,7 +117,7 @@ class Role
             return [
                 'success' => false,
                 'message' => "No se puede borrar: {$usersCount['employeesHasRoles']} colaborador/es tienen el rol de {$usersCount['role_name']}"
-            ]; // ← Devuelve array con INFORMACIÓN
+            ]; // Returns array with INFORMATION
         } else {
             // create the query to the database
             $query = "DELETE FROM roles WHERE id_role = ?";
@@ -146,6 +153,11 @@ class Role
 
         // save the first result of the query in a variable
         $role = $sql->fetch();
+
+        // If no role found, return null
+        if (!$role) {
+            return null;
+        }
 
         // return the result of the query
         return new Role($role["id_role"], $role["role_name"], $role["role_description"], $role["created_at"], $role["updated_at"]);

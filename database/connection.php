@@ -39,8 +39,9 @@ class DB {
                 // Here I create the PDO connection.
                 // self::$instance saves the connection I am creating to be able to reuse it later.
                 
-                "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8",
+                "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4",
                 // Here I build the string with the host (server), database name and encoding.
+                // Using utf8mb4 to support emojis and full Unicode characters (4 bytes).
                 
                 DB_USER,
                 // User to connect to (this is defined in another file, as a constant).
@@ -51,6 +52,9 @@ class DB {
                 $optionsPDO
                 // And I pass the options I defined above, like the exceptions.
             );
+            
+            // Set connection charset to utf8mb4 explicitly
+            self::$instance->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
 
             // echo "<br> Connected to the database!!!! <br> ";
             // This is only to make sure I am connected well (useful in tests).

@@ -28,16 +28,16 @@ echo Usando: %MYSQL_CMD%
 
 REM Ejecutar scripts en orden
 echo 1. Inicializando base de datos...
-%MYSQL_CMD% -u %MYSQL_USER% -p%MYSQL_PASS% < database/2025_01_19_init.sql
+%MYSQL_CMD% -u %MYSQL_USER% -p%MYSQL_PASS% < database/01_init.sql
 
 echo 2. Creando tablas...
-%MYSQL_CMD% -u %MYSQL_USER% -p%MYSQL_PASS% %DB_NAME% < database/2025_12_05_tables.sql
+%MYSQL_CMD% -u %MYSQL_USER% -p%MYSQL_PASS% %DB_NAME% < database/02_tables.sql
 
 echo 3. Agregando constraints...
-%MYSQL_CMD% -u %MYSQL_USER% -p%MYSQL_PASS% %DB_NAME% < database/2025_12_05_constraints.sql
+%MYSQL_CMD% -u %MYSQL_USER% -p%MYSQL_PASS% %DB_NAME% < database/03_constraints.sql
 
 echo 4. Insertando datos de prueba...
-%MYSQL_CMD% -u %MYSQL_USER% -p%MYSQL_PASS% %DB_NAME% < database/2025_10_03_seed_data.sql
+%MYSQL_CMD% -u %MYSQL_USER% -p%MYSQL_PASS% %DB_NAME% < database/06_seed_data.sql
 
 echo Base de datos actualizada correctamente!
 pause

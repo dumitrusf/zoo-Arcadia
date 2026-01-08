@@ -1,4 +1,3 @@
-
 <?php
 /**
  * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)

@@ -238,5 +238,37 @@ class Service {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
+
+    /**
+     * Get the last service created or modified
+     * @return object|false
+     */
+    public function getLast() {
+        $sql = "SELECT s.*, m.media_path, m.media_path_medium, m.media_path_large 
+                FROM services s
+                LEFT JOIN media_relations mr ON s.id_service = mr.related_id AND mr.related_table = 'services'
+                LEFT JOIN media m ON mr.media_id = m.id_media
+                ORDER BY s.id_service DESC
+                LIMIT 1";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
+
+    /**
+     * Get the last service log entry
+     * @return object|false
+     */
+    public function getLastLog() {
+        $sql = "SELECT sl.*, s.service_title, u.username
+                FROM service_logs sl
+                LEFT JOIN services s ON sl.service_id = s.id_service
+                LEFT JOIN users u ON sl.changed_by = u.id_user
+                ORDER BY sl.change_date DESC
+                LIMIT 1";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
 }
 

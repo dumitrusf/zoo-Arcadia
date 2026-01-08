@@ -13,12 +13,14 @@
  * - Arcadia\Animals\Models\FeedingLog (via App/animals/models/feedingLog.php)
  * - Arcadia\Animals\Models\AnimalFull (via App/animals/models/animalFull.php)
  * - Arcadia\Animals\Models\Nutrition (via App/animals/models/nutrition.php)
+ * - Arcadia\Includes\Functions (via includes/functions.php)
  */
 
 require_once __DIR__ . "/../models/feedingLog.php";
 require_once __DIR__ . "/../models/animalFull.php";
 require_once __DIR__ . "/../models/nutrition.php";
 require_once __DIR__ . "/../../../includes/functions.php";
+require_once __DIR__ . "/../../../includes/helpers/csrf.php";
 
 class AnimalsFeedingController
 {
@@ -82,6 +84,12 @@ class AnimalsFeedingController
             exit;
         }
 
+        // Verify CSRF token
+        if (!csrf_verify('feeding_save')) {
+            header('Location: /animals/feeding/create?msg=error&error=Invalid request. Please try again.');
+            exit;
+        }
+
         $animalFullId = $_POST['animal_f_id'] ?? null;
         $foodType = $_POST['food_type'] ?? null;
         $foodQty = $_POST['food_qtty'] ?? null;
@@ -118,7 +126,7 @@ class AnimalsFeedingController
         }
 
         $feedingModel = new FeedingLog();
-        $result = $feedingModel->create($animalFullId, $userId, $foodType, $foodQty, $foodDate);
+        $result = $feedingModel->create($animalFullId, $foodType, $foodQty, $userId, $foodDate);
 
         if ($result) {
             header('Location: /animals/feeding/start?msg=saved');

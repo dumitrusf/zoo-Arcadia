@@ -1,11 +1,11 @@
-// 1️⃣ Requiere módulos
+// 1️⃣ Require modules
 const { src, dest, watch, series } = require('gulp');
 const browserSync = require('browser-sync').create();
 const sass = require('gulp-sass')(require('sass')); // Si usas SASS
 const plumber = require('gulp-plumber');
 const { deleteAsync } = require('del');
 
-// 2️⃣ Módulos adicionales para JS
+// 2️⃣ Additional modules for JS
 const sourcemaps = require('gulp-sourcemaps');
 const concat = require('gulp-concat');
 const terser = require('gulp-terser-js');
@@ -21,13 +21,14 @@ const paths = {
         'node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js'
     ],
     vendorCss: [
+        'node_modules/normalize.css/normalize.css',
         'node_modules/bootstrap/dist/css/bootstrap.min.css',
         'node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css'
     ]
 };
 
 // 4️⃣ Ruta base para el proxy
-let currentProxy = 'http://localhost:3001'; // ÚNICO PUERTO PHP
+let currentProxy = 'http://localhost:3001'; // SINGLE PHP PORT
 
 // 5️⃣ Recarga navegador
 function reload(done) {
@@ -47,6 +48,14 @@ function cleanJs() {
 // 7️⃣ Procesar y compilar archivos
 function compileSass() {
   return src('src/scss/app.scss')
+    .pipe(plumber())
+    .pipe(sass())
+    .pipe(dest('public/build/css'))
+    .pipe(browserSync.stream());
+}
+
+function compileBoSidebar() {
+  return src('src/scss/bo-sidebar-only.scss')
     .pipe(plumber())
     .pipe(sass())
     .pipe(dest('public/build/css'))
@@ -75,8 +84,15 @@ function processJs() {
         .pipe(sourcemaps.write('.'))
         .pipe(dest('public/build/js'));
     
+    // Compilar rating-testimony.js por separado
+    const ratingTestimonyJs = src('src/js/rating-testimony.js')
+        .pipe(sourcemaps.init())
+        .pipe(terser())
+        .pipe(sourcemaps.write('.'))
+        .pipe(dest('public/build/js'));
+    
     // Retornar todos los streams en paralelo
-    return require('merge-stream')(appJs, animalsFilterJs, habitatFilterJs);
+    return require('merge-stream')(appJs, animalsFilterJs, habitatFilterJs, ratingTestimonyJs);
 }
 
 function copyVendorJs() {
@@ -90,8 +106,12 @@ function copyVendorCss() {
 }
 
 // 8️⃣ Tareas combinadas
-const buildCss = series(cleanCss, compileSass, copyVendorCss);
+const buildCss = series(cleanCss, compileSass, compileBoSidebar, copyVendorCss);
 const buildJs = series(cleanJs, processJs, copyVendorJs);
+
+// Exportar tareas para uso en Dockerfile
+exports.buildCss = buildCss;
+exports.buildJs = buildJs;
 
 // 9️⃣ Servidor con Browsersync
 function serve(done) {
@@ -103,7 +123,7 @@ function serve(done) {
   done();
 }
 
-// 🔟 Watcher ÚNICO Y TODOPODEROSO
+// 🔟 UNIQUE AND POWERFUL Watcher
 function watchAll() {
   // Estilos y JS
   watch(paths.scss, buildCss);
@@ -115,6 +135,6 @@ function watchAll() {
   watch('includes/**/*.php', reload);
 }
 
-// 1️⃣1️⃣ TAREA POR DEFECTO
+// 1️⃣1️⃣ DEFAULT TASK
 // Al llamar 'exports.default', Gulp sabe que esta es la tarea que debe ejecutar si solo escribes 'gulp'
 exports.default = series(buildCss, buildJs, serve, watchAll);

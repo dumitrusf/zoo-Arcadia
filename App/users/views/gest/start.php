@@ -3,13 +3,20 @@
         <h2 class="card-title">Users</h2>
         
         <?php 
-        // 🛡️ Solo usuarios con permiso users-create pueden crear usuarios
+        // 🛡️ Only users with users-create permission can create users
         $isAdmin = (isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin');
         if ($isAdmin || hasPermission('users-create')): 
         ?>
             <a name="users" id="" class="btn btn-success mb-2 mt-2" href="/users/gest/create" role="button">+ Create new Account</a>
         <?php endif; ?>
     </div>
+    
+    <!-- Show success, error or warning messages -->
+    <?php 
+    require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+    display_alert_message();
+    ?>
+    
     <div class="card-body container-fluid overflow-auto">
 
         <div class="table-responsive">

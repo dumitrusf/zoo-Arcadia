@@ -46,31 +46,23 @@ function getStateBadgeClass($state) {
         <?php endif; ?>
     </div>
 
-    <?php if (isset($_GET['msg'])): ?>
-        <div class="alert <?= ($_GET['msg'] === 'error') ? 'alert-danger' : 'alert-success' ?> alert-dismissible fade show" role="alert">
-            <?php
-            $msg = $_GET['msg'];
-            if ($msg === 'error' && isset($_GET['error'])) {
-                echo htmlspecialchars($_GET['error']);
-            } elseif ($msg === 'saved') {
-                echo 'Health report created successfully!';
-            } elseif ($msg === 'updated') {
-                echo 'Health report updated successfully!';
-            } elseif ($msg === 'deleted') {
-                echo 'Health report deleted successfully!';
-            }
-            ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
+    <?php 
+    require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+    display_alert_message('Action completed successfully!', [
+        'saved' => 'Health report created successfully!',
+        'updated' => 'Health report updated successfully!',
+        'deleted' => 'Health report deleted successfully!'
+    ]);
+    ?>
 
     <div class="card shadow-sm">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-hover align-middle">
+                <table id="vreportsTable" class="table table-hover align-middle dataTable">
                     <thead class="table-light">
                         <tr>
                             <th style="width: 50px;">ID</th>
+                            <th style="width: 80px;">Image</th>
                             <th>Animal</th>
                             <th>Species</th>
                             <th>State</th>
@@ -85,7 +77,19 @@ function getStateBadgeClass($state) {
                             <?php foreach ($reports as $report): ?>
                                 <tr>
                                     <!-- ID Column -->
-                                    <td class="fw-bold text-muted">#<?= $report->id_hs_report ?? 'N/A' ?></td>
+                                    <td class="fw-bold text-muted" data-order="<?= $report->id_hs_report ?? 0 ?>">#<?= $report->id_hs_report ?? 'N/A' ?></td>
+
+                                    <!-- Image Column -->
+                                    <td style="width: 80px;">
+                                        <?php if (!empty($report->media_path)): ?>
+                                            <img src="<?= htmlspecialchars($report->media_path) ?>" alt="Animal Photo" 
+                                                 class="rounded" style="width: 60px; height: 60px; object-fit: cover;" loading="lazy">
+                                        <?php else: ?>
+                                            <div class="bg-light rounded d-flex align-items-center justify-content-center text-muted" style="width: 60px; height: 60px;">
+                                                <i class="bi bi-image"></i>
+                                            </div>
+                                        <?php endif; ?>
+                                    </td>
 
                                     <!-- Animal Name -->
                                     <td class="fw-bold">
@@ -98,21 +102,21 @@ function getStateBadgeClass($state) {
                                     </td>
                                     
                                     <!-- Species -->
-                                    <td>
+                                    <td data-species="<?= htmlspecialchars($report->specie_name ?? 'N/A') ?>">
                                         <span class="badge bg-secondary">
                                             <?= htmlspecialchars($report->specie_name ?? 'N/A') ?>
                                         </span>
                                     </td>
 
                                     <!-- State with badge -->
-                                    <td>
+                                    <td data-state="<?= htmlspecialchars($report->hsr_state ?? '') ?>">
                                         <span class="badge bg-<?= getStateBadgeClass($report->hsr_state) ?>">
                                             <?= htmlspecialchars(ucfirst(str_replace('_', ' ', $report->hsr_state))) ?>
                                         </span>
                                     </td>
 
                                     <!-- Review Date -->
-                                    <td>
+                                    <td data-order="<?= strtotime($report->review_date ?? '1970-01-01') ?>">
                                         <?php 
                                             $date = new DateTime($report->review_date);
                                             echo $date->format('Y-m-d');
@@ -120,7 +124,7 @@ function getStateBadgeClass($state) {
                                     </td>
 
                                     <!-- Veterinarian -->
-                                    <td>
+                                    <td data-veterinarian="<?= htmlspecialchars($report->checked_by_username ?? 'Unknown') ?>">
                                         <?= htmlspecialchars($report->checked_by_username ?? 'Unknown') ?>
                                         <?php if ($report->role_name): ?>
                                             <br><small class="text-muted"><?= htmlspecialchars($report->role_name) ?></small>
@@ -128,7 +132,7 @@ function getStateBadgeClass($state) {
                                     </td>
 
                                     <!-- Last Updated -->
-                                    <td>
+                                    <td data-order="<?= strtotime($report->updated_at ?? '1970-01-01') ?>">
                                         <?php 
                                             $updated = new DateTime($report->updated_at);
                                             echo $updated->format('Y-m-d H:i');
@@ -182,7 +186,7 @@ function getStateBadgeClass($state) {
                             <?php endforeach; ?>
                         <?php else: ?>
                             <tr>
-                                <td colspan="8" class="text-center text-muted py-4">
+                                <td colspan="9" class="text-center text-muted py-4">
                                     <i class="bi bi-inbox"></i> No health reports found.
                                     <?php 
                                     // Only users with vet_reports-create permission can create reports
@@ -200,3 +204,4 @@ function getStateBadgeClass($state) {
     </div>
 </div>
 
+<script src="/public/build/js/vreports.js" defer></script>

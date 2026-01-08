@@ -24,9 +24,12 @@ WHERE email_sent = TRUE
 -- ============================================================
 -- 3. CLEANUP: psw_reset_token (Remove expired tokens)
 -- ============================================================
--- Run this daily to clean expired tokens
-DELETE FROM psw_reset_token 
-WHERE expires_at < NOW();
+-- NOTA: Esta tabla fue eliminada porque la funcionalidad de
+-- recuperación de contraseña NO está especificada en el PDF del TP.
+-- Ver: database/2025_12_31_remove_psw_reset_token.sql
+-- 
+-- DELETE FROM psw_reset_token 
+-- WHERE expires_at < NOW();
 
 -- ============================================================
 -- OPTIONAL: Add indexes for better cleanup performance

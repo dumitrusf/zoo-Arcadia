@@ -8,6 +8,10 @@
  * 📝 Description:
  * Controller for viewing animal click statistics.
  * Implements permission checks (RBAC) for viewing stats.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Animals\Models\AnimalClick (via App/animals/models/animalClick.php)
+ * - Arcadia\Includes\Functions (via includes/functions.php)
  */
 
 require_once __DIR__ . '/../models/animalClick.php';

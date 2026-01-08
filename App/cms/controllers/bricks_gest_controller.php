@@ -9,6 +9,12 @@
  * 📝 Description:
  * Controller for managing Bricks (Content Blocks).
  * Handles CRUD operations and image uploads via Cloudinary.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Cms\Models\Brick (via App/cms/models/brick.php)
+ * - Arcadia\Medias\Models\Cloudinary (via App/medias/models/cloudinary.php)
+ * - Arcadia\Medias\Models\Media (via App/medias/models/media.php)
+ * - Arcadia\Includes\Functions (via includes/functions.php)
  */
 
 require_once __DIR__ . '/../models/brick.php';
@@ -81,6 +87,14 @@ class BricksGestController
     public function save()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            require_once __DIR__ . '/../../../includes/helpers/csrf.php';
+            
+            // Verify CSRF token
+            if (!csrf_verify('brick_save')) {
+                header('Location: /cms/bricks/start?msg=error&error=Invalid request. Please try again.');
+                exit;
+            }
+
             $id = $_POST['id_brick'] ?? null;
             
             // Check permissions based on whether it's create or update (uses services permissions)

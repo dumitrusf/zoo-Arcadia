@@ -1,4 +1,3 @@
-
 <?php
 /**
  * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
@@ -9,6 +8,9 @@
  * 📝 Description:
  * Model for interacting with the 'habitats' database table.
  * Handles CRUD operations for habitats (Savannah, Jungle, etc.).
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Database\Connection (via database/connection.php)
  */
 
 require_once __DIR__ . '/../../../database/connection.php';
@@ -56,7 +58,8 @@ class Habitat {
      * @param int $id
      * @return object|false
      */
-    public function getById($id) { // get habitat by id
+    public function getById($id) { 
+        // get habitat by id
         $sql = "SELECT h.*, m.media_path, m.media_path_medium, m.media_path_large
                 FROM habitats h
                 LEFT JOIN media_relations mr ON h.id_habitat = mr.related_id AND mr.related_table = 'habitats'
@@ -157,5 +160,21 @@ class Habitat {
             error_log("Error deleting habitat: " . $e->getMessage());
             return false;
         }
+    }
+
+    /**
+     * Get the last habitat created or modified
+     * @return object|false
+     */
+    public function getLast() {
+        $sql = "SELECT h.*, m.media_path, m.media_path_medium, m.media_path_large
+                FROM habitats h
+                LEFT JOIN media_relations mr ON h.id_habitat = mr.related_id AND mr.related_table = 'habitats'
+                LEFT JOIN media m ON mr.media_id = m.id_media
+                ORDER BY h.id_habitat DESC
+                LIMIT 1";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
 }

@@ -10,6 +10,13 @@
                     <h4 class="mb-0">Edit Schedule</h4>
                 </div>
                 <div class="card-body">
+                    <!-- Success/Error Messages -->
+                    <?php 
+                    require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+                    display_alert_message();
+                    display_error_variable($error ?? null);
+                    ?>
+                    
                     <!-- The form sends data to the same URL but via POST -->
                     <form action="/schedules/gest/edit" method="POST">
                         

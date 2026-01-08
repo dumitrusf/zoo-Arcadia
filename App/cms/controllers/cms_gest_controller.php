@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 🏛️ ARCHITECTURE ARCADIA (Simulated Namespace)
  * ----------------------------------------------------
@@ -8,6 +9,12 @@
  * 📝 Description:
  * Controller for managing Zoo Services (CMS).
  * Handles CRUD operations and image uploads via Cloudinary.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Cms\Models\Service (via App/cms/models/service.php)
+ * - Arcadia\Medias\Models\Cloudinary (via App/medias/models/cloudinary.php)
+ * - Arcadia\Medias\Models\Media (via App/medias/models/media.php)
+ * - Arcadia\Includes\Functions (via includes/functions.php)
  */
 
 require_once __DIR__ . '/../models/service.php';
@@ -15,13 +22,15 @@ require_once __DIR__ . '/../../medias/models/cloudinary.php';
 require_once __DIR__ . '/../../medias/models/Media.php';
 require_once __DIR__ . '/../../../includes/functions.php';
 
-class CmsGestController {
-    
+class CmsGestController
+{
+
     // Dashboard: List all services
-    public function start() {
+    public function start()
+    {
         $serviceModel = new Service();
         $services = $serviceModel->getAll();
-        
+
         if (file_exists(__DIR__ . '/../views/gest/start.php')) {
             include_once __DIR__ . '/../views/gest/start.php';
         } else {
@@ -29,7 +38,8 @@ class CmsGestController {
         }
     }
 
-    public function create() {
+    public function create()
+    {
         // Check if user has permission to create services
         if (!hasPermission('services-create')) {
             header('Location: /cms/gest/start?msg=error&error=You do not have permission to create services');
@@ -43,7 +53,8 @@ class CmsGestController {
         }
     }
 
-    public function edit() {
+    public function edit()
+    {
         // Check if user has permission to edit services
         if (!hasPermission('services-edit')) {
             header('Location: /cms/gest/start?msg=error&error=You do not have permission to edit services');
@@ -51,13 +62,19 @@ class CmsGestController {
         }
 
         $id = $_GET['id'] ?? null;
-        if (!$id) { header('Location: /cms/gest/start'); exit; }
+        if (!$id) {
+            header('Location: /cms/gest/start');
+            exit;
+        }
 
         $serviceModel = new Service();
         $service = $serviceModel->getById($id);
         $action = 'edit';
 
-        if (!$service) { echo "Service not found."; return; }
+        if (!$service) {
+            echo "Service not found.";
+            return;
+        }
 
         if (file_exists(__DIR__ . '/../views/gest/edit.php')) {
             include_once __DIR__ . '/../views/gest/edit.php';
@@ -65,10 +82,19 @@ class CmsGestController {
     }
 
     // Save (Create or Update)
-    public function save() {
+    public function save()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $id = $_POST['id_service'] ?? null;
+            require_once __DIR__ . '/../../../includes/helpers/csrf.php';
             
+            // Verify CSRF token
+            if (!csrf_verify('service_save')) {
+                header('Location: /cms/gest/start?msg=error&error=Invalid request. Please try again.');
+                exit;
+            }
+
+            $id = $_POST['id_service'] ?? null;
+
             // Check permissions based on whether it's create or update
             if ($id) {
                 // UPDATE - requires services-edit permission
@@ -87,9 +113,9 @@ class CmsGestController {
             $desc = $_POST['service_description'];
             $link = $_POST['link'] ?? '';
             $type = $_POST['type'] ?? 'service';
-            
+
             // Get logged user ID or fallback to 1 (Admin/Dev)
-            $userId = $_SESSION['user']['id_user'] ?? 1; 
+            $userId = $_SESSION['user']['id_user'] ?? 1;
 
             $serviceModel = new Service();
             $cloudinary = new Cloudinary();
@@ -133,18 +159,11 @@ class CmsGestController {
 
                 // If at least one image uploaded
                 if ($urlMobile || $urlTablet || $urlDesktop) {
-                    // If mobile is not uploaded but others are, we need a base path.
-                    // For now, assume Mobile is mandatory if updating images, or use existing one if partial update.
-                    // But our view forces 'required' on create for mobile.
-                    
-                    // We need to fetch current media to not overwrite with nulls if we want partial updates?
-                    // Simplified: We assume user uploads what they want to change. If they upload Mobile, we create new Media.
-                    
-                    // Fallback: If only Desktop uploaded, use it as base? 
-                    $base = $urlMobile ?? $urlDesktop ?? $urlTablet;
+                    // Use Mobile as base image (first priority), then Tablet, then Desktop as fallback
+                    $base = $urlMobile ?? $urlTablet ?? $urlDesktop;
 
                     $mediaId = $mediaModel->create($base, 'image', "Service: $title", $urlTablet, $urlDesktop);
-                    
+
                     if ($mediaId) {
                         // Unlink old
                         $mediaModel->unlink('services', $serviceId);
@@ -155,15 +174,15 @@ class CmsGestController {
 
                 header('Location: /cms/gest/start?msg=saved');
                 exit;
-
             } catch (Exception $e) {
                 echo "<div class='alert alert-danger'><strong>Error saving service:</strong> " . $e->getMessage() . "</div>";
             }
         }
     }
-    
+
     // Delete
-    public function delete() {
+    public function delete()
+    {
         // Check if user has permission to delete services
         if (!hasPermission('services-delete')) {
             header('Location: /cms/gest/start?msg=error&error=You do not have permission to delete services');
@@ -180,10 +199,11 @@ class CmsGestController {
     }
 
     // Show Service Logs
-    public function logs() {
+    public function logs()
+    {
         $serviceModel = new Service();
         $logs = $serviceModel->getLogs();
-        
+
         if (file_exists(__DIR__ . '/../views/gest/logs.php')) {
             include_once __DIR__ . '/../views/gest/logs.php';
         } else {

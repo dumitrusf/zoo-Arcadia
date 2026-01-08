@@ -9,6 +9,12 @@ require_once __DIR__ . '/../../../../includes/functions.php';
         <h1>Manage Opening Hours</h1>
     </div>
 
+    <!-- Success/Error Messages -->
+    <?php 
+    require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+    display_alert_message();
+    ?>
+
     <div class="card shadow-sm">
         <div class="card-body">
             <div class="table-responsive">

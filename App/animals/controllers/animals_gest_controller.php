@@ -3,22 +3,24 @@
 /**
  * 🏛️ ARQUITECTURA ARCADIA (Código Simulativo Namespace)
  * ----------------------------------------------------
- * 📍 Ubicación Lógica: Arcadia\Animals\Controllers
- * 📂 Archivo Físico:   App/animals/controllers/animals_gest_controller.php
+ * 📍 Logical Path: Arcadia\Animals\Controllers
+ * 📂 Physical File:   App/animals/controllers/animals_gest_controller.php
  * 
- * 📝 Descripción:
- * Controlador para la gestión administrativa de animales.
- * Implementa lógica de permisos (RBAC) y CRUD.
+ * 📝 Description:
+ * Controller for the administrative management of animals.
+ * Implements permission logic (RBAC) and CRUD.
  * 
  * 🔗 Dependencies:
- * - Arcadia\Animals\Models\Animal (via App/animals/models/animal.php)
- * - Arcadia\Animals\Models\AnimalGeneral (via App/animals/models/animalGeneral.php)
  * - Arcadia\Animals\Models\AnimalFull (via App/animals/models/animalFull.php)
- * - Arcadia\Database\Connection (via database/connection.php)
- * - Arcadia\Animals\Views\Gest\Start (via App/animals/views/gest/start.php)
- * - Arcadia\Animals\Views\Gest\Create (via App/animals/views/gest/create.php)
- * - Arcadia\Animals\Views\Gest\Edit (via App/animals/views/gest/edit.php)
- * - Arcadia\Animals\Views\Gest\View (via App/animals/views/gest/view.php)
+ * - Arcadia\Animals\Models\AnimalGeneral (via App/animals/models/animalGeneral.php)
+ * - Arcadia\Animals\Models\Category (via App/animals/models/category.php)
+ * - Arcadia\Animals\Models\Specie (via App/animals/models/specie.php)
+ * - Arcadia\Animals\Models\Nutrition (via App/animals/models/nutrition.php)
+ * - Arcadia\Animals\Models\FeedingLog (via App/animals/models/feedingLog.php)
+ * - Arcadia\Habitats\Models\Habitat (via App/habitats/models/habitat.php)
+ * - Arcadia\Medias\Models\Cloudinary (via App/medias/models/cloudinary.php)
+ * - Arcadia\Medias\Models\Media (via App/medias/models/media.php)
+ * - Arcadia\Includes\Functions (via includes/functions.php)
  */
 
 require_once __DIR__ . "/../models/animalFull.php";
@@ -31,6 +33,7 @@ require_once __DIR__ . "/../../habitats/models/habitat.php";
 require_once __DIR__ . "/../../medias/models/cloudinary.php";
 require_once __DIR__ . "/../../medias/models/Media.php";
 require_once __DIR__ . "/../../../includes/functions.php";
+require_once __DIR__ . "/../../../includes/helpers/csrf.php";
 
 class AnimalsGestController
 {
@@ -64,6 +67,12 @@ class AnimalsGestController
     public function saveCategory()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Verify CSRF token
+            if (!csrf_verify('animal_save_category')) {
+                header('Location: /animals/gest/start?msg=error&error=Invalid request. Please try again.');
+                exit;
+            }
+
             $id = $_POST['id_category'] ?? null;
             
             // Check permissions based on whether it's create or update
@@ -132,6 +141,12 @@ class AnimalsGestController
     public function saveSpecies()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Verify CSRF token
+            if (!csrf_verify('animal_save_species')) {
+                header('Location: /animals/gest/start?msg=error&error=Invalid request. Please try again.');
+                exit;
+            }
+
             $id = $_POST['id_specie'] ?? null;
             
             // Check permissions based on whether it's create or update
@@ -201,6 +216,12 @@ class AnimalsGestController
     public function saveNutrition()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Verify CSRF token
+            if (!csrf_verify('animal_save_nutrition')) {
+                header('Location: /animals/gest/start?msg=error&error=Invalid request. Please try again.');
+                exit;
+            }
+
             $id = $_POST['id_nutrition'] ?? null;
             
             // Check permissions based on whether it's create or update
@@ -348,6 +369,17 @@ class AnimalsGestController
     public function save()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Verify CSRF token
+            if (!csrf_verify('animal_save')) {
+                $id = $_POST['id_full_animal'] ?? '';
+                if ($id) {
+                    header('Location: /animals/gest/edit?id=' . $id . '&msg=error&error=Invalid request. Please try again.');
+                } else {
+                    header('Location: /animals/gest/create?msg=error&error=Invalid request. Please try again.');
+                }
+                exit;
+            }
+
             $id = $_POST['id_full_animal'] ?? null;
             
             // Check permissions based on whether it's create or update

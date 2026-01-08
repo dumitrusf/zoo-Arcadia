@@ -7,7 +7,12 @@
  * 
  * 📝 Description:
  * Model for interacting with the 'opening' table (Schedules).
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Database\Connection (via database/connection.php)
  */
+
+require_once __DIR__ . '/../../../database/connection.php';
 
 class Schedule {
     private $db;
@@ -17,13 +22,23 @@ class Schedule {
         $this->db = DB::createInstance();
     }
 
-    // Get all schedules
+    /**
+     * Get all schedules
+     * @return array List of schedules as objects.
+     */
     public function getAll() {
         $stmt = $this->db->prepare("SELECT * FROM opening ORDER BY id_opening ASC");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+
+
+    /**
+     * Get a schedule by ID
+     * @param int $id
+     * @return object|false
+     */
     // Get a schedule by ID
     public function getById($id) {
         $stmt = $this->db->prepare("SELECT * FROM opening WHERE id_opening = ?");
@@ -31,6 +46,13 @@ class Schedule {
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
 
+
+    /**
+     * Update an existing schedule
+     * @param int $id
+     * @param array $data
+     * @return bool
+     */
     // Update an existing schedule
     public function update($id, $data) {
         $sql = "UPDATE opening SET 
@@ -55,5 +77,16 @@ class Schedule {
             error_log("Error updating schedule: " . $e->getMessage());
             return false;
         }
+    }
+
+    /**
+     * Get the last schedule modified
+     * @return object|false
+     */
+    public function getLast() {
+        // Note: opening table might not have updated_at, so we check by id_opening DESC
+        $stmt = $this->db->prepare("SELECT * FROM opening ORDER BY id_opening DESC LIMIT 1");
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
 }

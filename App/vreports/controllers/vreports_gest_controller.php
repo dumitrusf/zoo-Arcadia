@@ -12,11 +12,15 @@
  * 🔗 Dependencies:
  * - Arcadia\VReports\Models\HealthStateReport (via App/vreports/models/healthStateReport.php)
  * - Arcadia\Animals\Models\AnimalFull (via App/animals/models/animalFull.php)
+ * - Arcadia\Users\Models\User (via App/users/models/user.php)
+ * - Arcadia\Includes\Functions (via includes/functions.php)
  */
 
 require_once __DIR__ . "/../models/healthStateReport.php";
 require_once __DIR__ . "/../../animals/models/animalFull.php";
+require_once __DIR__ . "/../../users/models/user.php";
 require_once __DIR__ . "/../../../includes/functions.php";
+require_once __DIR__ . "/../../../includes/helpers/csrf.php";
 
 class VreportsGestController
 {
@@ -28,7 +32,7 @@ class VreportsGestController
         // Check if user has permission to view reports
         if (!hasPermission('vet_reports-view')) {
             header('Location: /home/pages/start?msg=error&error=You do not have permission to view health reports');
-            exit;
+            exit();
         }
 
         $reportModel = new HealthStateReport();
@@ -53,7 +57,7 @@ class VreportsGestController
         // Check if user has permission to create
         if (!hasPermission('vet_reports-create')) {
             header('Location: /vreports/gest/start?msg=error&error=You do not have permission to create health reports');
-            exit;
+            exit();
         }
 
         $animalModel = new AnimalFull();
@@ -78,12 +82,18 @@ class VreportsGestController
         // Check if user has permission to create
         if (!hasPermission('vet_reports-create')) {
             header('Location: /vreports/gest/start?msg=error&error=You do not have permission to create health reports');
-            exit;
+            exit();
         }
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location: /vreports/gest/start?msg=error&error=Invalid request method');
-            exit;
+            exit();
+        }
+
+        // Verify CSRF token
+        if (!csrf_verify('vreport_create')) {
+            header('Location: /vreports/gest/create?msg=error&error=Invalid request. Please try again.');
+            exit();
         }
 
         $fullAnimalId = $_POST['full_animal_id'] ?? null;
@@ -99,7 +109,7 @@ class VreportsGestController
         if ($userId === null || $userId === 0) {
             error_log("Error: user_id is null or 0 when creating health report. Session user data: " . print_r($_SESSION['user'] ?? [], true));
             header('Location: /vreports/gest/create?msg=error&error=User session error. Please log in again.');
-            exit;
+            exit();
         }
 
         // Validate state enum FIRST - must match exactly with database ENUM
@@ -115,13 +125,13 @@ class VreportsGestController
         if (empty($state) || !in_array($state, $allowedStates, true)) {
             error_log("Invalid health state: '$state' (raw: '$stateRaw', hex: " . bin2hex($stateRaw) . ")");
             header('Location: /vreports/gest/create?msg=error&error=Invalid health state selected. Please select a valid state.');
-            exit;
+            exit();
         }
 
         // Validation
         if (!$fullAnimalId || !$state || !$reviewDate || !$vetObs) {
             header('Location: /vreports/gest/create?msg=error&error=All required fields must be filled');
-            exit;
+            exit();
         }
 
         // Validate that the animal exists
@@ -129,23 +139,22 @@ class VreportsGestController
         $animal = $animalModel->getById($fullAnimalId);
         if (!$animal) {
             header('Location: /vreports/gest/create?msg=error&error=Selected animal does not exist. Please select a valid animal.');
-            exit;
+            exit();
         }
 
         // Validate that the user exists (if checked_by is required)
-        require_once __DIR__ . '/../../users/models/user.php';
         $user = User::find($userId);
         if (!$user) {
             error_log("Error: user_id $userId does not exist in database when creating health report.");
             header('Location: /vreports/gest/create?msg=error&error=User account error. Please log in again.');
-            exit;
+            exit();
         }
 
         // Validate date format
         $dateObj = DateTime::createFromFormat('Y-m-d', $reviewDate);
         if (!$dateObj || $dateObj->format('Y-m-d') !== $reviewDate) {
             header('Location: /vreports/gest/create?msg=error&error=Invalid date format');
-            exit;
+            exit();
         }
 
         // Convert fullAnimalId to integer to ensure proper type
@@ -157,6 +166,7 @@ class VreportsGestController
 
         if ($result && is_numeric($result)) {
             header('Location: /vreports/gest/start?msg=saved');
+            exit();
         } else {
             // Log detailed error for debugging
             error_log("Failed to save health report. Parameters: full_animal_id=$fullAnimalId, state=$state, review_date=$reviewDate, user_id=$userId");
@@ -178,8 +188,8 @@ class VreportsGestController
             }
             
             header('Location: /vreports/gest/create?msg=error&error=' . urlencode($errorMsg));
+            exit();
         }
-        exit;
     }
 
     /**
@@ -191,13 +201,13 @@ class VreportsGestController
         // Check if user has permission to edit
         if (!hasPermission('vet_reports-edit')) {
             header('Location: /vreports/gest/start?msg=error&error=You do not have permission to edit health reports');
-            exit;
+            exit();
         }
 
         $id = $_GET['id'] ?? null;
         if (!$id) {
             header('Location: /vreports/gest/start?msg=error&error=Report ID is required');
-            exit;
+            exit();
         }
 
         $reportModel = new HealthStateReport();
@@ -208,7 +218,7 @@ class VreportsGestController
         
         if (!$report) {
             header('Location: /vreports/gest/start?msg=error&error=Health report not found');
-            exit;
+            exit();
         }
 
         // Get user ID from session (veterinarian who will update the report)
@@ -230,12 +240,19 @@ class VreportsGestController
         // Check if user has permission to edit
         if (!hasPermission('vet_reports-edit')) {
             header('Location: /vreports/gest/start?msg=error&error=You do not have permission to edit health reports');
-            exit;
+            exit();
         }
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location: /vreports/gest/start?msg=error&error=Invalid request method');
-            exit;
+            exit();
+        }
+
+        // Verify CSRF token
+        if (!csrf_verify('vreport_edit')) {
+            $id = $_GET['id'] ?? '';
+            header('Location: /vreports/gest/edit?id=' . $id . '&msg=error&error=Invalid request. Please try again.');
+            exit();
         }
 
         $id = $_POST['id_hs_report'] ?? null;
@@ -252,42 +269,85 @@ class VreportsGestController
         if ($userId === null) {
             error_log("Error: user_id is null when updating health report. Session user data: " . print_r($_SESSION['user'] ?? [], true));
             header('Location: /vreports/gest/edit?id=' . $id . '&msg=error&error=User session error. Please log in again.');
-            exit;
+            exit();
         }
 
         // Validation
         if (!$id || !$fullAnimalId || !$state || !$reviewDate || !$vetObs) {
             header('Location: /vreports/gest/edit?id=' . $id . '&msg=error&error=All required fields must be filled');
-            exit;
+            exit();
+        }
+
+        // SECURITY: Verify that the animal ID matches the original report
+        // An existing health report cannot be reassigned to a different animal (historical integrity)
+        $reportModel = new HealthStateReport();
+        $existingReport = $reportModel->getById($id);
+        if (!$existingReport) {
+            header('Location: /vreports/gest/start?msg=error&error=Health report not found');
+            exit();
+        }
+        
+        if ($existingReport->id_full_animal != $fullAnimalId) {
+            error_log("Security warning: Attempt to change animal ID in health report. Report ID: $id, Original animal: {$existingReport->id_full_animal}, Attempted animal: $fullAnimalId");
+            header('Location: /vreports/gest/edit?id=' . $id . '&msg=error&error=Cannot change the animal for an existing health report. This is a historical record.');
+            exit();
         }
 
         // Validate state enum - must match exactly with database ENUM
         $allowedStates = ['healthy', 'sick', 'quarantined', 'injured', 'happy', 'sad', 'depressed', 'terminal', 'infant', 'hungry', 'well', 'good_condition', 'angry', 'aggressive', 'nervous', 'anxious', 'recovering', 'pregnant', 'malnourished', 'dehydrated', 'stressed'];
         
-        // Clean and validate state
+        // Clean and validate state IMMEDIATELY - only allow lowercase letters and underscore
+        $stateRaw = $state;
         $state = strtolower(trim($state));
-        if (!in_array($state, $allowedStates, true)) {
-            error_log("Invalid health state received in update: '$state' (original: '" . ($_POST['hsr_state'] ?? '') . "')");
+        $state = preg_replace('/[^a-z_]/', '', $state); // Only allow lowercase letters and underscore
+        
+        // Log for debugging
+        error_log("State validation in update() - Raw: '" . bin2hex($stateRaw) . "' | Cleaned: '" . bin2hex($state) . "' | Value: '$state'");
+        
+        if (empty($state) || !in_array($state, $allowedStates, true)) {
+            error_log("Invalid health state received in update: '$state' (raw: '$stateRaw', hex: " . bin2hex($stateRaw) . ")");
             header('Location: /vreports/gest/edit?id=' . $id . '&msg=error&error=Invalid health state selected. Please select a valid state.');
-            exit;
+            exit();
         }
 
         // Validate date format
         $dateObj = DateTime::createFromFormat('Y-m-d', $reviewDate);
         if (!$dateObj || $dateObj->format('Y-m-d') !== $reviewDate) {
             header('Location: /vreports/gest/edit?id=' . $id . '&msg=error&error=Invalid date format');
-            exit;
+            exit();
         }
 
         $reportModel = new HealthStateReport();
         $result = $reportModel->update($id, $state, $reviewDate, $vetObs, $userId, $optDetails);
 
-        if ($result) {
+        if ($result === true) {
             header('Location: /vreports/gest/start?msg=updated');
+            exit();
         } else {
-            header('Location: /vreports/gest/edit?id=' . $id . '&msg=error&error=Failed to update health report');
+            // Log detailed error for debugging
+            error_log("Failed to update health report. Parameters: id=$id, state=$state, review_date=$reviewDate, user_id=$userId");
+            
+            // Get specific error message if available
+            $errorMsg = "Failed to update health report. Please verify the data and try again.";
+            if (is_array($result) && isset($result['error'])) {
+                $dbError = $result['error'];
+                error_log("Database error: " . $dbError);
+                
+                // Provide more specific error messages
+                if (strpos($dbError, 'foreign key') !== false || strpos($dbError, '1452') !== false) {
+                    $errorMsg = "Failed to update: The selected animal or user does not exist in the database.";
+                } elseif (strpos($dbError, 'Duplicate entry') !== false) {
+                    $errorMsg = "Failed to update: A report with this information already exists.";
+                } elseif (strpos($dbError, 'Invalid state') !== false) {
+                    $errorMsg = "Failed to update: Invalid health state value.";
+                } else {
+                    $errorMsg = "Failed to update health report: " . htmlspecialchars($dbError);
+                }
+            }
+            
+            header('Location: /vreports/gest/edit?id=' . $id . '&msg=error&error=' . urlencode($errorMsg));
+            exit();
         }
-        exit;
     }
 
     /**
@@ -298,14 +358,14 @@ class VreportsGestController
         // Check if user has permission to view reports
         if (!hasPermission('vet_reports-view')) {
             header('Location: /vreports/gest/start?msg=error&error=You do not have permission to view health reports');
-            exit;
+            exit();
         }
 
         $id = $_GET['id'] ?? null;
         
         if (!$id) {
             header('Location: /vreports/gest/start?msg=error&error=Report ID is required');
-            exit;
+            exit();
         }
 
         $reportModel = new HealthStateReport();
@@ -313,7 +373,7 @@ class VreportsGestController
 
         if (!$report) {
             header('Location: /vreports/gest/start?msg=error&error=Health report not found');
-            exit;
+            exit();
         }
 
         if (file_exists(__DIR__ . '/../views/gest/view.php')) {
@@ -333,14 +393,14 @@ class VreportsGestController
         $isAdmin = isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin';
         if (!hasPermission('vet_reports-edit') && !$isAdmin) {
             header('Location: /vreports/gest/start?msg=error&error=You do not have permission to delete health reports');
-            exit;
+            exit();
         }
 
         $id = $_GET['id'] ?? null;
         
         if (!$id) {
             header('Location: /vreports/gest/start?msg=error&error=Report ID is required');
-            exit;
+            exit();
         }
 
         $reportModel = new HealthStateReport();
@@ -351,7 +411,7 @@ class VreportsGestController
         } else {
             header('Location: /vreports/gest/start?msg=error&error=Failed to delete health report');
         }
-        exit;
+        exit();
     }
 
     /**
@@ -363,14 +423,14 @@ class VreportsGestController
         // Check if user has permission to view reports
         if (!hasPermission('vet_reports-view')) {
             header('Location: /vreports/gest/start?msg=error&error=You do not have permission to view health reports');
-            exit;
+            exit();
         }
 
         $id = $_GET['id'] ?? null;
         
         if (!$id) {
             header('Location: /vreports/gest/start?msg=error&error=Report ID is required');
-            exit;
+            exit();
         }
 
         $reportModel = new HealthStateReport();
@@ -378,7 +438,7 @@ class VreportsGestController
 
         if (!$report) {
             header('Location: /vreports/gest/start?msg=error&error=Health report not found');
-            exit;
+            exit();
         }
 
         // Format dates
@@ -455,6 +515,40 @@ class VreportsGestController
             font-size: 12px;
             color: #666;
         }
+        
+        .print-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .print-button:hover {
+            background-color: #0052a3;
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+        .print-button:active {
+            transform: scale(0.95);
+        }
+        /* Hide button when printing */
+        @media print {
+            .print-button {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -527,6 +621,21 @@ class VreportsGestController
         <p>Generated on ' . date('F j, Y \a\t g:i A') . '</p>
         <p>Zoo Arcadia - Health State Report System</p>
     </div>
+
+    <!-- Botón flotante de impresión -->
+    <button class="print-button" onclick="window.print()" title="Imprimir (Ctrl+P)">
+        🖨️
+    </button>
+
+    <script>
+        // Also allows using Ctrl+P to print
+        document.addEventListener("keydown", function(event) {
+            if (event.ctrlKey && event.key === "p") {
+                event.preventDefault();
+                window.print();
+            }
+        });
+    </script>
 </body>
 </html>';
 
@@ -536,7 +645,7 @@ class VreportsGestController
         
         // Output HTML (can be printed as PDF using browser print function)
         echo $html;
-        exit;
+        exit();
     }
 
     /**

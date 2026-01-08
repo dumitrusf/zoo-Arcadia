@@ -83,20 +83,14 @@
                                 <!-- State filter -->
                                 <label for="filter-state" class="filter__label">state:</label>
                                 <select id="filter-state" name="filter-state" class="filter__select">
-                                    <option value="">healthy...</option>
-                                    <option value="healthy">Healthy</option>
-                                    <option value="sick">Sick</option>
-                                    <option value="injured">Injured</option>
-                                    <option value="recovering">Recovering</option>
-                                    <option value="quarantined">Quarantined</option>
-                                    <option value="pregnant">Pregnant</option>
-                                    <option value="deceased">Deceased</option>
-                                    <option value="stressed">Stressed</option>
-                                    <option value="under-observation">Under Observation</option>
-                                    <option value="new-arrival">New Arrival</option>
-                                    <option value="endangered">Endangered</option>
-                                    <option value="old-age">Old Age</option>
-                                    <option value="angry">Angry</option>
+                                    <option value="">state...</option>
+                                    <?php if (isset($allowedStates) && !empty($allowedStates)): ?>
+                                        <?php foreach ($allowedStates as $stateValue => $stateLabel): ?>
+                                            <option value="<?= htmlspecialchars($stateValue) ?>">
+                                                <?= htmlspecialchars($stateLabel) ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
                                 </select>
 
                                 <!-- Name filter -->
@@ -137,6 +131,7 @@
                          data-specie="<?= htmlspecialchars($animal->specie_name ?? '') ?>"
                          data-habitat="<?= htmlspecialchars($animal->habitat_name ?? '') ?>"
                          data-nutrition="<?= htmlspecialchars(strtolower($animal->nutrition_type ?? '')) ?>"
+                         data-state="<?= htmlspecialchars(strtolower($animal->latest_health_state ?? '')) ?>"
                          data-name="<?= htmlspecialchars(strtolower($animal->animal_name ?? '')) ?>">
                     <a class="intro__link" href="/animals/pages/animalpicked?id=<?= $animal->id_full_animal ?>" target="_blank" rel="noopener noreferrer">
                         <?php if (!empty($animal->media_path)): ?>

@@ -2,6 +2,57 @@ document.addEventListener("DOMContentLoaded", function() {
     let currentPage = 1;
     let itemsPerPage = 10;
 
+    // Function to get URL parameters
+    function getURLParams() {
+        const params = new URLSearchParams(window.location.search);
+        return {
+            specie: params.get('specie') || '',
+            habitat: params.get('habitat') || '',
+            nutrition: params.get('nutrition') || '',
+            state: params.get('state') || '',
+            name: params.get('name') || '',
+            perPage: params.get('perPage') || '10',
+            page: params.get('page') || '1'
+        };
+    }
+
+    // Function to update URL with current filter values
+    function updateURL() {
+        const params = new URLSearchParams();
+        const specie = $('#filter-specie').val();
+        const habitat = $('#filter-habitat').val();
+        const nutrition = $('#filter-nutrition').val();
+        const state = $('#filter-state').val();
+        const name = $('#filter-name').val();
+        const perPage = $('#filter-per-page').val();
+        
+        if (specie) params.set('specie', specie);
+        if (habitat) params.set('habitat', habitat);
+        if (nutrition) params.set('nutrition', nutrition);
+        if (state) params.set('state', state);
+        if (name) params.set('name', name);
+        if (perPage && perPage !== '10') params.set('perPage', perPage);
+        if (currentPage > 1) params.set('page', currentPage);
+        
+        // Update URL without reloading the page
+        const newURL = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+        window.history.pushState({}, '', newURL);
+    }
+
+    // Function to restore filters from URL
+    function restoreFiltersFromURL() {
+        const urlParams = getURLParams();
+        
+        if (urlParams.specie) $('#filter-specie').val(urlParams.specie);
+        if (urlParams.habitat) $('#filter-habitat').val(urlParams.habitat);
+        if (urlParams.nutrition) $('#filter-nutrition').val(urlParams.nutrition);
+        if (urlParams.state) $('#filter-state').val(urlParams.state);
+        if (urlParams.name) $('#filter-name').val(urlParams.name);
+        if (urlParams.perPage) $('#filter-per-page').val(urlParams.perPage);
+        if (urlParams.page) currentPage = parseInt(urlParams.page) || 1;
+        if (urlParams.perPage) itemsPerPage = parseInt(urlParams.perPage) || 10;
+    }
+
     function applyFilters() {
         const specie = $('#filter-specie').val().toLowerCase();
         const habitat = $('#filter-habitat').val().toLowerCase();
@@ -16,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const articleSpecie = $article.data('specie') || '';
             const articleHabitat = $article.data('habitat') || '';
             const articleNutrition = $article.data('nutrition') || '';
+            const articleState = $article.data('state') || '';
             const articleName = $article.data('name') || '';
 
             let show = true;
@@ -39,6 +91,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 show = false;
             }
 
+            // Filter by state (exact match)
+            if (show && state && articleState.toLowerCase() !== state.toLowerCase()) {
+                show = false;
+            }
+
             // Filter by name
             if (show && name && articleName.indexOf(name) === -1) {
                 show = false;
@@ -56,6 +113,9 @@ document.addEventListener("DOMContentLoaded", function() {
         // Apply pagination to visible animals
         currentPage = 1; // Reset to first page when filtering
         showPage(visibleAnimals);
+        
+        // Update URL with current filters
+        updateURL();
         
         return visibleAnimals;
     }
@@ -142,6 +202,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 currentPage--;
                 const visibleAnimals = getVisibleAnimals();
                 showPage(visibleAnimals);
+                updateURL(); // Update URL when page changes
             }
         });
         
@@ -152,6 +213,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 currentPage++;
                 const visibleAnimals = getVisibleAnimals();
                 showPage(visibleAnimals);
+                updateURL(); // Update URL when page changes
             }
         });
         
@@ -161,6 +223,7 @@ document.addEventListener("DOMContentLoaded", function() {
             currentPage = parseInt($(this).data('page'));
             const visibleAnimals = getVisibleAnimals();
             showPage(visibleAnimals);
+            updateURL(); // Update URL when page changes
         });
     }
 
@@ -169,6 +232,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const specie = $('#filter-specie').val().toLowerCase();
         const habitat = $('#filter-habitat').val().toLowerCase();
         const nutrition = $('#filter-nutrition').val().toLowerCase();
+        const state = $('#filter-state').val().toLowerCase();
         const name = $('#filter-name').val().toLowerCase();
         
         $('.intro__animal').each(function() {
@@ -177,6 +241,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const articleSpecie = $article.data('specie') || '';
             const articleHabitat = $article.data('habitat') || '';
             const articleNutrition = $article.data('nutrition') || '';
+            const articleState = $article.data('state') || '';
             const articleName = $article.data('name') || '';
             
             let show = true;
@@ -188,6 +253,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             if (show && habitat && articleHabitat.toLowerCase().indexOf(habitat) === -1) show = false;
             if (show && nutrition && articleNutrition.indexOf(nutrition) === -1) show = false;
+            if (show && state && articleState.toLowerCase() !== state.toLowerCase()) show = false;
             if (show && name && articleName.indexOf(name) === -1) show = false;
             
             if (show) {
@@ -206,8 +272,10 @@ document.addEventListener("DOMContentLoaded", function() {
     // Items per page change
     $('#filter-per-page').on('change', function() {
         currentPage = 1;
+        itemsPerPage = parseInt($(this).val()) || 10;
         const visibleAnimals = getVisibleAnimals();
         showPage(visibleAnimals);
+        updateURL(); // Update URL when items per page changes
     });
 
     // Reset filters
@@ -219,7 +287,12 @@ document.addEventListener("DOMContentLoaded", function() {
         $('.intro__animal').show();
         const visibleAnimals = getVisibleAnimals();
         showPage(visibleAnimals);
+        // Clear URL parameters on reset
+        window.history.pushState({}, '', window.location.pathname);
     });
+
+    // Restore filters from URL on page load
+    restoreFiltersFromURL();
 
     // Initialize pagination on load
     const visibleAnimals = getVisibleAnimals();

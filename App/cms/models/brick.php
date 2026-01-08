@@ -138,6 +138,22 @@ class Brick {
         $stmt = $this->db->prepare("DELETE FROM bricks WHERE id_brick = :id");
         return $stmt->execute([':id' => $id]);
     }
+
+    /**
+     * Get the last brick created or modified
+     * @return object|false
+     */
+    public function getLast() {
+        $sql = "SELECT b.*, m.media_path, m.media_path_medium, m.media_path_large 
+                FROM bricks b
+                LEFT JOIN media_relations mr ON b.id_brick = mr.related_id AND mr.related_table = 'bricks'
+                LEFT JOIN media m ON mr.media_id = m.id_media
+                ORDER BY b.id_brick DESC
+                LIMIT 1";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
 }
 
 

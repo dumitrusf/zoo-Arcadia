@@ -7,22 +7,31 @@
  * 
  * 📝 Description:
  * Controller for managing Hero Headers (CRUD).
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Hero\Models\Hero (via App/hero/models/Hero.php)
+ * - Arcadia\Hero\Models\Slide (via App/hero/models/Slide.php)
+ * - Arcadia\Medias\Models\Cloudinary (via App/medias/models/cloudinary.php)
+ * - Arcadia\Medias\Models\Media (via App/medias/models/media.php)
+ * - Arcadia\Includes\Functions (via includes/functions.php)
+ * 
  */
 
 // DEBUG: Show errors explicitly
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
 require_once __DIR__ . '/../models/Hero.php';
 require_once __DIR__ . '/../models/Slide.php'; 
 require_once __DIR__ . '/../../medias/models/cloudinary.php';
 require_once __DIR__ . '/../../medias/models/Media.php';
 require_once __DIR__ . '/../../../includes/functions.php';
+require_once __DIR__ . '/../../../includes/helpers/csrf.php';
 
 class HeroGestController {
     
-    // Dashboard: List all heroes
+    // Dashboard: List all heroes (page headers in back office)
     public function start() {
         $heroModel = new Hero();
         $heroes = $heroModel->getAll();
@@ -92,6 +101,12 @@ class HeroGestController {
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Verify CSRF token
+            if (!csrf_verify('hero_save')) {
+                header('Location: /hero/gest/start?msg=error&error=Invalid request. Please try again.');
+                exit;
+            }
+
             $id = $_POST['id_hero'] ?? null;
             $title = $_POST['hero_title'];
             $subtitle = $_POST['hero_subtitle'];
