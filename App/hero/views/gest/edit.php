@@ -13,7 +13,16 @@ $isEdit = ($action === 'edit');
                     <h4 class="mb-0"><?= $isEdit ? 'Modify Hero' : 'Create New Hero' ?></h4>
                 </div>
                 <div class="card-body">
+                    <!-- Success/Error Messages -->
+                    <?php 
+                    require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+                    display_alert_message();
+                    ?>
+                    
+                    <?php require_once __DIR__ . '/../../../../includes/helpers/csrf.php'; ?>
+                    
                     <form action="/hero/gest/save" method="POST" enctype="multipart/form-data">
+                        <?= csrf_field('hero_save') ?>
                         
                         <?php if ($isEdit): ?>
                             <input type="hidden" name="id_hero" value="<?= $hero->id_hero ?>">

@@ -1,7 +1,3 @@
-<?php
-// App/animals/views/feeding/create.php
-?>
-
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>Record New Feeding</h1>
@@ -10,22 +6,19 @@
         </a>
     </div>
 
-    <?php if (isset($_GET['msg']) && $_GET['msg'] === 'error'): ?>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <?php if (isset($_GET['error'])): ?>
-                <?= htmlspecialchars($_GET['error']) ?>
-            <?php else: ?>
-                An error occurred. Please try again.
-            <?php endif; ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
+    <?php 
+    require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+    display_alert_message();
+    ?>
 
     <div class="row">
         <div class="col-md-8 mx-auto">
             <div class="card shadow-sm">
                 <div class="card-body">
+                    <?php require_once __DIR__ . '/../../../../includes/helpers/csrf.php'; ?>
+                    
                     <form method="POST" action="/animals/feeding/save">
+                        <?= csrf_field('feeding_save') ?>
                         
                         <!-- Animal Selection -->
                         <div class="mb-3">

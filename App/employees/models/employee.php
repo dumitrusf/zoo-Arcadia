@@ -8,8 +8,11 @@
  * 📝 Description:
  * Model that manages the employee data.
  * Manages the personal and labor information of the staff.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Database\Connection (via database/connection.php)
  */
-// Defines the Employee class to interact with the database.
+
 class Employee
 {
 
@@ -66,7 +69,7 @@ class Employee
                                      ON u.employee_id = e.id_employee 
                                      LEFT JOIN roles r ON r.id_role = u.role_id");
 
-        // iterate through the employees obtained from the database, and store them in the $employeesList array we have to store them in some place right?
+        // iterate through the employees obtained from the database, and store them in the $employeesList array
         // for each query iteration, a new Employee object is created and added to the $employeesList array
         foreach ($sql->fetchAll() as $employee) {
 
@@ -184,5 +187,24 @@ class Employee
 
         // execute the query already prepared previously
         $sql->execute([$first_name, $last_name, $birthdate, $phone, $email, $address, $city, $zip_code, $country, $gender, $marital_status, $id_employee]);
+    }
+
+    /**
+     * Get the last employee created or modified
+     * @return object|false
+     */
+    public static function getLast() {
+        $connectionDB = DB::createInstance();
+        $sql = $connectionDB->query("SELECT e.*, r.role_name, r.id_role
+                                     FROM employees e
+                                     LEFT JOIN users u ON u.employee_id = e.id_employee 
+                                     LEFT JOIN roles r ON r.id_role = u.role_id
+                                     ORDER BY COALESCE(e.updated_at, e.created_at) DESC, e.id_employee DESC
+                                     LIMIT 1");
+        $employee = $sql->fetch(PDO::FETCH_ASSOC);
+        if ($employee) {
+            return new Employee($employee["id_employee"], $employee["first_name"], $employee["last_name"], $employee["birthdate"], $employee["phone"], $employee["email"], $employee["address"], $employee["city"], $employee["zip_code"], $employee["country"], $employee["gender"], $employee["marital_status"], $employee["role_name"], $employee["created_at"], $employee["updated_at"]);
+        }
+        return false;
     }
 }

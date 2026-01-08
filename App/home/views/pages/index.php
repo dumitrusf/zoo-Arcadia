@@ -64,27 +64,50 @@
 	</div>
 
 
-	<!-- For testimony will be set in the future cause now is static -->
+	<!-- Dynamic Testimonial Section -->
 	<section class="testimony">
 		<div class="testimony__approuved testimony__container">
 			<h2 class="testimony__title testimony__title--shown">take a look to our most recent testimony</h2>
 
-			<div class="testimony__item">
-				<div class="testimony__header">
-					<span class="testimony__user">knight</span>
-					<span class="testimony__rating">★★★★★</span>
+			<?php if (isset($bestTestimonial) && $bestTestimonial): ?>
+				<div class="testimony__item">
+					<div class="testimony__header">
+						<span class="testimony__user"><?= htmlspecialchars($bestTestimonial->pseudo) ?></span>
+						<span class="testimony__rating">
+							<?php
+							$rating = (int)$bestTestimonial->rating;
+							for ($i = 1; $i <= 5; $i++):
+								if ($i <= $rating):
+									echo '★';
+								else:
+									echo '☆';
+								endif;
+							endfor;
+							?>
+						</span>
+					</div>
+					<p class="testimony__text">
+						<?= nl2br(htmlspecialchars($bestTestimonial->message)) ?>
+					</p>
 				</div>
-				<p class="testimony__text">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem reiciendis exercitationem
-					iste, repellendus repudiandae nihil ut eaque sed quam sit at harum non quas nulla
-					explicabo architecto numquam eum deleniti!
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem reiciendis exercitationem
-					iste, repellendus repudiandae nihil ut eaque sed quam sit at harum non quas nulla
-					explicabo architecto numquam eum deleniti!
-				</p>
-			</div>
+			<?php else: ?>
+				<!-- Fallback if no testimonials available -->
+				<div class="testimony__item">
+					<div class="testimony__header">
+						<span class="testimony__user">knight</span>
+						<span class="testimony__rating">★★★★★</span>
+					</div>
+					<p class="testimony__text">
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem reiciendis exercitationem
+						iste, repellendus repudiandae nihil ut eaque sed quam sit at harum non quas nulla
+						explicabo architecto numquam eum deleniti!
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem reiciendis exercitationem
+						iste, repellendus repudiandae nihil ut eaque sed quam sit at harum non quas nulla
+						explicabo architecto numquam eum deleniti!
+					</p>
+				</div>
+			<?php endif; ?>
 		</div>
-		<a href="./about.php#testimonys" class="btn intro__button intro__button--hours">know more</a>
-
+		<a href="/about/pages/about#testimonys" class="btn intro__button intro__button--hours">know more</a>
 	</section>
 </main>

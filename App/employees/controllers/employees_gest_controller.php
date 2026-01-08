@@ -23,12 +23,9 @@ require_once __DIR__ . "/../models/employee.php";
 require_once __DIR__ . "/../../roles/models/role.php";
 
 require_once __DIR__ . "/../../../database/connection.php";
-// Include the file that has the DB class to be able to connect to the database.
+require_once __DIR__ . "/../../../includes/helpers/csrf.php";
 
 DB::createInstance();
-// Call the static method createInstance() of the DB class.
-// This method returns a PDO connection ready to use, following the Singleton pattern.
-// If it is the first time it is called, it creates the connection. If it already exists, it reuses the same one.
 
 class EmployeesGestController
 {
@@ -58,6 +55,12 @@ class EmployeesGestController
 
         // If the form is submitted (in create.php form), create a new employee
         if ($_POST) {
+            // Verify CSRF token
+            if (!csrf_verify('employee_create')) {
+                header('Location: /employees/gest/create?msg=error&error=Invalid request. Please try again.');
+                exit;
+            }
+
             $first_name = $_POST['firstname'];
             $last_name = $_POST['lastname'];
             $birthdate = $_POST['birthdate'];
@@ -75,6 +78,7 @@ class EmployeesGestController
             
             // Redirect to the start page
             header("Location: /employees/gest/start");
+            exit();
         }
 
         // Include the view to display the create page
@@ -92,6 +96,7 @@ class EmployeesGestController
 
         // Redirect to the start page
         header("Location: /employees/gest/start");
+        exit();
     }
 
 
@@ -106,7 +111,7 @@ class EmployeesGestController
         // Get the ID of the employee from the URL (thanks to the GET method)
         $id_employee = $_GET["id"];
 
-        // Find the employee from the database, thanks to the method find( from the Employee model)
+        // Find the employee from the database, thanks to the method find (from the Employee model)
         $employee = Employee::find($id_employee);
 
 
@@ -115,6 +120,13 @@ class EmployeesGestController
 
         // If the form is submitted (in edit.php form), update the employee
         if ($_POST) {
+            // Verify CSRF token
+            if (!csrf_verify('employee_edit')) {
+                $id = $_POST['id'] ?? '';
+                header('Location: /employees/gest/edit?id=' . $id . '&msg=error&error=Invalid request. Please try again.');
+                exit;
+            }
+
             // Get the data from the form
             $id_employee = $_POST['id'];
             $first_name = $_POST['firstname'];
@@ -134,6 +146,7 @@ class EmployeesGestController
             
             // Redirect to the start page
             header("Location: /employees/gest/start");
+            exit();
         }
 
 

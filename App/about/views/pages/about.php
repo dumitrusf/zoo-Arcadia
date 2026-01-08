@@ -36,95 +36,108 @@
 </main>
 
 <section class="testimony" id="testimonys">
-    <!-- ... testimony section remains static for now ... -->
 	<div class="testimony__approuved testimony__container">
 		<h2 class="testimony__title testimony__title--shown">All testimonys</h2>
 
-		<div id="carouselExampleRide" data-bs-theme="dark" class="carousel slide" data-bs-ride="true">
-			<div class="carousel-inner">
-				<div class="carousel-item active">
-					<div class="testimony__item">
-						<div class="testimony__header">
-							<span class="testimony__user">knight</span>
-							<span class="testimony__rating">★★★★★</span>
+		<?php if (!empty($validatedTestimonials)): ?>
+			<div id="carouselExampleRide" data-bs-theme="dark" class="carousel slide" data-bs-ride="true">
+				<div class="carousel-inner">
+					<?php foreach ($validatedTestimonials as $index => $testimonial): ?>
+						<div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
+							<div class="testimony__item">
+								<div class="testimony__header">
+									<span class="testimony__user"><?= htmlspecialchars($testimonial->pseudo) ?></span>
+									<span class="testimony__rating">
+										<?php
+										$rating = (int)$testimonial->rating;
+										for ($i = 1; $i <= 5; $i++):
+											if ($i <= $rating):
+												echo '★';
+											else:
+												echo '☆';
+											endif;
+										endfor;
+										?>
+									</span>
+								</div>
+								<p class="testimony__text">
+									<?= nl2br(htmlspecialchars($testimonial->message)) ?>
+								</p>
+							</div>
 						</div>
-						<p class="testimony__text">
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem reiciendis exercitationem
-							iste, repellendus repudiandae nihil ut eaque sed quam sit at harum non quas nulla
-							explicabo architecto numquam eum deleniti!
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem reiciendis exercitationem
-							iste, repellendus repudiandae nihil ut eaque sed quam sit at harum non quas nulla
-							explicabo architecto numquam eum deleniti!
-						</p>
-					</div>
+					<?php endforeach; ?>
 				</div>
-				<div class="carousel-item">
-					<div class="testimony__item">
-						<div class="testimony__header">
-							<span class="testimony__user">willfred</span>
-							<span class="testimony__rating">★★★★★</span>
-						</div>
-						<p class="testimony__text">
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem reiciendis exercitationem
-							iste, repellendus repudiandae nihil ut eaque sed quam sit at harum non quas nulla
-							explicabo architecto numquam eum deleniti!
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem reiciendis exercitationem
-							iste, repellendus repudiandae nihil ut eaque sed quam sit at harum non quas nulla
-							explicabo architecto numquam eum deleniti!
-						</p>
+				<?php if (count($validatedTestimonials) > 1): ?>
+					<div>
+						<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide"
+							data-bs-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Previous</span>
+						</button>
+						<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide"
+							data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Next</span>
+						</button>
 					</div>
-				</div>
-				<div class="carousel-item">
-					<div class="testimony__item">
-						<div class="testimony__header">
-							<span class="testimony__user">Robin</span>
-							<span class="testimony__rating">★★★★★</span>
-						</div>
-						<p class="testimony__text">
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem reiciendis exercitationem
-							iste, repellendus repudiandae nihil ut eaque sed quam sit at harum non quas nulla
-							explicabo architecto numquam eum deleniti!
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem reiciendis exercitationem
-							iste, repellendus repudiandae nihil ut eaque sed quam sit at harum non quas nulla
-							explicabo architecto numquam eum deleniti!
-						</p>
-					</div>
-				</div>
+				<?php endif; ?>
 			</div>
-			<div>
-				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide"
-					data-bs-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					<span class="visually-hidden">Previous</span>
-				</button>
-				<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide"
-					data-bs-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					<span class="visually-hidden">Next</span>
-				</button>
+		<?php else: ?>
+			<div class="testimony__item">
+				<p class="testimony__text text-center text-muted">
+					No testimonials available yet. Be the first to share your experience!
+				</p>
 			</div>
-		</div>
+		<?php endif; ?>
 	</div>
 
 	<div class="testimony__feedback testimony__container">
 		<h2 class="testimony__title testimony__title--feedback">Write your feedback</h2>
-		<form class="testimony__form">
-			<fieldset class="testimony__fieldset">
+		
+		<!-- Success/Error Messages -->
+		<?php if (isset($_GET['msg'])): ?>
+			<div class="alert alert-<?= $_GET['msg'] === 'success' ? 'success' : 'danger' ?> alert-dismissible fade show" role="alert" style="margin-bottom: 1rem;">
+				<?= htmlspecialchars($_GET['message'] ?? $_GET['error'] ?? '') ?>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+			<script>
+				// Clean URL parameters after 3 seconds or on click
+				(function() {
+					const cleanUrl = function() {
+						if (window.location.search.includes('msg=')) {
+							const url = new URL(window.location);
+							url.searchParams.delete('msg');
+							url.searchParams.delete('message');
+							url.searchParams.delete('error');
+							window.history.replaceState({}, '', url.pathname + (url.search ? url.search : ''));
+						}
+					};
+					
+					// Clean after 3 seconds
+					setTimeout(cleanUrl, 3000);
+					
+					// Clean on click anywhere
+					document.addEventListener('click', cleanUrl, { once: true });
+				})();
+			</script>
+		<?php endif; ?>
 
+		<form class="testimony__form" method="POST" action="/testimonials/pages/create" id="testimonyForm">
+			<fieldset class="testimony__fieldset">
 				<div class="testimony__field">
 					<div class="testimony__rating-group">
-						<label class="testimony__label" for="rating"></label>
-						<div id="rating" class="testimony__stars">
-							<span class="testimony__star" data-value="1">★</span>
-							<span class="testimony__star" data-value="2">★</span>
-							<span class="testimony__star" data-value="3">★</span>
-							<span class="testimony__star" data-value="4">★</span>
-							<span class="testimony__star" data-value="5">★</span>
+						<label class="testimony__label" for="rating">Rating </span></label>
+						<div id="rating" class="testimony__stars" style="margin-bottom: 10px;">
+							<span class="testimony__star" data-value="1" style="cursor: pointer; color: #ccc; opacity: 0.5; font-size: 1.5rem; margin-right: 5px;" title="1 star">★</span>
+							<span class="testimony__star" data-value="2" style="cursor: pointer; color: #ccc; opacity: 0.5; font-size: 1.5rem; margin-right: 5px;" title="2 stars">★</span>
+							<span class="testimony__star" data-value="3" style="cursor: pointer; color: #ccc; opacity: 0.5; font-size: 1.5rem; margin-right: 5px;" title="3 stars">★</span>
+							<span class="testimony__star" data-value="4" style="cursor: pointer; color: #ccc; opacity: 0.5; font-size: 1.5rem; margin-right: 5px;" title="4 stars">★</span>
+							<span class="testimony__star" data-value="5" style="cursor: pointer; color: #ccc; opacity: 0.5; font-size: 1.5rem; margin-right: 5px;" title="5 stars">★</span>
 						</div>
+						<input type="hidden" name="rating" id="ratingInput">
 						<label class="testimony__label" for="pseudo">Pseudo</label>
-
 					</div>
-					<input class="testimony__input" type="text" id="pseudo" name="pseudo" placeholder="Pseudo" />
+					<input class="testimony__input" type="text" id="pseudo" name="pseudo" placeholder="Pseudo" maxlength="100" />
 				</div>
 
 				<div class="testimony__field testimony__field--message">
@@ -135,11 +148,11 @@
 							placeholder="Your message"></textarea>
 						<br />
 					</div>
-					<a type="submit" class="btn intro__button intro__button--send">SEND</a>
+					<button type="submit" class="btn intro__button intro__button--send">SEND</button>
 				</div>
-
-
 			</fieldset>
 		</form>
 	</div>
 </section>
+
+<script src="/public/build/js/rating-testimony.js" defer></script>

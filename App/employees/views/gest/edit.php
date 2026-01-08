@@ -5,8 +5,16 @@
         <h3>Edit Employee</h3>
     </div>
     <div class="card-body">
+        <!-- Success/Error Messages -->
+        <?php 
+        require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+        display_alert_message();
+        ?>
 
+        <?php require_once __DIR__ . '/../../../../includes/helpers/csrf.php'; ?>
+        
         <form action="" method="post">
+            <?= csrf_field('employee_edit') ?>
 
 
             <!-- Very Important! Hidden input to store the employee ID, to be able to update the employee in the database -->
@@ -208,9 +216,9 @@
                 </select>
             </div>
 
-            <div class="card-footer text-end d-flex justify-content-between align-items-start">
+            <div class="card-footer d-flex justify-content-between align-items-center">
                 <input type="submit" class="btn btn-warning px-4" value="Update Employee">
-                <a href="/employees/gest/start" class=" btn btn-primary px-4">Cancel</a>
+                <a href="/employees/gest/start" class="btn btn-primary px-4">Cancel</a>
             </div>
         </form>
 

@@ -1,12 +1,28 @@
 <div class="card  shadow-sm mb-4">
     <div class="card-header bg-primary text-white">
-        <h3>Edit User <?php echo $user_to_edit->employee_last_name; ?>'s account</h3>
+        <h3>
+            <?php if (isset($user_to_edit)): ?>
+                Edit User <?php echo $user_to_edit->employee_last_name; ?>'s account
+            <?php elseif (isset($employee_to_assign)): ?>
+                Assign Account to Employee <?php echo $employee_to_assign->last_name; ?>
+            <?php else: ?>
+                Edit User
+            <?php endif; ?>
+        </h3>
     </div>
     <div class="card-body">
+        <!-- Success/Error Messages -->
+        <?php 
+        require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+        display_alert_message();
+        ?>
 
         <?php if (isset($user_to_edit)) { ?>
 
+            <?php require_once __DIR__ . '/../../../../includes/helpers/csrf.php'; ?>
+            
             <form action="/users/gest/edit" method="post">
+                <?= csrf_field('user_edit') ?>
 
                 <input type="hidden" name="id" value="<?php echo $user_to_edit->id; ?>">
 
@@ -138,6 +154,7 @@
         <?php } else if (isset($employee_to_assign)) { ?>
 
             <form action="/users/gest/assignAccount" method="post">
+                <?= csrf_field('user_assign') ?>
 
                 <input type="hidden" name="employee_id" value="<?php echo $employee_to_assign->id; ?>">
 

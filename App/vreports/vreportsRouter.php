@@ -15,4 +15,3 @@
 
 require_once __DIR__ . '/../../includes/functions.php';
 handleDomainRouting('vreports', __DIR__);
-

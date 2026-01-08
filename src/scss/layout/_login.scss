@@ -4,6 +4,12 @@
 
 .body-login {
   background-color: map-get(map-get(v.$color, solid-colors), c-bg-contact);
+
+  display: grid;
+  min-height: 100vh;
+  grid-template-rows: 1fr auto;
+  grid-auto-rows: auto;
+  row-gap: 4rem;
 }
 
 .login {

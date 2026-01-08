@@ -13,30 +13,26 @@
  * - Arcadia\{Domain}\{Domain}Router (via App/{domain}/{domain}Router.php)
  */
 
-// App/router.php (The central guard)
-
 session_start();
 
-
-// 1. Caché out (it usually works, but sometimes we have to clear the browser cache to start going)(trying also ctrl + shift + r)
+// 1. Disable browser cache to prevent update issues
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
 $domain = $_GET["domain"] ?? "home";
 
-// 2. List of sites where we don't need to be logged in
-// "home", "about", "habitats", "animals", "cms" should be here to be accessible publicly.
-$public_domains = ["auth", "contact", "home", "about", "habitats", "animals", "cms"];
+// 2. Define public domains that do not require authentication
+$public_domains = ["auth", "contact", "home", "about", "habitats", "animals", "cms", "testimonials"];
 
-// 2.1 Session expiration check (11 hours = 39600 seconds)
-// If session is older than 11 hours, destroy it and require re-login
+// 2.1 Check session expiration (11 hours = 39600 seconds)
+// If the session is older, we destroy it and redirect to login
 if (isset($_SESSION["user"]["username"])) {
     $sessionTimeout = 39600; // 11 hours in seconds
     $lastActivity = $_SESSION["last_activity"] ?? time();
     
     if (time() - $lastActivity > $sessionTimeout) {
-        // Session expired - destroy it
+        // Session expired: destroy it completely
         $_SESSION = array();
         if (ini_get("session.use_cookies")) {
             $params = session_get_cookie_params();
@@ -53,9 +49,9 @@ if (isset($_SESSION["user"]["username"])) {
         $_SESSION["last_activity"] = time();
     }
     
-    // Additional security: Verify session data integrity
+    // Additional verification: validate session data integrity
     if (!isset($_SESSION["user"]["id_user"]) || !isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-        // Invalid session data - destroy it
+        // Invalid session data: destroy it
         $_SESSION = array();
         session_destroy();
         header("Location: /auth/pages/login?msg=invalid_session");
@@ -63,33 +59,32 @@ if (isset($_SESSION["user"]["username"])) {
     }
 }
 
-// 3. Security check
-// If there is no user and the domain is not public...
+// 3. Main security check
+// If there is no authenticated user and the domain is not public, redirect to login
 if (!isset($_SESSION["user"]["username"]) && !in_array($domain, $public_domains)) {
     // we redirect to login!.
     header("Location: /auth/pages/login");
     exit();
 }
 
-// 3.1 Protection specific for the Dashboard (/home/pages/start)
-// Even though "home" is public (for index), the action "start" requires login.
+// 3.1 Specific protection for Dashboard (/home/pages/start)
+// Although "home" is public for the main page, the "start" action requires authentication
 if ($domain === "home" && $_GET["action"] === "start" && !isset($_SESSION["user"]["username"])) {
     //we'll redirect to login page.
     header("Location: /auth/pages/login");
     exit();
 }
 
-// 3.2 Global Management Protection (/gest/)
-// If someone tries to access a management controller (gest) without being logged in -> Login.
-// This covers /cms/gest, /hero/gest, etc., even if the domain is public.
+// 3.2 Global protection for management controllers (/gest/)
+// Any access to a "gest" controller requires authentication, even in public domains
 $controller = $_GET['controller'] ?? '';
 if ($controller === 'gest' && !isset($_SESSION["user"]["username"])) {
     header("Location: /auth/pages/login");
     exit();
 }
 
-// 3.3 Protection for private routes within public domains
-// Animals domain: /animals/feeding/* and /animals/gest/* require authentication
+// 3.3 Protection for private routes within "animals" domain
+// The "feeding" and "gest" controllers require authentication
 if ($domain === "animals") {
     $controller = $_GET['controller'] ?? '';
     if (in_array($controller, ['feeding', 'gest']) && !isset($_SESSION["user"]["username"])) {
@@ -98,8 +93,8 @@ if ($domain === "animals") {
     }
 }
 
-// 3.4 Protection for private routes in habitats domain
-// Habitats domain: /habitats/gest/* and /habitats/suggestion/* require authentication
+// 3.4 Protection for private routes within "habitats" domain
+// The "gest" and "suggestion" controllers require authentication
 if ($domain === "habitats") {
     $controller = $_GET['controller'] ?? '';
     if (in_array($controller, ['gest', 'suggestion']) && !isset($_SESSION["user"]["username"])) {
@@ -108,36 +103,33 @@ if ($domain === "habitats") {
     }
 }
 
-// 4. Inverse check (optional but useful to perform a security check and to avoid infinite loops)
-// If there is a user and the user tries to go to login...
+// 4. Inverse check: already authenticated users
+// If an authenticated user tries to access login, redirect to dashboard
+// This prevents infinite loops and improves user experience
 if (isset($_SESSION["user"]["username"]) && $domain === "auth" && $_GET["action"] === "login") {
-    // ... why? If you are already inside the database and logged in, we send you to home!
-    // (to avoid infinite loops).
     header("Location: /home/pages/start");
     exit();
 }
 
-$domain = $_GET["domain"] ?? "home";
-
-//  "white list" of domains that exist. If a domain is not here, it is rejected.
+// 5. Whitelist of allowed domains
+// Only domains in this list can be processed. Any other will be rejected
 $allowed_domains = ["hero", "medias", "habitat1", "cms", "about", "auth", "home", "animals", "employees", "habitats", "permissions", "reports", "roles", "schedules", "testimonials", "users", "contact", "vreports"];
 
 if (in_array($domain, $allowed_domains)) {
-    // we redirect to the domain router.
+    // Domain is valid: load its corresponding router
     $domainRouterPath = __DIR__ . "/{$domain}/{$domain}Router.php";
 
     if (file_exists($domainRouterPath)) {
         require_once $domainRouterPath;
     } else {
-        // ERROR 500: The domain is in the list, but we haven't created its router file.
-        // This is our error (of the programmers), not the user's.
+        // ERROR 500: Domain is in the list but its router file does not exist
+        // This is a programming error, not a user error
         http_response_code(500); 
-        // In the future, we could create an `error-500.php` page.
         header('Location: /public/error-500.php');
         exit();
     }
 } else {
-    // ERROR 404: The domain that the user requested does not exist in our list.
+    // ERROR 404: The requested domain does not exist in our list
     http_response_code(404);
     header('Location: /public/error-404.php');
     exit();

@@ -17,21 +17,13 @@ require_once __DIR__ . '/../../../../includes/functions.php';
         <?php endif; ?>
     </div>
 
-    <?php if (isset($_GET['msg'])): ?>
-        <div class="alert <?= ($_GET['msg'] === 'error') ? 'alert-danger' : 'alert-success' ?> alert-dismissible fade show" role="alert">
-            <?php
-            $msg = $_GET['msg'];
-            if ($msg === 'error' && isset($_GET['error'])) {
-                echo htmlspecialchars($_GET['error']);
-            } elseif ($msg === 'saved') {
-                echo 'Action completed successfully!';
-            } elseif ($msg === 'deleted') {
-                echo 'Habitat deleted successfully!';
-            }
-            ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
+    <?php 
+    require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+    display_alert_message('Action completed successfully!', [
+        'saved' => 'Action completed successfully!',
+        'deleted' => 'Habitat deleted successfully!'
+    ]);
+    ?>
 
     <?php if (isset($error)): ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">

@@ -22,13 +22,13 @@ class FeedingLog {
     /**
      * Create a new feeding log entry.
      * @param int $animalFullId ID from animal_full
-     * @param int $userId ID from users (employee who fed, can be null)
      * @param string $foodType ('meat', 'fruit', 'legumes', 'insect')
      * @param int $foodQty Quantity in grams
+     * @param int|null $userId ID from users (employee who fed, can be null)
      * @param string|null $foodDate Custom date/time (optional, defaults to NOW)
      * @return int|false The ID of the new log entry or false on failure.
      */
-    public function create($animalFullId, $userId = null, $foodType, $foodQty, $foodDate = null) {
+    public function create($animalFullId, $foodType, $foodQty, $userId = null, $foodDate = null) {
         try {
             if ($foodDate) {
                 $sql = "INSERT INTO feeding_logs (animal_f_id, user_id, food_type, food_qtty, food_date) 
@@ -175,6 +175,25 @@ class FeedingLog {
             error_log("Error deleting feeding log: " . $e->getMessage());
             return false;
         }
+    }
+
+    /**
+     * Get the last feeding log entry
+     * @return object|false
+     */
+    public function getLast() {
+        $sql = "SELECT fl.*, 
+                       ag.animal_name, 
+                       u.username AS fed_by_username
+                FROM feeding_logs fl
+                JOIN animal_full af ON fl.animal_f_id = af.id_full_animal
+                JOIN animal_general ag ON af.animal_g_id = ag.id_animal_g
+                LEFT JOIN users u ON fl.user_id = u.id_user
+                ORDER BY fl.food_date DESC, fl.id_feeding_log DESC
+                LIMIT 1";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
 }
 

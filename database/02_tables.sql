@@ -14,7 +14,6 @@ DROP TABLE IF EXISTS specie ;
 DROP TABLE IF EXISTS specie;
 DROP TABLE IF EXISTS habitat_suggestion;
 DROP TABLE IF EXISTS habitats;
-DROP TABLE IF EXISTS psw_reset_token;
 DROP TABLE IF EXISTS testimonials;
 DROP TABLE IF EXISTS user_permissions;
 DROP TABLE IF EXISTS roles_permissions;
@@ -34,21 +33,21 @@ DROP TABLE IF EXISTS form_contact;
 CREATE TABLE form_contact (
     id_form INT AUTO_INCREMENT PRIMARY KEY,
     -- Primary key that increases automatically.
-    ff_name VARCHAR(50) NOT NULL,
+    ff_name VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
     -- Name of the sender cannot be null.
-    fl_name VARCHAR(50) NOT NULL,
+    fl_name VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
     -- Surname of the sender cannot be null.
     f_email VARCHAR(100) NOT NULL,
     -- Email of the sender cannot be null.
-    f_subject VARCHAR(100),
+    f_subject VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
     -- Validation of the email format to do it in the application.
-    f_message TEXT NOT NULL,
-    -- Optional message matter.
+    f_message TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    -- Optional message matter. Using utf8mb4 to support emojis and full Unicode.
     f_sent_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
     -- Body of the mandatory message, since it is the main content.
     email_sent BOOLEAN DEFAULT FALSE 
     -- Date of sending the message.It is automatically established at the time of insertion, Flag to track if email was sent to zoo
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 --
 --
@@ -274,10 +273,10 @@ CREATE TABLE roles_permissions (
 CREATE TABLE testimonials (
     id_testimonial INT AUTO_INCREMENT PRIMARY KEY,
     -- Unique testimony identifier.
-    pseudo VARCHAR(100) NOT NULL,
+    pseudo VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
     -- pseudonym of the author of the testimony, mandatory.
-    message TEXT NOT NULL,
-    -- Testimony content, mandatory.
+    message TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    -- Testimony content, mandatory. Using utf8mb4 to support emojis and full Unicode.
     rating TINYINT UNSIGNED NOT NULL CHECK (
         rating BETWEEN 1
         AND 5
@@ -292,24 +291,7 @@ CREATE TABLE testimonials (
     validated_at TIMESTAMP NULL DEFAULT NULL,
     -- Validation date of the optional testimony.
     validated_by INT DEFAULT NULL -- Optional relationship with the users table (validator).
-);
-
---
---
--- PSW_RESET_ToKEN table: stores the password restoration tokens
-CREATE TABLE psw_reset_token (
-    id_reset_token INT AUTO_INCREMENT PRIMARY KEY,
-    -- Single token identifier.
-    token VARCHAR(255) NOT NULL UNIQUE,
-    -- Unique and mandatory token.
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    -- Token creation date.It is assigned automatically.
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    -- Last update date.It is automatically updated.
-    expires_at TIMESTAMP NOT NULL,
-    -- Date and expiration time of the Token.
-    user_id INT NOT NULL -- Relationship with the Users table (associated user).
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 --
 --

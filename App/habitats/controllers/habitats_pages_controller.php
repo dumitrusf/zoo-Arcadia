@@ -7,6 +7,16 @@
  * 
  * 📝 Description:
  * Controller for the public Habitats pages.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Habitats\Models\Habitat (via App/habitats/models/habitat.php)
+ * - Arcadia\Hero\Models\Hero (via App/hero/models/Hero.php)
+ * - Arcadia\Hero\Models\Slide (via App/hero/models/Slide.php)
+ * - Arcadia\Animals\Models\AnimalFull (via App/animals/models/animalFull.php)
+ * - Arcadia\Animals\Models\Specie (via App/animals/models/specie.php)
+ * - Arcadia\Animals\Models\Nutrition (via App/animals/models/nutrition.php)
+ * - Arcadia\VReports\Models\HealthStateReport (via App/vreports/models/healthStateReport.php)
+ * 
  */
 
 require_once __DIR__ . '/../models/habitat.php';
@@ -15,6 +25,7 @@ require_once __DIR__ . '/../../hero/models/Slide.php';
 require_once __DIR__ . '/../../animals/models/animalFull.php';
 require_once __DIR__ . '/../../animals/models/specie.php';
 require_once __DIR__ . '/../../animals/models/nutrition.php';
+require_once __DIR__ . '/../../vreports/models/healthStateReport.php';
 
 class HabitatsPagesController {
 
@@ -62,12 +73,44 @@ class HabitatsPagesController {
         // 2. Get animals in this habitat
         $animals = $habitatModel->getAnimalsByHabitatId($id);
 
+        // 2.5. Get latest health state for each animal
+        $healthReportModel = new HealthStateReport();
+        foreach ($animals as $animal) {
+            $latestReport = $healthReportModel->getLatestByAnimalId($animal->id_full_animal);
+            $animal->latest_health_state = $latestReport->hsr_state ?? null;
+        }
+
         // 3. Get filter data (without habitat since we're already in a specific habitat)
         $specieModel = new specie();
         $nutritionModel = new Nutrition();
         
         $species = $specieModel->getAll();
         $nutritions = $nutritionModel->getAll();
+
+        // 3.5. Define allowed health states (matching back office)
+        $allowedStates = [
+            'healthy' => 'Healthy',
+            'sick' => 'Sick',
+            'quarantined' => 'Quarantined',
+            'injured' => 'Injured',
+            'happy' => 'Happy',
+            'sad' => 'Sad',
+            'depressed' => 'Depressed',
+            'terminal' => 'Terminal',
+            'infant' => 'Infant',
+            'hungry' => 'Hungry',
+            'well' => 'Well',
+            'good_condition' => 'Good Condition',
+            'angry' => 'Angry',
+            'aggressive' => 'Aggressive',
+            'nervous' => 'Nervous',
+            'anxious' => 'Anxious',
+            'recovering' => 'Recovering',
+            'pregnant' => 'Pregnant',
+            'malnourished' => 'Malnourished',
+            'dehydrated' => 'Dehydrated',
+            'stressed' => 'Stressed'
+        ];
 
         // 4. Get Hero for this specific habitat (if exists), otherwise use generic habitats hero
         $heroModel = new Hero();

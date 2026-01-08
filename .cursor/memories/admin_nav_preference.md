@@ -1,1 +1,0 @@
-El usuario prefiere y le gustó la lógica de ocultar elementos de navegación basándose en el rol del usuario (`$_SESSION['user']['role_name'] === 'Admin'`) en `BO_main_layout.php`. Usar este patrón para futuras funcionalidades exclusivas de administrador.

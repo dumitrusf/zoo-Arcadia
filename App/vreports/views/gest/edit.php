@@ -15,40 +15,44 @@ $userId = $_SESSION['user']['id_user'] ?? null;
         </a>
     </div>
 
-    <?php if (isset($_GET['msg']) && $_GET['msg'] === 'error' && isset($_GET['error'])): ?>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <?= htmlspecialchars($_GET['error']) ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
+    <?php 
+    require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+    display_alert_message();
+    ?>
 
     <div class="card shadow-sm">
         <div class="card-body">
+            <?php require_once __DIR__ . '/../../../../includes/helpers/csrf.php'; ?>
+            
             <form action="/vreports/gest/update" method="POST">
+                <?= csrf_field('vreport_edit') ?>
                 <!-- Hidden field for report ID -->
                 <input type="hidden" name="id_hs_report" value="<?= $report->id_hs_report ?>">
 
-                <!-- Animal Selection -->
+                <!-- Animal Selection (Read-only in edit mode) -->
                 <div class="mb-3">
                     <label for="full_animal_id" class="form-label fw-bold">Animal <span class="text-danger">*</span></label>
-                    <select class="form-select" id="full_animal_id" name="full_animal_id" required>
-                        <option value="" disabled>Select an animal...</option>
-                        <?php if (!empty($animals)): ?>
-                            <?php foreach ($animals as $animal): ?>
-                                <option value="<?= $animal->id_full_animal ?>" 
-                                        <?= ($animal->id_full_animal == $report->id_full_animal) ? 'selected' : '' ?>>
-                                    <?= htmlspecialchars($animal->animal_name ?? 'N/A') ?> 
-                                    (<?= htmlspecialchars($animal->specie_name ?? 'N/A') ?>)
-                                    <?php if ($animal->habitat_name): ?>
-                                        - <?= htmlspecialchars($animal->habitat_name) ?>
-                                    <?php endif; ?>
-                                </option>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <option disabled>No animals available.</option>
-                        <?php endif; ?>
-                    </select>
-                    <div class="form-text">Select the animal for this health report.</div>
+                    <?php
+                    // Find the current animal from the list to display its info
+                    $currentAnimal = null;
+                    if (!empty($animals)) {
+                        foreach ($animals as $animal) {
+                            if ($animal->id_full_animal == $report->id_full_animal) {
+                                $currentAnimal = $animal;
+                                break;
+                            }
+                        }
+                    }
+                    ?>
+                    <input type="text" 
+                           class="form-control" 
+                           id="full_animal_id_display" 
+                           value="<?= htmlspecialchars(($currentAnimal->animal_name ?? 'N/A') . ' (' . ($currentAnimal->specie_name ?? 'N/A') . ')' . ($currentAnimal->habitat_name ? ' - ' . $currentAnimal->habitat_name : '')) ?>" 
+                           readonly 
+                           style="background-color: #e9ecef; cursor: not-allowed;">
+                    <!-- Hidden field to send the animal ID -->
+                    <input type="hidden" name="full_animal_id" value="<?= htmlspecialchars($report->id_full_animal) ?>">
+                    <div class="form-text">The animal cannot be changed for an existing health report. This is a historical record.</div>
                 </div>
 
                 <!-- Health State -->

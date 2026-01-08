@@ -14,12 +14,10 @@ require_once __DIR__ . '/../../../../includes/functions.php';
         <?php endif; ?>
     </div>
 
-    <?php if (isset($_GET['msg'])): ?>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            Action completed successfully!
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
+    <?php 
+    require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+    display_alert_message();
+    ?>
 
     <div class="card shadow-sm">
         <div class="card-body">
@@ -54,7 +52,7 @@ require_once __DIR__ . '/../../../../includes/functions.php';
 
                                     <td><span class="badge bg-info text-dark"><?= ucfirst($brick->page_name) ?></span></td>
                                     <td class="fw-bold"><?= htmlspecialchars($brick->title) ?></td>
-                                    <td><?= htmlspecialchars(substr($brick->description, 0, 60)) ?>...</td>
+                                    <td><?= nl2br(htmlspecialchars(substr($brick->description, 0, 60))) ?>...</td>
                                     
                                     <td class="text-end">
                                         <?php if (hasPermission('services-edit')): ?>

@@ -10,8 +10,8 @@
  * 
  * 🔗 Dependencies:
  * - Arcadia\Database\Connection (via database/connection.php)
- * - Arcadia\Schedules\Views\Gest\Start (via App/schedules/views/gest/start.php)
  * - Arcadia\Schedules\Models\Schedule (via App/schedules/models/schedule.php)
+ * - Arcadia\Includes\Functions (via includes/functions.php)
  */
 
 require_once __DIR__ . '/../../../database/connection.php';
@@ -33,7 +33,7 @@ class SchedulesGestController {
             echo "Error: View file not found at " . __DIR__ . '/../views/gest/start.php';
         }
     }
-
+    
     public function edit() {
         // Check if user has permission to edit schedules
         if (!hasPermission('schedules-edit')) {

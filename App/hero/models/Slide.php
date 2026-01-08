@@ -8,6 +8,10 @@
  * 📝 Description:
  * Model for interacting with the 'slides' database table.
  * Handles CRUD operations for carousel slides.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Database\Connection (via database/connection.php)
+ * 
  */
 
 require_once __DIR__ . '/../../../database/connection.php';

@@ -10,16 +10,10 @@
         </a>
     </div>
 
-    <?php if (isset($_GET['msg']) && $_GET['msg'] === 'error'): ?>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <?php if (isset($_GET['error'])): ?>
-                <?= htmlspecialchars($_GET['error']) ?>
-            <?php else: ?>
-                An error occurred. Please try again.
-            <?php endif; ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
+    <?php 
+    require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+    display_alert_message();
+    ?>
 
     <?php if ($suggestion->status !== 'pending'): ?>
         <div class="alert alert-warning">
@@ -33,7 +27,10 @@
         <div class="col-md-8 mx-auto">
             <div class="card shadow-sm">
                 <div class="card-body">
+                    <?php require_once __DIR__ . '/../../../../includes/helpers/csrf.php'; ?>
+                    
                     <form method="POST" action="/habitats/suggestion/update">
+                        <?= csrf_field('habitat_suggestion_update') ?>
                         <input type="hidden" name="id_hab_suggestion" value="<?= $suggestion->id_hab_suggestion ?>">
                         
                         <!-- Habitat (Read-only, cannot be changed) -->

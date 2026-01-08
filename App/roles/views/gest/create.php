@@ -5,8 +5,16 @@
         <h3>Register New Role</h3>
     </div>
     <div class="card-body">
+        <!-- Success/Error Messages -->
+        <?php 
+        require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+        display_alert_message();
+        ?>
 
+        <?php require_once __DIR__ . '/../../../../includes/helpers/csrf.php'; ?>
+        
         <form action="" method="post">
+            <?= csrf_field('role_create') ?>
 
             <div class="mb-3">
                 <label for="role_name"

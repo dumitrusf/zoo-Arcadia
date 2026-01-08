@@ -11,14 +11,17 @@ $isEdit = ($action === 'edit');
                     <h4 class="mb-0"><?= $isEdit ? 'Modificar Hábitat' : 'Crear Nuevo Hábitat' ?></h4>
                 </div>
                 <div class="card-body">
-                    
-                    <?php if (isset($error)): ?>
-                        <div class="alert alert-danger">
-                            <?= htmlspecialchars($error) ?>
-                        </div>
-                    <?php endif; ?>
+                    <!-- Success/Error Messages -->
+                    <?php 
+                    require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+                    display_alert_message();
+                    display_error_variable($error ?? null);
+                    ?>
 
+                    <?php require_once __DIR__ . '/../../../../includes/helpers/csrf.php'; ?>
+                    
                     <form method="POST" action="/habitats/gest/save" enctype="multipart/form-data">
+                        <?= csrf_field('habitat_save') ?>
                         
                         <!-- Hidden ID for Update -->
                         <?php if ($isEdit && isset($habitat->id_habitat)): ?>

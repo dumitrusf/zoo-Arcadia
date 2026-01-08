@@ -56,16 +56,10 @@ include(__DIR__ . '/../pageTitle.php');
 
     <link rel="icon" type="image/png" href="/src/assets/images/favicon.png" />
 
-    <link rel="stylesheet" href="/node_modules/Normalize-css/normalize.css" />
-
-    <link rel="stylesheet" href="/public/build/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/public/build/css/dataTables.bootstrap5.min.css" />
-
-    <link rel="preload" href="/public/build/css/app.css" as="style"
-        onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-        <link rel="stylesheet" href="/public/build/css/app.css">
-    </noscript>
+    <link rel="stylesheet" href="/build/css/normalize.css" />
+    <link rel="stylesheet" href="/build/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/build/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="/build/css/app.css" />
 
 
 

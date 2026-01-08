@@ -11,8 +11,11 @@ $isEdit = ($action === 'edit');
                     <h4 class="mb-0"><?= $isEdit ? 'Modify Content Block' : 'Create New Brick' ?></h4>
                 </div>
                 <div class="card-body">
+                    <?php require_once __DIR__ . '/../../../../includes/helpers/csrf.php'; ?>
+                    
                     <form action="/cms/bricks/save" method="POST" enctype="multipart/form-data">
-                        
+                        <?= csrf_field('brick_save') ?>
+
                         <?php if ($isEdit): ?>
                             <input type="hidden" name="id_brick" value="<?= $brick->id_brick ?>">
                         <?php endif; ?>
@@ -33,16 +36,16 @@ $isEdit = ($action === 'edit');
 
                         <div class="mb-3">
                             <label for="title" class="form-label fw-bold">Block Title</label>
-                            <input type="text" class="form-control" id="title" name="title" 
-                                   value="<?= $isEdit ? htmlspecialchars($brick->title) : '' ?>" 
-                                   placeholder="E.g., More About Us" required>
+                            <input type="text" class="form-control" id="title" name="title"
+                                value="<?= $isEdit ? htmlspecialchars($brick->title) : '' ?>"
+                                placeholder="E.g., More About Us" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="link" class="form-label fw-bold">Button Link (Optional)</label>
-                            <input type="text" class="form-control" id="link" name="link" 
-                                   value="<?= $isEdit ? htmlspecialchars($brick->link ?? '') : '' ?>" 
-                                   placeholder="E.g., /about/pages/about">
+                            <input type="text" class="form-control" id="link" name="link"
+                                value="<?= $isEdit ? htmlspecialchars($brick->link ?? '') : '' ?>"
+                                placeholder="E.g., /about/pages/about">
                             <div class="form-text">Leave empty if no button is needed.</div>
                         </div>
 
@@ -50,7 +53,7 @@ $isEdit = ($action === 'edit');
                         <div class="card mb-3 border-light bg-light">
                             <div class="card-body">
                                 <h5 class="card-title text-muted mb-3"><i class="bi bi-images"></i> Block Image (Optional)</h5>
-                                
+
                                 <!-- Mobile Image (Main) -->
                                 <div class="mb-3">
                                     <label class="form-label fw-bold small text-uppercase">Main Image</label>
@@ -91,8 +94,10 @@ $isEdit = ($action === 'edit');
 
                         <div class="mb-4">
                             <label for="description" class="form-label fw-bold">Description / Content</label>
-                            <textarea class="form-control" id="description" name="description" 
-                                      rows="6" placeholder="Enter text content here..." required><?= $isEdit ? htmlspecialchars($brick->description) : '' ?></textarea>
+                            <textarea class="form-control" id="description" name="description"
+                                rows="6" placeholder="Enter text content here..." required><?= $isEdit ? htmlspecialchars($brick->description ?? '') : '' ?>
+                            </textarea>
+
                         </div>
 
                         <div class="d-flex justify-content-between">
@@ -108,4 +113,3 @@ $isEdit = ($action === 'edit');
         </div>
     </div>
 </div>
-

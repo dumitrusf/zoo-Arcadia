@@ -11,8 +11,10 @@ $isEdit = ($action === 'edit');
                     <h4 class="mb-0"><?= $isEdit ? 'Modify Service' : 'Create New Service' ?></h4>
                 </div>
                 <div class="card-body">
+                    <?php require_once __DIR__ . '/../../../../includes/helpers/csrf.php'; ?>
                     
                     <form action="/cms/gest/save" method="POST" enctype="multipart/form-data">
+                        <?= csrf_field('service_save') ?>
                         
                         <!-- Hidden ID for Update (CRITICAL) -->
                         <?php if ($isEdit && isset($service->id_service)): ?>

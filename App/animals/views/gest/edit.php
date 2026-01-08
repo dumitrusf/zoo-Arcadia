@@ -11,8 +11,16 @@ $isEdit = ($action === 'edit');
                     <h4 class="mb-0"><?= $isEdit ? 'Modify Animal' : 'Create New Animal' ?></h4>
                 </div>
                 <div class="card-body">
+                    <!-- Success/Error Messages -->
+                    <?php 
+                    require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+                    display_alert_message();
+                    ?>
+                    
+                    <?php require_once __DIR__ . '/../../../../includes/helpers/csrf.php'; ?>
                     
                     <form action="/animals/gest/save" method="POST" enctype="multipart/form-data">
+                        <?= csrf_field('animal_save') ?>
                         
                         <!-- Hidden ID for Update (CRITICAL) -->
                         <?php if ($isEdit && isset($animal->id_full_animal)): ?>

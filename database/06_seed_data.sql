@@ -712,10 +712,10 @@ VALUES
        (3, 31),
        (3, 32),
        -- habitat_suggestions: view, manage, delete
+       -- testimonials: view (#33), validate (#34), delete (#35)
        (3, 33),
        (3, 34),
        (3, 35),
-       -- testimonials: view, validate, delete
        -- Employee (role_id = 2) tiene todos los permisos (1-27, 30-32, 33-35)
        (2, 1),
        (2, 9),
@@ -733,9 +733,10 @@ VALUES
        -- animal_stats: view, animal_feeding: view, assign
        (2, 27),
        -- vet_reports: view
+       -- testimonials: view (#33), validate (#34), delete (#35) - Employee can do all actions
        (2, 33),
        (2, 34),
-       -- testimonials: view, validate
+       (2, 35),
        -- Veterinarian (role_id = 1) tiene todos los permisos (1-35)
        (1, 13),
        -- schedules: view

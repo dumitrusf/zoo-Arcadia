@@ -8,11 +8,17 @@
  * 📝 Description:
  * Controller for managing Slides within a Hero.
  * Handles image uploads and slide CRUD.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Hero\Models\Slide (via App/hero/models/Slide.php)
+ * - Arcadia\Medias\Models\Cloudinary (via App/medias/models/cloudinary.php)
+ * - Arcadia\Medias\Models\Media (via App/medias/models/media.php)
  */
 
 require_once __DIR__ . '/../models/Slide.php';
 require_once __DIR__ . '/../../medias/models/cloudinary.php';
 require_once __DIR__ . '/../../medias/models/Media.php';
+require_once __DIR__ . '/../../../includes/helpers/csrf.php';
 
 class SlidesGestController {
 
@@ -62,6 +68,13 @@ class SlidesGestController {
     // Save (Create or Update)
     public function save() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Verify CSRF token
+            if (!csrf_verify('slide_save')) {
+                $heroId = $_POST['hero_id'] ?? '';
+                header('Location: /hero/slides/create?hero_id=' . $heroId . '&msg=error&error=Invalid request. Please try again.');
+                exit;
+            }
+
             $id = $_POST['id_slide'] ?? null;
             $heroId = $_POST['hero_id'];
             $title = $_POST['title_caption'];
@@ -110,7 +123,7 @@ class SlidesGestController {
                     $mediaId = $mediaModel->create($base, 'image', "Slide: $title", $urlTablet, $urlDesktop);
                     
                     if ($mediaId) {
-                        // UNLINK OLD & LINK NEW
+                        // UNLINK OLD & LINK NEW !important to keep in mind for our experience!
                         $mediaModel->unlink('slides', $slideId);
                         $mediaModel->link($mediaId, 'slides', $slideId);
                     }

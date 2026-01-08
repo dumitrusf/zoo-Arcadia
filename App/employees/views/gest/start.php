@@ -10,6 +10,13 @@
             <a name="employees" id="" class="btn btn-success mb-2 mt-2" href="/employees/gest/create" role="button">+ Create New Employee</a>
         <?php endif; ?>
     </div>
+    
+    <!-- Show success, error or warning messages -->
+    <?php 
+    require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+    display_alert_message();
+    ?>
+    
     <div class="card-body container-fluid overflow-auto">
 
         <div class="table-responsive">
@@ -74,7 +81,27 @@
                                     <div class="btn-group" role="group" aria-label="">
 
                                         <a href="/employees/gest/edit?id=<?php echo $employee->id; ?>" class="btn btn-sm btn-primary">Edit</a>
-                                        <a href="/employees/gest/delete?id=<?php echo $employee->id; ?>" class="btn btn-sm btn-danger">Delete</a>
+                                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $employee->id; ?>">Delete</button>
+                                    </div>
+
+                                    <!-- Delete Confirmation Modal -->
+                                    <div class="modal fade" id="deleteModal<?php echo $employee->id; ?>" tabindex="-1" aria-labelledby="deleteModalLabel<?php echo $employee->id; ?>" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="deleteModalLabel<?php echo $employee->id; ?>">Confirm Delete</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to delete the employee <strong><?php echo htmlspecialchars($employee->first_name . ' ' . $employee->last_name); ?></strong>?</p>
+                                                    <p class="text-danger"><small>This action cannot be undone.</small></p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                    <a href="/employees/gest/delete?id=<?php echo $employee->id; ?>" class="btn btn-danger">Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
                                 </td>

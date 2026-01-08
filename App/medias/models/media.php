@@ -8,6 +8,9 @@
  * 📝 Description:
  * Model for interacting with the 'media' database table.
  * Handles CRUD operations for media records.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Database\Connection (via database/connection.php)
  */
 
 require_once __DIR__ . '/../../../database/connection.php';

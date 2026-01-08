@@ -23,7 +23,7 @@
                         <?php endif; ?>
 
                         <div class="intro__details">
-                            <p class="intro__description"><?= htmlspecialchars($service->service_description) ?></p>
+                            <p class="intro__description"><?= nl2br(htmlspecialchars($service->service_description)) ?></p>
                         </div>
                     </div>
                 </section>

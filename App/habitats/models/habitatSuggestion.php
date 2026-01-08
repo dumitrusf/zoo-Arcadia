@@ -8,6 +8,9 @@
  * 📝 Description:
  * Model for interacting with the 'habitat_suggestion' database table.
  * Handles CRUD operations for habitat improvement suggestions.
+ * 
+ * 🔗 Dependencies:
+ * - Arcadia\Database\Connection (via database/connection.php)
  */
 
 require_once __DIR__ . '/../../../database/connection.php';
@@ -184,6 +187,27 @@ class HabitatSuggestion {
             error_log("Error soft deleting habitat suggestion: " . $e->getMessage());
             return false;
         }
+    }
+
+    /**
+     * Get the last habitat suggestion
+     * @return object|false
+     */
+    public function getLast() {
+        $sql = "SELECT hs.*, 
+                       h.habitat_name,
+                       u_suggest.username AS suggested_by_username,
+                       u_review.username AS reviewed_by_username
+                FROM habitat_suggestion hs
+                JOIN habitats h ON hs.habitat_id = h.id_habitat
+                LEFT JOIN users u_suggest ON hs.suggested_by = u_suggest.id_user
+                LEFT JOIN users u_review ON hs.reviewed_by = u_review.id_user
+                WHERE hs.deleted_by_admin = 0 AND hs.deleted_by_veterinarian = 0
+                ORDER BY hs.proposed_on DESC
+                LIMIT 1";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
 }
 
