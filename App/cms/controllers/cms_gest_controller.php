@@ -85,6 +85,14 @@ class CmsGestController
     public function save()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            require_once __DIR__ . '/../../../includes/helpers/csrf.php';
+            
+            // Verify CSRF token
+            if (!csrf_verify('service_save')) {
+                header('Location: /cms/gest/start?msg=error&error=Invalid request. Please try again.');
+                exit;
+            }
+
             $id = $_POST['id_service'] ?? null;
 
             // Check permissions based on whether it's create or update

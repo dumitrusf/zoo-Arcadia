@@ -20,6 +20,7 @@
 require_once __DIR__ . '/../../../database/connection.php';
 require_once __DIR__ . '/../models/testimonial.php';
 require_once __DIR__ . '/../../../includes/functions.php';
+require_once __DIR__ . '/../../../includes/helpers/csrf.php';
 
 class TestimonialsGestController
 {
@@ -219,6 +220,13 @@ class TestimonialsGestController
         // Only process POST requests
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location: /testimonials/gest/start?msg=error&error=Invalid request method');
+            exit;
+        }
+
+        // Verify CSRF token
+        if (!csrf_verify('testimonial_update')) {
+            $id = $_POST['id'] ?? '';
+            header('Location: /testimonials/gest/edit?id=' . $id . '&msg=error&error=Invalid request. Please try again.');
             exit;
         }
 

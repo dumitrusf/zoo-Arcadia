@@ -45,7 +45,10 @@
                 </script>
             <?php endif; ?>
 
+            <?php require_once __DIR__ . '/../../../../includes/helpers/csrf.php'; ?>
+            
             <form action="/contact/pages/contact" method="POST" class="contact__form">
+                <?= csrf_field('contact_form') ?>
 
                 <div class="contact__form-info">
 

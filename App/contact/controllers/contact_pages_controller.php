@@ -20,6 +20,7 @@ require_once __DIR__ . '/../../hero/models/Hero.php';
 require_once __DIR__ . '/../../hero/models/Slide.php';
 require_once __DIR__ . '/../models/formContact.php';
 require_once __DIR__ . '/../../../includes/helpers/EmailHelper.php';
+require_once __DIR__ . '/../../../includes/helpers/csrf.php';
 
 class ContactPagesController {
     
@@ -53,6 +54,12 @@ class ContactPagesController {
      */
     public function submit()
     {
+        // Verify CSRF token before processing
+        if (!csrf_verify('contact_form')) {
+            header('Location: /contact/pages/contact?msg=error&error=Invalid request. Please try again.');
+            exit;
+        }
+
         // Get form data
         $firstName = trim($_POST['first-name'] ?? '');
         $lastName = trim($_POST['last-name'] ?? '');

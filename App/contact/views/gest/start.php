@@ -190,7 +190,7 @@
 
                                                         <?php
                                                         // Build Gmail compose URL
-                                                        // 1. Limpieza y validación del email
+                                                        // 1. Email cleaning and validation
                                                         $replyEmail = trim($contact->f_email ?? '');
                                                         
                                                         if (!empty($replyEmail)) {

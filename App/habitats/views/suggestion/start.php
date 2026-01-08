@@ -1,5 +1,7 @@
 <?php
 // App/habitats/views/suggestion/start.php
+require_once __DIR__ . '/../../../../includes/helpers/csrf.php';
+
 $userRoleName = $_SESSION['user']['role_name'] ?? null;
 $isAdmin = ($userRoleName === 'Admin');
 $isVeterinarian = ($userRoleName === 'Veterinary');
@@ -15,24 +17,15 @@ $isVeterinarian = ($userRoleName === 'Veterinary');
         <?php endif; ?>
     </div>
 
-    <?php if (isset($_GET['msg'])): ?>
-        <div class="alert <?= ($_GET['msg'] === 'error') ? 'alert-danger' : 'alert-success' ?> alert-dismissible fade show" role="alert">
-            <?php if ($_GET['msg'] === 'error' && isset($_GET['error'])): ?>
-                <?= htmlspecialchars($_GET['error']) ?>
-            <?php elseif ($_GET['msg'] === 'saved'): ?>
-                Suggestion created successfully!
-            <?php elseif ($_GET['msg'] === 'updated'): ?>
-                Suggestion updated successfully!
-            <?php elseif ($_GET['msg'] === 'reviewed'): ?>
-                Suggestion reviewed successfully!
-            <?php elseif ($_GET['msg'] === 'deleted'): ?>
-                Suggestion deleted successfully!
-            <?php else: ?>
-                Action completed successfully!
-            <?php endif; ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
+    <?php 
+    require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+    display_alert_message('Action completed successfully!', [
+        'saved' => 'Suggestion created successfully!',
+        'updated' => 'Suggestion updated successfully!',
+        'reviewed' => 'Suggestion reviewed successfully!',
+        'deleted' => 'Suggestion deleted successfully!'
+    ]);
+    ?>
 
     <div class="card shadow-sm">
         <div class="card-body">
@@ -139,6 +132,7 @@ $isVeterinarian = ($userRoleName === 'Veterinary');
                                         <?php if ($isAdmin && $suggestion->status === 'pending'): ?>
                                             <!-- Admin can accept/reject pending suggestions -->
                                             <form method="POST" action="/habitats/suggestion/review" class="d-inline me-1">
+                                                <?= csrf_field('habitat_suggestion_review') ?>
                                                 <input type="hidden" name="id_hab_suggestion" value="<?= $suggestion->id_hab_suggestion ?>">
                                                 <input type="hidden" name="status" value="accepted">
                                                 <button type="submit" class="btn btn-sm btn-success" title="Accept">
@@ -146,6 +140,7 @@ $isVeterinarian = ($userRoleName === 'Veterinary');
                                                 </button>
                                             </form>
                                             <form method="POST" action="/habitats/suggestion/review" class="d-inline me-1">
+                                                <?= csrf_field('habitat_suggestion_review') ?>
                                                 <input type="hidden" name="id_hab_suggestion" value="<?= $suggestion->id_hab_suggestion ?>">
                                                 <input type="hidden" name="status" value="rejected">
                                                 <button type="submit" class="btn btn-sm btn-danger" title="Reject">

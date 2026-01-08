@@ -1,4 +1,4 @@
-// typographie
+// typography
 @use "fonts" as f;
 @use "color" as c;
 @use "shadows" as sh;
@@ -164,7 +164,7 @@
   color: map-get(map-get(c.$color, solid-colors), c-light);
 }
 
-// typographie
+// typography
 html,
 body {
   font-family: map-get(
@@ -321,11 +321,11 @@ body {
   }
   // titles cards
 
-  // paraph in cards
+  // paragraph in cards
   &__description {
     @include desc-section();
   }
-  // paraph in cards
+  // paragraph in cards
 
   &__name {
     letter-spacing: map-get(

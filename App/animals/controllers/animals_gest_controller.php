@@ -33,6 +33,7 @@ require_once __DIR__ . "/../../habitats/models/habitat.php";
 require_once __DIR__ . "/../../medias/models/cloudinary.php";
 require_once __DIR__ . "/../../medias/models/Media.php";
 require_once __DIR__ . "/../../../includes/functions.php";
+require_once __DIR__ . "/../../../includes/helpers/csrf.php";
 
 class AnimalsGestController
 {
@@ -66,6 +67,12 @@ class AnimalsGestController
     public function saveCategory()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Verify CSRF token
+            if (!csrf_verify('animal_save_category')) {
+                header('Location: /animals/gest/start?msg=error&error=Invalid request. Please try again.');
+                exit;
+            }
+
             $id = $_POST['id_category'] ?? null;
             
             // Check permissions based on whether it's create or update
@@ -134,6 +141,12 @@ class AnimalsGestController
     public function saveSpecies()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Verify CSRF token
+            if (!csrf_verify('animal_save_species')) {
+                header('Location: /animals/gest/start?msg=error&error=Invalid request. Please try again.');
+                exit;
+            }
+
             $id = $_POST['id_specie'] ?? null;
             
             // Check permissions based on whether it's create or update
@@ -203,6 +216,12 @@ class AnimalsGestController
     public function saveNutrition()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Verify CSRF token
+            if (!csrf_verify('animal_save_nutrition')) {
+                header('Location: /animals/gest/start?msg=error&error=Invalid request. Please try again.');
+                exit;
+            }
+
             $id = $_POST['id_nutrition'] ?? null;
             
             // Check permissions based on whether it's create or update
@@ -350,6 +369,17 @@ class AnimalsGestController
     public function save()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Verify CSRF token
+            if (!csrf_verify('animal_save')) {
+                $id = $_POST['id_full_animal'] ?? '';
+                if ($id) {
+                    header('Location: /animals/gest/edit?id=' . $id . '&msg=error&error=Invalid request. Please try again.');
+                } else {
+                    header('Location: /animals/gest/create?msg=error&error=Invalid request. Please try again.');
+                }
+                exit;
+            }
+
             $id = $_POST['id_full_animal'] ?? null;
             
             // Check permissions based on whether it's create or update

@@ -17,20 +17,13 @@ require_once __DIR__ . '/../../../../includes/functions.php';
         <?php endif; ?>
     </div>
 
-    <?php if (isset($_GET['msg'])): ?>
-        <div class="alert <?= ($_GET['msg'] === 'error') ? 'alert-danger' : 'alert-success' ?> alert-dismissible fade show" role="alert">
-            <?php if ($_GET['msg'] === 'error' && isset($_GET['error'])): ?>
-                <?= htmlspecialchars($_GET['error']) ?>
-            <?php elseif ($_GET['msg'] === 'saved'): ?>
-                Feeding log saved successfully!
-            <?php elseif ($_GET['msg'] === 'deleted'): ?>
-                Feeding log deleted successfully!
-            <?php else: ?>
-                Action completed successfully!
-            <?php endif; ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
+    <?php 
+    require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+    display_alert_message('Action completed successfully!', [
+        'saved' => 'Feeding log saved successfully!',
+        'deleted' => 'Feeding log deleted successfully!'
+    ]);
+    ?>
 
     <div class="card shadow-sm">
         <div class="card-body">

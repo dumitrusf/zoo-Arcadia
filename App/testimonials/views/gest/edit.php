@@ -22,17 +22,18 @@
             </div>
 
             <!-- Success/Error Messages -->
-            <?php if (isset($_GET['msg'])): ?>
-                <div class="alert alert-<?= $_GET['msg'] === 'success' ? 'success' : 'danger' ?> alert-dismissible fade show" role="alert">
-                    <?= htmlspecialchars($_GET['message'] ?? $_GET['error'] ?? '') ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            <?php endif; ?>
+            <?php 
+            require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+            display_alert_message();
+            ?>
 
             <!-- Edit Form -->
             <div class="card">
                 <div class="card-body">
+                    <?php require_once __DIR__ . '/../../../../includes/helpers/csrf.php'; ?>
+                    
                     <form method="POST" action="/testimonials/gest/update">
+                        <?= csrf_field('testimonial_update') ?>
                         <input type="hidden" name="id" value="<?= $testimonial->id_testimonial ?>">
 
                         <!-- Pseudo Field -->

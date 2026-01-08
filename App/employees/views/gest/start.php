@@ -10,6 +10,13 @@
             <a name="employees" id="" class="btn btn-success mb-2 mt-2" href="/employees/gest/create" role="button">+ Create New Employee</a>
         <?php endif; ?>
     </div>
+    
+    <!-- Show success, error or warning messages -->
+    <?php 
+    require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+    display_alert_message();
+    ?>
+    
     <div class="card-body container-fluid overflow-auto">
 
         <div class="table-responsive">

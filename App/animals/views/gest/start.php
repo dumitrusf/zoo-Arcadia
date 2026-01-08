@@ -18,16 +18,10 @@
         <?php endif; ?>
     </div>
 
-    <?php if (isset($_GET['msg'])): ?>
-        <div class="alert <?= ($_GET['msg'] === 'error') ? 'alert-danger' : 'alert-success' ?> alert-dismissible fade show" role="alert">
-            <?php if ($_GET['msg'] === 'error' && isset($_GET['error'])): ?>
-                <?= htmlspecialchars($_GET['error']) ?>
-            <?php else: ?>
-                Action completed successfully!
-            <?php endif; ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
+    <?php 
+    require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+    display_alert_message();
+    ?>
 
     <!-- TABS NAVIGATION -->
     <ul class="nav nav-tabs mb-4" id="animalsTabs" role="tablist">
@@ -241,7 +235,10 @@
                     <h5 class="mb-0">Create New Species</h5>
                 </div>
                 <div class="card-body">
+                    <?php require_once __DIR__ . '/../../../../includes/helpers/csrf.php'; ?>
+                    
                     <form action="/animals/gest/saveSpecies" method="POST" class="row g-3">
+                        <?= csrf_field('animal_save_species') ?>
                         <div class="col-md-5">
                             <label for="specie_name" class="form-label fw-bold">Species Name (Scientific)</label>
                             <input type="text" class="form-control" id="specie_name" name="specie_name" 
@@ -333,6 +330,7 @@
                 </div>
                 <div class="card-body">
                     <form action="/animals/gest/saveCategory" method="POST" class="row g-3">
+                        <?= csrf_field('animal_save_category') ?>
                         <div class="col-md-10">
                             <label for="category_name" class="form-label fw-bold">Category Name</label>
                             <input type="text" class="form-control" id="category_name" name="category_name" 
@@ -406,6 +404,7 @@
                 </div>
                 <div class="card-body">
                     <form action="/animals/gest/saveNutrition" method="POST" class="row g-3">
+                        <?= csrf_field('animal_save_nutrition') ?>
                         <div class="col-md-4">
                             <label for="nutrition_type" class="form-label fw-bold">Nutrition Type</label>
                             <select class="form-select" id="nutrition_type" name="nutrition_type" required>
@@ -638,6 +637,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="/animals/gest/saveCategory" method="POST">
+                <?= csrf_field('animal_save_category') ?>
                 <div class="modal-header">
                     <h5 class="modal-title">Edit Category</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -663,6 +663,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="/animals/gest/saveSpecies" method="POST">
+                <?= csrf_field('animal_save_species') ?>
                 <div class="modal-header">
                     <h5 class="modal-title">Edit Species</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -701,6 +702,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="/animals/gest/saveNutrition" method="POST">
+                <?= csrf_field('animal_save_nutrition') ?>
                 <div class="modal-header">
                     <h5 class="modal-title">Edit Nutrition Plan</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>

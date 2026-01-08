@@ -11,7 +11,10 @@ $isEdit = ($action === 'edit');
                     <h4 class="mb-0"><?= $isEdit ? 'Modify Content Block' : 'Create New Brick' ?></h4>
                 </div>
                 <div class="card-body">
+                    <?php require_once __DIR__ . '/../../../../includes/helpers/csrf.php'; ?>
+                    
                     <form action="/cms/bricks/save" method="POST" enctype="multipart/form-data">
+                        <?= csrf_field('brick_save') ?>
 
                         <?php if ($isEdit): ?>
                             <input type="hidden" name="id_brick" value="<?= $brick->id_brick ?>">

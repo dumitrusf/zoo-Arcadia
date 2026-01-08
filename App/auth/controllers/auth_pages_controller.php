@@ -20,6 +20,7 @@ include_once __DIR__ . "/../../../database/connection.php";
 // Include User model to get permissions
 require_once __DIR__ . '/../../users/models/user.php';
 require_once __DIR__ . '/../../roles/models/role.php';
+require_once __DIR__ . '/../../../includes/helpers/csrf.php';
 
 DB::createInstance();
 // Call the static method createInstance() of the DB class.
@@ -31,6 +32,13 @@ class AuthPagesController{
         
 
         if ($_POST) {
+            // Verify CSRF token before processing login
+            if (!csrf_verify('login_form')) {
+                $_SESSION["login_error"] = "Invalid request. Please try again.";
+                header('Location: /auth/pages/login');
+                exit();
+            }
+
             $connectionDB = DB::createInstance();
 
             // 1. We search ONLY by user/email. We don't put the password here! (i think that if we put the psw here can be risky!, AT THIS MOMENT I DON'T KNO WHY but i'm sure of it, my instinct says me that can i model it in another way to make it more secure)

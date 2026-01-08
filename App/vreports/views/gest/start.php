@@ -46,23 +46,14 @@ function getStateBadgeClass($state) {
         <?php endif; ?>
     </div>
 
-    <?php if (isset($_GET['msg'])): ?>
-        <div class="alert <?= ($_GET['msg'] === 'error') ? 'alert-danger' : 'alert-success' ?> alert-dismissible fade show" role="alert">
-            <?php
-            $msg = $_GET['msg'];
-            if ($msg === 'error' && isset($_GET['error'])) {
-                echo htmlspecialchars($_GET['error']);
-            } elseif ($msg === 'saved') {
-                echo 'Health report created successfully!';
-            } elseif ($msg === 'updated') {
-                echo 'Health report updated successfully!';
-            } elseif ($msg === 'deleted') {
-                echo 'Health report deleted successfully!';
-            }
-            ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
+    <?php 
+    require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+    display_alert_message('Action completed successfully!', [
+        'saved' => 'Health report created successfully!',
+        'updated' => 'Health report updated successfully!',
+        'deleted' => 'Health report deleted successfully!'
+    ]);
+    ?>
 
     <div class="card shadow-sm">
         <div class="card-body">

@@ -33,64 +33,64 @@ class EmailHelper
      */
     private static function getMailer()
     {
-        // Creamos una nueva instancia de PHPMailer
-        // true como parámetro habilita el manejo de excepciones
+        // Create a new PHPMailer instance
+        // true as parameter enables exception handling
         $mail = new PHPMailer(true);
 
         try {
             // Cargamos las variables de entorno desde el archivo .env
-            // Esto nos permite guardar información sensible (como contraseñas) fuera del código
+            // This allows us to store sensitive information (like passwords) outside the code
             // Usamos try-catch para manejar errores de parsing
             try {
                 $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
                 $dotenv->safeLoad(); // safeLoad() no lanza excepciones si el archivo no existe
             } catch (Exception $e) {
-                // Si hay un error de parsing, lo registramos pero continuamos con valores por defecto
+                // If there is a parsing error, log it but continue with default values
                 error_log("Warning: Error parsing .env file: " . $e->getMessage());
-                // Continuamos con valores por defecto en lugar de fallar completamente
+                // Continue with default values instead of failing completely
             }
 
             // Configuramos el servidor SMTP
             // SMTP es el protocolo que se usa para enviar emails
             $mail->isSMTP();
             
-            // Dirección del servidor SMTP (ej: smtp.gmail.com, smtp.outlook.com)
-            // Si no está configurado, usamos localhost por defecto (útil para desarrollo)
+            // SMTP server address (e.g., smtp.gmail.com, smtp.outlook.com)
+            // If not configured, use localhost by default (useful for development)
             $mail->Host = $_ENV['SMTP_HOST'] ?? 'localhost';
             
-            // Habilitamos la autenticación SMTP (necesaria para la mayoría de servidores)
+            // Enable SMTP authentication (required for most servers)
             $mail->SMTPAuth = true;
             
             // Usuario para autenticarse en el servidor SMTP
             $mail->Username = $_ENV['SMTP_USER'] ?? '';
             
-            // Contraseña para autenticarse en el servidor SMTP
+            // Password to authenticate with the SMTP server
             $mail->Password = $_ENV['SMTP_PASS'] ?? '';
             
-            // Tipo de encriptación (TLS o SSL)
-            // TLS es más moderno y seguro que SSL
-            // En el .env puedes usar: 'tls', 'ssl', o dejarlo vacío
+            // Encryption type (TLS or SSL)
+            // TLS is more modern and secure than SSL
+            // In .env you can use: 'tls', 'ssl', or leave empty
             $smtpSecure = $_ENV['SMTP_SECURE'] ?? 'tls';
             if ($smtpSecure === 'tls') {
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             } elseif ($smtpSecure === 'ssl') {
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             } else {
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Por defecto TLS
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Default TLS
             }
             
             // Puerto del servidor SMTP
-            // 587 es el puerto estándar para TLS, 465 para SSL
+            // 587 is the standard port for TLS, 465 for SSL
             $mail->Port = $_ENV['SMTP_PORT'] ?? 587;
             
-            // Codificación de caracteres (UTF-8 soporta todos los idiomas)
+            // Character encoding (UTF-8 supports all languages)
             $mail->CharSet = 'UTF-8';
             
-            // Email desde el cual se envía (remitente)
+            // Email from which it is sent (sender)
             $mail->setFrom($_ENV['SMTP_FROM_EMAIL'] ?? 'noreply@arcadia-zoo.com', $_ENV['SMTP_FROM_NAME'] ?? 'Arcadia Zoo');
             
-            // En modo desarrollo, podemos deshabilitar la verificación SSL
-            // ⚠️ IMPORTANTE: En producción, esto debe estar en false para seguridad
+            // In development mode, we can disable SSL verification
+            // ⚠️ IMPORTANT: In production, this must be false for security
             if ($_ENV['APP_ENV'] === 'development') {
                 $mail->SMTPOptions = array(
                     'ssl' => array(
@@ -102,7 +102,7 @@ class EmailHelper
             }
 
         } catch (Exception $e) {
-            // Si hay un error, lo registramos y lanzamos la excepción
+            // If there is an error, log it and throw the exception
             error_log("Error configurando PHPMailer: " . $e->getMessage());
             throw $e;
         }
@@ -176,11 +176,11 @@ class EmailHelper
      */
     public static function sendAccountCreationEmail($toEmail, $username, $roleName)
     {
-        // PASO 1: VALIDAR CONFIGURACIÓN
-        // Antes de intentar enviar, verificamos que la configuración esté completa
+        // STEP 1: VALIDATE CONFIGURATION
+        // Before attempting to send, verify that the configuration is complete
         $configCheck = self::validateEmailConfig();
         if (!$configCheck['valid']) {
-            // Si la configuración no es válida, registramos el error y retornamos false
+            // If configuration is invalid, log error and return false
             error_log("Error en configuración de email: " . $configCheck['message']);
             return ['success' => false, 'message' => $configCheck['message']];
         }
@@ -199,7 +199,7 @@ class EmailHelper
             $mail->Subject = 'Bienvenue à Arcadia Zoo - Votre compte a été créé';
 
             // Cuerpo del email en formato HTML
-            // Usamos HTML para que el email se vea más profesional
+            // Use HTML for a more professional looking email
             $mail->isHTML(true);
             
             // Construimos el contenido del email con un diseño atractivo

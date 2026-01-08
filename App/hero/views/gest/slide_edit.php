@@ -13,7 +13,16 @@ $isEdit = ($action === 'edit');
                     </h4>
                 </div>
                 <div class="card-body p-4">
+                    <!-- Success/Error Messages -->
+                    <?php 
+                    require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+                    display_alert_message();
+                    ?>
+                    
+                    <?php require_once __DIR__ . '/../../../../includes/helpers/csrf.php'; ?>
+                    
                     <form action="/hero/slides/save" method="POST" enctype="multipart/form-data">
+                        <?= csrf_field('slide_save') ?>
                         
                         <!-- Hidden IDs -->
                         <input type="hidden" name="hero_id" value="<?= $heroId ?>">

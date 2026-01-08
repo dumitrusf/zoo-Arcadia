@@ -23,7 +23,7 @@ header("Pragma: no-cache");
 $domain = $_GET["domain"] ?? "home";
 
 // 2. Define public domains that do not require authentication
-$public_domains = ["auth", "contact", "home", "about", "habitats", "animals", "cms"];
+$public_domains = ["auth", "contact", "home", "about", "habitats", "animals", "cms", "testimonials"];
 
 // 2.1 Check session expiration (11 hours = 39600 seconds)
 // If the session is older, we destroy it and redirect to login

@@ -114,12 +114,14 @@
 
     <!-- Habitat Description Section -->
     <?php if (isset($habitat)): ?>
-        <div class="container my-5">
+        <div class="habitat-info container">
             <div class="row">
                 <div class="col-12">
-                    <h2 class="text-center mb-4"><?= htmlspecialchars(strtoupper($habitat->habitat_name)) ?></h2>
+                    <h2 class="habitat-info__title"><?= htmlspecialchars(strtoupper($habitat->habitat_name)) ?></h2>
                     <?php if (!empty($habitat->description_habitat)): ?>
-                        <p class="text-center lead"><?= htmlspecialchars($habitat->description_habitat) ?></p>
+                        <div class="habitat-info__desc-container">
+                            <p class="habitat-info__desc"><?= htmlspecialchars($habitat->description_habitat) ?></p>
+                        </div>
                     <?php endif; ?>
                 </div>
             </div>

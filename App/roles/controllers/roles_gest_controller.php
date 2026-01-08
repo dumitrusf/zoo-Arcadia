@@ -18,6 +18,7 @@
 require_once __DIR__ . "/../models/role.php";
 require_once __DIR__ . "/../../../database/connection.php";
 require_once __DIR__ . "/../../../includes/functions.php";
+require_once __DIR__ . "/../../../includes/helpers/csrf.php";
 
 DB::createInstance();
 
@@ -39,6 +40,12 @@ class RolesGestController
         }
 
         if ($_POST) {
+            // Verify CSRF token
+            if (!csrf_verify('role_create')) {
+                header('Location: /roles/gest/create?msg=error&error=Invalid request. Please try again.');
+                exit;
+            }
+
             // print_r($_POST);
             $role_name = $_POST['role_name'];
             $description = $_POST['role_description'];
@@ -93,6 +100,12 @@ class RolesGestController
 
         // if we receive data by POST, we process the form.
         if ($_POST) {
+            // Verify CSRF token
+            if (!csrf_verify('role_edit')) {
+                header('Location: /roles/gest/edit?id=' . $id_role . '&msg=error&error=Invalid request. Please try again.');
+                exit;
+            }
+
             // 1. we update the name and description of the role.
             $role_name = $_POST['role_name'];
             $description = $_POST['role_description'];

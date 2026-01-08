@@ -15,16 +15,17 @@ $userId = $_SESSION['user']['id_user'] ?? null;
         </a>
     </div>
 
-    <?php if (isset($_GET['msg']) && $_GET['msg'] === 'error' && isset($_GET['error'])): ?>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <?= htmlspecialchars($_GET['error']) ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
+    <?php 
+    require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+    display_alert_message();
+    ?>
 
     <div class="card shadow-sm">
         <div class="card-body">
+            <?php require_once __DIR__ . '/../../../../includes/helpers/csrf.php'; ?>
+            
             <form action="/vreports/gest/save" method="POST">
+                <?= csrf_field('vreport_create') ?>
                 <!-- Animal Selection -->
                 <div class="mb-3">
                     <label for="full_animal_id" class="form-label fw-bold">Animal <span class="text-danger">*</span></label>

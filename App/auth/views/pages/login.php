@@ -17,23 +17,15 @@
             <h2 class="login__title">Owner?</h2>
 
             <!-- Show error message if it exists -->
-            <?php if (isset($_SESSION["login_error"])): ?>
-                <div id="error-message" class="alert alert-danger" role="alert">
-                    <h4 class="alert-heading">
-                        <strong>Error:</strong> <?php echo htmlspecialchars($_SESSION["login_error"]); ?>
-                    </h4>
+            <?php 
+            require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+            display_session_alert('login_error', 'danger', 2800);
+            ?>
 
-                </div>
-                <script>
-                    setTimeout(function() {
-                        document.getElementById('error-message').style.display = 'none';
-                    }, 2800);
-                </script>
-                <?php unset($_SESSION["login_error"]); // Delete it after showing it 
-                ?>
-            <?php endif; ?>
-
+            <?php require_once __DIR__ . '/../../../../includes/helpers/csrf.php'; ?>
+            
             <form action="" method="POST" class="login__form">
+                <?= csrf_field('login_form') ?>
 
                 <div class="login__form-info">
 

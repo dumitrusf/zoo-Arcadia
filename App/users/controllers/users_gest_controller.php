@@ -27,6 +27,7 @@ require_once __DIR__ . "/../../../database/connection.php";
 require_once __DIR__ . "/../../../includes/functions.php";
 // Include the email helper to be able to send emails when a user is created
 require_once __DIR__ . "/../../../includes/helpers/EmailHelper.php";
+require_once __DIR__ . "/../../../includes/helpers/csrf.php";
 
 DB::createInstance();
 
@@ -55,12 +56,18 @@ class UsersGestController
             exit;
         }
 
-        // Cargamos los roles y empleados disponibles para mostrarlos en el formulario
+        // Load available roles and employees to display in the form
         $roles = Role::check();
         $employees = Employee::freeEmployees();
 
         // If the form was submitted (POST method), process the creation of the user
         if ($_POST) {
+            // Verify CSRF token
+            if (!csrf_verify('user_create')) {
+                header('Location: /users/gest/create?msg=error&error=Invalid request. Please try again.');
+                exit;
+            }
+
             // Get the data from the form
             // trim() removes whitespace from the beginning and end of the text
             $username = trim($_POST['username']);
@@ -70,7 +77,7 @@ class UsersGestController
 
             // Step 1: CHECK FOR DUPLICATES
             // Before creating the user, check if the username already exists in the database
-            // Esto evita crear usuarios duplicados y posibles errores
+            // This prevents creating duplicate users and possible errors
             if (User::usernameExists($username)) {
                 // If the username already exists, redirect with an error message
                 // The message will be displayed on the users start page
@@ -122,7 +129,7 @@ class UsersGestController
 
             // Try to send the email only if we have a valid email
             if ($emailToSend) {
-                // El método retorna un array con 'success' y 'message' para mejor manejo de errores
+                // The method returns an array with 'success' and 'message' for better error handling
                 $emailResult = EmailHelper::sendAccountCreationEmail($emailToSend, $username, $roleName);
                 
                 // Prepare the redirect message according to the result of the email sending
@@ -259,6 +266,11 @@ class UsersGestController
 
         // Logic of the POST for the UPDATE of a user
         if ($_POST && isset($_POST['id'])) {
+            // Verify CSRF token
+            if (!csrf_verify('user_edit')) {
+                header('Location: /users/gest/edit?id=' . $_POST['id'] . '&msg=error&error=Invalid request. Please try again.');
+                exit;
+            }
 
             $id_user = $_POST['id'];
             $username = $_POST['username'];
@@ -300,6 +312,12 @@ class UsersGestController
     public function assignAccount()
     {
         if ($_POST) {
+            // Verify CSRF token
+            if (!csrf_verify('user_assign')) {
+                header('Location: /users/gest/start?msg=error&error=Invalid request. Please try again.');
+                exit;
+            }
+
             $employee_id = $_POST['employee_id'];
             $user_id = $_POST['user_id'];
 

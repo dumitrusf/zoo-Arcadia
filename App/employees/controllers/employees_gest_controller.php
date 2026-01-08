@@ -23,6 +23,7 @@ require_once __DIR__ . "/../models/employee.php";
 require_once __DIR__ . "/../../roles/models/role.php";
 
 require_once __DIR__ . "/../../../database/connection.php";
+require_once __DIR__ . "/../../../includes/helpers/csrf.php";
 
 DB::createInstance();
 
@@ -54,6 +55,12 @@ class EmployeesGestController
 
         // If the form is submitted (in create.php form), create a new employee
         if ($_POST) {
+            // Verify CSRF token
+            if (!csrf_verify('employee_create')) {
+                header('Location: /employees/gest/create?msg=error&error=Invalid request. Please try again.');
+                exit;
+            }
+
             $first_name = $_POST['firstname'];
             $last_name = $_POST['lastname'];
             $birthdate = $_POST['birthdate'];
@@ -113,6 +120,13 @@ class EmployeesGestController
 
         // If the form is submitted (in edit.php form), update the employee
         if ($_POST) {
+            // Verify CSRF token
+            if (!csrf_verify('employee_edit')) {
+                $id = $_POST['id'] ?? '';
+                header('Location: /employees/gest/edit?id=' . $id . '&msg=error&error=Invalid request. Please try again.');
+                exit;
+            }
+
             // Get the data from the form
             $id_employee = $_POST['id'];
             $first_name = $_POST['firstname'];

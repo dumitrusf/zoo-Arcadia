@@ -19,12 +19,10 @@
             </div>
 
             <!-- Success/Error Messages -->
-            <?php if (isset($_GET['msg'])): ?>
-                <div class="alert alert-<?= $_GET['msg'] === 'success' ? 'success' : 'danger' ?> alert-dismissible fade show" role="alert">
-                    <?= htmlspecialchars($_GET['message'] ?? $_GET['error'] ?? '') ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            <?php endif; ?>
+            <?php 
+            require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+            display_alert_message();
+            ?>
 
             <!-- Statistics Cards -->
             <div class="row mb-4">

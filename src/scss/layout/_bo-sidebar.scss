@@ -18,7 +18,7 @@
   transition: none;
   overflow-x: visible;
   
-  // Activar transición solo después de que se cargue el estado
+  // Activate transition only after state is loaded
   &.loaded {
     transition: width 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   }
@@ -26,7 +26,7 @@
   display: flex;
   flex-direction: column;
 
-  // Oculto por defecto en móvil
+  // Hidden by default on mobile
   @media (max-width: 767.98px) {
     transform: translateX(-100%);
     
@@ -70,14 +70,14 @@
     }
   }
 
-  // Ocultar logo cuando está colapsado
+  // Hide logo when collapsed
   &.collapsed &__logo {
     opacity: 0;
     width: 0;
     overflow: hidden;
   }
 
-  // Flecha para expandir/colapsar (en el área blanca, sobresale del sidebar)
+  // Arrow to expand/collapse (in white area, sticks out from sidebar)
   &__toggle-arrow {
     position: fixed;
     left: 20rem;
@@ -110,7 +110,7 @@
     }
   }
 
-  // Cuando está colapsado, la flecha sigue sobresaliendo del borde derecho (2rem de ancho)
+  // When collapsed, arrow still sticks out from right border (2rem width)
   &.collapsed &__toggle-arrow {
     left: 2rem;
 
@@ -126,7 +126,7 @@
     transition: opacity 0.3s ease;
   }
 
-  // Ocultar menú cuando está colapsado
+  // Hide menu when collapsed
   &.collapsed &__menu {
     opacity: 0;
     overflow: hidden;
@@ -179,7 +179,7 @@
     transition: opacity 0.3s ease;
   }
 
-  // Ocultar footer cuando está colapsado
+  // Hide footer when collapsed
   &.collapsed &__footer {
     opacity: 0;
     overflow: hidden;
@@ -239,7 +239,7 @@
   }
 }
 
-// Overlay para móvil cuando el sidebar está abierto
+// Mobile overlay when sidebar is open
 .bo-sidebar-overlay {
   display: none;
   position: fixed;
@@ -261,7 +261,7 @@
   }
 }
 
-// Ajustar el contenido principal cuando el sidebar está visible
+// Adjust main content when sidebar is visible
 .bo-main-content {
   margin-left: 0;
   transition: none;

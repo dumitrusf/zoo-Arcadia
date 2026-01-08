@@ -27,6 +27,7 @@ require_once __DIR__ . '/../models/Slide.php';
 require_once __DIR__ . '/../../medias/models/cloudinary.php';
 require_once __DIR__ . '/../../medias/models/Media.php';
 require_once __DIR__ . '/../../../includes/functions.php';
+require_once __DIR__ . '/../../../includes/helpers/csrf.php';
 
 class HeroGestController {
     
@@ -100,6 +101,12 @@ class HeroGestController {
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Verify CSRF token
+            if (!csrf_verify('hero_save')) {
+                header('Location: /hero/gest/start?msg=error&error=Invalid request. Please try again.');
+                exit;
+            }
+
             $id = $_POST['id_hero'] ?? null;
             $title = $_POST['hero_title'];
             $subtitle = $_POST['hero_subtitle'];

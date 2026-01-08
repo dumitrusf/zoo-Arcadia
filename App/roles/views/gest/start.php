@@ -17,7 +17,13 @@ require_once __DIR__ . '/../../../../includes/functions.php';
     </div>
     <div class="card-body">
 
-        <!-- Mostrar mensaje de error si existe -->
+        <!-- Mostrar mensaje de error/success desde URL (msg=error) -->
+        <?php 
+        require_once __DIR__ . '/../../../../includes/helpers/messages.php';
+        display_alert_message();
+        ?>
+
+        <!-- Mostrar mensaje de error si existe en sesión -->
         <?php if (isset($_SESSION['error_message'])): ?>
             <div id="error-message" class="alert alert-danger">
                 <strong>Error:</strong> <?php echo htmlspecialchars($_SESSION['error_message']); ?>
@@ -27,7 +33,7 @@ require_once __DIR__ . '/../../../../includes/functions.php';
                     document.getElementById('error-message').style.display = 'none';
                 }, 6000);
             </script>
-            <?php unset($_SESSION['error_message']); // Lo borra después de mostrarlo 
+            <?php unset($_SESSION['error_message']); // Delete it after showing it
             ?>
         <?php endif; ?>
 
@@ -40,7 +46,7 @@ require_once __DIR__ . '/../../../../includes/functions.php';
                     document.getElementById('success-message').style.display = 'none';
                 }, 6000);
             </script>
-            <?php unset($_SESSION['success_message']); // Lo borra después de mostrarlo 
+            <?php unset($_SESSION['success_message']); // Delete it after showing it
             ?>
         <?php endif; ?>
 

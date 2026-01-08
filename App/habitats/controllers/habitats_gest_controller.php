@@ -22,6 +22,7 @@ require_once __DIR__ . '/../../medias/models/cloudinary.php';
 require_once __DIR__ . '/../../medias/models/Media.php';
 require_once __DIR__ . '/../../hero/models/Hero.php';
 require_once __DIR__ . '/../../../includes/functions.php';
+require_once __DIR__ . '/../../../includes/helpers/csrf.php';
 
 class HabitatsGestController {
     
@@ -96,6 +97,17 @@ class HabitatsGestController {
 
     public function save() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Verify CSRF token
+            if (!csrf_verify('habitat_save')) {
+                $id = $_POST['id_habitat'] ?? '';
+                if ($id) {
+                    header('Location: /habitats/gest/edit?id=' . $id . '&msg=error&error=Invalid request. Please try again.');
+                } else {
+                    header('Location: /habitats/gest/create?msg=error&error=Invalid request. Please try again.');
+                }
+                exit;
+            }
+
             $id = $_POST['id_habitat'] ?? null;
             
             // Check permissions based on whether it's create or update

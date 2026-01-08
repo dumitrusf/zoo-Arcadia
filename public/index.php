@@ -16,7 +16,19 @@
  * - Arcadia\App\Router (via App/router.php)
  */
 
-// 0. Load required dependencies
+// 0. Configure secure session cookies BEFORE starting session
+// This makes session cookies more secure against attacks
+session_set_cookie_params([
+    'lifetime' => 0,                           // Cookie expira al cerrar navegador (sesión temporal)
+    'path' => '/',                             // Cookie válida en todo el sitio
+    'secure' => isset($_SERVER['HTTPS']),      // Solo HTTPS en producción (true si hay HTTPS)
+    'httponly' => true,                        // JavaScript cannot access (prevents XSS cookie theft)
+    'samesite' => 'Lax'                        // Protección CSRF adicional (Lax permite links externos, Strict no)
+]);
+// Note: 'Lax' allows you to arrive at the site from an external link with your session.
+// 'Strict' would be more secure but would log you out when coming from another site.
+
+// 1. Load required dependencies
 require_once __DIR__ . '/../vendor/autoload.php';      // Load Composer libraries
 require_once __DIR__ . '/../database/connection.php';  // Load database connection and config
 require_once __DIR__ . '/../includes/functions.php';   // Load helper functions

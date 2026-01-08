@@ -17,6 +17,7 @@
 
 require_once __DIR__ . "/../models/habitatSuggestion.php";
 require_once __DIR__ . "/../models/habitat.php";
+require_once __DIR__ . "/../../../includes/helpers/csrf.php";
 
 class HabitatsSuggestionController
 {
@@ -82,6 +83,12 @@ class HabitatsSuggestionController
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location: /habitats/suggestion/start?msg=error&error=Invalid request method');
+            exit;
+        }
+
+        // Verify CSRF token
+        if (!csrf_verify('habitat_suggestion_save')) {
+            header('Location: /habitats/suggestion/create?msg=error&error=Invalid request. Please try again.');
             exit;
         }
 
@@ -171,6 +178,13 @@ class HabitatsSuggestionController
             exit;
         }
 
+        // Verify CSRF token
+        if (!csrf_verify('habitat_suggestion_update')) {
+            $id = $_POST['id_hab_suggestion'] ?? '';
+            header('Location: /habitats/suggestion/edit?id=' . $id . '&msg=error&error=Invalid request. Please try again.');
+            exit;
+        }
+
         $id = $_POST['id_hab_suggestion'] ?? null;
         $details = trim($_POST['details'] ?? '');
         $userId = $_SESSION['user']['id_user'] ?? null;
@@ -222,6 +236,12 @@ class HabitatsSuggestionController
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location: /habitats/suggestion/start?msg=error&error=Invalid request method');
+            exit;
+        }
+
+        // Verify CSRF token
+        if (!csrf_verify('habitat_suggestion_review')) {
+            header('Location: /habitats/suggestion/start?msg=error&error=Invalid request. Please try again.');
             exit;
         }
 

@@ -20,6 +20,7 @@ require_once __DIR__ . "/../models/healthStateReport.php";
 require_once __DIR__ . "/../../animals/models/animalFull.php";
 require_once __DIR__ . "/../../users/models/user.php";
 require_once __DIR__ . "/../../../includes/functions.php";
+require_once __DIR__ . "/../../../includes/helpers/csrf.php";
 
 class VreportsGestController
 {
@@ -86,6 +87,12 @@ class VreportsGestController
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location: /vreports/gest/start?msg=error&error=Invalid request method');
+            exit();
+        }
+
+        // Verify CSRF token
+        if (!csrf_verify('vreport_create')) {
+            header('Location: /vreports/gest/create?msg=error&error=Invalid request. Please try again.');
             exit();
         }
 
@@ -241,6 +248,13 @@ class VreportsGestController
             exit();
         }
 
+        // Verify CSRF token
+        if (!csrf_verify('vreport_edit')) {
+            $id = $_GET['id'] ?? '';
+            header('Location: /vreports/gest/edit?id=' . $id . '&msg=error&error=Invalid request. Please try again.');
+            exit();
+        }
+
         $id = $_POST['id_hs_report'] ?? null;
         $fullAnimalId = $_POST['full_animal_id'] ?? null;
         $state = trim($_POST['hsr_state'] ?? ''); // Trim whitespace
@@ -261,6 +275,21 @@ class VreportsGestController
         // Validation
         if (!$id || !$fullAnimalId || !$state || !$reviewDate || !$vetObs) {
             header('Location: /vreports/gest/edit?id=' . $id . '&msg=error&error=All required fields must be filled');
+            exit();
+        }
+
+        // SECURITY: Verify that the animal ID matches the original report
+        // An existing health report cannot be reassigned to a different animal (historical integrity)
+        $reportModel = new HealthStateReport();
+        $existingReport = $reportModel->getById($id);
+        if (!$existingReport) {
+            header('Location: /vreports/gest/start?msg=error&error=Health report not found');
+            exit();
+        }
+        
+        if ($existingReport->id_full_animal != $fullAnimalId) {
+            error_log("Security warning: Attempt to change animal ID in health report. Report ID: $id, Original animal: {$existingReport->id_full_animal}, Attempted animal: $fullAnimalId");
+            header('Location: /vreports/gest/edit?id=' . $id . '&msg=error&error=Cannot change the animal for an existing health report. This is a historical record.');
             exit();
         }
 
@@ -486,7 +515,7 @@ class VreportsGestController
             font-size: 12px;
             color: #666;
         }
-        /* Botón flotante de impresión */
+        
         .print-button {
             position: fixed;
             bottom: 30px;
@@ -514,7 +543,7 @@ class VreportsGestController
         .print-button:active {
             transform: scale(0.95);
         }
-        /* Ocultar el botón al imprimir */
+        /* Hide button when printing */
         @media print {
             .print-button {
                 display: none !important;
@@ -599,7 +628,7 @@ class VreportsGestController
     </button>
 
     <script>
-        // También permite usar Ctrl+P para imprimir
+        // Also allows using Ctrl+P to print
         document.addEventListener("keydown", function(event) {
             if (event.ctrlKey && event.key === "p") {
                 event.preventDefault();

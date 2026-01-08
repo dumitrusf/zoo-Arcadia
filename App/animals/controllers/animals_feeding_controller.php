@@ -20,6 +20,7 @@ require_once __DIR__ . "/../models/feedingLog.php";
 require_once __DIR__ . "/../models/animalFull.php";
 require_once __DIR__ . "/../models/nutrition.php";
 require_once __DIR__ . "/../../../includes/functions.php";
+require_once __DIR__ . "/../../../includes/helpers/csrf.php";
 
 class AnimalsFeedingController
 {
@@ -80,6 +81,12 @@ class AnimalsFeedingController
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location: /animals/feeding/start?msg=error&error=Invalid request method');
+            exit;
+        }
+
+        // Verify CSRF token
+        if (!csrf_verify('feeding_save')) {
+            header('Location: /animals/feeding/create?msg=error&error=Invalid request. Please try again.');
             exit;
         }
 
