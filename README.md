@@ -1,43 +1,35 @@
-# 🦁 Zoo ARCADIA - Guía de Inicio Rápido
+# Zoo ARCADIA
 
-Guía completa para desarrolladores nuevos que quieren arrancar el proyecto en localhost desde cero.
+Sistema de gestión para zoológico desarrollado en PHP con arquitectura basada en dominios (Screaming Architecture).
 
----
+## Requisitos
 
-## 📋 Prerrequisitos
-
-Antes de comenzar, asegúrate de tener instalado:
-
-- **Git** - Para clonar el repositorio
+- **Git** - Control de versiones
 - **Composer** - Gestor de dependencias PHP
-- **Node.js y npm** - Para compilar assets (CSS/JS) - **npm incluye npx automáticamente**
-- **MySQL o MariaDB** - Base de datos (puede ser XAMPP, WAMP, o instalación independiente)
-- **Docker Desktop** (opcional) - Si prefieres trabajar con Docker
+- **Node.js y npm** - Para compilar assets (CSS/JS). npm incluye npx automáticamente
+- **MySQL o MariaDB** - Base de datos (XAMPP, WAMP, o instalación independiente)
+- **Docker Desktop** (opcional) - Para trabajar con Docker
 
----
+## Instalación de Prerrequisitos
 
-## 🔧 Instalación de Prerrequisitos
-
-### 1. Instalar Git
+### Git
 
 **Windows:**
-- Descarga Git desde: https://git-scm.com/download/win
-- Ejecuta el instalador y sigue las instrucciones
-- Acepta las opciones por defecto (están bien configuradas)
+- Descargar desde: https://git-scm.com/download/win
+- Ejecutar el instalador y seguir las instrucciones
 
 **Verificar instalación:**
 ```bash
 git --version
 ```
 
-### 2. Instalar Node.js y npm (incluye npx)
+### Node.js y npm
 
 **Windows:**
-1. Ve a: https://nodejs.org/
-2. Descarga la versión **LTS (Long Term Support)** - Recomendada
-3. Ejecuta el instalador `.msi`
-4. Acepta todas las opciones por defecto
-5. Durante la instalación, asegúrate de marcar la opción **"Add to PATH"** si está disponible
+1. Descargar desde: https://nodejs.org/ (versión LTS recomendada)
+2. Ejecutar el instalador `.msi`
+3. Aceptar las opciones por defecto
+4. Marcar la opción "Add to PATH" si está disponible
 
 **Verificar instalación:**
 ```bash
@@ -46,57 +38,56 @@ npm --version
 npx --version
 ```
 
-**Nota:** `npx` viene incluido automáticamente con npm (versión 5.2+), no necesitas instalarlo por separado.
+**Nota:** `npx` viene incluido automáticamente con npm (versión 5.2+).
 
-### 3. Instalar Composer
+### Composer
 
 **Windows:**
-1. Ve a: https://getcomposer.org/download/
-2. Descarga el instalador `Composer-Setup.exe`
-3. Ejecuta el instalador
-4. El instalador detectará automáticamente tu instalación de PHP
-5. Acepta las opciones por defecto
-6. Asegúrate de marcar la opción para agregar Composer al PATH del sistema
+1. Descargar desde: https://getcomposer.org/download/
+2. Descargar el instalador `Composer-Setup.exe`
+3. Ejecutar el instalador (detecta automáticamente PHP)
+4. Aceptar las opciones por defecto
+5. Marcar la opción para agregar Composer al PATH del sistema
 
 **Si no tienes PHP instalado:**
-- Opción A: Instala XAMPP (incluye PHP, MySQL y Apache): https://www.apachefriends.org/
-- Opción B: Instala PHP manualmente: https://windows.php.net/download/
+- Opción A: Instalar XAMPP (incluye PHP, MySQL y Apache): https://www.apachefriends.org/
+- Opción B: Instalar PHP manualmente: https://windows.php.net/download/
 
 **Verificar instalación:**
 ```bash
 composer --version
 ```
 
-**Nota:** Si después de instalar Composer no lo reconoces en Git Bash, cierra y vuelve a abrir Git Bash, o reinicia tu terminal.
+**Nota:** Si después de instalar Composer no se reconoce en Git Bash, cerrar y volver a abrir Git Bash, o reiniciar la terminal.
 
-### 4. Instalar MySQL/MariaDB
+### MySQL/MariaDB
 
 **Opción A: XAMPP (Recomendado para principiantes)**
-- Descarga desde: https://www.apachefriends.org/
+- Descargar desde: https://www.apachefriends.org/
 - Incluye: Apache, MySQL, PHP y phpMyAdmin
-- Durante la instalación, marca MySQL para que se instale
+- Durante la instalación, marcar MySQL para que se instale
 
 **Opción B: MariaDB (Recomendado)**
-- Descarga desde: https://mariadb.org/download/
-- Selecciona la versión para Windows
-- Durante la instalación, configura la contraseña de root (anótala, la necesitarás)
+- Descargar desde: https://mariadb.org/download/
+- Seleccionar la versión para Windows
+- Durante la instalación, configurar la contraseña de root
 
 **Opción C: WAMP**
-- Descarga desde: https://www.wampserver.com/
+- Descargar desde: https://www.wampserver.com/
 - Similar a XAMPP pero específico para Windows
 
 **Verificar instalación:**
-- Abre el panel de control de XAMPP/WAMP o el servicio de MariaDB
-- Verifica que MySQL/MariaDB esté corriendo
+- Abrir el panel de control de XAMPP/WAMP o el servicio de MariaDB
+- Verificar que MySQL/MariaDB esté corriendo
 
-### 5. Instalar Docker Desktop (Opcional)
+### Docker Desktop (Opcional)
 
-**Solo si quieres trabajar con Docker:**
-1. Ve a: https://www.docker.com/products/docker-desktop/
-2. Descarga Docker Desktop para Windows
-3. Ejecuta el instalador
-4. Reinicia tu computadora cuando se solicite
-5. Abre Docker Desktop y espera a que termine de iniciar
+**Solo si se quiere trabajar con Docker:**
+1. Descargar desde: https://www.docker.com/products/docker-desktop/
+2. Descargar Docker Desktop para Windows
+3. Ejecutar el instalador
+4. Reiniciar la computadora cuando se solicite
+5. Abrir Docker Desktop y esperar a que termine de iniciar
 
 **Verificar instalación:**
 ```bash
@@ -104,9 +95,7 @@ docker --version
 docker-compose --version
 ```
 
----
-
-## 🚀 Pasos para Arrancar el Proyecto
+## Pasos para Arrancar el Proyecto
 
 ### 1. Clonar el Repositorio
 
@@ -121,7 +110,7 @@ cd zoo-ARCADIA
 composer install
 ```
 
-Esto instalará todas las dependencias PHP definidas en `composer.json` (Intervention Image, PHPMailer, Cloudinary, etc.)
+Instala todas las dependencias PHP definidas en `composer.json` (Intervention Image, PHPMailer, Cloudinary, etc.)
 
 ### 3. Instalar Dependencias de Node.js
 
@@ -129,11 +118,11 @@ Esto instalará todas las dependencias PHP definidas en `composer.json` (Interve
 npm install
 ```
 
-Esto instalará todas las dependencias de desarrollo (Gulp, Sass, Terser, etc.) definidas en `package.json`.
+Instala todas las dependencias de desarrollo (Gulp, Sass, Terser, etc.) definidas en `package.json`.
 
 ### 4. Configurar la Base de Datos
 
-**⚠️ IMPORTANTE - Primera vez:** Si acabas de clonar el proyecto, es posible que no tengas el archivo `.env`. Los scripts `.bat` lo crearán automáticamente, pero si prefieres crearlo manualmente, crea un archivo `.env` en la raíz del proyecto con:
+**Primera vez:** Si acabas de clonar el proyecto, es posible que no tengas el archivo `.env`. Los scripts `.bat` lo crearán automáticamente, pero si prefieres crearlo manualmente, crear un archivo `.env` en la raíz del proyecto con:
 
 **Para Local:**
 ```
@@ -157,25 +146,23 @@ Si tienes MySQL o MariaDB instalado localmente (XAMPP, WAMP, o instalación inde
 
 1. **Seleccionar configuración local:**
    ```bash
-   # En Git Bash o PowerShell
    .\switch-to-local.bat
    ```
-
-   Esto creará/configurará el archivo `.env` para usar:
+   
+   Crea/configura el archivo `.env` para usar:
    - `DB_HOST=localhost`
    - `DB_USER=root`
    - `DB_PASS=root`
    
-   **Nota:** Si no existe `.env`, el script intentará crearlo. Si hay problemas, créalo manualmente con el contenido de arriba.
+   **Nota:** Si no existe `.env`, el script intentará crearlo. Si hay problemas, crearlo manualmente con el contenido de arriba.
 
 2. **Desplegar la base de datos:**
    ```bash
-   # En Git Bash o PowerShell
    .\deploy_database.bat
    ```
-
+   
    Este script:
-   - Detecta automáticamente tu instalación de MySQL/MariaDB (XAMPP, WAMP, o MariaDB independiente)
+   - Detecta automáticamente la instalación de MySQL/MariaDB (XAMPP, WAMP, o MariaDB independiente)
    - Crea la base de datos `zoo_arcadia`
    - Ejecuta todos los scripts SQL en orden:
      - `01_init.sql` - Inicialización
@@ -191,19 +178,19 @@ Si prefieres usar Docker:
    ```bash
    .\switch-to-docker.bat
    ```
-
-   Esto creará/configurará el archivo `.env` para usar:
+   
+   Crea/configura el archivo `.env` para usar:
    - `DB_HOST=db` (nombre del servicio Docker)
    - `DB_USER=zoo_user`
    - `DB_PASS=zoo_password`
    
-   **Nota:** Este script copia desde `.env.docker` si existe. Si no existe, créalo manualmente con el contenido de arriba.
+   **Nota:** Este script copia desde `.env.docker` si existe. Si no existe, crearlo manualmente con el contenido de arriba.
 
 2. **La base de datos se crea automáticamente** cuando arrancas Docker (ver paso 6).
 
 ### 5. Compilar Assets (CSS y JavaScript)
 
-**IMPORTANTE:** Antes de arrancar el proyecto, debes compilar los archivos CSS y JavaScript:
+Antes de arrancar el proyecto, compilar los archivos CSS y JavaScript:
 
 ```bash
 npx gulp buildCss && npx gulp buildJs
@@ -213,7 +200,7 @@ Esto:
 - Compila los archivos SCSS de `src/scss/` a CSS en `public/build/css/`
 - Compila y minifica los archivos JS de `src/js/` a JavaScript en `public/build/js/`
 
-**Nota:** Si modificas archivos en `src/scss/` o `src/js/`, debes volver a ejecutar este comando para ver los cambios.
+**Nota:** Si modificas archivos en `src/scss/` o `src/js/`, volver a ejecutar este comando para ver los cambios.
 
 ### 6. Arrancar el Proyecto
 
@@ -236,15 +223,12 @@ El proyecto estará disponible en: **http://localhost:8080**
 Si trabajas con base de datos local y no usas Docker:
 
 ```bash
-# En el directorio raíz del proyecto
 php -S localhost:3001 -t public public/index.php
 ```
 
 El proyecto estará disponible en: **http://localhost:3001**
 
----
-
-## 🛑 Detener el Proyecto
+## Detener el Proyecto
 
 ### Si usas Docker:
 
@@ -256,22 +240,20 @@ Esto detiene y elimina los contenedores (pero **NO** elimina los datos de la bas
 
 ### Si usas PHP Built-in Server:
 
-Simplemente presiona `Ctrl + C` en la terminal donde está corriendo el servidor.
+Presionar `Ctrl + C` en la terminal donde está corriendo el servidor.
 
----
+## Actualizar la Base de Datos
 
-## 🔄 Actualizar la Base de Datos
-
-Si se han hecho cambios en la estructura de la base de datos (nuevas tablas, columnas, constraints, etc.), debes aplicar esos cambios:
+Si se han hecho cambios en la estructura de la base de datos (nuevas tablas, columnas, constraints, etc.), aplicar esos cambios:
 
 ### Para Base de Datos Local:
 
-1. **Asegúrate de estar en modo local:**
+1. **Asegurarse de estar en modo local:**
    ```bash
    .\switch-to-local.bat
    ```
 
-2. **Ejecuta el deploy:**
+2. **Ejecutar el deploy:**
    ```bash
    .\deploy_database.bat
    ```
@@ -280,22 +262,20 @@ Si se han hecho cambios en la estructura de la base de datos (nuevas tablas, col
 
 ### Para Base de Datos Docker:
 
-Tienes **dos opciones** dependiendo de si quieres mantener tus datos o empezar desde cero:
-
----
+Hay dos opciones dependiendo de si se quiere mantener los datos o empezar desde cero:
 
 #### Opción 1: Aplicar Cambios SIN Perder Datos (Mantener datos persistentes)
 
-**Usa esto cuando:**
-- Ya tienes datos importantes en la base de datos
-- Solo cambiaste un script SQL específico
-- Quieres mantener los datos existentes
+**Usar cuando:**
+- Ya hay datos importantes en la base de datos
+- Solo se cambió un script SQL específico
+- Se quiere mantener los datos existentes
 
-**📝 Ejemplo: Cambias una columna en `database/02_tables.sql` pero quieres mantener tus datos**
+**Ejemplo: Cambiar una columna en `database/02_tables.sql` pero mantener los datos**
 
 **Pasos:**
 
-1. **Asegúrate de que Docker esté corriendo:**
+1. **Asegurarse de que Docker esté corriendo:**
    ```bash
    docker-compose ps
    ```
@@ -304,34 +284,29 @@ Tienes **dos opciones** dependiendo de si quieres mantener tus datos o empezar d
    docker-compose up -d
    ```
 
-2. **Ejecuta SOLO el script que cambiaste** contra el contenedor Docker:
+2. **Ejecutar SOLO el script que se cambió** contra el contenedor Docker:
    
-   **Si cambiaste `02_tables.sql`:**
+   **Si se cambió `02_tables.sql`:**
    ```bash
    docker exec -i zoo-arcadia-db mariadb -uzoo_user -pzoo_password zoo_arcadia < database/02_tables.sql
    ```
    
-   **Si cambiaste `03_constraints.sql`:**
+   **Si se cambió `03_constraints.sql`:**
    ```bash
    docker exec -i zoo-arcadia-db mariadb -uzoo_user -pzoo_password zoo_arcadia < database/03_constraints.sql
    ```
    
-   **Si cambiaste `04_indexes.sql`:**
+   **Si se cambió `04_indexes.sql`:**
    ```bash
    docker exec -i zoo-arcadia-db mariadb -uzoo_user -pzoo_password zoo_arcadia < database/04_indexes.sql
    ```
 
-3. **¡Listo!** El cambio se aplicó y tus datos siguen ahí.
+3. El cambio se aplicó y los datos siguen ahí.
 
 **⚠️ IMPORTANTE:**
-- Este método **solo funciona** si tu script SQL tiene comandos como `ALTER TABLE` o `CREATE TABLE IF NOT EXISTS`
-- Si tu script tiene `DROP TABLE` o `CREATE TABLE` sin `IF NOT EXISTS`, puede causar errores
-- Si hay errores, usa la Opción 2 (recrear desde cero)
-
-**💡 Ejemplo práctico:**
-- Si borras el archivo `database/06_seed_data.sql` y usas este método (Opción 1), **tus datos se mantienen** porque solo ejecutas el script que especifiques
-- Los datos que ya están en la base de datos **NO se borran** automáticamente
-- Solo se ejecuta el script que tú indiques con `docker exec`
+- Este método solo funciona si el script SQL tiene comandos como `ALTER TABLE` o `CREATE TABLE IF NOT EXISTS`
+- Si el script tiene `DROP TABLE` o `CREATE TABLE` sin `IF NOT EXISTS`, puede causar errores
+- Si hay errores, usar la Opción 2 (recrear desde cero)
 
 **Ejemplo de cambio que funciona con este método:**
 ```sql
@@ -345,36 +320,34 @@ ALTER TABLE animals ADD COLUMN nueva_columna VARCHAR(100);
 DROP TABLE IF EXISTS animals;
 CREATE TABLE animals (...);
 ```
-(En este caso, usa la Opción 2)
-
----
+(En este caso, usar la Opción 2)
 
 #### Opción 2: Recrear la Base de Datos desde Cero (Borra todos los datos)
 
-**Usa esto cuando:**
-- No te importa perder los datos
-- Hiciste cambios importantes en varios scripts
-- Quieres empezar completamente limpio
+**Usar cuando:**
+- No importa perder los datos
+- Se hicieron cambios importantes en varios scripts
+- Se quiere empezar completamente limpio
 - Es más simple y garantiza que todo funcione
 
-**📝 Ejemplo práctico: Cambias una columna en `database/02_tables.sql`**
+**Ejemplo: Cambiar una columna en `database/02_tables.sql`**
 
-**Pasos exactos (súper simple):**
+**Pasos:**
 
-1. **Editas el archivo** `database/02_tables.sql` y haces tu cambio (por ejemplo, agregas una columna a la tabla `animals`)
+1. **Editar el archivo** `database/02_tables.sql` y hacer el cambio (por ejemplo, agregar una columna a la tabla `animals`)
 
-2. **Ejecutas estos 2 comandos en Git Bash:**
+2. **Ejecutar estos 2 comandos en Git Bash:**
    ```bash
    docker-compose down -v
    docker-compose up -d
    ```
 
-3. **¡Eso es todo!** Docker automáticamente:
+3. Docker automáticamente:
    - Elimina la base de datos antigua (por eso el `-v`)
    - Crea una nueva base de datos vacía
    - Ejecuta todos los scripts SQL en orden:
      - `01_init.sql` → Crea la base de datos
-     - `02_tables.sql` → Crea las tablas (con tu cambio)
+     - `02_tables.sql` → Crea las tablas (con el cambio)
      - `03_constraints.sql` → Agrega las relaciones
      - `04_indexes.sql` → Crea los índices
      - `05_procedures.sql` → Crea los procedimientos
@@ -383,55 +356,46 @@ CREATE TABLE animals (...);
 **¿Por qué `-v`?**
 - El flag `-v` elimina los **volúmenes** (donde Docker guarda los datos de la BD)
 - Sin `-v`, Docker no ejecutaría los scripts SQL de nuevo (solo los ejecuta la primera vez)
-- Con `-v`, Docker "piensa" que es la primera vez y ejecuta todos los scripts automáticamente
+- Con `-v`, Docker ejecuta todos los scripts automáticamente
 
 **⚠️ ADVERTENCIA:** 
 - Esto **borra todos los datos** de la base de datos
-- Si tienes datos importantes, haz un backup primero o usa la Opción 1
-
-**💡 Ejemplo práctico:**
-- Si borras el archivo `database/06_seed_data.sql` y usas este método (Opción 2), **NO habrá datos de prueba** porque ese script no existe
-- Todos los scripts se ejecutan desde cero, así que si falta `seed_data.sql`, no se insertarán datos de prueba
-- Si quieres mantener tus datos actuales, usa la Opción 1 en su lugar
-
----
+- Si hay datos importantes, hacer un backup primero o usar la Opción 1
 
 #### ¿Cuál opción usar?
 
-- **Opción 1** → Si tienes datos importantes y solo cambiaste un script específico
+- **Opción 1** → Si hay datos importantes y solo se cambió un script específico
   - ✅ Mantiene todos los datos existentes
-  - ✅ Si borras `seed_data.sql`, tus datos se mantienen
-  - ✅ Solo ejecuta el script que especifiques
+  - ✅ Si se borra `seed_data.sql`, los datos se mantienen
+  - ✅ Solo ejecuta el script que se especifique
   
-- **Opción 2** → Si no te importa perder datos o quieres empezar limpio (más simple)
+- **Opción 2** → Si no importa perder datos o se quiere empezar limpio (más simple)
   - ⚠️ Borra todos los datos
-  - ⚠️ Si borras `seed_data.sql`, no habrá datos de prueba
+  - ⚠️ Si se borra `seed_data.sql`, no habrá datos de prueba
   - ✅ Ejecuta todos los scripts desde cero
 
 #### Verificar que los cambios se aplicaron:
 
-Puedes conectarte a la base de datos Docker para verificar:
+Conectarse a la base de datos Docker para verificar:
 
 ```bash
-# Conectarte a la base de datos
+# Conectarse a la base de datos
 docker exec -it zoo-arcadia-db mariadb -uzoo_user -pzoo_password zoo_arcadia
 
-# Dentro de MariaDB, puedes ejecutar:
+# Dentro de MariaDB, ejecutar:
 SHOW TABLES;
 DESCRIBE nombre_de_tabla;
 EXIT;
 ```
 
-O usar un cliente gráfico como DBeaver, MySQL Workbench, o phpMyAdmin conectándote a:
+O usar un cliente gráfico como DBeaver, MySQL Workbench, o phpMyAdmin conectándose a:
 - **Host:** `localhost`
 - **Puerto:** `3306`
 - **Usuario:** `zoo_user`
 - **Contraseña:** `zoo_password`
 - **Base de datos:** `zoo_arcadia`
 
----
-
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 zoo-ARCADIA/
@@ -452,9 +416,7 @@ zoo-ARCADIA/
 └── gulpfile.js           # Tareas de compilación Gulp
 ```
 
----
-
-## 🔧 Comandos Útiles
+## Comandos Útiles
 
 ### Compilar Assets
 
@@ -498,13 +460,11 @@ docker-compose down -v
 .\switch-to-docker.bat
 ```
 
----
-
-## ⚠️ Problemas Comunes
+## Problemas Comunes
 
 ### El proyecto no carga CSS/JS
 
-**Solución:** Asegúrate de haber compilado los assets:
+**Solución:** Compilar los assets:
 ```bash
 npx gulp buildCss && npx gulp buildJs
 ```
@@ -512,9 +472,9 @@ npx gulp buildCss && npx gulp buildJs
 ### Error de conexión a la base de datos
 
 **Solución:** 
-1. Verifica que MySQL/MariaDB esté corriendo
-2. Verifica el archivo `.env` tiene la configuración correcta
-3. Si usas Docker, verifica que el contenedor `zoo-arcadia-db` esté corriendo:
+1. Verificar que MySQL/MariaDB esté corriendo
+2. Verificar el archivo `.env` tiene la configuración correcta
+3. Si usas Docker, verificar que el contenedor `zoo-arcadia-db` esté corriendo:
    ```bash
    docker-compose ps
    ```
@@ -526,37 +486,16 @@ npx gulp buildCss && npx gulp buildJs
 - `C:\xampp\mysql\bin\mysql.exe`
 - `C:\wamp64\bin\mysql\mysql8.0.31\bin\mysql.exe`
 
-Si tu instalación está en otra ruta, edita `deploy_database.bat` y agrega tu ruta.
+Si tu instalación está en otra ruta, editar `deploy_database.bat` y agregar tu ruta.
 
 ### Los cambios en SCSS/JS no se reflejan
 
-**Solución:** Debes recompilar después de cada cambio:
+**Solución:** Recompilar después de cada cambio:
 ```bash
 npx gulp buildCss && npx gulp buildJs
 ```
 
----
-
-## 📝 Notas Importantes
-
-- **Siempre compila los assets** antes de arrancar el proyecto o después de modificar archivos en `src/`
-- **El archivo `.env`** controla la configuración de la base de datos. Úsalo para cambiar entre local y Docker.
-- **Los scripts SQL** en `database/` se ejecutan en orden numérico. No modifiques los nombres de los archivos.
-- **Docker** es la forma recomendada de trabajar, ya que garantiza un entorno consistente.
-
----
-
-## 🆘 ¿Necesitas Ayuda?
-
-Si tienes problemas:
-1. Revisa los logs de Docker: `docker-compose logs -f`
-2. Verifica que todas las dependencias estén instaladas
-3. Asegúrate de haber ejecutado todos los pasos en orden
-4. Consulta la documentación en `docs/` para más detalles
-
----
-
-## 📄 Archivos de Configuración
+## Archivos de Configuración
 
 ### .gitignore
 
@@ -590,7 +529,7 @@ El archivo `.env` contiene la configuración de la base de datos y **NO se sube 
 
 **Este es el único archivo que realmente usa el sistema.** El archivo `config.php` lee este archivo para obtener la configuración de la base de datos.
 
-Este archivo se crea/modifica automáticamente cuando ejecutas:
+Este archivo se crea/modifica automáticamente cuando se ejecuta:
 - `switch-to-local.bat` → Modifica `.env` para configuración local
 - `switch-to-docker.bat` → Modifica `.env` para configuración Docker
 
@@ -628,7 +567,7 @@ DB_PASS=zoo_password
 
 #### .env.local (Opcional - backup automático)
 
-El script `switch-to-local.bat` crea este archivo automáticamente como backup de tu configuración local antes de cambiar a Docker. **No es necesario** para el funcionamiento del sistema.
+El script `switch-to-local.bat` crea este archivo automáticamente como backup de la configuración local antes de cambiar a Docker. **No es necesario** para el funcionamiento del sistema.
 
 **Notas importantes:**
 - El archivo `.env` **NO se sube a Git** (está en `.gitignore`)
@@ -636,7 +575,9 @@ El script `switch-to-local.bat` crea este archivo automáticamente como backup d
 - Si clonas el proyecto en otro ordenador, necesitarás crear el `.env` manualmente o usar los scripts `.bat`
 - Si el `.env` no existe, `config.php` usa valores por defecto (localhost, root, root)
 
----
+## Notas Importantes
 
-**¡Listo para desarrollar! 🚀**
-
+- Compilar los assets antes de arrancar el proyecto o después de modificar archivos en `src/`
+- El archivo `.env` controla la configuración de la base de datos. Usarlo para cambiar entre local y Docker.
+- Los scripts SQL en `database/` se ejecutan en orden numérico. No modificar los nombres de los archivos.
+- Docker es la forma recomendada de trabajar, ya que garantiza un entorno consistente.
