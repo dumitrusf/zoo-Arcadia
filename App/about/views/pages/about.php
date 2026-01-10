@@ -155,4 +155,4 @@
 	</div>
 </section>
 
-<script src="/public/build/js/rating-testimony.js" defer></script>
+<script src="/build/js/rating-testimony.js" defer></script>

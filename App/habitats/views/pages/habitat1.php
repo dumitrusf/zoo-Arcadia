@@ -189,4 +189,4 @@
 
 </main>
 
-<script src="/public/build/js/habitat-filter.js" defer></script>
+<script src="/build/js/habitat-filter.js" defer></script>

@@ -204,4 +204,4 @@ function getStateBadgeClass($state) {
     </div>
 </div>
 
-<script src="/public/build/js/vreports.js" defer></script>
+<script src="/build/js/vreports.js" defer></script>

@@ -37,28 +37,38 @@ require_once __DIR__ . '/../includes/functions.php';   // Load helper functions
 $parsedUrl = parse_url($_SERVER['REQUEST_URI']);
 $path = ltrim($parsedUrl['path'] ?? '', '/');
 
-// 2. Serve static files (CSS, JS, images) if they are outside the public directory
-// If the URL starts with "public/", "src/" or "node_modules/", we serve the file directly
-if (strpos($path, 'public/') === 0 || strpos($path, 'src/') === 0 || strpos($path, 'node_modules/') === 0) {
+// 2. Serve static files from different locations
+// Determine full path based on requested path
+$fullPath = null;
+
+if (strpos($path, 'src/') === 0 || strpos($path, 'node_modules/') === 0) {
+    // Files outside public (src/, node_modules/)
     $fullPath = __DIR__ . '/../' . $path;
+} elseif (strpos($path, 'public/') === 0) {
+    // Explicit public/ prefix
+    $fullPath = __DIR__ . '/../' . $path;
+} elseif (strpos($path, 'build/') === 0) {
+    // Build assets (inside public/)
+    $fullPath = __DIR__ . '/' . $path;
+}
+
+if ($fullPath && file_exists($fullPath) && is_file($fullPath)) {
+    // Set MIME type
+    $ext = strtolower(pathinfo($fullPath, PATHINFO_EXTENSION));
+    $mimes = [
+        'css' => 'text/css', 'js' => 'application/javascript',
+        'png' => 'image/png', 'jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg',
+        'gif' => 'image/gif', 'webp' => 'image/webp', 'svg' => 'image/svg+xml',
+        'ttf' => 'font/ttf', 'woff' => 'font/woff', 'woff2' => 'font/woff2',
+        'eot' => 'application/vnd.ms-fontobject'
+    ];
     
-    if (file_exists($fullPath) && is_file($fullPath)) {
-        // Set appropriate MIME type based on file extension
-        $ext = pathinfo($fullPath, PATHINFO_EXTENSION);
-        switch ($ext) {
-            case 'css':  header('Content-Type: text/css'); break;
-            case 'js':   header('Content-Type: application/javascript'); break;
-            case 'png':  header('Content-Type: image/png'); break;
-            case 'jpg':  header('Content-Type: image/jpeg'); break;
-            case 'jpeg': header('Content-Type: image/jpeg'); break;
-            case 'svg':  header('Content-Type: image/svg+xml'); break;
-            case 'ttf':  header('Content-Type: font/ttf'); break;
-            case 'woff': header('Content-Type: font/woff'); break;
-            case 'woff2':header('Content-Type: font/woff2'); break;
-        }
-        readfile($fullPath);
-        exit; // Important: stop execution here to prevent loading the router
+    if (isset($mimes[$ext])) {
+        header('Content-Type: ' . $mimes[$ext]);
     }
+    
+    readfile($fullPath);
+    exit;
 }
 
 // 3. Check if the path corresponds to a real file inside the public directory

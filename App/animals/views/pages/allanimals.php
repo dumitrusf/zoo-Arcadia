@@ -183,4 +183,4 @@
     </nav>
 </main>
 
-<script src="/public/build/js/animals-filter.js" defer></script>
+<script src="/build/js/animals-filter.js" defer></script>
