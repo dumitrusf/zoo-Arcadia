@@ -528,10 +528,10 @@ body {
   font-size: calc(clamp(1.8rem, 1.6129vw + 1rem, 2.4rem) + 0.5rem);
 }
 
-.filter {
+.filter .navbar-toggler-icon {
   font-size: clamp(1.8rem, 1.6129vw + 1rem, 2.4rem);
 }
-.filter .navbar-toggler-icon {
+.filter {
   font-size: clamp(1.8rem, 1.6129vw + 1rem, 2.4rem);
 }
 .filter__legend, .filter__legend ~ label, .filter__legend ~ input, .filter__fieldset select option, .filter__legend ~ select {
@@ -904,7 +904,6 @@ a {
 .hero-carousel .controls-carousel {
   width: 100%;
   margin: 0 auto;
-  margin-bottom: 3rem;
 }
 @media screen and (min-width: 744px) {
   .hero-carousel .controls-carousel {
@@ -931,6 +930,9 @@ a {
     height: 4.5rem;
     width: 4.5rem;
   }
+}
+.hero-carousel .controls-carousel {
+  margin-bottom: 3rem;
 }
 
 .intro {
@@ -1371,12 +1373,14 @@ select {
   z-index: 1000;
   transition: none;
   overflow-x: visible;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
-  display: flex;
-  flex-direction: column;
 }
 .bo-sidebar.loaded {
   transition: width 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.bo-sidebar {
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
 }
 @media (max-width: 767.98px) {
   .bo-sidebar {
@@ -1619,15 +1623,15 @@ body:has(.bo-sidebar.loaded) .bo-main-content {
   content: "";
   position: absolute;
   inset: 0;
-  box-shadow: 0rem -17.2rem 5.92rem -11.2rem #ebebeb inset;
+  background: linear-gradient(180deg, rgba(235, 235, 235, 0) 70%, #ebebeb 88%, #ebebeb 100%);
   z-index: 3;
   margin: auto;
   width: min(100vw, max(128rem, 0vw));
   height: 100%;
-  box-shadow: 0rem -17.2rem 5.92rem -11.2rem #ebebeb inset;
 }
 @media screen and (min-width: 1280px) {
   .hero::after {
+    background: linear-gradient(180deg, rgba(235, 235, 235, 0) 70%, #ebebeb 88%, #ebebeb 100%);
     box-shadow: 0rem -17.2rem 5.92rem -11.2rem #ebebeb inset, 17.2rem 0rem 5.92rem -11.2rem #ebebeb inset, -17.2rem 0rem 5.92rem -11.2rem #ebebeb inset;
   }
 }
@@ -1770,7 +1774,6 @@ body:has(.bo-sidebar.loaded) .bo-main-content {
 
 .k-about__container {
   max-height: 24.8rem;
-  position: relative;
 }
 @media screen and (min-width: 744px) {
   .k-about__container {
@@ -1783,19 +1786,24 @@ body:has(.bo-sidebar.loaded) .bo-main-content {
     vertical-align: baseline;
   }
 }
+.k-about__container {
+  position: relative;
+}
 .k-about__container::after {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 3;
-  margin: auto;
-  width: min(100vw, max(128rem, 0vw));
-  height: 100%;
 }
 @media screen and (min-width: 744px) {
   .k-about__container::after {
     background: linear-gradient(180deg, rgba(48, 26, 0, 0) 25%, rgba(48, 26, 0, 0.0666666667) 45%, #301a00 99.999%);
   }
+}
+.k-about__container::after {
+  z-index: 3;
+  margin: auto;
+  width: min(100vw, max(128rem, 0vw));
+  height: 100%;
 }
 @media screen and (min-width: 1280px) {
   .k-about__container::after {
@@ -1811,14 +1819,6 @@ body:has(.bo-sidebar.loaded) .bo-main-content {
   background-color: rgba(66, 36, 0, 0.4745098039);
   inset: 0;
   z-index: 4;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  flex-wrap: nowrap;
-  gap: 0;
-  vertical-align: baseline;
-  text-align: center;
 }
 @media screen and (min-width: 744px) {
   .k-about__content {
@@ -1840,6 +1840,16 @@ body:has(.bo-sidebar.loaded) .bo-main-content {
     -ms-border-radius: 0 1.5rem 1.5rem 0;
     -o-border-radius: 0 1.5rem 1.5rem 0;
   }
+}
+.k-about__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 0;
+  vertical-align: baseline;
+  text-align: center;
 }
 
 .intro {
@@ -2051,13 +2061,15 @@ body:has(.bo-sidebar.loaded) .bo-main-content {
   gap: 0;
   vertical-align: baseline;
   border-bottom: #ebebeb 0.158rem solid;
-  margin: auto;
 }
 .animal__table tr th {
   letter-spacing: -0.05rem;
 }
 .animal__table tr td {
   color: #2ed6ff;
+}
+.animal__table tr {
+  margin: auto;
 }
 
 .hero-carousel .hero__container .intro__button--hours {
@@ -2114,7 +2126,6 @@ body:has(.bo-sidebar.loaded) .bo-main-content {
   flex-wrap: nowrap;
   gap: 0;
   vertical-align: baseline;
-  backdrop-filter: blur(5.0500001907px);
 }
 @media screen and (min-width: 744px) {
   .hero-carousel .carousel-caption {
@@ -2127,6 +2138,9 @@ body:has(.bo-sidebar.loaded) .bo-main-content {
     left: calc(50vw - 32rem);
     right: calc(50vw - 32rem);
   }
+}
+.hero-carousel .carousel-caption {
+  backdrop-filter: blur(5.0500001907px);
 }
 .hero-carousel .controls-carousel {
   display: flex;
