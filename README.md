@@ -11,6 +11,16 @@ Système de gestion de zoo en **PHP** avec une architecture par domaines (**Scre
 
 Zoo Arcadia est un site web pour un zoo fictif : les visiteurs peuvent consulter **les animaux**, **les habitats** et **les services**, et le back-office permet de gérer le contenu et les opérations internes avec des permissions par rôle.
 
+## Contexte (ECF Studi / RNCP DWWM)
+
+Ce dépôt a été réalisé dans le cadre du **projet ECF** de la formation **Développeur Web et Web Mobile (STUDI)**, avec un objectif “jury” : livrer une application **fonctionnelle**, **responsive**, et **justifiable techniquement** (architecture, sécurité, déploiement).
+
+Exigences fonctionnelles (résumé) :
+
+- **Espaces back-office** : administrateur (gestion complète), vétérinaire (suivi santé/rapports), employé (actions limitées).
+- **Fonctionnalités front** : pages de présentation + filtres (animaux/habitats), formulaire de contact, témoignages.
+- **Traçabilité** : Git + suivi Jira.
+
 ## Screenshots
 
 | Home | Animals |
@@ -127,7 +137,7 @@ curl.cainfo = "C:\php\cacert.pem"
 openssl.cafile = "C:\php\cacert.pem"
 ```
 
-Ensuite : rouvre le terminal (et redémarre Apache si nécessaire) puis réessaie `composer install`.
+Ensuite : nous rouvrons le terminal (et nous redémarrons Apache si nécessaire), puis nous relançons `composer install`.
 
 ## Structure du projet (haut niveau)
 
