@@ -27,7 +27,7 @@ printf "\$_ENV['DB_HOST'] = '%s';\n" "${DB_HOST:-mysql.railway.internal}" >> /va
 printf "\$_ENV['DB_PORT'] = '%s';\n" "${DB_PORT:-3306}" >> /var/www/html/env_railway.php
 printf "\$_ENV['DB_NAME'] = '%s';\n" "${DB_NAME:-railway}" >> /var/www/html/env_railway.php
 printf "\$_ENV['DB_USER'] = '%s';\n" "${DB_USER:-root}" >> /var/www/html/env_railway.php
-printf "\$_ENV['DB_PASS'] = '%s';\n" "${DB_PASS}" >> /var/www/html/env_railway.php
+printf "\$_ENV['DB_PASS'] = '%s';\n" "${DB_PASS:-StyqYmtkAdqphXlEdqgaVusbNknweeHz}" >> /var/www/html/env_railway.php
 
 # Iniciar Apache en primer plano
 exec apache2-foreground
