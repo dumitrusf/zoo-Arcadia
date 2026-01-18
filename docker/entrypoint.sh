@@ -7,6 +7,10 @@ PORT_TO_USE=${PORT:-80}
 
 sed -i "s/80/${PORT_TO_USE}/g" /etc/apache2/ports.conf /etc/apache2/sites-available/*.conf
 
+# TRUCO MAESTRO: Volcar variables de entorno a un archivo .env para que PHP las vea sí o sí
+# Esto soluciona el problema de que Apache/PHP no hereden las variables de Railway
+printenv > /var/www/html/.env
+
 # Deshabilitar TODOS los MPM para evitar conflictos
 a2dismod mpm_event 2>/dev/null || true
 a2dismod mpm_worker 2>/dev/null || true
