@@ -30,7 +30,7 @@
 
 require_once __DIR__ . '/../../cms/models/service.php';
 require_once __DIR__ . '/../../cms/models/brick.php';
-require_once __DIR__ . '/../../hero/models/Hero.php';
+require_once __DIR__ . '/../../hero/models/hero.php';
 require_once __DIR__ . '/../../hero/models/Slide.php';
 require_once __DIR__ . '/../../testimonials/models/testimonial.php';
 require_once __DIR__ . '/../../users/models/user.php';
