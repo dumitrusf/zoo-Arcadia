@@ -21,17 +21,10 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y nodejs
 
 # Habilitar mod_rewrite y mod_headers para Apache
-# Corrección MPM BLINDADA: Borrar manualmente cualquier rastro de otros MPM
-RUN rm -f /etc/apache2/mods-enabled/mpm_*.load /etc/apache2/mods-enabled/mpm_*.conf \
-    && a2enmod mpm_prefork rewrite headers
-
-# Configurar Apache para usar el puerto dinámico de Railway (PORT)
-RUN sed -i 's/80/${PORT}/g' /etc/apache2/ports.conf /etc/apache2/sites-available/*.conf
+RUN a2enmod rewrite headers
 
 # Copiar configuración de Apache
 COPY docker/apache-config.conf /etc/apache2/sites-available/000-default.conf
-# Asegurar que el archivo copiado también use el puerto dinámico
-RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf
 
 # Establecer directorio de trabajo
 WORKDIR /var/www/html
@@ -66,6 +59,10 @@ RUN chown -R www-data:www-data /var/www/html \
 # Exponer puerto 80
 EXPOSE 80
 
-# Comando por defecto (Apache ya se inicia automáticamente)
-CMD ["apache2-foreground"]
+# Copiar y configurar entrypoint para solucionar conflictos MPM y puertos
+COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# Comando por defecto usando el entrypoint
+CMD ["/usr/local/bin/entrypoint.sh"]
 
