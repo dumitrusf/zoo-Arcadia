@@ -39,7 +39,7 @@ class DB {
                 // Here I create the PDO connection.
                 // self::$instance saves the connection I am creating to be able to reuse it later.
                 
-                "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4",
+                "mysql:host=" . DB_HOST . ";port=" . (defined('DB_PORT') ? DB_PORT : 3306) . ";dbname=" . DB_NAME . ";charset=utf8mb4",
                 // Here I build the string with the host (server), database name and encoding.
                 // Using utf8mb4 to support emojis and full Unicode characters (4 bytes).
                 
