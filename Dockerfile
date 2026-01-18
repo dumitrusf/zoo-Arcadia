@@ -21,7 +21,9 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y nodejs
 
 # Habilitar mod_rewrite y mod_headers para Apache
-RUN a2enmod rewrite headers
+# Corrección MPM: Asegurar que solo mpm_prefork está activo y evitar conflictos
+RUN a2dismod mpm_event mpm_worker || true \
+    && a2enmod mpm_prefork rewrite headers
 
 # Copiar configuración de Apache
 COPY docker/apache-config.conf /etc/apache2/sites-available/000-default.conf
