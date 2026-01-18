@@ -16,19 +16,36 @@ a2dismod mpm_prefork 2>/dev/null || true
 # Habilitar SOLO mpm_prefork (necesario para PHP)
 a2enmod mpm_prefork
 
-# SOLUCIÓN DEFINITIVA: Escribir variables en un archivo PHP que se cargará SIEMPRE
-cat > /var/www/html/env_railway.php << 'PHPEOF'
+# SOLUCIÓN DEFINITIVA: Parsear MYSQL_URL (que Railway SIEMPRE inyecta)
+# Formato: mysql://usuario:password@host:puerto/database
+if [ -n "$MYSQL_URL" ]; then
+    # Extraer partes de la URL
+    DB_USER_PARSED=$(echo $MYSQL_URL | sed -n 's#.*://\([^:]*\):.*#\1#p')
+    DB_PASS_PARSED=$(echo $MYSQL_URL | sed -n 's#.*://[^:]*:\([^@]*\)@.*#\1#p')
+    DB_HOST_PARSED=$(echo $MYSQL_URL | sed -n 's#.*@\([^:]*\):.*#\1#p')
+    DB_PORT_PARSED=$(echo $MYSQL_URL | sed -n 's#.*:\([0-9]*\)/.*#\1#p')
+    DB_NAME_PARSED=$(echo $MYSQL_URL | sed -n 's#.*/\([^?]*\).*#\1#p')
+    
+    # Crear archivo PHP con variables
+    cat > /var/www/html/env_railway.php <<PHPEOF
 <?php
-// Variables de entorno inyectadas por Railway en tiempo de arranque
-// Este archivo es generado automáticamente por entrypoint.sh
+\$_ENV['DB_HOST'] = '${DB_HOST_PARSED}';
+\$_ENV['DB_PORT'] = '${DB_PORT_PARSED}';
+\$_ENV['DB_NAME'] = '${DB_NAME_PARSED}';
+\$_ENV['DB_USER'] = '${DB_USER_PARSED}';
+\$_ENV['DB_PASS'] = '${DB_PASS_PARSED}';
 PHPEOF
-
-# Añadir variables de entorno al archivo PHP
-echo "\$_ENV['DB_HOST'] = '${DB_HOST:-localhost}';" >> /var/www/html/env_railway.php
-echo "\$_ENV['DB_PORT'] = '${DB_PORT:-3306}';" >> /var/www/html/env_railway.php
-echo "\$_ENV['DB_NAME'] = '${DB_NAME:-zoo_arcadia}';" >> /var/www/html/env_railway.php
-echo "\$_ENV['DB_USER'] = '${DB_USER:-root}';" >> /var/www/html/env_railway.php
-echo "\$_ENV['DB_PASS'] = '${DB_PASS:-root}';" >> /var/www/html/env_railway.php
+else
+    # Fallback: usar variables individuales o defaults
+    cat > /var/www/html/env_railway.php <<PHPEOF
+<?php
+\$_ENV['DB_HOST'] = '${DB_HOST:-mysql.railway.internal}';
+\$_ENV['DB_PORT'] = '${DB_PORT:-3306}';
+\$_ENV['DB_NAME'] = '${DB_NAME:-railway}';
+\$_ENV['DB_USER'] = '${DB_USER:-root}';
+\$_ENV['DB_PASS'] = '${DB_PASS:-}';
+PHPEOF
+fi
 
 # Iniciar Apache en primer plano
 exec apache2-foreground
