@@ -1,10 +1,11 @@
 #!/bin/bash
 set -e
 
-# Configurar puerto dinámico de Railway si existe la variable PORT
-if [ -n "$PORT" ]; then
-    sed -i "s/80/$PORT/g" /etc/apache2/ports.conf /etc/apache2/sites-available/*.conf
-fi
+# Configurar puerto dinámico de Railway
+# Si PORT no está definido, usamos 80 por defecto para evitar error de sintaxis en Apache
+PORT_TO_USE=${PORT:-80}
+
+sed -i "s/80/${PORT_TO_USE}/g" /etc/apache2/ports.conf /etc/apache2/sites-available/*.conf
 
 # Deshabilitar TODOS los MPM para evitar conflictos
 a2dismod mpm_event 2>/dev/null || true

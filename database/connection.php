@@ -31,27 +31,42 @@ class DB {
         // Use `self::` because I am inside the class and want to access its static variable.
         // If there is no connection yet, I enter and create it.
 
+            // DEBUG MODE: Si falla la conexión, mostramos qué variables estamos usando
+            // (Esto es para debugging en producción, quitar luego)
+            $host = defined('DB_HOST') ? DB_HOST : 'NO_DEFINIDO';
+            $port = defined('DB_PORT') ? DB_PORT : '3306';
+            
+            // Si seguimos en localhost en producción, algo va mal
+            if (getenv('RAILWAY_ENVIRONMENT') && $host === 'localhost') {
+                die("ERROR CRÍTICO: Estamos en Railway pero DB_HOST es localhost. Variables detectadas: MYSQLHOST=" . getenv('MYSQLHOST'));
+            }
+
             $optionsPDO[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
             // This tells PDO that if something goes wrong, don't tell me with a strange number, 
             // but throw an exception to be able to capture the error.
 
-            self::$instance = new PDO(
-                // Here I create the PDO connection.
-                // self::$instance saves the connection I am creating to be able to reuse it later.
-                
-                "mysql:host=" . DB_HOST . ";port=" . (defined('DB_PORT') ? DB_PORT : 3306) . ";dbname=" . DB_NAME . ";charset=utf8mb4",
-                // Here I build the string with the host (server), database name and encoding.
-                // Using utf8mb4 to support emojis and full Unicode characters (4 bytes).
-                
-                DB_USER,
-                // User to connect to (this is defined in another file, as a constant).
-                
-                DB_PASS,
-                // Password of that user.
-                
-                $optionsPDO
-                // And I pass the options I defined above, like the exceptions.
-            );
+            try {
+                self::$instance = new PDO(
+                    // Here I create the PDO connection.
+                    // self::$instance saves the connection I am creating to be able to reuse it later.
+                    
+                    "mysql:host=" . DB_HOST . ";port=" . (defined('DB_PORT') ? DB_PORT : 3306) . ";dbname=" . DB_NAME . ";charset=utf8mb4",
+                    // Here I build the string with the host (server), database name and encoding.
+                    // Using utf8mb4 to support emojis and full Unicode characters (4 bytes).
+                    
+                    DB_USER,
+                    // User to connect to (this is defined in another file, as a constant).
+                    
+                    DB_PASS,
+                    // Password of that user.
+                    
+                    $optionsPDO
+                    // And I pass the options I defined above, like the exceptions.
+                );
+            } catch (PDOException $e) {
+                // Si falla, mostramos un mensaje más útil con los valores (OJO: No mostrar contraseña)
+                die("Error de Conexión DB: " . $e->getMessage() . " | Host: " . DB_HOST . " | Port: " . (defined('DB_PORT') ? DB_PORT : 3306));
+            }
             
             // Set connection charset to utf8mb4 explicitly
             self::$instance->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
