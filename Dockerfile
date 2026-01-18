@@ -21,12 +21,17 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y nodejs
 
 # Habilitar mod_rewrite y mod_headers para Apache
-# Corrección MPM: Asegurar que solo mpm_prefork está activo y evitar conflictos
-RUN a2dismod mpm_event mpm_worker || true \
+# Corrección MPM BLINDADA: Borrar manualmente cualquier rastro de otros MPM
+RUN rm -f /etc/apache2/mods-enabled/mpm_*.load /etc/apache2/mods-enabled/mpm_*.conf \
     && a2enmod mpm_prefork rewrite headers
+
+# Configurar Apache para usar el puerto dinámico de Railway (PORT)
+RUN sed -i 's/80/${PORT}/g' /etc/apache2/ports.conf /etc/apache2/sites-available/*.conf
 
 # Copiar configuración de Apache
 COPY docker/apache-config.conf /etc/apache2/sites-available/000-default.conf
+# Asegurar que el archivo copiado también use el puerto dinámico
+RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf
 
 # Establecer directorio de trabajo
 WORKDIR /var/www/html
