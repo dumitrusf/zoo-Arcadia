@@ -2,20 +2,29 @@
 /**
  * Configuración de Base de Datos
  * 
- * Lee variables de entorno usando getenv() y $_SERVER (más confiable en Apache/Docker).
- * Si no existen, usa valores por defecto para desarrollo local.
+ * En Railway, el entrypoint.sh genera env_railway.php con las variables.
+ * En local, se usa el archivo .env tradicional.
  */
 
-// Cargar variables de entorno desde .env si existe (solo en local)
+// 1. Si existe env_railway.php (generado por Railway), cargarlo
+if (file_exists(__DIR__ . '/env_railway.php')) {
+    require_once __DIR__ . '/env_railway.php';
+}
+
+// 2. Si existe .env (local), cargarlo con phpdotenv
 if (file_exists(__DIR__ . '/.env')) {
     require_once __DIR__ . '/vendor/autoload.php';
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
     $dotenv->safeLoad();
 }
 
-// Helper function para leer variables de forma robusta
+// 3. Helper function para leer variables
 function env($key, $default = null) {
-    // Prioridad: 1. getenv() -> 2. $_SERVER -> 3. $_ENV -> 4. default
+    // Prioridad: $_ENV (poblado por env_railway.php o .env) -> getenv() -> $_SERVER -> default
+    if (isset($_ENV[$key]) && $_ENV[$key] !== '') {
+        return $_ENV[$key];
+    }
+    
     $value = getenv($key);
     if ($value !== false && $value !== '') {
         return $value;
@@ -25,14 +34,10 @@ function env($key, $default = null) {
         return $_SERVER[$key];
     }
     
-    if (isset($_ENV[$key]) && $_ENV[$key] !== '') {
-        return $_ENV[$key];
-    }
-    
     return $default;
 }
 
-// Configuración de Base de Datos
+// 4. Definir constantes
 define('DB_HOST', env('DB_HOST', 'localhost'));
 define('DB_PORT', env('DB_PORT', 3306));
 define('DB_NAME', env('DB_NAME', 'zoo_arcadia'));
