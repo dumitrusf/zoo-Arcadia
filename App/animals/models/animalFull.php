@@ -24,7 +24,7 @@ class AnimalFull {
      * @return array List of full animal profiles.
      */
     public function getAll() {
-        $sql = "SELECT af.*, ag.animal_name, ag.gender, s.specie_name, c.category_name, h.habitat_name, 
+        $sql = "SELECT DISTINCT af.*, ag.animal_name, ag.gender, s.specie_name, c.category_name, h.habitat_name, 
                        n.nutrition_type, n.food_type AS nutrition_food_type, n.food_qtty AS nutrition_food_qtty,
                        m.media_path, m.media_path_medium, m.media_path_large
                 FROM animal_full af
@@ -35,8 +35,6 @@ class AnimalFull {
                 LEFT JOIN nutrition n ON af.nutrition_id = n.id_nutrition
                 LEFT JOIN media_relations mr ON af.id_full_animal = mr.related_id AND mr.related_table = 'animal_full'
                 LEFT JOIN media m ON mr.media_id = m.id_media
-                LEFT JOIN health_state_report hsr ON hsr.full_animal_id = af.id_full_animal
-                GROUP BY af.id_full_animal
                 ORDER BY ag.animal_name ASC";
         
         $stmt = $this->db->prepare($sql);
