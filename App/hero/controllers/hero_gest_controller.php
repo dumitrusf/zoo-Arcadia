@@ -22,7 +22,7 @@
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
 
-require_once __DIR__ . '/../models/Hero.php';
+require_once __DIR__ . '/../models/hero.php';
 require_once __DIR__ . '/../models/Slide.php'; 
 require_once __DIR__ . '/../../medias/models/cloudinary.php';
 require_once __DIR__ . '/../../medias/models/Media.php';

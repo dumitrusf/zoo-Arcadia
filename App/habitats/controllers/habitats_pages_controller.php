@@ -20,7 +20,7 @@
  */
 
 require_once __DIR__ . '/../models/habitat.php';
-require_once __DIR__ . '/../../hero/models/Hero.php';
+require_once __DIR__ . '/../../hero/models/hero.php';
 require_once __DIR__ . '/../../hero/models/Slide.php';
 require_once __DIR__ . '/../../animals/models/animalFull.php';
 require_once __DIR__ . '/../../animals/models/specie.php';

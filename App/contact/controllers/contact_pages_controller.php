@@ -16,7 +16,7 @@
  * - Arcadia\Includes\Helpers\EmailHelper (via includes/helpers/EmailHelper.php) - used in submit()
  */
 
-require_once __DIR__ . '/../../hero/models/Hero.php';
+require_once __DIR__ . '/../../hero/models/hero.php';
 require_once __DIR__ . '/../../hero/models/Slide.php';
 require_once __DIR__ . '/../models/formContact.php';
 require_once __DIR__ . '/../../../includes/helpers/EmailHelper.php';
