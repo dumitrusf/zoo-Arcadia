@@ -16,9 +16,20 @@ if (file_exists(__DIR__ . '/.env')) {
 // Configuración de Base de Datos
 // Prioridad: 1. Variables de Railway (getenv) -> 2. Variables .env ($_ENV) -> 3. Fallback (Local)
 // Usamos getenv() porque $_ENV a veces viene vacío en algunos entornos Docker/Cloud
-define('DB_HOST', getenv('MYSQLHOST') ?: ($_ENV['MYSQLHOST'] ?? $_ENV['DB_HOST'] ?? 'localhost'));
-define('DB_PORT', getenv('MYSQLPORT') ?: ($_ENV['MYSQLPORT'] ?? $_ENV['DB_PORT'] ?? 3306));
-define('DB_NAME', getenv('MYSQLDATABASE') ?: ($_ENV['MYSQLDATABASE'] ?? $_ENV['DB_NAME'] ?? 'zoo_arcadia'));
-define('DB_USER', getenv('MYSQLUSER') ?: ($_ENV['MYSQLUSER'] ?? $_ENV['DB_USER'] ?? 'root'));
-define('DB_PASS', getenv('MYSQLPASSWORD') ?: ($_ENV['MYSQLPASSWORD'] ?? $_ENV['DB_PASS'] ?? 'root'));
+function envValue(string $key, $default = null) {
+    $val = getenv($key);
+    if ($val !== false && $val !== '') {
+        return $val;
+    }
+    if (isset($_ENV[$key]) && $_ENV[$key] !== '') {
+        return $_ENV[$key];
+    }
+    return $default;
+}
+
+define('DB_HOST', envValue('MYSQLHOST', envValue('DB_HOST', 'localhost')));
+define('DB_PORT', envValue('MYSQLPORT', envValue('DB_PORT', 3306)));
+define('DB_NAME', envValue('MYSQLDATABASE', envValue('DB_NAME', 'zoo_arcadia')));
+define('DB_USER', envValue('MYSQLUSER', envValue('DB_USER', 'root')));
+define('DB_PASS', envValue('MYSQLPASSWORD', envValue('DB_PASS', 'root')));
 
