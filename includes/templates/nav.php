@@ -56,10 +56,10 @@ include(__DIR__ . '/../pageTitle.php');
 
     <link rel="icon" type="image/png" href="/src/assets/images/favicon.png" />
 
-    <link rel="stylesheet" href="/build/css/normalize.css?v=<?= time() ?>" />
-    <link rel="stylesheet" href="/build/css/bootstrap.min.css?v=<?= time() ?>" />
-    <link rel="stylesheet" href="/build/css/dataTables.bootstrap5.min.css?v=<?= time() ?>" />
-    <link rel="stylesheet" href="/build/css/app.css?v=<?= time() ?>" />
+    <link rel="stylesheet" href="/build/css/normalize.css" />
+    <link rel="stylesheet" href="/build/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/build/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="/build/css/app.css" />
 
 
 
