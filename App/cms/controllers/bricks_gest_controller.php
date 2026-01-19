@@ -19,7 +19,7 @@
 
 require_once __DIR__ . '/../models/brick.php';
 require_once __DIR__ . '/../../medias/models/cloudinary.php';
-require_once __DIR__ . '/../../medias/models/Media.php';
+require_once __DIR__ . '/../../medias/models/media.php';
 require_once __DIR__ . '/../../../includes/functions.php';
 
 class BricksGestController

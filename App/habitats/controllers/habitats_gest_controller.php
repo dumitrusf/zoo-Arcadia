@@ -19,7 +19,7 @@
 
 require_once __DIR__ . '/../models/habitat.php';
 require_once __DIR__ . '/../../medias/models/cloudinary.php';
-require_once __DIR__ . '/../../medias/models/Media.php';
+require_once __DIR__ . '/../../medias/models/media.php';
 require_once __DIR__ . '/../../hero/models/hero.php';
 require_once __DIR__ . '/../../../includes/functions.php';
 require_once __DIR__ . '/../../../includes/helpers/csrf.php';

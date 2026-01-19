@@ -14,7 +14,7 @@
  */
 
 require_once __DIR__ . '/../models/cloudinary.php';
-require_once __DIR__ . '/../models/Media.php';
+require_once __DIR__ . '/../models/media.php';
 
 class MediasGestController {
     
