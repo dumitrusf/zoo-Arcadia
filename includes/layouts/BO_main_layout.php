@@ -59,10 +59,10 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
 
     <!-- Compiled and copied stylesheets by Gulp -->
     <!-- <link rel="stylesheet" href="/build/css/normalize.css"> -->
-    <link rel="stylesheet" href="/build/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/build/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" href="/node_modules/bootstrap-icons/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="/build/css/bo-sidebar-only.css">
+    <link rel="stylesheet" href="/build/css/bootstrap.min.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/build/css/dataTables.bootstrap5.min.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/node_modules/bootstrap-icons/font/bootstrap-icons.min.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/build/css/bo-sidebar-only.css?v=<?= time() ?>">
     <script>
         // Aplicar estado del sidebar ANTES de que se renderice el body
         (function() {
