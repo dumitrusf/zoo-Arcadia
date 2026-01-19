@@ -30,13 +30,15 @@ class Habitat {
     public function getAll($includeAnimalCount = false) {
         if ($includeAnimalCount) {
             // count animals in each habitat
-            $sql = "SELECT h.*, COUNT(af.id_full_animal) as animal_count,
-                           m.media_path, m.media_path_medium, m.media_path_large
+            $sql = "SELECT h.*, COUNT(DISTINCT af.id_full_animal) as animal_count,
+                           MAX(m.media_path) as media_path, 
+                           MAX(m.media_path_medium) as media_path_medium, 
+                           MAX(m.media_path_large) as media_path_large
                     FROM habitats h
                     LEFT JOIN animal_full af ON h.id_habitat = af.habitat_id
                     LEFT JOIN media_relations mr ON h.id_habitat = mr.related_id AND mr.related_table = 'habitats'
                     LEFT JOIN media m ON mr.media_id = m.id_media
-                    GROUP BY h.id_habitat
+                    GROUP BY h.id_habitat, h.habitat_name, h.description_habitat
                     ORDER BY h.habitat_name ASC";
         } else {
             // else return all habitats without animal count
@@ -100,11 +102,11 @@ class Habitat {
      * @return object|false Habitat with animal_count field.
      */
     public function getByIdWithAnimalCount($id) {
-        $sql = "SELECT h.*, COUNT(af.id_full_animal) as animal_count
+        $sql = "SELECT h.*, COUNT(DISTINCT af.id_full_animal) as animal_count
                 FROM habitats h
                 LEFT JOIN animal_full af ON h.id_habitat = af.habitat_id
                 WHERE h.id_habitat = :id
-                GROUP BY h.id_habitat";
+                GROUP BY h.id_habitat, h.habitat_name, h.description_habitat";
         
         $stmt = $this->db->prepare($sql);
         $stmt->execute([':id' => $id]);
