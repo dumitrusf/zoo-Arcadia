@@ -25,7 +25,6 @@
                     <tr>
                         <th class="text-nowrap border border-start-3 border-end-0 rounded-start-3 text-center align-middle" scope="col">ID</th>
                         <th class="text-nowrap border border-start-3 border-end-0 rounded-start-3 text-center align-middle" scope="col">Username</th>
-                        <th class="text-nowrap border border-start-1 border-end-1 text-center align-middle" scope="col">psw</th>
                         <th class="text-nowrap border border-start-1 border-end-1 text-center align-middle" scope="col">Activated ?</th>
                         <th class="text-nowrap border border-start-1 border-end-1 text-center align-middle" scope="col">Role</th>
                         <th class="text-nowrap border border-start-1 border-end-1 text-center align-middle" scope="col">Employee-Name</th>
@@ -62,7 +61,6 @@
                         <tr id="<?= $anchor_id ?>" class="<?php echo get_row_class($rowNumber); ?> " >
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>"> <?php echo $user->id; ?> </td>
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>"> <?php echo $user->username; ?> </td>
-                            <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>"> <?php echo $user->psw; ?> </td>
                             <td class="text-nowrap <?php echo get_cell_border_class($rowNumber); ?>">
                                 <div class="btn-group" role="group" aria-label="">
                                     <?php if ($user->is_active == 1): ?>
