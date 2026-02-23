@@ -75,9 +75,47 @@ class AuthPagesController{
 
             // 2. Now PHP makes the detective (how?), well.. comparing if the user exists or not, and if the password is correct or not.
             if ($user) {
-                // Here we compare the password
-                // thanks to select u.* we can see the password in the database (psw column) and compare psw from database with what user put in the input field (passwordInput)
-                if ($user['psw'] === $passwordInput) { // If we don't use hash (INSECURE BUT WORKS)
+                // SECURITY UPGRADE: PASSWORD VERIFICATION (Hash + check old text plain psw)
+                
+                $storedPassword = $user['psw']; // Password from DB (can be hash or plain text)
+                
+                $loginSuccessful = false;
+                $shouldUpdateHash = false;
+
+                // 1. Try secure verification (Standard PHP password_verify)
+                // This checks if the input matches the BCrypt/Argon2 hash
+                if (password_verify($passwordInput, $storedPassword)) {
+                    $loginSuccessful = true;
+                    
+                    // Check if the hash needs to be updated to a newer algorithm (maintenance)
+                    if (password_needs_rehash($storedPassword, PASSWORD_DEFAULT)) {
+                        $shouldUpdateHash = true;
+                    }
+                }
+                // 2. Fallback: Try plain text verification (Legacy Migration for old users)
+                // If the user hasn't logged in since the security update, their password is still plain text.
+                elseif ($storedPassword === $passwordInput) {
+                    $loginSuccessful = true;
+                    $shouldUpdateHash = true; // Mark for immediate upgrade to Hash
+                }
+
+                if ($loginSuccessful) {
+                    // AUTO-MIGRATION: Upgrade insecure password to Hash silently
+                    if ($shouldUpdateHash) {
+                        $newHash = password_hash($passwordInput, PASSWORD_DEFAULT);
+                        try {
+                            $updateQuery = "UPDATE users SET psw = :new_psw WHERE id_user = :id";
+                            $updateStmt = $connectionDB->prepare($updateQuery);
+                            $updateStmt->execute([
+                                ':new_psw' => $newHash,
+                                ':id' => $user['id_user']
+                            ]);
+                        } catch (Exception $e) {
+                            // If update fails, we log it but allow login to proceed (don't block the user)
+                            error_log("Failed to update password hash for user ID " . $user['id_user']);
+                        }
+                    }
+                    // 🚀 SESSION CREATION (Original Logic)
                     
                     // NEW LOGIC: Check if the account is active
                     if ($user['is_active'] == 0) {
@@ -99,8 +137,9 @@ class AuthPagesController{
                     }
 
                 } else {
-                    // echo "Password incorrect.";
+                    // Password incorrect (ni hash ni texto plano)
                     $_SESSION["loggedin"] = false;
+                    $_SESSION["login_error"] = "User not found or password incorrect.";
                     header('Location: /auth/pages/login');
                     exit();
                 }

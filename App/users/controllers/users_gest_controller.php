@@ -274,7 +274,19 @@ class UsersGestController
 
             $id_user = $_POST['id'];
             $username = $_POST['username'];
-            $psw = $_POST['psw'];
+            $pswInput = trim($_POST['psw'] ?? '');
+
+            // 🛡️ PASSWORD UPDATE LOGIC
+            // We need to fetch the current user to decide what to do with the password
+            $currentUser = User::find($id_user);
+            
+            if (!empty($pswInput)) {
+                // Case 1: Admin typed a NEW password -> We HASH it securely
+                $psw = password_hash($pswInput, PASSWORD_DEFAULT);
+            } else {
+                // Case 2: Admin left the field empty -> We keep the EXISTING password (hash or plain)
+                $psw = $currentUser->psw;
+            }
 
             // Clean up role_id and employee_id before sending them to the model.
             // An empty string '' from the form is converted to NULL for the database. This is the definitive fix.

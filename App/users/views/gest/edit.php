@@ -51,11 +51,10 @@
                     <input type="text"
                         class="form-control"
                         id="psw"
-                        placeholder="<?php echo $user_to_edit->psw; ?>"
-                        value="<?php echo $user_to_edit->psw; ?>"
+                        placeholder="Leave empty to keep current password"
+                        value=""
                         name="psw"
-                        aria-describedby="psw-help"
-                        required>
+                        aria-describedby="psw-help">
                 </div>
 
 
