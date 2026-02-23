@@ -3,8 +3,8 @@
 ?>
 
 <div class="jumbotron">
-    <h1 class="display-4">Welcome <?php echo htmlspecialchars($_SESSION["user"]["username"]); ?> to your dashboard !</h1>
-    <p class="display-6">As <?php echo htmlspecialchars($_SESSION["user"]["role_name"]); ?> you can access the following sections:</p>
+    <h1 class="display-4">Welcome <?php echo htmlspecialchars($_SESSION["user"]["username"] ?? ''); ?> to your dashboard !</h1>
+    <p class="display-6">As <?php echo htmlspecialchars($_SESSION["user"]["role_name"] ?? ''); ?> you can access the following sections:</p>
     <hr class="my-4">
 </div>
 
