@@ -71,7 +71,7 @@ class UsersGestController
             // Get the data from the form
             // trim() removes whitespace from the beginning and end of the text
             $username = trim($_POST['username']);
-            $password = $_POST['psw'];
+            $password = password_hash($_POST['psw'], PASSWORD_DEFAULT);
             $role = $_POST['role'];
             $employee = $_POST['employee'];
 
