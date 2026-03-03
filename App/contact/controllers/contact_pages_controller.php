@@ -104,7 +104,7 @@ class ContactPagesController {
 
         // Send notification email to zoo (optional - just for notification)
         // Get zoo email from .env or use a default
-        $zooEmail = $_ENV['ZOO_EMAIL'] ?? $_ENV['SMTP_FROM_EMAIL'] ?? 'contact@arcadia-zoo.com';
+        $zooEmail = getenv('ZOO_EMAIL') ?: getenv('SMTP_FROM_EMAIL') ?: 'contact@arcadia-zoo.com';
         
         $emailResult = EmailHelper::sendContactFormEmail(
             $zooEmail,

@@ -38,9 +38,9 @@ class EmailHelper
         $mail = new PHPMailer(true);
 
         try {
-            // Cargamos las variables de entorno desde el archivo .env
+            // load the environment variables from the .env file
             // This allows us to store sensitive information (like passwords) outside the code
-            // Usamos try-catch para manejar errores de parsing
+            // we use try-catch to handle parsing errors
             try {
                 $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
                 $dotenv->safeLoad(); // safeLoad() no lanza excepciones si el archivo no existe
@@ -50,27 +50,27 @@ class EmailHelper
                 // Continue with default values instead of failing completely
             }
 
-            // Configuramos el servidor SMTP
-            // SMTP es el protocolo que se usa para enviar emails
+            // configure the SMTP server
+    // SMTP is the protocol used to send emails
             $mail->isSMTP();
             
             // SMTP server address (e.g., smtp.gmail.com, smtp.outlook.com)
-            // If not configured, use localhost by default (useful for development)
-            $mail->Host = $_ENV['SMTP_HOST'] ?? 'localhost';
+            // getenv() reads the variables injected by Railway/process; $_ENV may be empty in production
+            $mail->Host = getenv('SMTP_HOST') ?: 'localhost';
             
             // Enable SMTP authentication (required for most servers)
             $mail->SMTPAuth = true;
             
-            // Usuario para autenticarse en el servidor SMTP
-            $mail->Username = $_ENV['SMTP_USER'] ?? '';
+            // Username to authenticate with the SMTP server
+            $mail->Username = getenv('SMTP_USER') ?: '';
             
             // Password to authenticate with the SMTP server
-            $mail->Password = $_ENV['SMTP_PASS'] ?? '';
+            $mail->Password = getenv('SMTP_PASS') ?: '';
             
             // Encryption type (TLS or SSL)
             // TLS is more modern and secure than SSL
             // In .env you can use: 'tls', 'ssl', or leave empty
-            $smtpSecure = $_ENV['SMTP_SECURE'] ?? 'tls';
+            $smtpSecure = getenv('SMTP_SECURE') ?: 'tls';
             if ($smtpSecure === 'tls') {
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             } elseif ($smtpSecure === 'ssl') {
@@ -81,17 +81,20 @@ class EmailHelper
             
             // Puerto del servidor SMTP
             // 587 is the standard port for TLS, 465 for SSL
-            $mail->Port = $_ENV['SMTP_PORT'] ?? 587;
+            $mail->Port = getenv('SMTP_PORT') ?: 587;
+
+            // add this: limit of 3 seconds so it doesn't hang
+            $mail->Timeout = 3;
             
             // Character encoding (UTF-8 supports all languages)
             $mail->CharSet = 'UTF-8';
             
             // Email from which it is sent (sender)
-            $mail->setFrom($_ENV['SMTP_FROM_EMAIL'] ?? 'noreply@arcadia-zoo.com', $_ENV['SMTP_FROM_NAME'] ?? 'Arcadia Zoo');
+            $mail->setFrom(getenv('SMTP_FROM_EMAIL') ?: 'noreply@arcadia-zoo.com', getenv('SMTP_FROM_NAME') ?: 'Arcadia Zoo');
             
             // In development mode, we can disable SSL verification
             // ⚠️ IMPORTANT: In production, this must be false for security
-            if ($_ENV['APP_ENV'] === 'development') {
+            if ((getenv('APP_ENV') ?: '') === 'development') {
                 $mail->SMTPOptions = array(
                     'ssl' => array(
                         'verify_peer' => false,
@@ -145,7 +148,7 @@ class EmailHelper
 
         $missing = [];
         foreach ($requiredVars as $var => $description) {
-            if (empty($_ENV[$var])) {
+            if (empty(getenv($var))) {
                 $missing[] = $description . " ({$var})";
             }
         }
@@ -267,8 +270,8 @@ class EmailHelper
             error_log("Detalles del error: " . print_r([
                 'to' => $toEmail,
                 'username' => $username,
-                'smtp_host' => $_ENV['SMTP_HOST'] ?? 'no configurado',
-                'smtp_user' => $_ENV['SMTP_USER'] ?? 'no configurado',
+                'smtp_host' => getenv('SMTP_HOST') ?: 'no configurado',
+                'smtp_user' => getenv('SMTP_USER') ?: 'no configurado',
                 'error' => $e->getMessage()
             ], true));
             
@@ -390,7 +393,7 @@ class EmailHelper
                 'to' => $toEmail,
                 'visitor_email' => $visitorEmail,
                 'subject' => $subject,
-                'smtp_host' => $_ENV['SMTP_HOST'] ?? 'no configurado',
+                'smtp_host' => getenv('SMTP_HOST') ?: 'no configurado',
                 'error' => $e->getMessage()
             ], true));
             

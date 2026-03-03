@@ -115,3 +115,28 @@
 
     </div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Buscamos el formulario de esta vista
+    const form = document.querySelector('form');
+    
+    if(form) {
+        form.addEventListener('submit', function() {
+            // ¡OJO AQUÍ! Buscamos tu <input type="submit"> específicamente
+            const submitBtn = this.querySelector('input[type="submit"]');
+            
+            if(submitBtn) {
+                // Desactivamos el botón para evitar doble clic
+                submitBtn.disabled = true;
+                
+                // Como es un input, se cambia el "value" en lugar del innerHTML
+                submitBtn.value = ' Creating account...';
+                
+                // Cambiamos el estilo
+                submitBtn.style.opacity = '0.7';
+                submitBtn.style.cursor = 'not-allowed';
+            }
+        });
+    }
+});
+</script>
