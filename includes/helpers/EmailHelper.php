@@ -81,10 +81,13 @@ class EmailHelper
             
             // Puerto del servidor SMTP
             // 587 is the standard port for TLS, 465 for SSL
-            $mail->Port = getenv('SMTP_PORT') ?: 587;
+            // $mail->Port = getenv('SMTP_PORT') ?: 587;
+            // 465 for SSL (SMTPS); alternativamente 587 for TLS (STARTTLS)
+            $mail->Port = getenv('SMTP_PORT') ?: 465;
+            // $mail->Port = getenv('SMTP_PORT') ?: 587;
 
             // add this: limit of 3 seconds so it doesn't hang
-            $mail->Timeout = 3;
+            // $mail->Timeout = getenv('SMTP_TIMEOUT') ?: 60;
             
             // Character encoding (UTF-8 supports all languages)
             $mail->CharSet = 'UTF-8';
@@ -107,7 +110,7 @@ class EmailHelper
         } catch (Exception $e) {
             // If there is an error, log it and throw the exception
             error_log("Error configurando PHPMailer: " . $e->getMessage());
-            throw $e;
+            throw $e; 
         }
 
         return $mail;
