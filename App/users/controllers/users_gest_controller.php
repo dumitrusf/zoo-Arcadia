@@ -71,7 +71,12 @@ class UsersGestController
             // Get the data from the form
             // trim() removes whitespace from the beginning and end of the text
             $username = trim($_POST['username']);
-            $password = password_hash($_POST['psw'], PASSWORD_DEFAULT);
+            $pswPlain = trim($_POST['psw'] ?? '');
+            if ($pswPlain === '') {
+                header('Location: /users/gest/create?msg=error&error=Password is required.');
+                exit;
+            }
+            $password = password_hash($pswPlain, PASSWORD_DEFAULT);
             $role = $_POST['role'];
             $employee = $_POST['employee'];
 
