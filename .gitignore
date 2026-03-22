@@ -28,3 +28,5 @@ Thumbs.db
 npm-debug.log
 
 # NOTE: /public/build/ is NOT ignored so CSS/JS are uploaded for easier deployment
+.gitnexus/
+is truth or not .md
