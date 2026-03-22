@@ -202,7 +202,19 @@ class UsersGestController
      */
     public function toggleActivation()
     {
-        $id_user = $_GET["id"];
+        // Même règle que la vue (gest/start.php) : réservé à l'admin — contrôle serveur (pas seulement le bouton)
+        $isAdmin = isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin';
+        if (!$isAdmin) {
+            header('Location: /users/gest/start?msg=error&error=You do not have permission to change user activation');
+            exit;
+        }
+
+        $id_user = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+        if ($id_user <= 0) {
+            header('Location: /users/gest/start?msg=error&error=Invalid user');
+            exit;
+        }
+
         User::toggleActive($id_user);
         header("Location: /users/gest/start#user-" . $id_user);
         exit();
