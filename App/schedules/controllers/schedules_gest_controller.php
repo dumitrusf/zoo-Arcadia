@@ -22,6 +22,12 @@ DB::createInstance();
 
 class SchedulesGestController {
     public function start() {
+        // RBAC : horaires = « schedules-view » ou « schedules-edit » (aligné dashboard home)
+        if (!hasPermission('schedules-view') && !hasPermission('schedules-edit')) {
+            header('Location: /home/pages/start?msg=error&error=You do not have permission to access schedule management');
+            exit;
+        }
+
         $scheduleModel = new Schedule();
         $schedules = $scheduleModel->getAll();
 

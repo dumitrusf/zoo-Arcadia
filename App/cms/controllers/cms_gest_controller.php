@@ -28,6 +28,18 @@ class CmsGestController
     // Dashboard: List all services
     public function start()
     {
+        // RBAC : CMS services / contenu = au moins une permission « services-* » (aligné dashboard home)
+        if (
+            !hasPermission('services-view')
+            && !hasPermission('services-create')
+            && !hasPermission('services-edit')
+            && !hasPermission('services-delete')
+        ) {
+            header('Location: /home/pages/start?msg=error&error=You do not have permission to access service management');
+            exit;
+        }
+
+        
         $serviceModel = new Service();
         $services = $serviceModel->getAll();
 

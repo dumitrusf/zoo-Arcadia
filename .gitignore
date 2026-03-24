@@ -27,3 +27,17 @@ Thumbs.db
 npm-debug.log
 
 # NOTE: /public/build/ is NOT ignored so CSS/JS are uploaded for easier deployment
+
+is_truth_or_not.md
+
+what-i-need-or-not.md
+
+.claude/
+.gitnexus/
+AGENTS.md
+CLAUDE.md
+
+DOSSIER_PROJET.MD
+MPD_2026_ARCADIA.pdf
+TP_Dev_Web_Web_Mobile.pdf
+diagram-export-16-3-2026-22_58_44.pdf

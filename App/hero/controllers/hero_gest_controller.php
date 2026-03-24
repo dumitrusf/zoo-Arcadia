@@ -33,6 +33,13 @@ class HeroGestController {
     
     // Dashboard: List all heroes (page headers in back office)
     public function start() {
+        // RBAC : en-têtes de page — réservé Admin (aligné create/edit Hero)
+        $isAdmin = isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin';
+        if (!$isAdmin) {
+            header('Location: /home/pages/start?msg=error&error=You do not have permission to access page headers management');
+            exit;
+        }
+
         $heroModel = new Hero();
         $heroes = $heroModel->getAll();
         

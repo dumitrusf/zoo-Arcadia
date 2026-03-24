@@ -33,6 +33,16 @@ class EmployeesGestController
     // method to display the start page, showing all the employees
     public function start()
     {
+        // RBAC : même périmètre que la tuile « employés » du dashboard (permissions « users-* »)
+        if (
+            !hasPermission('users-view')
+            && !hasPermission('users-create')
+            && !hasPermission('users-edit')
+            && !hasPermission('users-delete')
+        ) {
+            header('Location: /home/pages/start?msg=error&error=You do not have permission to access employee management');
+            exit;
+        }
 
         // Get all the employees from model Employee, thanks to the method check()
         $employees = Employee::check();
