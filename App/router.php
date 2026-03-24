@@ -29,6 +29,7 @@ $public_domains = ["auth", "contact", "home", "about", "habitats", "animals", "c
 // If the session is older, we destroy it and redirect to login
 if (isset($_SESSION["user"]["username"])) {
     // $_SESSION['last_activity'] = time() - 40000; test of the session.
+    $_SESSION['last_activity'] = time() - 40000;
     $sessionTimeout = 39600; // 11 hours in seconds
     $lastActivity = $_SESSION["last_activity"] ?? time();
     
