@@ -42,6 +42,20 @@ class AnimalsGestController
      */
     public function start()
     {
+        // RBAC : accès gestion animaux = au moins une permission « animals-* » ou alimentation (onglet Feeding)
+        if (
+            !hasPermission('animals-view')
+            && !hasPermission('animals-create')
+            && !hasPermission('animals-edit')
+            && !hasPermission('animals-delete')
+            && !hasPermission('animal_feeding-view')
+            && !hasPermission('animal_feeding-assign')
+            && !hasPermission('animal_feeding-delete')
+        ) {
+            header('Location: /home/pages/start?msg=error&error=You do not have permission to access animal management');
+            exit;
+        }
+
         $animalModel = new AnimalFull();
         $categoryModel = new category();
         $specieModel = new specie();
