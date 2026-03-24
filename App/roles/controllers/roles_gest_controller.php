@@ -26,6 +26,19 @@ class RolesGestController
 {
     public function start()
     {
+        // RBAC : rôles — Admin ou au moins une permission « roles-* »
+        $isAdmin = isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin';
+        if (
+            !$isAdmin
+            && !hasPermission('roles-view')
+            && !hasPermission('roles-create')
+            && !hasPermission('roles-edit')
+            && !hasPermission('roles-delete')
+        ) {
+            header('Location: /home/pages/start?msg=error&error=You do not have permission to access role management');
+            exit;
+        }
+
         $roles = Role::check();
 
         include_once __DIR__ . "/../views/gest/start.php";

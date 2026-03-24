@@ -27,6 +27,18 @@ class HabitatsSuggestionController
      */
     public function start()
     {
+        // RBAC : suggestions d'habitat — Admin, Vétérinaire, ou permissions « habitat_suggestions-* » (dashboard home)
+        $roleName = $_SESSION['user']['role_name'] ?? '';
+        if (
+            $roleName !== 'Admin'
+            && $roleName !== 'Veterinary'
+            && !hasPermission('habitat_suggestions-view')
+            && !hasPermission('habitat_suggestions-manage')
+        ) {
+            header('Location: /home/pages/start?msg=error&error=You do not have permission to access habitat suggestions');
+            exit;
+        }
+        
         $suggestionModel = new HabitatSuggestion();
         $habitatModel = new Habitat();
         

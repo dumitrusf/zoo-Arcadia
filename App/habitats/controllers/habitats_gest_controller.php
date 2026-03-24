@@ -19,14 +19,25 @@
 
 require_once __DIR__ . '/../models/habitat.php';
 require_once __DIR__ . '/../../medias/models/cloudinary.php';
-require_once __DIR__ . '/../../medias/models/media.php';
-require_once __DIR__ . '/../../hero/models/hero.php';
+require_once __DIR__ . '/../../medias/models/Media.php';
+require_once __DIR__ . '/../../hero/models/Hero.php';
 require_once __DIR__ . '/../../../includes/functions.php';
 require_once __DIR__ . '/../../../includes/helpers/csrf.php';
 
 class HabitatsGestController {
     
     public function start() {
+        // RBAC : accès gestion habitats = au moins une permission « habitats-* » (aligné dashboard home)
+        if (
+            !hasPermission('habitats-view')
+            && !hasPermission('habitats-create')
+            && !hasPermission('habitats-edit')
+            && !hasPermission('habitats-delete')
+        ) {
+            header('Location: /home/pages/start?msg=error&error=You do not have permission to access habitat management');
+            exit;
+        }
+
         $habitatModel = new Habitat();
         // Include animal count (in model function getAll we have animal count)
         $habitats = $habitatModel->getAll(true); 

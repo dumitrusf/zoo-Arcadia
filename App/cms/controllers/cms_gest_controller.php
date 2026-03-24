@@ -19,7 +19,7 @@
 
 require_once __DIR__ . '/../models/service.php';
 require_once __DIR__ . '/../../medias/models/cloudinary.php';
-require_once __DIR__ . '/../../medias/models/media.php';
+require_once __DIR__ . '/../../medias/models/Media.php';
 require_once __DIR__ . '/../../../includes/functions.php';
 
 class CmsGestController
@@ -28,6 +28,18 @@ class CmsGestController
     // Dashboard: List all services
     public function start()
     {
+        // RBAC : CMS services / contenu = au moins une permission « services-* » (aligné dashboard home)
+        if (
+            !hasPermission('services-view')
+            && !hasPermission('services-create')
+            && !hasPermission('services-edit')
+            && !hasPermission('services-delete')
+        ) {
+            header('Location: /home/pages/start?msg=error&error=You do not have permission to access service management');
+            exit;
+        }
+
+        
         $serviceModel = new Service();
         $services = $serviceModel->getAll();
 

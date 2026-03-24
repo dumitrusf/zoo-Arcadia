@@ -22,10 +22,10 @@
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
 
-require_once __DIR__ . '/../models/hero.php';
+require_once __DIR__ . '/../models/Hero.php';
 require_once __DIR__ . '/../models/Slide.php'; 
 require_once __DIR__ . '/../../medias/models/cloudinary.php';
-require_once __DIR__ . '/../../medias/models/media.php';
+require_once __DIR__ . '/../../medias/models/Media.php';
 require_once __DIR__ . '/../../../includes/functions.php';
 require_once __DIR__ . '/../../../includes/helpers/csrf.php';
 
@@ -33,6 +33,13 @@ class HeroGestController {
     
     // Dashboard: List all heroes (page headers in back office)
     public function start() {
+        // RBAC : en-têtes de page — réservé Admin (aligné create/edit Hero)
+        $isAdmin = isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin';
+        if (!$isAdmin) {
+            header('Location: /home/pages/start?msg=error&error=You do not have permission to access page headers management');
+            exit;
+        }
+
         $heroModel = new Hero();
         $heroes = $heroModel->getAll();
         

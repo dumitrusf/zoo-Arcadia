@@ -17,13 +17,27 @@
 
 require_once __DIR__ . '/../models/Slide.php';
 require_once __DIR__ . '/../../medias/models/cloudinary.php';
-require_once __DIR__ . '/../../medias/models/media.php';
+require_once __DIR__ . '/../../medias/models/Media.php';
 require_once __DIR__ . '/../../../includes/helpers/csrf.php';
 
 class SlidesGestController {
 
+    /**
+     * Slides = sous-ensemble des Heroes (en-têtes de page) — même règle que HeroGestController : Admin uniquement.
+     */
+    private function assertAdminForSlides(): void
+    {
+        $isAdmin = isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin';
+        if (!$isAdmin) {
+            header('Location: /home/pages/start?msg=error&error=You do not have permission to manage slides');
+            exit;
+        }
+    }
+
     // Show Create Form for a specific Hero
     public function create() {
+        $this->assertAdminForSlides();
+
         $heroId = $_GET['hero_id'] ?? null;
         if (!$heroId) {
             // If no hero ID, go back to heroes list
@@ -50,6 +64,8 @@ class SlidesGestController {
 
     // Show Edit Form
     public function edit() {
+        $this->assertAdminForSlides();
+
         $id = $_GET['id'] ?? null;
         if (!$id) { header('Location: /hero/gest/start'); exit; }
 
@@ -141,6 +157,8 @@ class SlidesGestController {
 
     // Delete
     public function delete() {
+        $this->assertAdminForSlides();
+
         $id = $_GET['id'] ?? null;
         if ($id) {
             $slideModel = new Slide();

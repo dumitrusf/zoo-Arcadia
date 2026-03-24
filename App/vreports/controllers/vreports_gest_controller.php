@@ -29,9 +29,13 @@ class VreportsGestController
      */
     public function start()
     {
-        // Check if user has permission to view reports
-        if (!hasPermission('vet_reports-view')) {
-            header('Location: /home/pages/start?msg=error&error=You do not have permission to view health reports');
+        // RBAC : rapports véto — au moins une permission « vet_reports-* » (aligné dashboard home)
+        if (
+            !hasPermission('vet_reports-view')
+            && !hasPermission('vet_reports-create')
+            && !hasPermission('vet_reports-edit')
+        ) {
+            header('Location: /home/pages/start?msg=error&error=You do not have permission to access veterinary reports');
             exit();
         }
 

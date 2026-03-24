@@ -35,6 +35,16 @@ class UsersGestController
 {
     public function start()
     {
+        // RBAC : accès gestion utilisateurs = au moins une permission « users-* » (aligné dashboard home)
+        if (
+            !hasPermission('users-view')
+            && !hasPermission('users-create')
+            && !hasPermission('users-edit')
+            && !hasPermission('users-delete')
+        ) {
+            header('Location: /home/pages/start?msg=error&error=You do not have permission to access user management');
+            exit;
+        }
 
         $users = User::check();
 

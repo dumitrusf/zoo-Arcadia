@@ -15,16 +15,33 @@
 
 require_once __DIR__ . '/../models/cloudinary.php';
 require_once __DIR__ . '/../models/media.php';
+require_once __DIR__ . '/../../../includes/functions.php';
 
 class MediasGestController {
+
+    /**
+     * Outil de test / upload médias — réservé Admin (même périmètre que la gestion Hero / médias back-office).
+     */
+    private function assertAdminForMediasGest(): void
+    {
+        $isAdmin = isset($_SESSION['user']['role_name']) && $_SESSION['user']['role_name'] === 'Admin';
+        if (!$isAdmin) {
+            header('Location: /home/pages/start?msg=error&error=You do not have permission to access media tools');
+            exit;
+        }
+    }
     
     // Test the upload form
     public function test() {
+        $this->assertAdminForMediasGest();
+
         include_once __DIR__ . '/../views/gest/test_upload.php';
     }
 
     // Upload the image to Cloudinary and save to the database
     public function upload() {
+        $this->assertAdminForMediasGest();
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
             
             // 1. Upload to Cloudinary

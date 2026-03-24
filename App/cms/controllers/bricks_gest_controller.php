@@ -19,7 +19,7 @@
 
 require_once __DIR__ . '/../models/brick.php';
 require_once __DIR__ . '/../../medias/models/cloudinary.php';
-require_once __DIR__ . '/../../medias/models/media.php';
+require_once __DIR__ . '/../../medias/models/Media.php';
 require_once __DIR__ . '/../../../includes/functions.php';
 
 class BricksGestController
@@ -28,6 +28,18 @@ class BricksGestController
     // Dashboard: List all bricks
     public function start()
     {
+        // RBAC : blocs CMS = mêmes permissions « services-* » que le reste du CMS (aligné dashboard home)
+        if (
+            !hasPermission('services-view')
+            && !hasPermission('services-create')
+            && !hasPermission('services-edit')
+            && !hasPermission('services-delete')
+        ) {
+            header('Location: /home/pages/start?msg=error&error=You do not have permission to access content blocks management');
+            exit;
+        }
+
+        
         $brickModel = new Brick();
         $bricks = $brickModel->getAll();
 
