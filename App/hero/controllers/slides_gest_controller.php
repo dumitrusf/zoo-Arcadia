@@ -17,7 +17,7 @@
 
 require_once __DIR__ . '/../models/Slide.php';
 require_once __DIR__ . '/../../medias/models/cloudinary.php';
-require_once __DIR__ . '/../../medias/models/Media.php';
+require_once __DIR__ . '/../../medias/models/media.php';
 require_once __DIR__ . '/../../../includes/helpers/csrf.php';
 
 class SlidesGestController {
