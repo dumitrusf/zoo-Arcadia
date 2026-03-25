@@ -22,13 +22,20 @@ cat > /var/www/html/env_railway.php <<'PHPEOF'
 // Variables de entorno de Railway
 PHPEOF
 
-# Usar printf para evitar problemas con caracteres especiales en las contraseñas
-printf "\$_ENV['DB_HOST'] = '%s';\n" "${DB_HOST:-mysql.railway.internal}" >> /var/www/html/env_railway.php
-printf "\$_ENV['DB_PORT'] = '%s';\n" "${DB_PORT:-3306}" >> /var/www/html/env_railway.php
-printf "\$_ENV['DB_NAME'] = '%s';\n" "${DB_NAME:-railway}" >> /var/www/html/env_railway.php
-printf "\$_ENV['DB_USER'] = '%s';\n" "${DB_USER:-root}" >> /var/www/html/env_railway.php
+# Base de datos : l'app attend DB_* ; Railway peut injecter aussi les variables du plugin MySQL (MYSQLHOST, MYSQLPASSWORD, etc.).
+# Ordre : DB_* explicites (tableau Variables du service web) puis repli sur les variables MySQL du même environnement.
+# Aucun mot de passe dans le dépôt Git — évitez le fallback hardcodé.
+DB_HOST_RES="${DB_HOST:-${MYSQLHOST:-${MYSQL_HOST:-mysql.railway.internal}}}"
+DB_PORT_RES="${DB_PORT:-${MYSQLPORT:-${MYSQL_PORT:-3306}}}"
+DB_NAME_RES="${DB_NAME:-${MYSQLDATABASE:-${MYSQL_DATABASE:-railway}}}"
+DB_USER_RES="${DB_USER:-${MYSQLUSER:-${MYSQL_USER:-root}}}"
+DB_PASS_RES="${DB_PASS:-${MYSQLPASSWORD:-${MYSQL_ROOT_PASSWORD:-}}}"
 
-printf "\$_ENV['DB_PASS'] = '%s';\n" "${DB_PASS:-}" >> /var/www/html/env_railway.php
+printf "\$_ENV['DB_HOST'] = '%s';\n" "$DB_HOST_RES" >> /var/www/html/env_railway.php
+printf "\$_ENV['DB_PORT'] = '%s';\n" "$DB_PORT_RES" >> /var/www/html/env_railway.php
+printf "\$_ENV['DB_NAME'] = '%s';\n" "$DB_NAME_RES" >> /var/www/html/env_railway.php
+printf "\$_ENV['DB_USER'] = '%s';\n" "$DB_USER_RES" >> /var/www/html/env_railway.php
+printf "\$_ENV['DB_PASS'] = '%s';\n" "$DB_PASS_RES" >> /var/www/html/env_railway.php
 
 # Iniciar Apache en primer plano
 exec apache2-foreground
