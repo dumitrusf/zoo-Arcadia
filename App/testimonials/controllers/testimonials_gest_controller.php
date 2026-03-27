@@ -81,7 +81,17 @@ class TestimonialsGestController
             exit;
         }
 
-        $testimonialId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: /testimonials/gest/start?msg=error&error=Invalid request method');
+            exit;
+        }
+
+        if (!csrf_verify('testimonial_validate')) {
+            header('Location: /testimonials/gest/start?msg=error&error=Invalid request. Please try again.');
+            exit;
+        }
+
+        $testimonialId = isset($_POST['id']) ? (int)$_POST['id'] : 0;
         $validatorId = $_SESSION["user"]["id_user"] ?? null;
 
         if (!$testimonialId || !$validatorId) {
@@ -118,7 +128,17 @@ class TestimonialsGestController
             exit;
         }
 
-        $testimonialId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: /testimonials/gest/start?msg=error&error=Invalid request method');
+            exit;
+        }
+
+        if (!csrf_verify('testimonial_reject')) {
+            header('Location: /testimonials/gest/start?msg=error&error=Invalid request. Please try again.');
+            exit;
+        }
+
+        $testimonialId = isset($_POST['id']) ? (int)$_POST['id'] : 0;
         $validatorId = $_SESSION["user"]["id_user"] ?? null;
 
         if (!$testimonialId || !$validatorId) {
@@ -150,7 +170,22 @@ class TestimonialsGestController
             exit;
         }
 
-        $testimonialId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+        if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+            header('Location: /auth/pages/login?msg=error&error=You must be logged in');
+            exit;
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: /testimonials/gest/start?msg=error&error=Invalid request method');
+            exit;
+        }
+
+        if (!csrf_verify('testimonial_delete')) {
+            header('Location: /testimonials/gest/start?msg=error&error=Invalid request. Please try again.');
+            exit;
+        }
+
+        $testimonialId = isset($_POST['id']) ? (int)$_POST['id'] : 0;
 
         if (!$testimonialId) {
             header('Location: /testimonials/gest/start?msg=error&error=Invalid testimonial ID');

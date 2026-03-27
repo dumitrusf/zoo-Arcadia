@@ -9,6 +9,8 @@
  * Back office view for managing testimonials.
  * Displays all testimonials with filtering and action buttons.
  */
+
+require_once __DIR__ . '/../../../../includes/helpers/csrf.php';
 ?>
 
 <div class="container-fluid mt-4">
@@ -185,21 +187,21 @@
                                                     if ($roleName === 'Admin' || $roleName === 'Employee'): 
                                                     ?>
                                                         <?php if ($testimonial->status === 'pending' || $testimonial->status === 'rejected'): ?>
-                                                            <a href="/testimonials/gest/validate?id=<?= $testimonial->id_testimonial ?>" 
-                                                               class="btn btn-sm btn-success" 
-                                                               title="Validate"
-                                                               onclick="return confirm('Are you sure you want to validate this testimonial?');">
-                                                                Validate
-                                                            </a>
+                                                            <form method="post" action="/testimonials/gest/validate" class="d-inline"
+                                                                  onsubmit="return confirm('Are you sure you want to validate this testimonial?');">
+                                                                <?= csrf_field('testimonial_validate') ?>
+                                                                <input type="hidden" name="id" value="<?= (int)($testimonial->id_testimonial ?? 0) ?>">
+                                                                <button type="submit" class="btn btn-sm btn-success" title="Validate">Validate</button>
+                                                            </form>
                                                         <?php endif; ?>
                                                         
                                                         <?php if ($testimonial->status === 'pending' || $testimonial->status === 'validated'): ?>
-                                                            <a href="/testimonials/gest/reject?id=<?= $testimonial->id_testimonial ?>" 
-                                                               class="btn btn-sm btn-danger" 
-                                                               title="Reject"
-                                                               onclick="return confirm('Are you sure you want to reject this testimonial?');">
-                                                                Reject
-                                                            </a>
+                                                            <form method="post" action="/testimonials/gest/reject" class="d-inline"
+                                                                  onsubmit="return confirm('Are you sure you want to reject this testimonial?');">
+                                                                <?= csrf_field('testimonial_reject') ?>
+                                                                <input type="hidden" name="id" value="<?= (int)($testimonial->id_testimonial ?? 0) ?>">
+                                                                <button type="submit" class="btn btn-sm btn-danger" title="Reject">Reject</button>
+                                                            </form>
                                                         <?php endif; ?>
 
                                                         <a href="/testimonials/gest/edit?id=<?= $testimonial->id_testimonial ?>" 
@@ -208,12 +210,12 @@
                                                             Edit
                                                         </a>
 
-                                                        <a href="/testimonials/gest/delete?id=<?= $testimonial->id_testimonial ?>" 
-                                                           class="btn btn-sm btn-danger" 
-                                                           title="Delete"
-                                                           onclick="return confirm('Are you sure you want to delete this testimonial? This action cannot be undone.');">
-                                                            Delete
-                                                        </a>
+                                                        <form method="post" action="/testimonials/gest/delete" class="d-inline"
+                                                              onsubmit="return confirm('Are you sure you want to delete this testimonial? This action cannot be undone.');">
+                                                            <?= csrf_field('testimonial_delete') ?>
+                                                            <input type="hidden" name="id" value="<?= (int)($testimonial->id_testimonial ?? 0) ?>">
+                                                            <button type="submit" class="btn btn-sm btn-danger" title="Delete">Delete</button>
+                                                        </form>
                                                     <?php endif; ?>
                                                 </div>
                                             </td>
