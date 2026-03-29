@@ -114,7 +114,7 @@ if (isset($_SESSION["user"]["username"]) && $domain === "auth" && $_GET["action"
 
 // 5. Whitelist of allowed domains
 // Only domains in this list can be processed. Any other will be rejected
-$allowed_domains = ["hero", "medias", "habitat1", "cms", "about", "auth", "home", "animals", "employees", "habitats", "permissions", "reports", "roles", "schedules", "testimonials", "users", "contact", "vreports"];
+$allowed_domains = ["hero", "medias", "cms", "about", "auth", "home", "animals", "employees", "habitats", "permissions", "roles", "schedules", "testimonials", "users", "contact", "vreports"];
 
 if (in_array($domain, $allowed_domains)) {
     // Domain is valid: load its corresponding router
@@ -126,13 +126,13 @@ if (in_array($domain, $allowed_domains)) {
         // ERROR 500: Domain is in the list but its router file does not exist
         // This is a programming error, not a user error
         http_response_code(500); 
-        header('Location: /public/error-500.php');
+        header('Location: /error-500.php');
         exit();
     }
 } else {
     // ERROR 404: The requested domain does not exist in our list
     http_response_code(404);
-    header('Location: /public/error-404.php');
+    header('Location: /error-404.php');
     exit();
 }
 

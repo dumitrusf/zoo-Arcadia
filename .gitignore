@@ -6,6 +6,8 @@
 /.env
 /.env.local
 /.env.*.local
+.env.docker
+.env
 *.pdf
 
 # Documentation and private notes

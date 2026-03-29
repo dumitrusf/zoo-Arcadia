@@ -109,9 +109,10 @@ function copyVendorCss() {
 const buildCss = series(cleanCss, compileSass, compileBoSidebar, copyVendorCss);
 const buildJs = series(cleanJs, processJs, copyVendorJs);
 
-// Exportar tareas para uso en Dockerfile
+// Exportar tareas para uso en Dockerfile / npm run css (alias)
 exports.buildCss = buildCss;
 exports.buildJs = buildJs;
+exports.compileCss = buildCss; // mismo pipeline que buildCss; package.json "css": "gulp compileCss"
 
 // 9️⃣ Servidor con Browsersync
 function serve(done) {
