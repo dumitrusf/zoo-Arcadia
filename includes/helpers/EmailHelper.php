@@ -6,11 +6,11 @@
  * 📂 Physical File:   includes/helpers/EmailHelper.php
  * 
  * 📝 Description:
- * Helper class for sending emails using PHPMailer.
- * This class simplifies the process of sending emails in the application.
- * 
+ * Helper class for sending emails using PHPMailer (SMTP) or Resend (HTTPS API).
+ * Resend avoids blocked SMTP ports on hosts like Railway Hobby.
+ *
  * 🔗 Dependencies:
- * - PHPMailer (via Composer)
+ * - PHPMailer, resend/resend-php (via Composer)
  */
 
 // Cargamos el autoloader de Composer para poder usar PHPMailer
@@ -19,9 +19,86 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use Dotenv\Dotenv;
+use Resend\Exceptions\ErrorException as ResendApiException;
 
 class EmailHelper
 {
+    /**
+     * Carga .env una vez por petición (Railway inyecta vars sin .env).
+     */
+    private static function loadEnv(): void
+    {
+        static $loaded = false;
+        if ($loaded) {
+            return;
+        }
+        $loaded = true;
+        try {
+            $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
+            $dotenv->safeLoad();
+        } catch (Exception $e) {
+            error_log('Warning: Error parsing .env file: ' . $e->getMessage());
+        }
+    }
+
+    /** Clave API Resend (sin espacios; Railway a veces añade saltos de línea al pegar). */
+    private static function getResendApiKey(): string
+    {
+        $key = getenv('RESEND_API_KEY');
+        if (!is_string($key)) {
+            return '';
+        }
+        return trim($key);
+    }
+
+    /** Prioridad: API Resend (HTTPS :443) si hay RESEND_API_KEY; si no, SMTP (local, etc.). */
+    private static function useResend(): bool
+    {
+        return self::getResendApiKey() !== '';
+    }
+
+    /**
+     * Cabecera From para Resend: RESEND_FROM o "Nombre <correo>" desde SMTP_*.
+     */
+    private static function resendFromAddress(): string
+    {
+        $raw = getenv('RESEND_FROM');
+        if (is_string($raw) && trim($raw) !== '') {
+            return trim($raw);
+        }
+        $email = getenv('SMTP_FROM_EMAIL') ?: '';
+        $name = getenv('SMTP_FROM_NAME') ?: 'Arcadia Zoo';
+        if ($email === '') {
+            return '';
+        }
+        return $name . ' <' . $email . '>';
+    }
+
+    /**
+     * @param array{from: string, to: string|string[], subject: string, html: string, text?: string, reply_to?: string|string[]} $params
+     * @return array{success: bool, message: string}
+     */
+    private static function sendViaResend(array $params): array
+    {
+        try {
+            $client = \Resend::client(self::getResendApiKey());
+            $client->emails->send($params);
+            return ['success' => true, 'message' => 'Email enviado vía Resend'];
+        } catch (ResendApiException $e) {
+            error_log('Resend API: ' . $e->getMessage());
+            return [
+                'success' => false,
+                'message' => 'Resend: ' . $e->getMessage(),
+            ];
+        } catch (\Throwable $e) {
+            error_log('Resend error: ' . $e->getMessage());
+            return [
+                'success' => false,
+                'message' => 'Error al enviar con Resend: ' . $e->getMessage(),
+            ];
+        }
+    }
+
     /**
      * Configura y retorna una instancia de PHPMailer lista para usar
      * 
@@ -38,17 +115,7 @@ class EmailHelper
         $mail = new PHPMailer(true);
 
         try {
-            // load the environment variables from the .env file
-            // This allows us to store sensitive information (like passwords) outside the code
-            // we use try-catch to handle parsing errors
-            try {
-                $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
-                $dotenv->safeLoad(); // safeLoad() no lanza excepciones si el archivo no existe
-            } catch (Exception $e) {
-                // If there is a parsing error, log it but continue with default values
-                error_log("Warning: Error parsing .env file: " . $e->getMessage());
-                // Continue with default values instead of failing completely
-            }
+            self::loadEnv();
 
             // configure the SMTP server
     // SMTP is the protocol used to send emails
@@ -86,8 +153,9 @@ class EmailHelper
             $mail->Port = getenv('SMTP_PORT') ?: 465;
             // $mail->Port = getenv('SMTP_PORT') ?: 587;
 
-            // add this: limit of 3 seconds so it doesn't hang
-            // $mail->Timeout = getenv('SMTP_TIMEOUT') ?: 60;
+            // Evita cuelgues largos (p. ej. Railway Hobby bloquea SMTP → sin esto PHPMailer usa 300 s).
+            $timeout = (int) (getenv('SMTP_TIMEOUT') ?: 20);
+            $mail->Timeout = max(5, min(120, $timeout));
             
             // Character encoding (UTF-8 supports all languages)
             $mail->CharSet = 'UTF-8';
@@ -127,26 +195,27 @@ class EmailHelper
      */
     private static function validateEmailConfig()
     {
-        // Cargamos las variables de entorno
-        // Usamos try-catch para manejar errores de parsing del archivo .env
-        try {
-            $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
-            $dotenv->safeLoad(); // safeLoad() no lanza excepciones, solo retorna false si hay error
-        } catch (Exception $e) {
-            // Si hay un error al cargar el .env, lo registramos y retornamos error
-            error_log("Error loading .env file: " . $e->getMessage());
-            return [
-                'valid' => false,
-                'message' => 'Error en el archivo .env. Verifica el formato. Error: ' . $e->getMessage()
-            ];
+        self::loadEnv();
+
+        if (self::useResend()) {
+            if (self::getResendApiKey() === '') {
+                return ['valid' => false, 'message' => 'RESEND_API_KEY vacío.'];
+            }
+            $from = self::resendFromAddress();
+            if ($from === '') {
+                return [
+                    'valid' => false,
+                    'message' => 'Configura RESEND_FROM (ej. Arcadia <onboarding@resend.dev>) o SMTP_FROM_EMAIL para el remitente Resend.',
+                ];
+            }
+            return ['valid' => true, 'message' => 'Resend OK'];
         }
 
-        // Verificamos cada variable necesaria
         $requiredVars = [
             'SMTP_HOST' => 'Servidor SMTP',
             'SMTP_USER' => 'Usuario SMTP',
             'SMTP_PASS' => 'Contraseña SMTP',
-            'SMTP_FROM_EMAIL' => 'Email remitente'
+            'SMTP_FROM_EMAIL' => 'Email remitente',
         ];
 
         $missing = [];
@@ -159,8 +228,8 @@ class EmailHelper
         if (!empty($missing)) {
             return [
                 'valid' => false,
-                'message' => 'Configuración de email incompleta. Faltan: ' . implode(', ', $missing) . 
-                           '. Por favor, crea un archivo .env en la raíz del proyecto con estas variables.'
+                'message' => 'Configuración SMTP incompleta. Faltan: ' . implode(', ', $missing) .
+                    '. O define RESEND_API_KEY (+ RESEND_FROM) para usar la API Resend (HTTPS).',
             ];
         }
 
@@ -191,25 +260,8 @@ class EmailHelper
             return ['success' => false, 'message' => $configCheck['message']];
         }
 
-        try {
-            // PASO 2: OBTENER INSTANCIA DE PHPMailer CONFIGURADA
-            // Obtenemos una instancia configurada de PHPMailer con todas las opciones SMTP
-            $mail = self::getMailer();
-
-            // PASO 3: CONFIGURAR DESTINATARIO
-            // Configuramos el destinatario del email
-            $mail->addAddress($toEmail);
-
-            // PASO 4: CONFIGURAR ASUNTO Y CONTENIDO
-            // Asunto del email
-            $mail->Subject = 'Bienvenue à Arcadia Zoo - Votre compte a été créé';
-
-            // Cuerpo del email en formato HTML
-            // Use HTML for a more professional looking email
-            $mail->isHTML(true);
-            
-            // Construimos el contenido del email con un diseño atractivo
-            $mail->Body = "
+        $subject = 'Bienvenue à Arcadia Zoo - Votre compte a été créé';
+        $htmlBody = "
                 <html>
                 <head>
                     <style>
@@ -248,28 +300,42 @@ class EmailHelper
                 </html>
             ";
 
-            // Versión en texto plano (por si el cliente de email no soporta HTML)
-            $mail->AltBody = "Bienvenue à Arcadia Zoo\n\n" .
+        $altBody = "Bienvenue à Arcadia Zoo\n\n" .
                            "Votre compte a été créé avec succès.\n\n" .
                            "Nom d'utilisateur : {$username}\n" .
                            "Rôle : {$roleName}\n\n" .
                            "Important : Pour obtenir votre mot de passe, veuillez vous rapprocher de l'administrateur.\n\n" .
                            "Arcadia Zoo - Depuis 1960";
 
-            // PASO 5: ENVIAR EL EMAIL
-            // Enviamos el email usando el método send() de PHPMailer
+        if (self::useResend()) {
+            $res = self::sendViaResend([
+                'from' => self::resendFromAddress(),
+                'to' => [$toEmail],
+                'subject' => $subject,
+                'html' => $htmlBody,
+                'text' => $altBody,
+            ]);
+            if ($res['success']) {
+                $res['message'] = 'Email enviado exitosamente a: ' . $toEmail;
+            }
+            return $res;
+        }
+
+        try {
+            $mail = self::getMailer();
+            $mail->addAddress($toEmail);
+            $mail->Subject = $subject;
+            $mail->isHTML(true);
+            $mail->Body = $htmlBody;
+            $mail->AltBody = $altBody;
             $mail->send();
-            
-            // Si llegamos aquí, el email se envió correctamente
+
             return ['success' => true, 'message' => 'Email enviado exitosamente a: ' . $toEmail];
 
         } catch (Exception $e) {
-            // Si hay un error, lo registramos en el log del servidor con detalles completos
-            // Esto es importante para poder debuggear problemas de envío
             $errorMessage = "Error enviando email de creación de cuenta a {$toEmail}: " . $e->getMessage();
             error_log($errorMessage);
             
-            // También guardamos información adicional del error para debugging
             error_log("Detalles del error: " . print_r([
                 'to' => $toEmail,
                 'username' => $username,
@@ -278,11 +344,10 @@ class EmailHelper
                 'error' => $e->getMessage()
             ], true));
             
-            // Retornamos false con un mensaje descriptivo
             return [
                 'success' => false, 
                 'message' => 'Error al enviar email: ' . $e->getMessage() . 
-                           '. Verifica la configuración SMTP en el archivo .env'
+                           '. Verifica SMTP o Resend en .env / variables del servidor'
             ];
         }
     }
@@ -303,29 +368,14 @@ class EmailHelper
      */
     public static function sendContactFormEmail($toEmail, $firstName, $lastName, $visitorEmail, $subject, $message)
     {
-        try {
-            // Obtenemos una instancia de PHPMailer configurada
-            $mail = self::getMailer();
+        $configCheck = self::validateEmailConfig();
+        if (!$configCheck['valid']) {
+            error_log('Error en configuración de email (contacto): ' . $configCheck['message']);
+            return ['success' => false, 'message' => $configCheck['message']];
+        }
 
-            // PASO 1: CONFIGURAR DESTINATARIO
-            // El email se envía al zoo
-            $mail->addAddress($toEmail);
-
-            // PASO 2: CONFIGURAR ASUNTO
-            // El asunto incluye el asunto del visitante
-            $mail->Subject = "Nouveau message de contact - " . htmlspecialchars($subject);
-
-            // PASO 3: CONFIGURAR REMITENTE Y REPLY-TO
-            // El remitente es el sistema, pero el Reply-To es el email del visitante
-            // Esto permite que el empleado responda directamente al visitante
-            $mail->addReplyTo($visitorEmail, $firstName . ' ' . $lastName);
-
-            // PASO 4: CONFIGURAR CONTENIDO DEL EMAIL
-            // Cuerpo del email en formato HTML
-            $mail->isHTML(true);
-            
-            // Construimos el contenido del email con un diseño atractivo
-            $mail->Body = "
+        $emailSubject = 'Nouveau message de contact - ' . htmlspecialchars($subject);
+        $htmlBody = "
                 <html>
                 <head>
                     <style>
@@ -373,8 +423,7 @@ class EmailHelper
                 </html>
             ";
 
-            // Versión en texto plano
-            $mail->AltBody = "Nouveau message de contact - Arcadia Zoo\n\n" .
+        $altBody = "Nouveau message de contact - Arcadia Zoo\n\n" .
                            "De : " . htmlspecialchars($firstName) . " " . htmlspecialchars($lastName) . "\n" .
                            "Email : " . htmlspecialchars($visitorEmail) . "\n" .
                            "Sujet : " . htmlspecialchars($subject) . "\n" .
@@ -383,15 +432,33 @@ class EmailHelper
                            "Pour répondre, utilisez simplement le bouton \"Répondre\" de votre client de messagerie.\n\n" .
                            "Arcadia Zoo - Depuis 1960";
 
-            // PASO 5: ENVIAR EL EMAIL
+        if (self::useResend()) {
+            return self::sendViaResend([
+                'from' => self::resendFromAddress(),
+                'to' => [$toEmail],
+                'subject' => $emailSubject,
+                'html' => $htmlBody,
+                'text' => $altBody,
+                'reply_to' => $visitorEmail,
+            ]);
+        }
+
+        try {
+            $mail = self::getMailer();
+            $mail->addAddress($toEmail);
+            $mail->Subject = $emailSubject;
+            $mail->addReplyTo($visitorEmail, $firstName . ' ' . $lastName);
+            $mail->isHTML(true);
+            $mail->Body = $htmlBody;
+            $mail->AltBody = $altBody;
             $mail->send();
-            
+
             return ['success' => true, 'message' => 'Email enviado exitosamente al zoo'];
 
         } catch (Exception $e) {
             $errorMessage = "Error enviando email de contacto al zoo: " . $e->getMessage();
             error_log($errorMessage);
-            
+
             error_log("Detalles del error: " . print_r([
                 'to' => $toEmail,
                 'visitor_email' => $visitorEmail,
@@ -399,11 +466,11 @@ class EmailHelper
                 'smtp_host' => getenv('SMTP_HOST') ?: 'no configurado',
                 'error' => $e->getMessage()
             ], true));
-            
+
             return [
-                'success' => false, 
-                'message' => 'Error al enviar email: ' . $e->getMessage() . 
-                           '. Verifica la configuración SMTP en el archivo .env'
+                'success' => false,
+                'message' => 'Error al enviar email: ' . $e->getMessage() .
+                           '. Verifica SMTP o Resend en .env / variables del servidor',
             ];
         }
     }

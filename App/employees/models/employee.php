@@ -100,6 +100,30 @@ class Employee
         return $connectionDB->lastInsertId();
     }
 
+    /**
+     * Indica si el correo ya está usado por otro empleado (índice único employees.email).
+     *
+     * @param int|null $excludeEmployeeId Si se pasa (edición), se ignora ese id_employee.
+     */
+    public static function emailExists($email, $excludeEmployeeId = null)
+    {
+        $email = trim((string) $email);
+        if ($email === '') {
+            return false;
+        }
+        $connectionDB = DB::createInstance();
+        if ($excludeEmployeeId !== null) {
+            $sql = $connectionDB->prepare(
+                'SELECT 1 FROM employees WHERE email = ? AND id_employee != ? LIMIT 1'
+            );
+            $sql->execute([$email, (int) $excludeEmployeeId]);
+        } else {
+            $sql = $connectionDB->prepare('SELECT 1 FROM employees WHERE email = ? LIMIT 1');
+            $sql->execute([$email]);
+        }
+
+        return (bool) $sql->fetchColumn();
+    }
 
     // method to delete an employee from the database
     public static function delete($id_employee)

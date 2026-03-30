@@ -120,8 +120,9 @@ class UsersGestController
             // The employee's email is more reliable than the username
             if ($employee_id) {
                 $employeeData = Employee::find($employee_id);
-                if ($employeeData && !empty($employeeData->email)) {
-                    $emailToSend = $employeeData->email;
+                if ($employeeData && trim((string) $employeeData->email) !== '') {
+                    // Mismo correo tras borrar usuario+empleado: no hay “memoria” de envíos; Resend no usa idempotency aquí.
+                    $emailToSend = trim($employeeData->email);
                 }
             } else {
                 // If there is no employee associated, check if the username is a valid email
@@ -364,20 +365,12 @@ class UsersGestController
             // This method updates the users table to link the user_id with the employee_id
             User::assignAccount($employee_id, $user_id);
 
-            // Step 2: SEND INFORMATIVE EMAIL TO THE EMPLOYEE
-            // When a user is assigned to an employee, we must notify them by email
-            // This is important because the employee needs to know that they have a created account
-            
-            // Get the user data to know their username and role
             $user = User::find($user_id);
-            
-            // Get the employee data to know their email
             $employeeData = Employee::find($employee_id);
-            
-            // Check if the employee has an email before trying to send
-            if ($employeeData && !empty($employeeData->email)) {
-                // Get the role name of the user
-                $roleName = 'Sin rol'; // Default value
+
+            $emailResult = null;
+            if ($employeeData && !empty(trim($employeeData->email))) {
+                $roleName = 'Without role';
                 if ($user->role_id) {
                     $roleData = Role::find($user->role_id);
                     if ($roleData) {
@@ -385,24 +378,36 @@ class UsersGestController
                     }
                 }
 
-                // Send the email to the employee with their username and role
-                // The email informs that an account has been assigned to them
                 $emailResult = EmailHelper::sendAccountCreationEmail(
-                    $employeeData->email,  // Employee's email (from human resources)
-                    $user->username,       // Username assigned to them
-                    $roleName              // Role assigned
+                    trim($employeeData->email),
+                    $user->username,
+                    $roleName
                 );
-                
-                // If the email could not be sent, log it but do not block the assignment
+
                 if (!$emailResult['success']) {
-                    error_log("Could not send the email of account assignment for user ID: {$user_id}, employee ID: {$employee_id}. Error: " . $emailResult['message']);
+                    error_log(
+                        "assignAccount email failed user={$user_id} employee={$employee_id}: " .
+                        $emailResult['message']
+                    );
                 }
             }
 
-            // Redirect to the users start page
-            // If the email was sent, the success message will indicate it
-            header("Location: /users/gest/start?msg=success&message=Account assigned to employee successfully" . 
-                   (isset($employeeData->email) ? ". Email sent to: {$employeeData->email}" : ""));
+            $base = 'Account assigned to employee successfully.';
+            if (!$employeeData || trim((string) $employeeData->email) === '') {
+                $msgType = 'success';
+                $detail = $base . ' No employee email on file — no notification was sent.';
+            } elseif ($emailResult && $emailResult['success']) {
+                $msgType = 'success';
+                $detail = $base . ' Email sent to: ' . trim($employeeData->email);
+            } elseif ($emailResult && !$emailResult['success']) {
+                $msgType = 'warning';
+                $detail = $base . ' Email could not be sent: ' . $emailResult['message'];
+            } else {
+                $msgType = 'success';
+                $detail = $base;
+            }
+
+            header('Location: /users/gest/start?msg=' . $msgType . '&message=' . rawurlencode($detail));
             exit();
         }
     }

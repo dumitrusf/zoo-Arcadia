@@ -51,6 +51,15 @@ function display_alert_message($defaultSuccessMessage = 'Action completed succes
         echo '</div>';
         return;
     }
+
+    if ($msg === 'warning') {
+        $message = $_GET['message'] ?? 'Please review.';
+        echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">';
+        echo htmlspecialchars($message);
+        echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+        echo '</div>';
+        return;
+    }
     
     // Fallback for other msg values (saved, updated, deleted, etc.) - default to success
     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">';

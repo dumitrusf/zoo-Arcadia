@@ -75,13 +75,21 @@ class EmployeesGestController
             $last_name = $_POST['lastname'];
             $birthdate = $_POST['birthdate'];
             $phone = $_POST['phone'];
-            $email = $_POST['email'];
+            $email = trim($_POST['email'] ?? '');
             $address = $_POST['address'];
             $city = $_POST['city'];
             $zip_code = $_POST['zip_code'];
             $country = $_POST['country'];
             $gender = $_POST['gender'];
             $marital_status = $_POST['marital_status'];
+
+            if (Employee::emailExists($email)) {
+                header(
+                    'Location: /employees/gest/create?msg=error&error=' .
+                    rawurlencode('An employee with this email already exists. Use another address.')
+                );
+                exit;
+            }
 
             // Create the new employee in the database
             $employee_id = Employee::create($first_name, $last_name, $birthdate, $phone, $email, $address, $city, $zip_code, $country, $gender, $marital_status);
@@ -143,13 +151,22 @@ class EmployeesGestController
             $last_name = $_POST['lastname'];
             $birthdate = $_POST['birthdate'];
             $phone = $_POST['phone'];
-            $email = $_POST['email'];
+            $email = trim($_POST['email'] ?? '');
             $address = $_POST['address'];
             $city = $_POST['city'];
             $zip_code = $_POST['zip_code'];
             $country = $_POST['country'];
             $gender = $_POST['gender'];
             $marital_status = $_POST['marital_status'];
+
+            if (Employee::emailExists($email, (int) $id_employee)) {
+                header(
+                    'Location: /employees/gest/edit?id=' . rawurlencode((string) $id_employee) .
+                    '&msg=error&error=' .
+                    rawurlencode('An employee with this email already exists. Use another address.')
+                );
+                exit;
+            }
 
             // Update the employee in the database, thanks to the method update( from the Employee model)
             $employee_id = Employee::update($id_employee, $first_name, $last_name, $birthdate, $phone, $email, $address, $city, $zip_code, $country, $gender, $marital_status);
